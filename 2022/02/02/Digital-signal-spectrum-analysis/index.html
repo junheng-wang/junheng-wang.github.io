@@ -1,0 +1,997 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>数字信号频域变换分析 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Digital-signal-spectrum-analysis"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  数字信号频域变换分析
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/02/02/Digital-signal-spectrum-analysis/" class="article-date">
+  <time datetime="2022-02-02T01:02:36.000Z" itemprop="datePublished">2022-02-02</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E4%BF%A1%E5%8F%B7%E4%B8%8E%E7%B3%BB%E7%BB%9F/">信号与系统</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">9.8k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">37 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="一、数字信号处理中常用矩函数计算和其物理意义"><a href="#一、数字信号处理中常用矩函数计算和其物理意义" class="headerlink" title="一、数字信号处理中常用矩函数计算和其物理意义"></a>一、数字信号处理中常用矩函数计算和其物理意义</h3><h4 id="一-常用矩函数"><a href="#一-常用矩函数" class="headerlink" title="(一) 常用矩函数"></a>(一) 常用矩函数</h4><h5 id="1-均值"><a href="#1-均值" class="headerlink" title="1. 均值"></a>1. 均值</h5><p>均值表示信号中<strong>直流分量</strong>的大小，用$E(x)$表示。对于高斯白噪声信号而言，它的均值为0，所以它只有交流分量。<br>$$<br>E(x) = \bar x = \frac{x_1 + x_2 + \cdots +x_n}{n} = \frac{\sum_{i=1}^{n}x_i}{n}<br>$$</p>
+<h5 id="2-均值的平方"><a href="#2-均值的平方" class="headerlink" title="2. 均值的平方"></a>2. 均值的平方</h5><p>均值的平方，用${E^2(x)}$表示，它表示的是信号中<strong>直流分量的功率</strong>。</p>
+<h5 id="3-均方值"><a href="#3-均方值" class="headerlink" title="3. 均方值"></a>3. 均方值</h5><p>均方值表示信号平方后的均值，用$E(x^2)$表示。<strong>均方值表示信号的平均功率</strong>。信号的平均功率 = 信号交流分量功率信号直流分量功率。</p>
+<h5 id="4-均方根值"><a href="#4-均方根值" class="headerlink" title="4. 均方根值"></a>4. 均方根值</h5><p>用RMS（root meansquare），即均方值的开根号。<br>$$<br>X_{rms} = \sqrt{\frac{\sum_{i=1}^{n}X_i^2}{N}}<br>$$</p>
+<h5 id="5-均方差"><a href="#5-均方差" class="headerlink" title="5. 均方差"></a>5. 均方差</h5><p>均方差（mean squareerror），用MSE表示。均方差是各数据偏离真实值的距离平方和的平均数，也即误差平方和的平均数，计算公式形式上接近方差，它的开方叫均方根误差，均方根误差才和标准差形式上接近。均方差有时候被认为等同于方差。<br>$$<br>X_{MSE} = \frac{1}{n}<br>$$</p>
+<h5 id="6-均方根误差"><a href="#6-均方根误差" class="headerlink" title="6. 均方根误差"></a>6. 均方根误差</h5><p>均方根误差用RMSE（root mean  squareerror）表示。它是观测值与真值偏差的平方和观测次数n比值的平方根，在实际测量中，观测次数n总是有限的，真值只能用最可信赖（最佳）值来代替。方根误差对一组测量中的特大或特小误差反映非常敏感，所以均方根误差能够很好地反映出测量的精密度。均方根误差有时被认为是标准差。</p>
+<h5 id="7-方差"><a href="#7-方差" class="headerlink" title="7. 方差"></a>7. 方差</h5><p>方差用variance或deviation 或Var表示。方差描述信号的波动范围，表示信号中<strong>交流分量</strong>的强弱，即<strong>交流信号的平均功率</strong>。<br>$$<br>D(X) = E[(X-E(X))^2]<br>$$</p>
+<p>$$<br>s^2 = \frac{1}{n-1}\sum_{i=1}^{n}(x_i - \bar x)^2  ——或者另一种形式——s^2 = \frac{1}{n}\sum_{i=1}^{n}(x_i - \bar x)^2<br>$$</p>
+<blockquote>
+<p>注意上面除以的是n-1，只有这样由样本值估计出的方差才是<strong>无偏的</strong>，即上面式子的期望才是X的方差。但是有的地方也有用除以n来表示方差，只不过这样求出的结果不是方差的无偏估计，计算结果的数学期望并不是X的方差，而是X方差的倍。 </p>
+</blockquote>
+<h5 id="8-标准差"><a href="#8-标准差" class="headerlink" title="8. 标准差"></a>8. 标准差</h5><p>标准差（Standard Deviation）用σ表示，有的时候标准差又可以被称为均方根误差RMSE。标准差是各数据偏离平均数的距离的平均数，它是离均差平方和平均后的方根，用σ表示，标准差能反映一个数据集的离散程度。</p>
+<p>标准差σ， 反映了测量数据偏离真实值的程度，σ越小，表示测量精度越高，因此可用σ作为评定这一测量过程精度的标准。<br>$$<br>S = \sqrt{\frac{\sum_{i=1}^{n}(x_i-\bar x)^2}{n}}<br>$$</p>
+<blockquote>
+<p>有了方差为什么要使用标准差？标准差比方差有什么优势？</p>
+<p>因为方差与我们要处理的数据的量纲是不一致的，虽然能很好的描述数据与均值的偏离程度，但是处理结果是不符合我们的直观思维的。 </p>
+</blockquote>
+<h4 id="二-总结"><a href="#二-总结" class="headerlink" title="(二) 总结"></a>(二) 总结</h4><p>（1）总的来说，均方差，均方根误差和方差，标准差是不能够等同的，尽管它们的公式相似。我们需要从真实值和均值之间的关系来区分它们</p>
+<p>（2）对于方差和标准差而言，它们反映的是数据序列与均值的关系。</p>
+<p>（3）对于均方差和均方根误差而言，它们反映的是数据序列与真实值之间的关系。</p>
+<h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：新浪博客/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> <a target="_blank" rel="noopener" href="http://www.360doc.com/content/18/0715/14/908538_770556276.shtml">http://www.360doc.com/content/18/0715/14/908538_770556276.shtml</a></p>
+<hr>
+<h3 id="二、数字域频率与模拟频率"><a href="#二、数字域频率与模拟频率" class="headerlink" title="二、数字域频率与模拟频率"></a>二、数字域频率与模拟频率</h3><h4 id="一-二者关系"><a href="#一-二者关系" class="headerlink" title="(一) 二者关系"></a>(一) 二者关系</h4><p><strong>重点：数字域频率是模拟角频率相对于采样频率的归一化。</strong></p>
+<h5 id="1-第一种理解："><a href="#1-第一种理解：" class="headerlink" title="1. 第一种理解："></a>1. 第一种理解：</h5><p>从”连续时间正弦信号与离散时间正弦信号“的关系来理解。</p>
+<img src="https://pic.imgdb.cn/item/61f9eb132ab3f51d91a2dbbe.jpg" style="zoom:70%">
+
+<p>敲黑板，重点是</p>
+<img src="https://pic.imgdb.cn/item/61f9ec4d2ab3f51d91a3d307.jpg" style="zoom:70%">
+
+<h5 id="2-第二种理解"><a href="#2-第二种理解" class="headerlink" title="2. 第二种理解"></a>2. 第二种理解</h5><p>从”采样信号的傅里叶变换与离散时间信号的傅里叶变换“的关系来理解。从时域采样出发，先看时域上离散时间信号$x(n)$的自变量$n$与连续时间信号$x(t)$的自变量$t$的关系，如下图。</p>
+<img src="https://pic.imgdb.cn/item/61f9ed512ab3f51d91a4a253.jpg" style="zoom:70%">
+
+<p>在频域上模拟信号、采样信号、和采样序列(也就是离散时间信号)三者的频谱的关系，如下图所示。看看横轴，时域上，横轴由$t$变成$n$，是按照$n=t/T$的规则；而频域上，横轴由$\Omega$(模拟角频率)变成了$\omega$(数字域频率)，按照$\omega = \Omega × T$的规则。</p>
+<img src="https://pic.imgdb.cn/item/61f9ee502ab3f51d91a55e3c.jpg" style="zoom:70%">
+
+<p>数字域频率$\omega$的最高频率是$\pi$，这一点可以结合采样定理来理解。采样间隔$T$，意味着采样角频率为$2\pi/T$，根据采样定理，最高的频率是采样频率的一半，也就是$\pi/T$，再将它转换为数字域频率（(乘以$T$)，不就是$\pi$吗?</p>
+<h5 id="3-第三种理解"><a href="#3-第三种理解" class="headerlink" title="3. 第三种理解"></a>3. 第三种理解</h5><p>从z平面与s平面的映射关系上来理解。</p>
+<img src="https://pic.imgdb.cn/item/61f9ef592ab3f51d91a62e74.jpg" style="zoom:70%">
+
+<h4 id="二-总结-1"><a href="#二-总结-1" class="headerlink" title="(二) 总结"></a>(二) 总结</h4><p>不管从哪种角度、哪种方式，殊途同归，结论是一样的，那就是——数字域频率是模拟角频率相对于采样频率的归一化。这一结论，是我们能够正确解读采样后的信号它的频谱分析结果的前提。<br>模拟角频率和数字域频率是数字信号处理中非常重要的两个概念，因为经常需要将模拟信号离散化后再进行频域分析，那么，得到的是数字域频率，必须正确转换为模拟角频率后，才能得到分析对象——模拟信号的频域信息。</p>
+<h5 id="说明-1"><a href="#说明-1" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：个人图书馆/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> <a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808354.shtml">http://www.360doc.com/content/19/0611/18/908538_841808354.shtml</a></p>
+<hr>
+<h3 id="三、离散时间傅里叶变换DTFT"><a href="#三、离散时间傅里叶变换DTFT" class="headerlink" title="三、离散时间傅里叶变换DTFT"></a>三、离散时间傅里叶变换DTFT</h3><p>首先要需要理解英文缩写DTFT的含义：离散时间DT、傅里叶变换FT，连起来就是DTFT。注意第二个T (也就是Time)，至关重要。它是“离散D”这个特性所描述的主体：也就是，时间是离散的。</p>
+<h4 id="一-从z变换到DTFT"><a href="#一-从z变换到DTFT" class="headerlink" title="(一) 从z变换到DTFT"></a>(一) 从z变换到DTFT</h4><p><strong>重点1：从“单位圆上的z变换“这个角度来理解DTFT正变换的定义。</strong><br><strong>重点2：理解DTFT的周期性——离散时间信号的傅里叶变换都是以$2\pi$为周期的。</strong></p>
+<img src="https://pic.imgdb.cn/item/61f9f1bb2ab3f51d91a81cbd.jpg">
+
+<h5 id="1-DTFT的正变换："><a href="#1-DTFT的正变换：" class="headerlink" title="1. DTFT的正变换："></a>1. DTFT的正变换：</h5><p>$$<br>\text{DTFT}[x(n)] = X(e^{j\omega}) = \sum_{n = -\infty}^{\infty}x(n)e^{-j\omega n}<br>$$</p>
+<h5 id="2-DTFT的基本性质："><a href="#2-DTFT的基本性质：" class="headerlink" title="2. DTFT的基本性质："></a>2. DTFT的基本性质：</h5><p>​    $X(e^{j\omega})$是以$\omega$为自变量的<font color="red"><strong>连续</strong>函数</font>；</p>
+<p>​    $X(e^{j\omega})$是以$2\pi$为周期的<font color="red"><strong>周期</strong>函数</font>；</p>
+<h5 id="3-DTFT存在的充分条件："><a href="#3-DTFT存在的充分条件：" class="headerlink" title="3. DTFT存在的充分条件："></a>3. DTFT存在的充分条件：</h5><p>$$<br>x(n)绝对可和：\sum_{n = -\infty}^{\infty}|x(n)| &lt; \infty<br>$$</p>
+<h4 id="二-DTFT变换对及物理含义"><a href="#二-DTFT变换对及物理含义" class="headerlink" title="(二) DTFT变换对及物理含义"></a>(二) DTFT变换对及物理含义</h4><p><strong>重点1：理解离散信号频谱的物理概念及特点。</strong><br><strong>重点2：会求几种常用信号的DTFT(单位样值信号、矩形脉冲、指数衰减信号、离散Sa函数等)。</strong></p>
+<h5 id="1-DTFT公式整理"><a href="#1-DTFT公式整理" class="headerlink" title="1. DTFT公式整理"></a>1. DTFT公式整理</h5><img src="https://pic.imgdb.cn/item/61f9f4c02ab3f51d91aa9178.jpg">
+
+<h5 id="2-物理含义"><a href="#2-物理含义" class="headerlink" title="2. 物理含义"></a>2. 物理含义</h5><p>(1) $x(n)$可以表示成复指数信号的线性组合(只需一个$2\pi$区间内的频率)；</p>
+<p>(2) $X(e^{j\omega})$表示了$x(n)$中各个频率分量的相对大小及位置，称为$x(n)$的频谱(以$2\pi$为周期)。<br>$$<br>X(e^{j \omega})=|X(e^{j \omega})| e^{j \angle X(e^{j \omega})}<br>$$</p>
+<h5 id="说明-2"><a href="#说明-2" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：个人图书馆/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> <a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808425.shtml">http://www.360doc.com/content/19/0611/18/908538_841808425.shtml</a></p>
+<hr>
+<h3 id="四、离散傅里叶级数DFS"><a href="#四、离散傅里叶级数DFS" class="headerlink" title="四、离散傅里叶级数DFS"></a>四、离散傅里叶级数DFS</h3><h4 id="一-离散时间周期信号的DFS"><a href="#一-离散时间周期信号的DFS" class="headerlink" title="(一) 离散时间周期信号的DFS"></a>(一) 离散时间周期信号的DFS</h4><p><strong>重点1：对照连续时间周期信号的FS的思想，理解离散时间周期信号的FS，二者的相同(离散谱)和不同之处。</strong><br><strong>重点2：理解离散时间周期信号的FS展开式为何只有N项，理解离散时间周期信号频谱的周期性。</strong></p>
+<img src="https://pic.imgdb.cn/item/61f9f6e12ab3f51d91ac386f.jpg">
+
+<p>需要说明的是，DFS有两种表示形式，如下面两个式子，这两种方式的区别在于，1/N的系数在正变换(FS系数求解式)中，还是反变换(级数展开式)中。没有实质区别，只是差一个常数N。这里均采用第二种表示形式，即将1/N的系数放在反变换中。<br>$$<br>第一种：\tilde{X} _ k = \frac{1}{N}\sum _ {n = 0}^{N-1}\tilde{x} _ ne^{-j\frac{2\pi}{N}kn}\text{ } - - - - \text{ }\tilde{x}(n) = \sum _ {k=0}^{N-1}\tilde{X} _ ke^{j\frac{2\pi}{N}kn}<br>$$</p>
+<p>$$<br>第二种：\tilde{X}(k) =\sum _ {n = 0}^{N-1}\tilde{x} _ ne^{-j\frac{2\pi}{N}kn} \text{ } - - - -\text{ }\tilde{x}(n) =  \frac{1}{N}\sum _ {k=0}^{N-1}\tilde{X}(k)e^{j\frac{2\pi}{N}kn}<br>$$</p>
+<h4 id="二-离散时间周期信号的频谱"><a href="#二-离散时间周期信号的频谱" class="headerlink" title="(二) 离散时间周期信号的频谱"></a>(二) 离散时间周期信号的频谱</h4><p><strong>重点1：掌握离散时间周期信号频谱的特点——离散性、谐波性、周期性；</strong><br><strong>重点2：会求常用离散时间周期信号的DFS(见例题1和例题2)。</strong></p>
+<img src="https://pic.imgdb.cn/item/61f9faf22ab3f51d91af8e23.jpg" style="zoom:80%">
+
+<h5 id="1-两类典型的求解DFS的题目："><a href="#1-两类典型的求解DFS的题目：" class="headerlink" title="1. 两类典型的求解DFS的题目："></a>1. 两类典型的求解DFS的题目：</h5><p><strong>第一类：</strong>周期信号直接以正弦、余弦之和形式给出(如例1)<br>方法：与标准形式的FS对照，直接得出FS的系数（即频谱)。<br><strong>第二类：</strong>一般的周期信号(如例2)<br>方法：用FS的系数求解公式。</p>
+<h5 id="2-DFS与DTFT的关系"><a href="#2-DFS与DTFT的关系" class="headerlink" title="2. DFS与DTFT的关系"></a>2. DFS与DTFT的关系</h5><p><strong>重点：理解DFS与DTFT的关系——周期序列的离散谱是其主值序列连续谱的离散抽样。</strong></p>
+<p>与上一讲中离散矩形脉冲的DTFT进行比较：可见，二者在时域上的关系是周期延拓，频域上的关系是离散抽样。如下图所示。 </p>
+<img src="https://pic.imgdb.cn/item/61f9fc072ab3f51d91b070dc.jpg">
+
+<img src="https://pic.imgdb.cn/item/61f9fc512ab3f51d91b0a4f4.jpg">
+
+<h5 id="3-四种傅里叶变换的关系"><a href="#3-四种傅里叶变换的关系" class="headerlink" title="3. 四种傅里叶变换的关系"></a>3. 四种傅里叶变换的关系</h5><p><strong>重点：一个域周期，对应另一个域离散。</strong></p>
+<img src="https://pic.imgdb.cn/item/61f9fd6e2ab3f51d91b1b54d.jpg">
+
+<h5 id="说明-3"><a href="#说明-3" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：个人图书馆/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> <a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808371.shtml">http://www.360doc.com/content/19/0611/18/908538_841808371.shtml</a></p>
+<hr>
+<h3 id="五、离散傅里叶变换DFT"><a href="#五、离散傅里叶变换DFT" class="headerlink" title="五、离散傅里叶变换DFT"></a>五、离散傅里叶变换DFT</h3><h4 id="一-背景介绍"><a href="#一-背景介绍" class="headerlink" title="(一) 背景介绍"></a>(一) 背景介绍</h4><p>为什么需要定义一种“新”的变换?</p>
+<p>计算机处理的两个基本条件：<br><strong>第一，只能处理离散的数据(时域和频域都要离散)；</strong><br><strong>第二，要有限长。</strong></p>
+<p>DTFT，时域上离散，但频域是连续的；DFS，时域频域都是离散的，但同时又都是周期的，周期序列长度为无限长。但同时我们也注意到，周期序列实际上只有有限个序列值有意义，因而它的离散傅里叶级数也适用于有限长序列，这就得到有限长序列的离散傅里叶变换(DFT)。</p>
+<img src="https://pic.imgdb.cn/item/61f9fe8b2ab3f51d91b28d6c.jpg" style="zoom:80%">
+
+<p>所以，<strong>DFT并不是一种新的变换</strong>。它只是将DFS时域和频域上都取一个周期而已。<strong>DFT正反变换的定义式与DFS相同，只是加了一个取值范围的限定而已</strong>。换汤不换药。</p>
+<h4 id="二-DFT的定义及物理含义"><a href="#二-DFT的定义及物理含义" class="headerlink" title="(二) DFT的定义及物理含义"></a>(二) DFT的定义及物理含义</h4><p><strong>重点：DFT与DFS、DTFT的关系</strong></p>
+<h5 id="1-变换公式"><a href="#1-变换公式" class="headerlink" title="1. 变换公式"></a>1. 变换公式</h5><p>$$<br>正变换：X(k)=\sum_{n=0}^{N-1} x(n) e^{-j \frac{2 \pi}{N} k n}, k=0,1, \ldots, N-1<br>$$</p>
+<p>$$<br>逆变换：x(n)=\frac{1}{N} \sum_{k=0}^{N-1} X(k) e^{j \frac{2 \pi}{N} k n}, n=0,1, \ldots, N-1<br>$$</p>
+<p>定义<font color="red"><strong>旋转因子$W_N=e^{-j\frac{2\pi}{N}}$</strong></font>，则上式转变为：<br>$$<br>正变换：X(k)=\sum_{n=0}^{N-1} x(n) W_{N}^{k n}, k=0,1, \ldots, N-1<br>$$</p>
+<p>$$<br>逆变换：x(n)=\frac{1}{N} \sum_{k=0}^{N-1} X(k) W_{N}^{-k n}, n=0,1, \ldots, N-1<br>$$</p>
+<p>总上，这对变换记为：<br>$$<br>x(n)\overset{N点\text{DFT}}{\longleftrightarrow}X(k)<br>$$<br><img src="https://pic.imgdb.cn/item/61fa03b92ab3f51d91b6cb31.jpg" style="zoom:80%"></p>
+<p><strong>DFT不是序列x(n)的真正的频谱。x(n)的真正的频谱是DTFT，DFT只是对其真正频谱的一个周期上的离散抽样值。</strong></p>
+<h4 id="三-DFT的计算"><a href="#三-DFT的计算" class="headerlink" title="(三) DFT的计算"></a>(三) DFT的计算</h4><p><strong>重点：DFT的两种计算方法。</strong></p>
+<h5 id="1-方法一：利用DFT定义式"><a href="#1-方法一：利用DFT定义式" class="headerlink" title="1. 方法一：利用DFT定义式"></a>1. 方法一：利用DFT定义式</h5><p>$$<br>X(k) = \sum_{n=0}^{N-1}x(n)e^{-j\frac{2\pi}{N}kn},k=0,1,\cdots,N-1<br>$$</p>
+<h5 id="2-方法二：先求DTFT再抽样"><a href="#2-方法二：先求DTFT再抽样" class="headerlink" title="2. 方法二：先求DTFT再抽样"></a>2. 方法二：先求DTFT再抽样</h5><p>$$<br>X(k)=X(e^{j \omega})| _ {\omega=\frac{2 \pi}{N} k} R _ {N}(k)<br>$$</p>
+<h5 id="3-例题"><a href="#3-例题" class="headerlink" title="3. 例题"></a>3. 例题</h5><p>下面的例题，分别用这两种方法进行求解。</p>
+<html>
+    <table style="margin-left: auto; margin-right: auto;">
+        <tr>
+            <td>
+                <!--左侧内容-->
+                求5点矩形窗函数$x(n) = R_5(n)$的5点DFT$X_1(k)$和10点DFT$X_2(x)$
+            </td>
+            <td>
+                <!--右侧内容-->
+                <img src="https://pic.imgdb.cn/item/61fa05922ab3f51d91b85a37.jpg">
+            </td>
+        </tr>
+    </table>
+</html>
+
+<img src="https://pic.imgdb.cn/item/61fa090f2ab3f51d91bb0fba.jpg">
+
+<p>对于本题来说，方法二特别直观，便于理解DFT与DTFT的关系。</p>
+<img src="https://pic.imgdb.cn/item/61fa09a32ab3f51d91bb8efb.jpg" style="zoom:70%">
+
+<p>可见，同一个序列的不同点数的DFT，得到的结果不同。DFT的点数$N$越大，$X(k)$越能反映连续频谱的形状。<br>当DFT的点数$N$&gt;序列的长度$N_0$时，相当于在序列后面补上$N-N_0$个零，故称为<strong>”补零DFT“</strong>。</p>
+<img src="https://pic.imgdb.cn/item/61fa0a292ab3f51d91bbff68.jpg" style="zoom:70%">
+
+<h4 id="四-DFT性质"><a href="#四-DFT性质" class="headerlink" title="(四) DFT性质"></a>(四) DFT性质</h4><h5 id="1-圆周移位-循环移位"><a href="#1-圆周移位-循环移位" class="headerlink" title="1. 圆周移位(循环移位)"></a>1. 圆周移位(循环移位)</h5><p>首先看，为什么要定义一种新的移位?这种新的移位为什么称为“圆周移位”？它与普通的移位有何异同？见下图。</p>
+<img src="https://pic.imgdb.cn/item/61fa0ab42ab3f51d91bc7111.jpg" style="zoom:70%">
+
+<p>可见，圆周移位与普通移位的区别在于：多一个周期延拓、再取主值区间的过程。定义式如下：<br>$$<br>圆周移位(循环移位)——x(n+m)_NR_N(n) = \tilde{x}(n+m)R_N(n)<br>$$<br>圆周移位的步骤：先周期延拓、再移位、最后取主值区间；或者先移位、再周期延拓、最后取主值区间。前两步谁先谁后都可以。见下图。</p>
+<img src="https://pic.imgdb.cn/item/61fa0bf72ab3f51d91bd7a9a.jpg" style="zoom:70%">
+
+<p>可见，这种新的移位，相当于先把序列放在一个圆上，然后转圈圈：左移，沿顺时针方向转(即上图中的情况);右移，沿逆时针方向转。<br>**与其他傅里叶变换一样，DFT依然满足：时域移位，频域线性相移；频域移位，时域调制。需要注意的是，这里的移位，都指的是<font color="red">圆周(循环)移位</font>**。</p>
+<img src="https://pic.imgdb.cn/item/61fa0cb02ab3f51d91be2ca9.jpg" style="zoom:80%">
+
+<h5 id="2-圆周卷积-循环卷积"><a href="#2-圆周卷积-循环卷积" class="headerlink" title="2. 圆周卷积(循环卷积)"></a>2. 圆周卷积(循环卷积)</h5><p><strong>(1) 圆周卷积的定义</strong><br>仿照上面我们对移位操作做的改进——增加了“周期延拓、取主值区间”的过程，将“移位”改造成“圆周移位”一样，我们也对之前很熟悉的卷积和公式做改进，就得到一种新的卷积”圆周卷积“(或称为循环卷积)的定义。</p>
+<p>$x_1(n)$的长度为$N_1$，$x_2(n)$的长度为$N_2$，$N \geq \max(N_1,N_2)$，则$N$点圆周卷积为：<br>$$<br>x_1(n) \odot x_2(n) = \sum_{m=0}^{N-1}x_1(m)x_2(n-m)_NR_N(n)<br>$$<br>为了区分，大家在《信号与系统》中所学习的卷积和，称为”线性卷积“。<br>显然易见，圆周卷积的结果与$N$有关。<br><strong>(2) DFT的圆周卷积定理</strong><br>在圆周卷积的定义下，DFT依然满足”一个域卷积，另外一个域相乘“这一更古不变的关系。</p>
+<p><font color="bule"><strong>时域圆周卷积定理：</strong></font><br>$$<br>x_1(n) \odot x_2(n) \overset{N点\text{DFT}}{\longleftrightarrow}X_1(k)X_2(k)<br>$$<br><font color="bule"><strong>频域圆周卷积定理：</strong></font><br>$$<br>x_1(n)  x_2(n) \overset{N点\text{DFT}}{\longleftrightarrow}\frac{1}{N}X_1(k) \odot X_2(k)<br>$$<br><strong>(3) 圆周卷积的计算</strong><br>下面重点来看圆周卷积的计算。</p>
+<img src="https://pic.imgdb.cn/item/61fa10de2ab3f51d91c1fa15.jpg" style="zoom:85%">
+
+<p><strong>(4) 圆周卷积与线性卷积的关系</strong><br>上面的例题中，两个序列的线性卷积是多少呢?圆周卷积与之相同吗?为什么?<br>线性卷积，是直接将序列2反转、平移，而没有”周期延拓、再取主值“这两步。可以用图解法或者竖式法得到（信号与系统中已学，此处直接给出结果)，线性卷积的结果如下：<br>$$<br>两序列的5点线性卷积为:x _ 1(n) * x _ 2(n)=[1,3,6,9,12,9,5]<br>$$<br>两种卷积为何不同呢?又有何关系呢?<br>下图从公式上推导圆周卷积与线性卷积的关系</p>
+<img src="https://pic.imgdb.cn/item/61fa11ac2ab3f51d91c2b12a.jpg" style="zoom:80%">
+
+<p>我们可以得到以下结论：</p>
+<p><strong>圆周卷积是线性卷积周期延拓后的主值序列：</strong><br>$$<br>y_c(n) = \sum_{r=-\infty}^{\infty}y_l(n+rN)R_N(n)<br>$$<br><strong>当$N\geq N_1+N_2-1$时，圆周卷积和线性卷积结果相同。</strong></p>
+<p>根据以上结论，我们可以根据线性卷积的结果，直接得到N点圆周卷积的结果。如下图：</p>
+<img src="https://pic.imgdb.cn/item/61fa12862ab3f51d91c36961.jpg" style="zoom:70%">
+
+<h5 id="3-圆周共轭对称性"><a href="#3-圆周共轭对称性" class="headerlink" title="3. 圆周共轭对称性"></a>3. 圆周共轭对称性</h5><p>这里不讲证明(教材上都有)，重点讲怎么理解教材上让人眼花缭乱的公式。我们把“公式”翻译成“人话”。<br>首先说明，文中所说的N点长序列，都指的是自变量取值范围为$[0,N-1]$，除此之外的区间，序列值为0。<br>先看第一个。<br><strong>(1) 共轭序列的DFT</strong><br>时频域有这样一个基本对应关系——时域取共轭，对应频域自变量取负然后函数取共轭。具体到DFT呢？“自变量取负”也就是“反转”，而“DFT隐含着周期性”，所以这里的“反转”要加上“周期延拓，再取主值区间”，所以，公式及证明过程如下</p>
+<img src="https://pic.imgdb.cn/item/61fa135b2ab3f51d91c41e2a.jpg" style="zoom:70%">
+
+<p><strong>时域取共轭，对应DFT是：先周期延拓，再反转，再取主值区间，最后取共扼。</strong>当然，第一步与第二步可以交换次序，取共轮可以放在任意步骤上。关键是理解这个操作用公式的三种描述方式(上图中画红线处)：<br>第①种：$X^*((-k))_N R_N(k)$，是最直观地展现上述过程的；<br>第②种：$X^*((N-k))_N R_N(k)$，可认为用其周期性(周期延拓得到的当然是以$N$为周期啦)，把$-k$换成$N-k$；<br>第③种：去掉了双括号，也去掉了$R_N(k)$，好像看不出“周期延拓”和“取主值区间”的操作了。大家会心存疑虑，这个等号成立吗?<br>我们用下图的例子来说明一下这个等号成立，为了画图的方便，我们用函数值为实数的情况，图中是以$n$为自变量，换作$k$当然也是一样的。</p>
+<img src="https://pic.imgdb.cn/item/61fa223c2ab3f51d91d25487.jpg">
+
+<p>$x(N-n)$可以看作简写形式，优点在于形式简洁明了，缺点在于掩盖了周期延拓再取主值的过程。用这种简写形式，要注意一点，$N$点长序列$x(n)$，$n$的取值范围为$0&lt;n&lt;N-1$，也就是说，本来应该$x(N)=0$。但是，此处，当$n=0$时，$x(N-n)=x(N)$，不能认为$x(N)=0$，而要认为$x(N)=x(0)$。也就是说，要把$x(n)$的这$N$个点，认为是周期序列的主值区间，那么$x(N)$就是下一个周期的第一个点，所以$x(N)=x(0)$。<br>用这种简写形式来描述这个性质，就是：时域取共轭，对应的DFT，相当于把序号$k$与序号$N-k$做一个互换，然后取共轭。<br>下面，看这个性质的两个推论。</p>
+<ul>
+<li><p><strong>第一个推论：实序列的DFT是圆周共轭对称序列。</strong></p>
+<ul>
+<li>对于实序列$x(n)$，其DFT即$X(k)$满足<br>$$<br>X(k) = X^*(N-k)_NR_N(k) = X^*(N-k)<br>$$<br><font color="red"><strong>实序列的DFT $X(k)$是圆周共轭对称序列</strong></font>。即：实部圆周偶对称，虚部圆周奇对称；模圆周偶对称，相角圆周奇对称。</li>
+</ul>
+<p>“圆周共轭对称”是个什么鬼？我们按照以下几步来解释一下：</p>
+<p>第一步：从“偶对称、奇对称”到“共轭对称/共轭反对称”</p>
+<p>​    偶对称/奇对称地球人都知道吧。共轭对称/反对称就不是地球人都知道了，大学生才知道。</p>
+<p>​    对于实函数$x(n)$，如果$x(-n)=x(n)$，称之为偶对称，$x(-n)=-x(n)$称之为奇对称。</p>
+<p>​    扩展到复函数$x(n)$，如果$x^*(-n)=x(n)$，称之为共轭对称，$x^*(-n)=-x(n)$称之为共轭反对称。</p>
+<p>第二步：从“共轭对称”到“圆周共轭对称”</p>
+<p>​    圆周共轭对称的定义：对于$N$点长序列$x(n)$，如果$x(n)=x((N-n))_NR_N(n)$，或者用简写形式：$x(n)=x(N-n)$，那么称之为“圆周共轭对称”。<br>可以理解为：把$x(n)$放在一个圆周的$N$个等分点上，或者说把横轴掰弯成一个圆($n=N-1$与原点重合)，则这$N$个序列值关于原点对称，或者说关于$\dfrac{N}{2}$也对称，如下图所示。</p>
+<img src="https://pic.imgdb.cn/item/61fa27d02ab3f51d91d78d3a.jpg" style="zoom:70%">
+
+<p>我们前面求解过的例题：5点矩形脉冲的DFT，如下图，也体现出圆周偶对称的特点。</p>
+<img src="https://pic.imgdb.cn/item/61fa28242ab3f51d91d7e051.jpg" style="zoom:70%"></li>
+<li><p><strong>第二个推论：实部/虚部与圆周共轭对称/反对称分量的关系</strong><br>首先解释一下什么叫圆周共轭对称分量和圆周共轭反对称分量。需要经过以下几步循序渐进的理解。<br>第一步：实函数可以分解为偶分量+奇分量<br>$$<br>x(n) = x_e(n)+x_o(n)<br>$$<br>其中：偶分量——$x_e = \dfrac{x(n)+x(-n)}{2}$，奇分量——$x_o = \dfrac{x(n)-x(-n)}{2}$</p>
+<p>第二步：从“偶分量/奇分量”到复函数可以分解为“共轭对称分量+共轭反对称分量”<br>把上式中的$x(-n)$改为$x^*(-n)$即可<br>$$<br>x(n) = x_e(n)+x_o(n)<br>$$<br>其中：共轭对称分量——$x_e(n) = \dfrac{x(n)+x^*(-n)}{2}$，共轭反对称分量——$x_o = \dfrac{x(n)-x^*(-n)}{2}$</p>
+<p>以上两式，无论是对无限长序列，还是有限长序列，都是适用的。如果$x(n)$为$N$点长，并且$0&lt;n&lt;N-1$，那么$x_e(n)$和$x_o(n)$是$2N-1$点长，并且$-(N-1) \leq n \leq N-1$。<br>第三步：改造成适合DFT的<br>凡是涉及到自变量取负(也就是反转)的，都加上“周期延拓，再取主值区间”的操作。也就是把上式中的$x(-n)$改为$x((N-n))_NR_N(n)$，用简写形式表示就是$x(N-n)$  </p>
+<p>因此，得到圆周共轭对称分量和圆周共轭反对称分量的定义：</p>
+<p>$N$点长的序列$x(n)$，可以分解为<font color="red">圆周共轭对称分量+圆周共轭反对称分量</font><br>$$<br>x(n) = x_{ep}(n) + x_{op}(n)<br>$$<br>其中：圆周共轭对称分量——$x_{ep}(n) = \dfrac{x(n)+x^*(N-n)}{2}$，圆周共轭反对称分量——$x_{op}(n) = \dfrac{x(n)-x^*(N-n)}{2}$</p>
+<p>注意，前提是$x(n)$为$N$点长序列，并且n的范围是$0≤n≤N-1$，圆周共轭对称/反对称分量的长度仍是$N$，$n$的范围也不变。而且如前所述，$n=0$时，$x(N-0)=x(N)=x(0)$。<br>上面，是以$x(n)$为例，同样，对于DFT $X(k)$，也可以定义圆周共扼对称/反对称分量，不再赘述。<br>解释完这些，我们的核心公式就出来啦（证明过程省略，直接看结论)。<br>序列$x(n)$及其DFT的实部/虚部与圆周共轭对称/反对称分量之间的关系，见下图：</p>
+<img src="https://pic.imgdb.cn/item/61fa317c2ab3f51d91e0bda3.jpg" style="zoom:70%">
+
+<p>(此处省略若干公式)<br>翻译成人话(绕口令)就是:<br>序列实部的DFT是序列DFT的共轭对称分量<br>序列虚部×j的DFT是序列DFT的共轭反对称分量<br>序列共轭对称分量的DFT是序列DFT的实部<br>序列共轭反对称分量的DFT是序列DFT的虚部巧j<br>是不是像绕口令，但总比公式强多了。<br>这—切，意义何在?<br><strong>第一，从图形上可以淋漓尽致地体现DFT隐含的周期性。</strong><br><strong>第二，为DFT的简化运算提供了思路。</strong></p>
+</li>
+</ul>
+<h5 id="4-Parseval定理"><a href="#4-Parseval定理" class="headerlink" title="4. Parseval定理"></a>4. Parseval定理</h5><p>有限长序列的能量：$\sum\limits_{n=0}^{N-1}|x(n)|^{2}=\dfrac{1}{N} \sum\limits_{k=0}^{N-1}|X(k)|^{2}$</p>
+<h4 id="五-频域抽样"><a href="#五-频域抽样" class="headerlink" title="(五) 频域抽样"></a>(五) 频域抽样</h4><p>实际上，<font color="red"><strong>DFT就是频域抽样</strong></font>。包括三个问题，这三个问题环环相扣、层层推进。</p>
+<h5 id="1-DFT与DTFT、z变换的关系"><a href="#1-DFT与DTFT、z变换的关系" class="headerlink" title="1. DFT与DTFT、z变换的关系"></a>1. DFT与DTFT、z变换的关系</h5><p>先从公式上看三个变换的关系，再结合z平面的单位圆的概念，从图形上理解。如下图:</p>
+<img src="https://pic.imgdb.cn/item/61fa339a2ab3f51d91e2d239.jpg" style="zoom:70%">
+
+<img src="https://pic.imgdb.cn/item/61fa33b52ab3f51d91e2eb74.jpg" style="zoom:70%">
+
+<p>毫无疑问，DFT的自变量$k$为离散的，而DTFT的自变量$\omega$、以及z变换的自变量$z$都是连续变量。DFT是另外两种变换的离散采样值。因为这种采样是在频域，所以称为”频域采样“。</p>
+<p>那么问题来啦：能否由离散频谱值$X(k)$得到$X(z)$和$X(e^{j\omega})$？</p>
+<p>不管在那个域进行抽样，其数学本质都是用一些离散的数值代替原来连续变化的函数，或者说用一些离散的点代表原来连续的曲线。能不能代表取决于两个因素：一是这些离散的点的间隔，即抽样间隔；二是原来那条连续曲线的变化起伏程度，(<font color="red"><strong>频域抽样定理</strong></font>)。</p>
+<h5 id="2-频域抽样定理"><a href="#2-频域抽样定理" class="headerlink" title="2. 频域抽样定理"></a>2. 频域抽样定理</h5><p>傅里叶分析方法的好处在于，建立起时域和频域的一种重要的对应关系：一个域离散抽样，另外一个域周期延拓。所以，研究时域抽样时，把问题对应到频域上去研究；那么现在研究频域抽样时，又要把问题对应到时域上去研究。毫无疑问，时域上会周期延拓。如下图：</p>
+<img src="https://pic.imgdb.cn/item/61fa34a62ab3f51d91e3d3f7.jpg" style="zoom:70%">
+
+<p>既然是以$N$为周期延拓，条件自然而然就出来了：</p>
+<p>对于$M$点长的序列$x(n)$，频域抽样不失真的条件是：<font color="red"> <strong>一个周期内的频域抽样点数$N \geq M$</strong></font> ，此时有：<br>$$<br>x_N(n) = \sum_{r = -\infty}^{\infty}x(n+rN)R_N(n) = x(n)<br>$$<br>即满足该条件时，$N$个频率抽样值$X(k)$（即$x(n)$的$N$点DFT)能够完全代表$x(e^{j\omega})$及$X(z)$。</p>
+<p>问题又来了，怎么表示?这就是第三个问题：频域的插值恢复。</p>
+<h5 id="3-频域的插值恢复"><a href="#3-频域的插值恢复" class="headerlink" title="3. 频域的插值恢复"></a>3. 频域的插值恢复</h5><p>与时域抽样的恢复完全相同的思路，用离散的样本值乘以一个插值函数，得到一个连续的函数，只不过这里的插值函数是关于$\omega$或$z$的函数。下面的任务就是找这个函数$\varphi(w)$或$\varphi(z)$。</p>
+<img src="https://pic.imgdb.cn/item/61fa365f2ab3f51d91e58cc6.jpg" style="zoom:70%">
+
+<p>z变换的形式更为简洁，因此首先解决由$X(k)$得到$X(z)$的问题。<br>以下推导过程的大致思路：把z变换定义式中的$x(n)$用IDFT的公式替换，然后交换求和次序，再利用旋转因子的性质，即可得到。如下图：</p>
+<img src="https://pic.imgdb.cn/item/61fa36922ab3f51d91e5bf47.jpg" style="zoom:70%">
+
+<p>解决了由$X(k)$得到$X(z)$的问题，将$z$换成$e^{j\omega}$，自然就得到了$X(e^{j\omega})$。如下图：</p>
+<img src="https://pic.imgdb.cn/item/61fa37172ab3f51d91e642e8.jpg" style="zoom:70%">
+
+<p>把内插公式和内插函数总结如下图，这个内插函数的幅度部分的图形我们可以画出来，我们发现，它在一些固定的位置($\dfrac{2\pi}{N}$的整数倍处）是零，而$\dfrac{2\pi}{N}​$恰好是频域抽样时的间隔，这是巧合吗？显然不是，这是必然的。</p>
+<img src="https://pic.imgdb.cn/item/61fa377b2ab3f51d91e6a274.jpg" style="zoom:70%">
+
+<p>我们把内插公式展开来看，如下图所示。也就是说，把各个频域抽样值$X(k)$与做相应平移后的内插函数（平移$\dfrac{2\pi}N$的$k$倍）相乘，再相加，就得到连续的频谱函数$X(e^{j\omega})$。与第$k$个抽样值相乘的内插函数，在所有其他抽样点处刚好是零点，只有在第$k$个抽样点处的值不为零(值为1)。所以，重建后的这个连续函数，在每个抽样位置（也就是$\dfrac{2}{N}$的整数倍)上的值，就等于$X(k)$这一点的值，不需要任何其他抽样值参与;而在两个抽样点之间的值（没抽到的地方)，需要所有抽样值来参与共同构成。</p>
+<img src="https://pic.imgdb.cn/item/61fa38172ab3f51d91e73dc1.jpg" style="zoom:70%">
+
+<p>这个问题的理解，与“时域抽样后信号的重建”问题是一样的。但有的人可能会说，时域抽样后信号的重建，我记得是通过理想低通滤波器来推导出重建的内插公式，这里怎么不是呢?<br>如果你能提出这样的疑问，要表扬，说明你“信号与系统”学的不错。其实，图7和图8中的内插公式，完全可以用“时域抽样信号重建连续时间信号的内插公式”相同的推导方法推导出来。感兴趣的同学可以试一下哦。</p>
+<h5 id="说明-4"><a href="#说明-4" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：个人图书馆/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> </p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808337.shtml">http://www.360doc.com/content/19/0611/18/908538_841808337.shtml</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808319.shtml">http://www.360doc.com/content/19/0611/18/908538_841808319.shtml</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808298.shtml">http://www.360doc.com/content/19/0611/18/908538_841808298.shtml</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808274.shtml">http://www.360doc.com/content/19/0611/18/908538_841808274.shtml</a></p>
+<hr>
+<h3 id="六、快速傅里叶变换FFT"><a href="#六、快速傅里叶变换FFT" class="headerlink" title="六、快速傅里叶变换FFT"></a>六、快速傅里叶变换FFT</h3><h4 id="一-改进DFT计算的方法"><a href="#一-改进DFT计算的方法" class="headerlink" title="(一) 改进DFT计算的方法"></a>(一) 改进DFT计算的方法</h4><h5 id="1-DFT计算量分析"><a href="#1-DFT计算量分析" class="headerlink" title="1. DFT计算量分析"></a>1. DFT计算量分析</h5><p>对于$N$点长的序列$x(n)$其DFT变换为<br>$$<br>正变换：X(k) = \text{DFT}[x(n)] = \sum_{n=0}^{N-1}x(n)e^{-j\frac{2\pi}{N}kn} = \sum_{n=0}^{N-1}x(n)W_N^{nk}<br>$$</p>
+<p>$$<br>逆变换：x(n) = \text{IDFT}[X(k)] = \frac{1}{N}\sum_{k=0}^{N-1}X(k)e^{j\frac{2\pi}{N}kn} = \sum_{k=0}^{N-1}X(k)W_N^{-nk}<br>$$</p>
+<p>DFT正反变换的运算方式和运算量是相同的，后面的分析以DFT正变换为例。</p>
+<p>观察正变换和反变换的公式可知，二者的运算方式和运算量是完全相同的。下面的分析均以DFT正变换为例。(顺便说一句，大家要像熟悉自己的手机一样熟悉旋转因子，闭着眼睛都知道它)<br>观察DFT正变换的公式，容易看出：每计算一个点的数据，需要$N$次复数乘法、$N-1$次复数加法，所以$N$点DFT，需要$N$的平方次复数乘法，$N(N-1)$次复数加法。我们知道，DFT的点数，至少要取成序列的长度，当序列长度很长时，运算量巨大！如下表所示。</p>
+<table>
+<thead>
+<tr>
+<th align="center">序列长度</th>
+<th align="center">复数乘法$N^2$</th>
+<th align="center">复数加法$N(N-1)$</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">2</td>
+<td align="center">4</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">64</td>
+<td align="center">56</td>
+</tr>
+<tr>
+<td align="center">64</td>
+<td align="center">4096</td>
+<td align="center">4032</td>
+</tr>
+<tr>
+<td align="center">1024</td>
+<td align="center">1048576</td>
+<td align="center">1047552</td>
+</tr>
+<tr>
+<td align="center">2048</td>
+<td align="center">4194304</td>
+<td align="center">4192256</td>
+</tr>
+</tbody></table>
+<p>以1024点为例，复数乘法的次数100万次之多。</p>
+<p>1965年，库利(J.w.Cooley)和图基(J.W.Tukey)在《Mathmatics of Computation》上发表了《AnAlgorithm for the Machine Calculation of Complex Fourier Series》，提出一种DFT的快速算法，后人称为快速傅里叶变换(Fast Fourier Transform ——FFT)。</p>
+<h5 id="2-改进DFT计算效率的基本途径"><a href="#2-改进DFT计算效率的基本途径" class="headerlink" title="2. 改进DFT计算效率的基本途径"></a>2. 改进DFT计算效率的基本途径</h5><img src="https://pic.imgdb.cn/item/61fa3b0a2ab3f51d91ea2f7a.jpg" style="zoom:70%">
+
+<p>$N$点DFT，直接计算，需要$N$的平方次乘法；分成2个$\dfrac{N}{2}$点DFT分别计算，乘法的次数减少了一半；分成4个$\dfrac{N}{4}$点DFT，乘法的次数又减少了一半。如果能够继续下去，前景很让人向往。<br>为了能够一直分下去，我们限定$N$为2的整数次幂，即：$N=2^M$，称为<strong>基2FFT</strong>。由此可见，<font color="red"><strong>FFT的基本思想是：把长序列分成几个较短的序列</strong></font>。<br>但怎么分?不能随便分，基本原则：要保证这几个短序列的DFT组合起来后能够很方便地构成原来长序列的DFT。<br>所以，DFT快速算法要解决的两个核心问题是：<strong>怎么分？怎么合？</strong><br>根据分与合的方式不同，有两种基2FFT算法，分别称为:</p>
+<ul>
+<li>按时间抽取的FFT算法———Decimation-in-Time，简称DIT-FFT。</li>
+<li>按频率抽取的FFT算法———Decimation-in-Frequency，简称DIF-FFT。</li>
+</ul>
+<p>下面我们分别来归纳总结两种基2FFT算法。</p>
+<h4 id="二-两种基2FFT算法"><a href="#二-两种基2FFT算法" class="headerlink" title="(二) 两种基2FFT算法"></a>(二) 两种基2FFT算法</h4><h5 id="1-按时间抽取DIT-FFT算法"><a href="#1-按时间抽取DIT-FFT算法" class="headerlink" title="1. 按时间抽取DIT-FFT算法"></a>1. 按时间抽取DIT-FFT算法</h5><p>以第一次分解($N$点分为2个$\dfrac{N}{2}$点)为例来说明算法原理。<br>首先解决怎么分的问题。</p>
+<img src="https://pic.imgdb.cn/item/61fa3c602ab3f51d91eb7188.jpg" style="zoom:70%">
+
+<p>通俗地说，就是大家列队、报数（从0开始），报偶数的一组，奇数的一组。</p>
+<img src="https://pic.imgdb.cn/item/61fa3c902ab3f51d91eba2c8.jpg" style="zoom:70%">
+
+<p>然后解决怎么合的问题。<br>我们略过看似艰苦卓绝实际很简单的推导过程，直接上结论：</p>
+<img src="https://pic.imgdb.cn/item/61fa3cbd2ab3f51d91ebcde6.jpg" style="zoom:70%">
+
+<p>公式不好看，有人画了一幅图，并且起了个好听的名字：<strong>蝶形运算符号</strong>。<br>下面的动图演示了蝶形运算的过程:</p>
+<img src="https://pic.imgdb.cn/item/61fa3fae2ab3f51d91ee90ff.gif">
+
+<p>以8点长序列为例，我们来看分解为2个4点长DFT，是如何通过蝶形运算合成8点DFT的： </p>
+<img src="https://pic.imgdb.cn/item/61fa3ff22ab3f51d91eecd84.gif">
+
+<p>经过第一次分解之后，总的运算量=两个N/2点DFT的运算+N/2个蝶形的运算。而每次蝶形运算，只需要1次乘法，2次加法。所以，总的乘法次数为：<br>$$<br>\frac{N^2}{2}+\frac{N}{2} \approx \frac{N^2}{2}<br>$$<br>总加法次数为：<br>$$<br>N(\frac{N}{2}-1)+N \approx \frac{N^2}{2}<br>$$<br>当$N$很大时，运算量减少了近一半。</p>
+<p>这就给了我们信心，说明这种分解思路是可以有效减少运算量的。我们继续分解下去，经过M-1次分解，分解为N/2 个 2 点长序列。</p>
+<p>而2点DFT也用蝶形运算来表示（因为计算机最擅长一致而重复的东西），就得到下面的流图：</p>
+<img src="https://pic.imgdb.cn/item/61fa40ce2ab3f51d91ef97a2.jpg">
+
+<h5 id="2-按频率抽取DIF-FFT算法"><a href="#2-按频率抽取DIF-FFT算法" class="headerlink" title="2. 按频率抽取DIF-FFT算法"></a>2. 按频率抽取DIF-FFT算法</h5><p>仍以第一次分解（$N$点分为2个$\dfrac N2$点）为例来说明算法原理。</p>
+<img src="https://pic.imgdb.cn/item/61fa41312ab3f51d91effcba.jpg" style="zoom:80%">
+
+<p>以8点长序列为例，我们来看分解为2个4点长DFT，是如何通过蝶形运算合成8点DFT的： </p>
+<img src="https://pic.imgdb.cn/item/61fa415c2ab3f51d91f02935.gif" style="zoom:120%">
+
+<p>注意到，输出的频率数据，序号是按照偶数一组、奇数一组的顺序排列的，所以这种算法称为：按频率抽取。我们继续分解下去，经过$M-1$次分解，分解为$N/2$ 个 2 点长序列，就得到下面的流图：</p>
+<img src="https://pic.imgdb.cn/item/61fa419d2ab3f51d91f0698d.jpg">
+
+<h5 id="3-运算量分析"><a href="#3-运算量分析" class="headerlink" title="3. 运算量分析"></a>3. 运算量分析</h5><p>通过前面的分析可见，两种基2FFT算法，运算量是一样的，N点DFT，就分解成了若干个蝶形的运算而已。多少个蝶形呢？序列长度$N=2^M$，共有 $M$级蝶形，每级$\dfrac N2$个蝶形，共$\dfrac{MN}{2}$个。而每个蝶形是1次复数乘法，2次复数加法。所以总的运算量为：</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">FFT</th>
+<th align="center">DFT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">复数乘法</td>
+<td align="center">$\dfrac{NM}{2} = \dfrac{N}{2}\log_2N$</td>
+<td align="center">$N^2$</td>
+</tr>
+<tr>
+<td align="center">复数加法</td>
+<td align="center">$NM = N\log_2N$</td>
+<td align="center">$N(N-1)$</td>
+</tr>
+</tbody></table>
+<p>频率作为自然界的一个基本物理量，是很多领域研究的重要内容。人们很早就认识到，用DFT的方法可以有效进行信号的频率分析。但是因为DFT算法运算量很大，在数字计算机发明以前，运算效率普遍很低的情况下，DFT也更多的是一种理论分析工具，很难被用于实际的信号处理。</p>
+<p>FFT的出现，破解了这一历史性难题，极大地促进了数字信号处理这门学科的应用和发展。有人甚至以FFT算法提出的1965年作为数字信号处理这门学科的诞生之年。</p>
+<h5 id="4-算法特点"><a href="#4-算法特点" class="headerlink" title="4. 算法特点"></a>4. 算法特点</h5><p>在计算机看来，这两种算法是非常相像的。两者互为转置。</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">DIF-FFT</th>
+<th align="center">DIF-FFT</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">同址运算</td>
+<td align="center">将蝶形运算的结果仍然保存在原输入量的存储单元中</td>
+<td align="center">将蝶形运算的结果仍然保存在原输入量的存储单元中</td>
+</tr>
+<tr>
+<td align="center">输入/输出顺序</td>
+<td align="center">输入倒位序,输出自然顺序</td>
+<td align="center">输入自然顺序，输出倒位序</td>
+</tr>
+<tr>
+<td align="center">蝶形运算</td>
+<td align="center">先乘旋转因子，后加减第$m$级节点间距离:$2^{m-1}$</td>
+<td align="center">先加减，后乘旋转因子第$m$级节点间距离:$2^{L-m}$</td>
+</tr>
+</tbody></table>
+<p>首先来看第一个特点：同址运算（又称同位运算或原位运算），每完成一个蝶形运算，输入的两个数据就没有用的，这就意味着，不需要再重新开辟新的存储单元来保存输出数据，计算结果仍保留在原输入数据占据的存储单元即可。</p>
+<p>再来看第二个特点：输入/输出数据的顺序。这是两种算法的不同之处。以DIT-FFT为例来说明为什么会输入倒位序。</p>
+<p>还是以8点长数据为例，输入数据的正常顺序是$x(0)、x(1)、x(2)……x(7)$，我们称之为 自然顺序。按照序号的奇偶分为两组，第一组是$x(0)、x(2)、x(4)、x(6)$，第二组是$x(1)、x(3)、x(5)、x(7)$。每个新的组再重新排队报数，按奇偶分，第一组又分成两个组，分别是$x(0)、x(4)$和$x(2)、x(6)$，第二组分成两个组，分别是$x(1)、x(5)$和$x(3)、x(7)$。</p>
+<p>也就是说，8点长序列的DIT-FFT，输入数据的顺序是：$x(0)、x(4)、x(2)、x(6)、x(1)、x(5)、x(3)、x(7)$。这个序号的顺序乍看杂乱无章，其实有规律性。0、1、2、3、4、5、6、7的顺序与0、4、2、6、1、3、5、7有何关系的呢？用二进制来写一目了然，看下面的动图：</p>
+<img src="https://pic.imgdb.cn/item/61fa439a2ab3f51d91f24b96.gif">
+
+<p>倒位序，是将二进制数的最高有效位到最低有效位的位序进行颠倒排列而得到的二进制数。 </p>
+<p>DIT-FFT算法中，对时域序列按照序号的奇偶进行分解，造成输入序列的序号按照倒位序排列。</p>
+<p>最后再说一说蝶形运算的规律。两种FFT算法，最终都是转换成了M列、每列N/2个、一共MN/2个蝶形运算。但二者蝶形运算的规律有差异。</p>
+<ul>
+<li>第一个差异：基本蝶形不同。DIT是先乘旋转因子，再加或减；而DIF是先加或减，再乘旋转因子。</li>
+<li>第二个差异：两种算法，蝴蝶翅膀的距离（即节点间的距离）和旋转因子的数目恰好相反。</li>
+</ul>
+<p>仔细观察两种算法的流图，我们会发现，二者互为转置。</p>
+<h4 id="三-其他FFT算法简介"><a href="#三-其他FFT算法简介" class="headerlink" title="(三) 其他FFT算法简介"></a>(三) 其他FFT算法简介</h4><h5 id="1-混合基FFT"><a href="#1-混合基FFT" class="headerlink" title="1. 混合基FFT"></a>1. 混合基FFT</h5><img src="https://pic.imgdb.cn/item/61fa445b2ab3f51d91f30d11.png" style="zoom:80%">
+
+<h5 id="2-Chirp-z变换"><a href="#2-Chirp-z变换" class="headerlink" title="2. Chirp-z变换"></a>2. Chirp-z变换</h5><p>实际应用中，有时只对信号的某一频段感兴趣，即只需要计算单位圆上某一段的频谱值，而不需要计算[0，Π]区间的所有频谱采样值。此时，可以用”Chirp-z变换“（CZT）。</p>
+<p>适用场合：窄带信号的DFT。</p>
+<h5 id="3-Goertzel算法"><a href="#3-Goertzel算法" class="headerlink" title="3. Goertzel算法"></a>3. Goertzel算法</h5><p>在某些应用场合，只需计算很少几个频率点的频谱值。例如，双音多频信号（DTMF）的检测。此时可以采用卡泽尔（Goertzel）算法。</p>
+<p>除此之外，傅里叶变换的快速算法还有很多种。不过应用最广泛的依然能是基2FFT算法，它是数字信号处理最经典算法之一，几乎各种主流的计算机编程语言都有现成的函数可以调用。不同型号的芯片，硬件开发商也都会给出优化后的FFT算法源代码，一般情况下直接调用就可以。</p>
+<h5 id="说明-5"><a href="#说明-5" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：个人图书馆/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> <a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808253.shtml">http://www.360doc.com/content/19/0611/18/908538_841808253.shtml</a></p>
+<hr>
+<h3 id="七、FFT算法的应用"><a href="#七、FFT算法的应用" class="headerlink" title="七、FFT算法的应用"></a>七、FFT算法的应用</h3><h5 id="说明-6"><a href="#说明-6" class="headerlink" title="说明"></a>说明</h5><p><strong>文章转自：个人图书馆/未注明作者，感谢原作者的辛勤付出，如涉及版权，请联系我删除！</strong> </p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808231.shtml">http://www.360doc.com/content/19/0611/18/908538_841808231.shtml</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808103.shtml">http://www.360doc.com/content/19/0611/18/908538_841808103.shtml</a></p>
+<hr>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/02/02/Digital-signal-spectrum-analysis/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%95%B0%E5%AD%97%E4%BF%A1%E5%8F%B7/" rel="tag">数字信号</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%A2%91%E8%B0%B1%E5%88%86%E6%9E%90/" rel="tag">频谱分析</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/02/12/Probabilistic-Basic-Systems-Learning/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            概率基础系统学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/01/27/signal-and-system-essence/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">信号与系统概念本质理解</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "",
+    app_key: "",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+</body>
+
+</html>
