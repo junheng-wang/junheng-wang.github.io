@@ -719,7 +719,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>1891.2万</span></span>
+                        <span>1892.9万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>59.5万</span></span></p>
@@ -776,8 +776,37 @@
 <h5 id="二、排列组合的基础知识"><a href="#二、排列组合的基础知识" class="headerlink" title="二、排列组合的基础知识"></a>二、排列组合的基础知识</h5><p>……</p>
 <h5 id="三、古典概率模型的性质"><a href="#三、古典概率模型的性质" class="headerlink" title="三、古典概率模型的性质"></a>三、古典概率模型的性质</h5><p>1、非负性：$0 \leq P(A) \leq 1$；</p>
 <p>2、规范性：$P(\Omega) = 1，P(\phi) = 0$；</p>
-<p>3、有限可加：$A_1, A_2, \cdots ,A_n$互不相容，则有$P(A_1+A_2+ \cdots +A_n) = P(A_1)+P(A_2)+ \cdots +P(A_n)$；</p>
-<p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
+<p>3、有限可加：$A_1, A_2, \cdots ,A_n $互不相容，则有$P(A_1+A_2+ \cdots +A_n) = P(A_1)+P(A_2)+ \cdots +P(A_n) $；</p>
+<h4 id="1-2-3-几何概率模型"><a href="#1-2-3-几何概率模型" class="headerlink" title="1.2.3 几何概率模型"></a>1.2.3 几何概率模型</h4><h5 id="一、定义-1"><a href="#一、定义-1" class="headerlink" title="一、定义"></a>一、定义</h5><p>几何概型是一种概率模型。在这个模型下，随机实验所有可能的结果是无限的，并且每个基本结果发生的概率是相同的。例如一个人到单位的时间可能是8:00~9:00之间的任意一个时刻；往一个方格中投一个石子，石子落在方格中任何一点上……这些试验出现的结果都是无限多个，属于几何概型。一个试验是否为几何概型在于这个试验是否具有几何概型的两个特征——无限性和等可能性，只有同时具备这两个特点的概型才是几何概型。 </p>
+<h5 id="二、性质"><a href="#二、性质" class="headerlink" title="二、性质"></a>二、性质</h5><p>1、完全可加性：$A_1, A_2, \cdots ,A_n $互不相容，则有$P(\bigcup\limits_{i=1}^{\infty}A_i) = \sum\limits_{i=1}^{\infty}A_i $；</p>
+<h5 id="三、古典概率模型与几何概率模型的区别"><a href="#三、古典概率模型与几何概率模型的区别" class="headerlink" title="三、古典概率模型与几何概率模型的区别"></a>三、古典概率模型与几何概率模型的区别</h5><p>古典概型的基本事件都是有限的，概率为事件所包含的基本事件除以总基本事件个数。 几何概型的基本事件通常不可计数，只能通过一定的测度，像长度，面积，体积的的比值来表示。 </p>
+<h5 id="四、随机模拟-蒙特卡洛法："><a href="#四、随机模拟-蒙特卡洛法：" class="headerlink" title="四、随机模拟/蒙特卡洛法："></a>四、随机模拟/蒙特卡洛法：</h5><p>1、基本思想</p>
+<p>蒙特卡罗方法是一种计算方法。原理是通过大量随机样本，去了解一个系统，进而得到所要计算的值。 </p>
+<p>蒙特卡洛法的基本思想是：为了求解问题，首先建立一个概率模型或随机过程，使它的参数或数字特征等于问题的解；然后通过对模型或过程的观察或抽样试验来计算这些参数或数字特征，最后给出所求解的近似值。解的精确度用估计值的标准误差来表示。蒙特卡洛法的主要理论基础是概率统计理论，主要手段是随机抽样、统计试验。 </p>
+<p>2、求解问题的基本步骤 </p>
+<ul>
+<li>根据实际问题的特点，构造简单而又便于实现的概率统计模型，使所求的解恰好是所求问题的概率分布或数学期望；</li>
+<li>给出模型中各种不同分布随机变量的抽样方法；</li>
+<li>统计处理模拟结果，给出问题解的统计估计值和精度估计值。</li>
+</ul>
+<p>3、例子：$\pi$的计算</p>
+<p>正方形内部有一个相切的圆，它们的面积之比是$\dfrac{\pi}{4}$。 </p>
+<img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9naW1nL2Fzc2V0LzIwMTUvYmcyMDE1MDcyNjExLmpwZw?x-oss-process=image/format,png" style="zoom:70%">
+
+<p>现在，在这个正方形内部，随机产生10000个点（即10000个坐标对 (x, y)），计算它们与中心点的距离，从而判断是否落在圆的内部。 </p>
+<img src="https://img-blog.csdn.net/20180112174309308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzk1MjE1NTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" style="zoom:60%">
+
+<p>如果这些点均匀分布，那么圆内的点应该占到所有点的$\dfrac{\pi}{4}$，因此将这个比值乘以4，就是π的值。通过R语言脚本随机模拟30000个点，π的估算值与真实值相差0.07%。 </p>
+<h4 id="1-2-4-频率与概率"><a href="#1-2-4-频率与概率" class="headerlink" title="1.2.4 频率与概率"></a>1.2.4 频率与概率</h4><h5 id="一、频率"><a href="#一、频率" class="headerlink" title="一、频率"></a>一、频率</h5><p>1、定义：做了n次实验，事件A发生了m次，则定义频率为$\omega_n(A) = \dfrac{m}{n}$。</p>
+<p>2、性质：</p>
+<ul>
+<li>非负性——$0 \leq \omega_n(A) \leq 1$；</li>
+<li>规范性——$\omega_n(必然事件) = \omega_n(\Omega) = 1$，$\omega_n(不可能事件) = \omega_n(\phi) = 0$；</li>
+<li>可加性——设事件$A_1, \cdots, A_k$两两互不相容，则有$\omega_n(A_1 + \cdots +A_k) = \omega_n(A_1)+\cdots + \omega_n(A_k)$；</li>
+</ul>
+<h5 id="二、概率"><a href="#二、概率" class="headerlink" title="二、概率"></a>二、概率</h5><p>(PS：这里主要是讲频率与概率的关系)</p>
+<p>概率可以视为事件的一个属性，先于实验而存在，不随实验的变换而变化，随着实验次数的增加，频率逐渐接近概率。</p>
+<h4 id="1-2-5-概率的公理化"><a href="#1-2-5-概率的公理化" class="headerlink" title="1.2.5 概率的公理化"></a>1.2.5 概率的公理化</h4><p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>[1]B站宋浩视频 <a href="https://www.bilibili.com/video/BV1ot411y7mU">https://www.bilibili.com/video/BV1ot411y7mU</a></p>
 <p>[2]书籍目录 <a href="https://www.taobao.com/list/item/610183739684.htm">https://www.taobao.com/list/item/610183739684.htm</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
