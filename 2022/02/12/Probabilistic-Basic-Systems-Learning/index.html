@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.8k</span>
+            <span class="post-count">3k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -128,10 +128,10 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>1892.9万</span></span>
+                        <span>1898.3万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>59.5万</span></span></p>
+                        <span>59.6万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -203,7 +203,7 @@
 <img src="https://imgconvert.csdnimg.cn/aHR0cDovL3d3dy5ydWFueWlmZW5nLmNvbS9ibG9naW1nL2Fzc2V0LzIwMTUvYmcyMDE1MDcyNjExLmpwZw?x-oss-process=image/format,png" style="zoom:70%">
 
 <p>现在，在这个正方形内部，随机产生10000个点（即10000个坐标对 (x, y)），计算它们与中心点的距离，从而判断是否落在圆的内部。 </p>
-<img src="https://img-blog.csdn.net/20180112174309308?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMzk1MjE1NTQ=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" style="zoom:60%">
+<img src="https://pic.imgdb.cn/item/620cb0fe2ab3f51d910c4f91.jpg" style="zoom:40%">
 
 <p>如果这些点均匀分布，那么圆内的点应该占到所有点的$\dfrac{\pi}{4}$，因此将这个比值乘以4，就是π的值。通过R语言脚本随机模拟30000个点，π的估算值与真实值相差0.07%。 </p>
 <h4 id="1-2-4-频率与概率"><a href="#1-2-4-频率与概率" class="headerlink" title="1.2.4 频率与概率"></a>1.2.4 频率与概率</h4><h5 id="一、频率"><a href="#一、频率" class="headerlink" title="一、频率"></a>一、频率</h5><p>1、定义：做了n次实验，事件A发生了m次，则定义频率为$\omega_n(A) = \dfrac{m}{n}$。</p>
@@ -215,7 +215,63 @@
 </ul>
 <h5 id="二、概率"><a href="#二、概率" class="headerlink" title="二、概率"></a>二、概率</h5><p>(PS：这里主要是讲频率与概率的关系)</p>
 <p>概率可以视为事件的一个属性，先于实验而存在，不随实验的变换而变化，随着实验次数的增加，频率逐渐接近概率。</p>
-<h4 id="1-2-5-概率的公理化"><a href="#1-2-5-概率的公理化" class="headerlink" title="1.2.5 概率的公理化"></a>1.2.5 概率的公理化</h4><p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
+<h4 id="1-2-5-概率的公理化"><a href="#1-2-5-概率的公理化" class="headerlink" title="1.2.5 概率的公理化"></a>1.2.5 概率的公理化</h4><h5 id="一、概率的定义方法"><a href="#一、概率的定义方法" class="headerlink" title="一、概率的定义方法"></a>一、概率的定义方法</h5><p>描述概率定义、古典概率定义、几何概率定义、统计概率定义</p>
+<p>以上这四种定义的概率都有公共的3种性质：① 非负性；② 规范性；③ 可加性；</p>
+<h5 id="二、概率的公理化定义"><a href="#二、概率的公理化定义" class="headerlink" title="二、概率的公理化定义"></a>二、概率的公理化定义</h5><p>1、首先提炼出3条公理</p>
+<p><strong>公理1(非负性)：</strong>$0 \leq P(A) \leq 1$</p>
+<p><strong>公理2(规范性)：</strong>$P(\Omega) = 1$，注意——公理2中没有定义$P(\phi) = 0$</p>
+<p><strong>公理3(完全可加性)：</strong>若事件$A_1, A_2, \cdots $不相容，则$P(A_1+A_2+ \cdots) = P(A_1)+P(A_2)+ \cdots$</p>
+<blockquote>
+<p><strong>可加性性质：有限可加性，可列可加性，完全可加性</strong></p>
+<p>其中：可列可加性=完全可加性</p>
+<p>可列可加性的理解可能要深入<strong>测度论</strong>的学习</p>
+</blockquote>
+<p>2、从3条公理推导其他性质</p>
+<p><strong>性质1：</strong>$P(\phi) = 0$</p>
+<blockquote>
+<p>证明：将$\Omega$写为$\Omega = \Omega + \phi + \phi + \phi + \cdots$，易知它们之间互不相容，则有<br>$P(\Omega) = P(\Omega + \phi + \phi + \phi + \cdots) = P(\Omega) + P(\phi) + P(\phi) + \cdots$<br>两边同时减去$P(\Omega)$，则有$0 = P(\phi) + P(\phi) + \cdots$<br>又知$0 \leq P(A) \leq 1$，故$P(\phi) = 0$，得证！</p>
+</blockquote>
+<p><strong>性质2：</strong>有限可加性——本性质说明完全可加性可以推出有限可加性</p>
+<p>若事件$A_1, A_2, \cdots ,A_n$不相容，则$P(A_1+A_2+ \cdots +A_n) = P(A_1)+P(A_2)+ \cdots + P(A_n)$</p>
+<blockquote>
+<p>证明：$A_1, A_2, \cdots, A_n, \phi + \phi + \phi + \cdots$，易知它们之间互不相容，则有<br>$P(A_1 + A_2 + \cdots + A_n) = P(A_1 + A_2 + \cdots + A_n + \phi + \phi + \phi + \cdots) = P(A_1) + P(A_2) + \cdots + P(A_n)+P(\phi) + P(\phi) + \cdots$<br>又由性质1可知$P(\phi) = 0$，则有$P(A_1 + A_2 + \cdots + A_n) =P(A_1) + P(A_2) + \cdots + P(A_n)$</p>
+</blockquote>
+<p><strong>性质3：</strong>$P(\bar A) = 1 - P(A)$</p>
+<p><strong>性质4：</strong></p>
+<p>—— ① $P(A-B) = P(A) - P(AB)$</p>
+<p>—— ② $B \subset A, P(A-B) = P(A) - P(B) ,且P(A) \geq P(B)$</p>
+<blockquote>
+<p>证明①：易知$A = (A-B) \cup AB$，$A-B$与$AB$是互不相容的，则有<br>$P(A) = P(A-B) + P(AB)$，移项得证。</p>
+<p>证明②：略</p>
+</blockquote>
+<p><strong>性质5(加法性质)：</strong>$P(A + B) = P(A) + P(B) - P(AB)$</p>
+<blockquote>
+<p>证明：略</p>
+</blockquote>
+<h3 id="1-3-条件概率与乘法公式"><a href="#1-3-条件概率与乘法公式" class="headerlink" title="1.3 条件概率与乘法公式"></a>1.3 条件概率与乘法公式</h3><h4 id="1-3-1-条件概率"><a href="#1-3-1-条件概率" class="headerlink" title="1.3.1 条件概率"></a>1.3.1 条件概率</h4><h5 id="一、定义-2"><a href="#一、定义-2" class="headerlink" title="一、定义"></a>一、定义</h5><p>样本空间为$\Omega$，A、B两个事件，$P(B) &gt; 0$，在B已经发生的条件下A发生的概率叫做A对B的条件概率，记为：$P(A|B)$</p>
+<h5 id="二、计算"><a href="#二、计算" class="headerlink" title="二、计算"></a>二、计算</h5><p>$P(A|B) = \dfrac{P(AB)}{P(B)}$</p>
+<h4 id="1-3-2-乘法公式"><a href="#1-3-2-乘法公式" class="headerlink" title="1.3.2 乘法公式"></a>1.3.2 乘法公式</h4><p>由条件概率可以推导得：</p>
+<p>$P(AB) = P(B)P(A|B) = P(A)P(B|A)$</p>
+<p><strong>推广：</strong>$P(A_1 A_2 \cdots A_n) = P(A_1)P(A_2|A_1)P(A_3|A_1 A_2) \cdots P(A_n | A_1 A_2 \cdots A_{n-1})$</p>
+<h3 id="1-4-全概率公式与贝叶斯公式"><a href="#1-4-全概率公式与贝叶斯公式" class="headerlink" title="1.4 全概率公式与贝叶斯公式"></a>1.4 全概率公式与贝叶斯公式</h3><h4 id="1-4-1-全概率公式"><a href="#1-4-1-全概率公式" class="headerlink" title="1.4.1 全概率公式"></a>1.4.1 全概率公式</h4><h5 id="一、定义-3"><a href="#一、定义-3" class="headerlink" title="一、定义"></a>一、定义</h5><p>假设$A_1, A_2, \cdots, A_n$是实验E的完备事件组(实际中不一定是完备的，只要能把事件B全部包括进去就行)，则对于某一事件B有：<br>$$<br>P(B) = \sum_{i=1}^{n}P(A_i)P(B|A_i)<br>$$<br><img src="https://pic.imgdb.cn/item/620f368d2ab3f51d919636fb.jpg" style="zoom:40%"></p>
+<h4 id="1-4-2-贝叶斯公式"><a href="#1-4-2-贝叶斯公式" class="headerlink" title="1.4.2 贝叶斯公式"></a>1.4.2 贝叶斯公式</h4><h5 id="一、定义-4"><a href="#一、定义-4" class="headerlink" title="一、定义"></a>一、定义</h5><p>假设$A_1, A_2, \cdots, A_n$是实验E的完备事件组，则对于某一事件B有：<br>$$<br>P(A_k | B) = \frac{P(A_k B)}{P(B)} = \frac{P(A_k B)的乘法公式}{P(B)的全概率公式} = \frac{P(A_k)P(B|A_k)}{\sum\limits_{i = 1}^{n}P(A_i)P(B|A_i)}<br>$$<br>其中，$P(A_i)$称为<font color="red"><strong>先验概率</strong></font>，$P(A_i | B)$称为<font color="red"><strong>后验概率</strong></font> </p>
+<h5 id="二、与全概率公式的辨析"><a href="#二、与全概率公式的辨析" class="headerlink" title="二、与全概率公式的辨析"></a>二、与全概率公式的辨析</h5><p>全概率公式是<font color="red"><strong>由因求果</strong></font></p>
+<p>贝叶斯公式是<font color="red"><strong>由果溯因</strong></font></p>
+<h3 id="1-5-事件的独立性与伯努利概型"><a href="#1-5-事件的独立性与伯努利概型" class="headerlink" title="1.5 事件的独立性与伯努利概型"></a>1.5 事件的独立性与伯努利概型</h3><h4 id="1-5-1-事件的独立性"><a href="#1-5-1-事件的独立性" class="headerlink" title="1.5.1 事件的独立性"></a>1.5.1 事件的独立性</h4><h5 id="一、定义-5"><a href="#一、定义-5" class="headerlink" title="一、定义"></a>一、定义</h5><p>A事件发生的概率不受B事件发生与否的影响，用公式可以表述为：$P(A|B) = P(A)$，或者说：<br>$$<br>P(AB) = P(A)P(B)<br>$$<br><strong>推论：</strong></p>
+<p>① $\phi,\Omega$与任意事件均独立；</p>
+<p>② 若A与B相互独立，则$\bar A 与 B$、$A 与 \bar B$、$\bar A 与 \bar B$也相互独立；</p>
+<p>③ 若事件A满足$P(A) = 0 或 P(A) = 1$，则事件A与任意事件都独立；(注意：事件的概率等于0或者1不一定就是空集$\phi$或者全集$\Omega$) </p>
+<p>证明略。。。</p>
+<h5 id="二、独立与互不相容-互斥-辨析"><a href="#二、独立与互不相容-互斥-辨析" class="headerlink" title="二、独立与互不相容(互斥)辨析"></a>二、独立与互不相容(互斥)辨析</h5><p>1、从定义来讲：</p>
+<p>A与B不相容，是$P(AB) = \phi$</p>
+<p>A与B独立，是$P(AB) = P(A)P(B)$</p>
+<p>2、通俗来讲：</p>
+<p>A、B不相容是A发生了，B就一定不能发生，反之亦然；</p>
+<p>A、B相互独立是A是否发生并不影响事件A发生的概率，所以A发生了B也可能会发生。 </p>
+<p>3、推论：</p>
+<p>当$P(A) &gt; 0$、$P(B) &gt; 0$时，互不相容与独立不会同时发生。</p>
+<h5 id="三、补充知识——对立"><a href="#三、补充知识——对立" class="headerlink" title="三、补充知识——对立"></a>三、补充知识——对立</h5><p>最后再说一下对立事件，对立是指A、B必然发生一个且仅有一个发生，比如今天下雨或者不下雨，<strong>对立一定互不相容(互斥)，但是互不相容不一定对立</strong></p>
+<p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>[1]B站宋浩视频 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ot411y7mU">https://www.bilibili.com/video/BV1ot411y7mU</a></p>
 <p>[2]书籍目录 <a target="_blank" rel="noopener" href="https://www.taobao.com/list/item/610183739684.htm">https://www.taobao.com/list/item/610183739684.htm</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
