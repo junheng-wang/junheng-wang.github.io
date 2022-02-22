@@ -160,22 +160,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Basic-concepts-of-radar</title>
-    <url>/2022/01/25/Basic-concepts-of-radar/</url>
-    <content><![CDATA[<h3 id="一、雷达距离fft-多普勒fft"><a href="#一、雷达距离fft-多普勒fft" class="headerlink" title="一、雷达距离fft+多普勒fft"></a>一、雷达距离fft+多普勒fft</h3><p>参考链接：</p>
-<p>[1-1]TI毫米波雷达系列（三）：调频连续波雷达回波信号3DFFT处理原理（测距、测速、测角）<a href="https://blog.csdn.net/qq_35605018/article/details/108816709">https://blog.csdn.net/qq_35605018/article/details/108816709</a></p>
-<p>[1-2]距离-多普勒谱(RD谱)之二：距离相关 <a href="https://blog.csdn.net/mddh_123/article/details/109152790">https://blog.csdn.net/mddh_123/article/details/109152790</a></p>
-<p>[1-3]干货 | 利用MATLAB实现FMCW雷达的距离多普勒估计 <a href="https://www.jianshu.com/p/d2d865da6dce">https://www.jianshu.com/p/d2d865da6dce</a></p>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
-      <categories>
-        <category>学习提升</category>
-        <category>雷达信号处理</category>
-      </categories>
-      <tags>
-        <tag>雷达基础</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>书-音-影</title>
     <url>/2022/02/12/Book-Music-Film/</url>
     <content><![CDATA[<h2 id="壹-观影"><a href="#壹-观影" class="headerlink" title="壹 - 观影"></a>壹 - 观影</h2><h3 id="一、鬼子来了【22-02-11】"><a href="#一、鬼子来了【22-02-11】" class="headerlink" title="一、鬼子来了【22-02-11】"></a>一、鬼子来了【22-02-11】</h3><p><a target="_blank" href="https://movie.douban.com/subject/1291858/" style="position: relative; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; box-sizing: border-box; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 390px; min-height: 84px; border-radius: 8px; max-width: 100%; overflow: hidden; margin: 16px auto; padding: 12px 12px 9px 12px; background-color: #F6F6F6;"><span class="LinkCard-contents"><span style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 40px; line-height: 1.25; color: #121212;">鬼子来了 - 豆瓣链接</span><span style="display: -webkit-box; font-size: 13px; height: 18px; line-height: 18px; color: #999; word-break: break-all; text-overflow: ellipsis; overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"><span style="display: inline-flex; align-items: center;"><svg class="Zi Zi--InsertLink" fill="currentColor" viewbox="0 0 24 24" width="14" height="14"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"/></svg></span><span>https://movie.douban.com/subject/1291858/</span></span></span></a></p>
@@ -235,7 +219,7 @@
                         <span>102.3万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>8982</span></span></p>
+                        <span>8986</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -276,7 +260,7 @@
                         <span>77.2万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>4177</span></span></p>
+                        <span>4178</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -367,6 +351,22 @@
         <tag>观影</tag>
         <tag>听音乐</tag>
         <tag>思考</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Basic-concepts-of-radar</title>
+    <url>/2022/01/25/Basic-concepts-of-radar/</url>
+    <content><![CDATA[<h3 id="一、雷达距离fft-多普勒fft"><a href="#一、雷达距离fft-多普勒fft" class="headerlink" title="一、雷达距离fft+多普勒fft"></a>一、雷达距离fft+多普勒fft</h3><p>参考链接：</p>
+<p>[1-1]TI毫米波雷达系列（三）：调频连续波雷达回波信号3DFFT处理原理（测距、测速、测角）<a href="https://blog.csdn.net/qq_35605018/article/details/108816709">https://blog.csdn.net/qq_35605018/article/details/108816709</a></p>
+<p>[1-2]距离-多普勒谱(RD谱)之二：距离相关 <a href="https://blog.csdn.net/mddh_123/article/details/109152790">https://blog.csdn.net/mddh_123/article/details/109152790</a></p>
+<p>[1-3]干货 | 利用MATLAB实现FMCW雷达的距离多普勒估计 <a href="https://www.jianshu.com/p/d2d865da6dce">https://www.jianshu.com/p/d2d865da6dce</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>学习提升</category>
+        <category>雷达信号处理</category>
+      </categories>
+      <tags>
+        <tag>雷达基础</tag>
       </tags>
   </entry>
   <entry>
@@ -975,137 +975,6 @@
       <tags>
         <tag>概率基础</tag>
         <tag>概率论学习</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人博客搭建历程</title>
-    <url>/2022/01/18/post-name/</url>
-    <content><![CDATA[<h3 id="〇-简要介绍"><a href="#〇-简要介绍" class="headerlink" title="〇. 简要介绍"></a>〇. 简要介绍</h3><p>本博客的搭建不需要什么技术，而且自己截止到当前时间对Git和Github的使用也刚学，所以只是参考网上博客和B站的教学视频来做的。</p>
-<h3 id="一-部署Github-Pages"><a href="#一-部署Github-Pages" class="headerlink" title="一. 部署Github Pages"></a>一. 部署Github Pages</h3><p>在自己的Github上创建一个新的<strong>Repositories</strong>，注意命名规则是——Github账号名.github.io。</p>
-<h3 id="二-安装Hexo"><a href="#二-安装Hexo" class="headerlink" title="二. 安装Hexo"></a>二. 安装Hexo</h3><h4 id="1-插入注解"><a href="#1-插入注解" class="headerlink" title="1. 插入注解"></a>1. 插入注解</h4><h5 id="1-常见的博客搭建方法"><a href="#1-常见的博客搭建方法" class="headerlink" title="(1) 常见的博客搭建方法"></a>(1) 常见的博客搭建方法</h5><p>据我目前所知，搭建博客总体上分有两种方法：</p>
-<ul>
-<li>第三方平台：在现有的博客网站、论坛或社区上注册个人主页。如知乎，掘金，简书，segmentFault，csdn，博客园等。特点：无技术门槛，可专注于内容。</li>
-<li>静态网站生成技术：在终端执行命令快速生成静态网站，如 Jekyll、Hugo、Hexo等。然后通过 Github Pages、Coding 等展示。特点：通过插件可增加评论、搜索、分析等功能。有多种主题可选。在本地以特定格式书写文章，放置在指定的文件夹。每次发布或修改文章都需要重新生成和部署网站。</li>
-<li>其他：<a href="https://juejin.cn/post/6951679886557708302">参考链接-如何搭建个人博客 ：几种方案比较 + 个人实现</a> </li>
-</ul>
-<h5 id="2-静态网站生成技术比较"><a href="#2-静态网站生成技术比较" class="headerlink" title="(2) 静态网站生成技术比较"></a>(2) 静态网站生成技术比较</h5><p>在该方法当中，也与许多可供选择的方案，像 Jekyll、Hugo、Hexo、Typecho、Wordpress等等，那么它们各有什么优缺点呢，这里我就不说了(不是我的重点)，请参考链接：<a href="https://blog.laoda.de/archives/blog-choosing">Hexo还是Hugo？Typecho还是Wordpress？读完这篇或许你就有答案了！</a></p>
-<h4 id="2-安装相应软件"><a href="#2-安装相应软件" class="headerlink" title="2. 安装相应软件"></a>2. 安装相应软件</h4><h5 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="(1) 安装Node.js"></a>(1) 安装Node.js</h5><p>Node.js的官方网站：<a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a> </p>
-<p>下载好了之后直接安装，安装过程中会出现</p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2599.png" alt="&lt;font color=red&gt;图1&lt;/font&gt;  Node安装"></p>
-<p>要点第四个，添加到Path(环境变量)。</p>
-<h5 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="(2) Git安装"></a>(2) Git安装</h5><p>Git的安装则是傻瓜式安装即可，虽然步骤多，但是按照默认的来就行；</p>
-<p>好的，现在已经全部准备完毕，下面简单测试一下看看是否安装成功。</p>
-<h5 id="3-测试"><a href="#3-测试" class="headerlink" title="(3) 测试"></a>(3) 测试</h5><p> 为了验证我们的Node.js和Git是否安装完毕，可以在CMD（win+R，输入“cmd”即可打开）中输入两条命令查看： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">git version</span><br></pre></td></tr></table></figure>
-
-<p>若两条命令没有报错，而且显示了版本号，则安装成功！</p>
-<h4 id="3-Hexo本地化"><a href="#3-Hexo本地化" class="headerlink" title="3. Hexo本地化"></a>3. Hexo本地化</h4><h5 id="1-创建新文件夹"><a href="#1-创建新文件夹" class="headerlink" title="(1) 创建新文件夹"></a>(1) 创建新文件夹</h5><p>这个新文件夹在之后会保存Hexo的文件以及你的博客相关内容，十分重要，我是建立在E盘下新文件夹I.myBlog。</p>
-<h5 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="(2) 安装Hexo"></a>(2) 安装Hexo</h5><p>打开Windows中使用cmd命令打开命令行，然后更改命令行目录到上一步创建的新文件夹中，然后执行下面的命令安装Hexo：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>注意安装过程中网络不要断开，安装完成后文件夹还是一个空的状态，下一步要初始化。</p>
-<h5 id="3-初始化Hexo"><a href="#3-初始化Hexo" class="headerlink" title="(3) 初始化Hexo"></a>(3) 初始化Hexo</h5><p> 执行以下代码完成初始化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p>这时候文件夹就出现了新文件，不再是空的，文件主要有以下几种：</p>
-<ul>
-<li>.deploty_git：上传到Github的最终文件，如果不使用Git，则不会生成</li>
-<li>.github：一个神秘文件夹</li>
-<li>node_modules：一个神秘文件夹</li>
-<li>public：上传到Github的最终文件，不安装Git时可以使用这种方法直接部署</li>
-<li>scaffolds：存放创建新文章时的模板文件</li>
-<li>theme：主题存放文件夹</li>
-<li>post：博客文章存放的地方</li>
-</ul>
-<h3 id="三-基础配置与指令"><a href="#三-基础配置与指令" class="headerlink" title="三. 基础配置与指令"></a>三. 基础配置与指令</h3><h4 id="1-主题配置-美化"><a href="#1-主题配置-美化" class="headerlink" title="1. 主题配置(美化)"></a>1. 主题配置(美化)</h4><p>进入博客文件夹根目录，打开**_config.yml**文件，然后自行进行修改。</p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc258c.png" alt="&lt;font color=red&gt; 图2&lt;/font&gt;  _config文件截图示意"></p>
-<p>这里是一些基本的，比如说你的网站名（第六行）、描述（第八行）、作者（第十行）、语言（第十一行）等都可以进行自主修改。</p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc25a2.png" alt="&lt;font color=red&gt; 图3&lt;/font&gt;  url修改"></p>
-<p>如图3所示，这里url的修改十分重要，一定要记得修改。要改成你将来要部署的网站！！！比如你要用GitHub Pages部署，就必须是那一节你部署过的网站链接！！！ </p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2594.png" alt="&lt;font color=red&gt; 图4&lt;/font&gt;  git链接修改"></p>
-<p><font color="red"><strong>注意，下面这几处修改十分重要！！！</strong></font></p>
-<p>第100行的主题名改为之前让你复制的那个文件夹名(记得空格，在你没有下载新主题之前不用管，默认即可)；</p>
-<p>第105行“type”后面填写“git”；</p>
-<p>第106行加上“repo”，然后加上链接——不是GitHub Pages的链接，是GitHub Pages的库的链接！！</p>
-<blockquote>
-<p>注意：这里由于Github在2021年进行了一次更新，应该是不能再使用https协议了，转而应该示意SSH，但是我这里使用了https好像也没什么问题，其实我自己现在对Git、GitHub的使用也还是模模糊糊，对一些操作、概念(如：密钥、公钥、令牌等)不明白，所以也就是稀里糊涂，后面我还要仔细学习学习Git的知识，如果你的使用https不行，建议参考链接进行设置——<a href="https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91">https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91</a> </p>
-</blockquote>
-<p>第107行加上“branch”，名字起main；</p>
-<blockquote>
-<p>注意：这里与Github在2021年进行了一次更新有关，之前应该是填写master，现在填写main即可；</p>
-</blockquote>
-<p>完成这些之后，我们可以再次用“hexo s”这个指令查看预览，发现已经更新主题了。</p>
-<h4 id="2-Hexo的常用命令"><a href="#2-Hexo的常用命令" class="headerlink" title="2. Hexo的常用命令"></a>2. Hexo的常用命令</h4><ul>
-<li>hexo s：在本地演示网站</li>
-<li>hexo g：在本地渲染静态页面(就是将md转换为html)</li>
-<li>hexo d：把静态页面一键上传到Github Pages</li>
-<li>hexo new：<ul>
-<li>标题(直接加标题则是在source/_posts文件夹生成—个”标题.md”文件作为文章)<ul>
-<li>建议∶生成新文章和页面时最好用阿拉伯数字或者英文,这样链接不会很长</li>
-</ul>
-</li>
-<li>page+标题(标题前加page则是生成一个新页面,hexo刚开始只有默认的首页和归档页,创建其他页面,例如标签,关于页面,都需要此指令生成)</li>
-<li>post+标题(在_config.yml中将post_asset_folder设为true之后hexo new post “first-page”之后新建了一篇文章，就会同时在hexo/source/_post文件夹下生成一个.md文件和一个同名文件夹，文件夹存放文章中的图片)</li>
-</ul>
-</li>
-<li>hexo clean：清理已有的静态页面(不是删干净重来)</li>
-</ul>
-<h4 id="3-示例配置过程"><a href="#3-示例配置过程" class="headerlink" title="3. 示例配置过程"></a>3. 示例配置过程</h4><p>在执行<code>hexo init</code>之后，可以再执行<code>hexg g</code> 在本地渲染页面，完成后文件夹中会出现<strong>public</strong>文件夹。然后再执行<code>hexo new ts</code> 这时在source文件夹下会生成_post文件夹，里面有hello-world.md(默认自带)和ts.md(代码新生成的)，然后我们可以在ts.md中写一些东西，就是日后的博客文章。还可以使用命令<code>hexo new page about</code> 生成一个新的about文件夹，里面有index.md，可以写一些介绍自己的内容。</p>
-<p>弄好上面的之后，我们可以执行命令<code>hexo s</code> 在本地演示网站，此时cmd窗口会生成一个<a href="http://localhost:4000/">http://localhost:4000</a> 的链接，我们在浏览器打开就可以看到渲染的博客页面了。</p>
-<h4 id="4-主题的美化"><a href="#4-主题的美化" class="headerlink" title="4. 主题的美化"></a>4. 主题的美化</h4><p>主要是利用<strong>根目录下的_config.yml文件</strong>和<strong>themes文件夹下某一主题文件夹下的_config.yml</strong>进行修改美化页面，可以自己进行探索。</p>
-<h5 id="1-关于主题的设置"><a href="#1-关于主题的设置" class="headerlink" title="(1) 关于主题的设置"></a>(1) 关于主题的设置</h5><ul>
-<li>存放位置：/themes/主题名/_config.yml(注意：有别于根目录下的_config.yml文件)<ul>
-<li>这里需要说明的是：Hexo在渲染静态页面时，themes文件夹的_config.yml文件优先度比根目录的_config.yml高</li>
-</ul>
-</li>
-<li>修改方式：大部分为布尔值(只需要修改true或者false即可)，支持中文的主题大部分会有注释<ul>
-<li>这里推荐Hexo的Next与Ayer主题，两者有很清晰明了的中文，页面也很清爽(我的主题是Ayer)</li>
-</ul>
-</li>
-<li>添加自定义js的方式：在/themes/主题名/layout/layout.ejs中添加<ul>
-<li>该方法是我在用Next主题时发现的，当时成功了，是后来Ayer主题失败了，还是要按照不同的主题来</li>
-</ul>
-</li>
-</ul>
-<p>完成配置后，可以使用<code>hexok s</code> 在本地演示网站看一下配置情况。</p>
-<h5 id="2-Markdown语法学习"><a href="#2-Markdown语法学习" class="headerlink" title="(2) Markdown语法学习"></a>(2) Markdown语法学习</h5><p>自己学习，这里不讲。</p>
-<h3 id="四-部署与上传"><a href="#四-部署与上传" class="headerlink" title="四. 部署与上传"></a>四. 部署与上传</h3><p>在进行完这一步之后，就可以真正意义上有一个可以在浏览器打开的自己的博客网站！！！</p>
-<p>正常情况下，在cmd输入指令<code>npm install hexo-deployer-git --save</code> 之后指令<code>hexo g -d</code> 理论上就可以成功将博客文件上传到Github上了，然后在GitHub网页的settings页面下找到pages，就可以找到对应的网址，打开即可看到自己的博客。<br>但是，由于Github服务器在国外，所以经常出现网络问题，需要搭梯子，下面是失败情况下的一些处理方法。</p>
-<ul>
-<li>失败则输入指令<code>git config --global credential.helper wincred</code></li>
-<li>再次失败，错误原因是spawn的话就是网络有些问题，重启cmd试试</li>
-<li>还是失败的话可能是电脑上装了两个hexo</li>
-<li>最终还是失败的话可以使用指令<code>hexo g</code>，然后直接在网页端的GitHub上传public文件夹。</li>
-</ul>
-<h3 id="五-相关链接"><a href="#五-相关链接" class="headerlink" title="五. 相关链接"></a>五. 相关链接</h3><h4 id="1-帮助文档链接"><a href="#1-帮助文档链接" class="headerlink" title="1. 帮助文档链接"></a>1. 帮助文档链接</h4><p>在自己搭建第一个博客中出现了很多问题，有许多博客、视频帮助了我，贴在下面可以可看一下。</p>
-<p>听话的便当的B站视频：<a href="https://space.bilibili.com/435364951/channel/seriesdetail?sid=812995">听话的_便当的个人空间_哔哩哔哩_bilibili</a> </p>
-<p>听话的便当的博客：<a href="https://byn6.github.io/2021/08/29/gp-h/">https://byn6.github.io/2021/08/29/gp-h/</a></p>
-<p>Ayer中文官方文档： <a href="https://shen-yu.gitee.io/2019/ayer">https://shen-yu.gitee.io/2019/ayer</a></p>
-<p>Hexo官方文档：<a href="https://hexo.io/zh-cn/docs/asset-folders.html">https://hexo.io/zh-cn/docs/asset-folders.html</a></p>
-<p>Hexo常用命令详解及使用方法：<a href="https://www.mabiji.com/hexo/hexocommands.html">https://www.mabiji.com/hexo/hexocommands.html</a></p>
-<p>Hexo为文章设置目录与标签的方法：<a href="https://blog.csdn.net/weixin_44543463/article/details/119738094">https://blog.csdn.net/weixin_44543463/article/details/119738094</a></p>
-<p>[hexo]如何更换主题、删除文章：<a href="https://www.cnblogs.com/mrwuzs/p/7942689.html">https://www.cnblogs.com/mrwuzs/p/7942689.html</a></p>
-<p>hexo搭建博客后图片无法显示的完美解决：<a href="https://blog.csdn.net/weixin_43702620/article/details/118655308">https://blog.csdn.net/weixin_43702620/article/details/118655308</a></p>
-<p>不会git就学不会github吗？：<a href="https://www.zhihu.com/question/29566172">https://www.zhihu.com/question/29566172</a></p>
-<p>git是干什么的？ sourcetree是干什么的？：<a href="https://www.zhihu.com/question/48322958">https://www.zhihu.com/question/48322958</a></p>
-<p>SourceTree的基本使用教程：<a href="https://blog.csdn.net/qq_34129814/article/details/82847753">https://blog.csdn.net/qq_34129814/article/details/82847753</a></p>
-<p>Hexo server报错TypeError: Cannot read property ‘utcOffset’ of null解决方法：<a href="http://t.zoukankan.com/mmzuo-798-p-10510225.html">http://t.zoukankan.com/mmzuo-798-p-10510225.html</a></p>
-<p>免费图床，看这一篇就够了！：<a href="https://www.duangvps.com/archives/1737">https://www.duangvps.com/archives/1737</a></p>
-<h4 id="2-数学公式解决方法"><a href="#2-数学公式解决方法" class="headerlink" title="2. 数学公式解决方法"></a>2. 数学公式解决方法</h4><p>MathJax在Hexo博客中插入数学公式：<a href="https://blog.csdn.net/weixin_39789979/article/details/110806006">https://blog.csdn.net/weixin_39789979/article/details/110806006</a></p>
-<p>markdown斜体和数学公式的矛盾：<a href="https://blog.moper.net/2640.html">https://blog.moper.net/2640.html</a></p>
-<p>hexo博客MathJax公式渲染问题：<a href="https://www.cnblogs.com/Ai-heng/p/7282110.htm">https://www.cnblogs.com/Ai-heng/p/7282110.htm</a></p>
-<p>hexo 如何解决markdown下划线要加反斜杠，以及如何使用其他markdown的渲染引擎？：<a href="https://segmentfault.com/q/1010000003987383">https://segmentfault.com/q/1010000003987383</a></p>
-<h4 id="3-优秀博客示例"><a href="#3-优秀博客示例" class="headerlink" title="3. 优秀博客示例"></a>3. 优秀博客示例</h4><p>二十五画生 <a href="https://blog.laoda.de/">https://blog.laoda.de</a></p>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
-      <categories>
-        <category>生活休闲</category>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Git</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -1969,6 +1838,137 @@
       <tags>
         <tag>学习</tag>
         <tag>Git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人博客搭建历程</title>
+    <url>/2022/01/18/post-name/</url>
+    <content><![CDATA[<h3 id="〇-简要介绍"><a href="#〇-简要介绍" class="headerlink" title="〇. 简要介绍"></a>〇. 简要介绍</h3><p>本博客的搭建不需要什么技术，而且自己截止到当前时间对Git和Github的使用也刚学，所以只是参考网上博客和B站的教学视频来做的。</p>
+<h3 id="一-部署Github-Pages"><a href="#一-部署Github-Pages" class="headerlink" title="一. 部署Github Pages"></a>一. 部署Github Pages</h3><p>在自己的Github上创建一个新的<strong>Repositories</strong>，注意命名规则是——Github账号名.github.io。</p>
+<h3 id="二-安装Hexo"><a href="#二-安装Hexo" class="headerlink" title="二. 安装Hexo"></a>二. 安装Hexo</h3><h4 id="1-插入注解"><a href="#1-插入注解" class="headerlink" title="1. 插入注解"></a>1. 插入注解</h4><h5 id="1-常见的博客搭建方法"><a href="#1-常见的博客搭建方法" class="headerlink" title="(1) 常见的博客搭建方法"></a>(1) 常见的博客搭建方法</h5><p>据我目前所知，搭建博客总体上分有两种方法：</p>
+<ul>
+<li>第三方平台：在现有的博客网站、论坛或社区上注册个人主页。如知乎，掘金，简书，segmentFault，csdn，博客园等。特点：无技术门槛，可专注于内容。</li>
+<li>静态网站生成技术：在终端执行命令快速生成静态网站，如 Jekyll、Hugo、Hexo等。然后通过 Github Pages、Coding 等展示。特点：通过插件可增加评论、搜索、分析等功能。有多种主题可选。在本地以特定格式书写文章，放置在指定的文件夹。每次发布或修改文章都需要重新生成和部署网站。</li>
+<li>其他：<a href="https://juejin.cn/post/6951679886557708302">参考链接-如何搭建个人博客 ：几种方案比较 + 个人实现</a> </li>
+</ul>
+<h5 id="2-静态网站生成技术比较"><a href="#2-静态网站生成技术比较" class="headerlink" title="(2) 静态网站生成技术比较"></a>(2) 静态网站生成技术比较</h5><p>在该方法当中，也与许多可供选择的方案，像 Jekyll、Hugo、Hexo、Typecho、Wordpress等等，那么它们各有什么优缺点呢，这里我就不说了(不是我的重点)，请参考链接：<a href="https://blog.laoda.de/archives/blog-choosing">Hexo还是Hugo？Typecho还是Wordpress？读完这篇或许你就有答案了！</a></p>
+<h4 id="2-安装相应软件"><a href="#2-安装相应软件" class="headerlink" title="2. 安装相应软件"></a>2. 安装相应软件</h4><h5 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="(1) 安装Node.js"></a>(1) 安装Node.js</h5><p>Node.js的官方网站：<a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a> </p>
+<p>下载好了之后直接安装，安装过程中会出现</p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2599.png" alt="&lt;font color=red&gt;图1&lt;/font&gt;  Node安装"></p>
+<p>要点第四个，添加到Path(环境变量)。</p>
+<h5 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="(2) Git安装"></a>(2) Git安装</h5><p>Git的安装则是傻瓜式安装即可，虽然步骤多，但是按照默认的来就行；</p>
+<p>好的，现在已经全部准备完毕，下面简单测试一下看看是否安装成功。</p>
+<h5 id="3-测试"><a href="#3-测试" class="headerlink" title="(3) 测试"></a>(3) 测试</h5><p> 为了验证我们的Node.js和Git是否安装完毕，可以在CMD（win+R，输入“cmd”即可打开）中输入两条命令查看： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">git version</span><br></pre></td></tr></table></figure>
+
+<p>若两条命令没有报错，而且显示了版本号，则安装成功！</p>
+<h4 id="3-Hexo本地化"><a href="#3-Hexo本地化" class="headerlink" title="3. Hexo本地化"></a>3. Hexo本地化</h4><h5 id="1-创建新文件夹"><a href="#1-创建新文件夹" class="headerlink" title="(1) 创建新文件夹"></a>(1) 创建新文件夹</h5><p>这个新文件夹在之后会保存Hexo的文件以及你的博客相关内容，十分重要，我是建立在E盘下新文件夹I.myBlog。</p>
+<h5 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="(2) 安装Hexo"></a>(2) 安装Hexo</h5><p>打开Windows中使用cmd命令打开命令行，然后更改命令行目录到上一步创建的新文件夹中，然后执行下面的命令安装Hexo：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>注意安装过程中网络不要断开，安装完成后文件夹还是一个空的状态，下一步要初始化。</p>
+<h5 id="3-初始化Hexo"><a href="#3-初始化Hexo" class="headerlink" title="(3) 初始化Hexo"></a>(3) 初始化Hexo</h5><p> 执行以下代码完成初始化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>这时候文件夹就出现了新文件，不再是空的，文件主要有以下几种：</p>
+<ul>
+<li>.deploty_git：上传到Github的最终文件，如果不使用Git，则不会生成</li>
+<li>.github：一个神秘文件夹</li>
+<li>node_modules：一个神秘文件夹</li>
+<li>public：上传到Github的最终文件，不安装Git时可以使用这种方法直接部署</li>
+<li>scaffolds：存放创建新文章时的模板文件</li>
+<li>theme：主题存放文件夹</li>
+<li>post：博客文章存放的地方</li>
+</ul>
+<h3 id="三-基础配置与指令"><a href="#三-基础配置与指令" class="headerlink" title="三. 基础配置与指令"></a>三. 基础配置与指令</h3><h4 id="1-主题配置-美化"><a href="#1-主题配置-美化" class="headerlink" title="1. 主题配置(美化)"></a>1. 主题配置(美化)</h4><p>进入博客文件夹根目录，打开**_config.yml**文件，然后自行进行修改。</p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc258c.png" alt="&lt;font color=red&gt; 图2&lt;/font&gt;  _config文件截图示意"></p>
+<p>这里是一些基本的，比如说你的网站名（第六行）、描述（第八行）、作者（第十行）、语言（第十一行）等都可以进行自主修改。</p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc25a2.png" alt="&lt;font color=red&gt; 图3&lt;/font&gt;  url修改"></p>
+<p>如图3所示，这里url的修改十分重要，一定要记得修改。要改成你将来要部署的网站！！！比如你要用GitHub Pages部署，就必须是那一节你部署过的网站链接！！！ </p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2594.png" alt="&lt;font color=red&gt; 图4&lt;/font&gt;  git链接修改"></p>
+<p><font color="red"><strong>注意，下面这几处修改十分重要！！！</strong></font></p>
+<p>第100行的主题名改为之前让你复制的那个文件夹名(记得空格，在你没有下载新主题之前不用管，默认即可)；</p>
+<p>第105行“type”后面填写“git”；</p>
+<p>第106行加上“repo”，然后加上链接——不是GitHub Pages的链接，是GitHub Pages的库的链接！！</p>
+<blockquote>
+<p>注意：这里由于Github在2021年进行了一次更新，应该是不能再使用https协议了，转而应该示意SSH，但是我这里使用了https好像也没什么问题，其实我自己现在对Git、GitHub的使用也还是模模糊糊，对一些操作、概念(如：密钥、公钥、令牌等)不明白，所以也就是稀里糊涂，后面我还要仔细学习学习Git的知识，如果你的使用https不行，建议参考链接进行设置——<a href="https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91">https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91</a> </p>
+</blockquote>
+<p>第107行加上“branch”，名字起main；</p>
+<blockquote>
+<p>注意：这里与Github在2021年进行了一次更新有关，之前应该是填写master，现在填写main即可；</p>
+</blockquote>
+<p>完成这些之后，我们可以再次用“hexo s”这个指令查看预览，发现已经更新主题了。</p>
+<h4 id="2-Hexo的常用命令"><a href="#2-Hexo的常用命令" class="headerlink" title="2. Hexo的常用命令"></a>2. Hexo的常用命令</h4><ul>
+<li>hexo s：在本地演示网站</li>
+<li>hexo g：在本地渲染静态页面(就是将md转换为html)</li>
+<li>hexo d：把静态页面一键上传到Github Pages</li>
+<li>hexo new：<ul>
+<li>标题(直接加标题则是在source/_posts文件夹生成—个”标题.md”文件作为文章)<ul>
+<li>建议∶生成新文章和页面时最好用阿拉伯数字或者英文,这样链接不会很长</li>
+</ul>
+</li>
+<li>page+标题(标题前加page则是生成一个新页面,hexo刚开始只有默认的首页和归档页,创建其他页面,例如标签,关于页面,都需要此指令生成)</li>
+<li>post+标题(在_config.yml中将post_asset_folder设为true之后hexo new post “first-page”之后新建了一篇文章，就会同时在hexo/source/_post文件夹下生成一个.md文件和一个同名文件夹，文件夹存放文章中的图片)</li>
+</ul>
+</li>
+<li>hexo clean：清理已有的静态页面(不是删干净重来)</li>
+</ul>
+<h4 id="3-示例配置过程"><a href="#3-示例配置过程" class="headerlink" title="3. 示例配置过程"></a>3. 示例配置过程</h4><p>在执行<code>hexo init</code>之后，可以再执行<code>hexg g</code> 在本地渲染页面，完成后文件夹中会出现<strong>public</strong>文件夹。然后再执行<code>hexo new ts</code> 这时在source文件夹下会生成_post文件夹，里面有hello-world.md(默认自带)和ts.md(代码新生成的)，然后我们可以在ts.md中写一些东西，就是日后的博客文章。还可以使用命令<code>hexo new page about</code> 生成一个新的about文件夹，里面有index.md，可以写一些介绍自己的内容。</p>
+<p>弄好上面的之后，我们可以执行命令<code>hexo s</code> 在本地演示网站，此时cmd窗口会生成一个<a href="http://localhost:4000/">http://localhost:4000</a> 的链接，我们在浏览器打开就可以看到渲染的博客页面了。</p>
+<h4 id="4-主题的美化"><a href="#4-主题的美化" class="headerlink" title="4. 主题的美化"></a>4. 主题的美化</h4><p>主要是利用<strong>根目录下的_config.yml文件</strong>和<strong>themes文件夹下某一主题文件夹下的_config.yml</strong>进行修改美化页面，可以自己进行探索。</p>
+<h5 id="1-关于主题的设置"><a href="#1-关于主题的设置" class="headerlink" title="(1) 关于主题的设置"></a>(1) 关于主题的设置</h5><ul>
+<li>存放位置：/themes/主题名/_config.yml(注意：有别于根目录下的_config.yml文件)<ul>
+<li>这里需要说明的是：Hexo在渲染静态页面时，themes文件夹的_config.yml文件优先度比根目录的_config.yml高</li>
+</ul>
+</li>
+<li>修改方式：大部分为布尔值(只需要修改true或者false即可)，支持中文的主题大部分会有注释<ul>
+<li>这里推荐Hexo的Next与Ayer主题，两者有很清晰明了的中文，页面也很清爽(我的主题是Ayer)</li>
+</ul>
+</li>
+<li>添加自定义js的方式：在/themes/主题名/layout/layout.ejs中添加<ul>
+<li>该方法是我在用Next主题时发现的，当时成功了，是后来Ayer主题失败了，还是要按照不同的主题来</li>
+</ul>
+</li>
+</ul>
+<p>完成配置后，可以使用<code>hexok s</code> 在本地演示网站看一下配置情况。</p>
+<h5 id="2-Markdown语法学习"><a href="#2-Markdown语法学习" class="headerlink" title="(2) Markdown语法学习"></a>(2) Markdown语法学习</h5><p>自己学习，这里不讲。</p>
+<h3 id="四-部署与上传"><a href="#四-部署与上传" class="headerlink" title="四. 部署与上传"></a>四. 部署与上传</h3><p>在进行完这一步之后，就可以真正意义上有一个可以在浏览器打开的自己的博客网站！！！</p>
+<p>正常情况下，在cmd输入指令<code>npm install hexo-deployer-git --save</code> 之后指令<code>hexo g -d</code> 理论上就可以成功将博客文件上传到Github上了，然后在GitHub网页的settings页面下找到pages，就可以找到对应的网址，打开即可看到自己的博客。<br>但是，由于Github服务器在国外，所以经常出现网络问题，需要搭梯子，下面是失败情况下的一些处理方法。</p>
+<ul>
+<li>失败则输入指令<code>git config --global credential.helper wincred</code></li>
+<li>再次失败，错误原因是spawn的话就是网络有些问题，重启cmd试试</li>
+<li>还是失败的话可能是电脑上装了两个hexo</li>
+<li>最终还是失败的话可以使用指令<code>hexo g</code>，然后直接在网页端的GitHub上传public文件夹。</li>
+</ul>
+<h3 id="五-相关链接"><a href="#五-相关链接" class="headerlink" title="五. 相关链接"></a>五. 相关链接</h3><h4 id="1-帮助文档链接"><a href="#1-帮助文档链接" class="headerlink" title="1. 帮助文档链接"></a>1. 帮助文档链接</h4><p>在自己搭建第一个博客中出现了很多问题，有许多博客、视频帮助了我，贴在下面可以可看一下。</p>
+<p>听话的便当的B站视频：<a href="https://space.bilibili.com/435364951/channel/seriesdetail?sid=812995">听话的_便当的个人空间_哔哩哔哩_bilibili</a> </p>
+<p>听话的便当的博客：<a href="https://byn6.github.io/2021/08/29/gp-h/">https://byn6.github.io/2021/08/29/gp-h/</a></p>
+<p>Ayer中文官方文档： <a href="https://shen-yu.gitee.io/2019/ayer">https://shen-yu.gitee.io/2019/ayer</a></p>
+<p>Hexo官方文档：<a href="https://hexo.io/zh-cn/docs/asset-folders.html">https://hexo.io/zh-cn/docs/asset-folders.html</a></p>
+<p>Hexo常用命令详解及使用方法：<a href="https://www.mabiji.com/hexo/hexocommands.html">https://www.mabiji.com/hexo/hexocommands.html</a></p>
+<p>Hexo为文章设置目录与标签的方法：<a href="https://blog.csdn.net/weixin_44543463/article/details/119738094">https://blog.csdn.net/weixin_44543463/article/details/119738094</a></p>
+<p>[hexo]如何更换主题、删除文章：<a href="https://www.cnblogs.com/mrwuzs/p/7942689.html">https://www.cnblogs.com/mrwuzs/p/7942689.html</a></p>
+<p>hexo搭建博客后图片无法显示的完美解决：<a href="https://blog.csdn.net/weixin_43702620/article/details/118655308">https://blog.csdn.net/weixin_43702620/article/details/118655308</a></p>
+<p>不会git就学不会github吗？：<a href="https://www.zhihu.com/question/29566172">https://www.zhihu.com/question/29566172</a></p>
+<p>git是干什么的？ sourcetree是干什么的？：<a href="https://www.zhihu.com/question/48322958">https://www.zhihu.com/question/48322958</a></p>
+<p>SourceTree的基本使用教程：<a href="https://blog.csdn.net/qq_34129814/article/details/82847753">https://blog.csdn.net/qq_34129814/article/details/82847753</a></p>
+<p>Hexo server报错TypeError: Cannot read property ‘utcOffset’ of null解决方法：<a href="http://t.zoukankan.com/mmzuo-798-p-10510225.html">http://t.zoukankan.com/mmzuo-798-p-10510225.html</a></p>
+<p>免费图床，看这一篇就够了！：<a href="https://www.duangvps.com/archives/1737">https://www.duangvps.com/archives/1737</a></p>
+<h4 id="2-数学公式解决方法"><a href="#2-数学公式解决方法" class="headerlink" title="2. 数学公式解决方法"></a>2. 数学公式解决方法</h4><p>MathJax在Hexo博客中插入数学公式：<a href="https://blog.csdn.net/weixin_39789979/article/details/110806006">https://blog.csdn.net/weixin_39789979/article/details/110806006</a></p>
+<p>markdown斜体和数学公式的矛盾：<a href="https://blog.moper.net/2640.html">https://blog.moper.net/2640.html</a></p>
+<p>hexo博客MathJax公式渲染问题：<a href="https://www.cnblogs.com/Ai-heng/p/7282110.htm">https://www.cnblogs.com/Ai-heng/p/7282110.htm</a></p>
+<p>hexo 如何解决markdown下划线要加反斜杠，以及如何使用其他markdown的渲染引擎？：<a href="https://segmentfault.com/q/1010000003987383">https://segmentfault.com/q/1010000003987383</a></p>
+<h4 id="3-优秀博客示例"><a href="#3-优秀博客示例" class="headerlink" title="3. 优秀博客示例"></a>3. 优秀博客示例</h4><p>二十五画生 <a href="https://blog.laoda.de/">https://blog.laoda.de</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>生活休闲</category>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>Git</tag>
+        <tag>博客</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
