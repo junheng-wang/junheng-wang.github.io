@@ -32,7 +32,7 @@
 <p>​    3° 有限并属于事件域</p>
 <p>​    4° 有限交属于事件域</p>
 <p>例如$\mathscr{F}_1 =$ { $A_1, A_2, …, A _ {16}$ }，$\mathscr{F}_2 =$ { $A_1, A _ {16}, A_2, A _ {14}$ }，$\mathscr{F}_3 =$ { $A_1,  A _ {16}$ } 等都是事件域(都满足上面3条)，其中$\mathscr{F}_3 $是最简单的事件域(一个事件域最少由空集和样本空间这两个集合组成)，又称平凡事件域。</p>
-<h5 id="2-5-事件域和样本空间辨析"><a href="#2-5-事件域和样本空间辨析" class="headerlink" title="2.5 事件域和样本空间辨析"></a>2.5 事件域和样本空间辨析</h5><p><strong>事件域是样本空间幂集的子集。也就是说，事件域中的每个元素是样本空间的一个子集。</strong>例如，掷骰子，样本空间取 A={1,2,3,4,5,6}，事件域可以取上述集合的全部子集，即F=2^A。此时F中的元素称为事件。例如，“掷出偶数”指的是F中的{2,4,6}这一元素。顺便一提：</p>
+<h5 id="2-5-事件域和样本空间辨析"><a href="#2-5-事件域和样本空间辨析" class="headerlink" title="2.5 事件域和样本空间辨析"></a>2.5 事件域和样本空间辨析</h5><p><strong>事件域是样本空间幂集的子集。也就是说，事件域中的每个元素是样本空间的一个子集。</strong>例如，掷骰子，样本空间取 A={1,2,3,4,5,6}，事件域可以取上述集合的全部子集，即$F=2^A$。此时F中的元素称为事件。例如，“掷出偶数”指的是F中的{2,4,6}这一元素。顺便一提：</p>
 <p><font color="red"><strong>概率本质是定义在事件域上的函数，而随机变量本质是定义在样本空间上的函数。</strong> </font></p>
 <h4 id="3-重新梳理逻辑"><a href="#3-重新梳理逻辑" class="headerlink" title="3. 重新梳理逻辑"></a>3. 重新梳理逻辑</h4><p>上面我们先是给出了定义，再进一步解释的定义中各部分的意义，有点”由果寻因“的意味，逻辑上逆推。现在我们简单通过逻辑正推梳理一下：</p>
 <p>样本点 { $\omega_1, \omega_2,…, \omega_n$}   $\Rightarrow$   样本空间$\Omega =$ {$ \omega_1, \omega_2,…, \omega_n $ }   $\Rightarrow$   某个事件$A_i =$ { $\omega_1, \omega_2$ }, $(A \subset \Omega)$   $\Rightarrow$   事件域$\mathscr{F} =$ { $A_1,A_2,…$}(事件域里面的事件$A_i$不是随意的，必须满足$\sigma$域条件)，那么概率就是一个函数，将事件域映射到$[0,1]$，计算概率的示例如下：</p>
@@ -46,7 +46,7 @@
 <p>[1-5]概率论复习笔记(3)——概率的公理化定义 - Fiddie的文章 - 知乎 <a href="https://zhuanlan.zhihu.com/p/61729415">https://zhuanlan.zhihu.com/p/61729415</a> </p>
 <p>[1-6]事件域和样本空间有什么区别？- 恩牛网 <a href="https://www.enmsb.com/article/%E4%BA%8B%E4%BB%B6%E5%9F%9F%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%A9%BA%E9%97%B4.html">https://www.enmsb.com/article/%E4%BA%8B%E4%BB%B6%E5%9F%9F%E5%92%8C%E4%BA%8B%E4%BB%B6%E7%A9%BA%E9%97%B4.html</a>) </p>
 <h3 id="二、什么是随机变量"><a href="#二、什么是随机变量" class="headerlink" title="二、什么是随机变量"></a>二、什么是随机变量</h3><h4 id="1-随机变量的本质"><a href="#1-随机变量的本质" class="headerlink" title="1. 随机变量的本质"></a>1. 随机变量的本质</h4><p><font color="red"><strong>随机变量的本质是函数——样本点的函数</strong></font></p>
-<p>定义：设$X(w)$是定义在概率空间$(\Omega, \mathscr{F}, P)$上的单值实函数(也就是说它的自变量就是一个个的样本点，因变量是实函数)，如果对直线上任意一博雷尔点集$B$，有${\omega, X(\omega) \in B} \in  \mathscr{F}$，则称$X(\omega)$为随机变量(r.v.)。</p>
+<p>定义：设$X(w)​$是定义在概率空间$(\Omega, \mathscr{F}, P)​$上的单值实函数(也就是说它的自变量就是一个个的样本点，因变量是实函数)，如果对直线上任意一博雷尔点集$B​$，有$\begin{Bmatrix} \omega, X(\omega) \in B \end{Bmatrix} \subset \mathscr{F}​$则称$X(\omega)​$为随机变量(r.v.)。</p>
 <blockquote>
 <p>思考题目(某年北京考研题目)：</p>
 <p>已知：$\Omega =$ { $\omega_1, \omega_2, \omega_3$ }, $P(\omega_1) = \frac{1}{3}, P(\omega_2) = \frac{1}{6}, P(\omega_3) = \frac{1}{2},  X(\omega_1) = 2, X(\omega_2) = X(\omega_3) = 0$</p>
@@ -96,7 +96,41 @@
 <p>[2-4]随机变量和随机过程的个人理解 - UPPER的文章 - 知乎 <a href="https://zhuanlan.zhihu.com/p/47113623">https://zhuanlan.zhihu.com/p/47113623</a> </p>
 <p>[2-5]概率统计中，小x和大X有什么区别 <a href="https://zhidao.baidu.com/question/501709573263510124.html">https://zhidao.baidu.com/question/501709573263510124.html</a>) </p>
 <p>[2-6]请问在概率论中的随机变量X，与统计学中总体随机变量X，极其样本X_1，X_2，X_3有怎么样的关系？ - 顾念一人的回答 - 知乎 <a href="https://www.zhihu.com/question/404719167/answer/1344528800">https://www.zhihu.com/question/404719167/answer/1344528800</a> </p>
-<h3 id="三、概率分布与概率密度"><a href="#三、概率分布与概率密度" class="headerlink" title="三、概率分布与概率密度"></a>三、概率分布与概率密度</h3><h4 id="参考链接：-3"><a href="#参考链接：-3" class="headerlink" title="参考链接："></a><strong>参考链接：</strong></h4><p>[3-1]概率分布就很好，为什么还要提出概率密度的概念？ - 知乎 <a href="https://www.zhihu.com/question/25367654">https://www.zhihu.com/question/25367654</a> </p>
+<h3 id="三、概率函数P-x-、概率分布函数F-x-、概率密度函数f-x"><a href="#三、概率函数P-x-、概率分布函数F-x-、概率密度函数f-x" class="headerlink" title="三、概率函数P(x)、概率分布函数F(x)、概率密度函数f(x)"></a>三、概率函数P(x)、概率分布函数F(x)、概率密度函数f(x)</h3><h4 id="1-写在前面"><a href="#1-写在前面" class="headerlink" title="1. 写在前面"></a>1. 写在前面</h4><p>进入主题前，先明确几个概念：<br><strong>离散型变量（或取值个数有限的变量）</strong>：取值可一一列举，且总数是确定的，如投骰子出现的点数（1点、2点、3点、4点、5点、6点）。<br><strong>连续型变量（或取值个数无限的变量）</strong>：取值无法一一列举，且总数是不确定的，如所有的自然数（0、1、2、3……）。</p>
+<p>**离散型变量取某个值$x_i$的概率$P(x_i)$是个确定的值（虽然很多时候我们不知道这个值是多少），即$P(x_i)≠0$**：例如，投一次骰子出现2点的概率是$P(2)=\dfrac{1}{6}$。</p>
+<p><font color="red"><strong>连续型变量取某个值$x_i$的概率$P(x_i)=0$</strong></font>：<font color="blue"> 对于连续型变量而言，<strong>“取某个具体值的概率”的说法是无意义的，因为取任何单个值的概率都等于0</strong>，只能说<strong>“取值落在某个区间内的概率”</strong>，或<strong>“取值落在某个值邻域内的概率”</strong>，即**只能说$P(a&lt;xi≤b)$，而不能说$P(x_i)$。**</font>  为什么是这样？且看下例：<br>   例如，从所有自然数中任取一个数，问这个数等于5的概率是多少？从所有的自然数中取一个，当然是有可能取到5的，但是自然数有无穷多个，因此取到5的概率是$\dfrac{1}{\infty}$，也就是0。<br>   又如扔飞镖，虽然是有可能落在靶心的，但其概率也是0（不考虑熟练程度等其他因素），因为靶盘上有无数个点，每个点的概率是一样的，因此落在某一个具体的点上的概率为$\dfrac{1}{\infty} = 0$。</p>
+<p>根据前面的例子可知：<font color="red"> <strong>在连续型变量中：概率为0的事件是有可能发生的，概率为1的事件不一定必然发生。</strong></font> </p>
+<h4 id="2-概率分布和概率函数P-X"><a href="#2-概率分布和概率函数P-X" class="headerlink" title="2. 概率分布和概率函数P(X)"></a>2. 概率分布和概率函数P(X)</h4><p><strong>概率分布</strong>：给出了所有取值及其对应的概率（少一个也不行），<strong>只对离散型变量有意义</strong>。例如： </p>
+<img src="https://pic.imgdb.cn/item/621457fd2ab3f51d913ee894.jpg" style="zoom:40%">
+
+<p><strong>概率函数</strong>：用函数形式给出每个取值发生的概率，P(x)（x=x1，x2，x3，……），<strong>只对离散型变量有意义</strong>，实际上是对概率分布的数学描述。</p>
+<p><strong>概率分布和概率函数只对离散型变量有意义，那如何描述连续型变量呢？</strong></p>
+<p> <font color="red">答案就是“**概率分布函数F(x)<strong>”和“</strong>概率密度函数f(x)**”，</font> 当然这两者也是可以描述离散型变量的。</p>
+<h4 id="3-概率分布函数F-X-与概率密度函数f-x"><a href="#3-概率分布函数F-X-与概率密度函数f-x" class="headerlink" title="3. 概率分布函数F(X)与概率密度函数f(x)"></a>3. 概率分布函数F(X)与概率密度函数f(x)</h4><p>1、<strong>概率分布函数F(x)：给出取值小于某个值的概率，是概率的累加形式</strong>，即：$F(x_i)=P(x&lt;x_i)= \sum(P(x_1),P(x_2), \cdots ,P(x_i))$（对于离散型变量）或求积分（对于连续型变量，见后图）。</p>
+<p>2、<strong>概率分布函数F(x)的性质</strong></p>
+<ul>
+<li>单调非减性：$\forall a&lt;b$，总有$F(a) \leq F(b)$；</li>
+<li>$F(x)$是一个右连续函数；</li>
+<li>有界性：$\forall x \in \rm R$，总有$0 \leq F(x) \leq 1$，且$\lim\limits_{x \to -\infty} F(x) = 0, \lim\limits_{x \to \infty} F(x) = 1$；</li>
+</ul>
+<p>3、<strong>概率分布函数F(x)的作用</strong><br> （1）<strong>给出x落在某区间(a,b]内的概率</strong>：$P(a&lt;x≤b)=F(b)-F(a)$<br> （2）<strong>根据F(x)的斜率判断“区间概率”$P(A&lt;x≤B)$的变化（实际上就是后面要说的概率密度函数f(x)）（特别注意：是判断“区间概率”，即x落在$(A,B]$中的概率，而不是x取某个确定值的概率，这是连续型变量和离散型变量的本质区别）</strong><br>   <strong>某区间(A,B]内，F(x)越倾斜，表示x落在该区间内的概率P(A&lt;x≤B) 越大</strong>。如图中(a,b]区间内F(x)的斜率最大，如果将整个取值区间以$δ_x=b-a$的间隔等距分开，则x落在$(a,b]$内的概率最大。为什么？因为$P(A&lt;x≤B) )=F(B)-F(A)$，所有区间中只有在$(a,b]$这个区间上（即A=a，B=b）$F(B)-F(A)$达到最大值，也就是图中竖向红色线段最长。</p>
+<img src="https://upload-images.jianshu.io/upload_images/14029140-e0d4c8f212cd2efb.png" style="zoom:80%">
+
+<p>4、<strong>概率密度函数f(x)</strong></p>
+<p>给出了变量落在某值$x_i$邻域内（或者某个区间内）的<font color="red"> <strong>概率变化快慢</strong>，<strong>概率密度函数的值不是概率，而是概率的变化率，概率密度函数下面的面积才是概率</strong>。 </font>  </p>
+<p>定义1：若存在非负可积函数$f(x)$，使随机变量X取值于任一区间$(a,b]$的概率可表示成<br>$$<br>P(a \leq X \leq b) = \int_a^b f(x)dx<br>$$<br>则称X为连续型随机变量，$f(x)$为X的概率密度函数，简称概率密度或密度。</p>
+<p> 5、概率分布函数和概率密度函数之间的关系<br>$$<br>F(x) = \int_{-\infty}^{x}f(t)dt \<br>f(x) = \frac{d}{dx}F(x)<br>$$</p>
+<blockquote>
+<p>注意：</p>
+<p>概率密度函数$f(x)$在点a处取值，不是事件${X=a}$的概率。但是，该值越大，X在a点附近取值的概率越大。</p>
+</blockquote>
+<img src="https://upload-images.jianshu.io/upload_images/14029140-adbb1dfa8e7dc22c.png" style="zoom:100%">
+
+<p><strong>连续型变量的概率、概率分布函数、概率密度函数之间的关系（以正态分布为例）</strong>如下图：<br>   <strong>对于正态分布而言，x落在u附近的概率最大，而F(x)是概率的累加和，因此在u附近F(x)的递增变化最快，即F(x)曲线在（u，F(u)）这一点的切线的斜率最大，这个斜率就等于f(u)。</strong>x落在a和b之间的概率为F(b)-F(a)（图中的红色小线段），而在概率密度曲线中则是f(x)与ab围成的面积S。如下图所示：</p>
+<img src="https://upload-images.jianshu.io/upload_images/14029140-857d5a75582fd969.png" style="zoom:100%">
+
+<h4 id="4-概率密度函数在某点a的值f-a-的物理意义到底是什么？"><a href="#4-概率密度函数在某点a的值f-a-的物理意义到底是什么？" class="headerlink" title="4. 概率密度函数在某点a的值f(a)的物理意义到底是什么？"></a>4. 概率密度函数在某点a的值f(a)的物理意义到底是什么？</h4><p><strong>我们知道f(a)表示，概率分布函数F(x)在a点的变化率(或导数)；其物理意义实际上就是x落在a点附近的无穷小邻域内的概率，但不是落在a点的概率（前已述及，连续变量单点概率=0），用数学语言描述就是：</strong><br>$$<br>f(a) = F’(a) = P(a-\delta x &lt; x \leq a+\delta x)_{\delta x &gt;0 且 \to 0} ≠ P(a)<br>$$</p>
+<h4 id="参考链接：-3"><a href="#参考链接：-3" class="headerlink" title="参考链接："></a><strong>参考链接：</strong></h4><p>[3-1]概率分布就很好，为什么还要提出概率密度的概念？ - 知乎 <a href="https://www.zhihu.com/question/25367654">https://www.zhihu.com/question/25367654</a> </p>
 <p>[3-2]概率基础：概率密度函数并不是概率 - coasxu的文章 - 知乎 <a href="https://zhuanlan.zhihu.com/p/413360980">https://zhuanlan.zhihu.com/p/413360980</a> </p>
 <p>[3-3]概率密度函数在某一点的值有什么意义？ - 知乎 <a href="https://www.zhihu.com/question/23237834">https://www.zhihu.com/question/23237834</a> </p>
 <p>[3-4]如何通俗的理解概率密度函数？ - 知乎 <a href="https://www.zhihu.com/question/263467674">https://www.zhihu.com/question/263467674</a> </p>
@@ -776,10 +810,10 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>1898.3万</span></span>
+                        <span>1901.0万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>59.6万</span></span></p>
+                        <span>59.7万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -919,7 +953,18 @@
 <p>3、推论：</p>
 <p>当$P(A) &gt; 0$、$P(B) &gt; 0$时，互不相容与独立不会同时发生。</p>
 <h5 id="三、补充知识——对立"><a href="#三、补充知识——对立" class="headerlink" title="三、补充知识——对立"></a>三、补充知识——对立</h5><p>最后再说一下对立事件，对立是指A、B必然发生一个且仅有一个发生，比如今天下雨或者不下雨，<strong>对立一定互不相容(互斥)，但是互不相容不一定对立</strong></p>
-<p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
+<h4 id="1-5-2-伯努利模型"><a href="#1-5-2-伯努利模型" class="headerlink" title="1.5.2 伯努利模型"></a>1.5.2 伯努利模型</h4><h5 id="一、几个相关概念"><a href="#一、几个相关概念" class="headerlink" title="一、几个相关概念"></a>一、几个相关概念</h5><p>1、独立实验序列：实验$E_1,E_2, \cdots, E_n$相互独立；</p>
+<p>2、N重独立实验：把一个实验做N次，每次都是相互独立的；</p>
+<p>3、伯努利实验：实验结果只有两种的实验(e.g. 硬币的正反)</p>
+<p>4、N重伯努利实验：重复做N次实验，每次实验都相互独立，且实验的结果只有两种的实验。</p>
+<h5 id="二、定义"><a href="#二、定义" class="headerlink" title="二、定义"></a>二、定义</h5><p>在伯努利实验模型中，事件A发生的概率是$P$，则$\bar A$的概率为$1-P$，那么在N重伯努利实验中，事件A发生k次的概率为：<br>$$<br>P_N(k) = C_N^k P^k (1-P)^{N-k}<br>$$<br>上面的公式又称为二项概率公式。</p>
+<h2 id="第二章-随机变量及其分布"><a href="#第二章-随机变量及其分布" class="headerlink" title="第二章 随机变量及其分布"></a>第二章 随机变量及其分布</h2><h3 id="2-1-随机变量的概念"><a href="#2-1-随机变量的概念" class="headerlink" title="2.1 随机变量的概念"></a>2.1 随机变量的概念</h3><h5 id="一、定义-6"><a href="#一、定义-6" class="headerlink" title="一、定义"></a>一、定义</h5><p><font color="red"><strong>重点：随机变量的本质是函数——样本点的函数</strong></font></p>
+<p>设$X(w)$是定义在概率空间$(\Omega, \mathscr{F}, P)$上的单值实函数(也就是说它的自变量就是一个个的样本点，因变量是实函数)，如果对直线上任意一博雷尔点集$B$，有$\begin{Bmatrix} \omega, X(\omega) \in B \end{Bmatrix} \subset \mathscr{F}$则称$X(\omega)$为随机变量(r.v.)。</p>
+<h5 id="二、表示"><a href="#二、表示" class="headerlink" title="二、表示"></a>二、表示</h5><p>有了随机变量的概念，我们就可以将一个事件表示为：$\begin{Bmatrix} \omega | X(\omega) = a \end{Bmatrix}$，简记为$\begin{Bmatrix} X = a \end{Bmatrix}$，此时事件的概率可表示为：<br>$$<br>P(X=a)<br>$$<br>为了理解其本质，我将上面的简写形式的完整形式写在下面：<br>$$<br>P(X=a) = P(\begin{Bmatrix} \omega | X(\omega) = a \end{Bmatrix})<br>$$</p>
+<h5 id="三、分类"><a href="#三、分类" class="headerlink" title="三、分类"></a>三、分类</h5><p>1、离散型随机变量：变量是离散的，且满足<strong>个数有限</strong>或者<strong>无限但可列</strong>；</p>
+<p>2、连续性随机变量：变量是连续的。</p>
+<h3 id="2-2-随机变量的分布"><a href="#2-2-随机变量的分布" class="headerlink" title="2.2 随机变量的分布"></a>2.2 随机变量的分布</h3><h4 id="2-2-1-离散型随机变量及其概率分布"><a href="#2-2-1-离散型随机变量及其概率分布" class="headerlink" title="2.2.1 离散型随机变量及其概率分布"></a>2.2.1 离散型随机变量及其概率分布</h4><h5 id="一、定义-7"><a href="#一、定义-7" class="headerlink" title="一、定义"></a>一、定义</h5><p>离散随机变量X的取值为$x_k(k = 1,2, \cdots)$，其概率为$P(X = x_k) = p_k$，则其称为随机变量的概率分布。</p>
+<h4 id="2-2-2-连续型随机变量及其概率密度函数"><a href="#2-2-2-连续型随机变量及其概率密度函数" class="headerlink" title="2.2.2 连续型随机变量及其概率密度函数"></a>2.2.2 连续型随机变量及其概率密度函数</h4><p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$、$\begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>[1]B站宋浩视频 <a href="https://www.bilibili.com/video/BV1ot411y7mU">https://www.bilibili.com/video/BV1ot411y7mU</a></p>
 <p>[2]书籍目录 <a href="https://www.taobao.com/list/item/610183739684.htm">https://www.taobao.com/list/item/610183739684.htm</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
