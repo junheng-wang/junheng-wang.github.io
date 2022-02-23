@@ -224,7 +224,7 @@
 <li>有界性：$\forall x \in \rm R$，总有$0 \leq F(x) \leq 1$，且$\lim\limits_{x \to -\infty} F(x) = 0, \lim\limits_{x \to \infty} F(x) = 1$；</li>
 </ul>
 <p>3、<strong>概率分布函数F(x)的作用</strong><br> （1）<strong>给出x落在某区间(a,b]内的概率</strong>：$P(a&lt;x≤b)=F(b)-F(a)$<br> （2）<strong>根据F(x)的斜率判断“区间概率”$P(A&lt;x≤B)$的变化（实际上就是后面要说的概率密度函数f(x)）（特别注意：是判断“区间概率”，即x落在$(A,B]$中的概率，而不是x取某个确定值的概率，这是连续型变量和离散型变量的本质区别）</strong><br>   <strong>某区间(A,B]内，F(x)越倾斜，表示x落在该区间内的概率P(A&lt;x≤B) 越大</strong>。如图中(a,b]区间内F(x)的斜率最大，如果将整个取值区间以$δ_x=b-a$的间隔等距分开，则x落在$(a,b]$内的概率最大。为什么？因为$P(A&lt;x≤B) )=F(B)-F(A)$，所有区间中只有在$(a,b]$这个区间上（即A=a，B=b）$F(B)-F(A)$达到最大值，也就是图中竖向红色线段最长。</p>
-<img src="https://upload-images.jianshu.io/upload_images/14029140-e0d4c8f212cd2efb.png" style="zoom:80%">
+<img src="https://pic.imgdb.cn/item/62148eb52ab3f51d91b44170.jpg" style="zoom:40%">
 
 <p>4、<strong>概率密度函数f(x)</strong></p>
 <p>给出了变量落在某值$x_i$邻域内（或者某个区间内）的<font color="red"> <strong>概率变化快慢</strong>，<strong>概率密度函数的值不是概率，而是概率的变化率，概率密度函数下面的面积才是概率</strong>。 </font>  </p>
@@ -234,10 +234,10 @@
 <p>注意：</p>
 <p>概率密度函数$f(x)$在点a处取值，不是事件${X=a}$的概率。但是，该值越大，X在a点附近取值的概率越大。</p>
 </blockquote>
-<img src="https://upload-images.jianshu.io/upload_images/14029140-adbb1dfa8e7dc22c.png" style="zoom:100%">
+<img src="https://pic.imgdb.cn/item/62148ee92ab3f51d91b4c173.jpg" style="zoom:50%">
 
 <p><strong>连续型变量的概率、概率分布函数、概率密度函数之间的关系（以正态分布为例）</strong>如下图：<br>   <strong>对于正态分布而言，x落在u附近的概率最大，而F(x)是概率的累加和，因此在u附近F(x)的递增变化最快，即F(x)曲线在（u，F(u)）这一点的切线的斜率最大，这个斜率就等于f(u)。</strong>x落在a和b之间的概率为F(b)-F(a)（图中的红色小线段），而在概率密度曲线中则是f(x)与ab围成的面积S。如下图所示：</p>
-<img src="https://upload-images.jianshu.io/upload_images/14029140-857d5a75582fd969.png" style="zoom:100%">
+<img src="https://pic.imgdb.cn/item/62148f2e2ab3f51d91b58251.jpg" style="zoom:60%">
 
 <h4 id="4-概率密度函数在某点a的值f-a-的物理意义到底是什么？"><a href="#4-概率密度函数在某点a的值f-a-的物理意义到底是什么？" class="headerlink" title="4. 概率密度函数在某点a的值f(a)的物理意义到底是什么？"></a>4. 概率密度函数在某点a的值f(a)的物理意义到底是什么？</h4><p><strong>我们知道f(a)表示，概率分布函数F(x)在a点的变化率(或导数)；其物理意义实际上就是x落在a点附近的无穷小邻域内的概率，但不是落在a点的概率（前已述及，连续变量单点概率=0），用数学语言描述就是：</strong><br>$$<br>f(a) = F’(a) = P(a-\delta x &lt; x \leq a+\delta x)_{\delta x &gt;0 且 \to 0} ≠ P(a)<br>$$</p>
 <h4 id="参考链接：-3"><a href="#参考链接：-3" class="headerlink" title="参考链接："></a><strong>参考链接：</strong></h4><p>[3-1]概率分布就很好，为什么还要提出概率密度的概念？ - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/25367654">https://www.zhihu.com/question/25367654</a> </p>

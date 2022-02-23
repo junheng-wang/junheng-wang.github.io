@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Basic-concepts-of-radar</title>
+    <url>/2022/01/25/Basic-concepts-of-radar/</url>
+    <content><![CDATA[<h3 id="一、雷达距离fft-多普勒fft"><a href="#一、雷达距离fft-多普勒fft" class="headerlink" title="一、雷达距离fft+多普勒fft"></a>一、雷达距离fft+多普勒fft</h3><p>参考链接：</p>
+<p>[1-1]TI毫米波雷达系列（三）：调频连续波雷达回波信号3DFFT处理原理（测距、测速、测角）<a href="https://blog.csdn.net/qq_35605018/article/details/108816709">https://blog.csdn.net/qq_35605018/article/details/108816709</a></p>
+<p>[1-2]距离-多普勒谱(RD谱)之二：距离相关 <a href="https://blog.csdn.net/mddh_123/article/details/109152790">https://blog.csdn.net/mddh_123/article/details/109152790</a></p>
+<p>[1-3]干货 | 利用MATLAB实现FMCW雷达的距离多普勒估计 <a href="https://www.jianshu.com/p/d2d865da6dce">https://www.jianshu.com/p/d2d865da6dce</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>学习提升</category>
+        <category>雷达信号处理</category>
+      </categories>
+      <tags>
+        <tag>雷达基础</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>概率基础概念本质的辨析理解</title>
     <url>/2022/01/24/Basic-concept-of-probability/</url>
     <content><![CDATA[<h3 id="〇、如何学好概率论与数理统计"><a href="#〇、如何学好概率论与数理统计" class="headerlink" title="〇、如何学好概率论与数理统计"></a>〇、如何学好概率论与数理统计</h3><h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a><strong>参考链接：</strong></h4><p>[0-1]如何学好概率论与数理统计 <a href="http://www.hanhai.org/xuexijiaoliu/26.htm">http://www.hanhai.org/xuexijiaoliu/26.htm</a></p>
@@ -114,7 +130,7 @@
 <li>有界性：$\forall x \in \rm R$，总有$0 \leq F(x) \leq 1$，且$\lim\limits_{x \to -\infty} F(x) = 0, \lim\limits_{x \to \infty} F(x) = 1$；</li>
 </ul>
 <p>3、<strong>概率分布函数F(x)的作用</strong><br> （1）<strong>给出x落在某区间(a,b]内的概率</strong>：$P(a&lt;x≤b)=F(b)-F(a)$<br> （2）<strong>根据F(x)的斜率判断“区间概率”$P(A&lt;x≤B)$的变化（实际上就是后面要说的概率密度函数f(x)）（特别注意：是判断“区间概率”，即x落在$(A,B]$中的概率，而不是x取某个确定值的概率，这是连续型变量和离散型变量的本质区别）</strong><br>   <strong>某区间(A,B]内，F(x)越倾斜，表示x落在该区间内的概率P(A&lt;x≤B) 越大</strong>。如图中(a,b]区间内F(x)的斜率最大，如果将整个取值区间以$δ_x=b-a$的间隔等距分开，则x落在$(a,b]$内的概率最大。为什么？因为$P(A&lt;x≤B) )=F(B)-F(A)$，所有区间中只有在$(a,b]$这个区间上（即A=a，B=b）$F(B)-F(A)$达到最大值，也就是图中竖向红色线段最长。</p>
-<img src="https://upload-images.jianshu.io/upload_images/14029140-e0d4c8f212cd2efb.png" style="zoom:80%">
+<img src="https://pic.imgdb.cn/item/62148eb52ab3f51d91b44170.jpg" style="zoom:40%">
 
 <p>4、<strong>概率密度函数f(x)</strong></p>
 <p>给出了变量落在某值$x_i$邻域内（或者某个区间内）的<font color="red"> <strong>概率变化快慢</strong>，<strong>概率密度函数的值不是概率，而是概率的变化率，概率密度函数下面的面积才是概率</strong>。 </font>  </p>
@@ -124,10 +140,10 @@
 <p>注意：</p>
 <p>概率密度函数$f(x)$在点a处取值，不是事件${X=a}$的概率。但是，该值越大，X在a点附近取值的概率越大。</p>
 </blockquote>
-<img src="https://upload-images.jianshu.io/upload_images/14029140-adbb1dfa8e7dc22c.png" style="zoom:100%">
+<img src="https://pic.imgdb.cn/item/62148ee92ab3f51d91b4c173.jpg" style="zoom:50%">
 
 <p><strong>连续型变量的概率、概率分布函数、概率密度函数之间的关系（以正态分布为例）</strong>如下图：<br>   <strong>对于正态分布而言，x落在u附近的概率最大，而F(x)是概率的累加和，因此在u附近F(x)的递增变化最快，即F(x)曲线在（u，F(u)）这一点的切线的斜率最大，这个斜率就等于f(u)。</strong>x落在a和b之间的概率为F(b)-F(a)（图中的红色小线段），而在概率密度曲线中则是f(x)与ab围成的面积S。如下图所示：</p>
-<img src="https://upload-images.jianshu.io/upload_images/14029140-857d5a75582fd969.png" style="zoom:100%">
+<img src="https://pic.imgdb.cn/item/62148f2e2ab3f51d91b58251.jpg" style="zoom:60%">
 
 <h4 id="4-概率密度函数在某点a的值f-a-的物理意义到底是什么？"><a href="#4-概率密度函数在某点a的值f-a-的物理意义到底是什么？" class="headerlink" title="4. 概率密度函数在某点a的值f(a)的物理意义到底是什么？"></a>4. 概率密度函数在某点a的值f(a)的物理意义到底是什么？</h4><p><strong>我们知道f(a)表示，概率分布函数F(x)在a点的变化率(或导数)；其物理意义实际上就是x落在a点附近的无穷小邻域内的概率，但不是落在a点的概率（前已述及，连续变量单点概率=0），用数学语言描述就是：</strong><br>$$<br>f(a) = F’(a) = P(a-\delta x &lt; x \leq a+\delta x)_{\delta x &gt;0 且 \to 0} ≠ P(a)<br>$$</p>
 <h4 id="参考链接：-3"><a href="#参考链接：-3" class="headerlink" title="参考链接："></a><strong>参考链接：</strong></h4><p>[3-1]概率分布就很好，为什么还要提出概率密度的概念？ - 知乎 <a href="https://www.zhihu.com/question/25367654">https://www.zhihu.com/question/25367654</a> </p>
@@ -354,19 +370,52 @@
       </tags>
   </entry>
   <entry>
-    <title>Basic-concepts-of-radar</title>
-    <url>/2022/01/25/Basic-concepts-of-radar/</url>
-    <content><![CDATA[<h3 id="一、雷达距离fft-多普勒fft"><a href="#一、雷达距离fft-多普勒fft" class="headerlink" title="一、雷达距离fft+多普勒fft"></a>一、雷达距离fft+多普勒fft</h3><p>参考链接：</p>
-<p>[1-1]TI毫米波雷达系列（三）：调频连续波雷达回波信号3DFFT处理原理（测距、测速、测角）<a href="https://blog.csdn.net/qq_35605018/article/details/108816709">https://blog.csdn.net/qq_35605018/article/details/108816709</a></p>
-<p>[1-2]距离-多普勒谱(RD谱)之二：距离相关 <a href="https://blog.csdn.net/mddh_123/article/details/109152790">https://blog.csdn.net/mddh_123/article/details/109152790</a></p>
-<p>[1-3]干货 | 利用MATLAB实现FMCW雷达的距离多普勒估计 <a href="https://www.jianshu.com/p/d2d865da6dce">https://www.jianshu.com/p/d2d865da6dce</a></p>
+    <title>先验概率与后验概率</title>
+    <url>/2022/01/22/Prior-and-Posterior-Probabilities/</url>
+    <content><![CDATA[<h4 id="1-先验概率"><a href="#1-先验概率" class="headerlink" title="1. 先验概率"></a>1. 先验概率</h4><p>事情还没有发生，根据以往的经验来判断事情发生的概率，是“由因求果”。(根据统计和规律得出得概率 )</p>
+<blockquote>
+<p>扔一个硬币，在扔之前就知道正面向上的概率为0.5。这是根据我们之前的经验得到的。这个0.5就是先验概率。</p>
+</blockquote>
+<h4 id="2-后验概率"><a href="#2-后验概率" class="headerlink" title="2. 后验概率"></a>2. 后验概率</h4><p>事情已发生，有多种原因，判断事情的发生是由哪一种原因引起的，是“由果求因”。(根据贝叶斯公式可以得到) </p>
+<blockquote>
+<p>今天上学迟到了，有两个原因，一个是自行车坏了，一个是生病了。后验概率就是根据结果（迟到）来计算原因（生病/自行车坏了）的概率。</p>
+</blockquote>
+<p><font color="red"> <strong>数学表达上，后验概率和条件概率有相同的形式</strong></font></p>
+<p><font color="red"><strong>贝叶斯公式就是由先验概率求后验概率的公式</strong> </font></p>
+<h4 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h4><p>先验概率是对某一件事情发生可能性的预先客观评估，而后验概率是对事情发生是由某一个原因导致的概率。</p>
+<p>先验概率是以全事件为背景下A事件发生的概率$P(A|\Omega)$，后验概率是以新事件B为背景下A事件发生的概率$P(A|B)$全事件一般是统计获得的，所以称为先验概率，没有实验前的概率。新事件一般是实验，如试验B，此时的事件背景从全事件变成了B，该事件B可能对A的概率有影响，那么需要对A现在的概率进行一个修正，从$P(A|Ω)$变成$P(A|B)$，所以称 $P(A|B)$为后验概率，也就是试验(事件B发生)后的概率。</p>
+<p>后验概率分布是条件概率的一个例子。 后验概率告诉我们，在我们观察到一组特定数据的情况下，参数值的可能性有多大。 当然，条件概率不需要描述参数和数据，所以后验概率是条件概率的一个特例。</p>
+<h4 id="4-补充-条件概率与后验概率"><a href="#4-补充-条件概率与后验概率" class="headerlink" title="4. 补充-条件概率与后验概率"></a>4. 补充-条件概率与后验概率</h4><p>后验概率就是一种条件概率，但是与其它条件概率的不同之处在于，它限定了目标事件为隐变量取值，而其中的条件为观测结果。 一般的条件概率，条件和事件都可以是任意的。</p>
+<p><strong>举例区分普通条件概率与后验概率的区别</strong>：</p>
+<blockquote>
+<p>1）那么如果我们出门之前我们听到新闻说今天路上出了个交通事故，那么我们想算一下堵车的概率，这个就叫做条件概率 。也就是P(堵车|交通事故)。这是有因求果。</p>
+<p>2）如果我们已经出了门，然后遇到了堵车，那么我们想算一下堵车时由交通事故引起的概率有多大，那这个就叫做后验概率 （其实也是条件概率，但是通常习惯这么说） 。也就是P(交通事故|堵车)。这是有果求因。</p>
+</blockquote>
+<p> 从上述例子可知道，后验概率就是在已知某B事件发生的情况下，求解其中A事件发生的概率是多少，而A事件正是B事件发生的一个隐状态事件，所以A与B是有前后关联的。在利用贝叶斯进行文本分类的时候也是这个意思：<br>$$<br>P(\frac{c}{d})=\frac{p(\frac{d}{c})p(c)}{p(d)}<br>$$<br>d文档分为c类的概率，$p(c)$就是先验概率，$p(c/d)$就是后验概率，所以贝叶斯就是用先验概率估计后验概率。</p>
+<p>而一般的条件概率，目标事件A和条件事件B，是可以没有任何关系的。</p>
+<hr>
+<p>概率论老师说：</p>
+<p>A的概率——$P(A)$</p>
+<p>A在条件C下的概率——$P(A|C)$</p>
+<p>统计学老师说：</p>
+<p>A事件发生的先验概率——$P(A)$</p>
+<p>知道C事件发生后，A事件发生的后验概率——$P(A|C)$</p>
+<p><strong>小结</strong></p>
+<p>条件概率和后验概率理论上是没区别，唯一的区别在于后验概率来自后验概率分布上。后验概率按理应该是在贝叶斯推论框架下，在这个框架下，必须将后验概率分布和后验概率结合来看。</p>
+<p>综上，后验概率是贝叶斯推论中的概念，而条件概率在频率学派和贝叶斯学派中都有使用，注意这两个学派的区别后，应该能能理解这两者的区别。</p>
+<h4 id="相关链接："><a href="#相关链接：" class="headerlink" title="相关链接："></a>相关链接：</h4><p>[1]贝叶斯学派与频率学派有何不同？ - 知乎 <a href="https://www.zhihu.com/question/20587681">https://www.zhihu.com/question/20587681</a> </p>
+<p>[2]用贝叶斯 计算后验概率(一) - 住奥马哈的张校长的文章 - 知乎 <a href="https://zhuanlan.zhihu.com/p/27006631">https://zhuanlan.zhihu.com/p/27006631</a> </p>
+<p>[3]贝叶斯推断如何更新后验概率？ - 知乎 <a href="https://www.zhihu.com/question/27398304">https://www.zhihu.com/question/27398304</a> </p>
+<p>[4]概率与似然<a href="https://blog.csdn.net/FWing/article/details/4850068?utm_source=app&amp;app_version=5.0.0">https://blog.csdn.net/FWing/article/details/4850068?utm_source=app&amp;app_version=5.0.0</a> </p>
+<p>[5]似然(likelihood)和概率(probability)的区别与联系<a href="https://blog.csdn.net/songyu0120/article/details/85059149?utm_source=app&amp;app_version=5.0.0">https://blog.csdn.net/songyu0120/article/details/85059149?utm_source=app&amp;app_version=5.0.0</a> </p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
-        <category>雷达信号处理</category>
+        <category>概率论与数理统计</category>
       </categories>
       <tags>
-        <tag>雷达基础</tag>
+        <tag>学习</tag>
+        <tag>概率</tag>
       </tags>
   </entry>
   <entry>
@@ -744,55 +793,6 @@
       </tags>
   </entry>
   <entry>
-    <title>先验概率与后验概率</title>
-    <url>/2022/01/22/Prior-and-Posterior-Probabilities/</url>
-    <content><![CDATA[<h4 id="1-先验概率"><a href="#1-先验概率" class="headerlink" title="1. 先验概率"></a>1. 先验概率</h4><p>事情还没有发生，根据以往的经验来判断事情发生的概率，是“由因求果”。(根据统计和规律得出得概率 )</p>
-<blockquote>
-<p>扔一个硬币，在扔之前就知道正面向上的概率为0.5。这是根据我们之前的经验得到的。这个0.5就是先验概率。</p>
-</blockquote>
-<h4 id="2-后验概率"><a href="#2-后验概率" class="headerlink" title="2. 后验概率"></a>2. 后验概率</h4><p>事情已发生，有多种原因，判断事情的发生是由哪一种原因引起的，是“由果求因”。(根据贝叶斯公式可以得到) </p>
-<blockquote>
-<p>今天上学迟到了，有两个原因，一个是自行车坏了，一个是生病了。后验概率就是根据结果（迟到）来计算原因（生病/自行车坏了）的概率。</p>
-</blockquote>
-<p><font color="red"> <strong>数学表达上，后验概率和条件概率有相同的形式</strong></font></p>
-<p><font color="red"><strong>贝叶斯公式就是由先验概率求后验概率的公式</strong> </font></p>
-<h4 id="3-总结"><a href="#3-总结" class="headerlink" title="3. 总结"></a>3. 总结</h4><p>先验概率是对某一件事情发生可能性的预先客观评估，而后验概率是对事情发生是由某一个原因导致的概率。</p>
-<p>先验概率是以全事件为背景下A事件发生的概率$P(A|\Omega)$，后验概率是以新事件B为背景下A事件发生的概率$P(A|B)$全事件一般是统计获得的，所以称为先验概率，没有实验前的概率。新事件一般是实验，如试验B，此时的事件背景从全事件变成了B，该事件B可能对A的概率有影响，那么需要对A现在的概率进行一个修正，从$P(A|Ω)$变成$P(A|B)$，所以称 $P(A|B)$为后验概率，也就是试验(事件B发生)后的概率。</p>
-<p>后验概率分布是条件概率的一个例子。 后验概率告诉我们，在我们观察到一组特定数据的情况下，参数值的可能性有多大。 当然，条件概率不需要描述参数和数据，所以后验概率是条件概率的一个特例。</p>
-<h4 id="4-补充-条件概率与后验概率"><a href="#4-补充-条件概率与后验概率" class="headerlink" title="4. 补充-条件概率与后验概率"></a>4. 补充-条件概率与后验概率</h4><p>后验概率就是一种条件概率，但是与其它条件概率的不同之处在于，它限定了目标事件为隐变量取值，而其中的条件为观测结果。 一般的条件概率，条件和事件都可以是任意的。</p>
-<p><strong>举例区分普通条件概率与后验概率的区别</strong>：</p>
-<blockquote>
-<p>1）那么如果我们出门之前我们听到新闻说今天路上出了个交通事故，那么我们想算一下堵车的概率，这个就叫做条件概率 。也就是P(堵车|交通事故)。这是有因求果。</p>
-<p>2）如果我们已经出了门，然后遇到了堵车，那么我们想算一下堵车时由交通事故引起的概率有多大，那这个就叫做后验概率 （其实也是条件概率，但是通常习惯这么说） 。也就是P(交通事故|堵车)。这是有果求因。</p>
-</blockquote>
-<p> 从上述例子可知道，后验概率就是在已知某B事件发生的情况下，求解其中A事件发生的概率是多少，而A事件正是B事件发生的一个隐状态事件，所以A与B是有前后关联的。在利用贝叶斯进行文本分类的时候也是这个意思：<br>$$<br>P(\frac{c}{d})=\frac{p(\frac{d}{c})p(c)}{p(d)}<br>$$<br>d文档分为c类的概率，$p(c)$就是先验概率，$p(c/d)$就是后验概率，所以贝叶斯就是用先验概率估计后验概率。</p>
-<p>而一般的条件概率，目标事件A和条件事件B，是可以没有任何关系的。</p>
-<hr>
-<p>概率论老师说：</p>
-<p>A的概率——$P(A)$</p>
-<p>A在条件C下的概率——$P(A|C)$</p>
-<p>统计学老师说：</p>
-<p>A事件发生的先验概率——$P(A)$</p>
-<p>知道C事件发生后，A事件发生的后验概率——$P(A|C)$</p>
-<p><strong>小结</strong></p>
-<p>条件概率和后验概率理论上是没区别，唯一的区别在于后验概率来自后验概率分布上。后验概率按理应该是在贝叶斯推论框架下，在这个框架下，必须将后验概率分布和后验概率结合来看。</p>
-<p>综上，后验概率是贝叶斯推论中的概念，而条件概率在频率学派和贝叶斯学派中都有使用，注意这两个学派的区别后，应该能能理解这两者的区别。</p>
-<h4 id="相关链接："><a href="#相关链接：" class="headerlink" title="相关链接："></a>相关链接：</h4><p>[1]贝叶斯学派与频率学派有何不同？ - 知乎 <a href="https://www.zhihu.com/question/20587681">https://www.zhihu.com/question/20587681</a> </p>
-<p>[2]用贝叶斯 计算后验概率(一) - 住奥马哈的张校长的文章 - 知乎 <a href="https://zhuanlan.zhihu.com/p/27006631">https://zhuanlan.zhihu.com/p/27006631</a> </p>
-<p>[3]贝叶斯推断如何更新后验概率？ - 知乎 <a href="https://www.zhihu.com/question/27398304">https://www.zhihu.com/question/27398304</a> </p>
-<p>[4]概率与似然<a href="https://blog.csdn.net/FWing/article/details/4850068?utm_source=app&amp;app_version=5.0.0">https://blog.csdn.net/FWing/article/details/4850068?utm_source=app&amp;app_version=5.0.0</a> </p>
-<p>[5]似然(likelihood)和概率(probability)的区别与联系<a href="https://blog.csdn.net/songyu0120/article/details/85059149?utm_source=app&amp;app_version=5.0.0">https://blog.csdn.net/songyu0120/article/details/85059149?utm_source=app&amp;app_version=5.0.0</a> </p>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
-      <categories>
-        <category>学习提升</category>
-        <category>概率论与数理统计</category>
-      </categories>
-      <tags>
-        <tag>学习</tag>
-        <tag>概率</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>概率基础系统学习</title>
     <url>/2022/02/12/Probabilistic-Basic-Systems-Learning/</url>
     <content><![CDATA[<div class="bvideo">
@@ -810,7 +810,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>1901.0万</span></span>
+                        <span>1902.8万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>59.7万</span></span></p>
@@ -964,7 +964,10 @@
 <h5 id="三、分类"><a href="#三、分类" class="headerlink" title="三、分类"></a>三、分类</h5><p>1、离散型随机变量：变量是离散的，且满足<strong>个数有限</strong>或者<strong>无限但可列</strong>；</p>
 <p>2、连续性随机变量：变量是连续的。</p>
 <h3 id="2-2-随机变量的分布"><a href="#2-2-随机变量的分布" class="headerlink" title="2.2 随机变量的分布"></a>2.2 随机变量的分布</h3><h4 id="2-2-1-离散型随机变量及其概率分布"><a href="#2-2-1-离散型随机变量及其概率分布" class="headerlink" title="2.2.1 离散型随机变量及其概率分布"></a>2.2.1 离散型随机变量及其概率分布</h4><h5 id="一、定义-7"><a href="#一、定义-7" class="headerlink" title="一、定义"></a>一、定义</h5><p>离散随机变量X的取值为$x_k(k = 1,2, \cdots)$，其概率为$P(X = x_k) = p_k$，则其称为随机变量的概率分布。</p>
-<h4 id="2-2-2-连续型随机变量及其概率密度函数"><a href="#2-2-2-连续型随机变量及其概率密度函数" class="headerlink" title="2.2.2 连续型随机变量及其概率密度函数"></a>2.2.2 连续型随机变量及其概率密度函数</h4><p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$、$\begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
+<h4 id="2-2-2-连续型随机变量及其概率密度函数"><a href="#2-2-2-连续型随机变量及其概率密度函数" class="headerlink" title="2.2.2 连续型随机变量及其概率密度函数"></a>2.2.2 连续型随机变量及其概率密度函数</h4><p>关于概率分布与概率密度的具体细节，参见自己的博客文章**”概率基础概念本质的辨析理解_三、概率函数P(x)、概率分布函数F(x)、概率密度函数f(x)”部分**</p>
+<h4 id="2-2-3-随机变量的分布函数"><a href="#2-2-3-随机变量的分布函数" class="headerlink" title="2.2.3 随机变量的分布函数"></a>2.2.3 随机变量的分布函数</h4><p>关于概率分布与概率密度的具体细节，参见自己的博客文章**”概率基础概念本质的辨析理解_三、概率函数P(x)、概率分布函数F(x)、概率密度函数f(x)”部分**</p>
+<h3 id="2-3-常见随机变量的分布"><a href="#2-3-常见随机变量的分布" class="headerlink" title="2.3 常见随机变量的分布"></a>2.3 常见随机变量的分布</h3><h4 id="2-3-1-常见离散型随机变量的分布"><a href="#2-3-1-常见离散型随机变量的分布" class="headerlink" title="2.3.1 常见离散型随机变量的分布"></a>2.3.1 常见离散型随机变量的分布</h4><h5 id="一、0-1分布"><a href="#一、0-1分布" class="headerlink" title="一、0-1分布"></a>一、0-1分布</h5><p>0-1分布是指随机变量X的取值只有0或1，其用公式表示为：<br>$$<br>P(X = k) = p^k (1-p)^{1-k},(k = 0, 1)<br>$$</p>
+<p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$、$\begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>[1]B站宋浩视频 <a href="https://www.bilibili.com/video/BV1ot411y7mU">https://www.bilibili.com/video/BV1ot411y7mU</a></p>
 <p>[2]书籍目录 <a href="https://www.taobao.com/list/item/610183739684.htm">https://www.taobao.com/list/item/610183739684.htm</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
@@ -975,6 +978,137 @@
       <tags>
         <tag>概率基础</tag>
         <tag>概率论学习</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>个人博客搭建历程</title>
+    <url>/2022/01/18/post-name/</url>
+    <content><![CDATA[<h3 id="〇-简要介绍"><a href="#〇-简要介绍" class="headerlink" title="〇. 简要介绍"></a>〇. 简要介绍</h3><p>本博客的搭建不需要什么技术，而且自己截止到当前时间对Git和Github的使用也刚学，所以只是参考网上博客和B站的教学视频来做的。</p>
+<h3 id="一-部署Github-Pages"><a href="#一-部署Github-Pages" class="headerlink" title="一. 部署Github Pages"></a>一. 部署Github Pages</h3><p>在自己的Github上创建一个新的<strong>Repositories</strong>，注意命名规则是——Github账号名.github.io。</p>
+<h3 id="二-安装Hexo"><a href="#二-安装Hexo" class="headerlink" title="二. 安装Hexo"></a>二. 安装Hexo</h3><h4 id="1-插入注解"><a href="#1-插入注解" class="headerlink" title="1. 插入注解"></a>1. 插入注解</h4><h5 id="1-常见的博客搭建方法"><a href="#1-常见的博客搭建方法" class="headerlink" title="(1) 常见的博客搭建方法"></a>(1) 常见的博客搭建方法</h5><p>据我目前所知，搭建博客总体上分有两种方法：</p>
+<ul>
+<li>第三方平台：在现有的博客网站、论坛或社区上注册个人主页。如知乎，掘金，简书，segmentFault，csdn，博客园等。特点：无技术门槛，可专注于内容。</li>
+<li>静态网站生成技术：在终端执行命令快速生成静态网站，如 Jekyll、Hugo、Hexo等。然后通过 Github Pages、Coding 等展示。特点：通过插件可增加评论、搜索、分析等功能。有多种主题可选。在本地以特定格式书写文章，放置在指定的文件夹。每次发布或修改文章都需要重新生成和部署网站。</li>
+<li>其他：<a href="https://juejin.cn/post/6951679886557708302">参考链接-如何搭建个人博客 ：几种方案比较 + 个人实现</a> </li>
+</ul>
+<h5 id="2-静态网站生成技术比较"><a href="#2-静态网站生成技术比较" class="headerlink" title="(2) 静态网站生成技术比较"></a>(2) 静态网站生成技术比较</h5><p>在该方法当中，也与许多可供选择的方案，像 Jekyll、Hugo、Hexo、Typecho、Wordpress等等，那么它们各有什么优缺点呢，这里我就不说了(不是我的重点)，请参考链接：<a href="https://blog.laoda.de/archives/blog-choosing">Hexo还是Hugo？Typecho还是Wordpress？读完这篇或许你就有答案了！</a></p>
+<h4 id="2-安装相应软件"><a href="#2-安装相应软件" class="headerlink" title="2. 安装相应软件"></a>2. 安装相应软件</h4><h5 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="(1) 安装Node.js"></a>(1) 安装Node.js</h5><p>Node.js的官方网站：<a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a> </p>
+<p>下载好了之后直接安装，安装过程中会出现</p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2599.png" alt="&lt;font color=red&gt;图1&lt;/font&gt;  Node安装"></p>
+<p>要点第四个，添加到Path(环境变量)。</p>
+<h5 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="(2) Git安装"></a>(2) Git安装</h5><p>Git的安装则是傻瓜式安装即可，虽然步骤多，但是按照默认的来就行；</p>
+<p>好的，现在已经全部准备完毕，下面简单测试一下看看是否安装成功。</p>
+<h5 id="3-测试"><a href="#3-测试" class="headerlink" title="(3) 测试"></a>(3) 测试</h5><p> 为了验证我们的Node.js和Git是否安装完毕，可以在CMD（win+R，输入“cmd”即可打开）中输入两条命令查看： </p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">git version</span><br></pre></td></tr></table></figure>
+
+<p>若两条命令没有报错，而且显示了版本号，则安装成功！</p>
+<h4 id="3-Hexo本地化"><a href="#3-Hexo本地化" class="headerlink" title="3. Hexo本地化"></a>3. Hexo本地化</h4><h5 id="1-创建新文件夹"><a href="#1-创建新文件夹" class="headerlink" title="(1) 创建新文件夹"></a>(1) 创建新文件夹</h5><p>这个新文件夹在之后会保存Hexo的文件以及你的博客相关内容，十分重要，我是建立在E盘下新文件夹I.myBlog。</p>
+<h5 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="(2) 安装Hexo"></a>(2) 安装Hexo</h5><p>打开Windows中使用cmd命令打开命令行，然后更改命令行目录到上一步创建的新文件夹中，然后执行下面的命令安装Hexo：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
+
+<p>注意安装过程中网络不要断开，安装完成后文件夹还是一个空的状态，下一步要初始化。</p>
+<h5 id="3-初始化Hexo"><a href="#3-初始化Hexo" class="headerlink" title="(3) 初始化Hexo"></a>(3) 初始化Hexo</h5><p> 执行以下代码完成初始化</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
+
+<p>这时候文件夹就出现了新文件，不再是空的，文件主要有以下几种：</p>
+<ul>
+<li>.deploty_git：上传到Github的最终文件，如果不使用Git，则不会生成</li>
+<li>.github：一个神秘文件夹</li>
+<li>node_modules：一个神秘文件夹</li>
+<li>public：上传到Github的最终文件，不安装Git时可以使用这种方法直接部署</li>
+<li>scaffolds：存放创建新文章时的模板文件</li>
+<li>theme：主题存放文件夹</li>
+<li>post：博客文章存放的地方</li>
+</ul>
+<h3 id="三-基础配置与指令"><a href="#三-基础配置与指令" class="headerlink" title="三. 基础配置与指令"></a>三. 基础配置与指令</h3><h4 id="1-主题配置-美化"><a href="#1-主题配置-美化" class="headerlink" title="1. 主题配置(美化)"></a>1. 主题配置(美化)</h4><p>进入博客文件夹根目录，打开**_config.yml**文件，然后自行进行修改。</p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc258c.png" alt="&lt;font color=red&gt; 图2&lt;/font&gt;  _config文件截图示意"></p>
+<p>这里是一些基本的，比如说你的网站名（第六行）、描述（第八行）、作者（第十行）、语言（第十一行）等都可以进行自主修改。</p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc25a2.png" alt="&lt;font color=red&gt; 图3&lt;/font&gt;  url修改"></p>
+<p>如图3所示，这里url的修改十分重要，一定要记得修改。要改成你将来要部署的网站！！！比如你要用GitHub Pages部署，就必须是那一节你部署过的网站链接！！！ </p>
+<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2594.png" alt="&lt;font color=red&gt; 图4&lt;/font&gt;  git链接修改"></p>
+<p><font color="red"><strong>注意，下面这几处修改十分重要！！！</strong></font></p>
+<p>第100行的主题名改为之前让你复制的那个文件夹名(记得空格，在你没有下载新主题之前不用管，默认即可)；</p>
+<p>第105行“type”后面填写“git”；</p>
+<p>第106行加上“repo”，然后加上链接——不是GitHub Pages的链接，是GitHub Pages的库的链接！！</p>
+<blockquote>
+<p>注意：这里由于Github在2021年进行了一次更新，应该是不能再使用https协议了，转而应该示意SSH，但是我这里使用了https好像也没什么问题，其实我自己现在对Git、GitHub的使用也还是模模糊糊，对一些操作、概念(如：密钥、公钥、令牌等)不明白，所以也就是稀里糊涂，后面我还要仔细学习学习Git的知识，如果你的使用https不行，建议参考链接进行设置——<a href="https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91">https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91</a> </p>
+</blockquote>
+<p>第107行加上“branch”，名字起main；</p>
+<blockquote>
+<p>注意：这里与Github在2021年进行了一次更新有关，之前应该是填写master，现在填写main即可；</p>
+</blockquote>
+<p>完成这些之后，我们可以再次用“hexo s”这个指令查看预览，发现已经更新主题了。</p>
+<h4 id="2-Hexo的常用命令"><a href="#2-Hexo的常用命令" class="headerlink" title="2. Hexo的常用命令"></a>2. Hexo的常用命令</h4><ul>
+<li>hexo s：在本地演示网站</li>
+<li>hexo g：在本地渲染静态页面(就是将md转换为html)</li>
+<li>hexo d：把静态页面一键上传到Github Pages</li>
+<li>hexo new：<ul>
+<li>标题(直接加标题则是在source/_posts文件夹生成—个”标题.md”文件作为文章)<ul>
+<li>建议∶生成新文章和页面时最好用阿拉伯数字或者英文,这样链接不会很长</li>
+</ul>
+</li>
+<li>page+标题(标题前加page则是生成一个新页面,hexo刚开始只有默认的首页和归档页,创建其他页面,例如标签,关于页面,都需要此指令生成)</li>
+<li>post+标题(在_config.yml中将post_asset_folder设为true之后hexo new post “first-page”之后新建了一篇文章，就会同时在hexo/source/_post文件夹下生成一个.md文件和一个同名文件夹，文件夹存放文章中的图片)</li>
+</ul>
+</li>
+<li>hexo clean：清理已有的静态页面(不是删干净重来)</li>
+</ul>
+<h4 id="3-示例配置过程"><a href="#3-示例配置过程" class="headerlink" title="3. 示例配置过程"></a>3. 示例配置过程</h4><p>在执行<code>hexo init</code>之后，可以再执行<code>hexg g</code> 在本地渲染页面，完成后文件夹中会出现<strong>public</strong>文件夹。然后再执行<code>hexo new ts</code> 这时在source文件夹下会生成_post文件夹，里面有hello-world.md(默认自带)和ts.md(代码新生成的)，然后我们可以在ts.md中写一些东西，就是日后的博客文章。还可以使用命令<code>hexo new page about</code> 生成一个新的about文件夹，里面有index.md，可以写一些介绍自己的内容。</p>
+<p>弄好上面的之后，我们可以执行命令<code>hexo s</code> 在本地演示网站，此时cmd窗口会生成一个<a href="http://localhost:4000/">http://localhost:4000</a> 的链接，我们在浏览器打开就可以看到渲染的博客页面了。</p>
+<h4 id="4-主题的美化"><a href="#4-主题的美化" class="headerlink" title="4. 主题的美化"></a>4. 主题的美化</h4><p>主要是利用<strong>根目录下的_config.yml文件</strong>和<strong>themes文件夹下某一主题文件夹下的_config.yml</strong>进行修改美化页面，可以自己进行探索。</p>
+<h5 id="1-关于主题的设置"><a href="#1-关于主题的设置" class="headerlink" title="(1) 关于主题的设置"></a>(1) 关于主题的设置</h5><ul>
+<li>存放位置：/themes/主题名/_config.yml(注意：有别于根目录下的_config.yml文件)<ul>
+<li>这里需要说明的是：Hexo在渲染静态页面时，themes文件夹的_config.yml文件优先度比根目录的_config.yml高</li>
+</ul>
+</li>
+<li>修改方式：大部分为布尔值(只需要修改true或者false即可)，支持中文的主题大部分会有注释<ul>
+<li>这里推荐Hexo的Next与Ayer主题，两者有很清晰明了的中文，页面也很清爽(我的主题是Ayer)</li>
+</ul>
+</li>
+<li>添加自定义js的方式：在/themes/主题名/layout/layout.ejs中添加<ul>
+<li>该方法是我在用Next主题时发现的，当时成功了，是后来Ayer主题失败了，还是要按照不同的主题来</li>
+</ul>
+</li>
+</ul>
+<p>完成配置后，可以使用<code>hexok s</code> 在本地演示网站看一下配置情况。</p>
+<h5 id="2-Markdown语法学习"><a href="#2-Markdown语法学习" class="headerlink" title="(2) Markdown语法学习"></a>(2) Markdown语法学习</h5><p>自己学习，这里不讲。</p>
+<h3 id="四-部署与上传"><a href="#四-部署与上传" class="headerlink" title="四. 部署与上传"></a>四. 部署与上传</h3><p>在进行完这一步之后，就可以真正意义上有一个可以在浏览器打开的自己的博客网站！！！</p>
+<p>正常情况下，在cmd输入指令<code>npm install hexo-deployer-git --save</code> 之后指令<code>hexo g -d</code> 理论上就可以成功将博客文件上传到Github上了，然后在GitHub网页的settings页面下找到pages，就可以找到对应的网址，打开即可看到自己的博客。<br>但是，由于Github服务器在国外，所以经常出现网络问题，需要搭梯子，下面是失败情况下的一些处理方法。</p>
+<ul>
+<li>失败则输入指令<code>git config --global credential.helper wincred</code></li>
+<li>再次失败，错误原因是spawn的话就是网络有些问题，重启cmd试试</li>
+<li>还是失败的话可能是电脑上装了两个hexo</li>
+<li>最终还是失败的话可以使用指令<code>hexo g</code>，然后直接在网页端的GitHub上传public文件夹。</li>
+</ul>
+<h3 id="五-相关链接"><a href="#五-相关链接" class="headerlink" title="五. 相关链接"></a>五. 相关链接</h3><h4 id="1-帮助文档链接"><a href="#1-帮助文档链接" class="headerlink" title="1. 帮助文档链接"></a>1. 帮助文档链接</h4><p>在自己搭建第一个博客中出现了很多问题，有许多博客、视频帮助了我，贴在下面可以可看一下。</p>
+<p>听话的便当的B站视频：<a href="https://space.bilibili.com/435364951/channel/seriesdetail?sid=812995">听话的_便当的个人空间_哔哩哔哩_bilibili</a> </p>
+<p>听话的便当的博客：<a href="https://byn6.github.io/2021/08/29/gp-h/">https://byn6.github.io/2021/08/29/gp-h/</a></p>
+<p>Ayer中文官方文档： <a href="https://shen-yu.gitee.io/2019/ayer">https://shen-yu.gitee.io/2019/ayer</a></p>
+<p>Hexo官方文档：<a href="https://hexo.io/zh-cn/docs/asset-folders.html">https://hexo.io/zh-cn/docs/asset-folders.html</a></p>
+<p>Hexo常用命令详解及使用方法：<a href="https://www.mabiji.com/hexo/hexocommands.html">https://www.mabiji.com/hexo/hexocommands.html</a></p>
+<p>Hexo为文章设置目录与标签的方法：<a href="https://blog.csdn.net/weixin_44543463/article/details/119738094">https://blog.csdn.net/weixin_44543463/article/details/119738094</a></p>
+<p>[hexo]如何更换主题、删除文章：<a href="https://www.cnblogs.com/mrwuzs/p/7942689.html">https://www.cnblogs.com/mrwuzs/p/7942689.html</a></p>
+<p>hexo搭建博客后图片无法显示的完美解决：<a href="https://blog.csdn.net/weixin_43702620/article/details/118655308">https://blog.csdn.net/weixin_43702620/article/details/118655308</a></p>
+<p>不会git就学不会github吗？：<a href="https://www.zhihu.com/question/29566172">https://www.zhihu.com/question/29566172</a></p>
+<p>git是干什么的？ sourcetree是干什么的？：<a href="https://www.zhihu.com/question/48322958">https://www.zhihu.com/question/48322958</a></p>
+<p>SourceTree的基本使用教程：<a href="https://blog.csdn.net/qq_34129814/article/details/82847753">https://blog.csdn.net/qq_34129814/article/details/82847753</a></p>
+<p>Hexo server报错TypeError: Cannot read property ‘utcOffset’ of null解决方法：<a href="http://t.zoukankan.com/mmzuo-798-p-10510225.html">http://t.zoukankan.com/mmzuo-798-p-10510225.html</a></p>
+<p>免费图床，看这一篇就够了！：<a href="https://www.duangvps.com/archives/1737">https://www.duangvps.com/archives/1737</a></p>
+<h4 id="2-数学公式解决方法"><a href="#2-数学公式解决方法" class="headerlink" title="2. 数学公式解决方法"></a>2. 数学公式解决方法</h4><p>MathJax在Hexo博客中插入数学公式：<a href="https://blog.csdn.net/weixin_39789979/article/details/110806006">https://blog.csdn.net/weixin_39789979/article/details/110806006</a></p>
+<p>markdown斜体和数学公式的矛盾：<a href="https://blog.moper.net/2640.html">https://blog.moper.net/2640.html</a></p>
+<p>hexo博客MathJax公式渲染问题：<a href="https://www.cnblogs.com/Ai-heng/p/7282110.htm">https://www.cnblogs.com/Ai-heng/p/7282110.htm</a></p>
+<p>hexo 如何解决markdown下划线要加反斜杠，以及如何使用其他markdown的渲染引擎？：<a href="https://segmentfault.com/q/1010000003987383">https://segmentfault.com/q/1010000003987383</a></p>
+<h4 id="3-优秀博客示例"><a href="#3-优秀博客示例" class="headerlink" title="3. 优秀博客示例"></a>3. 优秀博客示例</h4><p>二十五画生 <a href="https://blog.laoda.de/">https://blog.laoda.de</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>生活休闲</category>
+        <category>博客搭建</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Git</tag>
+        <tag>Hexo</tag>
+        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
@@ -1838,137 +1972,6 @@
       <tags>
         <tag>学习</tag>
         <tag>Git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>个人博客搭建历程</title>
-    <url>/2022/01/18/post-name/</url>
-    <content><![CDATA[<h3 id="〇-简要介绍"><a href="#〇-简要介绍" class="headerlink" title="〇. 简要介绍"></a>〇. 简要介绍</h3><p>本博客的搭建不需要什么技术，而且自己截止到当前时间对Git和Github的使用也刚学，所以只是参考网上博客和B站的教学视频来做的。</p>
-<h3 id="一-部署Github-Pages"><a href="#一-部署Github-Pages" class="headerlink" title="一. 部署Github Pages"></a>一. 部署Github Pages</h3><p>在自己的Github上创建一个新的<strong>Repositories</strong>，注意命名规则是——Github账号名.github.io。</p>
-<h3 id="二-安装Hexo"><a href="#二-安装Hexo" class="headerlink" title="二. 安装Hexo"></a>二. 安装Hexo</h3><h4 id="1-插入注解"><a href="#1-插入注解" class="headerlink" title="1. 插入注解"></a>1. 插入注解</h4><h5 id="1-常见的博客搭建方法"><a href="#1-常见的博客搭建方法" class="headerlink" title="(1) 常见的博客搭建方法"></a>(1) 常见的博客搭建方法</h5><p>据我目前所知，搭建博客总体上分有两种方法：</p>
-<ul>
-<li>第三方平台：在现有的博客网站、论坛或社区上注册个人主页。如知乎，掘金，简书，segmentFault，csdn，博客园等。特点：无技术门槛，可专注于内容。</li>
-<li>静态网站生成技术：在终端执行命令快速生成静态网站，如 Jekyll、Hugo、Hexo等。然后通过 Github Pages、Coding 等展示。特点：通过插件可增加评论、搜索、分析等功能。有多种主题可选。在本地以特定格式书写文章，放置在指定的文件夹。每次发布或修改文章都需要重新生成和部署网站。</li>
-<li>其他：<a href="https://juejin.cn/post/6951679886557708302">参考链接-如何搭建个人博客 ：几种方案比较 + 个人实现</a> </li>
-</ul>
-<h5 id="2-静态网站生成技术比较"><a href="#2-静态网站生成技术比较" class="headerlink" title="(2) 静态网站生成技术比较"></a>(2) 静态网站生成技术比较</h5><p>在该方法当中，也与许多可供选择的方案，像 Jekyll、Hugo、Hexo、Typecho、Wordpress等等，那么它们各有什么优缺点呢，这里我就不说了(不是我的重点)，请参考链接：<a href="https://blog.laoda.de/archives/blog-choosing">Hexo还是Hugo？Typecho还是Wordpress？读完这篇或许你就有答案了！</a></p>
-<h4 id="2-安装相应软件"><a href="#2-安装相应软件" class="headerlink" title="2. 安装相应软件"></a>2. 安装相应软件</h4><h5 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="(1) 安装Node.js"></a>(1) 安装Node.js</h5><p>Node.js的官方网站：<a href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a> </p>
-<p>下载好了之后直接安装，安装过程中会出现</p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2599.png" alt="&lt;font color=red&gt;图1&lt;/font&gt;  Node安装"></p>
-<p>要点第四个，添加到Path(环境变量)。</p>
-<h5 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="(2) Git安装"></a>(2) Git安装</h5><p>Git的安装则是傻瓜式安装即可，虽然步骤多，但是按照默认的来就行；</p>
-<p>好的，现在已经全部准备完毕，下面简单测试一下看看是否安装成功。</p>
-<h5 id="3-测试"><a href="#3-测试" class="headerlink" title="(3) 测试"></a>(3) 测试</h5><p> 为了验证我们的Node.js和Git是否安装完毕，可以在CMD（win+R，输入“cmd”即可打开）中输入两条命令查看： </p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">node -v</span><br><span class="line">git version</span><br></pre></td></tr></table></figure>
-
-<p>若两条命令没有报错，而且显示了版本号，则安装成功！</p>
-<h4 id="3-Hexo本地化"><a href="#3-Hexo本地化" class="headerlink" title="3. Hexo本地化"></a>3. Hexo本地化</h4><h5 id="1-创建新文件夹"><a href="#1-创建新文件夹" class="headerlink" title="(1) 创建新文件夹"></a>(1) 创建新文件夹</h5><p>这个新文件夹在之后会保存Hexo的文件以及你的博客相关内容，十分重要，我是建立在E盘下新文件夹I.myBlog。</p>
-<h5 id="2-安装Hexo"><a href="#2-安装Hexo" class="headerlink" title="(2) 安装Hexo"></a>(2) 安装Hexo</h5><p>打开Windows中使用cmd命令打开命令行，然后更改命令行目录到上一步创建的新文件夹中，然后执行下面的命令安装Hexo：</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure>
-
-<p>注意安装过程中网络不要断开，安装完成后文件夹还是一个空的状态，下一步要初始化。</p>
-<h5 id="3-初始化Hexo"><a href="#3-初始化Hexo" class="headerlink" title="(3) 初始化Hexo"></a>(3) 初始化Hexo</h5><p> 执行以下代码完成初始化</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo init</span><br></pre></td></tr></table></figure>
-
-<p>这时候文件夹就出现了新文件，不再是空的，文件主要有以下几种：</p>
-<ul>
-<li>.deploty_git：上传到Github的最终文件，如果不使用Git，则不会生成</li>
-<li>.github：一个神秘文件夹</li>
-<li>node_modules：一个神秘文件夹</li>
-<li>public：上传到Github的最终文件，不安装Git时可以使用这种方法直接部署</li>
-<li>scaffolds：存放创建新文章时的模板文件</li>
-<li>theme：主题存放文件夹</li>
-<li>post：博客文章存放的地方</li>
-</ul>
-<h3 id="三-基础配置与指令"><a href="#三-基础配置与指令" class="headerlink" title="三. 基础配置与指令"></a>三. 基础配置与指令</h3><h4 id="1-主题配置-美化"><a href="#1-主题配置-美化" class="headerlink" title="1. 主题配置(美化)"></a>1. 主题配置(美化)</h4><p>进入博客文件夹根目录，打开**_config.yml**文件，然后自行进行修改。</p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc258c.png" alt="&lt;font color=red&gt; 图2&lt;/font&gt;  _config文件截图示意"></p>
-<p>这里是一些基本的，比如说你的网站名（第六行）、描述（第八行）、作者（第十行）、语言（第十一行）等都可以进行自主修改。</p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc25a2.png" alt="&lt;font color=red&gt; 图3&lt;/font&gt;  url修改"></p>
-<p>如图3所示，这里url的修改十分重要，一定要记得修改。要改成你将来要部署的网站！！！比如你要用GitHub Pages部署，就必须是那一节你部署过的网站链接！！！ </p>
-<p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2594.png" alt="&lt;font color=red&gt; 图4&lt;/font&gt;  git链接修改"></p>
-<p><font color="red"><strong>注意，下面这几处修改十分重要！！！</strong></font></p>
-<p>第100行的主题名改为之前让你复制的那个文件夹名(记得空格，在你没有下载新主题之前不用管，默认即可)；</p>
-<p>第105行“type”后面填写“git”；</p>
-<p>第106行加上“repo”，然后加上链接——不是GitHub Pages的链接，是GitHub Pages的库的链接！！</p>
-<blockquote>
-<p>注意：这里由于Github在2021年进行了一次更新，应该是不能再使用https协议了，转而应该示意SSH，但是我这里使用了https好像也没什么问题，其实我自己现在对Git、GitHub的使用也还是模模糊糊，对一些操作、概念(如：密钥、公钥、令牌等)不明白，所以也就是稀里糊涂，后面我还要仔细学习学习Git的知识，如果你的使用https不行，建议参考链接进行设置——<a href="https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91">https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91</a> </p>
-</blockquote>
-<p>第107行加上“branch”，名字起main；</p>
-<blockquote>
-<p>注意：这里与Github在2021年进行了一次更新有关，之前应该是填写master，现在填写main即可；</p>
-</blockquote>
-<p>完成这些之后，我们可以再次用“hexo s”这个指令查看预览，发现已经更新主题了。</p>
-<h4 id="2-Hexo的常用命令"><a href="#2-Hexo的常用命令" class="headerlink" title="2. Hexo的常用命令"></a>2. Hexo的常用命令</h4><ul>
-<li>hexo s：在本地演示网站</li>
-<li>hexo g：在本地渲染静态页面(就是将md转换为html)</li>
-<li>hexo d：把静态页面一键上传到Github Pages</li>
-<li>hexo new：<ul>
-<li>标题(直接加标题则是在source/_posts文件夹生成—个”标题.md”文件作为文章)<ul>
-<li>建议∶生成新文章和页面时最好用阿拉伯数字或者英文,这样链接不会很长</li>
-</ul>
-</li>
-<li>page+标题(标题前加page则是生成一个新页面,hexo刚开始只有默认的首页和归档页,创建其他页面,例如标签,关于页面,都需要此指令生成)</li>
-<li>post+标题(在_config.yml中将post_asset_folder设为true之后hexo new post “first-page”之后新建了一篇文章，就会同时在hexo/source/_post文件夹下生成一个.md文件和一个同名文件夹，文件夹存放文章中的图片)</li>
-</ul>
-</li>
-<li>hexo clean：清理已有的静态页面(不是删干净重来)</li>
-</ul>
-<h4 id="3-示例配置过程"><a href="#3-示例配置过程" class="headerlink" title="3. 示例配置过程"></a>3. 示例配置过程</h4><p>在执行<code>hexo init</code>之后，可以再执行<code>hexg g</code> 在本地渲染页面，完成后文件夹中会出现<strong>public</strong>文件夹。然后再执行<code>hexo new ts</code> 这时在source文件夹下会生成_post文件夹，里面有hello-world.md(默认自带)和ts.md(代码新生成的)，然后我们可以在ts.md中写一些东西，就是日后的博客文章。还可以使用命令<code>hexo new page about</code> 生成一个新的about文件夹，里面有index.md，可以写一些介绍自己的内容。</p>
-<p>弄好上面的之后，我们可以执行命令<code>hexo s</code> 在本地演示网站，此时cmd窗口会生成一个<a href="http://localhost:4000/">http://localhost:4000</a> 的链接，我们在浏览器打开就可以看到渲染的博客页面了。</p>
-<h4 id="4-主题的美化"><a href="#4-主题的美化" class="headerlink" title="4. 主题的美化"></a>4. 主题的美化</h4><p>主要是利用<strong>根目录下的_config.yml文件</strong>和<strong>themes文件夹下某一主题文件夹下的_config.yml</strong>进行修改美化页面，可以自己进行探索。</p>
-<h5 id="1-关于主题的设置"><a href="#1-关于主题的设置" class="headerlink" title="(1) 关于主题的设置"></a>(1) 关于主题的设置</h5><ul>
-<li>存放位置：/themes/主题名/_config.yml(注意：有别于根目录下的_config.yml文件)<ul>
-<li>这里需要说明的是：Hexo在渲染静态页面时，themes文件夹的_config.yml文件优先度比根目录的_config.yml高</li>
-</ul>
-</li>
-<li>修改方式：大部分为布尔值(只需要修改true或者false即可)，支持中文的主题大部分会有注释<ul>
-<li>这里推荐Hexo的Next与Ayer主题，两者有很清晰明了的中文，页面也很清爽(我的主题是Ayer)</li>
-</ul>
-</li>
-<li>添加自定义js的方式：在/themes/主题名/layout/layout.ejs中添加<ul>
-<li>该方法是我在用Next主题时发现的，当时成功了，是后来Ayer主题失败了，还是要按照不同的主题来</li>
-</ul>
-</li>
-</ul>
-<p>完成配置后，可以使用<code>hexok s</code> 在本地演示网站看一下配置情况。</p>
-<h5 id="2-Markdown语法学习"><a href="#2-Markdown语法学习" class="headerlink" title="(2) Markdown语法学习"></a>(2) Markdown语法学习</h5><p>自己学习，这里不讲。</p>
-<h3 id="四-部署与上传"><a href="#四-部署与上传" class="headerlink" title="四. 部署与上传"></a>四. 部署与上传</h3><p>在进行完这一步之后，就可以真正意义上有一个可以在浏览器打开的自己的博客网站！！！</p>
-<p>正常情况下，在cmd输入指令<code>npm install hexo-deployer-git --save</code> 之后指令<code>hexo g -d</code> 理论上就可以成功将博客文件上传到Github上了，然后在GitHub网页的settings页面下找到pages，就可以找到对应的网址，打开即可看到自己的博客。<br>但是，由于Github服务器在国外，所以经常出现网络问题，需要搭梯子，下面是失败情况下的一些处理方法。</p>
-<ul>
-<li>失败则输入指令<code>git config --global credential.helper wincred</code></li>
-<li>再次失败，错误原因是spawn的话就是网络有些问题，重启cmd试试</li>
-<li>还是失败的话可能是电脑上装了两个hexo</li>
-<li>最终还是失败的话可以使用指令<code>hexo g</code>，然后直接在网页端的GitHub上传public文件夹。</li>
-</ul>
-<h3 id="五-相关链接"><a href="#五-相关链接" class="headerlink" title="五. 相关链接"></a>五. 相关链接</h3><h4 id="1-帮助文档链接"><a href="#1-帮助文档链接" class="headerlink" title="1. 帮助文档链接"></a>1. 帮助文档链接</h4><p>在自己搭建第一个博客中出现了很多问题，有许多博客、视频帮助了我，贴在下面可以可看一下。</p>
-<p>听话的便当的B站视频：<a href="https://space.bilibili.com/435364951/channel/seriesdetail?sid=812995">听话的_便当的个人空间_哔哩哔哩_bilibili</a> </p>
-<p>听话的便当的博客：<a href="https://byn6.github.io/2021/08/29/gp-h/">https://byn6.github.io/2021/08/29/gp-h/</a></p>
-<p>Ayer中文官方文档： <a href="https://shen-yu.gitee.io/2019/ayer">https://shen-yu.gitee.io/2019/ayer</a></p>
-<p>Hexo官方文档：<a href="https://hexo.io/zh-cn/docs/asset-folders.html">https://hexo.io/zh-cn/docs/asset-folders.html</a></p>
-<p>Hexo常用命令详解及使用方法：<a href="https://www.mabiji.com/hexo/hexocommands.html">https://www.mabiji.com/hexo/hexocommands.html</a></p>
-<p>Hexo为文章设置目录与标签的方法：<a href="https://blog.csdn.net/weixin_44543463/article/details/119738094">https://blog.csdn.net/weixin_44543463/article/details/119738094</a></p>
-<p>[hexo]如何更换主题、删除文章：<a href="https://www.cnblogs.com/mrwuzs/p/7942689.html">https://www.cnblogs.com/mrwuzs/p/7942689.html</a></p>
-<p>hexo搭建博客后图片无法显示的完美解决：<a href="https://blog.csdn.net/weixin_43702620/article/details/118655308">https://blog.csdn.net/weixin_43702620/article/details/118655308</a></p>
-<p>不会git就学不会github吗？：<a href="https://www.zhihu.com/question/29566172">https://www.zhihu.com/question/29566172</a></p>
-<p>git是干什么的？ sourcetree是干什么的？：<a href="https://www.zhihu.com/question/48322958">https://www.zhihu.com/question/48322958</a></p>
-<p>SourceTree的基本使用教程：<a href="https://blog.csdn.net/qq_34129814/article/details/82847753">https://blog.csdn.net/qq_34129814/article/details/82847753</a></p>
-<p>Hexo server报错TypeError: Cannot read property ‘utcOffset’ of null解决方法：<a href="http://t.zoukankan.com/mmzuo-798-p-10510225.html">http://t.zoukankan.com/mmzuo-798-p-10510225.html</a></p>
-<p>免费图床，看这一篇就够了！：<a href="https://www.duangvps.com/archives/1737">https://www.duangvps.com/archives/1737</a></p>
-<h4 id="2-数学公式解决方法"><a href="#2-数学公式解决方法" class="headerlink" title="2. 数学公式解决方法"></a>2. 数学公式解决方法</h4><p>MathJax在Hexo博客中插入数学公式：<a href="https://blog.csdn.net/weixin_39789979/article/details/110806006">https://blog.csdn.net/weixin_39789979/article/details/110806006</a></p>
-<p>markdown斜体和数学公式的矛盾：<a href="https://blog.moper.net/2640.html">https://blog.moper.net/2640.html</a></p>
-<p>hexo博客MathJax公式渲染问题：<a href="https://www.cnblogs.com/Ai-heng/p/7282110.htm">https://www.cnblogs.com/Ai-heng/p/7282110.htm</a></p>
-<p>hexo 如何解决markdown下划线要加反斜杠，以及如何使用其他markdown的渲染引擎？：<a href="https://segmentfault.com/q/1010000003987383">https://segmentfault.com/q/1010000003987383</a></p>
-<h4 id="3-优秀博客示例"><a href="#3-优秀博客示例" class="headerlink" title="3. 优秀博客示例"></a>3. 优秀博客示例</h4><p>二十五画生 <a href="https://blog.laoda.de/">https://blog.laoda.de</a></p>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
-      <categories>
-        <category>生活休闲</category>
-        <category>博客搭建</category>
-      </categories>
-      <tags>
-        <tag>Git</tag>
-        <tag>博客</tag>
-        <tag>Hexo</tag>
-        <tag>Github</tag>
       </tags>
   </entry>
   <entry>
