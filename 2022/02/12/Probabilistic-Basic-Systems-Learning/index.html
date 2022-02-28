@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">4.3k</span>
+            <span class="post-count">4.7k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">17 分钟</span>
+            <span class="post-count">19 分钟</span>
         </span>
     </span>
 </div>
@@ -128,10 +128,10 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>1907.8万</span></span>
+                        <span>1912.3万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>59.8万</span></span></p>
+                        <span>59.9万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -302,7 +302,23 @@
 <p>③ 当不放回抽样中总体数量巨大，抽出的数量相对于总体数量远远小于，则超几何分布可以使用二项分布来近似</p>
 </blockquote>
 <h5 id="六、均匀分布"><a href="#六、均匀分布" class="headerlink" title="六、均匀分布"></a>六、均匀分布</h5><p> 定义式为：<br>$$<br>f(x)=\left{<br>\begin{aligned}<br>\frac{1}{b-a}, &amp;a \leq x \leq b \<br>0, &amp;x&lt;a,x&gt;b<br>\end{aligned}<br>\right.<br>$$<br>记为$X \sim U[a, b]$，其分布函数为：<br>$$<br>F(x) = \left{<br>\begin{aligned}<br>0, &amp;x&lt;a \<br>\frac{x-a}{b-a}, &amp;a \leq x \leq b \<br>1, &amp;x&gt;b<br>\end{aligned}<br>\right.<br>$$</p>
-<h5 id="七、指数分布"><a href="#七、指数分布" class="headerlink" title="七、指数分布"></a>七、指数分布</h5><p>定义式为：<br>$$<br>f(x)=\left{<br>\begin{aligned}<br>\lambda e^{-\lambda x}, &amp;x &gt; 0 \<br>0, &amp;x \leq 0<br>\end{aligned}<br>\right.<br>$$<br>记为$X \sim \text{Exp}(\lambda)$</p>
+<h5 id="七、指数分布"><a href="#七、指数分布" class="headerlink" title="七、指数分布"></a>七、指数分布</h5><p>定义式为：<br>$$<br>f(x)=\left{<br>\begin{aligned}<br>\lambda e^{-\lambda x}, &amp;x &gt; 0 \<br>0, &amp;x \leq 0<br>\end{aligned}<br>\right.<br>$$<br>其中$\lambda &gt; 0$，记为$X \sim \text{Exp}(\lambda)$，其分布函数为：<br>$$<br>F(x) = \left{<br>\begin{aligned}<br>1-e^{-\lambda x}, &amp;x&gt;0 \<br>0, &amp;x \leq 0<br>\end{aligned}<br>\right.<br>$$<br>指数分布有一个特性：<strong>无记忆性</strong><br>$$<br>P(X&gt;s+t|X&gt;s) = P(X&gt;t),s&gt;0,t&gt;0<br>$$</p>
+<h5 id="八、正态分布"><a href="#八、正态分布" class="headerlink" title="八、正态分布"></a>八、正态分布</h5><p>定义式为：<br>$$<br>\phi(x) = \frac{1}{\sqrt{2 \pi} \sigma} e^{-\frac{(x- \mu)^2}{2 \sigma^2}}, -\infty &lt; x &lt; \infty<br>$$<br>记为$X \sim N(\mu, \sigma^2)$，其分布函数为：<br>$$<br>\Phi(x) = \frac{1}{\sqrt{2\pi}\sigma}\int_{-\infty}^x e^{-\frac{(t- \mu)^2}{2 \sigma^2}}dt<br>$$</p>
+<ul>
+<li><strong>正态分布的性质：</strong><ul>
+<li>① 其密度函数$\phi(x)$是以$x = \mu$为对称轴，且在$x = \mu$处取得最大值；</li>
+<li>② 其密度函数$\phi(x)$是以x轴为渐近线；</li>
+<li>③ $\sigma$固定$\mu$变化，则$\phi(x)$左右移动，$\mu$固定$\sigma$变化，则$\phi(x)$窄宽变化；</li>
+</ul>
+</li>
+</ul>
+<p><strong>标准正太分布</strong>：$\mu = 0, \sigma = 1$，其密度函数$\phi_0(x)$为：<br>$$<br>\phi_0(x) = \frac{1}{\sqrt{2\pi}}e^{-\frac{x^2}{2}}, -\infty &lt; x &lt; \infty<br>$$<br>记为$X \sim N(0,1)$，其分布函数$\Phi_0(x)$为：<br>$$<br>\Phi(x) = \frac{1}{\sqrt{2\pi}}\int_{-\infty}^x e^{-\frac{t^2}{2}}dt<br>$$<br>一个一般的正态分布转换为标准正态分布：$x \to \dfrac{x-\mu}{\sigma}$。</p>
+<h4 id="2-3-2-随机变量函数的分布"><a href="#2-3-2-随机变量函数的分布" class="headerlink" title="2.3.2 随机变量函数的分布"></a>2.3.2 随机变量<font color="red">函数</font>的分布</h4><p>本节要研究的内容可以简单概况为——已知X是某分布，求Y = aX+b的分布。</p>
+<h5 id="一、离散型"><a href="#一、离散型" class="headerlink" title="一、离散型"></a>一、离散型</h5><h5 id="二、连续型"><a href="#二、连续型" class="headerlink" title="二、连续型"></a>二、连续型</h5><p>设X的概率密度为$f_X(x)$，令$Y = g(X)$，求Y的密度函数$f_Y(x)$。求解方法步骤：</p>
+<ul>
+<li>① $F_Y(x) \to F_X(x)$</li>
+<li>② $f_Y(x) \leftarrow f_X(x)$</li>
+</ul>
 <p>集合测试：$\Omega = \begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$、$\begin{Bmatrix} 1, 2, 3 \end{Bmatrix}$</p>
 <h2 id="参考内容"><a href="#参考内容" class="headerlink" title="参考内容"></a>参考内容</h2><p>[1]B站宋浩视频 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1ot411y7mU">https://www.bilibili.com/video/BV1ot411y7mU</a></p>
 <p>[2]书籍目录 <a target="_blank" rel="noopener" href="https://www.taobao.com/list/item/610183739684.htm">https://www.taobao.com/list/item/610183739684.htm</a></p>
