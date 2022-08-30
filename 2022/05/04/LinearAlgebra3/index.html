@@ -1,0 +1,1344 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>线性代数_Part3 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-LinearAlgebra3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  线性代数_Part3
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/05/04/LinearAlgebra3/" class="article-date">
+  <time datetime="2022-05-04T00:37:08.000Z" itemprop="datePublished">2022-05-04</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">数学基础</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">14.3k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">60 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="第二十五讲-正交向量与正交子空间"><a href="#第二十五讲-正交向量与正交子空间" class="headerlink" title="第二十五讲 正交向量与正交子空间"></a>第二十五讲 正交向量与正交子空间</h3><p>进入第三单元学习，主题是正定矩阵及其应用。<strong>对称矩阵是其中最重要的矩阵之一，对称矩阵的特征值为实数并且拥有一套正交特征向量</strong>。正定矩阵的性质则比对称矩阵更好更好。 </p>
+<h4 id="25-1-实对称矩阵-Symmetric-matrices-boldsymbol-A-mathrm-T-A"><a href="#25-1-实对称矩阵-Symmetric-matrices-boldsymbol-A-mathrm-T-A" class="headerlink" title="25.1 实对称矩阵 Symmetric matrices $\boldsymbol{A^{\mathrm T} = A}$"></a>25.1 实对称矩阵 Symmetric matrices $\boldsymbol{A^{\mathrm T} = A}$</h4><p>包含特殊性质的矩阵，例如Markov矩阵，其特征值和特征向量往往拥有一定特性。对于对称矩阵来说有两个待证明性质：</p>
+<ul>
+<li>实对称矩阵的特征值也是实数 </li>
+<li>有完全正交的特征向量<ul>
+<li>如果特征值互不相同，那么每个特征值的特征向量是在单独的一条线上，那些线是垂直正交的；如果特征值重复，那就有一整个平面的特征向量，在那个平面上可以选择垂直的向量</li>
+<li>可以将这组特征向量转化为标准正交向量。</li>
+</ul>
+</li>
+</ul>
+<p>例如：<strong>单位矩阵</strong>，单位矩阵是对称矩阵，特征值都为1，每一个向量都是特征向量。</p>
+<p>如果$\boldsymbol A$具有$n$个线性无关的特征向量，可以对角化得到：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A = \boldsymbol{S \Lambda S}^{-1}</script><p>而对于对称矩阵，由于其特征向量是正交的，所以有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A = \boldsymbol{Q \Lambda Q}^{-1} = \boldsymbol{Q \Lambda Q}^{\mathrm T}</script><p>上式$\boldsymbol Q$表示标准正交矩阵，这里是方阵，因为对称矩阵的$\boldsymbol S$是垂直正交的，所以可转化为$\boldsymbol Q$，同时标准正交矩阵$\boldsymbol Q$有：$\boldsymbol Q^{-1} = \boldsymbol Q^{\mathrm T}$ ，所以以上式子是对称矩阵的分解形式，分解成特征向量和特征值的组合。等式右边取转置又得到自己，所以A是对称矩阵。 </p>
+<ul>
+<li>数学上叫这个为<font color="blue"><strong>谱定理</strong></font>，谱就是指矩阵的特征值集合，一些纯东西组合。</li>
+<li>力学上叫这个为<font color="blue"><strong>主轴定理</strong></font>，从几何图形上看，它意味着如果给定某种材料，在合适的轴上来看，它就变成对角化的，方向就不会重复。</li>
+</ul>
+<p><strong>问题1：为什么实对称矩阵的特征值是实数</strong> </p>
+<p>先假设特征值中存在复数。矩阵$\boldsymbol A$具有特征值$\lambda$和特征向量$\boldsymbol x$，则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol {Ax} = \lambda \boldsymbol x {\Longrightarrow} \overline{\boldsymbol {Ax}} = \overline{ \lambda \boldsymbol {x}} \Longrightarrow \overline{\boldsymbol A} \overline{\boldsymbol x} = \overline{\lambda}\overline{\boldsymbol x} \Longrightarrow  \boldsymbol A \overline{\boldsymbol x} = \overline{\lambda}\overline{\boldsymbol x}</script><p>上式说明实对称矩阵有特征值$\lambda$和特征向量$\boldsymbol x$，那该矩阵必然有另一特征值$\overline \lambda$和特征向量$\overline{\boldsymbol x}$。将上式最后部分$\boldsymbol A \overline{\boldsymbol x} = \overline{\lambda}\overline{\boldsymbol x}$转置可得：</p>
+<script type="math/tex; mode=display">
+\overline{\boldsymbol x}^{\mathrm T} \boldsymbol A^{\mathrm T} = \overline{\lambda}\overline{\boldsymbol x}^{\mathrm T}</script><p>将上式从右边乘$\boldsymbol x$取内积：</p>
+<script type="math/tex; mode=display">
+\overline{\boldsymbol x}^{\mathrm T} \boldsymbol A^{\mathrm T}{\boldsymbol x} = \overline{\lambda}\overline{\boldsymbol x}^{\mathrm T}{\boldsymbol x}</script><p>再对上述长式子中前面部分$\boldsymbol {Ax} = \lambda \boldsymbol x$左边乘$\overline{\boldsymbol x}^{\mathrm T}$取内积：</p>
+<script type="math/tex; mode=display">
+\overline{\boldsymbol x}^{\mathrm T} \boldsymbol {Ax} = \lambda \overline{\boldsymbol x}^{\mathrm T}\boldsymbol x</script><p>上面两个式子一对比可知：等式左侧相同，因此右端也相等：</p>
+<script type="math/tex; mode=display">
+\overline{\lambda}\overline{\boldsymbol x}^{\mathrm T}{\boldsymbol x} = \lambda \overline{\boldsymbol x}^{\mathrm T}\boldsymbol x</script><p>所以有$\overline{\lambda} = \lambda$，所以实对称阵的特征值为实数。</p>
+<blockquote>
+<p>注意：上面推导的最后一步要保证$\overline{\boldsymbol x}^{\mathrm T}\boldsymbol x$不等于0。这里我们简单带入数据可知$\overline{\boldsymbol x}^{\mathrm T}\boldsymbol x$不等于0且为正数。( 一个向量为复向量，那么它乘以其共轭复向量得到实部的平方加上虚部的平方，为其长度平方 )</p>
+</blockquote>
+<p><strong>问题1延伸：性质好矩阵</strong></p>
+<p>本节中性质好矩阵是指<font color="red">“特征值为实数”、”特征向量正交垂直”</font>。</p>
+<p>那么什么矩阵是好的呢？</p>
+<ul>
+<li>如果一个矩阵是实数矩阵，那么<strong>“性质好”</strong>的矩阵就是<strong>“实对称矩阵”</strong>，$\boldsymbol{A^{\mathrm T} = A}$</li>
+<li>如果一个矩阵是复数矩阵，那么<strong>“性质好”</strong>的矩阵就是<strong>“复对称矩阵”</strong>，$\overline{\boldsymbol A}^{\mathrm T} = \boldsymbol A$<ul>
+<li>因为可以类比实矩阵的推导过程进行推导，这时可以发现对复数矩阵来说，只有当$\overline{\boldsymbol A}^{\mathrm T} = \boldsymbol A$成立时才可以推导出该复数矩阵”特征值为实数”。也就是说假设矩阵原来是复数矩阵，对称的等价条件是$\overline{\boldsymbol A}^{\mathrm T} = \boldsymbol A$；</li>
+<li>这里就是想说：若给定一复矩阵，想让它和实对称矩阵有一样的性质，那该复矩阵就需要满足$\overline{\boldsymbol A}^{\mathrm T} = \boldsymbol A$。</li>
+</ul>
+</li>
+</ul>
+<p>对于对称矩阵，$\boldsymbol A = \boldsymbol{Q \Lambda Q}^{-1} = \boldsymbol{Q \Lambda Q}^{\mathrm T}$，可以写作： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boldsymbol{A}=\boldsymbol{Q} \boldsymbol{\Lambda} \boldsymbol{Q}^{-1}=\left[\begin{array}{llll}
+\boldsymbol{q}_{1} & \boldsymbol{q}_{2} & \cdots & \boldsymbol{q}_{\mathrm{n}}
+\end{array}\right]\left[\begin{array}{llll}
+\lambda_{1} & & & \\
+& \lambda_{2} & & \\
+& & \ddots & \\
+& & & \lambda_{\mathrm{n}}
+\end{array}\right]\left[\begin{array}{c}
+\boldsymbol{q}_{1}^{T} \\
+\boldsymbol{q}_{2}^{T} \\
+\vdots \\
+\boldsymbol{q}_{\mathbf{n}}
+\end{array}\right]\\
+&=\lambda_{1} \boldsymbol{q}_{1} \boldsymbol{q}_{1}^{T}+\lambda_{2} \boldsymbol{q}_{2} \boldsymbol{q}_{2}{ }^{T}+\cdots+\lambda_{\mathrm{n}} \boldsymbol{q}_{\mathrm{n}} \boldsymbol{q}_{\mathrm{n}}{ }^{T}
+\end{aligned}</script><p>矩阵<script type="math/tex">\boldsymbol q_k \boldsymbol q_k^{\mathrm T}</script>朝向向量<script type="math/tex">\boldsymbol q_k</script>的投影矩阵，所以<strong>每一个对称矩阵都是正交投影矩阵的线性组合(每一个对称矩阵都是一些相互垂直的投影矩阵的组合)</strong>。这是理解谱定理的另一种方法。</p>
+<p>当确认矩阵特征值为实数后，下一个要考虑的问题就是它是正还是负数，因为这影响着微分方程中体系的稳定与否。但是对于大型矩阵通过计算$|(\boldsymbol A -\lambda \boldsymbol I)| = 0$ 得到特征值进行判定难以实现，即使用MATLAB求解结果也不一定可靠，但MATLAB可以得到矩阵的主元，而<font color="green"><strong>对称阵的主元中正负数的个数与特征值相同</strong></font>，即正主元的数目等于正特征值的数目。 </p>
+<blockquote>
+<p>注意：课程中老师并没有说“主元正负个数等于特征值正负个数”这个性质是如何证明的，可以不做深究。</p>
+<p>但是简要证明可以参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46023045">https://zhuanlan.zhihu.com/p/46023045</a></p>
+<p>(对于对称阵主元与特征值符号相匹配这件事情，通常是用合同矩阵的惯性定理加以证明)</p>
+</blockquote>
+<p>矩阵$\boldsymbol A + b \boldsymbol I$的特征值比矩阵的$\boldsymbol A$特征值大$b$，可以通过$\boldsymbol A + b \boldsymbol I$的主元来了解矩阵$\boldsymbol A$的特征值与$b$的大小关系，因此利用这个性质可以估计特征值的状态。 </p>
+<h4 id="25-2-正定矩阵-Positive-definite-matrices"><a href="#25-2-正定矩阵-Positive-definite-matrices" class="headerlink" title="25.2 正定矩阵 Positive definite matrices"></a>25.2 正定矩阵 Positive definite matrices</h4><p>正定矩阵是对称阵的一个子类，如果一个实对称矩阵的特征值都是正数，那么它是正定矩阵。其性质比普通对称阵更好一点，即其性质为：</p>
+<ul>
+<li>① 特征值都为正数的对称矩阵，它的主元也均为正数。 </li>
+<li>② 正定矩阵的所有子行列式都是正数 </li>
+</ul>
+<p><strong>正定矩阵将方阵特征值，主元，行列式融为一体</strong>。 </p>
+<p>若将行列式作为正定的判据，则要求$n$阶矩阵左上角的所有$k \times k,(1 \leq k \leq n)$子行列式（subdeterminant）数值均为正，矩阵确定为正定矩阵。</p>
+<p>本讲的内容将之前教授的主元、行列式和特征值的概念结合在了一起，对于正定矩阵这些都是正的，当完全掌握了它们的性质后会推广到非对称矩阵，甚至非方阵。</p>
+<h3 id="第二十六讲-复数矩阵和快速傅里叶变换"><a href="#第二十六讲-复数矩阵和快速傅里叶变换" class="headerlink" title="第二十六讲 复数矩阵和快速傅里叶变换"></a>第二十六讲 复数矩阵和快速傅里叶变换</h3><p>实矩阵也可能有复特征值，因此无法避免在矩阵运算中碰到复数，本讲学习处理复数矩阵和复向量。</p>
+<p>最重要的复矩阵是傅里叶矩阵，它用于傅里叶变换。而对于大数据处理快速傅里叶变换（FFT）显得更为重要，它将矩阵乘法的运算次数从$n^2$降到$n \log_2 n$次。 </p>
+<h4 id="26-1-复向量-Complex-vectors"><a href="#26-1-复向量-Complex-vectors" class="headerlink" title="26.1 复向量 Complex vectors"></a>26.1 复向量 Complex vectors</h4><p>对于给定的复向量<script type="math/tex">\boldsymbol{z}=\left[\begin{array}{c} z_{1} \\ z_{2} \\ \vdots \\ z_{\mathrm{n}}\end{array}\right] \in \mathbf{C}^{n}</script>，其元素中有复数，因此$\boldsymbol z^{\mathrm T}\boldsymbol z$无法给出向量的长度。例如：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+1 & i
+\end{array}\right]\left[\begin{array}{l}
+1 \\
+i
+\end{array}\right]=0</script><p>因此对于复向量而言，需要定义其模长为：</p>
+<script type="math/tex; mode=display">
+|\boldsymbol{z}|^{2}=\overline{\boldsymbol{z}}^{T} \boldsymbol{z}=\left|z_{1}\right|^{2}+\left|z_{1}\right|^{2}+\cdots+\left|z_{1}\right|^{2}</script><p>将复矩阵的<strong>“共轭转置”</strong>记为$\overline{\boldsymbol{z}}^{\mathrm T} = {\boldsymbol{z}}^{\mathrm H}$(H来自于“Hermite”)。</p>
+<p>与之相似，内积的定义也变为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{y}^{\mathrm H} \boldsymbol{x}=\overline{\boldsymbol{y}}^{\mathrm T} \boldsymbol{x}=\bar{y}_{1} x_{1}+\bar{y}_{2} x_{2}+\cdots+\bar{y}_{n} x_{n}</script><h4 id="26-2-复矩阵-Complex-matrices"><a href="#26-2-复矩阵-Complex-matrices" class="headerlink" title="26.2 复矩阵 Complex matrices"></a>26.2 复矩阵 Complex matrices</h4><p> 上一讲中讲到了对于复矩阵$\boldsymbol A$，若有$\overline{\boldsymbol A}^{\mathrm T} = \boldsymbol A$则复矩阵$\boldsymbol A$的特征值为实数。这种复矩阵被称为埃尔米特矩阵(Hermitian matrixes)。转置共轭记作$\overline{\boldsymbol{A}}^{\mathrm T} = {\boldsymbol{A}}^{\mathrm H}$</p>
+<p> 例如矩阵<script type="math/tex">\left[\begin{array}{cc} 2 & 3+i \\ 3-i & 5\end{array}\right]</script> 为埃尔米特矩阵。它具有实数特征值和正交的特征向量。由性质可知埃尔米特矩阵对角线均为实数。 </p>
+<p>此处向量标准正交的意思是：</p>
+<script type="math/tex; mode=display">
+\overline{\boldsymbol{q}}_{j}^{T} \boldsymbol{q}_{k}= \begin{cases}0 & j \neq k \\ 1 & j=k\end{cases}</script><p>用$n$个标准正交的复向量作为列向量可以构造一个矩阵$\boldsymbol Q$，则有</p>
+<script type="math/tex; mode=display">
+\boldsymbol Q^{\mathrm H}\boldsymbol Q  = \boldsymbol Q \boldsymbol Q^{\mathrm H} = \boldsymbol I</script><script type="math/tex; mode=display">
+\boldsymbol Q^{\mathrm T}\boldsymbol Q = \boldsymbol I = \boldsymbol Q^{\mathrm H}\boldsymbol Q</script><p>这个复空间的正交矩阵$\boldsymbol Q$称为<font color="red"><strong>酉矩阵</strong>（unitary matrix）</font>，换句话说，酉矩阵的逆矩阵，就是其共轭转置： </p>
+<script type="math/tex; mode=display">
+\boldsymbol Q^{-1} = \boldsymbol Q^{\mathrm H}</script><p>酉矩阵是实数上的正交矩阵在复数的推广。 </p>
+<h4 id="26-3-酉矩阵的性质"><a href="#26-3-酉矩阵的性质" class="headerlink" title="26.3 酉矩阵的性质"></a>26.3 酉矩阵的性质</h4><ul>
+<li><strong>性质1：</strong>$\boldsymbol Q^{\mathrm H}\boldsymbol Q  = \boldsymbol Q \boldsymbol Q^{\mathrm H} = \boldsymbol I$</li>
+<li><strong>性质2：</strong>酉矩阵亦必定可逆，且逆矩阵等于其共轭转置：$\boldsymbol Q^{-1} = \boldsymbol Q^{\mathrm H}$</li>
+<li><strong>性质3：</strong>酉矩阵的所有特征值，都是绝对值等于1的复数：$|\lambda_i| = 1$</li>
+<li><strong>性质4：</strong>由性质3可知，酉矩阵行列式的绝对值也是 1： $\det(\boldsymbol Q) = 1$</li>
+<li><strong>性质5：</strong>酉矩阵不会改变两个复向量$\boldsymbol x$和$\boldsymbol y$的点积：$(\boldsymbol{Qx}) \cdot (\boldsymbol{Qy}) = \boldsymbol{x \cdot y}$ </li>
+</ul>
+<h4 id="26-3-傅里叶变换Fourier-transform"><a href="#26-3-傅里叶变换Fourier-transform" class="headerlink" title="26.3 傅里叶变换Fourier transform"></a>26.3 傅里叶变换Fourier transform</h4><p><strong>傅里叶矩阵</strong>：最著名的“酉矩阵”。 </p>
+<p>傅里叶级数是将周期函数或者信号变换为不同频率的三角函数的和函数。 </p>
+<script type="math/tex; mode=display">
+f(x)=a_{0}+a_{1} \cos x+b_{1} \sin x+a_{2} \cos 2 x+b_{2} \sin 2 x+\cdots</script><p>在电子工程或者计算机科学中，矩阵的行和列从第0行和第0列开始计数，最后到第$n-1$行和第$n-1$列。我们在讨论傅里叶矩阵的时候遵从这种习惯。 $n$阶傅里叶矩阵：全矩阵，是一个酉矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{F}_{n}=\left[\begin{array}{rrrrr}
+1 & 1 & 1 & \cdots & 1 \\
+1 & \omega & \omega^{2} & & \omega^{(n-1)} \\
+1 & \omega^{2} & \omega^{2} & & \omega^{2(n-1)} \\
+\vdots & & & \ddots & \\
+1 & \omega^{n-1} & \omega^{2(n-1)} & & \omega^{(n-1)^{2}}
+\end{array}\right]</script><p>也就是<script type="math/tex">(\boldsymbol F_n)_{jk} = \omega^{jk}</script>，且傅里叶矩阵为对称矩阵<script type="math/tex">\boldsymbol F_n \boldsymbol F_n^{\mathrm T}</script> 。矩阵中的元素是<script type="math/tex">\omega</script>的幂，且<script type="math/tex">\omega^n=1</script>($n$是矩阵阶数)，在复平面内，<script type="math/tex">\omega</script>落在单位圆上：</p>
+<script type="math/tex; mode=display">
+\omega = e^{i \frac{2\pi}{n}}</script><p>矩阵的列向量正交。的方次分布在复平面的单位元上，只是幅角不同。当$n=4$时有</p>
+<script type="math/tex; mode=display">
+\omega^4=1, \omega = e^{i \frac{2\pi}{4}} = i</script><script type="math/tex; mode=display">
+\boldsymbol{F}_{4}=\left[\begin{array}{cccc}
+1 & 1 & 1 & 1 \\
+1 & i & i^{2} & i^{3} \\
+1 & i^{2} & i^{4} & i^{6} \\
+1 & i^{3} & i^{6} & i^{9}
+\end{array}\right]=\left[\begin{array}{rrrr}
+1 & 1 & 1 & 1 \\
+1 & i & -1 & -i \\
+1 & -1 & 1 & -1 \\
+1 & -i & -1 & i
+\end{array}\right]</script><p>从矩阵可以得到一个四点(离散的)傅里叶变换，它的逆矩阵就是反傅里叶变换。逆矩阵很容易计算，因为傅里叶矩阵列向量正交。实际上这个矩阵可以分解成一系列稀疏矩阵，并且它们的逆矩阵都很容易得到。 </p>
+<p>计算可知列向量的模不是1，矩阵除以2之后，向量标准正交： </p>
+<script type="math/tex; mode=display">
+\dfrac{1}{4}\boldsymbol F_n^{\mathrm H}\boldsymbol F_n =\boldsymbol I</script><p>它的逆矩阵就是共轭转置。 一个很好的性质：可以把傅里叶矩阵分解为一些列“稀疏矩阵”。 </p>
+<h4 id="26-4-快速傅里叶变换-Fast-Fourier-transform"><a href="#26-4-快速傅里叶变换-Fast-Fourier-transform" class="headerlink" title="26.4 快速傅里叶变换 Fast Fourier transform"></a>26.4 快速傅里叶变换 Fast Fourier transform</h4><p>对于64阶傅里叶矩阵<script type="math/tex">\boldsymbol F_{64}</script>中的<script type="math/tex">\omega_{64}</script>与32阶傅里叶矩阵<script type="math/tex">\boldsymbol F_{32}</script>的元素<script type="math/tex">\omega_{32}</script>相比，幅角是其一半，<script type="math/tex">\omega_{64}^2 = \omega_{32}</script>。可以从分块矩阵运算找到两者的联系：</p>
+<script type="math/tex; mode=display">
+\left[\boldsymbol{F}_{64}\right]=\left[\begin{array}{rr}
+\boldsymbol{I} & \boldsymbol{D} \\
+\boldsymbol{I} & -\boldsymbol{D}
+\end{array}\right]\left[\begin{array}{rr}
+\boldsymbol{F}_{32} & 0 \\
+0 & \boldsymbol{F}_{32}
+\end{array}\right][\boldsymbol{P}]</script><p> 其中$\boldsymbol P​$是置换矩阵，而$\boldsymbol D​$为对角矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{P}=\left[\begin{array}{cccccccc}
+1 & 0 & 0 & 0 & \cdots & \cdots & 0 & 0 \\
+0 & 0 & 1 & 0 & & & 0 & 0 \\
+& & & \vdots & & & & \\
+0 & 0 & 0 & 0 & \cdots & \cdots & 1 & 0 \\
+0 & 1 & 0 & 0 & \cdots & \cdots & 0 & 0 \\
+0 & 0 & 0 & 1 & \cdots & \cdots & 0 & 0 \\
+& & & \vdots & & & & \\
+0 & 0 & 0 & 0 & \cdots & \cdots & 0 & 1
+\end{array}\right]</script><script type="math/tex; mode=display">
+\boldsymbol{D}=\left[\begin{array}{lllll}
+1 & & & & \\
+& \omega & & & \\
+& & \omega^{2} & & \\
+& & & \ddots & \\
+& & & & \\
+& & & & \omega^{31}
+\end{array}\right]</script><p>$\boldsymbol P$的效果是使得所乘的向量$\boldsymbol x$序数为奇数的分量如$x_1，x_3，x_5$等提到前面，而偶数分量$x_2，x_4$等放到后面。</p>
+<p>计算$64$阶傅里叶变换（傅里叶矩阵乘以向量）的计算量是$64 \times 64$，而等式右侧的计算量是$2 \times 32 \times 32$（两个$32$阶）再加上一些修正项，修正项主要来自于与对角矩阵$\boldsymbol D$的乘法，大约为$32$次。继续对$\boldsymbol F_{32}$进行分解，计算的运算量再一次下降变为$2 (2 \times 16 \times 16+16)+32$。分解到最后，仅剩修正项的运算，$32 \times \log_2 64$次。对于$n$阶矩阵，即将$n^2$次计算降至$\dfrac{n}{2}\log_2 n$次。例如对于$1024$阶矩阵，运算量从$1024 \times 1024$降至$5 \times 1024$。 </p>
+<h3 id="第二十七讲-正定矩阵和最小值"><a href="#第二十七讲-正定矩阵和最小值" class="headerlink" title="第二十七讲 正定矩阵和最小值"></a>第二十七讲 正定矩阵和最小值</h3><p>本讲学习正定矩阵，这部分内容将本课程之前的知识点：主元、行列式、特征值以及方程的稳定性融为一体。本讲介绍如何判定一个矩阵是否正定矩阵，以及当一个矩阵是正定矩阵时，其内涵和矩阵操作的效果有何特别之处。此外还有正定矩阵与几何的关系：椭圆和正定有关，双曲线与正定无关。 </p>
+<h4 id="27-1-正定矩阵-Positive-definite-matrices"><a href="#27-1-正定矩阵-Positive-definite-matrices" class="headerlink" title="27.1 正定矩阵 Positive definite matrices"></a>27.1 正定矩阵 Positive definite matrices</h4><p>给定一个$2\times 2$对称矩阵<script type="math/tex">\boldsymbol A=\left[\begin{array}{ll} a & b \\ b & c\end{array}\right]</script>，有四个途径判定矩阵是否正定矩阵： </p>
+<ul>
+<li>特征值： 所有特征值均大于0——$\lambda_1 &gt; 0$，$\lambda_2 &gt; 0$</li>
+<li>行列式：所有子行列式均大于0——$a&gt;0$，$ac-b^2&gt;0$</li>
+<li>主元： 主元要均大于0——$a&gt;0$，$\dfrac{ac-b^2}{a} &gt;0$</li>
+<li>表达式 ：$\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x &gt; 0, (\boldsymbol x 为任意向量，但是\boldsymbol x \neq  0)$——<strong>通常这就是正定的定义，而前三条是用来验证正定性的条件</strong></li>
+</ul>
+<p>给定矩阵<script type="math/tex">\boldsymbol A=\left[\begin{array}{ll} 2 & 6 \\ 6 & c\end{array}\right]</script>，从判据(行列式)可知矩阵为正定阵的条件是$2c-36&gt;0$，即$c&gt;18$。 </p>
+<ul>
+<li><strong>当$c = 18$时：</strong></li>
+</ul>
+<p>矩阵<script type="math/tex">\left[\begin{array}{ll} 2 & 6 \\ 6 & 18\end{array}\right]</script>正好处在判定为正定矩阵的临界点上，称之为<strong>半正定(positive semidefinite)矩阵</strong>，它具有一个特征值0，是奇异矩阵，只有一个主元，而行列式为0。<strong>半正定矩阵特征值大于等于0。</strong> </p>
+<p>再观察$\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x &gt; 0$判据： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} &=\left[\begin{array}{ll}
+x_{1} & x_{2}
+\end{array}\right]\left[\begin{array}{cc}
+2 & 6 \\
+6 & 18
+\end{array}\right]\left[\begin{array}{l}
+x_{1} \\
+x_{2}
+\end{array}\right] \\
+&=2 x_{1}^{2}+12 x_{1} x_{2}+18 x_{2}^{2}
+\end{aligned}</script><p>之前讨论得都是线性方程$\boldsymbol {Ax}$(展开方程次数为一阶)，现在引入$\boldsymbol x^{\mathrm T}$变成二次，如果对于任意$x,y$，这种二次型(quadratic form)$ax^2+2bxy+cy^2$均大于零，则矩阵为正定矩阵。</p>
+<p>在本例的半正定矩阵中，当$x_1=3, x_2=-1$时，带入可知：<script type="math/tex">\boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} = 0</script></p>
+<ul>
+<li><strong>当$c = 7$时：</strong></li>
+</ul>
+<p>矩阵变为<script type="math/tex">\left[\begin{array}{ll} 2 & 6 \\ 6 & 7\end{array}\right]</script>，其二次型为<script type="math/tex">f(x,y) = \boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} = 2 x_{1}^{2}+12 x_{1} x_{2}+ 7 x_{2}^{2}</script>，从图像上看无最小值点，在原点处有一<strong>鞍点</strong>。鞍点在某个方向上看是极大值点，在另一方向上是极小值点，实际上最佳观测角度是<strong>特征向量的方向</strong>。 </p>
+<ul>
+<li><strong>当$c = 20$时：</strong></li>
+</ul>
+<p>矩阵变为<script type="math/tex">\left[\begin{array}{ll} 2 & 6 \\ 6 & 20\end{array}\right]</script>，主元为正；特征值之积为行列式的值4，特征值和为矩阵的迹22，因此特征值为正；子行列式均为正。矩阵为正定矩阵。 </p>
+<p>其二次型<script type="math/tex">f(x,y) = \boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} = 2 x_{1}^{2}+12 x_{1} x_{2}+ 20 x_{2}^{2}</script>，其图像最小值点为原点，一阶偏导数为0，二阶偏导数大于0。 </p>
+<p><img src="https://pic.imgdb.cn/item/62731bf60947543129a804f5.jpg" style="zoom:80%"></p>
+<blockquote>
+<p>当年上课时候老师讲双曲面的鞍点，画的图不好，有个篮球队的哥们理解不了，于是下了课跑去问老师，老师指着他的热身篮球裤说，就你这种裤腿两侧能撕开的篮球裤，全部打开，拎起来，裤裆地方就是鞍点……算了，反正GS画图真心不行，看看Lay的吧： </p>
+<p><img src="https://pic.imgdb.cn/item/62731c620947543129a8977a.jpg" style="zoom:80%"></p>
+</blockquote>
+<p>微积分中判定最小值点的判据【海森矩阵（Hessian Matrix）？】：</p>
+<ul>
+<li>一阶导数等于零：$\dfrac{\mathrm du}{\mathrm d x} = 0$</li>
+<li>二阶导数为正：$\dfrac{\mathrm d^2u}{\mathrm d x^2} &gt; 0$</li>
+</ul>
+<p>线性代数中判据为二阶导数矩阵正定。</p>
+<p>对于二次型我们可以用配方的办法来验证其是否具有最小值：</p>
+<script type="math/tex; mode=display">
+f(x,y) = \boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} = 2 x^{2}+12 xy+ 20 y^{2} = 2(x+3y^2)+2y^2</script><p>配方使得$x^2$的系数和交叉项$xy$的系数配合形成完全平方的形式，这个时候用到的$y^2$的系数正好是18，即判定正定的临界点。在此例中如果实际的系数$c&gt;18$，则还剩余$(c-18)y^2$，二次型在原点之外一定大于零，若$c&lt;18$则二次型可以小于等于0。 </p>
+<p>对于$f(x,y) = \boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} = 2 x^{2}+12 xy+ 20 y^{2} = 2(x+3y^2)+2y^2$，其几何图像为碗型的曲面，如果我们用$f=1$的截面横截曲面，得到的就是$2(x+3y^2)+2y^2 = 1$的椭圆。而对于双曲面进行切割就得到双曲线。</p>
+<p>配方法其实就是消元：</p>
+<p><img src="https://pic.imgdb.cn/item/62731ff60947543129ad7ba2.jpg"></p>
+<p>主元就是平方项系数，$\boldsymbol L$矩阵中的行操作数$l_{21}$ 就是配方项内$y$的系数。因为主元是每一个完全平方项的系数，因此这就是为什么矩阵的主元为正则该矩阵为正定矩阵。本例中二次型表达式的配方说明了二维的情形，而线代的理论可以将之推广到$n$维。 </p>
+<blockquote>
+<p>PS：虽然知道配方和消元数字上是的对上的，但我还是不太明白消元和配方过程上有啥联系…… </p>
+<p>消元和配方都是在去耦合吧，调配成最简略的关系 </p>
+</blockquote>
+<p>二阶导数的矩阵记为<script type="math/tex">\left[\begin{array}{ll} f_{x x} & f_{x y} \\ f_{y x} & f_{y y}\end{array}\right]</script>【海森矩阵（Hessian Matrix）？】，矩阵对称代表交叉二阶偏导数与求导顺序无关，即<script type="math/tex">f _ {xy} = f _ {yx}</script>。在微积分中我们学到的判据<script type="math/tex">f _ {xx}f _ {yy} > f _ {xy}^2</script>，和<strong>二阶矩阵判定正定是等价的</strong>，并且线代可以推广到$n$维。 </p>
+<script type="math/tex; mode=display">
+f_{xx}f_{yy}>f_{xy}^2 \stackrel{等价于}\Longleftrightarrow 二阶矩阵判定正定</script><p>3阶矩阵<script type="math/tex">\boldsymbol A=\left(\begin{array}{ccc} 2 & -1 & 0 \\ -1 & 2 & -1 \\ 0 & -1 & 2\end{array}\right)</script>，它是正定矩阵。计算子行列式得到</p>
+<script type="math/tex; mode=display">
+|2| = 2, \left|\begin{array}{rr}
+2 & -1 \\
+-1 & 2
+\end{array}\right|=3, 
+\left|\begin{array}{rrr}
+1 & 2 & 1 \\ 0 & 2 & -2 \\ 0 & 4 & 1
+\end{array}\right|=4</script><p>主元是$2，3/2，4/3$。特征值是$2-\sqrt2, 2, 2+\sqrt2$。</p>
+<blockquote>
+<p>PS：这是G. Strang最爱的矩阵之一，可以用来把二阶微分方程变成离散问题，因为它每一行都是差分方程 <script type="math/tex">f_{n+1}-2f_n+f_{n-1}</script></p>
+</blockquote>
+<p>其二次型为：</p>
+<script type="math/tex; mode=display">
+f(x,y) = \boldsymbol{x}^{\mathrm T} \boldsymbol{A} \boldsymbol{x} = 2 x_{1}^{2}+2 x_{2}^{2}+2 x_{3}^{2}-2 x_{1} x_{2}-2 x_{2} x_{3}</script><p>是一四维图像，三个维度<script type="math/tex">x_1，x_2，x_3</script>加函数<script type="math/tex">f</script>，若用<script type="math/tex">f=1</script>切割，则有<script type="math/tex">2 x_{1}^{2}+2 x_{2}^{2}+2 x_{3}^{2}-2 x_{1} x_{2}-2 x_{2} x_{3} = 1</script> 。这是一个椭球体，<font color="green"><strong>三个特征值不同，因此椭球的三个长轴长度不同。三个轴的方向就是特征向量的方向，轴长度就是特征值</strong></font>，矩阵的分解<script type="math/tex">\boldsymbol{A = Q \Lambda Q}^{\mathrm T}</script>很好的说明了这件事，这就是所谓的“主轴定理”。 </p>
+<h4 id="27-2-小说明"><a href="#27-2-小说明" class="headerlink" title="27.2 小说明"></a>27.2 小说明</h4><p>对于三条判据可以判定正定：$\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x &gt; 0, (\boldsymbol x 为任意向量，但是\boldsymbol x \neq  0)$。已经分析了判据3主元要大于零的原因，因为它是配方后的参数，只有都大于零才能保证正定。以下对于判据1和2做简要说明。  </p>
+<ul>
+<li><strong>判据1：所有特征值大于0</strong></li>
+</ul>
+<p>对称矩阵$\boldsymbol A$，其正交的特征向量可以张成整个空间，因此任意向量$\boldsymbol x$均可表示成特征向量的线性组合</p>
+<script type="math/tex; mode=display">
+\boldsymbol x = c_1\boldsymbol x_1+c_2\boldsymbol x_2+\dots + c_n\boldsymbol x_n</script><p>代入得：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x = c_1^2 \lambda_1 + c_2^2 \lambda_2 + \dots + c_n^2 \lambda_n</script><p>当特征值都大于零且$\boldsymbol x \neq  0)$时，才能保证$\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x &gt; 0$。因此条件1与正定性等价。 </p>
+<ul>
+<li><strong>判据2：所有子行列式大于0</strong></li>
+</ul>
+<p>记$\boldsymbol A_k$ 为矩阵$\boldsymbol A$左上角$k$阶方块，取特殊向量<script type="math/tex">x=\left[\begin{array}{l} \boldsymbol x_k \\ \boldsymbol 0 \end{array}\right]</script>即后$n-k$个元素为0，则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{x}^{T} \boldsymbol{A} \boldsymbol{x}=\left[\begin{array}{ll}
+\boldsymbol x_{k} & \boldsymbol 0
+\end{array}\right]\left[\begin{array}{cc}
+\boldsymbol A_{k} & * \\
+* & *
+\end{array}\right]\left[\begin{array}{c}
+\boldsymbol x_{k} \\
+\boldsymbol 0
+\end{array}\right]=\boldsymbol{x}_{k}^{T} \boldsymbol{A}_{k} \boldsymbol{x}_{k}</script><p>若矩阵$\boldsymbol A$满足正定性，则所有$\boldsymbol A_k$均满足正定性。已证明正定性等价于特征值均为正，而矩阵行列式等于特征值之积，因此可知子行列式均大于零。反之亦成立，两命题等价。 </p>
+<h3 id="第二十八讲-相似矩阵和若尔当标准型"><a href="#第二十八讲-相似矩阵和若尔当标准型" class="headerlink" title="第二十八讲 相似矩阵和若尔当标准型"></a>第二十八讲 相似矩阵和若尔当标准型</h3><p>本讲介绍相似矩阵，这些内容以及奇异值分解是线性代数最核心的概念。 </p>
+<blockquote>
+<p>Strang 老师说了, Jordan标准型不再是线性代数的核心，现代线性代数尤其是AI也不怎么用到他，所以此节略去Jordan型的内容。这一讲重点讲解相似矩阵 </p>
+</blockquote>
+<h4 id="28-1-正定矩阵-boldsymbol-A-mathrm-T-boldsymbol-A"><a href="#28-1-正定矩阵-boldsymbol-A-mathrm-T-boldsymbol-A" class="headerlink" title="28.1 正定矩阵 $\boldsymbol A^{\mathrm T} \boldsymbol A$"></a>28.1 正定矩阵 $\boldsymbol A^{\mathrm T} \boldsymbol A$</h4><p>若矩阵$\boldsymbol A$满足对任意向量$\boldsymbol x_0$均有$\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x &gt; 0$，则称矩阵为正定矩阵，可以通过特征值、主元和行列式的办法来判断矩阵的正定性。</p>
+<p><strong>正定矩阵来自于最小二乘问题</strong>。有大量的实际问题用到了长方形矩阵，而最小二乘问题中用到了长方形矩阵的积$\boldsymbol A^{\mathrm T} \boldsymbol A$，它是正定矩阵。</p>
+<p>正定矩阵$\boldsymbol A$是对称矩阵，它的逆矩阵$\boldsymbol A^{-1}$也是正定矩阵，逆矩阵的特征值是原矩阵的倒数，因此也都是正数。若矩阵$\boldsymbol A$和$\boldsymbol B$都是正定矩阵，则$\boldsymbol {A+B}$也是正定矩阵：$\boldsymbol x^{\mathrm T} \boldsymbol A \boldsymbol x &gt; 0$，$\boldsymbol x^{\mathrm T} \boldsymbol B \boldsymbol x &gt; 0$，则有$\boldsymbol x^{\mathrm T} (\boldsymbol {A+B}) \boldsymbol x &gt; 0$ 。</p>
+<p>如果$\boldsymbol A$是一个$m \times n$长方形矩阵，则$\boldsymbol A^{\mathrm T} \boldsymbol A$是对称方阵。通过讨论$\boldsymbol x^{\mathrm T} (\boldsymbol A^{\mathrm T} \boldsymbol A) \boldsymbol x &gt; 0$的正负可以确认它是正定矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x^{\mathrm T} (\boldsymbol A^{\mathrm T} \boldsymbol A) \boldsymbol x = (\boldsymbol A \boldsymbol x)^{\mathrm T} (\boldsymbol A \boldsymbol x) = |\boldsymbol A \boldsymbol x|^2 \geq 0</script><p>当且仅当$\boldsymbol A \boldsymbol x = \boldsymbol 0$时，上面表达式取等号为0。当矩阵$\boldsymbol A$的各列线性无关时，即矩阵为列满秩$r=n$，$\boldsymbol A$的零空间只有零向量，即此条件下仅有零向量，满足$\boldsymbol x^{\mathrm T} (\boldsymbol A^{\mathrm T} \boldsymbol A) \boldsymbol x = 0$。因此矩阵列满秩时，$\boldsymbol A^{\mathrm T} \boldsymbol A$是正定矩阵。正定矩阵将之前的知识点串联起来。</p>
+<h4 id="28-2-相似矩阵-Similar-matrices"><a href="#28-2-相似矩阵-Similar-matrices" class="headerlink" title="28.2 相似矩阵 Similar matrices"></a>28.2 相似矩阵 Similar matrices</h4><p>$\boldsymbol A$和$\boldsymbol B$均是$n \times n$方阵，若存在可逆矩阵$\boldsymbol M$，使得$\boldsymbol B = \boldsymbol {M^{-1}AM}$，则$\boldsymbol A$和$\boldsymbol B$为相似矩阵。 </p>
+<h5 id="一-特征值互不相同-Distinct-eigenvalues"><a href="#一-特征值互不相同-Distinct-eigenvalues" class="headerlink" title="(一) 特征值互不相同 Distinct eigenvalues"></a>(一) 特征值互不相同 Distinct eigenvalues</h5><p>若矩阵$\boldsymbol A$具有$n$个线性无关的特征向量，可以对角化得到$\boldsymbol {S^{-1}AS} = \boldsymbol \Lambda$，则$\boldsymbol A$相似于$\boldsymbol \Lambda$，这里的$\boldsymbol M$是特征向量矩阵$\boldsymbol S$。如果将$\boldsymbol M$取其它可逆矩阵，可以得到和$\boldsymbol A$相似的另一矩阵$\boldsymbol B$，实际上这样可以定义一类矩阵，$\boldsymbol \Lambda$是其中最简洁的一个。 </p>
+<p>例： <script type="math/tex">\boldsymbol A=\left[\begin{array}{ll} 2 & 1 \\ 1 & 2\end{array}\right]</script>，则<script type="math/tex">\boldsymbol \Lambda = \left[\begin{array}{ll} 3 & 0 \\ 0 & 1\end{array}\right]</script>，而取另一$\boldsymbol M$，则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol B = \boldsymbol {M^{-1}AM} =
+\left[\begin{array}{cc}
+1 & -4 \\
+0 & 1
+\end{array}\right]\left[\begin{array}{ll}
+2 & 1 \\
+1 & 2
+\end{array}\right]\left[\begin{array}{ll}
+1 & 4 \\
+0 & 1
+\end{array}\right]=\left[\begin{array}{cc}
+-2 & -15 \\
+1 & 6
+\end{array}\right]</script><p>相似矩阵最重要的特性是：<font color="red"><strong>相似矩阵具有相同的特征值</strong></font>。事实上，所有特征值为3和1的二阶矩阵都是$\boldsymbol A$的相似矩阵。</p>
+<p><strong>证明</strong>：矩阵$\boldsymbol A$的相似矩阵$\boldsymbol B = \boldsymbol {M^{-1}AM}$具有和矩阵$\boldsymbol A$相同的特征值：</p>
+<p>矩阵$\boldsymbol A$具有的特征值$\lambda$ ，即存在特征向量$\boldsymbol x$满足$\boldsymbol {Ax} = \lambda \boldsymbol x$ 。则有： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{A M M}^{-1} \boldsymbol{x} =\lambda \boldsymbol{x} \\
+\Downarrow  \\
+\boldsymbol M^{-1}\boldsymbol{A M M}^{-1} \boldsymbol{x} =\lambda \boldsymbol M^{-1} \boldsymbol{x} \\
+\Downarrow \\
+\boldsymbol{B} (\boldsymbol M^{-1} \boldsymbol{x}) =\lambda (\boldsymbol M^{-1} \boldsymbol{x})</script><p>即矩阵$\boldsymbol B$具有特征值$\lambda$，且特征向量为$\boldsymbol M^{-1} \boldsymbol{x}$。</p>
+<p>因此，相似矩阵具有相同的特征值，并且线性无关的特征向量的个数相同，但是特征向量往往不同。如果矩阵$\boldsymbol A$的特征值互不相等$\lambda_1 \neq \lambda_2 \neq \dots \neq \lambda_n$，且与另一个矩阵$\boldsymbol B$的特征值完全相同，则它们与相同的对角矩阵$\boldsymbol \Lambda$相似。</p>
+<h5 id="二-重特征值-Repeated-eigenvalues"><a href="#二-重特征值-Repeated-eigenvalues" class="headerlink" title="(二) 重特征值 Repeated eigenvalues"></a>(二) 重特征值 Repeated eigenvalues</h5><p> 如果矩阵有重特征值，则可能无法进行对角化。 </p>
+<p>例：二阶矩阵有重特征值$\lambda_1 = \lambda_2 = 4$</p>
+<ul>
+<li>第一类： 只与自己相似——<script type="math/tex">\left[\begin{array}{cc} 4 & 0 \\ 0 & 4\end{array}\right]</script></li>
+</ul>
+<script type="math/tex; mode=display">
+\boldsymbol{M}^{-1}\left[\begin{array}{ll}
+4 & 0 \\
+0 & 4
+\end{array}\right] \boldsymbol{M}=4 \boldsymbol{M}^{-1} \boldsymbol{I} \boldsymbol{M}=\left[\begin{array}{ll}
+4 & 0 \\
+0 & 4
+\end{array}\right]</script><p>这个系列的相似矩阵仅包含其自身。 </p>
+<ul>
+<li>第二类：包含其它所有的重特征值为4的矩阵，其中最简洁的是 —— <script type="math/tex">\left[\begin{array}{cc} 4 & 1 \\ 0 & 4\end{array}\right]</script></li>
+</ul>
+<p>元素1的位置换上其它数值仍然是相似矩阵。这个最优形式称为<strong>若尔当(Jordan form)标准型</strong>。有了这个理论，就可以处理不可对角化的矩阵，完成近似的“对角化”转化为若尔当标准型进行处理。 </p>
+<p>与<script type="math/tex">\left[\begin{array}{cc} 4 & 1 \\ 0 & 4\end{array}\right]</script>相似的矩阵，迹为8，行列式为16，因此我们可以构造出很多相似矩阵：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc} 5 & 1 \\ -1 & 3\end{array}\right], \left[\begin{array}{cc} 4 & 0 \\ 17 & 4\end{array}\right], \left[\begin{array}{cc} a & * \\ * & 8-a\end{array}\right]</script><p>它们都不能对角化(因为若可以对角化则按照特征值可知结果为$4 \boldsymbol I$，而只$4 \boldsymbol I$与自己相似）。 </p>
+<h5 id="三-若尔当标准型-Jordan-form"><a href="#三-若尔当标准型-Jordan-form" class="headerlink" title="(三) 若尔当标准型 Jordan form"></a>(三) 若尔当标准型 Jordan form</h5><p>更复杂的情况，一个四阶矩阵具有重特征值0：$\lambda_1 = \lambda_2 = \lambda_3 = \lambda_4 = 0$。如下面的例子所示。</p>
+<p>矩阵<script type="math/tex">\boldsymbol A=\left(\begin{array}{cccc} 0 & 1 & 0 & 0\\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0\end{array}\right)</script>，它的秩为2，因此其零空间的维数为$4-2=2$，而零空间的向量就是矩阵的特征向量，满足$\boldsymbol{Ax} = 0\boldsymbol{x} $，所以矩阵$\boldsymbol{A}$只有两个特征向量。若尔当指出上对角线每增加一个1，矩阵就减掉一个特征向量，本例中特征向量数为$4-2=2$。 </p>
+<p> 矩阵<script type="math/tex">\boldsymbol B=\left(\begin{array}{cccc} 0 & 1 & 7 & 0\\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0\end{array}\right)</script>与矩阵<script type="math/tex">\boldsymbol A=\left(\begin{array}{cccc} 0 & 1 & 0 & 0\\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0\end{array}\right)</script>为相似矩阵。 </p>
+<p>但矩阵<script type="math/tex">\boldsymbol C=\left(\begin{array}{cccc} 0 & 1 & 0 & 0\\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 0\end{array}\right)</script>与矩阵<script type="math/tex">\boldsymbol A=\left(\begin{array}{cccc} 0 & 1 & 0 & 0\\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0\end{array}\right)</script>并不是相似矩阵，两者具有不同的若尔当块。 </p>
+<p>若尔当块形如：</p>
+<script type="math/tex; mode=display">
+\boldsymbol J_i=\left[\begin{array}{ccccc}
+\lambda_{i} & 1 & 0 & \cdots & 0 \\
+0 & \lambda_{i} & 1 & \ddots & \vdots \\
+0 & 0 & \ddots & \ddots & 0 \\
+\vdots & \vdots & \ddots & \ddots & 1 \\
+0 & 0 & \cdots & 0 & \lambda_{i}
+\end{array}\right]</script><p>对角线上为重特征值$\lambda_i$，上对角线为1，其它位置的元素均为0，每个若尔当块只有1个特征向量。若干个若尔当块可以拼成一个若尔当矩阵。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{J}=\left[\begin{array}{cccc}
+\boldsymbol{J}_{1} & 0 & \cdots & 0 \\
+0 & \boldsymbol{J}_{2} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & \boldsymbol{J}_{d}
+\end{array}\right]</script><p>两个矩阵具有相同的特征值和特征向量个数，但是其若尔当块的尺寸不同，两者也并不是相似矩阵。如前述矩阵$\boldsymbol A$与并$\boldsymbol C$不相似。</p>
+<p>若尔当理论：任意$n$阶矩阵$\boldsymbol A$都与一个若尔当矩阵$\boldsymbol J$相似。若尔当矩阵中的每一个若尔当块对应一个特征向量。若矩阵具有$n$个不同的特征向量，则可以对角化，此时其若尔当标准型$\boldsymbol J$就是对角矩阵$\boldsymbol \Lambda$。若出现重特征值，则特征向量个数变少。</p>
+<blockquote>
+<p>说到了$\boldsymbol A^{\mathrm T} \boldsymbol A$和最小二乘问题就要解释一下G.Strang举的曲线拟合的例子，都是线性公式$y=ax+b$，但实际上最小二乘法也处理非线性方程，因为这里所谓的非线性是对$x$而言，而只要对于所求的参数是线性方程就可以。比如下面的例子中$x$的方幂组成的矩阵$\boldsymbol X$只是一个系数矩阵，对于所求的参数$β$这仍是个线性方程组。</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/627378b509475431296c80fa.jpg"></p>
+<p><img src="https://pic.imgdb.cn/item/627378c809475431296ca597.jpg"></p>
+<ul>
+<li><strong>相似矩阵拥有相同的特征值，但是特向量一般不相等(如果特征向量也相等那估计就是同一个矩阵了)</strong></li>
+<li><strong>如果两个矩阵拥有n个相同的特征值，那么他们必然相似于某个对角矩阵。</strong></li>
+</ul>
+<h3 id="第二十九讲-奇异值分解SVD"><a href="#第二十九讲-奇异值分解SVD" class="headerlink" title="第二十九讲 奇异值分解SVD"></a>第二十九讲 奇异值分解SVD</h3><p><img src="https://pic.imgdb.cn/item/6279aad50947543129d3b40d.jpg" style="zoom:70%"></p>
+<h4 id="29-1-简介"><a href="#29-1-简介" class="headerlink" title="29.1 简介"></a>29.1 简介</h4><p>本讲介绍奇异值分解（Singular value decomposition），简称SVD。这是矩阵最终也是最好的分解，任意矩阵可分解为$\boldsymbol {A = U Σ V}^{\mathrm T}$，分解结果为正交矩阵$\boldsymbol U$，对角阵$\boldsymbol Σ$和正交矩阵$\boldsymbol V$ 。</p>
+<p>如果矩阵$\boldsymbol A$是正定矩阵，它的奇异值分解就是$\boldsymbol {A = Q \Lambda Q}^{\mathrm T}$，一个正交矩阵$\boldsymbol Q$就可以满足分解，而不需要两个。而对于可对角化的矩阵有$\boldsymbol {A = S \Lambda S}^{-1}$，但特征向量矩阵$\boldsymbol S$并不是正交矩阵，而SVD中的$\boldsymbol U$和$\boldsymbol V$都是正交矩阵。</p>
+<h4 id="29-2-对矩阵进行SVD分解"><a href="#29-2-对矩阵进行SVD分解" class="headerlink" title="29.2 对矩阵进行SVD分解"></a>29.2 对矩阵进行SVD分解</h4><p>可将矩阵$\boldsymbol A$视为一种线性变换操作，将其行空间的一个向量$\boldsymbol v_1$,变为其列空间中的向量$\boldsymbol u_1 = \boldsymbol{Av}_1$ 。奇异值分解就是要在行空间中寻找一组正交基，将其通过矩阵$\boldsymbol A$线性变换生成列空间中的一组正交基$\boldsymbol{Av}_i = \sigma_i \boldsymbol u_i$。 </p>
+<p><img src="https://pic.imgdb.cn/item/6279ad7e0947543129d7d307.jpg" style="zoom:70%"></p>
+<p>找出矩阵$\boldsymbol A$行空间中的正交基很容易，Gram-Schmidt正交化过程就可以做到，但是随便的一组正交基经过矩阵矩阵$\boldsymbol A$变换得到的向量并不一定正交，因此满足此要求的行空间的正交基非常特殊。而矩阵$\boldsymbol A$零空间的向量所对应的是矩阵$\boldsymbol Σ$对角线上的0元素，因此很容易处理。 </p>
+<ul>
+<li>问题的核心就是找到行空间中一组特殊的正交基： </li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{A}\left[\begin{array}{llll}
+\boldsymbol{v}_{1} & \boldsymbol{v}_{2} & \cdots & \boldsymbol{v}_{r}
+\end{array}\right] &=\left[\begin{array}{lllll}
+\sigma_{1} \boldsymbol{u}_{1} & \sigma_{2} \boldsymbol{u}_{2} & \cdots & \sigma_{r} \boldsymbol{u}_{r}
+\end{array}\right] \\
+&=\left[\begin{array}{lllll}
+\boldsymbol{u}_{1} & \boldsymbol{u}_{2} & \cdots & \boldsymbol{u}_{r}
+\end{array}\right]\left[\begin{array}{ccc}
+\sigma_{1} & & \\
+& \sigma_{2} & & \\
+& & \ddots & \\
+& & & \sigma_{r}
+\end{array}\right]
+\end{aligned}</script><p>如果加入零空间的部分，等式就变为$\boldsymbol {AV = U Σ}$，其中<script type="math/tex">\boldsymbol V = \boldsymbol V_行 + \boldsymbol V_零</script>。</p>
+<ul>
+<li><p>选取的行空间的一组基向量为：<script type="math/tex">\boldsymbol V_行 = \boldsymbol v_1, \boldsymbol v_2,  \cdots  ,\boldsymbol{v}_{r}</script></p>
+</li>
+<li><p>零空间对应的正交基<script type="math/tex">\boldsymbol V_零 = \boldsymbol v_{r+1}, \dots ,\boldsymbol v_{n}</script>，经过线性变换得到<script type="math/tex">\boldsymbol {AV_零 = 0}</script>，对应矩阵$\boldsymbol Σ$中对角线最后的特征值<script type="math/tex">\sigma_{r+1} = \sigma_{r+2} = \dots = \sigma_{n} = 0</script>。</p>
+</li>
+</ul>
+<p>在等式<script type="math/tex">\boldsymbol {AV = U Σ}</script>两侧右乘<script type="math/tex">\boldsymbol V^{-1}</script>得到<script type="math/tex">\boldsymbol{A = U Σ V}^{-1} = \boldsymbol{U Σ V}^{\mathrm T}</script>。</p>
+<p>现在的问题就是怎么找到符合要求的向量$\boldsymbol v_i, \boldsymbol u_i$。</p>
+<p>为了得到这两个正交矩阵，考虑首先解决其中的一个，在等式$\boldsymbol {A = U Σ V}^{\mathrm T}$两侧分别乘上等式$\boldsymbol A^{\mathrm T} = \boldsymbol{VΣ}^{\mathrm T}\boldsymbol{U}^{\mathrm T}$ 两侧的项：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{A}^{T} \boldsymbol{A} &=\boldsymbol{V} \boldsymbol{\Sigma}^{T} \boldsymbol{U}^{T} \boldsymbol{U} \boldsymbol{\Sigma} \boldsymbol{V}^{T} \\
+&=\boldsymbol{V} \boldsymbol{\Sigma}^{T} \boldsymbol{\Sigma} \boldsymbol{V}^{T} \\
+&=\boldsymbol{V}\left[\begin{array}{llll}
+\sigma_{1}{ }^{2} & & & \\
+& \sigma_{2}{ }^{2} & & \\
+& & \ddots & \\
+& & & \sigma_{r}{ }^{2}
+\end{array}\right] \boldsymbol{V}^{T}
+\end{aligned}</script><p>注意到$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$是一个对称方阵，并且符合正定矩阵正交分解的形式，上式其实就是正定矩阵$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$的正交分解，$\boldsymbol v_i$就是矩阵$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$的特征向量，$\sigma_i^2$就是矩阵$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$的特征值，奇异值$\sigma_i$要取正平方根。用同样的办法也可以求得$\boldsymbol U$，它的列向量就是矩阵$\boldsymbol {A} \boldsymbol {A}^{\mathrm T}$的的特征向量。 </p>
+<blockquote>
+<p>注意：上述求$\boldsymbol V$或者$\boldsymbol U$即——两侧分别乘上等式$\boldsymbol A^{\mathrm T} = \boldsymbol{VΣ}^{\mathrm T}\boldsymbol{U}^{\mathrm T}$ 的方法只能用于$\boldsymbol V$或者$\boldsymbol U$求解某一个，不能将$\boldsymbol V$和$\boldsymbol U$都用这种方法求解，这是因为确定特征向量的过程中，特征向量反向仍然符合要求，通过现在的方法无法确认向量的符号，但是一旦我们确认的$\boldsymbol V$方向之后，$\boldsymbol U$的方向也就随之确定，将$\boldsymbol V$代入<script type="math/tex">\boldsymbol {AV = U Σ}</script>计算$\boldsymbol U$可以避免这种问题。$\boldsymbol V$和$\boldsymbol U$之间的符号联系在进行$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$的计算时被切断了，而用<script type="math/tex">\boldsymbol {AV = U Σ}</script>计算可以避免此问题。 </p>
+<p>我们注意到，如果$\boldsymbol U$的一个向量反向，$\boldsymbol U$中的两个向量仍然是正交向量，且此时可以完成奇异值分解，这是因为在奇异值分解的过程中，一旦确认了$\boldsymbol V$中向量的方向之后，$\boldsymbol U$中向量的方向也一起被限定了，而在本例中，我们用一种和$\boldsymbol V$无关的方式求得了$\boldsymbol U$，而这种方法并不一定总是有效，需要尝试改变向量的方向。通过将$\boldsymbol V$代入<script type="math/tex">\boldsymbol {AV = U Σ}</script>求得$\boldsymbol U$，可以避免这个问题。  </p>
+</blockquote>
+<h4 id="29-3-小结语"><a href="#29-3-小结语" class="headerlink" title="29.3 小结语"></a>29.3 小结语</h4><p>做奇异值分解就是在矩阵的四个子空间中寻找到合适的基：</p>
+<ul>
+<li>$\boldsymbol v_1, \boldsymbol v_2, \dots, \boldsymbol v_r$为行空间的标准正交基</li>
+<li>$\boldsymbol u_1, \boldsymbol u_2, \dots, \boldsymbol u_r$为列空间的标准正交基</li>
+<li><script type="math/tex">\boldsymbol v_{r+1}, \boldsymbol v_{r+2}, \dots, \boldsymbol v_n</script>为零空间的标准正交基</li>
+<li><script type="math/tex">\boldsymbol u_{r+1}, \boldsymbol u_{r+2}, \dots, \boldsymbol u_m</script>为左零空间的标准正交基</li>
+</ul>
+<blockquote>
+<p>奇异值分解在最小二乘法问题中有重要应用，因为在实际问题中常碰到矩阵$\boldsymbol A$不是列满秩的状态，因此$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$不可逆，无法用之前的方法求最优解。即使是列满秩的情况当矩阵是超大型矩阵时，$\boldsymbol {A}^{\mathrm T} \boldsymbol {A}$的计算量太大，用奇异值分解的办法会降低计算量。</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/6279b8280947543129f1ef20.jpg"></p>
+<blockquote>
+<p>图为G.Strang给出的二阶方阵SVD的几何意义</p>
+<p>关于该图的解释、奇异阵的意义、以及奇异阵为什么能丢掉请看一下链接：</p>
+<p>【SVD的数学涵义及其应用实例 - 钱默吟的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/57803955">https://zhuanlan.zhihu.com/p/57803955</a> 】</p>
+<p>【奇异值的物理意义是什么？ - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22237507">https://www.zhihu.com/question/22237507</a> 】</p>
+<p>【为什么PCA中奇异值分解（SVD）和特征分解可以降低数据维度 <a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41987033/article/details/81211574】">https://blog.csdn.net/qq_41987033/article/details/81211574】</a></p>
+</blockquote>
+<h3 id="第三十讲-线性变换及对应矩阵"><a href="#第三十讲-线性变换及对应矩阵" class="headerlink" title="第三十讲 线性变换及对应矩阵"></a>第三十讲 线性变换及对应矩阵</h3><p>本讲介绍线性变换。在传统的线代课程中，线性变换会出现在的比矩阵还要早的位置，实际上可以在脱离坐标和具体数值的情况下讨论线性变换。但是面对科学计算的课题，还是要回到坐标上来。每个线性变换都对应于一个矩阵，矩阵概念的背后就是线性变换的概念。 </p>
+<blockquote>
+<p>无论是“线性变换”还是“矩阵”，对于初学者来说都是陌生而且突兀的概念。矩阵看起来直观，但是其运算规则总让人摸不着头脑；线性变换的概念显得抽象一些，但其实也可以描述得很朴素。G.Strang是从矩阵的概念出发，往求解线性方程组的方向引导大家，他最成功的地方是引入了列图像以及矩阵乘法的行操作、列操作,将矩阵运算变得不那么“没头没脑”。而之前推荐过的《线性代数应该这样学》是从线性变换的角度出发，用朴素的描述在更高的抽象层面讨论，很多原理与法则就变得比较简洁。个人认为两者都优于从行列式出发进入线性代数的路线。在《理解矩阵》中，作者写到矩阵的背后就是线性变换，相似矩阵描述的实际上是同一种线性变换。G.Strang说理解线性变换的本质就是找到它背后的矩阵。这实际上是一个意思，只是出发点和看问题的角度不同。当具体的矩阵和抽象的线性变换在大脑中合二为一的时候，才是对线代最本质的理解。 线性变换和矩阵的关系还可以参考以下课程，在2D空间中这个关系更容易描述： </p>
+</blockquote>
+<h4 id="30-1-几个小例子"><a href="#30-1-几个小例子" class="headerlink" title="30.1 几个小例子"></a>30.1 几个小例子</h4><ul>
+<li><strong>正例1：投影 Projection</strong></li>
+</ul>
+<p>抛开矩阵，从线性变换的概念来讨论“投影”。通过线性变换使得平面内的一个向量变为平面内的另一个向量，这种变换关系通常称之为“映射”（mapping）。</p>
+<p>$T：R^2→R^2$</p>
+<p>$T(\boldsymbol v)$就像一个函数，给一个”输入”，进行线性变换后得到一个”输出”。比如将二维平面的向量投影到一条直线上。</p>
+<p>线性代数只讨论线性变换，而线性变换符合如下规则：</p>
+<p>对于任意向量$\boldsymbol v，\boldsymbol w$和标量$c$，有</p>
+<script type="math/tex; mode=display">
+T(\boldsymbol{v+w})=T(\boldsymbol v)+T(\boldsymbol w); T(c\boldsymbol v)=cT(\boldsymbol v)</script><p>将两者结合就得到：</p>
+<script type="math/tex; mode=display">
+T(c\boldsymbol v+d\boldsymbol w)=cT(\boldsymbol v)+dT(\boldsymbol w)</script><ul>
+<li><strong>正例2：旋转45度 Rotation by 45</strong></li>
+</ul>
+<p>这个变换$T：R^2→R^2$，是一个线性变换，数乘和加法均符合。</p>
+<ul>
+<li><strong>反例1：平面平移 Shift whole plane</strong></li>
+</ul>
+<p>沿着某方向$\boldsymbol v_0$平移一个平面。这就不是一个线性变换。两条法则都违反。更简单的验证方法是线性运算规则的特例$T(\boldsymbol 0) = \boldsymbol 0$，“平移”不符合这个规则特例。</p>
+<ul>
+<li><strong>反例2：求长度$T(\boldsymbol v) = ||\boldsymbol v||$</strong></li>
+</ul>
+<p>这个变换，输入一个三维向量，得到一个数值(或者说一维向量)，即$T：R^3→R^1$。该变换可以满足$T(\boldsymbol 0) = \boldsymbol 0$，但是数乘负数就不符合规则。</p>
+<h4 id="30-2-线性变换"><a href="#30-2-线性变换" class="headerlink" title="30.2 线性变换"></a>30.2 线性变换</h4><p>对二维平面的图像做线性变换的操作示意图。 </p>
+<p><img src="https://pic.imgdb.cn/item/627a09500947543129e7ee9f.jpg"></p>
+<p>矩阵$T(\boldsymbol v) = \boldsymbol{Av}$，矩阵乘法是一个线性变换：</p>
+<script type="math/tex; mode=display">
+\boldsymbol {A(v+w)} = \boldsymbol {Av} + \boldsymbol {Aw}; \boldsymbol A c \boldsymbol v = c \boldsymbol {Av}</script><p>整个平面可以通过矩阵的乘法完成变换。</p>
+<p>例如，对上图的房子图像施加矩阵<script type="math/tex">\boldsymbol A=\left(\begin{array}{cc} 1 & 0 \\ 0 & -1\end{array}\right)</script> ，则输出的是上下颠倒的房子。</p>
+<p><strong><font color="red">理解线性变换的本质就是确定它背后的矩阵</font></strong>。</p>
+<p><strong>例：</strong>对某一线性变换$T：R^3→R^2$，输入一个三维向量而输出是一个二维向量。变成矩阵的形式$T(\boldsymbol v) = \boldsymbol{Av}$，则矩阵$\boldsymbol A$是一个$2 \times 3$矩阵。</p>
+<h4 id="30-3-描述线性变换-Describing-T-v"><a href="#30-3-描述线性变换-Describing-T-v" class="headerlink" title="30.3 描述线性变换 Describing T(v)"></a>30.3 描述线性变换 Describing T<strong>(</strong>v)</h4><p>在平面内，如果我们已经了解两个线性无关的向量$\boldsymbol v_1$和$\boldsymbol v_2$经过线性变换的结果$T(\boldsymbol v_1)$和$T(\boldsymbol v_1)$，我们实际上可以通过其线性组合，了解平面内所有的向量线性变换的结果。因此如果我们想了解线性变换对整个输入空间的影响，只需要确定它的一组基$\boldsymbol v_1, \boldsymbol v_2, \dots, \boldsymbol v_n$线性变换的结果。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boldsymbol{v}=c_{1} \boldsymbol{v}_{1}+c_{2} \boldsymbol{v}_{2}+\ldots+c_{n} \boldsymbol{v}_{n} \\
+&\boldsymbol{T}(\boldsymbol{v})=c_{1} \boldsymbol{T}\left(\boldsymbol{v}_{1}\right)+c_{2} \boldsymbol{T}\left(\boldsymbol{v}_{2}\right)+\ldots+c_{n} \boldsymbol{T}\left(\boldsymbol{v}_{n}\right)
+\end{aligned}</script><p><strong><font color="green">线性变换与坐标无关，而矩阵是与坐标有关的</font></strong>。选定一组基，则对于一个向量而言$c_1, c_2$等等就是一组坐标值，给定了将向量表示为基向量线性组合的唯一的表达式。因此可以说坐标源自于一组基，$c_1, c_2, \dots, c_n$就是向量的一组坐标值。通常给出空间的坐标是标准坐标，即一组标准基。例如：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{v}=\left[\begin{array}{l}
+3 \\
+2 \\
+4
+\end{array}\right]=3\left[\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right]+2\left[\begin{array}{l}
+0 \\
+1 \\
+0
+\end{array}\right]+4\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right]</script><p>如果用矩阵$\boldsymbol A$来表示线性变换$T：R^n→R^m$。则需要两组基，即输入空间的一组基和输出空间的一组基，来分别确认输入向量与输出向量的坐标。设$\boldsymbol v_1，\boldsymbol v_2, \dots ,\boldsymbol v_n$为输入空间的基，而为输出$\boldsymbol w_1，\boldsymbol w_2, \dots ,\boldsymbol w_n$空间的基，用矩阵来表示线性变换就是将向量的坐标乘以矩阵得到它在输出空间的坐标。</p>
+<ul>
+<li><strong>例：投影</strong></li>
+</ul>
+<p>将二维平面内的向量投影到一条直线，选择输入空间基向量为$\boldsymbol v_1$和$\boldsymbol v_2$，其中$\boldsymbol v_1$沿着投影方向，$\boldsymbol v_2$垂直于投影方向，输出空间基选择$\boldsymbol w_1 = \boldsymbol v_1, \boldsymbol w_2 = \boldsymbol v_2$。对于输入空间中任意向量$\boldsymbol v$有$\boldsymbol v = c_1 \boldsymbol v_1 + c_2 \boldsymbol v_2$，输出为$T(\boldsymbol v) = c_1 \boldsymbol v_1$。 </p>
+<p>因此这个线性变换的矩阵就是<script type="math/tex">\boldsymbol A=\left(\begin{array}{cc} 1 & 0 \\ 0 & 0\end{array}\right)</script>，输入<script type="math/tex">\left[\begin{array}{l} c_1 \\ c_2\end{array}\right]</script>得到<script type="math/tex">\left[\begin{array}{cc} 4 & 0 \\ 0 & 4\end{array}\right] \left[\begin{array}{l} c_1 \\ c_2\end{array}\right] = \left[\begin{array}{l} c_1 \\ 0 \end{array}\right]</script>。这组例子中实际上我们以投影矩阵的特征向量为基，因此得到的矩阵$\boldsymbol A$是对角阵。对角线上就是投影矩阵的特征值1和0。</p>
+<p>而如果我们以标准坐标为基，即<script type="math/tex">\boldsymbol w_1 = \boldsymbol v_1 = \left[\begin{array}{l} 1 \\ 0\end{array}\right]</script>，<script type="math/tex">\boldsymbol w_2 = \boldsymbol v_2 = \left[\begin{array}{l} 0 \\ 1\end{array}\right]</script> 。对应的投影矩阵就是之前学到的投影矩阵$\boldsymbol P = \dfrac{\boldsymbol {aa}^{\mathrm T}}{\boldsymbol a^{\mathrm T} \boldsymbol a}$对于投影到斜率45度的直线，<script type="math/tex">\boldsymbol P=\left(\begin{array}{cc} \dfrac{1}{2} & \dfrac{1}{2} \\ \dfrac{1}{2} & \dfrac{1}{2}\end{array}\right)</script></p>
+<h4 id="30-4-如何确定矩阵A-Rule-to-find-A"><a href="#30-4-如何确定矩阵A-Rule-to-find-A" class="headerlink" title="30.4 如何确定矩阵A Rule to find A"></a>30.4 如何确定矩阵A Rule to find A</h4><p>矩阵$\boldsymbol A$的列实际上是描述输入原空间的基向量得到的列空间线性组合的系数：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boldsymbol{T}\left(\boldsymbol{v}_{1}\right)=a_{11} \boldsymbol{w}_{1}+a_{21} \boldsymbol{w}_{2}+\ldots+a_{m 1} \boldsymbol{w}_{m} \\
+&\boldsymbol{T}\left(\boldsymbol{v}_{2}\right)=a_{12} \boldsymbol{w}_{1}+a_{22} \boldsymbol{w}_{2}+\ldots+a_{m 2} \boldsymbol{w}_{m} \\
+& \dots
+\end{aligned}</script><p>这样矩阵$\boldsymbol A$就满足“$\boldsymbol A [输入向量的坐标]=[输出空间的坐标]$”。</p>
+<p>例如：<script type="math/tex">\boldsymbol{A}\left[\begin{array}{c} 1 \\ 0 \\ \vdots \\ 0 \end{array}\right]=\left[\begin{array}{c}a_{11} \\ a_{21} \\ \vdots \\ a_{m 1} \end{array}\right]</script>，所得结果就是输出空间的坐标，也就是输出空间的基进行线性组合所需要的系数。</p>
+<ul>
+<li>介绍一个特别的线性变换——求导，$T = \dfrac{\mathrm{d}}{\mathrm d x}$<ul>
+<li>输入：$c_1 + c_2 x + c_3 x^2$ ，基：$1, x, x^2$</li>
+<li>输出：$c_2 + 2c_3 x$ ，基：$1, x$</li>
+</ul>
+</li>
+</ul>
+<p>这是一个$T:R^3 \to R^2$的线性变换。</p>
+<p>矩阵$\boldsymbol A$满足：<script type="math/tex">\boldsymbol{A}\left[\begin{array}{c} c_1 \\ c_2 \\ c_3 \end{array}\right]=\left[\begin{array}{c} c_2 \\ 2c_3 \end{array}\right]</script>，可求得矩阵<script type="math/tex">\boldsymbol A=\left(\begin{array}{ccc} 0& 1 & 0 \\ 0 & 0 & 2\end{array}\right)</script> 。</p>
+<p><strong>更普遍的来讲，矩阵的逆矩阵就是线性变换的逆变换，矩阵的乘积就是线性变换的乘积，矩阵乘法源自于线性变换。</strong></p>
+<h3 id="第三十一讲-基变换和图像压缩"><a href="#第三十一讲-基变换和图像压缩" class="headerlink" title="第三十一讲 基变换和图像压缩"></a>第三十一讲 基变换和图像压缩</h3><p>本讲介绍基变换。选择合适的基向量会给计算制造便利。基变换的一个重要应用就是压缩，图像、影像、音频和其它一些数据都会因为基变换而得到更高效的压缩储存。本讲的主题仍旧是线性变换和矩阵的关联。 </p>
+<h4 id="31-1-图像压缩-Compression-of-images"><a href="#31-1-图像压缩-Compression-of-images" class="headerlink" title="31.1 图像压缩 Compression of images"></a>31.1 图像压缩 Compression of images</h4><p>本讲涉及的压缩过程是有损压缩。例如一幅像素是$512 \times 512$的静态黑白图像，图像用一个向量来表示，向量的分量xi表示像素的灰度，变化范围$0 \leq x_i \leq 255$，占8bits。该向量属于$R^n$空间，$n=(512) \times (512)$。彩色图像描述每个点的像素需要三个数据，向量长度是黑白图像的3倍。</p>
+<p>图像的标准压缩方式为<strong>JPEG</strong>(联合图像专家组 Joint Photographic Experts Group)。<strong>图像压缩的本质就是基变换</strong>。</p>
+<p>压缩前图像采用的基向量是标准基。但是在图像中离得很近的区域，颜色是非常接近的，比如教学视频中黑板的一个区域，这些区域像素的灰度值很接近，但是用标准基来存储并没有利用上这一特点，这就给了我们压缩的空间。</p>
+<p>标准基就是：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{c}
+1 \\
+0 \\
+\vdots \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{c}
+0 \\
+1 \\
+\vdots \\
+0 \\
+0
+\end{array}\right], \cdots , \left[\begin{array}{c}
+0 \\
+0 \\
+\vdots \\
+1 \\
+0
+\end{array}\right], \left[\begin{array}{c}
+0 \\
+0 \\
+\vdots \\
+0 \\
+1
+\end{array}\right]</script><p>而显然对于灰度很接近的情况(即一幅图像的灰度基本都是一个值)，<script type="math/tex">\left[\begin{array}{c} 1 \\ 1 \\ \vdots \\ 1 \\1 \end{array}\right]</script>是一个很好的基（代表低频信号，频率为0，平滑。在图像压缩后经常会存在，因为其系数通常很大），在一组基中有一个这样的向量能解决很大的问题，可以处理像素灰度接近一致的情况。但图像不是灰度完全一致的，因此接下来的问题是跟它相配合的基要选择哪些。极端的情况包括选择<script type="math/tex">\left[\begin{array}{c} +1 \\ -1 \\ +1 \\ -1 \\ \vdots \end{array}\right]</script>，它可以给出类似国际象棋盘那种黑白相间的状态（最高频信号，噪音、扰动……在图像压缩后很少存在），还有图像一半图像暗一半图像亮，可以选择<script type="math/tex">\left[\begin{array}{c} +1 \\ \vdots \\ +1 \\ -1 \\ \vdots \\ -1 \end{array}\right]</script>。</p>
+<ul>
+<li><strong>傅里叶基 Fourier basis</strong></li>
+</ul>
+<p>在JPEG中，将$512 \times 512$的区域划分为$8 \times 8$的区块进行处理，所用到的基是傅里叶基向量。</p>
+<p>以$R^8$中的基举例：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+\omega \\
+\omega^{2} \\
+\omega^{3} \\
+\omega^{4} \\
+\omega^{5} \\
+\omega^{6} \\
+\omega^{7}
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+\omega^{2} \\
+\omega^{4} \\
+\omega^{6} \\
+\omega^{8} \\
+\omega^{10} \\
+\omega^{12} \\
+\omega^{14}
+\end{array}\right], \cdots, \left[\begin{array}{c}
+1 \\
+\omega^{7} \\
+\omega^{14} \\
+\omega^{21} \\
+\omega^{28} \\
+\omega^{35} \\
+\omega^{42} \\
+\omega^{49}
+\end{array}\right]</script><p><img src="https://pic.imgdb.cn/item/627a1f5c0947543129253f77.jpg"></p>
+<p>傅里叶基（Fourier basis）就是之前讲过的傅里叶矩阵的列向量，每个元素为复数的幂。在8x8区块中有64个系数，64个基向量，在这个64维空间中做基变换。</p>
+<script type="math/tex; mode=display">
+信号\boldsymbol x \stackrel{无损}\Longrightarrow 系数c \stackrel{有损}\Longrightarrow 系数 \hat c(很多0) \Longrightarrow \hat{\boldsymbol x} = \sum \hat c_i \boldsymbol v_i</script><p>首先对输入的信号$\boldsymbol x$，从标准基变换为傅里叶基，得到系数$c$，这一步是无损的过程。之后设置阀值进行压缩，超过阀值的认定为肉眼无法分辨的信号。在数学上表现为某些基向量的系数很小，这部分可以丢弃，随之得到新的系数$\hat c$。将新的系数赋值在傅里叶基上求和得到$\hat{\boldsymbol x} = \sum \hat c_i \boldsymbol v_i$。此时求和项已经不是64项，可能只剩下两三项，这就是压缩。</p>
+<p>视频文件可以视为图像的序列，一幅一幅进行图像压缩即可。但这样做没有利用好视频的性质，因为视频是连续的，一幅图像和下一幅图像非常接近，因此可以存储一幅基础图像，随后只存储下一幅图像对它的修正部分。</p>
+<ul>
+<li><strong>小波 Wavelets</strong></li>
+</ul>
+<p>下面介绍另一组和傅里叶竞争的基向量——小波。</p>
+<p>以$R^8$中的基举例：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{l}
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1 \\
+1
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+1 \\
+1 \\
+1 \\
+-1 \\
+-1 \\
+-1 \\
+-1
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+1 \\
+-1 \\
+-1 \\
+0 \\
+0 \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{c}
+0 \\
+0 \\
+0 \\
+0 \\
+1 \\
+1 \\
+-1 \\
+-1
+\end{array}\right],\left[\begin{array}{c}
+1 \\
+-1 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{array}\right], \cdots, \left[\begin{array}{c}
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+0 \\
+1 \\
+-1
+\end{array}\right]</script><p>这个只是一个小波选择，还有很多更精细的选择，这一组基中有太多从+1跳转到-1的变化。线性代数要做的基变换，就是将标准基下的向量$\boldsymbol p = [p_1, p_2, \cdots, p_8]$表示为小波基的线性组合，求出线性组合的参数$\boldsymbol c$满足$\boldsymbol p = c_1 \boldsymbol w_1 + c_2 \boldsymbol w_2+ \cdots + c_8 \boldsymbol w_8$，即$\boldsymbol{p = Wc}$。$\boldsymbol W$即以小波基向量为列向量的小波矩阵。因此有$\boldsymbol c = \boldsymbol W^{-1} \boldsymbol p$ 。</p>
+<p>好的基向量组要求：第一，可以快速求逆矩阵，例如快速傅里叶变换，这里也存在快速小波变换，因为小波矩阵列向量正交，因此可以转置得到逆矩阵；第二，要少量基向量就可以近似信号，可压缩的比例就比较高。</p>
+<h4 id="31-2-基变换-Change-of-basis"><a href="#31-2-基变换-Change-of-basis" class="headerlink" title="31.2 基变换 Change of basis"></a>31.2 基变换 Change of basis</h4><p>$\boldsymbol W$的列向量是一组新的基向量。在旧基向量体系下的向量$\boldsymbol x$和新基向量下的$\boldsymbol c$的关系是：$\boldsymbol {x = Wc}$。</p>
+<ul>
+<li><strong>变换矩阵</strong></li>
+</ul>
+<p>已知一个线性变换$T：R^8 \to R^8$。当使用空间的一组基时$\boldsymbol v_1，\boldsymbol v_2, \dots ,\boldsymbol v_8$，线性变换对应的矩阵为$\boldsymbol A$；当使用一组新的基$\boldsymbol u_1，\boldsymbol u_2, \dots ,\boldsymbol u_8$时，线性变换对应的矩阵为矩阵$\boldsymbol B$。两个矩阵对应的是同一个线性变换，只是使用了不同的基向量。那么$\boldsymbol A$和$\boldsymbol B$为<strong>相似矩阵</strong>——$\boldsymbol B = \boldsymbol{M^{-1} A M}$，$\boldsymbol M$是基变换矩阵（相似矩阵就是通过不同的基表示同一个向量）。</p>
+<p>复习一下线性变换的内容：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boldsymbol{x}=c_{1} \boldsymbol{v}_{1}+c_{2} \boldsymbol{v}_{2}+\ldots+c_{8} \boldsymbol{v}_{8} \\
+&\boldsymbol{T}(\boldsymbol{x})=c_{1} \boldsymbol{T}\left(\boldsymbol{v}_{1}\right)+c_{2} \boldsymbol{T}\left(\boldsymbol{v}_{2}\right)+\ldots+c_{8} \boldsymbol{T}\left(\boldsymbol{v}_{8}\right) \\
+&\boldsymbol{T}\left(\boldsymbol{v}_{1}\right)=a_{11} \boldsymbol{v}_{1}+a_{21} \boldsymbol{v}_{2}+\ldots+a_{81} \boldsymbol{v}_{8} \\
+&\boldsymbol{T}\left(\boldsymbol{v}_{2}\right)=a_{12} \boldsymbol{v}_{1}+a_{22} \boldsymbol{v}_{2}+\ldots+a_{82} \boldsymbol{v}_{8} \\
+& \cdots
+\end{aligned}</script><p>矩阵$\boldsymbol A$就是$a_{ij}$组成的矩阵。</p>
+<p>如果我们使用的基向量就是特征向量$T(\boldsymbol v_I = \lambda_i \boldsymbol v_i)$，矩阵$\boldsymbol A$就变成对角阵$\boldsymbol \Lambda$。找出特征向量是压缩最理想的结果，但是找出图像的特征向量代价太大，因此我们找到代价小但是接近理想状态的基向量（例如小波基）进行基变换，完成压缩过程。</p>
+<blockquote>
+<p>之前我在线性变换和基变换这两讲后面留了很多具体文字，希望帮助大家理解和区分这些概念，但是有的小伙伴貌似反而被误导，所以我把另一门课程的几何描述放在这里，希望大家看了之后可以完全明白，基变换是在同一个空间中，改变对一个东西的描述方式而已。</p>
+</blockquote>
+<h4 id="31-3-线性变换与基变换的区别与联系"><a href="#31-3-线性变换与基变换的区别与联系" class="headerlink" title="31.3 线性变换与基变换的区别与联系"></a>31.3 线性变换与基变换的区别与联系</h4><p>我们可以将基变换理解为特殊的线性变换，因为基变换其实是可逆线性变换，也就是说，始终是可逆矩阵。 </p>
+<ul>
+<li>线性变换：</li>
+</ul>
+<p>将一个向量变换为另一个向量，是在同一个坐标系(基向量)下的两个不同向量，其中矩阵的列可以看为标准基变换后的基，从这个变换中我们能看出这个矩阵对应什么变换。</p>
+<ul>
+<li>基变换：</li>
+</ul>
+<p>基变换在变换前后描述的都是一个向量，它表示一个向量在原来的基下的表示(系数)变换为另一组基下的表示(系数)。其中基变换矩阵的列表示原来的基在新的基下的坐标。</p>
+<p>。但是变换前的向量是在原来的基下的表示，变换后的向量的表示在新的基下的表示</p>
+<p>线性代数的本质09 基变换 - 三少爷的键的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/110975625">https://zhuanlan.zhihu.com/p/110975625</a> </p>
+<h3 id="第三十二讲-第三部分小结"><a href="#第三十二讲-第三部分小结" class="headerlink" title="第三十二讲 第三部分小结"></a>第三十二讲 第三部分小结</h3><p><strong>主要内容</strong></p>
+<ul>
+<li>特征值和特征向量$\boldsymbol{Ax} = \lambda \boldsymbol x$</li>
+<li>微分方程$\dfrac{\mathrm d \boldsymbol u}{\mathrm d t} = \boldsymbol{Au}$和矩阵指数形式$e^{\boldsymbol At}$</li>
+<li>对称矩阵$\boldsymbol A = \boldsymbol A^{\mathrm T}$的特征值永远为实数，总有足够的特征向量实现矩阵的对角化$\boldsymbol{A = Q \Lambda Q}^{\mathrm T}$。</li>
+<li>正定矩阵</li>
+<li>相似矩阵$\boldsymbol B = \boldsymbol M^{-1} \boldsymbol{AM}$，两矩阵具有相同的特征值，但是特征向量不同，矩阵的乘方形式很接近$\boldsymbol B = \boldsymbol M^{-1} \boldsymbol A^k \boldsymbol M$。</li>
+<li>奇异值分解SVD$\boldsymbol A = \boldsymbol{U Σ V}^{\mathrm T}$。</li>
+</ul>
+<p>几个知识点：</p>
+<p>矩阵$\boldsymbol A$的特征向量相互正交的条件：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A \boldsymbol A^{\mathrm T} = \boldsymbol A^{\mathrm T} \boldsymbol A</script><p>对称阵、反对称阵、正交阵都满足上面条件。</p>
+<p>投影矩阵的特征值等于0或者1，因为$\boldsymbol P^2 = \boldsymbol P \Longrightarrow \lambda^2 = \lambda$。</p>
+<p>例题参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46124814">https://zhuanlan.zhihu.com/p/46124814</a></p>
+<h3 id="第三十三讲-左右逆和伪逆"><a href="#第三十三讲-左右逆和伪逆" class="headerlink" title="第三十三讲 左右逆和伪逆"></a>第三十三讲 左右逆和伪逆</h3><p>【MIT—线性代数笔记33 左右逆和伪逆 - 三少爷的键的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/46124893">https://zhuanlan.zhihu.com/p/46124893</a> 】</p>
+<hr>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/355960334">https://zhuanlan.zhihu.com/p/355960334</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/05/04/LinearAlgebra3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%AC%E8%B4%A8%E9%97%AE%E9%A2%98/" rel="tag">本质问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E4%BB%A3/" rel="tag">线代</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/05/06/Teacher-Wang-s-scientific-research-materials/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            王老师科研资料
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/05/03/LinearAlgebra1/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">线性代数_Part1</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

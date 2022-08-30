@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>高等数学1 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Advanced-mathematics1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  高等数学1
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/06/26/Advanced-mathematics1/" class="article-date">
+  <time datetime="2022-06-26T12:00:03.000Z" itemprop="datePublished">2022-06-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">数学基础</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/%E9%AB%98%E7%AD%89%E6%95%B0%E5%AD%A6/">高等数学</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">732</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">2 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1-极限"><a href="#1-极限" class="headerlink" title="1 极限"></a>1 极限</h3><p>微积分，既是一种工具也思想。方法虽看似繁多其实背后蕴含的道理浅显而直观莫要迷失于众多的题目中，关键在于体会方法背后的想。</p>
+<h4 id="1-1-认识极限"><a href="#1-1-认识极限" class="headerlink" title="1.1 认识极限"></a>1.1 认识极限</h4><center><img src="https://pic.imgdb.cn/item/62b6d79a0947543129609682.jpg" style="zoom:50%"></center>
+
+<p>极限式如$\lim\limits<em>{x \to a}f(x)$、$\lim\limits</em>{x \to \infty}f(x)$的含义是：当$x$向某个值(或无穷远)处靠近时，$f(x)$向那个值靠近。例如：$\lim\limits_{x \to 2}(x+3) = 5$。</p>
+<h4 id="1-2-理解极限"><a href="#1-2-理解极限" class="headerlink" title="1.2 理解极限"></a>1.2 理解极限</h4><p>极限过程是一个动态的过程，不是一个“死”的数字。而至于“$\lim$”符号，是解算出接近的目标。要体会“$x \to a$”和“$x = a$”之间的区别。当$x \to a$时，$(x - a)$是无穷小的，所以我们研究极限时，大部分时候都是在和“无穷小”以及“无穷大”打交道。</p>
+<h4 id="1-3-求函数极限"><a href="#1-3-求函数极限" class="headerlink" title="1.3 求函数极限"></a>1.3 求函数极限</h4><h5 id="1-3-1-求解函数极限"><a href="#1-3-1-求解函数极限" class="headerlink" title="1.3.1 求解函数极限"></a>1.3.1 求解函数极限</h5><ul>
+<li>第一步，代入：将自变量极限值代入极限表达式，如果不能得到结果，继续下一步；<ul>
+<li>代入时，需要注意三点问题：① 无穷大与无穷小之间呈倒数关系；② 无穷小×有界函数=无穷小；③ 需要注意极限的方向性问题，区分“$x \to +\infty$”和“$x \to -\infty$”</li>
+</ul>
+</li>
+<li>第二步，分类：判断极限类型属于“$\dfrac{0}{0}$”、“$\dfrac{\infty}{\infty}$”、“$1^{\infty}$”、“${\infty} - {\infty}$”、“$0 \cdot \infty$”、“$\infty^0$”中的哪一种，重点是识别出式中的无穷小和无穷大成分；</li>
+<li>第三步，求解：根据极限类型，选择分别适用的求解方法，进行化简或者变形。</li>
+</ul>
+<h5 id="1-3-2-无穷小相关的极限问题"><a href="#1-3-2-无穷小相关的极限问题" class="headerlink" title="1.3.2 无穷小相关的极限问题"></a>1.3.2 无穷小相关的极限问题</h5><p>对于无穷小相关的极限，可采用的方法有：</p>
+<ul>
+<li>1° 化简：消除“致0 因子”；</li>
+<li>2° 等价无穷小代换；</li>
+<li>3° 洛必达法则。</li>
+</ul>
+<p>常用的等价无穷小代换：当$x \to 0$时，下列表格中左侧的无穷小量可以用右侧的替换：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">原函数</th>
+<th style="text-align:center">等价无穷小</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">$\sin x$</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\tan x$</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\arcsin x$</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\arctan x$</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$\ln(1 + x)$</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$e^x - 1$</td>
+<td style="text-align:center">$x$</td>
+</tr>
+<tr>
+<td style="text-align:center">$[(1+x)^a - 1]$</td>
+<td style="text-align:center">$ax$</td>
+</tr>
+<tr>
+<td style="text-align:center">$1-\cos x$</td>
+<td style="text-align:center">$\dfrac{1}{2}x^2$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>Tips：函数$f(x)$如果过原点，即$f(0)=0$，而且导数有$f’(0) = a$，则在$x \to a$时， 可以和$ax$等价无穷小代换(<strong>泰勒展开</strong>)。</p>
+</blockquote>
+<p>使用等价无穷小代换时，需要关注以下2个细节：</p>
+<ul>
+<li>要学会“抓住”无穷小，如果$x \to 0$，则相应的$ax$也是无穷小。如果$x \to a(a \neq 0)$，此时就要从式子中凑出$(x - a)$这个量；</li>
+<li>两个无穷小量相加减时，不可将其中任意一个部分进行代换。</li>
+</ul>
+<h5 id="1-3-3-无穷大相关的极限问题"><a href="#1-3-3-无穷大相关的极限问题" class="headerlink" title="1.3.3 无穷大相关的极限问题"></a>1.3.3 无穷大相关的极限问题</h5><p>解决无穷大类型问题的方法：“抓大头”的思想理念，抓住主要矛盾，忽略次要成分：</p>
+<script type="math/tex; mode=display">
+\ln x \ll x^{a} \ll x^{b} \ll c^{x} \ll d^{x} \ll x ! \ll x^{x} \quad(x \rightarrow \infty, 0<a<b, 1<c<d)</script><p>当两个相差无穷倍的量相进行加减时，这时候我们眼里可以忽略相对较小的一个量。在具体操作上，应该将最大的成分提括号外，分子分母同时除掉即可。</p>
+<h5 id="1-3-4-极限运算法则"><a href="#1-3-4-极限运算法则" class="headerlink" title="1.3.4 极限运算法则"></a>1.3.4 极限运算法则</h5><p>如果函数$u, v极限存在，则：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\lim (u \pm v)=\lim u \pm \lim v \\
+&\lim u \cdot v=\lim u \cdot \lim v \\
+&\lim \frac{u}{v}=\frac{\lim u}{\lim v}(v \neq 0)
+\end{aligned}</script><p>在处理极限的时候，我们可以选择将极限进行部分地运算。但要尤其注意前提条件！</p>
+<h3 id="2-函数的连续性与间断点"><a href="#2-函数的连续性与间断点" class="headerlink" title="2 函数的连续性与间断点"></a>2 函数的连续性与间断点</h3><p>函数连续性应满足条件：$\lim\limits_{x \to a}f(x) = f(a)$(着重体会$x \to a$和$x = a$的区别)该条件意味着函数图像应该是一条连续的线条，不会有断点。我们接触到的函数，断点往往会出现在这两种地方：分段函数的分界点、函数定义域的边界。比如下面这种情况：</p>
+<center><img src="https://pic.imgdb.cn/item/62b6e1bd09475431296ebdcb.jpg" style="zoom:50%"></center>
+
+<p>通过计算$\lim\limits_{x \to a}f(x)$后与$f(a)$作比较，就可以得到函数在$x = a$处的连续或间断情况。函数间断点有以下四种情形。</p>
+<center><img src="https://pic.imgdb.cn/item/62b6e25b09475431296f8932.jpg" style="zoom:50%"></center>
+
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220625182522557-749084244.png" style="zoom:50%"></center>
+
+<p><strong>总结：</strong></p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220625183842878-2103553256.png" style="zoom:50%"></center>
+
+<h3 id="3-微分"><a href="#3-微分" class="headerlink" title="3 微分"></a>3 微分</h3><h4 id="3-1-导数的定义"><a href="#3-1-导数的定义" class="headerlink" title="3.1 导数的定义"></a>3.1 导数的定义</h4><p>直线的斜率$k$：</p>
+<p>(1) $y$随$x$变化的方向与快慢：$x$每增加一个单位，$y$的变化量为$k$；<br>(2) 反映出直线的坡度：直线与$x$轴正方向夹角为$\alpha$，$k = \tan \alpha$。</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626114511281-1956701874.png" style="zoom:40%"></center>
+
+<p>如何研究曲线中$y$随$x$变化的快慢？</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626114613814-183584945.png" style="zoom:30%"></center>
+
+<p>导数反映出因变量随着自变量增长而变化的快慢。导数定义如下：</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626114659129-1208027593.png" style="zoom:80%"></center>
+
+<p>导数也被叫做“微商”，可以理解为两个无穷小量之间的比值。</p>
+<h4 id="3-2-导数的基本运算"><a href="#3-2-导数的基本运算" class="headerlink" title="3.2 导数的基本运算"></a>3.2 导数的基本运算</h4><h5 id="3-2-1-常用函数的导数"><a href="#3-2-1-常用函数的导数" class="headerlink" title="3.2.1 常用函数的导数"></a>3.2.1 常用函数的导数</h5><script type="math/tex; mode=display">
+\begin{array}{ll}
+(c)^{\prime}=0 \quad(c \text { 为常数 }) & \left(x^{\alpha}\right)^{\prime}=\alpha x^{\alpha-1} \\
+(\sin x)^{\prime}=\cos x & (\cos x)^{\prime}=-\sin x \\
+(\tan x)^{\prime}=\sec ^{2} x & (\cot x)^{\prime}=-\csc ^{2} x \\
+(\ln x)^{\prime}=\frac{1}{x} & \left(\log _{a} x\right)^{\prime}=\frac{1}{x \ln a} \quad(a>0, a \neq 1) \\
+\left(\mathrm{e}^{x}\right)^{\prime}=\mathrm{e}^{x} & \left(a^{x}\right)^{\prime}=a^{x} \ln a \quad(a>0) \\
+(\arcsin x)^{\prime}=\frac{1}{\sqrt{1-x^{2}}} & (\arctan x)^{\prime}=\frac{1}{1+x^{2}}
+\end{array}</script><h5 id="3-2-2-导数四则运算法则"><a href="#3-2-2-导数四则运算法则" class="headerlink" title="3.2.2 导数四则运算法则"></a>3.2.2 导数四则运算法则</h5><script type="math/tex; mode=display">
+\begin{aligned}
+&{[f(x) \pm g(x)]^{\prime}=f^{\prime}(x) \pm g^{\prime}(x)} \\
+&{[f(x) \cdot g(x)]^{\prime}=f^{\prime}(x) \cdot g(x)+f(x) \cdot g^{\prime}(x)} \\
+&{\left[\frac{f(x)}{g(x)}\right]^{\prime}=\frac{f^{\prime}(x) g(x)-f(x) g^{\prime}(x)}{g^{2}(x)} \quad(g(x) \neq 0)}
+\end{aligned}</script><h5 id="3-2-3-复合函数求导"><a href="#3-2-3-复合函数求导" class="headerlink" title="3.2.3 复合函数求导"></a>3.2.3 复合函数求导</h5><script type="math/tex; mode=display">
+[ f(g(x))]' = f'(g(x)) \cdot g'(x)</script><h5 id="3-2-4-求导链式法则"><a href="#3-2-4-求导链式法则" class="headerlink" title="3.2.4 求导链式法则"></a>3.2.4 求导链式法则</h5><p>即设置中间变量：</p>
+<script type="math/tex; mode=display">
+\dfrac{\text{d}y}{\text{d}x} = \dfrac{\text{d}y}{\text{d}u} \cdot \dfrac{\text{d}u}{\text{d}x}</script><h5 id="3-2-5-莱布尼茨公式"><a href="#3-2-5-莱布尼茨公式" class="headerlink" title="3.2.5 莱布尼茨公式"></a>3.2.5 莱布尼茨公式</h5><p>设$u = u(x)$、$v = v(x)$分别是关于$x$的函数，那么：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& (uv)' = u'v + uv' \\
+& (uv)'' = (u'v + uv')' = (u'v)' + (uv')' = u''v + 2u'v' + uv''
+\end{aligned}</script><p>如果函数$u = u(x)$、$v = v(x)$分别具有$n$阶导数，那么两者乘积的$n$阶导数为如下形式：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+{[u(x) \cdot v(x)]^{(n)} } &=C_{n}^{0} u^{(n)} v+C_{n}^{1} u^{(n-1)} v^{\prime}+C_{n}^{2} u^{(n-2)} v^{\prime \prime}+\cdots+C_{n}^{n-1} u^{\prime} v^{(n-1)}+C_{n}^{n} v^{(n)} u \\
+&=\sum_{k=0}^{n} C_{n}^{k} u^{(k)} \cdot v^{(n-k)}
+\end{aligned}</script><p>掌握莱布尼茨公式并不难，它类似于我们高中的“二项式定理”。</p>
+<h5 id="3-2-6-隐函数求导"><a href="#3-2-6-隐函数求导" class="headerlink" title="3.2.6 隐函数求导"></a>3.2.6 隐函数求导</h5><p>隐函数，例如：$y - xe^y = 1$，可以写为$y - xe^y - 1 = 0$，但是无法改写为$y = f(x)$的形式。这时求$y’$，左右两侧同时对$x$求导。注意，有时候我们遇到需要求导的问题，给出的函数并非隐函数的形式，但是转化成隐函数求导反而更简单。</p>
+<h5 id="3-2-7-参数方程求导"><a href="#3-2-7-参数方程求导" class="headerlink" title="3.2.7 参数方程求导"></a>3.2.7 参数方程求导</h5><p>形如$\left{\begin{array}{l}y=f(t) \ x=g(t)\end{array}\right.$，如果求$\dfrac{\text{d}y}{\text{d}x}$，则就等于$\dfrac{\text{d}y}{\text{d}x} = \dfrac{\dfrac{\text{d}y}{\text{d}t}}{\dfrac{\text{d}x}{\text{d}t}}$，也就是分别求出$\dfrac{\text{d}f}{\text{d}t}$、$\dfrac{\text{d}g}{\text{d}t}$再相除。</p>
+<h4 id="3-3-泰勒公式"><a href="#3-3-泰勒公式" class="headerlink" title="3.3 泰勒公式"></a>3.3 泰勒公式</h4><h5 id="3-3-1-什么是泰勒公式"><a href="#3-3-1-什么是泰勒公式" class="headerlink" title="3.3.1 什么是泰勒公式"></a>3.3.1 什么是泰勒公式</h5><p>$x$的多项式函数：$y = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n$，$x$的多项式次数越高，对应的曲线形状就越多变。于是我们可以用高次多项式来逼近其他函数，比如三角函数、对数函数、指数函数等等，如下图所示：</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626122151174-193995127.png" style="zoom:50%"></center>
+
+<p>泰勒公式就是把$(n + 1)$阶可导的函数写成下列格式：</p>
+<script type="math/tex; mode=display">
+f(x)=f\left(x_{0}\right)+\frac{f^{\prime}\left(x_{0}\right)}{1 !}\left(x-x_{0}\right)+\frac{f^{\prime \prime}\left(x_{0}\right)}{2 !}\left(x-x_{0}\right)^{2}+\cdots+\frac{f^{(n)}\left(x_{0}\right)}{n !}\left(x-x_{0}\right)^{n}+R_{n}(x)</script><p>我们需要把握下列常见函数的泰勒展开(麦克劳林展开，佩亚诺余项)形式：</p>
+<script type="math/tex; mode=display">
+\begin{array}{ll}
+\sin x=x-\frac{1}{3 !} x^{3}+\frac{1}{5 !} x^{5}+o\left(x^{5}\right) & \mathrm{e}^{x}=1+\frac{1}{1 !} x+\frac{1}{2 !} x^{2}+\frac{1}{3 !} x^{3}+o\left(x^{3}\right) \\
+\cos x=1-\frac{1}{2 !} x^{2}+\frac{1}{4 !} x^{4}+o\left(x^{4}\right) & \frac{1}{1-x}=1+x+x^{2}+x^{3}+o\left(x^{3}\right) \\
+\tan x=x+\frac{1}{3} x^{3}+\frac{2}{15} x^{5}+o\left(x^{5}\right) & \ln (1+x)=x-\frac{1}{2} x^{2}+\frac{1}{3} x^{3}+o\left(x^{3}\right)
+\end{array}</script><ul>
+<li>泰勒公式的要点：<br>(1) 上述是在$x = 0$附近进行的近似，当$x \to 0$时，余项可以近似舍弃；<br>(2) $\dfrac{1}{1-x}=1+x+x^{2}+x^{3}+o(x^3)$可以用等比数列从右向左推导。<br>(3) 利用导数、原函数的关系，就可以辅助记忆，例如$\ln(1+x)$泰勒公式可以用$\dfrac{1}{1-x}$来获得；<br>(4) 泰勒公式可以将复杂的函数计算化简成为加减乘除；<br>(5) 泰勒公式具有拓展性，当$x \to 0$时：$\sin x$、$\ln(1+x)$、$5x$也是无穷小量，在泰勒公式左右两侧<br>对进行替换，例如：<script type="math/tex; mode=display">
+\dfrac{1}{1-5 x}=1+5 x+25 x^{2}+125 x^{3}+\cdots</script></li>
+</ul>
+<h5 id="3-3-2-泰勒公式的应用"><a href="#3-3-2-泰勒公式的应用" class="headerlink" title="3.3.2 泰勒公式的应用"></a>3.3.2 泰勒公式的应用</h5><p>(1) 利用泰勒公式求极限</p>
+<p>泰勒公式可以看作是超级版本的无穷小代换，它不会受到加减法不能换的限制。</p>
+<script type="math/tex; mode=display">
+\lim _{x \rightarrow 0} \frac{\tan x-\sin x}{x^{3}}=\lim _{x \rightarrow 0} \frac{\left(x+\frac{1}{3} x^{3}\right)-\left(x-\frac{1}{6} x^{3}\right)}{x^{3}}=\lim _{x \rightarrow 0} \frac{\frac{1}{2} x^{3}}{x^{3}}=\frac{1}{2}</script><p>(2) 判断无穷小的阶数</p>
+<p>$x \to 0$时，判断下式的无穷小阶数(答案是3阶)：</p>
+<script type="math/tex; mode=display">
+\frac{1}{1-x}-\mathrm{e}^{x}+\cos x-1=\left(1+x+x^{2}+x^{3}\right)-\left(1+x+\frac{1}{2} x^{2}+\frac{1}{6} x^{3}\right)+\left(1-\frac{x^{2}}{2}+\frac{x^{4}}{24}\right)-1=\frac{5}{6} x^{3}</script><p>(3) 求高阶导数</p>
+<h3 id="4-积分部分"><a href="#4-积分部分" class="headerlink" title="4 积分部分"></a>4 积分部分</h3><h4 id="4-1-积分的基本概念：定积分和不定积分"><a href="#4-1-积分的基本概念：定积分和不定积分" class="headerlink" title="4.1 积分的基本概念：定积分和不定积分"></a>4.1 积分的基本概念：定积分和不定积分</h4><center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626161141811-1931427592.png" style="zoom:40%"></center>
+
+<p>例如求$y = e^x$在$x \in [0, 1]$区间内的函数区域面积，则有：</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626161325220-1535774144.png" style="zoom:40%"></center>
+
+<p>假设把$0 \sim 1$区间切割为$n$份，每个小矩形的宽度为$\dfrac{1}{n}$，则总面积有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+S &=\lim _{n \rightarrow \infty} \frac{1}{n} \mathrm{e}^{\frac{1}{n}}+\frac{1}{n} \mathrm{e}^{\frac{2}{n}}+\frac{1}{n} \mathrm{e}^{\frac{3}{n}}+\cdots+\frac{1}{n} \mathrm{e}^{\frac{n}{n}} \\
+&=\lim _{n \rightarrow \infty} \frac{1}{n}\left(\mathrm{e}^{\frac{1}{n}}+\mathrm{e}^{\frac{2}{n}}+\mathrm{e}^{\frac{3}{n}}+\cdots+\mathrm{e}^{\frac{n}{n}}\right) \\
+&=\lim _{n \rightarrow \infty} \frac{1}{n} \frac{\mathrm{e}^{\frac{1}{n}}\left[1-\left(\mathrm{e}^{\frac{1}{n}}\right)^{n}\right]}{1-\mathrm{e}^{\frac{1}{n}}}=\mathrm{e}-1
+\end{aligned}</script><p>微积分最为核心的公式 —— <strong><font color="red">牛顿-莱布尼茨公式</font></strong>：</p>
+<script type="math/tex; mode=display">
+\int_a^b f(x) \text{d}x = F(b) - F(a)</script><p>其中函数$F(x)$与函数$f(x)$之间存在关系：$f(x) = F’(x)$，则称函数$F(x)$为函数$f(x)$的“原函数”，记<br>为$\int f(x) \text{d}x = F(x)$，求函数$f(x)$的不定积分就是求函数的原函数$F(x)$。</p>
+<h4 id="4-2-常见函数积分"><a href="#4-2-常见函数积分" class="headerlink" title="4.2 常见函数积分"></a>4.2 常见函数积分</h4><script type="math/tex; mode=display">
+\begin{array}{ll}
+\int k \mathrm{~d} x=k x+C & \int \cos x \mathrm{~d} x=\sin x+C \\
+\int x^{a} \mathrm{~d} x=\frac{x^{a+1}}{a+1}+C & \int \sin x \mathrm{~d} x=-\cos x+C \\
+\int \frac{1}{x} \mathrm{~d} x=\ln |x|+C & \int \frac{1}{\cos ^{2} x} \mathrm{~d} x=\int \sec ^{2} x \mathrm{~d} x=\tan x+C \\
+\int \frac{1}{1+x^{2}} \mathrm{~d} x=\arctan x+C & \int \frac{1}{\sin ^{2} x} \mathrm{~d} x=\int \csc ^{2} x \mathrm{~d} x=-\cot x+C \\
+\int \frac{1}{\sqrt{1-x^{2}}} \mathrm{~d} x=\arcsin x+C & \int \mathrm{e}^{x} \mathrm{~d} x=\mathrm{e}^{x}+C \\
+& \int a^{x} \mathrm{~d} x=\frac{a^{x}}{\ln a}+C
+\end{array}</script><p>需要注意的是，求不定积分一定要在表达式结尾“$+C$”，因为同一个函数的原函数不仅有一个，它们之间相差一个常数。</p>
+<h4 id="4-3-积分运算法则"><a href="#4-3-积分运算法则" class="headerlink" title="4.3 积分运算法则"></a>4.3 积分运算法则</h4><script type="math/tex; mode=display">
+\int[f(x) \pm g(x)]\text{d}x = \int f(x)\text{d}x \pm \int  g(x)\text{d}x</script><script type="math/tex; mode=display">
+\int kf(x) \text{d}x = k\int f(x)\text{d}x</script><h4 id="4-4-常见求积分类型"><a href="#4-4-常见求积分类型" class="headerlink" title="4.4 常见求积分类型"></a>4.4 常见求积分类型</h4><h5 id="4-4-1-积分的线性变换"><a href="#4-4-1-积分的线性变换" class="headerlink" title="4.4.1 积分的线性变换"></a>4.4.1 积分的线性变换</h5><p>被积函数是$(ax+b)$的形式时，可以采用令$(ax+b=t)$的形式，将其换成简单的函数形式。</p>
+<h5 id="4-4-2-凑微分法：要求熟练掌握各类导数"><a href="#4-4-2-凑微分法：要求熟练掌握各类导数" class="headerlink" title="4.4.2 凑微分法：要求熟练掌握各类导数"></a>4.4.2 凑微分法：要求熟练掌握各类导数</h5><p>三角积分函数中的凑微分法小技巧，若积分式$R(\sin x, \cos x)$存在下列条件：</p>
+<ul>
+<li>$R(-\sin x, \cos x) = -R(\sin x, \cos x)$，则要凑$\sin x\text{d}x = -\text{d} \cos x$</li>
+<li>$R(\sin x, -\cos x) = -R(\sin x, \cos x)$，则要凑$\cos x\text{d}x = \text{d} \sin x$</li>
+<li>$R(-\sin x, -\cos x) = R(\sin x, \cos x)$，则要凑$\sec^2 x\text{d}x = \text{d} \tan x$</li>
+</ul>
+<h5 id="4-4-3-根式-三角变换"><a href="#4-4-3-根式-三角变换" class="headerlink" title="4.4.3 根式/三角变换"></a>4.4.3 根式/三角变换</h5><p><strong>换元目标：消除根号。</strong></p>
+<ul>
+<li>第一类：根号内为$x$的一次多项式$\sqrt{ax+b}$，令$\sqrt{ax+b} = t$；</li>
+<li>第二类：根号内为$x$的二次多项式：</li>
+</ul>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626171536757-902151703.png" style="zoom:50%"></center>
+
+<h5 id="4-4-4-分部积分法"><a href="#4-4-4-分部积分法" class="headerlink" title="4.4.4 分部积分法"></a>4.4.4 分部积分法</h5><p>引入例题：求下面图示阴影区域的面积：</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626171659484-588654276.png" style="zoom:50%"></center>
+
+<p>由于$y = \ln x, x = e^y$，所以面积有：</p>
+<script type="math/tex; mode=display">
+\int_{\frac{1}{2}}^2 x \text{d}y = \int_{\frac{1}{2}}^2 e^y \text{d}y = e^2 - e^{\frac{1}{2}}</script><p>由此可以推导得到分部积分的原理与公式：</p>
+<script type="math/tex; mode=display">
+\int u \cdot v' \text{d}x = \int u \text{d}v = uv - \int v \text{d}u = uv - \int v u' \text{d}x</script><center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626172600853-1654642365.png" style="zoom:50%"></center>
+
+<p>被积函数为两种不同类型函数相乘时，一般用分部积分法。<br>记住<strong>口诀</strong>：反对幂指三(反三角函数、对数函数、幂函数、指数函数、三角函数)。<br>口诀中，越是靠后类型的函数，越优先与“$\text{d}x$”结合。</p>
+<h5 id="4-4-5-变限积分"><a href="#4-4-5-变限积分" class="headerlink" title="4.4.5 变限积分"></a>4.4.5 变限积分</h5><p>对于变上限积分函数，我们常用到的是它的导数：</p>
+<script type="math/tex; mode=display">
+(\int_0^x f(t) \text{d}t)' = f(x)</script><p>而这种题目有相应的变体，我们也需要掌握：</p>
+<ul>
+<li>$(\int_0^{g(x)} f(t) \text{d}t)’ = f(g(x)) \cdot g’(x)$，变化的上限是$g(x)$，利用复合函数求导；</li>
+<li>$(\int<em>{a(x)}^{b(x)} f(t) \text{d}t)’ = (\int</em>{0}^{b(x)} f(t) \text{d}t - \int_{0}^{a(x)} f(t) \text{d}t)’$，上下限中均含有变量；</li>
+<li>$(\int<em>{0}^{x} x f(t) \mathrm{d} t)^{\prime}=(x \int</em>{0}^{x} f(t) \mathrm{d} t)^{\prime}=x f(x)+\int_{0}^{x} f(t) \mathrm{d} t$，被积表达式中有可提取的$x$；</li>
+<li>$(\int<em>{0}^{x} f(x t) \mathrm{d} t)^{\prime}=(\int</em>{0}^{x^{2}} \frac{f(u)}{x} \mathrm{~d} u)^{\prime}=(\frac{1}{x} \int_{0}^{x^{2}} f(u) \mathrm{d} u)$，被积函数中$x$和$t$结合。</li>
+</ul>
+<h4 id="4-5-定积分运算"><a href="#4-5-定积分运算" class="headerlink" title="4.5 定积分运算"></a>4.5 定积分运算</h4><p>定积分与不定积分类似，也需要求函数的原函数。但是不同的是定积分指定了上、下限，在求得原函数后需要代入、作差，例如$\int_{a}^{b} f(x) \text{d}x = F(b) - F(a) $。</p>
+<p>相比于不定积分，定积分还需要格外注意在引用新字母进行换元方法时，<strong>上下限也需要更换</strong>。</p>
+<h3 id="5-中值定理"><a href="#5-中值定理" class="headerlink" title="5 中值定理"></a>5 中值定理</h3><center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626182650625-2102361681.png" style="zoom:70%"></center>
+
+<h4 id="5-1-罗尔中值定理证明等式"><a href="#5-1-罗尔中值定理证明等式" class="headerlink" title="5.1 罗尔中值定理证明等式"></a>5.1 罗尔中值定理证明等式</h4><p>从图像上理解罗尔/拉格朗日中值定理：</p>
+<center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626182831439-69557075.png" style="zoom:60%"></center>
+
+<p><strong>第一步</strong>：将需要证明的等式中的“$\xi$”换为“x”，将右侧项移至左侧，设左侧的内容为$g(x)$，则原题需要证明的结论转化为：需要证明$g(x) = 0$在$(0,a)$内有实根；<br><strong>第二步</strong>：需要构造辅助函数$G(x)$，满足$G’(x) = g(x)$，或者$G’(x)$中含有$g(x)$；<br><strong>第三步</strong>：结合题目给出的其他条件，在区间$[0, a]$上找到两点，使辅助函数$G(x)$在这两点处函数值相等，结合罗尔定理，证明结论。</p>
+<p>此类题目的难点无非两点：构造辅助函数，证明两处值相等。</p>
+<h4 id="5-2-数列极限"><a href="#5-2-数列极限" class="headerlink" title="5.2 数列极限"></a>5.2 数列极限</h4><h5 id="5-2-1-直接化简法"><a href="#5-2-1-直接化简法" class="headerlink" title="5.2.1 直接化简法"></a>5.2.1 直接化简法</h5><h5 id="5-2-2-利用夹逼准则-缩放"><a href="#5-2-2-利用夹逼准则-缩放" class="headerlink" title="5.2.2 利用夹逼准则(缩放)"></a>5.2.2 利用夹逼准则(缩放)</h5><h5 id="5-2-3-转化为定积分"><a href="#5-2-3-转化为定积分" class="headerlink" title="5.2.3 转化为定积分"></a>5.2.3 转化为定积分</h5><hr>
+<p>导数dy/dx理解(除法？)<br>泰勒展开<br>高阶无穷小削去</p>
+<hr>
+<p>本文参考资料：<br>课程链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1j44y1E7ot">https://www.bilibili.com/video/BV1j44y1E7ot</a><br>PDF资料链接：<a target="_blank" rel="noopener" href="https://pan.baidu.com/s/1ZD6Qj9R0VycOF4S0SMYY1w">https://pan.baidu.com/s/1ZD6Qj9R0VycOF4S0SMYY1w</a> 提取码：gb6s</p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/06/26/Advanced-mathematics1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%AC%E8%B4%A8%E9%97%AE%E9%A2%98/" rel="tag">本质问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%AB%98%E6%95%B0/" rel="tag">高数</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/06/26/Advanced-mathematics2/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            高等数学2
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/06/11/leisure-activities/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">休闲事情</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

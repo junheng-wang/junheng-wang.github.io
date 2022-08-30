@@ -15,7 +15,7 @@
         name="viewport"
         content="width=device-width, initial-scale=1, maximum-scale=1"
       />
-      <title>Basic-concepts-of-radar |  Wang Junheng</title>
+      <title>雷达基础概念 |  Wang Junheng</title>
   <meta name="generator" content="hexo-theme-ayer">
       
       <link rel="shortcut icon" href="/favicon.ico" />
@@ -69,7 +69,7 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Basic-concepts-of-radar
+  雷达基础概念
 </h1>
  
 
@@ -81,7 +81,7 @@
   <time datetime="2022-01-25T12:49:38.000Z" itemprop="datePublished">2022-01-25</time>
 </a> 
   <div class="article-category">
-    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">雷达信号处理</a>
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E4%B8%8E%E9%9B%B7%E8%BE%BE/">信号处理与雷达</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E4%B8%8E%E9%9B%B7%E8%BE%BE/%E9%9B%B7%E8%BE%BE%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/">雷达信号处理</a>
   </div>
   
 <div class="word_count">
@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">104</span>
+            <span class="post-count">850</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -117,6 +117,31 @@
 <p>[1-1]TI毫米波雷达系列（三）：调频连续波雷达回波信号3DFFT处理原理（测距、测速、测角）<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35605018/article/details/108816709">https://blog.csdn.net/qq_35605018/article/details/108816709</a></p>
 <p>[1-2]距离-多普勒谱(RD谱)之二：距离相关 <a target="_blank" rel="noopener" href="https://blog.csdn.net/mddh_123/article/details/109152790">https://blog.csdn.net/mddh_123/article/details/109152790</a></p>
 <p>[1-3]干货 | 利用MATLAB实现FMCW雷达的距离多普勒估计 <a target="_blank" rel="noopener" href="https://www.jianshu.com/p/d2d865da6dce">https://www.jianshu.com/p/d2d865da6dce</a></p>
+<hr>
+<h3 id="二、一维距离像和距离-多普勒图"><a href="#二、一维距离像和距离-多普勒图" class="headerlink" title="二、一维距离像和距离-多普勒图"></a>二、一维距离像和距离-多普勒图</h3><p>毫米波雷达一般在每个脉冲周期发射调频连续波，在接收端对回波进行混频，最终得到的是多个目标回波的叠加，进而<strong>对这个一维回波信号进行傅里叶变化</strong>，得到如下形式的一维回波像，称为<font color="red"><strong>一维距离像</strong></font>，其体现为多个峰值的曲线形式。每个谱峰一般代表一个强目标的存在，其强度和目标的回波强度正相关，而位置正比于目标相对雷达的距离。而谱峰的尖锐程度则取决于雷达的距离分辨能力——<strong>距离分辨率越低（即分辨力越高），谱峰越尖锐</strong>。 </p>
+<p><img src="https://pic.imgdb.cn/item/623c21c827f86abb2acae728.jpg" style="zoom:70%"></p>
+<p>进一步地，对多个连续发射的回波所得到的<strong>一维距离像在<font color="red">另一个维度进行傅里叶变换</font></strong>，最终可以得到观测空间中的目标在<strong>距离-多普勒速度图像上的分布</strong>，如下图所示，一个维度表示距离，另一个维度表示速度，每个目标点在“距离-多普勒图（Range-Doppler Map，RDM）”上呈现为一个亮点，<strong>这个亮点的位置体现了目标自身的距离和速度，强度体现了目标的回波强度</strong>。 </p>
+<p><img src="https://pic.imgdb.cn/item/623c238b27f86abb2ad09917.jpg" style="zoom:80%"></p>
+<p>从离散单元的形式看，RDM即如下的形式： </p>
+<p><img src="https://pic.imgdb.cn/item/623c26b227f86abb2adb5706.jpg" style="zoom:80%"></p>
+<p>实际上，考虑噪声的影响，并且会采用加窗的形式抑制旁瓣（图2中的十字阴影），实际获取的的RDM是如下的形式，特别的，在接近距离=0的区域，由于DCDC抑制滤波器的存在，其整体噪底功率是低于其他区域的。 </p>
+<p><img src="https://pic.imgdb.cn/item/623c27fe27f86abb2adf5a2c.jpg" style="zoom:60%"></p>
+<p><strong>毫米波雷达的检测</strong></p>
+<p>在获取了上述RDM后，信号处理的下一步是检测，通常的算法是恒虚警（CFAR）检测，即自适应的估计每个点的周围噪底，再将这个点的强度和周围点的强度进行比较，最终确定该点是否是目标。如下图所示，图5为RDM，经过检测后，输出了每个点是否为目标的布尔值图像图6</p>
+<p><img src="https://pic.imgdb.cn/item/623c284b27f86abb2ae05a10.jpg" style="zoom:70%"></p>
+<p><img src="https://pic.imgdb.cn/item/623c288327f86abb2ae1142c.jpg" style="zoom:70%"></p>
+<p>基于上述检测原理可以看出，一个目标被有效检测的条件是：</p>
+<ul>
+<li>目标的回波强度大于基本的噪底；</li>
+<li>目标在RDM上呈现局部峰值的形式；</li>
+<li>目标的回波强度大于周围邻近区域的回波强度的均值。</li>
+</ul>
+<p>下面给出了一个车辆的RDM，其中标黑的部分表示主车体，还有一些横向的扩展局部极值是车轮微动引起的微多普勒目标点。</p>
+<p><img src="https://pic.imgdb.cn/item/623c28cf27f86abb2ae20334.jpg" style="zoom:70%"></p>
+<p>参考链接：</p>
+<p>[2-1]谈谈毫米波雷达的点云形式与分辨能力 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/386615052">https://zhuanlan.zhihu.com/p/386615052</a> </p>
+<p>[2-2]<a target="_blank" rel="noopener" href="https://training.ti.com/sites/default/files/docs/mmwaveSensing-FMCW-offlineviewing_4.pdf">https://training.ti.com/sites/default/files/docs/mmwaveSensing-FMCW-offlineviewing_4.pdf</a></p>
+<p>[2-3]TI的单芯片77GHz毫米波(mmWave)雷达解决方案 <a target="_blank" rel="noopener" href="https://www.sohu.com/a/307927764_695278">https://www.sohu.com/a/307927764_695278</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
@@ -215,8 +240,8 @@
 <script>
   new Valine({
     el: "#vcomments",
-    app_id: "",
-    app_key: "",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
     path: window.location.pathname,
     avatar: "monsterid",
     placeholder: "给我的文章加点评论吧~",
@@ -635,6 +660,22 @@
     
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 
 </html>

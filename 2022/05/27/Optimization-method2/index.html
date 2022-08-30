@@ -1,0 +1,1299 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>最优化方法_part2 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Optimization-method2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  最优化方法_part2
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/05/27/Optimization-method2/" class="article-date">
+  <time datetime="2022-05-27T01:59:29.000Z" itemprop="datePublished">2022-05-27</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">数学基础</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/%E6%9C%80%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/">最优化方法</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">41 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="第五讲-无约束优化问题（壹）"><a href="#第五讲-无约束优化问题（壹）" class="headerlink" title="第五讲 无约束优化问题（壹）"></a>第五讲 无约束优化问题（壹）</h3><h4 id="5-1-无约束优化问题"><a href="#5-1-无约束优化问题" class="headerlink" title="5.1 无约束优化问题"></a>5.1 无约束优化问题</h4><h5 id="一-无约束优化问题：-min-f-boldsymbol-x"><a href="#一-无约束优化问题：-min-f-boldsymbol-x" class="headerlink" title="(一) 无约束优化问题：$ \min f(\boldsymbol x)$"></a>(一) 无约束优化问题：$ \min f(\boldsymbol x)$</h5><ul>
+<li>最小二乘问题：<script type="math/tex">\min \| \boldsymbol{Ax-b} \|</script>；</li>
+<li>采用适当的方法可将约束优化问题转换为无约束优化问题；</li>
+<li>最优解的定义：<ul>
+<li>局部最优解<script type="math/tex">\overline{\boldsymbol x}</script>：<script type="math/tex">\forall \boldsymbol x \in \boldsymbol N_{\epsilon}(\overline{\boldsymbol x}), f({\boldsymbol x}) \geq f(\overline{\boldsymbol x})</script></li>
+<li>全局最优解<script type="math/tex">\boldsymbol x^*</script>：<script type="math/tex">\forall \boldsymbol x \in \mathbb{R}^n, f({\boldsymbol x}) \geq f(\boldsymbol x^*)</script></li>
+<li>严格局部/全局最优解：即上面式子提到的<script type="math/tex">\geq \to ></script></li>
+</ul>
+</li>
+</ul>
+<h5 id="二-无约束优化问题最优性条件"><a href="#二-无约束优化问题最优性条件" class="headerlink" title="(二) 无约束优化问题最优性条件"></a>(二) 无约束优化问题最优性条件</h5><p>考虑无约束优化问题：<script type="math/tex">\min f(\boldsymbol x)</script>：</p>
+<ul>
+<li>若<script type="math/tex">f(\boldsymbol x)</script>为凸函数，则<script type="math/tex">\boldsymbol x^*</script>是最优解等级于<script type="math/tex">\triangledown f(\boldsymbol x^*) = \boldsymbol 0</script></li>
+<li>若<script type="math/tex">f(\boldsymbol x)​</script>为一般函数(即不一定是凸函数)：<ul>
+<li>必要条件：若<script type="math/tex">\boldsymbol x^*</script>是最优解，则<script type="math/tex">\triangledown f(\boldsymbol x^*) = \boldsymbol 0</script>；<script type="math/tex">\triangledown^2 f(\boldsymbol x^*) \succeq  \boldsymbol 0, (即黑塞矩阵半正定)</script><ul>
+<li>上面两条分别对应<strong>“一阶必要条件”</strong>、<strong>“二阶必要条件”</strong></li>
+<li><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/370959560">泰勒展开形式</a></li>
+</ul>
+</li>
+<li>充分条件：若<script type="math/tex">\triangledown f(\boldsymbol x^*) = \boldsymbol 0</script>且<script type="math/tex">\triangledown^2 f(\boldsymbol x^*) \succ \boldsymbol 0, (即黑塞矩阵半正定)</script>，则<script type="math/tex">\boldsymbol x^*</script>是<strong>严格最优解</strong>(局部？)</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>修改：判定(半)正定矩阵的特殊大于(等于)简写符号为：<script type="math/tex">\succ, \succeq</script>，并不是<script type="math/tex">>, \geq</script></p>
+</blockquote>
+<h4 id="5-2-无约束优化算法概要"><a href="#5-2-无约束优化算法概要" class="headerlink" title="5.2 无约束优化算法概要"></a>5.2 无约束优化算法概要</h4><h5 id="一-迭代下降算法"><a href="#一-迭代下降算法" class="headerlink" title="(一) 迭代下降算法"></a>(一) 迭代下降算法</h5><p>给定初始点<script type="math/tex">\boldsymbol x_0</script>，产生点列<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>，并且<script type="math/tex">f(\boldsymbol x_{k+1}) < f(\boldsymbol x_k)</script>。</p>
+<ul>
+<li><p>如何从当前点<script type="math/tex">\boldsymbol x_k</script>得到下一个迭代点<script type="math/tex">\boldsymbol x_{k+1}</script>？</p>
+<ul>
+<li><p><strong>策略1：线搜索方法</strong></p>
+<ul>
+<li>当前点<script type="math/tex">\boldsymbol x_k</script>，从这个点出发，先找到某一个下降方向<script type="math/tex">\boldsymbol d_k</script>(即沿着该方向函数值减小)，然后需要设置在下降方向走多远(步长)<script type="math/tex">\alpha_k</script>，最终，得到下一个点为：<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_{k} + \alpha_k \boldsymbol d_k</script></li>
+</ul>
+</li>
+<li><p><strong>策略2：信赖域方法</strong></p>
+<ul>
+<li><p>该方法有点和线搜索步骤反过来的意味，即先确定好需要前进的区域，然后选择前进的方向。</p>
+</li>
+<li><p>设前进区域设为<script type="math/tex">\boldsymbol p</script>，给定其约束为<script type="math/tex">\Delta</script>，可以表述为</p>
+</li>
+<li><script type="math/tex; mode=display">
+\begin{cases}\text { min } & f(\boldsymbol x_{k} + \boldsymbol p) \\ 
+\text{ s.t.} & \| \boldsymbol p \|_2 \leq \Delta \end{cases}</script><blockquote>
+<p>注意：在线搜索方法中，选择步长是一个<strong>一元/一维</strong>的问题；但信赖域方法是一个<strong>N维</strong>问题($f$可能是一个比较复杂的函数)，因此信赖域方法直接求解复杂度较大。所以信赖域方法在求解时并不是直接求解上述优化，而是需要<strong><font color="blue">先用一个简单的函数$m_k(\boldsymbol p)$对$f$在$\boldsymbol x_k$点进行近似</font></strong>，比如用泰勒展开等方法。</p>
+</blockquote>
+<script type="math/tex; mode=display">
+\begin{cases}\text { min } & m_k(\boldsymbol p) \\ 
+\text{ s.t.} & \| \boldsymbol p \|_2 \leq \Delta \end{cases}</script><blockquote>
+<p>信赖域方法有几点需要考虑：</p>
+<p>(1) <script type="math/tex">\Delta</script>如何确定；(2) <script type="math/tex">m_k(\boldsymbol p)</script>如何选择，误差较大怎么办。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="二-基于线搜索-下降算法基本思路"><a href="#二-基于线搜索-下降算法基本思路" class="headerlink" title="(二) (基于线搜索)下降算法基本思路"></a>(二) (基于线搜索)下降算法基本思路</h5><ul>
+<li>STEP1：给定初始点<script type="math/tex">\boldsymbol x_0, k=0</script></li>
+<li>STEP2：判断<script type="math/tex">\boldsymbol x_k</script>是否满足终止条件；是则终止</li>
+<li>STEP3：否则寻找<script type="math/tex">\boldsymbol x_k</script>处的下降方向<script type="math/tex">\boldsymbol d_k</script></li>
+<li>STEP4：设置步长<script type="math/tex">\alpha_k</script>，使得<script type="math/tex">f(\boldsymbol x_{k} + \alpha_k \boldsymbol d_k) < f(\boldsymbol x_{k+1})</script></li>
+<li>STEP5：令<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_k + \alpha_k \boldsymbol d_k</script>；令<script type="math/tex">k=k+1</script>，转STEP1。</li>
+</ul>
+<p><strong>1 终止条件</strong></p>
+<p>常用的终止条件：</p>
+<script type="math/tex; mode=display">
+\| \triangledown f(\boldsymbol x_k) \|_2 \leq \varepsilon</script><p>其中，<script type="math/tex">\varepsilon</script>理论上取0，但在实际编程中一般取一个量级很小的数。此外要注意对与凸函数，此条件一定是最优解，但是非凸函数该终止条件找到的点就不一定是最优解了。</p>
+<p>其他终止条件：</p>
+<script type="math/tex; mode=display">
+\|\boldsymbol x_k - \boldsymbol x_{k-n} \|_2 \leq \varepsilon</script><script type="math/tex; mode=display">
+f(\boldsymbol x_k) - f(\boldsymbol x_{k-n}) \leq \varepsilon</script><p><strong>2 下降方向</strong></p>
+<p>常用的下降方向——<strong>负梯度方向</strong></p>
+<script type="math/tex; mode=display">
+\boldsymbol d_k = -\triangledown f(\boldsymbol x_k)</script><p>该方法又称<strong>最速下降法</strong>（Steepest descent）是梯度<strong>下降法</strong>的一种更具体实现形式。</p>
+<p>其他下降方向选择：牛顿方向、共轭梯度方向等。</p>
+<p><strong>3 步长</strong></p>
+<p>令<script type="math/tex">\phi(\alpha) :=  f(\boldsymbol x_{k} + \alpha \boldsymbol d_k)</script>，为一元函数。则可建模为：</p>
+<script type="math/tex; mode=display">
+\min \text{ }\phi(\alpha)</script><p>在确定$\alpha_k$的过程称为<strong>一维线搜索</strong>。</p>
+<p><strong>4 点列收敛性/收敛速度</strong></p>
+<p>我们的算法会产生一个点列<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>，若点列不收敛，则可认为该算法不好。另外，收敛速度越快，算法越好。</p>
+<h5 id="三-求解步长——线搜索方法详解"><a href="#三-求解步长——线搜索方法详解" class="headerlink" title="(三) 求解步长——线搜索方法详解"></a>(三) 求解步长——线搜索方法详解</h5><p>求解一元问题：</p>
+<script type="math/tex; mode=display">
+\begin{cases}\text { min } & \phi(\alpha) :=  f(\boldsymbol x_{k} + \alpha \boldsymbol d_k) \\ 
+\text{ s.t.} & \alpha > 0 \end{cases}</script><p>其解记为<script type="math/tex">\alpha^*</script>。</p>
+<p><strong>1 <script type="math/tex">f(\boldsymbol x)</script>为一个简单函数</strong></p>
+<p>若<script type="math/tex">f(\boldsymbol x)</script>为一个简单函数，如二次函数：<script type="math/tex">f(\boldsymbol x) = \dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol H \boldsymbol x + \boldsymbol c^{\mathrm T} \boldsymbol x + b, \text{} \boldsymbol H(黑塞矩阵) \succ 0</script>。黑塞矩阵正定则$f$为凸函数，则<script type="math/tex">\phi(\alpha)</script>也是凸函数。代入可得：</p>
+<script type="math/tex; mode=display">
+\begin{align*}
+  \phi(\alpha) & = \dfrac{1}{2} {(\boldsymbol x_{k} + \alpha \boldsymbol d_k)}^{\mathrm T} \boldsymbol H {(\boldsymbol x_{k} + \alpha \boldsymbol d_k)} + \boldsymbol c^{\mathrm T} {(\boldsymbol x_{k} + \alpha \boldsymbol d_k)} + b \\
+    &= \dfrac{1}{2} (\boldsymbol d_k^{\mathrm T} \boldsymbol H {\boldsymbol d_k})\alpha^2 +(\boldsymbol d_k^{\mathrm T} \boldsymbol H {\boldsymbol x_k} + \boldsymbol c^{\mathrm T}\boldsymbol d_k) \alpha + b \\
+\end{align*}</script><p>对于开口向上的二次函数，求最小，即导数为零即可。</p>
+<script type="math/tex; mode=display">
+\phi(\alpha)' = 0</script><p><strong>2 <script type="math/tex">f(\boldsymbol x)</script>为一个复杂非线性函数</strong></p>
+<p>若<script type="math/tex">f(\boldsymbol x)</script>为一个复杂非线性函数，则<script type="math/tex">\min \phi(\alpha)</script>问题就变得复杂起来了。下面简单介绍几种常见的处理方法：</p>
+<ul>
+<li><p><strong>基于搜索区间的直接搜索法</strong></p>
+<ul>
+<li>首先找到一个搜索区间，想办法缩小搜索区间(注意缩小时不用吧$\alpha^*$扔掉)，缩小到一定程度时，则可将区间内的一点作为最优解的近似。</li>
+<li>搜索区间<script type="math/tex">[ a_0, b_0]</script>：需要包含<script type="math/tex">\alpha^*</script>；<strong>单谷</strong>(即在搜索区间内，函数只有一个下凸，且要注意以下推导都基于此前提)</li>
+<li>方法：选取<script type="math/tex">\lambda, \mu \in (a_0, b_0)</script>且满足<script type="math/tex">\lambda < \mu</script><ul>
+<li>若<script type="math/tex">\phi(\lambda) < \phi(\mu)</script>，则得到新的搜索区间为<script type="math/tex">[ a_1, b_1] = [ a_0, \mu]</script></li>
+<li>若<script type="math/tex">\phi(\lambda) > \phi(\mu)</script>，则得到新的搜索区间为<script type="math/tex">[ a_1, b_1] = [ \lambda, b_0]</script></li>
+</ul>
+</li>
+<li><strong>常见的直接搜索法：</strong><ul>
+<li><strong>均匀搜索法：</strong><ul>
+<li>令<script type="math/tex">\delta = (b_0 - a_0)/N, \alpha_i = a_0 + i \delta, \text{ } i=1,2, \cdots, N-1</script></li>
+<li>比较相邻3个点对应的函数值，若对于某个<script type="math/tex">i</script>，有<script type="math/tex">\phi(\alpha_{i-1})>\phi(\alpha_i)<\phi(\alpha_{i+1})</script>，则<script type="math/tex">\alpha^* \in [\alpha_{i-1}, \alpha_{i+1}]</script>；</li>
+<li>得到新的搜索区间<script type="math/tex">[ a_1, b_1] =  [\alpha_{i-1}, \alpha_{i+1}]</script></li>
+</ul>
+</li>
+<li><strong>黄金区间法(0.618法)：</strong><ul>
+<li>令<script type="math/tex">\tau = (\sqrt 5 - 1)/2 =0.618, \text{ }\lambda = a_0 + (1 - \tau)(b_0-a_0), \text{ } \mu = a_0 + \tau (b_0 - a_0)</script></li>
+<li>若<script type="math/tex">\phi(\lambda) < \phi(\mu)</script>，则<script type="math/tex">\alpha^* \in [a_0, \mu]</script>，即新的搜索区间；</li>
+</ul>
+</li>
+<li><strong>基于导数信息的二分法</strong><ul>
+<li>记区间中点<script type="math/tex">\lambda = \dfrac{b_0+a_0}{2}</script>，计算该点的导数值<script type="math/tex">\phi'(\lambda)</script>；</li>
+<li>若<script type="math/tex">\phi'(\lambda) = 0</script>，则<script type="math/tex">\alpha^* = \lambda</script>；</li>
+<li>若<script type="math/tex">\phi'(\lambda) < 0</script>，则<script type="math/tex">\alpha^* \in[\lambda, b_0]</script>；</li>
+<li>若<script type="math/tex">\phi'(\lambda) > 0</script>，则<script type="math/tex">\alpha^* \in [a_0, \lambda]</script>；</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>非精确线搜索</strong></p>
+<blockquote>
+<p>实际下降算法中，步长的选取除了直接搜索法以外，还有其他一下方法，我们认为只要<script type="math/tex">\alpha</script>满足一定的准则，此时即使<script type="math/tex">\alpha</script>不是精确解也可以作为最终解的近似解。</p>
+</blockquote>
+<ul>
+<li><strong>Armijo条件：</strong><script type="math/tex">\phi(\alpha) \leq \phi(0) + c_1\alpha \phi'(0), \text{ } 0 \leq c_1 \leq 1</script></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/629197cf0947543129174487.jpg" style="zoom:50%"></p>
+<ul>
+<li><strong>Goldstein法则：</strong>除Armijo条件外还要去<script type="math/tex">\mu</script>满足：<script type="math/tex">\phi(\alpha) > \phi(0) + c_2\alpha \phi'(0), \text{ } 0 \leq c_1 \leq c_2\leq 1</script></li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/629198a00947543129183707.jpg" style="zoom:45%"></p>
+<h5 id="四-补充：收敛性"><a href="#四-补充：收敛性" class="headerlink" title="(四) 补充：收敛性"></a>(四) 补充：收敛性</h5><p>基于线搜索的迭代下降算法</p>
+<ul>
+<li>为保证全局收敛，步长<script type="math/tex">\alpha_k​</script>和下降方向<script type="math/tex">\boldsymbol d_k​</script>的选取均需满足定的条件：<ul>
+<li>记当前点<script type="math/tex">\boldsymbol x_k</script>处所选取下降方向<script type="math/tex">\boldsymbol d_k</script>与负梯度方向<script type="math/tex">-\triangledown f(\boldsymbol x_k)</script>的夹角为<script type="math/tex">\theta_k</script>：</li>
+<li><script type="math/tex; mode=display">\cos \theta_k = \dfrac{-\triangledown f(\boldsymbol x_k)^{\mathrm T}\boldsymbol d_k}{\|\triangledown f(\boldsymbol x_k) \| \| \boldsymbol d_k\|}</script></li>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>Zoutendijk定理说明：</p>
+<blockquote>
+<p>为了保证全局收敛，需要在选取步长和下降方向时候注意满足一定的条件</p>
+<p>此外注意区分：全局收敛与收敛到全局最优解的区别</p>
+<p>(1) 全局收敛是指在迭代下降算法初始点选取时，任意随机选取初始点都能保证所产生的点列满足收敛性；</p>
+<p>(2) 收敛到全局最优解</p>
+</blockquote>
+<ul>
+<li><p>在<strong>适当条件</strong>下，迭代点列<script type="math/tex">\boldsymbol x_k</script>满足：<script type="math/tex">\sum\limits_{k=1}^{\infty} \cos^2 \theta_k \|\triangledown f(\boldsymbol x_k) \|^2 < \infty</script>，点列收敛</p>
+</li>
+<li><p>当每次选取<script type="math/tex">\boldsymbol d_k</script>时均保证<script type="math/tex">\theta_k</script>满足<script type="math/tex">\cos \theta_k \geq \delta, \delta>0</script>，则：<script type="math/tex">\|\triangledown f(\boldsymbol x_k) \| \to 0</script></p>
+<blockquote>
+<p>通俗讲就是不要让下降方向<script type="math/tex">\boldsymbol d_k</script>与负梯度方向<script type="math/tex">-\triangledown f(\boldsymbol x_k)</script>的夹角太接近<script type="math/tex">\dfrac{\pi}{2}</script>，夹角尽量小。</p>
+</blockquote>
+</li>
+</ul>
+<p>Zoutendijk定理中的适当条件和证明：</p>
+<p>假设函数<script type="math/tex">f(\boldsymbol x)</script>有下界(保证有解存在)，且<script type="math/tex">\triangledown f(\boldsymbol x)</script>是Lipschitz连续的，即存在<script type="math/tex">L>0</script>使得：</p>
+<script type="math/tex; mode=display">
+\|\triangledown f(\boldsymbol x) - \triangledown f(\tilde{\boldsymbol x})  \| \leq L \|\boldsymbol x -  \tilde{\boldsymbol x} \|, \forall \boldsymbol x, \tilde{\boldsymbol x}</script><p>记迭代过程为<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_k + \alpha_k \boldsymbol d_k</script>，则</p>
+<script type="math/tex; mode=display">
+\sum\limits_{k=1}^{\infty} \cos^2 \theta_k \|\triangledown f(\boldsymbol x_k) \|^2 < \infty</script><p>证明部分没有细看，太复杂了。。。！！！</p>
+<blockquote>
+<p>此外，这里感觉很难理解，找了一些参考材料，有时间看看吧</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010182633/article/details/76554599">漫步最优化二十一——全局收敛</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36342854/article/details/103737901">约束优化方法<em>1</em>——Zoutendijk可行方向法</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/121001066">数值优化|笔记整理（2）——线搜索：步长选取条件的收敛性 - 学弱猹的文章 - 知乎</a></p>
+</blockquote>
+<h3 id="第六讲-无约束优化问题（贰）"><a href="#第六讲-无约束优化问题（贰）" class="headerlink" title="第六讲 无约束优化问题（贰）"></a>第六讲 无约束优化问题（贰）</h3><p><img src="https://pic.imgdb.cn/item/629311dc09475431290ae7c7.jpg" style="zoom:50%"></p>
+<h4 id="6-1-收敛速度"><a href="#6-1-收敛速度" class="headerlink" title="6.1 收敛速度"></a>6.1 收敛速度</h4><p>设序列<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>收敛到<script type="math/tex">\boldsymbol x^*</script>，若存在极限：</p>
+<script type="math/tex; mode=display">
+\lim_{k \to \infty} \dfrac{\|\boldsymbol x_{k+1} - \boldsymbol x^* \|}{\|\boldsymbol x_{k} - \boldsymbol x^* \|} = \beta</script><ul>
+<li>当<script type="math/tex">0 < \beta < 1</script>时，则称<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>为线性收敛；</li>
+<li>当<script type="math/tex">\beta = 0</script>时，则称<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>为超线性收敛。</li>
+</ul>
+<p>若存在某个 <script type="math/tex">p \geq 1</script>，有：</p>
+<script type="math/tex; mode=display">
+\lim_{k \to \infty} \dfrac{\|\boldsymbol x_{k+1} - \boldsymbol x^* \|}{\|\boldsymbol x_{k} - \boldsymbol x^* \|^p} = \beta < +\infty</script><p>则称<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>为<script type="math/tex">p</script>阶收敛。当<script type="math/tex">p > 1</script>时，<script type="math/tex">p</script>阶收敛必定为超线性收敛，但反之不一定成立。</p>
+<p> 评价一个算法除了收敛速度，还可以考虑把一个算法用于求解一个简单问题，如果该算法在求解简单问题时都会有较大的计算成本，那么说明该算法可能存在问题。一般用<strong>凸二次函数</strong>作为简单问题：</p>
+<script type="math/tex; mode=display">
+\min \frac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x + \boldsymbol c^{\mathrm T} \boldsymbol x,  \boldsymbol Q \succeq 0</script><p>如果算法用于求解该凸二次函数能够在有限步内找到最优解，那么称该算法具有<strong>“二次终止性”</strong>。</p>
+<h4 id="6-2-坐标轴交替下降法"><a href="#6-2-坐标轴交替下降法" class="headerlink" title="6.2 坐标轴交替下降法"></a>6.2 坐标轴交替下降法</h4><h5 id="一-基本思想"><a href="#一-基本思想" class="headerlink" title="(一)  基本思想"></a>(一)  基本思想</h5><p>给定初始点<script type="math/tex">\boldsymbol x_0</script>，依次沿着坐标轴<script type="math/tex">\boldsymbol e_1, \boldsymbol e_2, \cdots, \boldsymbol e_n</script>进行搜索。</p>
+<h5 id="二-算法框架-流程"><a href="#二-算法框架-流程" class="headerlink" title="(二) 算法框架/流程"></a>(二) 算法框架/流程</h5><ul>
+<li><p>STPE 1：给定初始点<script type="math/tex">\boldsymbol x_0, k:=0, \varepsilon>0</script>；</p>
+</li>
+<li><p>STPE 2：判断是否满足<script type="math/tex">\| \triangledown f(\boldsymbol x_k) \| \leq \varepsilon</script>，是，则终止算法；</p>
+</li>
+<li><p>STPE 3：记<script type="math/tex">\boldsymbol y_0 = \boldsymbol x_k</script>，令<script type="math/tex">\boldsymbol y_i = \boldsymbol y_{i-1} + \alpha_i \boldsymbol e_i</script></p>
+<blockquote>
+<p>其中，<script type="math/tex">\alpha_i := \arg \min f(\boldsymbol y_{i-1} + \alpha_i \boldsymbol e_i), i=1,2,\cdots, n</script></p>
+<p>arg是argument（自变量、参数）的缩写，那么由此可知：</p>
+<p>argmax F(x):使目标函数F(x)能够取到最大值时的变量x的值</p>
+<p>argmin F(x):使目标函数F(x)能够取到最小值时的变量x的值</p>
+<p>(只是用F(x)举个栗子，实际使用中的函数可能不止x这一个变量，不过意思还是这个意思~)</p>
+</blockquote>
+</li>
+<li><p>STPE4：令<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol y_n, k:=k+1</script>，转STPE1。</p>
+</li>
+</ul>
+<h5 id="三-优缺点"><a href="#三-优缺点" class="headerlink" title="(三) 优缺点"></a>(三) 优缺点</h5><p>优点：不需要成本即可得到搜索方向。当变量之间的交叉程度较小时非常有效(极端情况——可分离函数)；</p>
+<p>缺点：对于一般问题所得到的点列未必收敛。</p>
+<h5 id="四-改进方法"><a href="#四-改进方法" class="headerlink" title="(四) 改进方法"></a>(四) 改进方法</h5><p>比如：在交替下降过程中间每一步都加入一个线搜索。</p>
+<p><img src="https://pic.imgdb.cn/item/6293758909475431299a817e.jpg" style="zoom:40%"></p>
+<h4 id="6-3-梯度下降法-最速下降法"><a href="#6-3-梯度下降法-最速下降法" class="headerlink" title="6.3 梯度下降法(最速下降法)"></a>6.3 梯度下降法(最速下降法)</h4><h5 id="一-基本思想-1"><a href="#一-基本思想-1" class="headerlink" title="(一)  基本思想"></a>(一)  基本思想</h5><p>选择<script type="math/tex">\boldsymbol x_k</script>处负梯度作为搜索方向，即<script type="math/tex">\boldsymbol d_k = - \triangledown f(\boldsymbol x_k)</script>。</p>
+<h5 id="二-优缺点"><a href="#二-优缺点" class="headerlink" title="(二) 优缺点"></a>(二) 优缺点</h5><p>优点：简单直观；收敛；搜索方向计算简单(即只需计算梯度)；</p>
+<p>缺点：(1) 收敛速度慢(线性收敛)；(2) Zigzag现象(<strong>“之”字形</strong>)；(3) 不具备二次终止性(在有限步内求得凸二次函数的最优解)。</p>
+<ul>
+<li><p>缺点一：收敛速度慢(线性收敛)</p>
+<ul>
+<li><p>原因1：只利用了该点处的一阶导数，而没有利用二阶导数信息；</p>
+</li>
+<li><p>原因2：若迭代中步长<script type="math/tex">\alpha_k</script>是<script type="math/tex">\phi(\alpha):=f(\boldsymbol x_k + \alpha \boldsymbol d_k)</script>的精确最小点，则<script type="math/tex">\phi'(\alpha_k) = 0</script>，即</p>
+<script type="math/tex; mode=display">\phi'(\alpha_k) = \triangledown f(\boldsymbol x_k + \alpha_k \boldsymbol d_k)^{\mathrm T}\boldsymbol d_k= -\triangledown f(\boldsymbol x_{k+1}) \triangledown f(\boldsymbol x_k) =  0</script><p>根据上式，可以看到前后两个点之间的<strong>梯度垂直，呈现“之”字形</strong>。示例如下图所示。</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/629379520947543129a01147.jpg" style="zoom:40%"></p>
+<h4 id="6-4-牛顿法"><a href="#6-4-牛顿法" class="headerlink" title="6.4 牛顿法"></a>6.4 牛顿法</h4><h5 id="一-基本思想-2"><a href="#一-基本思想-2" class="headerlink" title="(一) 基本思想"></a>(一) 基本思想</h5><p>当前点<script type="math/tex">\boldsymbol x_k</script>处选择<script type="math/tex">\boldsymbol d_k = - [\triangledown^2 f(\boldsymbol x_k)]^{-1} \triangledown f(\boldsymbol x_k)</script>作为下降方向，可以理解为：对<script type="math/tex">\boldsymbol x_k</script>处的二次逼近函数(<strong>泰勒展开式</strong>)进行最小化。</p>
+<script type="math/tex; mode=display">
+\min f(\boldsymbol x_k) + \triangledown f(\boldsymbol x_k)^{\mathrm T}(\boldsymbol x - \boldsymbol x_k) + \frac{1}{2}(\boldsymbol x - \boldsymbol x_k)^{\mathrm T} \triangledown^2 f(\boldsymbol x_k) (\boldsymbol x - \boldsymbol x_k)</script><p>令上式求导等于零，可以得到：</p>
+<script type="math/tex; mode=display">
+\triangledown f(\boldsymbol x_k) + \triangledown^2 f(\boldsymbol x_k) (\boldsymbol x - \boldsymbol x_k) = \triangledown f(\boldsymbol x_k) + \triangledown^2 f(\boldsymbol x_k)  \boldsymbol d_k = 0</script><ul>
+<li><p><strong>纯牛顿法：</strong>步长<script type="math/tex">\alpha_k = 1</script></p>
+<blockquote>
+<p>因为<script type="math/tex">\boldsymbol d_k = - [\triangledown^2 f(\boldsymbol x_k)]^{-1} \triangledown f(\boldsymbol x_k)  \Longleftrightarrow \boldsymbol x_{k+1} = \boldsymbol x_k - [\triangledown^2 f(\boldsymbol x_k)]^{-1} \triangledown f(\boldsymbol x_k)</script></p>
+</blockquote>
+</li>
+</ul>
+<h5 id="二-算法框架-流程-1"><a href="#二-算法框架-流程-1" class="headerlink" title="(二) 算法框架/流程"></a>(二) 算法框架/流程</h5><ul>
+<li>STPE 1：给定初始点<script type="math/tex">\boldsymbol x_0, k:=0, \varepsilon>0</script>；</li>
+<li>STPE 2：判断是否满足<script type="math/tex">\| \triangledown f(\boldsymbol x_k) \| \leq \varepsilon</script>，是，则终止算法；</li>
+<li>STPE 3：计算<script type="math/tex">\boldsymbol d_k = - [\triangledown^2 f(\boldsymbol x_k)]^{-1} \triangledown f(\boldsymbol x_k)</script></li>
+<li>STPE4：令<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_{k} + \boldsymbol d_k, k:=k+1</script>，转STPE1。</li>
+</ul>
+<h5 id="三-优缺点-1"><a href="#三-优缺点-1" class="headerlink" title="(三) 优缺点"></a>(三) 优缺点</h5><p>优点：牛顿法同时考虑了一阶导数信息和和二阶导数信息(<strong>黑塞矩阵</strong>)；当初始点<script type="math/tex">\boldsymbol x_0</script>取得比较接近于收敛点<script type="math/tex">\boldsymbol x^*</script>，且<script type="math/tex">\triangledown^2 f(\boldsymbol x)</script>满足较好性质时，二阶收敛；二次终止性(一步终止)。</p>
+<p>缺点：计算量大(需计算Hesse矩阵)；适用范围较窄。</p>
+<p>此外，牛顿法还存在一个问题：二阶导数矩阵不一定是正定的，此时<script type="math/tex">\boldsymbol d_k</script>就不一定再是下降方向了。</p>
+<p><img src="https://pic.imgdb.cn/item/62937f780947543129a94517.jpg" style="zoom:40%"></p>
+<p><img src="https://pic.imgdb.cn/item/629380240947543129aa7197.jpg" style="zoom:40%"></p>
+<h4 id="6-5-修正牛顿法"><a href="#6-5-修正牛顿法" class="headerlink" title="6.5 修正牛顿法"></a>6.5 修正牛顿法</h4><ul>
+<li><strong>修改点1：步长</strong><ul>
+<li>对于步长<script type="math/tex">\alpha_k​</script>的修正：首先判断<script type="math/tex">\alpha_k = 1​</script>是否让目标函数充分下降；否，则采用线搜索方法重新确定<script type="math/tex">\alpha_k​</script>;</li>
+</ul>
+</li>
+<li><strong>修改点2：方向</strong><ul>
+<li>对于方向(Hesse矩阵)的修正：选取<script type="math/tex">\boldsymbol d_k = - \boldsymbol B_k^{-1} \triangledown f(\boldsymbol x_k)</script><ul>
+<li>若<script type="math/tex">\triangledown^2 f(\boldsymbol x_k) \succ 0</script>，则选取<script type="math/tex">\boldsymbol B_k = \triangledown^2 f(\boldsymbol x_k)</script></li>
+<li>否则，采取修正方法(多种)：<ul>
+<li><script type="math/tex">\boldsymbol B_k := \triangledown^2 f(\boldsymbol x_k) + \lambda \boldsymbol I</script>，其中，<script type="math/tex">\lambda</script>为适当正数保证<script type="math/tex">\boldsymbol b_k</script>正定。</li>
+<li>考虑特征值分解：<script type="math/tex">\triangledown^2 f(\boldsymbol x_k) = \boldsymbol Q^{\mathrm T} \boldsymbol \Lambda \boldsymbol Q</script>，令<script type="math/tex">\boldsymbol b_k = \boldsymbol Q^{\mathrm T} \text{diag} (\tau_i) \boldsymbol Q</script><ul>
+<li><script type="math/tex">\tau_{i}= \begin{cases}\lambda_{i}, & \text { if } \lambda_{i} \geq \delta \\ \delta, & \text { otherwise }\end{cases}</script>，其中<script type="math/tex">\delta</script>为一适当正数。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="6-6-拟牛顿法"><a href="#6-6-拟牛顿法" class="headerlink" title="6.6 拟牛顿法"></a>6.6 拟牛顿法</h4><h5 id="一-基本思想-3"><a href="#一-基本思想-3" class="headerlink" title="(一) 基本思想"></a>(一) 基本思想</h5><p>当前点<script type="math/tex">\boldsymbol x_k</script>处对<script type="math/tex">f(\boldsymbol x_k)</script>使用二次函数进行近似：</p>
+<script type="math/tex; mode=display">
+m_k(\boldsymbol x) := f(\boldsymbol x_k) + \triangledown f(\boldsymbol x_k)^{\mathrm T}(\boldsymbol x - \boldsymbol x_k) + \frac{1}{2}(\boldsymbol x - \boldsymbol x_k)^{\mathrm T} \boldsymbol B_k (\boldsymbol x - \boldsymbol x_k), \boldsymbol B_k \succ 0</script><p>利用<script type="math/tex">\min m_k(\boldsymbol x)</script>的搜索方向：<script type="math/tex">\boldsymbol d_k = - \boldsymbol B_k^{-1} \triangledown f(\boldsymbol x_k)</script>；我们希望<script type="math/tex">\boldsymbol B_k</script>尽量包含一些二阶信息，然后计算要相对简单。</p>
+<p>$\boldsymbol B_k \succ 0$为正定矩阵时，<script type="math/tex">m_k(\boldsymbol x)</script>是一个凸二次函数，求其最小值即可让<script type="math/tex">m_k(\boldsymbol x)</script>的梯度为0即可，求解即可得到：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x_{k+1} = \boldsymbol x = \boldsymbol x_k - \boldsymbol d_k = \boldsymbol x_k - \boldsymbol B_k^{-1} \triangledown f(\boldsymbol x_k)</script><h5 id="二-算法框架-流程-2"><a href="#二-算法框架-流程-2" class="headerlink" title="(二) 算法框架/流程"></a>(二) 算法框架/流程</h5><ul>
+<li>STPE 1：给定初始点<script type="math/tex">\boldsymbol x_0, k:=0, \varepsilon>0, \boldsymbol B_0</script>；</li>
+<li>STPE 2：判断是否满足<script type="math/tex">\| \triangledown f(\boldsymbol x_k) \| \leq \varepsilon</script>，是，则终止算法；</li>
+<li>STPE 3：计算<script type="math/tex">\boldsymbol d_k = - \boldsymbol B_k^{-1} \triangledown f(\boldsymbol x_k)</script>；</li>
+<li>STPE 4：使用线搜索法确定步长<script type="math/tex">\alpha_k</script>；</li>
+<li>STPE 5：令<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_{k} + \alpha_k \boldsymbol d_k, k:=k+1</script>，确定<script type="math/tex">\boldsymbol B_{k+1}</script>，转STPE1。</li>
+</ul>
+<h5 id="三-boldsymbol-B-k-1-矩阵的确定方法"><a href="#三-boldsymbol-B-k-1-矩阵的确定方法" class="headerlink" title="(三) $\boldsymbol B_{k+1}$矩阵的确定方法"></a>(三) $\boldsymbol B_{k+1}$矩阵的确定方法</h5><p><strong>1 拟牛顿方程(基本要求)</strong></p>
+<script type="math/tex; mode=display">
+\triangledown f(\boldsymbol x_{k+1}) - \triangledown f(\boldsymbol x_k) = \boldsymbol B_{k+1} (\boldsymbol x_{k+1} - \boldsymbol x_{k})</script><blockquote>
+<p>对上式的简单理解：</p>
+<p>首先由中值定理可得：<script type="math/tex">\triangledown f(\boldsymbol x_{k+1}) - \triangledown f(\boldsymbol x_k) = \triangledown^2 f(\boldsymbol \xi ) (\boldsymbol x_{k+1} - \boldsymbol x_{k}) , \text{ }\xi = \lambda \boldsymbol x_k + (1-\lambda)\boldsymbol x_k, \text{ } \lambda \in (0,1)</script></p>
+<p>对比发现：也就是我们希望<script type="math/tex">\boldsymbol B_{k+1}</script>能够体现<script type="math/tex">\triangledown^2 f(\boldsymbol \xi )</script>的作用。</p>
+<p>分析易知，<script type="math/tex">\boldsymbol B_{k+1}</script>大小为<script type="math/tex">n \times n</script>，其中变量个数为<script type="math/tex">\dfrac{n(n+1)}{2}</script>(对称阵)，但是等式只要<script type="math/tex">n</script>个方程，因此<script type="math/tex">\boldsymbol B_{k+1}</script>会有<strong>多个</strong>满足条件。</p>
+</blockquote>
+<p>记<script type="math/tex">\boldsymbol y_k := \triangledown f(\boldsymbol x_{k+1}) - \triangledown f(\boldsymbol x_k)</script>，<script type="math/tex">\boldsymbol s_k := \boldsymbol x_{k+1} - \boldsymbol x_{k}</script>，则拟牛顿方程简记为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol y_k = \boldsymbol B_{k+1} \boldsymbol s_k</script><p>此外，若记<script type="math/tex">\boldsymbol H_k = \boldsymbol B_k^{-1}</script>，拟牛顿方程也可以表示为：<script type="math/tex">\boldsymbol s_k = \boldsymbol H_{k+1} \boldsymbol y_k</script>。</p>
+<p>下面我们将对利用已有信息具体获得<script type="math/tex">\boldsymbol B_{k+1}</script>或者<script type="math/tex">\boldsymbol H_{k+1}</script></p>
+<p><strong>2 第一类方法</strong></p>
+<p>选择满足拟牛顿方程且与<script type="math/tex">\boldsymbol B_k</script>近似的矩阵。</p>
+<script type="math/tex; mode=display">
+\begin{cases}\text { min } & \| \boldsymbol B - \boldsymbol B_k \| \\
+\text{ s.t. } & \boldsymbol B \boldsymbol s_k = \boldsymbol y_k, \boldsymbol B = \boldsymbol B^T
+\end{cases}</script><script type="math/tex; mode=display">
+\begin{cases}\text { min } & \| \boldsymbol H - \boldsymbol H_k \| \\
+\text{ s.t. } & \boldsymbol H \boldsymbol y_k = \boldsymbol s_k, \boldsymbol H = \boldsymbol H^T
+\end{cases}</script><blockquote>
+<p>矩阵范数小知识：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35897775">向量范数与矩阵范数</a></p>
+</blockquote>
+<p><strong>3 第二类方法</strong></p>
+<p>对<script type="math/tex">\boldsymbol B_k</script>、<script type="math/tex">\boldsymbol H_k</script>进行校正，如：令<script type="math/tex">\boldsymbol B_{k+1} = \boldsymbol B_k + \Delta \boldsymbol B</script>。</p>
+<ul>
+<li><p><strong>rank-1</strong>校正：要求<script type="math/tex">\Delta \boldsymbol B</script>的秩为1；</p>
+<ul>
+<li><p>SR-1方法：可以看作是对<script type="math/tex">\boldsymbol B_k</script>进行rank-1校正</p>
+<ul>
+<li><script type="math/tex; mode=display">\boldsymbol B_{k+1} = \boldsymbol B_k + \dfrac{(\boldsymbol y_k - \boldsymbol B_k \boldsymbol s_k) (\boldsymbol y_k - \boldsymbol B_k\boldsymbol s_k)^{\mathrm T}}{(\boldsymbol y_k - \boldsymbol B_k \boldsymbol s_k)^{\mathrm T} \boldsymbol s_k}</script></li>
+<li><p>如何得到上式：</p>
+</li>
+<li><p><img src="https://pic.imgdb.cn/item/62941a5d09475431294eec76.jpg" style="zoom:40%"></p>
+</li>
+<li><p>该方法相对rank-2方法迭代公式更简单，但是不能保证正定性；适当条件下能达到$n$步超线性收敛。</p>
+<blockquote>
+<p>$n$步超线性收敛：</p>
+<script type="math/tex; mode=display">\lim_{k \to \infty} = \dfrac{\| \boldsymbol x_{k+1+n} - \boldsymbol x^* \|}{\boldsymbol x_{k} - \boldsymbol x^*}</script></blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>rank-2</strong>校正：要求<script type="math/tex">\Delta \boldsymbol B</script>的秩为2；</p>
+<ul>
+<li><strong>DFP方法：</strong>可以看作是对<script type="math/tex">\boldsymbol H_k</script>进行rank-2校正<ul>
+<li><script type="math/tex; mode=display">\boldsymbol H_{k+1} = \boldsymbol H_k + \dfrac{\boldsymbol H_k \boldsymbol y_k \boldsymbol y_k^{\mathrm T}\boldsymbol H_k}{\boldsymbol y_k^{\mathrm T}\boldsymbol H_k\boldsymbol y_k} +  \dfrac{\boldsymbol s_k \boldsymbol s_k^{\mathrm T}}{\boldsymbol y_k^{\mathrm T}\boldsymbol s_k}</script></li>
+<li>如何得到上式：注意下面图中的证明用到了<strong>对称秩1矩阵<script type="math/tex">\boldsymbol A</script>的性质：</strong><script type="math/tex">\boldsymbol A = \boldsymbol {uv}^T = \boldsymbol {uu}^T</script></li>
+<li><img src="https://pic.imgdb.cn/item/629416750947543129494abe.jpg" style="zoom:40%"></li>
+</ul>
+</li>
+<li><strong>BFGS方法：</strong>可以看作是对<script type="math/tex">\boldsymbol B_k</script>进行rank-2校正<ul>
+<li><script type="math/tex; mode=display">\boldsymbol B_{k+1} = \boldsymbol B_k + \dfrac{\boldsymbol B_k \boldsymbol s_k \boldsymbol s_k^{\mathrm T}\boldsymbol B_k}{\boldsymbol s_k^{\mathrm T}\boldsymbol B_k\boldsymbol s_k} +  \dfrac{\boldsymbol y_k \boldsymbol y_k^{\mathrm T}}{\boldsymbol y_k^{\mathrm T}\boldsymbol s_k}</script></li>
+<li>如何得到上式：原理同上面DFP推导类似。</li>
+<li>拟牛顿方向需要计算<script type="math/tex">\boldsymbol B_{k+1}^{-1}</script>，可以利用Sherman-Morrison公式显示写出；</li>
+<li>BFGS方法是被认为最有效的拟牛顿法；(适当前提下可证明)超线性收敛。</li>
+<li>Broyden族：DFP与BFGS的线性组合！</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="第七讲-无约束优化问题（叁）"><a href="#第七讲-无约束优化问题（叁）" class="headerlink" title="第七讲 无约束优化问题（叁）"></a>第七讲 无约束优化问题（叁）</h3><h4 id="7-1-共轭梯度法背景"><a href="#7-1-共轭梯度法背景" class="headerlink" title="7.1 共轭梯度法背景"></a>7.1 共轭梯度法背景</h4><p>1950年代，求解一类优化问题中：</p>
+<script type="math/tex; mode=display">
+\min \dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x +  \boldsymbol c^{\mathrm T} \boldsymbol x, \boldsymbol Q \succ 0, \boldsymbol c \in \mathbb{R}^n</script><p>该类问题可直接通过求梯度然后令梯度为零即可：</p>
+<script type="math/tex; mode=display">
+\triangledown f(\boldsymbol x) = \boldsymbol Q \boldsymbol x + \boldsymbol c = \boldsymbol 0</script><p>可知，需要求解线性方程组。当矩阵比较大时候，计算复杂，因此有人提出使用迭代法求解方程组，因此就有了”(线性)共轭梯度法”。</p>
+<p>1960年代，该方法推广到求解一般性优化问题，此时该方法也被称为”(非线性)共轭梯度法”。</p>
+<h4 id="7-2-线性共轭梯度法"><a href="#7-2-线性共轭梯度法" class="headerlink" title="7.2 线性共轭梯度法"></a>7.2 线性共轭梯度法</h4><p>考虑以下优化问题：</p>
+<script type="math/tex; mode=display">
+\min \dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x +  \boldsymbol c^{\mathrm T} \boldsymbol x, \boldsymbol Q \succ 0, \boldsymbol c \in \mathbb{R}^n</script><ul>
+<li>当<script type="math/tex">\boldsymbol Q</script>特殊一点为对角矩阵时：</li>
+</ul>
+<script type="math/tex; mode=display">
+f(\boldsymbol x) = \dfrac{1}{2} \boldsymbol x^{\mathrm T} \left[\begin{array}{ccc}
+q_{1} & \cdots & 0 \\
+\vdots & \ddots & 0 \\
+0 & 0 & q_{n}
+\end{array}\right] \boldsymbol x + \boldsymbol c^{\mathrm T}\boldsymbol x</script><p><img src="https://pic.imgdb.cn/item/629471ce0947543129c41093.jpg" style="zoom:50%"></p>
+<ul>
+<li>当<script type="math/tex">\boldsymbol Q</script>为一般情况(非对角矩阵)时：</li>
+</ul>
+<p>拿到一个普通二次型，就要想办法将其转换为标准二次型，即就是只有平方项没有交叉项。常用的方法有线性替换，最常见的线性替换又是：对<script type="math/tex">\boldsymbol Q</script>矩阵进行特征值和特征向量分解：</p>
+<script type="math/tex; mode=display">
+\boldsymbol Q = \boldsymbol S^{\mathrm T} \boldsymbol \Lambda \boldsymbol S</script><p>其中，<script type="math/tex">\boldsymbol S</script>是由标准正交化之后的特征向量组成。</p>
+<p>将<script type="math/tex">\dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x +  \boldsymbol c^{\mathrm T} \boldsymbol x</script>中<script type="math/tex">\boldsymbol x</script>用<script type="math/tex">\hat{\boldsymbol x} = \boldsymbol{Sx}</script>进行替换：</p>
+<script type="math/tex; mode=display">
+f(\hat{\boldsymbol x}) = \dfrac{1}{2} \hat{\boldsymbol x}^{\mathrm T} \boldsymbol \Lambda \hat{\boldsymbol x} +  \boldsymbol{(Sc)}^{\mathrm T} \hat{\boldsymbol x}</script><p>此时就可以像对角矩阵情况类似，求解变得简单。求解得到<script type="math/tex">\hat{\boldsymbol x}^*</script>后即可得到最终解：<script type="math/tex">\boldsymbol x^* = \boldsymbol P^{-1} \hat{\boldsymbol x}^* = \boldsymbol P^{\mathrm T} \hat{\boldsymbol x}^*</script></p>
+<p>一定要记住，线性共轭梯度法被设计出来就是用来求解线性方程组。</p>
+<h5 id="一-共轭方向"><a href="#一-共轭方向" class="headerlink" title="(一) 共轭方向"></a>(一) 共轭方向</h5><p>考虑正定矩阵<script type="math/tex">\boldsymbol Q</script>和非零向量<script type="math/tex">\boldsymbol d_i, \boldsymbol d_j</script>，若：</p>
+<script type="math/tex; mode=display">
+\boldsymbol d_i^{\mathrm T} \boldsymbol Q \boldsymbol d_j = \boldsymbol 0</script><p>则称<script type="math/tex">\boldsymbol d_i, \boldsymbol d_j</script>关于矩阵<script type="math/tex">\boldsymbol Q</script>共轭。</p>
+<p>向量组<script type="math/tex">\boldsymbol d_0, \boldsymbol d_1, \cdots,  \boldsymbol d_k</script>关于矩阵<script type="math/tex">\boldsymbol Q</script>共轭，两两共轭。</p>
+<h5 id="二-共轭-VS-正交"><a href="#二-共轭-VS-正交" class="headerlink" title="(二) 共轭 VS 正交"></a>(二) 共轭 VS 正交</h5><ul>
+<li><p>若向量组<script type="math/tex">\boldsymbol d_0, \boldsymbol d_1, \cdots,  \boldsymbol d_k</script>关于<script type="math/tex">\boldsymbol I</script>共轭，则向量组<script type="math/tex">\boldsymbol d_0, \boldsymbol d_1, \cdots,  \boldsymbol d_k</script>是正交向量组；</p>
+</li>
+<li><p>若向量组<script type="math/tex">\boldsymbol d_0, \boldsymbol d_1, \cdots,  \boldsymbol d_k</script>关于正定矩阵<script type="math/tex">\boldsymbol Q</script>共轭，令<script type="math/tex">\boldsymbol{Q = P}^2</script>，则有：</p>
+<ul>
+<li><script type="math/tex">\boldsymbol d_i^{\mathrm T} \boldsymbol Q \boldsymbol d_j  = \boldsymbol d_i^{\mathrm T} \boldsymbol P^{\mathrm T} \boldsymbol P \boldsymbol d_j = (\boldsymbol P \boldsymbol d_i)^{\mathrm T}  (\boldsymbol P \boldsymbol d_j) = \boldsymbol 0</script>正交</li>
+</ul>
+<blockquote>
+<p>涉及小知识点：</p>
+<p>一个正定矩阵一定能分解为另一个正定矩阵的平方：<script type="math/tex">\boldsymbol{Q = P}^2</script>；</p>
+<p>共轭向量组线性无关。</p>
+</blockquote>
+</li>
+</ul>
+<h5 id="三-共轭方向法"><a href="#三-共轭方向法" class="headerlink" title="(三) 共轭方向法"></a>(三) 共轭方向法</h5><script type="math/tex; mode=display">
+\min \text{ } \dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x +  \boldsymbol c^{\mathrm T} \boldsymbol x, \boldsymbol Q \succ 0, \boldsymbol c \in \mathbb{R}^n</script><p>给定初始点<script type="math/tex">\boldsymbol x_0</script>以及一组关于<script type="math/tex">\boldsymbol Q</script>共轭方向<script type="math/tex">\boldsymbol d_0, \boldsymbol d_1, \cdots,  \boldsymbol d_{n-1}</script>，令：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x_{k+1} := \boldsymbol x_k + \alpha_k \boldsymbol d_k, \text{ } k = 0, 1, \cdots, n-1</script><p>其中，<script type="math/tex">\alpha_k = \arg \min \phi(\alpha) := f(\boldsymbol x_k + \alpha \boldsymbol d_{k})</script>。计算可得<strong>步长</strong>为：</p>
+<script type="math/tex; mode=display">
+\phi'(\alpha_k) = 0 \Longrightarrow \alpha_k = -\dfrac{(\boldsymbol Q \boldsymbol x_k + \boldsymbol c)^{\mathrm T}\boldsymbol d_k}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k} = -\dfrac{\triangledown f(\boldsymbol x)^{\mathrm T} \boldsymbol d_k}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k}</script><p><img src="https://pic.imgdb.cn/item/6294a4bf0947543129090093.jpg" style="zoom:50%"></p>
+<p><strong>共轭方向法为一类方法，不同的选取共轭方向的方式就对应不同的共轭方向法，<font color="red">共轭梯度法</font>是其中一种</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/6294a9d909475431290f59c5.jpg" style="zoom:50%"></p>
+<h5 id="四-共轭方向法具备的特征"><a href="#四-共轭方向法具备的特征" class="headerlink" title="(四) 共轭方向法具备的特征"></a>(四) 共轭方向法具备的特征</h5><p>以下特征均是基于问题：<script type="math/tex">\min \dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x +  \boldsymbol c^{\mathrm T} \boldsymbol x, \boldsymbol Q \succ 0, \boldsymbol c \in \mathbb{R}^n</script></p>
+<p>点列<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>具有如下特征：</p>
+<ul>
+<li>特征1：<script type="math/tex">\triangledown f(\boldsymbol x_k )^{\mathrm T} \boldsymbol d_i = 0, i = 0, 1, \cdots, k-1</script></li>
+<li>特征2：<script type="math/tex">\boldsymbol x_k := \arg \min \begin{Bmatrix} \dfrac{1}{2} \boldsymbol x^{\mathrm T} \boldsymbol Q \boldsymbol x +  \boldsymbol c^{\mathrm T} \boldsymbol x \mid \boldsymbol x \in \boldsymbol X_k \end{Bmatrix}</script><ul>
+<li>其中，<script type="math/tex">\boldsymbol X_k =  \begin{Bmatrix} \boldsymbol x_ 0 + \sum\limits_{i=0}^{k-1} a_i \boldsymbol d_i \mid a_i \in \mathbb{R}, i = 1, 2, \cdots, k-1 \end{Bmatrix}</script></li>
+</ul>
+</li>
+</ul>
+<p>证明：参考视频。</p>
+<h4 id="7-3-共轭梯度法具体"><a href="#7-3-共轭梯度法具体" class="headerlink" title="7.3 共轭梯度法具体"></a>7.3 共轭梯度法具体</h4><h5 id="一-基本思想-4"><a href="#一-基本思想-4" class="headerlink" title="(一)  基本思想"></a>(一)  基本思想</h5><p>在迭代下降过程中，借助当前点<script type="math/tex">\boldsymbol x_k</script>处的梯度信息构造共轭方向。</p>
+<h5 id="二-算法框架-流程-3"><a href="#二-算法框架-流程-3" class="headerlink" title="(二) 算法框架/流程"></a>(二) 算法框架/流程</h5><ul>
+<li>STPE 1：给定初始点<script type="math/tex">\boldsymbol x_0, k:=0, \varepsilon>0</script>，记<script type="math/tex">\boldsymbol d_0 := -\triangledown f(\boldsymbol x_0)</script></li>
+<li>STPE 2：判断是否满足<script type="math/tex">\| \triangledown f(\boldsymbol x_k) \| \leq \varepsilon</script>，是，则终止算法；</li>
+<li>STPE 3：计算<script type="math/tex">\alpha_k = -\dfrac{\triangledown f(\boldsymbol x)^{\mathrm T} \boldsymbol d_k}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k}</script>；</li>
+<li>STPE4：令<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_{k} + \alpha_k \boldsymbol d_k</script>，计算方向<script type="math/tex">\boldsymbol d_{k+1} = -\triangledown f(\boldsymbol x_{k+1}) + \text{some-term}</script>，<script type="math/tex">k:=k+1</script>转STPE1。<ul>
+<li>其中，<script type="math/tex">\boldsymbol d_{k+1} = -\triangledown f(\boldsymbol x_{k+1}) + \beta_k \boldsymbol d_k</script>，<script type="math/tex">\beta_k  = \dfrac{\triangledown f(\boldsymbol x_{k+1}) \boldsymbol Q \boldsymbol d_k}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k}</script></li>
+</ul>
+</li>
+</ul>
+<h5 id="三-公式简化"><a href="#三-公式简化" class="headerlink" title="(三) 公式简化"></a>(三) 公式简化</h5><p>简化的目的：将这些表达式与目标函数的梯度比较直观地表现出来。</p>
+<p>共轭梯度法的步长公式：</p>
+<script type="math/tex; mode=display">
+\alpha_k = -\dfrac{\triangledown f(\boldsymbol x)^{\mathrm T} \boldsymbol d_k}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k}</script><p>可简化为：</p>
+<script type="math/tex; mode=display">
+\alpha_k = \dfrac{\triangledown f(\boldsymbol x)^{\mathrm T}\triangledown f(\boldsymbol x)}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k}</script><p>共轭梯度法的步长公式中的系数：</p>
+<script type="math/tex; mode=display">
+\beta_k  = \dfrac{\triangledown f(\boldsymbol x_{k+1}) \boldsymbol Q \boldsymbol d_k}{\boldsymbol d_k^{\mathrm T}\boldsymbol Q \boldsymbol d_k}</script><p>可简化为：</p>
+<script type="math/tex; mode=display">
+\beta_k  = \dfrac
+
+{\triangledown f(\boldsymbol x_{k+1})^{\mathrm T}[\triangledown f(\boldsymbol x_{k+1}) -  \triangledown f(\boldsymbol x_{k+1})]}
+
+{\triangledown f(\boldsymbol x_k)^{\mathrm T}\triangledown f(\boldsymbol x_k)}</script><p>进一步简化为：</p>
+<script type="math/tex; mode=display">
+\beta_k  = \dfrac
+
+{\triangledown f(\boldsymbol x_{k+1})^{\mathrm T} \triangledown f(\boldsymbol x_{k+1}) }
+
+{\triangledown f(\boldsymbol x_k)^{\mathrm T}\triangledown f(\boldsymbol x_k)}</script><h4 id="7-4-非线性共轭梯度法"><a href="#7-4-非线性共轭梯度法" class="headerlink" title="7.4 非线性共轭梯度法"></a>7.4 非线性共轭梯度法</h4><p>注意注意注意：上述推导全部是建立在线性共轭梯度法，基本函数是二次函数。</p>
+<ul>
+<li>STPE 1：给定初始点<script type="math/tex">\boldsymbol x_0, k:=0, \varepsilon>0</script>，记<script type="math/tex">\boldsymbol d_0 := -\triangledown f(\boldsymbol x_0)</script></li>
+<li>STPE 2：判断是否满足<script type="math/tex">\| \triangledown f(\boldsymbol x_k) \| \leq \varepsilon</script>，是，则终止算法；</li>
+<li>STPE 3：利用线性搜索计算<script type="math/tex">\alpha_k</script>；</li>
+<li>STPE4：令<script type="math/tex">\boldsymbol x_{k+1} = \boldsymbol x_{k} + \alpha_k \boldsymbol d_k</script>，计算方向<script type="math/tex">\boldsymbol d_{k+1} = -\triangledown f(\boldsymbol x_{k+1}) + \beta_k \boldsymbol d_k</script>，<script type="math/tex">k:=k+1</script>转STPE1。<ul>
+<li>PRP方法：<script type="math/tex">\beta_k  = \dfrac{\triangledown f(\boldsymbol x_{k+1})^{\mathrm T}[\triangledown f(\boldsymbol x_{k+1}) -  \triangledown f(\boldsymbol x_{k+1})]} {\triangledown f(\boldsymbol x_k)^{\mathrm T}\triangledown f(\boldsymbol x_k)}</script></li>
+<li>FR方法：<script type="math/tex">\beta_k  = \dfrac{\triangledown f(\boldsymbol x_{k+1})^{\mathrm T} \triangledown f(\boldsymbol x_{k+1}) }{\triangledown f(\boldsymbol x_k)^{\mathrm T}\triangledown f(\boldsymbol x_k)}</script></li>
+</ul>
+</li>
+</ul>
+<h4 id="7-5-一些说明"><a href="#7-5-一些说明" class="headerlink" title="7.5 一些说明"></a>7.5 一些说明</h4><ul>
+<li><p>在实践中，为保证每次产生的方向为下降方向，可能会对<script type="math/tex">\beta_k</script>进行调整；</p>
+</li>
+<li><p>具有二次终止性；</p>
+</li>
+<li><p>实现过程中常采用$n$步重启策略，可达到$n$步二阶收敛；</p>
+<blockquote>
+<p>n步二阶收敛：<script type="math/tex">\lim\limits_{k \to \infty}\dfrac{\| \boldsymbol x_{k+n} - \boldsymbol x^*\|}{\| \boldsymbol x_{k+n} - \boldsymbol x^*\|^2} = 某一有限值 \gamma</script></p>
+</blockquote>
+<ul>
+<li>原因1：较远的点对当前点贡献很小，可以忽略，因此重启；</li>
+<li>原因2：可能会将非线性共轭转变为线性共轭梯度法；</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6294c6a309475431293567f4.jpg" style="zoom:60%"></p>
+<h3 id="第八讲-约束优化理论-壹-—最优性条件"><a href="#第八讲-约束优化理论-壹-—最优性条件" class="headerlink" title="第八讲 约束优化理论(壹)—最优性条件"></a>第八讲 约束优化理论(壹)—最优性条件</h3><p>本讲要讨论的约束优化问题为：</p>
+<script type="math/tex; mode=display">
+(P) \text{ }\begin{cases}\text { min } & f(\boldsymbol x) \\ 
+\text{ s.t.} & g_{i}(\boldsymbol x) \leq 0, \text{  } i=1, \cdots, m \\ 
+& h_{i}(\boldsymbol x) = 0, \text{  } i=1, \cdots, l\end{cases}</script><p>记问题(P)的可行集为集合<script type="math/tex">\boldsymbol S = \begin{Bmatrix} \boldsymbol x \mid g_{i}(\boldsymbol x) \leq 0, \text{  } i=1, \cdots, m,  h_{i}(\boldsymbol x) = 0, \text{  } i=1, \cdots, l \end{Bmatrix}</script>。</p>
+<p>本讲讨论问题的基本假设/前提：</p>
+<ul>
+<li><p>问题(P)中函数<script type="math/tex">f(\boldsymbol x), g_i(\boldsymbol x), h_i(\boldsymbol x)</script>均为连续可微函数；</p>
+<blockquote>
+<p>注意，有几类特殊的非光滑函数存在不可微点，但是可以将其转化，例如：</p>
+<script type="math/tex; mode=display">f(x) = \max  \begin{Bmatrix} x, x^2 \end{Bmatrix} $$，绘图易知该函数存在两个不可微的点，那么优化问题：</script><p>\min f( x)</p>
+<script type="math/tex; mode=display">
+可以转化为：令$$t = f(\boldsymbol x) $$：</script><p>\min f( x) \<br>\Downarrow \<br>\begin{cases}\text { min } &amp;t \<br>\text{ s.t.} &amp; f( x) \leq t\end{cases} \<br>\Downarrow \<br>\begin{cases}\text { min } &amp;t \<br>\text{ s.t.} &amp;  x \leq t\<br>&amp; x^2\leq t\end{cases}<br><script type="math/tex">推广来看：</script>f(x) = \max \begin{Bmatrix} a_i x + b_i \end{Bmatrix}$$这一类函数可以进行转换。</p>
+</blockquote>
+<p>&gt;</p>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/629560260947543129c8f1f8.jpg" style="zoom:40%"></p>
+<h4 id="8-1-最优解的一阶必要条件-KKT条件"><a href="#8-1-最优解的一阶必要条件-KKT条件" class="headerlink" title="8.1 最优解的一阶必要条件(KKT条件)"></a>8.1 最优解的一阶必要条件(KKT条件)</h4><h5 id="一-KKT条件的内容"><a href="#一-KKT条件的内容" class="headerlink" title="(一) KKT条件的内容"></a>(一) KKT条件的内容</h5><p>假设<script type="math/tex">\boldsymbol x^*</script>是问题(P)的局部最优解，且<script type="math/tex">\boldsymbol x^*</script>处某个“适当条件”成立，则存在<script type="math/tex">\boldsymbol \lambda \in \mathbb{R}^m, \boldsymbol \mu \in \mathbb{R}^l</script>(<script type="math/tex">m</script>是不等式约束个数，<script type="math/tex">l</script>是等式约束个数)使得：</p>
+<script type="math/tex; mode=display">
+\triangledown f(\boldsymbol x^*) + \sum_{i=1}^{m}\lambda_i \triangledown g_i(\boldsymbol x^*) + \sum_{i=1}^{l} \mu_i \triangledown h_i(\boldsymbol x^*) = 0 \\
+\lambda_i > 0, i = 1,2, \cdots, m \\
+g_i(\boldsymbol x^*) \leq 0,  i = 1,2, \cdots, m \\
+h_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, l \\
+\lambda_i g_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, m</script><p>其中，以上5个条件就是著名的<strong><font color="red">KKT条件</font></strong>。<script type="math/tex">\lambda_i, \mu_i</script>是两组系数，又称为<font color="blue">“拉格朗日乘子”</font>。</p>
+<p>针对非凸问题设计优化算法时，如果能证明算法收敛到一个KKT点，那么就说明算法达到了一个基本要求，<em><u>KKT点相当于无约束优化问题中的梯度为零的作用</u></em>。</p>
+<h5 id="二-证明KKT必要条件"><a href="#二-证明KKT必要条件" class="headerlink" title="(二) 证明KKT必要条件"></a>(二) 证明KKT必要条件</h5><p><strong>1 几个概念</strong></p>
+<ul>
+<li><p>对于<script type="math/tex">\boldsymbol x^* \in \boldsymbol S</script>，若点列<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix} ⊂ \boldsymbol S</script>满足所有<script type="math/tex">\boldsymbol x_k \neq \boldsymbol x^*, \lim\limits_{k \to \infty} \boldsymbol x_k  = \boldsymbol x^*</script>，则称为<strong>可行点列</strong>。</p>
+</li>
+<li><p>基本思路：若<script type="math/tex">\boldsymbol x^* \in \boldsymbol S</script>是局部最优解，则沿着任意可行点列目标函数不会下降(即当<script type="math/tex">k</script>充分大时，有<script type="math/tex">f(\boldsymbol x_k) > f(\boldsymbol x^*)</script>)。</p>
+</li>
+<li><p>考虑<script type="math/tex">\boldsymbol x^*</script>处集合<script type="math/tex">\boldsymbol D(\boldsymbol x^*) = \begin{Bmatrix} \boldsymbol d \mid \triangledown f(\boldsymbol x^*)^{\mathrm T} \boldsymbol d < 0 \end{Bmatrix} : \forall \boldsymbol d \in \boldsymbol D</script>均为<script type="math/tex">f(\boldsymbol x_k)</script>是<script type="math/tex">\boldsymbol x^*</script>处的下降方向。</p>
+</li>
+<li><p>考虑<script type="math/tex">\boldsymbol x^*</script>处集合<script type="math/tex">\boldsymbol T(\boldsymbol x^*) = \begin{Bmatrix} \alpha \boldsymbol d \mid \alpha > 0, \boldsymbol d = \lim\limits_{k \to \infty}\dfrac{\boldsymbol x_k- \boldsymbol x^*}{\| \boldsymbol x_k- \boldsymbol x^* \|} , \boldsymbol x_k \to \boldsymbol x^*, \boldsymbol x_k \neq \boldsymbol x^*, \boldsymbol x_k \in \boldsymbol S \end{Bmatrix}</script>，该集合称为<script type="math/tex">\boldsymbol x^*</script>处的<strong>切锥</strong>。切锥里面包含的方向可以告诉我们：从<script type="math/tex">\boldsymbol x^*</script>点可以验证哪一些方向/曲线可以移动，示意图如下： </p>
+<blockquote>
+<p><img src="https://pic.imgdb.cn/item/62957f4e0947543129e80269.jpg" style="zoom:40%"></p>
+<p>上图中，红色箭头夹住部分为切锥包含的可行方向。</p>
+</blockquote>
+</li>
+</ul>
+<p><strong>2 最优解的必要条件</strong></p>
+<p>若<script type="math/tex">\boldsymbol x^*</script>是问题(P)的局部最优解，则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol D(\boldsymbol x^*) ∩ \boldsymbol T(\boldsymbol x^*) = \boldsymbol \emptyset</script><p>只要证明上述表达式中描述的两个集合交集为空，等价于：任取<script type="math/tex">\alpha \boldsymbol d \in \boldsymbol T(\boldsymbol x^*)</script>，都有<script type="math/tex">\triangledown f(\boldsymbol x^*)^{\mathrm T} \boldsymbol d \geq 0</script></p>
+<p><img src="https://pic.imgdb.cn/item/629586160947543129efd126.jpg" style="zoom:50%"></p>
+<h5 id="三-与切锥关系紧密的两个集合"><a href="#三-与切锥关系紧密的两个集合" class="headerlink" title="(三) 与切锥关系紧密的两个集合"></a>(三) 与切锥关系紧密的两个集合</h5><ul>
+<li><strong>可行方向集合</strong>：<ul>
+<li><script type="math/tex; mode=display">\boldsymbol F(\boldsymbol x^*) = \begin{Bmatrix} \boldsymbol d \mid \boldsymbol x^* + \lambda \boldsymbol d \in \boldsymbol S, \forall \lambda \in (0, \delta), \text{ some } \delta > 0 \end{Bmatrix}</script></li>
+<li>易知：<script type="math/tex">\boldsymbol F(\boldsymbol x^*) ⊆ \boldsymbol T(\boldsymbol x^*)</script>，即可行方向一定在<strong>切锥</strong>中。</li>
+</ul>
+</li>
+<li><p>集合2：记<script type="math/tex">\boldsymbol x^*</script>处的<strong>有效指标集</strong><script type="math/tex">\boldsymbol I =  \begin{Bmatrix} i \mid g_i(\boldsymbol x^*)=0 \end{Bmatrix}</script>，定义下面集合</p>
+<ul>
+<li><script type="math/tex; mode=display">\boldsymbol F_1(\boldsymbol x^*) = \begin{Bmatrix} \boldsymbol d \mid \triangledown g_i(\boldsymbol x^*)^{\mathrm T} \boldsymbol d \leq 0, i \in \boldsymbol I, \triangledown h_j(\boldsymbol x^*)^{\mathrm T} \boldsymbol d = 0, j = 1,2,\cdots, l \end{Bmatrix}</script></li>
+<li>易知：<script type="math/tex">\boldsymbol T(\boldsymbol x^*) ⊆ \boldsymbol F_1(\boldsymbol x^*)</script></li>
+<li>证明：<ul>
+<li><img src="https://pic.imgdb.cn/item/629586dc0947543129f0b2bc.jpg" style="zoom:40%"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>综上：<script type="math/tex">\boldsymbol F(\boldsymbol x^*) ⊆ \boldsymbol T(\boldsymbol x^*) ⊆ \boldsymbol F_1(\boldsymbol x^*)</script></p>
+</li>
+</ul>
+<h5 id="二-适当条件：约束规范-constrain-qualification"><a href="#二-适当条件：约束规范-constrain-qualification" class="headerlink" title="(二) 适当条件：约束规范(constrain qualification)"></a>(二) 适当条件：约束规范(constrain qualification)</h5><p>上文KKT条件描述中提到的<strong>适当条件</strong>就是此处要讨论的<strong>约束规范</strong>。在适当条件(约束规范下)：<script type="math/tex">\boldsymbol T(\boldsymbol x^*) = \boldsymbol F_1(\boldsymbol x^*)</script></p>
+<ul>
+<li>常用的约束规范有：<ul>
+<li>函数——<script type="math/tex">g_i(\boldsymbol x^*), i \in \boldsymbol I, h_j(\boldsymbol x^*), j = 1,2,\cdots, l</script>均为线性函数；</li>
+<li>向量组——<script type="math/tex">\triangledown g_i(\boldsymbol x^*), i \in \boldsymbol I, \triangledown h_j(\boldsymbol x^*), j = 1,2,\cdots, l</script>线性无关(LICQ)；</li>
+<li>Slater Condition</li>
+<li>……</li>
+</ul>
+</li>
+</ul>
+<p>若<script type="math/tex">\boldsymbol x^* \in \boldsymbol S</script>是问题(P)的局部最优解，在满足上述某一种约束条件下，有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol D(\boldsymbol x^*) ∩ \boldsymbol T(\boldsymbol x^*) = \boldsymbol D(\boldsymbol x^*) ∩ \boldsymbol F_1(\boldsymbol x^*) = \boldsymbol \emptyset</script><p>即KKT条件的一种形式。</p>
+<p>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</p>
+<p>若<script type="math/tex">\boldsymbol x^* \in \boldsymbol S</script>是问题(P)的局部最优解，在满足上述某一种约束条件下，则KKT条件成立。</p>
+<p>因为：根据Farkas引理，<script type="math/tex">\boldsymbol D(\boldsymbol x^*) ∩ \boldsymbol F_1(\boldsymbol x^*) = \boldsymbol \emptyset</script>当且仅当KKT条件成立。</p>
+<p>证明：观看视频，太难了。。。</p>
+<p>@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</p>
+<h4 id="8-2-KKT条件的解释说明"><a href="#8-2-KKT条件的解释说明" class="headerlink" title="8.2 KKT条件的解释说明"></a>8.2 KKT条件的解释说明</h4><h5 id="一-KKT条件中各部分的名字"><a href="#一-KKT条件中各部分的名字" class="headerlink" title="(一) KKT条件中各部分的名字"></a>(一) KKT条件中各部分的名字</h5><script type="math/tex; mode=display">
+\triangledown f(\boldsymbol x^*) + \sum_{i=1}^{m}\lambda_i \triangledown g_i(\boldsymbol x^*) + \sum_{i=1}^{l} \mu_i \triangledown h_i(\boldsymbol x^*) = 0 \\
+\lambda_i > 0, i = 1,2, \cdots, m \\
+g_i(\boldsymbol x^*) \leq 0,  i = 1,2, \cdots, m \\
+h_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, l \\
+\lambda_i g_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, m</script><p>各部分组合的名字如下：</p>
+<script type="math/tex; mode=display">
+(\text{对偶可行(Dual Feasible, DF)}) \text{ }\begin{cases} & \triangledown f(\boldsymbol x^*) + \sum_{i=1}^{m}\lambda_i \triangledown g_i(\boldsymbol x^*) + \sum_{i=1}^{l} \mu_i \triangledown h_i(\boldsymbol x^*) = 0 \\ 
+& \lambda_i > 0, i = 1,2, \cdots, m \end{cases}</script><script type="math/tex; mode=display">
+(\text{原问题可行(Primal Feasible, PF)}) \text{ }\begin{cases} & g_i(\boldsymbol x^*) \leq 0,  i = 1,2, \cdots, m \\
+& h_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, l \end{cases}</script><script type="math/tex; mode=display">
+(\text{互补松弛条件(Complementary Slack, CS)})  ) \text{ }\begin{cases} & \lambda_i g_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, m \end{cases}</script><blockquote>
+<p>不知道前面有没有说互补松弛的作用：保证那些不起作用的不等式约束在第一行中对应的乘子为零；</p>
+<p>传统的互补问题就是：两个向量都是非负的，求内积等于0，其要求为对应分量相乘为0。</p>
+</blockquote>
+<h5 id="二-KKT条件中拉格朗日乘子意义"><a href="#二-KKT条件中拉格朗日乘子意义" class="headerlink" title="(二) KKT条件中拉格朗日乘子意义"></a>(二) KKT条件中拉格朗日乘子意义</h5><p>KKT条件中拉格朗日乘子可反映约束条件右端项发生扰动时最优目标函数值的变化情况。</p>
+<p>设<script type="math/tex">\boldsymbol x^*</script>是问题(P)的局部最优解，且设<script type="math/tex">\boldsymbol x^*</script>满足KKT条件：</p>
+<script type="math/tex; mode=display">
+(P) \text{ }\begin{cases}\text { min } & f(\boldsymbol x) \\ 
+\text{ s.t.} & g_{i}(\boldsymbol x) \leq 0, \text{  } i=1, \cdots, m \\ 
+& h_{i}(\boldsymbol x) = 0, \text{  } i=1, \cdots, l\end{cases}</script><h5 id="三-KKT条件充分性"><a href="#三-KKT条件充分性" class="headerlink" title="(三) KKT条件充分性"></a>(三) KKT条件充分性</h5><p>以上好像都是在讨论KKT条件的必要性，即已经知道<script type="math/tex">\boldsymbol x^*</script>是局部最优解，那么在满足某一种约束条件下，KKT条件成立。</p>
+<p>但我们也想知道什么时候会变成充分条件，即一个点满足KKT条件，则该点是问题(P)的最优解。</p>
+<ul>
+<li><p>当问题(P)中满足：</p>
+<ul>
+<li>(1) <script type="math/tex">f(\boldsymbol x), g_i(\boldsymbol x), i =1,2,\cdots, m</script>均为凸函数；</li>
+<li>(2) <script type="math/tex">h_i(\boldsymbol x), i =1,2,\cdots, l</script>为线性函数；</li>
+</ul>
+</li>
+<li><p>则满足条件的KKT点也是问题(P)(此两条条件限制下，问题P就是<strong>凸问题</strong>)的局部(全局)最优解。</p>
+<blockquote>
+<p>注意2点：</p>
+<p>一、凸问题局部最优解即为全局最优解；</p>
+<p>二、可能在一些其他问题，不满足上述两条条件(即问题P非凸)，KKT点也有可能是局部最优解，但判断方法需要借助<strong>黑塞矩阵</strong>，下面会讲到。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="第九讲-约束优化理论-贰-—最优性条件—二阶充分条件"><a href="#第九讲-约束优化理论-贰-—最优性条件—二阶充分条件" class="headerlink" title="第九讲 约束优化理论(贰)—最优性条件—二阶充分条件"></a>第九讲 约束优化理论(贰)—最优性条件—二阶充分条件</h3><h4 id="9-1-本讲基础"><a href="#9-1-本讲基础" class="headerlink" title="9.1  本讲基础"></a>9.1  本讲基础</h4><p>由<strong>第八讲(三)KKT条件充分性</strong>部分内容可知：</p>
+<ul>
+<li>当问题(P)中满足：<ul>
+<li>(1) <script type="math/tex">f(\boldsymbol x), g_i(\boldsymbol x), i =1,2,\cdots, m</script>均为凸函数；</li>
+<li>(2) <script type="math/tex">h_i(\boldsymbol x), i =1,2,\cdots, l</script>为线性函数；</li>
+</ul>
+</li>
+<li>则满足条件的KKT点也是问题(P)(此两条条件限制下，问题P就是<strong>凸问题</strong>)的局部(全局)最优解。</li>
+</ul>
+<p>本将要解决的问题是，若通过验证，发现上面的条件(1)或者(2)不满足，那么还有没有什么其他条件说明当<script type="math/tex">\boldsymbol x^*</script>满足KKT条件时，KKT点<script type="math/tex">\boldsymbol x^*</script>是问题(P)的最优解。</p>
+<p>假设<script type="math/tex">\boldsymbol x^*</script>满足KKT条件：</p>
+<script type="math/tex; mode=display">
+\triangledown f(\boldsymbol x^*) + \sum_{i=1}^{m}\lambda_i \triangledown g_i(\boldsymbol x^*) + \sum_{i=1}^{l} \mu_i \triangledown h_i(\boldsymbol x^*) = 0 \\
+\lambda_i > 0, i = 1,2, \cdots, m \\
+g_i(\boldsymbol x^*) \leq 0,  i = 1,2, \cdots, m \\
+h_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, l \\
+\lambda_i g_i(\boldsymbol x^*) = 0,  i = 1,2, \cdots, m</script><p>令：</p>
+<script type="math/tex; mode=display">
+L(\boldsymbol x) = f(\boldsymbol x) + \sum_{i=1}^{m}\lambda_i g_i(\boldsymbol x) + \sum_{i=1}^{l} \mu_i  h_i(\boldsymbol x)</script><script type="math/tex; mode=display">L(\boldsymbol x)$$称为**<font color=red>拉格朗日函数</font>**。
+
+简单分析$$L(\boldsymbol x)$$可知其具备几个特征：
+
+- **(1) 梯度为0**：$$\triangledown L(\boldsymbol x^*)  = \triangledown f(\boldsymbol x^*) + \sum_{i=1}^{m}\lambda_i \triangledown g_i(\boldsymbol x^*) + \sum_{i=1}^{l} \mu_i \triangledown h_i(\boldsymbol x^*) = 0</script><ul>
+<li><strong>(2)</strong>：<script type="math/tex">L(\boldsymbol x^*)  = f(\boldsymbol x^*) + \sum_{i=1}^{m}\lambda_i g_i(\boldsymbol x^*) + \sum_{i=1}^{l} \mu_i h_i(\boldsymbol x^*) = f(\boldsymbol x^*)</script></li>
+<li>(3)：<script type="math/tex">L(\boldsymbol x)  = f(\boldsymbol x) + \sum_{i=1}^{m}\lambda_i g_i(\boldsymbol x) + \sum_{i=1}^{l} \mu_i h_i(\boldsymbol x) \leq f(\boldsymbol x), \forall \boldsymbol x \in  \boldsymbol S</script></li>
+</ul>
+<p>由上面(2)、(3)可知：若<script type="math/tex">\boldsymbol x^*</script>是<script type="math/tex">L(\boldsymbol x)</script>的最优解(局部或者全局最优解都可以)，则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的最优解。</p>
+<blockquote>
+<p>若<script type="math/tex">\boldsymbol x^*</script>是<script type="math/tex">L(\boldsymbol x)</script>的局部最优解，则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的局部最优解；</p>
+<p>若<script type="math/tex">\boldsymbol x^*</script>是<script type="math/tex">L(\boldsymbol x)</script>的全局最优解，则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的全局最优解。</p>
+<p>小证明：</p>
+<p>局部最优解情况：<script type="math/tex">f(\boldsymbol x^*)  = L(\boldsymbol x^*) = L(\boldsymbol x)  = f(\boldsymbol x), \forall \boldsymbol x \in \boldsymbol S ∩ \boldsymbol N_\delta(\boldsymbol x^*)</script></p>
+<p>全局最优解情况：<script type="math/tex">f(\boldsymbol x^*)  = L(\boldsymbol x^*) = L(\boldsymbol x)  = f(\boldsymbol x), \forall \boldsymbol x \in \boldsymbol S</script></p>
+</blockquote>
+<p>假设<script type="math/tex">\boldsymbol x^*</script>满足KKT条件，则有：</p>
+<ul>
+<li>(1)：若<script type="math/tex">\triangledown^2 L(\boldsymbol x)  \succeq 0, \forall \boldsymbol x \in \boldsymbol S</script>，则<script type="math/tex">L(\boldsymbol x)</script>在集合<script type="math/tex">\boldsymbol S</script>上是凸函数，则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的全局最优解；</li>
+<li>(2)：若<script type="math/tex">\triangledown^2 L(\boldsymbol x)  \succeq 0, \forall \boldsymbol x \in \boldsymbol S ∩ \boldsymbol N_\delta(\boldsymbol x^*)</script>，则<script type="math/tex">L(\boldsymbol x)</script>在上<script type="math/tex">\boldsymbol x^*</script>某一邻域是凸函数，则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的局部最优解；</li>
+<li>(3)：若<script type="math/tex">\triangledown^2 L(\boldsymbol x^*)  \succ 0</script>，则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的严格局部最优解；</li>
+</ul>
+<blockquote>
+<p>视频课程中这里有一部分分析推导，有时间记录</p>
+</blockquote>
+<h4 id="9-2-二阶充分条件"><a href="#9-2-二阶充分条件" class="headerlink" title="9.2 二阶充分条件"></a>9.2 二阶充分条件</h4><p>下面是本讲内容的核心：</p>
+<h5 id="一-二阶充分条件定义"><a href="#一-二阶充分条件定义" class="headerlink" title="(一) 二阶充分条件定义"></a>(一) 二阶充分条件定义</h5><p>假设<script type="math/tex">\boldsymbol x^*</script>是KKT点，易知：</p>
+<ul>
+<li><script type="math/tex; mode=display">\triangledown L(\boldsymbol x^*)  = 0</script></li>
+<li><script type="math/tex; mode=display">\boldsymbol d^T \triangledown^2 L(\boldsymbol x^*) \boldsymbol d > 0, \forall \boldsymbol d \in F_2(\boldsymbol x^*)</script></li>
+</ul>
+<p>则<script type="math/tex">\boldsymbol x^*</script>是问题(P)的严格局部最优解。</p>
+<h5 id="二-证明"><a href="#二-证明" class="headerlink" title="(二) 证明"></a>(二) 证明</h5><p>反证：假设<script type="math/tex">\boldsymbol x^*​</script>是KKT点，但<script type="math/tex">\boldsymbol x^*​</script>不是问题(P)的严格局部最优解。则能找到一个点<script type="math/tex">\boldsymbol x_k \to \boldsymbol x^* ​</script>，使得：</p>
+<script type="math/tex; mode=display">
+f(\boldsymbol x_k) \leq f(\boldsymbol x^*), \forall \boldsymbol x_k \in \boldsymbol S</script><p>记<script type="math/tex">\boldsymbol d_k = \dfrac{\boldsymbol x_k- \boldsymbol x^*}{\| \boldsymbol x_k- \boldsymbol x^* \|}</script>，<script type="math/tex">\alpha_k = {\| \boldsymbol x_k- \boldsymbol x^* \|}</script>，则会得到两个点列：<script type="math/tex">\begin{Bmatrix} \boldsymbol d_k \end{Bmatrix}</script>，<script type="math/tex">\begin{Bmatrix} \alpha_k \end{Bmatrix}</script>，易得：</p>
+<ul>
+<li>因为<script type="math/tex">\boldsymbol x_k \to \boldsymbol x^*</script>，因此<script type="math/tex">\begin{Bmatrix} \alpha_k \end{Bmatrix} \to 0</script></li>
+<li><script type="math/tex; mode=display">\begin{Bmatrix} \boldsymbol d_k \end{Bmatrix}$$是有界的，因此必然存在收敛子列，设最终$$\begin{Bmatrix} \boldsymbol d_k \end{Bmatrix} \to \boldsymbol d</script></li>
+</ul>
+<p>则有：<script type="math/tex">\boldsymbol x_k = \boldsymbol x^* + \alpha_k \boldsymbol d_k</script>，</p>
+<script type="math/tex; mode=display">
+f(\boldsymbol x_k) - f(\boldsymbol x^*) \xlongequal{泰勒展开} \triangledown f(\boldsymbol x^*)^{\mathrm T}(\boldsymbol x_k - \boldsymbol x^*) +\dfrac{\alpha_k^2}{2} \boldsymbol d_k^{\mathrm T}\triangledown f(\boldsymbol x^*)\boldsymbol d_k+\text{o}(\alpha_k^2) \\= \alpha_k \triangledown f(\boldsymbol x^*)^{\mathrm T} \boldsymbol d_k +\dfrac{\alpha_k^2}{2} \boldsymbol d_k^{\mathrm T}\triangledown f(\boldsymbol x^*)\boldsymbol d_k+\text{o}(\alpha_k^2) \leq 0</script><script type="math/tex; mode=display">
+g_i(\boldsymbol x_k) - g_i(\boldsymbol x^*) \xlongequal{泰勒展开} \triangledown g_i(\boldsymbol x^*)^{\mathrm T}(\boldsymbol x_k - \boldsymbol x^*) +\dfrac{\alpha_k^2}{2} \boldsymbol d_k^{\mathrm T}\triangledown g_i(\boldsymbol x^*)\boldsymbol d_k+\text{o}(\alpha_k^2) \\= \alpha_k \triangledown g_i(\boldsymbol x^*)^{\mathrm T} \boldsymbol d_k +\dfrac{\alpha_k^2}{2} \boldsymbol d_k^{\mathrm T}\triangledown g_i(\boldsymbol x^*)\boldsymbol d_k+\text{o}(\alpha_k^2) \leq 0</script><script type="math/tex; mode=display">
+h_i(\boldsymbol x_k) - h_i(\boldsymbol x^*) \xlongequal{泰勒展开} \triangledown h_i(\boldsymbol x^*)^{\mathrm T}(\boldsymbol x_k - \boldsymbol x^*) +\dfrac{\alpha_k^2}{2} \boldsymbol d_k^{\mathrm T}\triangledown h_i(\boldsymbol x^*)\boldsymbol d_k+\text{o}(\alpha_k^2) \\= \alpha_k \triangledown h_i(\boldsymbol x^*)^{\mathrm T} \boldsymbol d_k +\dfrac{\alpha_k^2}{2} \boldsymbol d_k^{\mathrm T}\triangledown h_i(\boldsymbol x^*)\boldsymbol d_k+\text{o}(\alpha_k^2) = 0</script><link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/05/27/Optimization-method2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%80%E4%BC%98%E5%8C%96/" rel="tag">最优化</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/06/11/leisure-activities/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            休闲事情
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/05/15/Paper-knowledge-Supplement/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">本科论文知识补充</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>线性代数_Part1 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-LinearAlgebra1"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  线性代数_Part1
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/05/03/LinearAlgebra1/" class="article-date">
+  <time datetime="2022-05-03T07:22:54.000Z" itemprop="datePublished">2022-05-03</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">数学基础</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">15.1k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">65 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1-线性代数基础"><a href="#1-线性代数基础" class="headerlink" title="1 线性代数基础"></a>1 线性代数基础</h3><h4 id="1-1-方程组的几何解释基础"><a href="#1-1-方程组的几何解释基础" class="headerlink" title="1.1 方程组的几何解释基础"></a>1.1 方程组的几何解释基础</h4><p>本节主要介绍线性代数的基础。首先从解方程开始，学习线性代数的应用之一就是求解复杂的方程问题，本节核心之一就是从row picture(行图像)和column picture(列图像)的角度解方程。</p>
+<h5 id="1-1-1-二维行图像"><a href="#1-1-1-二维行图像" class="headerlink" title="1.1.1 二维行图像"></a>1.1.1 二维行图像</h5><p>如下所示，一个普通的方程组：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{r}
+2 x-y=0 \\
+-x+2 y=3
+\end{array}\right.</script><p>按行将方程组写成矩阵形式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+2 & -1 \\
+-1 & 2
+\end{array}\right]\left[\begin{array}{l}
+x \\
+y
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+3
+\end{array}\right]</script><p>分别可以记为：</p>
+<ul>
+<li>系数矩阵($\boldsymbol A$): 将方程组系数按行提取出来，构造完成的一个矩阵。</li>
+</ul>
+<ul>
+<li>未知向量($\boldsymbol x$): 将方程组的未知数提取出来，按列构成一个向量。 </li>
+</ul>
+<ul>
+<li>向量($\boldsymbol b$): 将等号右侧结果按列提取，构成一个向量。</li>
+</ul>
+<p>从行的角度来看，$2x-y=0$和$-x+2y = 3$分别表示两条二维平面中的直线，如果这两条直线相交，那么交点的坐标$(x^<em>, y^</em>)$即为方程组的解。</p>
+<p>更确切的讲，如果两条直线相交于一点，那么该方程组有且仅有一个解，即为交点的坐标；如果两条直线重合，那么说明这两条直线方程实际上是同一条直线，此时直线上的所有点的坐标均为方程组的解；如果两条直线平行但不重合，则说明不存在点的坐标同时满足这两条直线的方程，此时方程组无解。</p>
+<h5 id="1-1-2-二维列图像"><a href="#1-1-2-二维列图像" class="headerlink" title="1.1.2 二维列图像"></a>1.1.2 二维列图像</h5><p>从列图像的角度，再次求解上面的方程，即将方程按列提取，得到的矩阵为：</p>
+<script type="math/tex; mode=display">
+x\left[\begin{array}{c}
+2 \\
+-1
+\end{array}\right]+y\left[\begin{array}{c}
+-1 \\
+2
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+3
+\end{array}\right]</script><p>使用列向量构成系数矩阵，将问题转化为：将向量$\boldsymbol \alpha=\left[\begin{array}{c}2 \ -1\end{array}\right]$与向量$\boldsymbol \beta=\left[\begin{array}{c}-1 \ 2\end{array}\right]$ 任意组合，使其结果构成$\boldsymbol \gamma=\left[\begin{array}{c}0 \ 3\end{array}\right]$，也就是“线性组合”，它是贯穿线性代数的基本方法。$x, y$称为线性组合的系数，因此线性方程组就可以理解为：<br>是否存在合适的线性组合系数$x, y$，使得$\boldsymbol \alpha, \boldsymbol \beta$的线性组合 $x\boldsymbol \alpha + y\boldsymbol \beta$恰好等于$\boldsymbol \gamma$。如果存在，线性组合的系数为多少？</p>
+<p>值得一提的是，从列的角度看待线性方程组是一种非常重要的理解方式，以后会经常用到这样的思想。</p>
+<p>对于一般的$n$维线性方程组$\boldsymbol{Ax = b}$，其中$\boldsymbol A$是$n \times n$维系数矩阵，$\boldsymbol x$是$n$维列向量。$\boldsymbol b$是方程组右端的$n$维列向量。不妨设$\boldsymbol A$由$n$个列向量$(\boldsymbol \alpha_1, \boldsymbol \alpha_2, \cdots, \boldsymbol \alpha_n)$组成，$\boldsymbol x=\left[\begin{array}{c}x_1 \ x_2 \ \vdots \ x_n\end{array}\right]$，则方程组$\boldsymbol{Ax = b}$可以表示为：</p>
+<script type="math/tex; mode=display">
+\left(\boldsymbol \alpha_{1}, \boldsymbol \alpha_{2}, \cdots, \boldsymbol \alpha_{n}\right)\left(\begin{array}{c}
+x_1 \\ x_2 \\ \vdots \\ x_n \end{array}\right)= \boldsymbol b</script><p>即</p>
+<script type="math/tex; mode=display">
+x_1 \boldsymbol \alpha_{1} + x_2 \boldsymbol \alpha_{2} + \cdots + x_n\boldsymbol \alpha_{n} = \boldsymbol b</script><p>由此可以看出，矩阵$\boldsymbol A$乘以向量$\boldsymbol x$相当于对$\boldsymbol A$的$n$个列向量作线性组合，线性组合的系数即为向量$\boldsymbol x$各对应的分量。因此对线性方程组可以理解为：是否存在合适的线性组合系数，使得$\boldsymbol A$的列向量的线性组合恰好为$\boldsymbol b$。如果存在，线性组合的系数为多少？这些线性组合的系数就构成了$\boldsymbol{Ax = b}$的解向量$\boldsymbol x$。</p>
+<h4 id="1-2-线性方程组有解情况"><a href="#1-2-线性方程组有解情况" class="headerlink" title="1.2 线性方程组有解情况"></a>1.2 线性方程组有解情况</h4><p>首先考虑对于任意的$n$维列向量$\boldsymbol x$，当$\boldsymbol x$变动时，$\boldsymbol{Ax}$也在变动，当 $\boldsymbol x$取遍所有的$n$维列向量时，$\boldsymbol{Ax}$就能取遍所有$\boldsymbol A$的列向量的线性组合，也就是说，所有的$\boldsymbol{Ax}$就构成了$\boldsymbol A$的列向量张成的线性空间$\boldsymbol{V} = \text{span} \begin{Bmatrix} \boldsymbol \alpha_1, \boldsymbol \alpha_2, \cdots, \boldsymbol \alpha_n \end{Bmatrix}$ (span是一组集合，它包含两个向量之间的全部线性组合)，因此：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{Ax = b}有解 \Longleftrightarrow \boldsymbol b \in \boldsymbol{V} = \text{span} \begin{Bmatrix} \boldsymbol \alpha_1, \boldsymbol \alpha_2, \cdots, \boldsymbol \alpha_n \end{Bmatrix}</script><p>又由于</p>
+<script type="math/tex; mode=display">
+\boldsymbol b \in \boldsymbol{V} = \text{span} \begin{Bmatrix} \boldsymbol \alpha_1, \boldsymbol \alpha_2, \cdots, \boldsymbol \alpha_n \end{Bmatrix}</script><p>因此也就得出了</p>
+<script type="math/tex; mode=display">
+\boldsymbol{Ax = b}有解 \Longleftrightarrow \text{Rank}(\boldsymbol A) = \text{Rank}(\boldsymbol A, \boldsymbol b)</script><p>特别地，若$\boldsymbol A$的$n$个列向量线性无关，则这$n$个列向量就构成了$n$维向量空间的一组基。此时对任意的向量均可由$\boldsymbol A$的列向量线性表出，也即是一定有解。换言之，如果$\boldsymbol A$<strong>可逆/非奇异</strong>，则一定有解。</p>
+<h4 id="1-3-矩阵乘法理解"><a href="#1-3-矩阵乘法理解" class="headerlink" title="1.3 矩阵乘法理解"></a>1.3 矩阵乘法理解</h4><p>有了对线性方程组的这些认识，我们可以更好地理解矩阵乘法。</p>
+<p><strong>(一) 向量右乘矩阵</strong></p>
+<p>首先考虑列向量$\boldsymbol x \in \mathbb{R}^n$右乘矩阵$\boldsymbol A \in \mathbb{R}^{n \times n}$。先从行的角度考虑，不妨设：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}=\left(\begin{array}{c}
+\boldsymbol{a}_{1}^{\mathrm{T}} \\
+\boldsymbol{\alpha}_{2}^{\mathrm{T}} \\
+\vdots \\
+\boldsymbol{\alpha}_{n}^{\mathrm{T}}
+\end{array}\right), \boldsymbol{x}=\left(\begin{array}{c}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n}
+\end{array}\right)</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A} \boldsymbol{x}=\left(\begin{array}{c}
+\boldsymbol{\alpha}_{1}^{\mathrm{T}} \\
+\boldsymbol{\alpha}_{2}^{\mathrm{T}} \\
+\vdots \\
+\boldsymbol{\alpha}_{n}^{\mathrm{T}}
+\end{array}\right) \boldsymbol{x}=\left(\begin{array}{c}
+\boldsymbol{\alpha}_{1}^{\mathrm{T}} \boldsymbol{x} \\
+\boldsymbol{\alpha}_{2}^{\mathrm{T}} \boldsymbol{x} \\
+\vdots \\
+\boldsymbol{a}_{n}^{\mathrm{T}} \boldsymbol{x}
+\end{array}\right)=\left(\begin{array}{c}
+\boldsymbol{\alpha}_{1} \cdot \boldsymbol{x} \\
+\boldsymbol{\alpha}_{2} \cdot \boldsymbol{x} \\
+\vdots \\
+\boldsymbol{\alpha}_{n} \cdot \boldsymbol{x}
+\end{array}\right)</script><p>由此可知，从行的角度来看，$\boldsymbol{Ax}$相当于分别用$\boldsymbol A$的行点乘$\boldsymbol x$，这就是矩阵乘法的定义。<br>下面从列的角度考虑，这是一种非常重要的理解方式。不妨设：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A = (\boldsymbol \beta_1, \boldsymbol \beta_2, \cdots, \boldsymbol \beta_n)</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A} \boldsymbol{x}=\left(\boldsymbol{\beta}_{1}, \boldsymbol{\beta}_{2}, \cdots, \boldsymbol{\beta}_{n}\right)\left(\begin{array}{c}
+x_{1} \\
+x_{2} \\
+\vdots \\
+x_{n}
+\end{array}\right)=x_{1} \boldsymbol{\beta}_{1}+x_{2} \boldsymbol{\beta}_{2}+\cdots+x_{n} \boldsymbol{\beta}_{n}</script><p>由此即知，列向量$\boldsymbol x$右乘矩阵$\boldsymbol A$即是对$\boldsymbol A$的列向量作线性组合，$\boldsymbol x$的各分量即为线性组合的系数。</p>
+<p><strong>(二) 向量左乘矩阵</strong></p>
+<p>下面考虑行向量$\boldsymbol y^{\mathrm T}$左乘矩阵$\boldsymbol A \in \mathbb{R}^{n \times n}$，其中$\boldsymbol y \in \mathbb{R}^{n}$，不妨设：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{y}^{\mathrm{T}}=\left(y_{1}, y_{2}, \cdots, y_{n}\right)</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{y}^{\mathrm{T}} \boldsymbol{A}=\left(y_{1}, y_{2}, \cdots, y_{n}\right)\left(\begin{array}{c}
+\boldsymbol{\alpha}_{1}^{\mathrm{T}} \\
+\boldsymbol{\alpha}_{2}^{\mathrm{T}} \\
+\vdots \\
+\boldsymbol{a}_{n}^{\mathrm{T}}
+\end{array}\right)=y_{1} \boldsymbol{\alpha}_{1}^{\mathrm{T}}+y_{2} \boldsymbol{\alpha}_{2}^{\mathrm{T}}+\cdots y_{n} \boldsymbol{\alpha}_{n}^{\mathrm{T}}</script><p>由此即知，行向量$\boldsymbol y^{\mathrm T}$左乘矩阵$\boldsymbol A$相当于对$\boldsymbol A$的行向量作线性组合，$\boldsymbol y^{\mathrm T}$的各分量即为线性组合的系数。</p>
+<p>综上所述，列向量$\boldsymbol x$右乘矩阵$\boldsymbol A$相当于对$\boldsymbol A$的列向量作线性组合，$\boldsymbol x$的各分量即为线性组合的系数；行向量$\boldsymbol y^{\mathrm T}$左乘矩阵$\boldsymbol A$相当于对$\boldsymbol A$的行向量作线性组合，$\boldsymbol y^{\mathrm T}$的各分量即为线性组合的系数。</p>
+<p><strong>(三) 矩阵乘以矩阵</strong></p>
+<p>对于矩阵与矩阵的乘法，只需把矩阵按行或列分块，即可按上述向量乘矩阵的方式理解。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A B}=\boldsymbol{A}\left(\boldsymbol{\beta}_{1}, \boldsymbol{\beta}_{2}, \cdots, \boldsymbol{\beta}_{n}\right)=\left(\boldsymbol{A} \boldsymbol{\beta}_{1}, \boldsymbol{A} \boldsymbol{\beta}_{2}, \cdots, \boldsymbol{A} \boldsymbol{\beta}_{n}\right)=\left(\begin{array}{c}
+\boldsymbol{\alpha}_{1}^{T} \\
+\boldsymbol{\alpha}_{2}^{T} \\
+\vdots \\
+\boldsymbol{\alpha}_{n}^{T}
+\end{array}\right) \boldsymbol{B}=\left(\begin{array}{c}
+\boldsymbol{\alpha}_{1}^{T} \boldsymbol{B} \\
+\boldsymbol{\alpha}_{2}^{T} \boldsymbol{B} \\
+\vdots \\
+\boldsymbol{\alpha}_{n}^{T} \boldsymbol{B}
+\end{array}\right)</script><p>也即是，矩阵$\boldsymbol B$右乘矩阵$\boldsymbol A$相当于对$\boldsymbol A$的列作线性组合，$\boldsymbol B$的各列的分量即为线性组合的系数；矩阵$\boldsymbol A$左乘矩阵$\boldsymbol B$相当于对$\boldsymbol B$的行作线性组合，$\boldsymbol A$的各行的分量即为线性组合的系数。这种理解方式也有助于我们更快地进行矩阵乘法的计算。</p>
+<h3 id="2-矩阵消元"><a href="#2-矩阵消元" class="headerlink" title="2 矩阵消元"></a>2 矩阵消元</h3><p>对于线性方程组：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{r}
+x+2 y+z=2 \\
+3 x+8 y+z=12 \\
+4 y+z=2
+\end{array}\right.</script><p>首先通过消元来简化方程组，再通过回代求得方程组的解。考虑方程组系数矩阵$\boldsymbol A$及其右端向量$\boldsymbol b$：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left(\begin{array}{lll}
+1 & 2 & 1 \\
+3 & 8 & 1 \\
+0 & 4 & 1
+\end{array}\right), \boldsymbol b=\left(\begin{array}{c}
+2 \\
+12 \\
+2
+\end{array}\right)</script><p>我们称：</p>
+<script type="math/tex; mode=display">
+(\boldsymbol A,\boldsymbol b)=\left(\begin{array}{lll}
+1 & 2 & 1 & 2\\
+3 & 8 & 1 & 12\\
+0 & 4 & 1 & 2
+\end{array}\right)</script><p>为增广矩阵(augmented matrix)。下面对增广矩阵$(\boldsymbol A,\boldsymbol b)$进行消元：</p>
+<p><img src="https://pic.imgdb.cn/item/62ab15940947543129489e3a.jpg"></p>
+<p>其中，方框中框起来的元素1,2,5称为主元(pivot)，注意主元不能为0。下面通过回代求得线性方程组的解。</p>
+<p>首先由增广矩阵的第3行可知$z = -2$，将$z = -2$代入第2行得$y = 1$，再将$z = -2, y = 1$代入第1行得$x = 2$。因此方程组的解为$x = 2, y = 1, z = 2$。</p>
+<p>我们将$\boldsymbol A$通过消元后得到的上三角矩阵(upper triangular)记为$\boldsymbol U$，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol U=\left(\begin{array}{ccc}
+1 & 2 & 1 \\
+0 & 2 & -2 \\
+0 & 0 & 5
+\end{array}\right)</script><p>下面从矩阵乘法角度来说明$\boldsymbol A$是如何变成$\boldsymbol U$的。先将$\boldsymbol A$的第1行的−3倍加到第2行得到了$\boldsymbol A_1=\left(\begin{array}{ccc} 1 &amp; 2 &amp; 1 \ 0 &amp; 2 &amp; -2 \ 0 &amp; 4 &amp; 1 \end{array}\right)$，回忆一下矩阵乘法，一个矩阵左乘矩阵$\boldsymbol A$相当于对$\boldsymbol A$的行作线性组合，因此我们要找到一个合适的矩阵$\boldsymbol X$使得$\boldsymbol{XA = A_1}$，由$\boldsymbol A$和$\boldsymbol A_1$的第1行和第3行相同可知，矩阵$\boldsymbol X$的第1行和第3行分别为$(1,0,0),(0,0,1)$。 又由将$\boldsymbol A$的第1行的-3倍加到第2行得到$\boldsymbol A_1$可知，$\boldsymbol X$的第2行为$(−3,1,0)$，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol X=\left(\begin{array}{ccc}
+1 & 0 & 0 \\
+-3 & 1 & 0 \\
+0 & 0 & 1
+\end{array}\right)</script><p>我们将这个矩阵称为$\boldsymbol E_{21}$，因为它把$\boldsymbol A$的$(2,1)$位置的元素消成了0。这个矩阵称为<strong>初等矩阵</strong>或消元矩阵(elementary matrix or elimination matrix)。同理可知，第二次变换的矩阵为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol E_{32}=\left(\begin{array}{ccc}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & -2 & 1
+\end{array}\right)</script><p>$\boldsymbol E_{32}$同样是初等矩阵。因此我们即得：</p>
+<script type="math/tex; mode=display">
+\boldsymbol E_{32} \boldsymbol E_{21} \boldsymbol A = \boldsymbol U</script><p>这就是矩阵消元的乘法表示。</p>
+<h3 id="3-矩阵乘法与逆"><a href="#3-矩阵乘法与逆" class="headerlink" title="3 矩阵乘法与逆"></a>3 矩阵乘法与逆</h3><h4 id="3-1-矩阵乘法的五种理解方式"><a href="#3-1-矩阵乘法的五种理解方式" class="headerlink" title="3.1 矩阵乘法的五种理解方式"></a>3.1 矩阵乘法的五种理解方式</h4><h5 id="3-1-1-定义的角度"><a href="#3-1-1-定义的角度" class="headerlink" title="3.1.1 定义的角度"></a>3.1.1 定义的角度</h5><p>设$\boldsymbol{C = AB}$，则矩阵$\boldsymbol A$的$(i,j)$处的元素为$\boldsymbol A$的第$i$行与$\boldsymbol B$的第$j$列的各元素相乘之和，即：</p>
+<script type="math/tex; mode=display">
+c_{i j}=a_{i 1} b_{1 j}+a_{i 2} b_{2 j}+\cdots+a_{i n} b_{n j}=\sum_{k=1}^{n} a_{i k} b_{k j}</script><p>也即是$\boldsymbol A$的第$i$行与$\boldsymbol B$的第$j$列点乘所得到的结果。</p>
+<h5 id="3-1-2-列的角度"><a href="#3-1-2-列的角度" class="headerlink" title="3.1.2 列的角度"></a>3.1.2 列的角度</h5><p>设矩阵$\boldsymbol B$为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol B = (\boldsymbol \beta_1, \boldsymbol \beta_2, \cdots, \boldsymbol \beta_n)</script><p>则：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{AB} = \boldsymbol A (\boldsymbol \beta_1, \boldsymbol \beta_2, \cdots, \boldsymbol \beta_n) = (\boldsymbol A \boldsymbol \beta_1, \boldsymbol A \boldsymbol \beta_2, \cdots, \boldsymbol A \boldsymbol \beta_n)</script><p>因此，从列的角度来看，矩阵$\boldsymbol B$右乘矩阵$\boldsymbol A$所得到的矩阵的每一列都是$\boldsymbol A$的列的线性组合，线性组合的系数分别是$\boldsymbol B$的各列的分量。</p>
+<h5 id="3-1-3-行的角度"><a href="#3-1-3-行的角度" class="headerlink" title="3.1.3 行的角度"></a>3.1.3 行的角度</h5><p>设矩阵$\boldsymbol A$为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}=\left(\begin{array}{c}
+\boldsymbol{a}_{1}^{\mathrm{T}} \\
+\boldsymbol{\alpha}_{2}^{\mathrm{T}} \\
+\vdots \\
+\boldsymbol{\alpha}_{n}^{\mathrm{T}}
+\end{array}\right)</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{AB}=\left(\begin{array}{c}
+\boldsymbol{a}_{1}^{\mathrm{T}} \boldsymbol B\\
+\boldsymbol{\alpha}_{2}^{\mathrm{T}} \boldsymbol B\\
+\vdots \\
+\boldsymbol{\alpha}_{n}^{\mathrm{T}} \boldsymbol B
+\end{array}\right)</script><p>因此，从行的角度来看，矩阵$\boldsymbol A$左乘矩阵$\boldsymbol B$所得到的矩阵的每一行都是$\boldsymbol B$的行的线性组合，线性组合的系数分别是$\boldsymbol A$的各行的分量。</p>
+<h5 id="3-1-4-从列乘以行的角度"><a href="#3-1-4-从列乘以行的角度" class="headerlink" title="3.1.4 从列乘以行的角度"></a>3.1.4 从列乘以行的角度</h5><p>设矩阵$\boldsymbol A$、$\boldsymbol B$分别为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}=\left(\boldsymbol{\alpha}_{1}, \boldsymbol{\alpha}_{2} \cdots, \boldsymbol{\alpha}_{n}\right), \boldsymbol{B}=\left(\begin{array}{c}
+\boldsymbol{\beta}_{1}^{\mathrm{T}} \\
+\boldsymbol{\beta}_{2}^{\mathrm{T}} \\
+\vdots \\
+\boldsymbol{\beta}_{n}^{\mathrm{T}}
+\end{array}\right)</script><p>则有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A B}=\boldsymbol{\alpha}_{1} \boldsymbol{\beta}_{1}^{\mathrm{T}}+\boldsymbol{\alpha}_{2} \boldsymbol{\beta}_{2}^{\mathrm{T}}+\cdots+\boldsymbol{\alpha}_{n} \boldsymbol{\beta}_{n}^{\mathrm{T}}=\sum_{k=1}^{n} \boldsymbol{\alpha}_{k} \boldsymbol{\beta}_{k}^{\mathrm{T}}</script><p>由于列向量乘以行向量得到的是一个矩阵，因此从列乘以行的角度来看，矩阵$\boldsymbol A$乘以$\boldsymbol B$得到的是$n$个矩阵之和，其中第$i$个矩阵由$\boldsymbol A$的第$i$列乘以$\boldsymbol B$的第$j$行得到。</p>
+<h5 id="3-1-5-分块乘法-block-multiplication"><a href="#3-1-5-分块乘法-block-multiplication" class="headerlink" title="3.1.5 分块乘法(block multiplication)"></a>3.1.5 分块乘法(block multiplication)</h5><p>矩阵乘法同样可以分块来乘，只要分块的大小能够使乘法有意义即可(分块的大小要相互匹配)如</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A B}=\left(\begin{array}{ll}
+\boldsymbol{A}_{1} & \boldsymbol{A}_{2} \\
+\boldsymbol{A}_{3} & \boldsymbol{A}_{4}
+\end{array}\right)\left(\begin{array}{ll}
+\boldsymbol{B}_{1} & \boldsymbol{B}_{2} \\
+\boldsymbol{B}_{3} & \boldsymbol{B}_{4}
+\end{array}\right)=\left(\begin{array}{ll}
+\boldsymbol{A}_{1} \boldsymbol{B}_{1}+\boldsymbol{A}_{2} \boldsymbol{B}_{3} & \boldsymbol{A}_{1} \boldsymbol{B}_{2}+\boldsymbol{A}_{2} \boldsymbol{B}_{4} \\
+\boldsymbol{A}_{3} \boldsymbol{B}_{1}+\boldsymbol{A}_{4} \boldsymbol{B}_{3} & \boldsymbol{A}_{3} \boldsymbol{B}_{2}+\boldsymbol{A}_{4} \boldsymbol{B}_{4}
+\end{array}\right)</script><h4 id="3-2-矩阵的逆"><a href="#3-2-矩阵的逆" class="headerlink" title="3.2 矩阵的逆"></a>3.2 矩阵的逆</h4><h5 id="3-2-1-矩阵逆的定义"><a href="#3-2-1-矩阵逆的定义" class="headerlink" title="3.2.1 矩阵逆的定义"></a>3.2.1 矩阵逆的定义</h5><p>如果存在矩阵$\boldsymbol B$使得$\boldsymbol{A B} = \boldsymbol{B A} = \boldsymbol I$，则矩阵$\boldsymbol B$称为矩阵$\boldsymbol A$的逆矩阵(inverse matrix)，记为$\boldsymbol A^{-1}$。一个矩阵可逆那么它是<strong>非奇异矩阵</strong>。<br>如果存在矩阵$\boldsymbol B$使得$\boldsymbol{AB = I}$，我们称$\boldsymbol B$是$\boldsymbol A$的右逆(right inverse)，事实上，可以证明$\boldsymbol B$还是$\boldsymbol A$的左逆(left inverse)，即$\boldsymbol{BA = I}$，因此，直接称满足$\boldsymbol{A B} = \boldsymbol{B A} = \boldsymbol I$的矩阵$\boldsymbol B$为$\boldsymbol A$的逆矩阵(inverse matrix)，即为$\boldsymbol A^{-1}$。</p>
+<h5 id="3-2-2-判断矩阵是否存在逆"><a href="#3-2-2-判断矩阵是否存在逆" class="headerlink" title="3.2.2 判断矩阵是否存在逆"></a>3.2.2 判断矩阵是否存在逆</h5><p>以矩阵$\boldsymbol A$为例：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left(\begin{array}{cc}
+1 & 3 \\
+2 & 6 
+\end{array}\right)</script><p>为例，如果从行列式的角度来看，由于$\boldsymbol A$的行列式为零，显然$\boldsymbol A$不可逆。但是，有没有其他方式来说明$\boldsymbol A$不可逆呢？<br>注意到$\boldsymbol A$的两列是线性相关的(都是$\left[\begin{array}{c}1 \ 2\end{array}\right]$的倍数)，假设存在矩阵$\boldsymbol B$使得$\boldsymbol{AB = I}$，再来回忆下矩阵的乘法可知，$\boldsymbol{AB}$的每一列都是$\boldsymbol A$的列的线性组合，因此$\boldsymbol{AB}$的每一列也都是$\left[\begin{array}{c}1 \ 2\end{array}\right]$的倍数，显然是不可能等于单位矩阵$\boldsymbol I$的，因此$\boldsymbol A$不可逆。</p>
+<ul>
+<li>或者我们可以再换一种方式来说明：<br>如果存在向量$\boldsymbol x \neq \boldsymbol 0$使得$\boldsymbol{Ax = 0}$，那么$\boldsymbol A$不可逆。<br>这个结论的证明是显然的，假设$\boldsymbol A$可逆，那么$\boldsymbol{Ax = 0}$两边同时乘以$\boldsymbol A^{-1}$，则得到$\boldsymbol{x = 0}$，矛盾，因此$\boldsymbol A$不可逆。<br>显然，可取$\boldsymbol x=\left[\begin{array}{c}-3 \ 1\end{array}\right]$，则$\boldsymbol{Ax = 0}$，因此，A 不可逆。</li>
+</ul>
+<h5 id="3-2-3-求矩阵的逆"><a href="#3-2-3-求矩阵的逆" class="headerlink" title="3.2.3 求矩阵的逆"></a>3.2.3 求矩阵的逆</h5><p>利用<strong><font color="red">Gauss-Jordan</font></strong> 消元法，对矩阵$(\boldsymbol{A, I})$通过行变换消元，当$(\boldsymbol{A, I})$中的$\boldsymbol A$变为$\boldsymbol I$时，$(\boldsymbol{A, I})$中的矩阵$\boldsymbol I$就变成了$\boldsymbol A^{-1}$，即：</p>
+<script type="math/tex; mode=display">
+(\boldsymbol{A, I}) \frac{\text { 行变换消元, 相当于在左边乘以矩阵 } \boldsymbol{X}}{\text { 当 } \boldsymbol{X A=I} \text { 时, } \boldsymbol X \text { 即为 } \boldsymbol A^{-1}, \boldsymbol I \text { 就变为 } \boldsymbol A^{-1}}\left(\boldsymbol I, \boldsymbol A^{-1}\right)</script><p>这种方法的原理可以从矩阵线性变换来考虑，初等行变换就是线性变换，其实就是对矩阵$\boldsymbol A$、$\boldsymbol I$同时进行相同的线性变换，当$\boldsymbol A$变成了$\boldsymbol I$，此时$\boldsymbol I$就变成了$\boldsymbol A^{-1}$。<br>发现矩阵的逆与线性相关/无关、矩阵的秩、矩阵行列式有很多相互关联关系。</p>
+<h3 id="4-矩阵的LU分解"><a href="#4-矩阵的LU分解" class="headerlink" title="4 矩阵的LU分解"></a>4 矩阵的LU分解</h3><p>从另一种角度来看待Gauss消元(本质上，LU分解是高斯消元的一种表达方式)。</p>
+<p>首先考虑没有行交换的情形（也就是主元位置的元素不为0）。对矩阵$\boldsymbol A$进行Gauss消元相当于用一系列初等矩阵左乘$\boldsymbol A$从而得到上三角矩阵$\boldsymbol U$。</p>
+<p>以$3 \times 3$矩阵为例。设$\boldsymbol A$是一个$3 \times 3$矩阵，$\boldsymbol E<em>{21}$、$\boldsymbol E</em>{31}$、$\boldsymbol E<em>{32}$是初等矩阵(将$\boldsymbol E</em>{ij}$位置的元素消为0），$\boldsymbol U$是消元后所得到的上三角矩阵，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol E_{32}\boldsymbol E_{31}\boldsymbol E_{21} \boldsymbol A= \boldsymbol U</script><p>因此：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A = \boldsymbol E_{21}^{-1}\boldsymbol E_{31}^{-1}\boldsymbol E_{32}^{-1} \boldsymbol U</script><p>记：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{E}=\boldsymbol{E}_{32} \boldsymbol{E}_{31} \boldsymbol{E}_{21}, \boldsymbol{L}=\boldsymbol{E}_{21}^{-1} \boldsymbol{E}_{31}^{-1} \boldsymbol{E}_{32}^{-1}</script><p>则以上两式即为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{EA = U}, \boldsymbol{A = LU}</script><p>而当我们写成$\boldsymbol{A = LU}$的形式时，显然$\boldsymbol L$是对角元素全为1的<strong>下三角矩阵</strong>(一般认为，下三角矩阵的左乘代表了对矩阵进行行变换)，且$\boldsymbol L$下三角部分各位置的元素可通过消元过程快速确定。<br>因此，我们只需记录消元所用的乘数，就能快速地确定矩阵$\boldsymbol L$(注意我们这里所讨论的是没有行交换的情形)，不需要进行任何计算，这就是我们使用形式$\boldsymbol{A = LU}$的好处。<br>数学家们喜欢0，喜欢1，喜欢对称，$\boldsymbol{A = LU}$显然不那么对称，$\boldsymbol{U}$对角线上是主元，$\boldsymbol{L}$对角线上是1，这太不美观了实际上，我们还可以进一步分解：</p>
+<script type="math/tex; mode=display">
+\boldsymbol U = \boldsymbol{DW} = \left[\begin{array}{cccc}
+d_{1} & & & \\
+& d_{2} & & \\
+& & \ddots & \\
+& & & d_{n}
+\end{array}\right]\left[\begin{array}{cccc}
+1 & u_{12} / d_{1} & u_{13} / d_{1} & \cdot \\
+& 1 & u_{23} / d_{2} & \cdot \\
+& & \ddots & \vdots \\
+& & & 1
+\end{array}\right]</script><p>因此，有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A = LDW}</script><p>此处$\boldsymbol{DW = U}$，$\boldsymbol D$是一个只有主对角线元素的矩阵，$\boldsymbol W$是对角元素全为1的上三角矩阵。</p>
+<blockquote>
+<p>你一定跟我当时一样心中一万匹羊驼在奔腾，觉得折腾这玩意有啥用啊，折腾过来折腾过去，没啥用啊，这么弄的目的是啥嘛，但是当天晚上回家看数值分析的书，刚好也讲这个过程，原来这么做的目的是为了减轻计算，举个例子$\boldsymbol{Ax = b}$这种计算过程在工程应用里非常常见，而且多半时间是$\boldsymbol A$不变，不同的$\boldsymbol b$来解不同的$\boldsymbol x$，那么按照高斯消元法，每次要从头消元，因为$\boldsymbol b$改变了增广矩阵，但是很多计算是冗余的，所以使用三角矩阵的好处就是可以大大减少冗余计算。<br>第一步：就是把矩阵分解成 LU 或者 LDU 形式（factor）<br>第二步：通过回代，把x求出来（solve）<br><img src="https://pic.imgdb.cn/item/62ab37de0947543129a17814.jpg" style="zoom:80%"><br>过程(1)(2)并不需要求逆，而是通过回代的过程进行，根据计算时间复杂度（也就是计算量，计算次数），factor的时间复杂度是$O(\dfrac{1}{3}n^3)$，solve的时间复杂度大概是$O(n^2)$，如果你对时间复杂度不了解，可以去看《算法导论》的最开始那一章，这个理论还是非常有用的，尤其是对研究算法的童鞋。通过回代而不是消元，能够降低不少多余的计算。</p>
+</blockquote>
+<h3 id="5-转置、置换、空间-mathbb-R-n"><a href="#5-转置、置换、空间-mathbb-R-n" class="headerlink" title="5 转置、置换、空间$\mathbb{R}^n$"></a>5 转置、置换、空间$\mathbb{R}^n$</h3><h4 id="5-1-置换矩阵-permutation-matrix"><a href="#5-1-置换矩阵-permutation-matrix" class="headerlink" title="5.1 置换矩阵(permutation matrix)"></a>5.1 置换矩阵(permutation matrix)</h4><p>置换矩阵可以用来行行交换。由上一节我们知道，一个矩阵若恰好不需要行变换就能完成$\boldsymbol{A = LU}$分解是十分简单，但是当被分解的矩阵的行主元有零时，则需要行变换才能完成分解，所以此时就变成了：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{PA = LU}</script><ul>
+<li>置换矩阵的每一行和每一列都恰好有一个1，其余的元素都是0；</li>
+<li>置换矩阵可由单位矩阵经过行或列交换得到；</li>
+<li>一个矩阵乘以置换矩阵，相当于对矩阵的行或列进行交换；</li>
+<li>置换矩阵的性质：$\boldsymbol P^{-1} =\boldsymbol P^{\mathrm T}$，即置换矩阵都是<strong>正交矩阵</strong>。</li>
+<li>由于置换矩阵的每一行都可以看作取自单位矩阵的某一行，因此$n \times n$维置换矩阵共有$n!$个。</li>
+</ul>
+<h4 id="5-2-转置"><a href="#5-2-转置" class="headerlink" title="5.2 转置"></a>5.2 转置</h4><p>矩阵$\boldsymbol A$的转置记为$\boldsymbol A^{\mathrm T}$，满足：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A_{ij}^{\mathrm T} = \boldsymbol A_{ji}</script><p>若矩阵$\boldsymbol A$满足$\boldsymbol A = \boldsymbol A^{\mathrm T}$，则称$\boldsymbol A$为对称矩阵。对于任何一个矩阵$\boldsymbol A$，不管$\boldsymbol A$是长方形矩阵还是方阵，$\boldsymbol {AA}^{\mathrm T}$、$\boldsymbol A^{\mathrm T}\boldsymbol A$一定是对称矩阵，因为：</p>
+<script type="math/tex; mode=display">
+ \left(\boldsymbol{A} \boldsymbol{A}^{\mathrm{T}}\right)^{\mathrm{T}}=\left(\boldsymbol{A}^{\mathrm{T}}\right)^{\mathrm{T}} \boldsymbol{A}^{\mathrm{T}}=\boldsymbol{A} \boldsymbol{A}^{\mathrm{T}},\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{\mathrm{T}}=\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}</script><p>这也是构造对称矩阵的一种方法。</p>
+<h4 id="5-3-向量空间"><a href="#5-3-向量空间" class="headerlink" title="5.3 向量空间"></a>5.3 向量空间</h4><p>向量空间必须对线性组合封闭，主要是“<strong>加法封闭和数乘封闭</strong>”。</p>
+<ul>
+<li>矩阵的列空间<br>矩阵$\boldsymbol{A}$的列的所有线性组合构成一个线性空间，称为$\boldsymbol{A}$的列空间。</li>
+</ul>
+<h3 id="6-列空间和零空间"><a href="#6-列空间和零空间" class="headerlink" title="6 列空间和零空间"></a>6 列空间和零空间</h3><h4 id="6-1-子空间-Subspace"><a href="#6-1-子空间-Subspace" class="headerlink" title="6.1 子空间(Subspace)"></a>6.1 子空间(Subspace)</h4><p>设非空集合$\boldsymbol S ⊂ \mathbb{R}^n$，且$\boldsymbol S$中的元素对加法和数乘封闭(即对任意的$\boldsymbol u, \boldsymbol v \in \boldsymbol S$，$\boldsymbol{u+v} \in \boldsymbol S$，$\lambda \boldsymbol u \in \boldsymbol S$，$\lambda$是常数），子空间中必须包含“0向量”，则$\boldsymbol S$是$\mathbb{R}^n$的子空间。</p>
+<p>设$\boldsymbol V, \boldsymbol W$是$\mathbb{R}^n$的子空间，则$\boldsymbol V \cap \boldsymbol W$也是$\mathbb{R}^n$的子空间(显然对加法和数乘封闭)，但$\boldsymbol V \cup \boldsymbol W$未必是$\mathbb{R}^n$的子空间，因为$\boldsymbol V \cup \boldsymbol W$中的元素未必对加法和数乘封闭。</p>
+<p>“子空间”为包含于向量空间内的一个向量空间。它是原向量空间的一个子集，而且本身也满足向量空间的要求。但是“子空间”和“子集”的概念有区别，所有元素都在原空间之内就可称之为子集，但是要满足对线性运算封闭的子集才能成为子空间。</p>
+<h4 id="6-2-列空间-Column-space"><a href="#6-2-列空间-Column-space" class="headerlink" title="6.2 列空间(Column space)"></a>6.2 列空间(Column space)</h4><p>矩阵$\boldsymbol{A}$的所有列向量的线性组合构成一个线性空间，称为$\boldsymbol{A}$的列空间，记为$C(\boldsymbol{A})$。</p>
+<p>由此可知，线性方程组$\boldsymbol{Ax = b}$有解当且仅当$\boldsymbol{b}$在$\boldsymbol{A}$的列空间中，也即是当且仅当$\boldsymbol{b}$是$\boldsymbol{A}$的列向量的线性组合。</p>
+<p>显然，<strong>列空间是线性空间</strong>。(存疑？？？)</p>
+<h4 id="6-3-零空间-Nullspace"><a href="#6-3-零空间-Nullspace" class="headerlink" title="6.3 零空间(Nullspace)"></a>6.3 零空间(Nullspace)</h4><p>方程组$\boldsymbol{Ax = 0}$的所有解$\boldsymbol x$的集合称为$\boldsymbol A$的零空间，记为$N(\boldsymbol{A})$。</p>
+<p>零空间也是线性空间，因为若$\boldsymbol{u,v} \in N(\boldsymbol A)$，则$\boldsymbol {A(u+v)=Au+Av=0}$，故$\boldsymbol{u+v} \in N(\boldsymbol A)$，同理可知对数乘也封闭。</p>
+<p>方程组$\boldsymbol{Ax = b}$的<strong>解</strong>构成的集合不是线性空间，因为其不含零向量(也可很容易地验证对加法和数乘不封闭)。</p>
+<h3 id="7-求解-boldsymbol-Ax-0-：主变量、特解"><a href="#7-求解-boldsymbol-Ax-0-：主变量、特解" class="headerlink" title="7 求解$\boldsymbol{Ax = 0}$：主变量、特解"></a>7 求解$\boldsymbol{Ax = 0}$：主变量、特解</h3><p>以：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left(\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right)</script><p>为例，对$\boldsymbol A$进行消元(行变换，消元不改变$\boldsymbol A$的行空间和零空间，改变$\boldsymbol A$的列空间)得：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+0 & 0 & 2 & 4 \\
+0 & 0 & 0 & 0
+\end{array}\right) \triangleq \boldsymbol{U}</script><p>其中，1、2为主元(每个非零行的第一个非零元素就是主元)，1、2所在的列第1列、第3列称为<strong>主元列</strong>，第2列、第4列称为<strong>自由列</strong>。主元的个数即为$\boldsymbol A$的秩，即$\text{rank}(\boldsymbol A) = 2$。</p>
+<blockquote>
+<p>主元列和自由列的一个重要区别就是，自由列可以表示为其左侧所有主元列的线性组合，而主元列则不可以。具体参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45815011">https://zhuanlan.zhihu.com/p/45815011</a></p>
+</blockquote>
+<p>设$\boldsymbol x=\left[\begin{array}{c}x_1 \ x_2 \ x_3 \ x_4\end{array}\right]$，则$x_1, x_3$为主变量，$x_2, x_4$为自由变量。自由变量的个数为未知数的个数减去主元的个数(即减去$\boldsymbol A$的秩)，即若$\boldsymbol A$是$m \times n$维矩阵，则自由变量的个数为$n - \text{rank}(\boldsymbol A)$。</p>
+<p>由于消元不改变方程组的解，因此求解$\boldsymbol{Ax = 0}$就等价于求解$\boldsymbol{Ux = 0}$。分别取自由变量$(x_2, x_4) = (1, 0)$、$(x_2, x_4) = (0, 1)$， 可得$\boldsymbol{Ux = 0}$的两个特解：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\xi}=\left(\begin{array}{c}
+-2 \\
+1 \\
+0 \\
+0
+\end{array}\right), \boldsymbol{\eta}=\left(\begin{array}{c}
+2 \\
+0 \\
+-2 \\
+1
+\end{array}\right)</script><p>因此，零空间中的元素为：$\boldsymbol{x} = a\boldsymbol{\xi} + b\boldsymbol{\eta}$，其中，$a, b$为任意常数。</p>
+<p>进一步简化行阶梯形式，在简化行阶梯形式中，主元上下的元素都为0，且主元都为1。下面我们进一步将矩阵$\boldsymbol U$化为简化行阶梯形式$\boldsymbol R$：</p>
+<script type="math/tex; mode=display">
+\boldsymbol R = \left(\begin{array}{cccc}
+1 & 2 & 0 & -2 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)</script><p>这样，求解$\boldsymbol{Ax = 0}$就等价于$\boldsymbol{Ux = 0}$再等价于$\boldsymbol{Rx = 0}$，从而能够更快地写出方程组的解。</p>
+<blockquote>
+<p>这一讲有点难以理解，可以多看几遍课程+参考笔记：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45815011">MIT—线性代数笔记07 求解Ax=0：主变量，特解 - 三少爷的键的文章 - 知乎</a></p>
+</blockquote>
+<h3 id="8-boldsymbol-Ax-b-：可解性及解的结构"><a href="#8-boldsymbol-Ax-b-：可解性及解的结构" class="headerlink" title="8 $\boldsymbol{Ax = b}$：可解性及解的结构"></a>8 $\boldsymbol{Ax = b}$：可解性及解的结构</h3><h4 id="8-1-可解的条件-Solvability-conditions-on-b"><a href="#8-1-可解的条件-Solvability-conditions-on-b" class="headerlink" title="8.1 可解的条件 Solvability conditions on b"></a>8.1 可解的条件 Solvability conditions on b</h4><p>仍取：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left(\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right)</script><p>则方程为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A x}=\left(\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right)\left(\begin{array}{l}
+x_{1} \\
+x_{2} \\
+x_{3} \\
+x_{4}
+\end{array}\right)=\left(\begin{array}{l}
+b_{1} \\
+b_{2} \\
+b_{3}
+\end{array}\right)</script><p>矩阵$\boldsymbol A$的第3行为第1行和第2行的加和，因此$\boldsymbol{Ax = b}$中$\boldsymbol b$的第3个分量也要等于其第1和第2个分量的和。若$\boldsymbol b$不满足$b_3 = b_1+b_2$则方程组无解，下面取$\boldsymbol b = \left(\begin{array}{l} 1 \ 5 \ 6 \end{array}\right)$。</p>
+<p>检验$\boldsymbol{Ax = b}$是否可解的方法是对增广矩阵进行行消元。如果矩阵$\boldsymbol{A}$的行被完全消去的话，则对应的$\boldsymbol b$的分量也要得0。在本例中，矩阵$\boldsymbol{A}$的第3行被消去。</p>
+<p>可解的条件：如果$\boldsymbol{Ax = b}$有解的话，则$\boldsymbol b$应该处于矩阵$\boldsymbol A$的列空间$C(\boldsymbol A)$ 里面。等价的另一种描述方式为：矩阵$\boldsymbol A$的行向量若经过线性组合为零向量时，则对应的$\boldsymbol b$经同样的线性组合后也为0(注意是单个0)。</p>
+<h4 id="8-2-特解A-particular-solution"><a href="#8-2-特解A-particular-solution" class="headerlink" title="8.2 特解A particular solution"></a>8.2 特解A particular solution</h4><p>求$\boldsymbol{Ax = b}$特解的方法是将自由变量均赋为0，求解其主变量。本例中，令$x_2 = 0, x_4 = 0$得到方程组：</p>
+<script type="math/tex; mode=display">
+\begin{array}{r}
+x_{1}+2 x_{3}=1 \\
+2 x_{2}=3
+\end{array}</script><p>可解得$x_1 = -2, x_3 = \dfrac{3}{2}$，即特解为：$\boldsymbol x_p=\left[\begin{array}{c}-2 \ 0 \ \dfrac{3}{2} \ 0 \end{array}\right]$。</p>
+<h4 id="8-3-通解Complete-solution"><a href="#8-3-通解Complete-solution" class="headerlink" title="8.3 通解Complete solution"></a>8.3 通解Complete solution</h4><p>为求得$\boldsymbol{Ax = b}$的所有解，我们首先检验方程是否可解，然后找到一个特解。将特解和矩阵零空间的向量相加即为方程的通解。</p>
+<ul>
+<li>与零空间进行线性组合 Combined with nullspace：</li>
+</ul>
+<script type="math/tex; mode=display">\boldsymbol{A x_p = b}</script><script type="math/tex; mode=display">\boldsymbol{A x_n = 0}</script><script type="math/tex; mode=display">\boldsymbol{A (x_p + x_n) = b}</script><p>即通解为：$\boldsymbol x_{\text{complete}} = \boldsymbol x_p + \boldsymbol x_n$。</p>
+<p>将$\boldsymbol A$转换成rref(行最简)，则结果如下所示：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}=\left(\begin{array}{cccc}
+x_{1} & x_{2} & x_{3} & x_{4} \\
+- & - & - & - \\
+1 & 2 & 0 & -2 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)</script><p>将$x_2, x_3$进行互换，把主元列、自由列分别放在一起，则为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{R}=\left(\begin{array}{cccc}
+x_{1} & x_{2} & x_{3} & x_{4} \\
+- & - & - & - \\
+1 & 0 & 2 & -2 \\
+0 & 1 & 0 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right)
+=\left(\begin{array}{cc}
+\boldsymbol I & \boldsymbol F  \\
+\boldsymbol 0 & \boldsymbol 0
+\end{array}\right)</script><p>互换后的$\boldsymbol{Ax = 0} \stackrel{转变为}{\longrightarrow} \boldsymbol{Rx = 0}$解应该为</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{c}
+-\boldsymbol{F} \\
+\boldsymbol{I}
+\end{array}\right)=\left(\begin{array}{cc}
+-2 & 2 \\
+0 & -2 \\
+1 & 0 \\
+0 & 1
+\end{array}\right)</script><p>再将$x_2, x_3$互换回来，即可得到原方程的解：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{x}=\left(\begin{array}{cc}
+-2 & 2 \\
+1 & 0 \\
+0 & -2 \\
+0 & 1
+\end{array}\right)</script><p>这是零空间解的一种简便算法，即通过行变换得到(必要时需要交换列，当然最后还要交换回来)得到$\boldsymbol{I, F}$后可直接写出零解。</p>
+<h4 id="8-4-秩Rank"><a href="#8-4-秩Rank" class="headerlink" title="8.4 秩Rank"></a>8.4 秩Rank</h4><p>假设矩阵的shape为$m \times n$，如果矩阵的秩为$r$，则必有$r \leq m, r \leq n$。</p>
+<h5 id="8-4-1-列满秩-r-n-n-leq-m"><a href="#8-4-1-列满秩-r-n-n-leq-m" class="headerlink" title="8.4.1 列满秩$r = n(n \leq m)$"></a>8.4.1 列满秩$r = n(n \leq m)$</h5><p>零空间$N(\boldsymbol A)$内只有零向量。原因：每列都有主元，即也可以认为每列都是线性无关的，$\boldsymbol x$的每个分量都是主变量，没有自由变量。方程$\boldsymbol{Ax = b}$无解或者有唯一解$\boldsymbol x_p$。</p>
+<h5 id="8-4-2-行满秩-r-m-m-leq-n"><a href="#8-4-2-行满秩-r-m-m-leq-n" class="headerlink" title="8.4.2 行满秩$r = m(m \leq n)$"></a>8.4.2 行满秩$r = m(m \leq n)$</h5><p>每行都有主元，无论$\boldsymbol b$取何值，方程$\boldsymbol{Ax = b}$都有解(因为$\boldsymbol A$是行满秩，所以$\boldsymbol A$的列向量能够线性组合充满整个$\mathbb{R}^{m \times m}$空间，而$\boldsymbol b$一定在$\mathbb{R}^{m \times m}$空间中)。主变量$r = m$个，自由变量$n-r = n-m$个，即也一定存在零空间解。</p>
+<h5 id="8-4-3-满秩-r-n-m"><a href="#8-4-3-满秩-r-n-m" class="headerlink" title="8.4.3 满秩$r = n = m$"></a>8.4.3 满秩$r = n = m$</h5><p>满秩，矩阵可逆。零空间只有零向量(因为矩阵$\boldsymbol A$的列都是线性无关的，不可能组合出零向量)，无论$\boldsymbol b$取何值，方程$\boldsymbol{Ax = b}$都有唯一解。$\boldsymbol{R = I}$。</p>
+<h4 id="8-5-小结"><a href="#8-5-小结" class="headerlink" title="8.5 小结"></a>8.5 小结</h4><p><img src="https://pic.imgdb.cn/item/62ac497509475431293c9580.jpg"></p>
+<p>简单来说，$\boldsymbol R$的倒数行是否为零行决定了是否有解。如果没有零行，则一定有解。秩决定了方程组解的数量。</p>
+<h3 id="9-线性无关，基和维度"><a href="#9-线性无关，基和维度" class="headerlink" title="9. 线性无关，基和维度"></a>9. 线性无关，基和维度</h3><p>向量的线性无关意味着什么？如何用线性无关的概念来帮助我们描述包括零空间在内的子空间。</p>
+<p>首先我们需要注意的是，线性无关是针对向量组而言的，而不是对矩阵而言的。重要概念：线性无关(线性相关)、张成空间、基、维度。</p>
+<h4 id="9-1-复习"><a href="#9-1-复习" class="headerlink" title="9.1 复习"></a>9.1 复习</h4><p>假设矩阵$\boldsymbol R$的shape为$m \times n$，并且$m &lt; n$，其中$m$表示的是方程组的个数，而$n$表示的是未知数的个数。那么$\boldsymbol{Ax = 0}$一定包含非零解。其中解存在的原因在于一定存在自由变量，其中自由变量个数最少为$n - m$。</p>
+<h4 id="9-2-线性无关-Independence"><a href="#9-2-线性无关-Independence" class="headerlink" title="9.2 线性无关 Independence"></a>9.2 线性无关 Independence</h4><p>若$c_1 \boldsymbol x_1 + c_2 \boldsymbol x_2 + \cdots + c_n \boldsymbol x_n = \boldsymbol 0$仅仅在$c_1 = c_2 = \cdots = c_n = 0$时成立，则称$\boldsymbol x_1, \boldsymbol x_2, \cdots, \boldsymbol x_n$是线性无关的。若这些向量作为列向量构成矩阵$\boldsymbol A$，则方程$\boldsymbol{A x = 0}$只有零解$\boldsymbol x = \boldsymbol 0$，或称矩阵$\boldsymbol A$的零空间只有零向量。换而言之，若存在非零向量$\boldsymbol c$，使得$\boldsymbol{Ac = 0}$，则这个矩阵的列向量线性相关。</p>
+<ul>
+<li><strong>思考：</strong>零向量和另外一个向量是线性相关还是线性无关呢？<br>答案是线性相关的。也就是说只要向量组中包含一个零向量，那么一定是线性相关的。</li>
+</ul>
+<p>在$\mathbb{R}^2$中，两个向量只要不共线就是线性无关的。（在$\mathbb{R}^3$中，三个向量线性无关的条件是它们不在一个平面上）若选定空间$\mathbb{R}^2$中的三个向量，则他们必然是线性相关的。例如，如下的三个向量线性相关的：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\begin{array}{lll}
+\boldsymbol{v}_{1} & \boldsymbol{v}_{2} & \boldsymbol{v}_{3}
+\end{array}\\
+&\left(\begin{array}{ccc}
+2 & 1 & 2.5 \\
+1 & 2 & -1
+\end{array}\right)
+\end{aligned}</script><p>此矩阵构成的方程$\boldsymbol{Ax = 0}$必有非零解，即三个向量线性相关。</p>
+<p>向量组线性无关等价于将该向量组构成的矩阵$\boldsymbol A$的零空间中只有零向量。如果是线性相关的话，存在非零向量$\boldsymbol c$使得$\boldsymbol{Ac=0}$。<br>如果矩阵$\boldsymbol A$的列向量为线性无关，则$\boldsymbol A$所有的列均为主元列，没有自由列，$\text{rank}(\boldsymbol A) = n$。若$\boldsymbol A$的列向量为线性相关，则$\text{rank}(\boldsymbol A) &lt; n$，并且存在自由列。其中自由列的本质是主列的一种组合。</p>
+<p>总结：向量组的线性相关性可转换成计算矩阵的零空间。</p>
+<h4 id="9-3-张成空间-Span-a-space"><a href="#9-3-张成空间-Span-a-space" class="headerlink" title="9.3 张成空间 Span a space"></a>9.3 张成空间 Span a space</h4><p>当一个空间是由向量$\boldsymbol v_1, \boldsymbol v_2, \cdots, \boldsymbol v_k$的所有线性组合组成时，我们称这些向量张成了这个空间。例如矩阵的列向量张成了该矩阵的列空间。<br>如果向量$\boldsymbol v_1, \boldsymbol v_2, \cdots, \boldsymbol v_k$张成空间$\boldsymbol S$，则$\boldsymbol S$是包含这些向量的最小空间。</p>
+<h4 id="9-4-基-Basis"><a href="#9-4-基-Basis" class="headerlink" title="9.4 基 Basis"></a>9.4 基 Basis</h4><p>向量空间的基是具有如下两个性质的一组向量$\boldsymbol v_1, \boldsymbol v_2, \cdots, \boldsymbol v_d$：</p>
+<ul>
+<li>$\boldsymbol v_1, \boldsymbol v_2, \cdots, \boldsymbol v_d$线性无关；</li>
+<li>$\boldsymbol v_1, \boldsymbol v_2, \cdots, \boldsymbol v_d$张成该向量空间；</li>
+</ul>
+<p>在$\mathbb{R}^3$空间中，其中一组基为：</p>
+<script type="math/tex; mode=display">
+\left(\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right)\left(\begin{array}{l}
+0 \\
+1 \\
+0
+\end{array}\right)\left(\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right)</script><p>若以$\mathbb{R}^n$空间中的$n$个向量为列向量构成的矩阵为可逆矩阵，则这些向量可以构成$\mathbb{R}^n$空间中的一组基。</p>
+<p><strong>(一) 子空间的基 Basis for a subspace</strong></p>
+<p>向量$\left[\begin{array}{c}1 \ 1 \ 0 \end{array}\right]$、$\left[\begin{array}{c}0 \ 1 \ 1 \end{array}\right]$构成$\mathbb{R}^3$中的一个平面，但是它们无法成为$\mathbb{R}^3$空间的一组基。空间中的基并不是唯一的。</p>
+<p><strong>(二) 维度 Dimension</strong></p>
+<p>空间的每一组基都具有相同的向量数，这个数值就是空间的维度(dimension)。所以$\mathbb{R}^n$空间的每组基都包含$n$个向量。简单来说，向量空间的维度就是基向量的个数。对于一个向量空间而言，基向量可以是不同的，但是维度是相同的。</p>
+<p><strong>(三) 列空间的基</strong></p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}=\left(\begin{array}{cccc}
+1 & 2 & 3 & 1 \\
+1 & 1 & 2 & 1 \\
+1 & 2 & 3 & 1 
+\end{array}\right)</script><script type="math/tex; mode=display">
+\text{rank} (\boldsymbol A) =  \text{pivot numbers} = \text{dimension } C(\boldsymbol A) = 2</script><p>注意：矩阵具有秩rank而不是维数dimension，而空间有维数而不是秩。当知道了列空间的维数，可以从矩阵列向量中随意选取足够数量的线性无关的向量，它们每一组都可以构成列空间的一组基。其中一组基是第一列与第二列</p>
+<p><strong>(四) 零空间的基</strong></p>
+<p>本例中矩阵的列向量不是线性无关的，因此其零空间$N(\boldsymbol A)$不止包含零向量。因为可以看出第3列是第1列和第2列的和。所以向量$\left[\begin{array}{c}-1 \ -1 \ 1 \ 0 \end{array}\right]$必然在零空间$N(\boldsymbol A)$之内。由于第1列和第4列相等，从而得到$\left[\begin{array}{c}1 \ 0 \ 0 \ -1 \end{array}\right]$也在零空间之内。它们就是的两个特解。</p>
+<p><strong>零空间的维数=自由列的数目=$n - r$(列数减去秩)</strong>，因此本例中$N(\boldsymbol A)$的维数为$4-2=2$。这两个特解就构成了零空间的一组基。</p>
+<h3 id="10-四个基本子空间"><a href="#10-四个基本子空间" class="headerlink" title="10 四个基本子空间"></a>10 四个基本子空间</h3><h4 id="10-1-四个子空间-Four-subspaces"><a href="#10-1-四个子空间-Four-subspaces" class="headerlink" title="10.1 四个子空间 Four subspaces"></a>10.1 四个子空间 Four subspaces</h4><p>任意的$m \times n$矩阵$\boldsymbol A$都定义了四个子空间。</p>
+<h5 id="10-1-1-列空间Column-space"><a href="#10-1-1-列空间Column-space" class="headerlink" title="10.1.1 列空间Column space"></a>10.1.1 列空间Column space</h5><p>矩阵$\boldsymbol A$的列空间是$\boldsymbol A$的列向量的线性组合在空间中构成的子空间。如何表示列空间中的任意向量呢？很显然是$\boldsymbol{Ax = b}$。</p>
+<h5 id="10-1-2-零空间-Nullspace"><a href="#10-1-2-零空间-Nullspace" class="headerlink" title="10.1.2 零空间 Nullspace"></a>10.1.2 零空间 Nullspace</h5><p>矩阵$\boldsymbol A$的零空间$\boldsymbol{Ax = 0}$是的所有解$\boldsymbol x$在$\mathbb{R}^n$空间中成的子空间。</p>
+<h5 id="10-1-3-行空间-Row-space"><a href="#10-1-3-行空间-Row-space" class="headerlink" title="10.1.3 行空间 Row space"></a>10.1.3 行空间 Row space</h5><p>矩阵$\boldsymbol A$的行空间是$\boldsymbol A$的行向量的线性组合在$\mathbb{R}^n$空间中构成的子空间，也就是矩阵$\boldsymbol A^{\mathrm T}$的列空间。</p>
+<h5 id="10-1-4-左零空间-Left-nullspace"><a href="#10-1-4-左零空间-Left-nullspace" class="headerlink" title="10.1.4 左零空间 Left nullspace"></a>10.1.4 左零空间 Left nullspace</h5><p>我们称矩阵$\boldsymbol A^{\mathrm T}$的零空间为矩阵$\boldsymbol A$的左零空间，它是$\mathbb{R}^m$空间中的子空间。</p>
+<h4 id="10-2-基和维度-Basis-amp-Dimension"><a href="#10-2-基和维度-Basis-amp-Dimension" class="headerlink" title="10.2 基和维度 Basis&amp; Dimension"></a>10.2 基和维度 Basis&amp; Dimension</h4><h5 id="10-2-1-列空间"><a href="#10-2-1-列空间" class="headerlink" title="10.2.1 列空间"></a>10.2.1 列空间</h5><p>矩阵$\boldsymbol A$的个主元列(pivot columns)构成了列空间$C(\boldsymbol A)$的一组基。</p>
+<script type="math/tex; mode=display">\dim C(\boldsymbol A) = \text{rank}(\boldsymbol A) = r</script><h5 id="10-2-2-零空间"><a href="#10-2-2-零空间" class="headerlink" title="10.2.2 零空间"></a>10.2.2 零空间</h5><p>$\boldsymbol{Ax = 0}$的一组特解对应于矩阵$\boldsymbol A$的$n - r$个自由列，并构成了零空间的一组基。个人理解：自由列分别进行one-hot处理。</p>
+<script type="math/tex; mode=display">\dim N(\boldsymbol A) = n - r</script><h5 id="10-2-3-行空间"><a href="#10-2-3-行空间" class="headerlink" title="10.2.3 行空间"></a>10.2.3 行空间</h5><p>我们用矩阵$\boldsymbol A$的化简的行阶梯矩阵$\boldsymbol R$。</p>
+<p>矩阵$\boldsymbol A$和矩阵$\boldsymbol R$的列空间不同$C(\boldsymbol A) \neq C(\boldsymbol R)$，但两者行空间相同。$\boldsymbol R$的行向量来自于$\boldsymbol A$的行向量的线性组合，因为<strong>消元操作是可逆的</strong>，所以$\boldsymbol A$的向量也可以表示为$\boldsymbol R$行向量的线性组合。</p>
+<p>$\boldsymbol R$的前$r$行向量就是矩阵$\boldsymbol A$行空间$C(\boldsymbol A^{\mathrm T})$的一组基。以$\boldsymbol A$为例，其中一组基是$\boldsymbol R$中的前两行。</p>
+<script type="math/tex; mode=display">\dim C(\boldsymbol A^{\mathrm T}) = r</script><p>为什么$\dim C(\boldsymbol A^{\mathrm T}) = r$，可以重点关注中$\boldsymbol R$的$\boldsymbol I$。</p>
+<h5 id="10-2-4-左零空间"><a href="#10-2-4-左零空间" class="headerlink" title="10.2.4 左零空间"></a>10.2.4 左零空间</h5><p>左零空间矩阵$\boldsymbol A^{\mathrm T}$有$m$列，而其秩为$r$，因此其自由列数目为$m-r$，故$\dim N(\boldsymbol A^{\mathrm T}) = m - r$，左零矩阵是满足$\boldsymbol A^{\mathrm T} \boldsymbol y = \boldsymbol 0$的所有向量$\boldsymbol y$的集合。称之为左零矩阵是因为该式可写作$\boldsymbol y^{\mathrm T} \boldsymbol A = \boldsymbol 0^{\mathrm T}$此时右边为行向量，而$\boldsymbol y$出现在矩阵$\boldsymbol A$左侧。</p>
+<p>为找到左零空间的基，我们应用增广矩阵：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+\boldsymbol A_{m \times n} & \boldsymbol I_{m \times n}
+\end{array}\right] \rightarrow\left[\begin{array}{ll}
+\boldsymbol R_{m \times n} & \boldsymbol E_{m \times n}
+\end{array}\right]</script><p>我们将$\boldsymbol A$通过消元得到矩阵$\boldsymbol R$，其消元矩阵记为$\boldsymbol E$，即$\boldsymbol{EA = R}$。若为$\boldsymbol A$方阵，且$\boldsymbol{R = I}$，则有$\boldsymbol{E = A}^{-1}$</p>
+<p><img src="https://pic.imgdb.cn/item/62ac8c5b0947543129aa9d0d.jpg" style="zoom:80%"></p>
+<p>以行操作的观点来看矩阵$\boldsymbol E$和$\boldsymbol A$的乘法，则矩阵$\boldsymbol E$最下面的$m -r$个行向量使得矩阵$\boldsymbol A$的行向量线性组合成为$\boldsymbol 0$，也就是矩阵$\boldsymbol R$最下面的$m-r$个零向量。本例中，$m -r = 1$。</p>
+<p>矩阵$\boldsymbol E$的这$m-r$个行向量满足$\boldsymbol{y}^{\mathrm T} \boldsymbol{A} = \boldsymbol{0}^{\mathrm T}$，它组成了矩阵$\boldsymbol A$左零空间的一组基，在本例中的左零空间的一组基为$\left[\begin{array}{c}-1 \ 0 \ 1 \end{array}\right]$。即上图中左边的部分所示的内容。</p>
+<h4 id="10-3-新向量空间-New-vector-space"><a href="#10-3-新向量空间-New-vector-space" class="headerlink" title="10.3 新向量空间 New vector space"></a>10.3 新向量空间 New vector space</h4><p>所有$3 \times 3$矩阵构成的集合是一个矩阵空间，符合对线性运算封闭，称之为$\boldsymbol M$。$\boldsymbol M$的子空间包括：</p>
+<ul>
+<li>所有的上三角阵</li>
+<li>所有的对称阵</li>
+<li>所有的对角阵</li>
+</ul>
+<p>对角阵是前两个子空间的交集，其维度为3，其中一组基为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right]\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{array}\right]\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 1
+\end{array}\right]</script><blockquote>
+<p>矩阵空间的概念参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/suyimin2010/article/details/90338886">https://blog.csdn.net/suyimin2010/article/details/90338886</a></p>
+<p>讨论：当最初告诉我说，矩阵的列秩等于主元数，并且主元列构成了列空间的一组基时，其实我是拒绝的。主元这个东西不是行变换消元得来的么，消元过程列空间不是已经改变了么，为什么所得出U的主元数和主元列的位置还能够反映出矩阵A列空间的状态呢？<br>这里需要说明的是两点，其一是关于秩的定义有很多在数学上等价但是描述差异很大的说法，在这里我们把“秩”理解为行（列）向量中最大的线性无关向量组的向量数即可，在矩阵A行变换消元成梯形阵后，很容易看到行空间内极大无关组之一就是主元所在的那前r行，这r个行向量可以张成行空间，因此行空间的维数与主元数相等都是r，并且前r行构成了行空间的一组基。<br>但是为什么列空间的维数也是r，并且主元列可以构成列空间的一组基呢？这就是要说明的第二点，初等行变换不会改变列向量的线性相关性。为了叙述方便起见，我们假定矩阵A列向量的极大无关组就是A前r’列的向量（若否可以通过列交换而达成，列交换不会改变线性关系）。<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45826349">https://zhuanlan.zhihu.com/p/45826349</a></p>
+</blockquote>
+<h3 id="11-矩阵空间、秩1矩阵和小世界图"><a href="#11-矩阵空间、秩1矩阵和小世界图" class="headerlink" title="11 矩阵空间、秩1矩阵和小世界图"></a>11 矩阵空间、秩1矩阵和小世界图</h3><h4 id="11-1-3∗3矩阵空间-3-by-3-matrices"><a href="#11-1-3∗3矩阵空间-3-by-3-matrices" class="headerlink" title="11.1 3∗3矩阵空间 3 by 3 matrices"></a>11.1 3∗3矩阵空间 3 by 3 matrices</h4><p>空间$\boldsymbol M$是所有$3 \times 3$矩阵所构成的空间，$\boldsymbol M$的部分子空间包括：</p>
+<ul>
+<li>所有的上三角阵 </li>
+<li>所有的对称阵 </li>
+<li>所有的对角阵</li>
+</ul>
+<p>对于矩阵空间而言，矩阵空间的维度是基矩阵的个数。它的一组基即为多个基矩阵。空间$\boldsymbol M$的维数为9，与$\mathbb{R}^9$空间很类似。我们可以选定它的一组基：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 1 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],
+\cdots
+,\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 1 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 1
+\end{array}\right]</script><p>对称阵构成的子空间$\boldsymbol S$维数为6，它的一组基为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 1
+\end{array}\right],\left[\begin{array}{lll}
+0 & 1 & 0 \\
+1 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+1 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 1 & 0
+\end{array}\right]</script><p>上三角阵构成的子空间$\boldsymbol U$维数也为6，它的一组基为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 1
+\end{array}\right],\left[\begin{array}{lll}
+0 & 1 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 1 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 1 \\
+0 & 0 & 0
+\end{array}\right]</script><p>对角阵构成的子空间$\boldsymbol D$维数为3，可以选定$\boldsymbol S$和$\boldsymbol U$的基的交集为$\boldsymbol D$的基，具体为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 0
+\end{array}\right],\left[\begin{array}{lll}
+0 & 0 & 0 \\
+0 & 0 & 0 \\
+0 & 0 & 1
+\end{array}\right]</script><p>$\boldsymbol S$和$\boldsymbol U$的并集，即$3 \times 3$矩阵中或为上三角阵或为对称阵的矩阵，构成$\boldsymbol M$的子空间么？答案是否定的。如下列矩阵加法所示：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & -1 & 0 \\
+-1 & 1 & 0 \\
+0 & 0 & 1
+\end{array}\right] + \left[\begin{array}{lll}
+0 & 3 & 3 \\
+0 & 0 & 4 \\
+0 & 0 & 0
+\end{array}\right] = \left[\begin{array}{lll}
+1 & 2 & 3 \\
+-1 & 1 & 4 \\
+0 & 0 & 1
+\end{array}\right]</script><p>显然最终结果并不在两者的并集中。这就如同在$\mathbb{R}^2$空间中找出两条直线，询问它们的并集是否构成一个子空间。如果我们将$\boldsymbol S$和$\boldsymbol U$中所有元素可能构成的加和作为一个集合，可以称为和集$\boldsymbol{S+U}$，它是$\boldsymbol M$的一个子空间。实际上$\boldsymbol{S+U}$就是$\boldsymbol M$本身，其维数为9。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\operatorname{dim}(S)+\operatorname{dim}(U)=\operatorname{dim}(S \cap U)+\operatorname{dim}(S+U) \\
+&\operatorname{dim}(S+U)=\operatorname{dim}(S)+\operatorname{dim}(U)-\operatorname{dim}(S \cap U)
+\end{aligned}</script><h4 id="11-2-微分方程-Differential-equations"><a href="#11-2-微分方程-Differential-equations" class="headerlink" title="11.2 微分方程 Differential equations"></a>11.2 微分方程 Differential equations</h4><p>对于给定的微分方程$\dfrac{\text{d}^2y}{\text{d}x^2}$，求解该方程可以视为求它的零空间。可以得到解为：$y = \cos(x), y = \sin(x), y = e^{ix}$，事实上通解为$y = c_1\cos(x) + c_2\sin(x)$，其中$c_1, c_2$可以取任意实数。也将解的线性组合构成的空间称为解空间，其维数为2。$\cos(x), \sin(x)$可以成为解空间的一组基。它们是函数，而不是向量，但是可以对其进行线性运算，在线性代数的范畴内讨论之。</p>
+<h4 id="11-3-子空间的交，和与维数定理"><a href="#11-3-子空间的交，和与维数定理" class="headerlink" title="11.3 子空间的交，和与维数定理"></a>11.3 子空间的交，和与维数定理</h4><p>接下来到关键的地方了，建议先阅读<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/76674347">《线性代数-线性空间的知识梳理3》</a>中子空间的<strong>交</strong>、<strong>和</strong>和<strong>维数定理</strong>等小节。</p>
+<p>接下来我们研究矩阵空间$\boldsymbol M$的子空间$\boldsymbol S$和$\boldsymbol U$的交，即$\boldsymbol S \cap \boldsymbol U$，这个比较简单，易知$\boldsymbol S \cap \boldsymbol U$即对角矩阵，其维数明显为3。</p>
+<p>但若要直接研究$\boldsymbol S$和$\boldsymbol U$ 的和，即$\boldsymbol S + \boldsymbol U$ ，这个就没有$\boldsymbol S \cap \boldsymbol U$那么直观了：</p>
+<p><strong>一种方法</strong>是通过定义，即</p>
+<script type="math/tex; mode=display">
+\boldsymbol S + \boldsymbol U = \begin{Bmatrix} \boldsymbol \alpha + \boldsymbol \beta \mid \boldsymbol \alpha \in \boldsymbol S, \boldsymbol \beta \in \boldsymbol U \end{Bmatrix}</script><p>那么可以发现，对于任何一个$3 \times 3$矩阵，它是可以表示成一个对称矩阵和一个上三角矩阵的和：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{array}\right]=\left[\begin{array}{ccc}
+a_{11} & a_{21} & a_{31} \\
+a_{21} & a_{22} & a_{32} \\
+a_{31} & a_{32} & a_{33}
+\end{array}\right]+\left[\begin{array}{ccc}
+0 & a_{12}-a_{21} & a_{13}-a_{31} \\
+0 & 0 & a_{23}-a_{32} \\
+0 & 0 & 0
+\end{array}\right]</script><p>所以$\boldsymbol S + \boldsymbol U = \boldsymbol M$ ，因此$\dim(\boldsymbol S + \boldsymbol U) = 9$ 。</p>
+<p><strong>另一种方法</strong>，为了确定$\boldsymbol S + \boldsymbol U$的维数，可以利用维数定理，即：</p>
+<script type="math/tex; mode=display">
+\dim(\boldsymbol S + \boldsymbol U) = \dim(\boldsymbol S) + \dim(\boldsymbol U) - \dim(\boldsymbol S \cap \boldsymbol U)</script><p>这个公式中，$\dim(\boldsymbol S \cap \boldsymbol U) = 3$ ，所以$\dim(\boldsymbol S + \boldsymbol U)  = 9$ ，而由$\boldsymbol S + \boldsymbol U$的定义可知，其本身就是$\boldsymbol M$的一个子空间，且$\dim(\boldsymbol M) = 9$，所以$\boldsymbol S + \boldsymbol U = \boldsymbol M$ ，即$\boldsymbol S$和$\boldsymbol U$的和刚好覆盖了整个矩阵空间$\boldsymbol M$。</p>
+<p>这就是维数定理一个很好的应用，有时候直接分析两个子空间的和不容易，那么可以考虑通过维数定理先分别分析这两个子空间，再分析其交，这样就能得到$\dim(\boldsymbol S + \boldsymbol U)$，<strong>一旦我们知道一个子空间的维数</strong>$n$<strong>，那么只要找到这个子空间中</strong>$n$<strong>个线性无关的向量，那么这</strong>$n$<strong>个向量就是子空间的一个基</strong>。</p>
+<p>本小节除了介绍子空间的交，和和维数定理，另一方面是给出线性空间中元素一般性的例子，当然课堂中，老师还讲到了线性微分方程的解空间也是一个线性空间，这里不做具体介绍。</p>
+<h4 id="11-4-秩1矩阵"><a href="#11-4-秩1矩阵" class="headerlink" title="11.4 秩1矩阵"></a>11.4 秩1矩阵</h4><p>对秩为1的矩阵，也可以进行研究，比如秩为1的矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left(\begin{array}{ccc}
+1 & 4 & 5 \\
+2 & 8 & 10
+\end{array}\right)</script><p>我们从行向量的角度分解，可以等价表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left(\begin{array}{ccc}
+1 & 4 & 5 \\
+2 & 8 & 10
+\end{array}\right)=\left(\begin{array}{l}
+1 \\
+2
+\end{array}\right)\left(\begin{array}{lll}
+1 & 4 & 5
+\end{array}\right)</script><p>我们有所有<strong>秩为1的矩阵可以表示为一列乘以一行的形式</strong>，即：$\boldsymbol A = \boldsymbol{uv}^{\mathrm T}$。</p>
+<p>之后的学习中，我们会认识到秩1矩阵行列式和特征值都会很简单。再讨论一下几个问题：</p>
+<h5 id="11-4-1-问题1"><a href="#11-4-1-问题1" class="headerlink" title="11.4.1 问题1"></a>11.4.1 问题1</h5><p>比如，一个$s \times n$ 的矩阵的秩为$r$，我们可以将其表示成$r$个秩1矩阵的组合，所以秩1矩阵很有用，它就像搭建其他矩阵的积木一样。</p>
+<p>举个简单例子：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left[\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right]=\left(\vec{a}_{1}, \vec{a}_{2}, \vec{a}_{3}, \vec{a}_{4}\right)</script><p>通过初等行变换：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left[\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+2 & 4 & 6 & 8 \\
+3 & 6 & 8 & 10
+\end{array}\right] \sim\left[\begin{array}{cccc}
+1 & 2 & 2 & 2 \\
+0 & 0 & 2 & 4 \\
+0 & 0 & 0 & 0
+\end{array}\right] \sim\left[\begin{array}{cccc}
+1 & 2 & 0 & -2 \\
+0 & 0 & 1 & 2 \\
+0 & 0 & 0 & 0
+\end{array}\right]</script><p>所以$\text{rank}(\boldsymbol A) = 2$ ，$\boldsymbol A$的1和3列是列空间的一个基，其零空间：</p>
+<script type="math/tex; mode=display">
+N_{n \times(n-r)}=\left[\begin{array}{c}
+-F_{r \times(n-r)} \\
+I_{n-r}
+\end{array}\right]=N_{4 \times 2}=\left[\begin{array}{cc}
+-2 & 2 \\
+1 & 0 \\
+0 & -2 \\
+0 & 1
+\end{array}\right]</script><p>由原始$\boldsymbol A$第一列可知$\vec{a}<em>{2}=2 \vec{a}</em>{1}, \vec{a}<em>{4}=-2 \vec{a}</em>{1}+2 \vec{a}_{3}$，则：</p>
+<script type="math/tex; mode=display">
+A=\left(\vec{a}_{1}, 2 \vec{a}_{1}, \vec{a}_{3},-2 \vec{a}_{1}+2 \vec{a}_{3}\right)=\left(\vec{a}_{1}, 2 \vec{a}_{1}, \overrightarrow{0},-2 \vec{a}_{1}\right)+\left(\overrightarrow{0}, \overrightarrow{0}, \vec{a}_{3}, 2 \vec{a}_{3}\right)</script><p>即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A=\left[\begin{array}{cccc}
+1 & 2 & 0 & -2 \\
+2 & 4 & 0 & -4 \\
+3 & 6 & 0 & -6
+\end{array}\right] + \left[\begin{array}{cccc}
+0 & 0 & 2 & 4 \\
+0 & 0 & 6 & 12 \\
+0 & 0 & 8 & 16
+\end{array}\right]</script><p>这就将$\boldsymbol A$ 分解成了两个秩1矩阵的和。</p>
+<h5 id="11-4-2-问题2"><a href="#11-4-2-问题2" class="headerlink" title="11.4.2 问题2"></a>11.4.2 问题2</h5><p>但$s \times n$型矩阵所有秩1矩阵所构成的子集显然不是一个子空间。</p>
+<h5 id="11-4-3-问题3"><a href="#11-4-3-问题3" class="headerlink" title="11.4.3 问题3"></a>11.4.3 问题3</h5><p>我们来看这样一个定义在数域$\boldsymbol K$上的列向量的集合$\boldsymbol W$：</p>
+<script type="math/tex; mode=display">
+\left\{\left[v_{1}, v_{2}, v_{3}, v_{4}\right]^{\mathrm T} \mid v_{1}+v_{2}+v_{3}+v_{4}=0, \quad v_{1}, v_{2}, v_{3}, v_{4} \in \boldsymbol K\right\}</script><p>它是$\boldsymbol K^4(\mathbb{K}^4)$的子空间吗？</p>
+<p>我们很容易验证它对加法和数乘运算都封闭，所以$\boldsymbol W$是$\boldsymbol K^4$的一个子空间。</p>
+<p>那么，这个子空间结构是什么样子，换句话说，它的基和维数又是什么？</p>
+<p>观察到$v<em>{1}+v</em>{2}+v<em>{3}+v</em>{4}=0$，这很像求解$\boldsymbol{Ax = 0}$ 时将化成的列向量组的形式，那么可以构造一个$\boldsymbol A = [1, 1,1, 1]$。这样，求$\boldsymbol W$的维数就变成了求 $\boldsymbol A$的零空间的维数。而$\text{rank}(\boldsymbol A) = 1$所以 $\text{rank }N(\boldsymbol A) = 3$ ，即$\text{rank}(\boldsymbol W) = 3$。同理，我们可以求出$\boldsymbol W$ 的一个基，即$N(\boldsymbol A)$的一个基为：</p>
+<script type="math/tex; mode=display">
+N_{n \times(n-r)}=\left[\begin{array}{c}
+-F_{r \times(n-r)} \\
+I_{n-r}
+\end{array}\right]=N_{4 \times 3}=\left[\begin{array}{ccc}
+-1 & -1& -1 \\
+1 & 0 & 0\\
+0 & 1 & 0 \\
+0 & 0 & 1
+\end{array}\right]</script><h4 id="11-5小世界图-Small-world-graphs"><a href="#11-5小世界图-Small-world-graphs" class="headerlink" title="11.5小世界图 Small world graphs"></a>11.5小世界图 <strong>Small world graphs</strong></h4><p>介绍小世界图主要是引出<strong>图论和线性代数</strong>的联系。</p>
+<p>在这里，“图”G是结点和边的集合$G = \begin{Bmatrix} \text{node}, \text{edge} \end{Bmatrix}​$ ：                </p>
+<p><img src="https://pic.imgdb.cn/item/62ad3a680947543129628128.jpg" style="zoom:30%"></p>
+<p>此图包含5个结点和6条边，我们可以利用一个$5 \times 6$矩阵完全描述它。</p>
+<p>我们可以用图来描述一个实际问题，如果每个人是一个结点，两个人互相认识为一个边，那么整个美国可以以此构成一张大图。我们可以通过这张图来确认两个人之间的最短距离是多少，即两个人需要通过最少几个朋友才能建立联系。G本人和克林顿之间的距离为2，他的一个朋友是参议员，他认识这个参议员朋友，那个人认识克林顿。班里的学生跟克林顿的距离因此不会大于3。还可以继续算希拉里和莱温斯基之间的距离，哈哈。</p>
+<p>所谓“六度分割理论”（six degrees of separation）猜想一个人和陌生人之间间隔的点不会超过六个。因此当陌生的两人聊起这种联系都会感叹：“世界真小啊！”这也是“小世界图”这个名字的由来。</p>
+<h3 id="12-图、网络、关联矩阵"><a href="#12-图、网络、关联矩阵" class="headerlink" title="12 图、网络、关联矩阵"></a>12 图、网络、关联矩阵</h3><p>本讲讨论线性代数在物理系统中的应用。可参考链接为：</p>
+<h4 id="12-1-图和网络-Graphs-amp-Networks"><a href="#12-1-图和网络-Graphs-amp-Networks" class="headerlink" title="12.1 图和网络 Graphs &amp; Networks"></a>12.1 <strong>图和网络</strong> Graphs &amp; Networks</h4><p>图是结点(node)和边(edge)的一个集合。</p>
+<p><img src="https://pic.imgdb.cn/item/62ad3be8094754312964443f.jpg" style="zoom:70%"></p>
+<p>边线上的箭头代表从结点流出的正方向。上图里包含4个结点，5条边，我们可以将每条边都指定参考方向用于区分正负，比如一个电路网络。在此例子中，将使用电势、回路、电流之类的词汇（当然这个模型还可以表示为液压系统、建筑结构等）。我们通过构造一个incidence matrix关联矩阵来解析这个图的含义。</p>
+<h4 id="12-2-关联矩阵（Incidence-matrices）"><a href="#12-2-关联矩阵（Incidence-matrices）" class="headerlink" title="12.2 关联矩阵（Incidence matrices）"></a>12.2 关联矩阵（Incidence matrices）</h4><p>构造一个矩阵来表示图的内在含义，此矩阵称为关联矩阵，图中每个结点代表一列，每边代表一行。则上图为$5 \times 4$矩阵。反过来从这个矩阵出发我们也能画出图。</p>
+<center><img src="https://pic.imgdb.cn/item/62ad3c83094754312964ed92.jpg" style="zoom:40%"></center>
+
+<p>第1行代表边①，从结点1流出记为-1，从结点2流入记为 1。也就是从结点1流向了结点2。</p>
+<p>边①、边②和边③构成了一个回路，称为<strong>环</strong>（loop）。反映在矩阵上是这三个行向量线性相关。</p>
+<p>源于现实问题的关联矩阵，通常描述了问题的结构。如果我们研究一个很大的图，则会构建一个很大的矩阵，但这个矩阵会是<strong>稀疏矩阵</strong>。</p>
+<h5 id="12-2-1-零空间"><a href="#12-2-1-零空间" class="headerlink" title="12.2.1 零空间"></a>12.2.1 零空间</h5><p>考察矩阵的零空间，即求$\boldsymbol{Ax = 0}$的解。零空间告诉我们列向量线性组合的状态。这里$\boldsymbol x$的分量表示的是每个节点。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A x}=\left[\begin{array}{l}
+x_{2}-x_{1} \\
+x_{3}-x_{2} \\
+x_{3}-x_{1} \\
+x_{4}-x_{1} \\
+x_{4}-x_{3}
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+0 \\
+0 \\
+0 \\
+0
+\end{array}\right]</script><p>如果$\boldsymbol x$为结点上的电势，则$\boldsymbol{Ax}$给出了每个边上的电势差。求解可以得到零空间为一维$\dim N(\boldsymbol A) = 1$，它的基就是$\left(\begin{array}{l}1 \1 \1 \1 \end{array}\right)$，解集则是$\boldsymbol x = c \left(\begin{array}{l}1 \1 \1 \1 \end{array}\right)$代表等电势，说明等电势条件下不会有电流产生。常数$c$的确定需要边界条件，比如我们将结点4接地，则$x_4 = 0$ 。</p>
+<h5 id="12-2-2-列空间"><a href="#12-2-2-列空间" class="headerlink" title="12.2.2 列空间"></a>12.2.2 列空间</h5><p>若求$\boldsymbol{Ax = b}$的解，则相当于在给定了电压$\boldsymbol b$的情况下，求各点的电势，但实际上我们得不到电势的准确值，因为零空间有常数解$c$ ，各点得到的电势需要加上常数$c$，这很类似于求积分要加上常函数，常数值需要边界条件来确定。</p>
+<p>矩阵的列数为4，而其零空间的维数为1，则矩阵的秩为3，矩阵第1列、第2列和第4列的列向量线性无关。</p>
+<p>考察矩阵列空间，一个重要的问题就是对于什么样的$\boldsymbol b$，$\boldsymbol{Ax = b}$有解。边①、边②和边③构成了环，这三个行向量线性相关，同样的情况还有边④、边⑤和边③构成的环。</p>
+<p>我们沿着第一幅图中的一个环边$(1, 3, -2)$对电势差求和：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\left(x_{2}-x_{1}\right)+\left(x_{3}-x_{2}\right)-\left(x_{3}-x_{1}\right)=0 \\
+&x_{2}-x_{1}=b_{1}, x_{3}-x_{2}=b_{3}, x_{3}-x_{1}=b_{2}
+\end{aligned}</script><p>所以$\boldsymbol b$的分量满足$b_1+b_3-b_2 = 0$和$b_3-b_4+b_5 = 0$。如果把边①、边②、边④、边⑤构成的大环也表示出来则还可以得到一个等式$b_1-b_2+b_4-b_5 = 0$，但实际上这个等式就是之前这两个等式的组合。这两个等式就是<strong>基尔霍夫电压定律</strong>(Kirchhoff’s Voltage law)，即环路电势差之和为零。</p>
+<h5 id="12-2-3-左零空间"><a href="#12-2-3-左零空间" class="headerlink" title="12.2.3 左零空间"></a>12.2.3 左零空间</h5><p>矩阵的左零空间是满足$\boldsymbol A^{\mathrm T} \boldsymbol y = 0$的向量$\boldsymbol y$的集合。其中$\boldsymbol y$的每个分量表示的是每个边。因为矩阵$\boldsymbol A^{\mathrm T} $有5列，且矩阵的秩为3，因此矩阵的左零空间维数为2。这反应了行向量的线性关系，整个“图”中，环数为2。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}^{T} \boldsymbol{y}=\left[\begin{array}{ccccc}
+-1 & 0 & -1 & -1 & 0 \\
+1 & -1 & 0 & 0 & 0 \\
+0 & 1 & 1 & 0 & -1 \\
+0 & 0 & 0 & 1 & 1
+\end{array}\right]\left[\begin{array}{l}
+y_1 \\
+y_2 \\
+y_3 \\
+y_4 \\
+y_5
+\end{array}\right]=\left[\begin{array}{l}
+0 \\
+0 \\
+0 \\
+0
+\end{array}\right]</script><p>其中$\boldsymbol y$的分量的值为“边”上的电流。在电势差和电流之间建立联系就是<strong>欧姆定律</strong>(Ohm’s Law)。</p>
+<p><img src="https://pic.imgdb.cn/item/62ad40a609475431296a5750.jpg" style="zoom:50%"></p>
+<p>我们求解$\boldsymbol A^{\mathrm T} \boldsymbol y = 0$就是在求5个满足基尔霍夫电流定律(Kirchhoff’s Law)的电流值。</p>
+<p>$\boldsymbol A^{\mathrm T} \boldsymbol y = 0$的方程形式$\left{\begin{array}{r}-y<em>{1}-y</em>{3}-y<em>{4}=0 \ y</em>{1}-y<em>{2}=0 \ y</em>{2}+y<em>{3}-y</em>{5}=0 \ y<em>{4}+y</em>{5}=0\end{array}\right.$，每一个方程关于一个结点，方程表示结点电流值为0，即流入等于流出。</p>
+<p>从图上解方程，而不是采用消元法解方程。如果我们设定$y_1 = 1$组成的回路的“环流“为0，则有$y_2 = 1, y_3 = -1$可解得$\boldsymbol y =\left[\begin{array}{c} 1 \ 1 \ -1 \ 0 \ 0\end{array}\right]$。取另一个回路的环流为0，则有$y_3 = 1, y_4 = -1, y_5 = 1$可解得$\boldsymbol y =\left[\begin{array}{c} 0 \ 0 \ 1 \ -1 \ 1\end{array}\right]$。如果设定$y_1, y_2, y_3, y_4, y_5$组成的大回路环流为0，则可以得到另一个向量$\boldsymbol y$，而该向量在零空间内，是前两个向量的线性组合。 </p>
+<h5 id="12-2-4-行空间——对应边"><a href="#12-2-4-行空间——对应边" class="headerlink" title="12.2.4 行空间——对应边"></a>12.2.4 行空间——对应边</h5><p>考察矩阵的行空间，因为矩阵秩$r = 3$，所以存在3个线性无关的向量。第1行、第2行和第4行为线性无关，在“图”中，边①、边②和边④构成了一张小图，这三个边没有形成回路。线性相关问题等价于形成回路。没有回路的小图包含4个结点和3条边，再添加一条边就会产生回路，在矩阵里表现为在第1行、第2行和第4行之上再添加一个行向量就会变为线性相关。<strong>没有回路的图称为“树”</strong>。</p>
+<p>思考一下维数公式的在“图”中的意义：</p>
+<ul>
+<li>左零空间维数$\dim N(\boldsymbol A^{\mathrm T}) = m - r$</li>
+<li>等价于“环”数量 = “边”数量-(“结点”数量-1)</li>
+</ul>
+<p>即<strong><font color="red">Eular公式</font></strong>：</p>
+<script type="math/tex; mode=display">
+“结点” − “边” + “环” = 1</script><p>对所有图都成立。$矩阵的秩r = 结点 − 1$，因为r表示了线性无关的边的数目，也就是“树”中“边”的数目。</p>
+<p><img src="https://pic.imgdb.cn/item/62ad44f209475431296fc86b.jpg" style="zoom:50%"></p>
+<p>之前的讨论都是针对于一个无源的电场，如果加入电源则情况又不同，例如加入电流源相当于将基尔霍夫定律的方程变为$\boldsymbol A^{\mathrm T} \boldsymbol y = f$，$f$就是外部流入的电流。将$\boldsymbol{e = Ax}, \boldsymbol y = c \boldsymbol e, \boldsymbol A^{\mathrm T} \boldsymbol y = f$ ，三个等式结合得到应用数学中的基本方程$\boldsymbol A^{\mathrm T}c\boldsymbol A \boldsymbol x = f$。</p>
+<p>关于方程$\boldsymbol A^{\mathrm T}c\boldsymbol A \boldsymbol x = f$的更多内容可以阅读GS老先生08的书“Computational science and engineering”的第二章。</p>
+<h3 id="13-习题课1"><a href="#13-习题课1" class="headerlink" title="13 习题课1"></a>13 习题课1</h3><p>具体内容参考：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45855579">MIT—线性代数笔记13 复习一 - 三少爷的键的文章 - 知乎</a></p>
+<hr>
+<p>资料链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1029672383375949824">三少爷的MIT笔记</a>，超强数学笔记！！！</p>
+<p>资料链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/xhf0374/article/details/63250083">MIT 公开课：Gilbert Strang《线性代数》课程笔记（汇总）</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/05/03/LinearAlgebra1/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%AC%E8%B4%A8%E9%97%AE%E9%A2%98/" rel="tag">本质问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E4%BB%A3/" rel="tag">线代</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/05/04/LinearAlgebra3/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            线性代数_Part3
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/29/English-grammar-learning/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">英语语法学习</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

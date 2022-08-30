@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>线性代数_Part2 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-LinearAlgebra2"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  线性代数_Part2
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/05/LinearAlgebra2/" class="article-date">
+  <time datetime="2022-04-05T06:59:11.000Z" itemprop="datePublished">2022-04-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/">数学基础</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E6%95%B0%E5%AD%A6%E5%9F%BA%E7%A1%80/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">17k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">73 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="第十四讲-正交向量与正交子空间"><a href="#第十四讲-正交向量与正交子空间" class="headerlink" title="第十四讲 正交向量与正交子空间"></a>第十四讲 正交向量与正交子空间</h3><p><img src="https://pic.imgdb.cn/item/625423a7239250f7c5047658.jpg" style="zoom:70%"></p>
+<h4 id="14-1-正交向量-Orthogonal-vectors"><a href="#14-1-正交向量-Orthogonal-vectors" class="headerlink" title="14.1 正交向量 Orthogonal vectors"></a>14.1 正交向量 Orthogonal vectors</h4><p><img src="https://pic.imgdb.cn/item/625423c4239250f7c504af7f.jpg"></p>
+<p>正交就是垂直(perpendicular)的另一种说法。两向量正交的判据之一是其点积$\boldsymbol x^{\text T} \boldsymbol y = \boldsymbol y^{\text T} \boldsymbol x = 0$。当两个向量的夹角为90度时，按照毕达哥拉斯定理，$\boldsymbol {x,y}$ 满足：</p>
+<script type="math/tex; mode=display">
+||\boldsymbol x||^2 + ||\boldsymbol y||^2 = ||\boldsymbol{x+y }||^2,其中||\boldsymbol x||^2 = \boldsymbol x^{\text T} \boldsymbol x</script><p>例如<script type="math/tex">\boldsymbol  x=\left(\begin{array}{l} 1 \\ 2 \\ 3 \end{array}\right), \boldsymbol  y=\left(\begin{array}{l} 2 \\ -1 \\ 0 \end{array}\right)</script>，则<script type="math/tex">\boldsymbol  {x+y}=\left(\begin{array}{l} 3 \\ 1 \\ 3 \end{array}\right), ||\boldsymbol x||^2=14,  ||\boldsymbol y||^2=5, ||\boldsymbol{x+y }||^2 = 19</script>。</p>
+<p>将勾股定理展开进行计算，则有</p>
+<script type="math/tex; mode=display">
+\boldsymbol x^{\text T} \boldsymbol x + \boldsymbol y^{\text T} \boldsymbol y = (\boldsymbol x + \boldsymbol y)^{\text T} (\boldsymbol x + \boldsymbol y) = \boldsymbol x^{\text T} \boldsymbol x + \boldsymbol y^{\text T} \boldsymbol y +\boldsymbol x^{\text T} \boldsymbol y + \boldsymbol y^{\text T} \boldsymbol x</script><p>得到$\boldsymbol x^{\text T} \boldsymbol y =0$。</p>
+<p>零向量与所有向量都正交。 </p>
+<h4 id="14-2-正交子空间-Orthogonal-subspaces"><a href="#14-2-正交子空间-Orthogonal-subspaces" class="headerlink" title="14.2 正交子空间 Orthogonal subspaces"></a>14.2 正交子空间 Orthogonal subspaces</h4><p>子空间$\boldsymbol S$与子空间$\boldsymbol T$正交，则$\boldsymbol S$中的任意一个向量都和$\boldsymbol T$中的任意向量正交。黑板所在的平面和地板所在平面不是正交关系，沿两者的交线方向的向量同时属于两个平面，但并不与自己正交。<font color="green"><strong>所以如果两个平面的交点（交线）如果不是零向量，则它们就不是正交的。</strong></font></p>
+<p>如果在平面内(二维空间)讨论正交子空间，平面的子空间包括只包含零向量的0空间、过原点的直线以及整个平面。经过原点的直线不会和整个空间正交(二维空间限制下过原点的直线在平面内，不要想成3维空间了)；0空间和过原点的直线正交(<strong>0空间与任意空间正交</strong>)；经过原点的两条直线若夹角为直角则互相正交。</p>
+<h4 id="14-3-零空间与行空间正交-Nullspace-is-perpendicular-to-row-space"><a href="#14-3-零空间与行空间正交-Nullspace-is-perpendicular-to-row-space" class="headerlink" title="14.3 零空间与行空间正交 Nullspace is perpendicular to row space"></a>14.3 零空间与行空间正交 Nullspace is perpendicular to row space</h4><p>矩阵$\boldsymbol  A$的行空间和它的零空间正交。若在零空间内，则有$\boldsymbol {Ax} = \boldsymbol 0$，将$\boldsymbol A$表示为行向量的格式：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{c}
+\operatorname{row}_{1} \\
+\operatorname{row}_{2} \\
+\vdots \\
+\text { row }_{m}
+\end{array}\right][\boldsymbol x]=\left[\begin{array}{c}
+\operatorname{row}_{1} \cdot \boldsymbol x \\
+\operatorname{row}_{2} \cdot\boldsymbol  x \\
+\vdots \\
+\operatorname{row}_{m} \cdot \boldsymbol x
+\end{array}\right]=\left[\begin{array}{c}
+0 \\
+0 \\
+\vdots \\
+0
+\end{array}\right]</script><p>$\boldsymbol x$与矩阵$\boldsymbol A$的行向量点积都等于0，则它和矩阵$\boldsymbol A$行向量的线性组合进行点积也为 0，所以$\boldsymbol x$与矩阵$\boldsymbol A$的行空间正交。$\boldsymbol x$为零空间内的任意向量，所以零空间与行空间正交。（一vs多-&gt;多vs多）</p>
+<p>同理可以证明列空间与左零空间正交。</p>
+<p>行空间和零空间实际上把$R^n$空间分割成了两个正交的子空间。例如对于矩阵：</p>
+<script type="math/tex; mode=display">
+A=\left[\begin{array}{lll}
+1 & 2 & 5 \\
+2 & 4 & 10
+\end{array}\right]</script><p>则其行空间是1维的，向量<script type="math/tex">\left(\begin{array}{l} 1 \\ 2 \\ 5 \end{array}\right)</script> 是它的基向量，而其零空间是垂直于<script type="math/tex">\left(\begin{array}{l} 1 \\ 2 \\ 5 \end{array}\right)</script> 并穿过原点的2维平面。其中零空间的法向量为<script type="math/tex">\left(\begin{array}{l} 1 \\ 2 \\ 5 \end{array}\right)</script>。</p>
+<h4 id="14-4-正交补Orthogonal-Complements"><a href="#14-4-正交补Orthogonal-Complements" class="headerlink" title="14.4 正交补Orthogonal Complements"></a>14.4 正交补Orthogonal Complements</h4><p>行空间和零空间不仅仅是正交，并且其维数之和等于$n$，我们称行空间和零空间为$R^n$空间内的<font color="red"><strong>正交补(orthogonal complements)</strong></font>。</p>
+<script type="math/tex; mode=display">
+\dim N(\boldsymbol A) + \dim C(\boldsymbol A^{\text T}) = n</script><p>正交补的概念很重要，它表明$R^n$中的任何一个向量$\boldsymbol x$都可以<font color="blue">拆分为互为正交补的子空间的向量之和</font>。以$\boldsymbol {Ax = b}$的解$\boldsymbol x$为例，$\boldsymbol x$是$R^n$中的向量，$\boldsymbol x$可以拆分为在行空间的分量$\boldsymbol x_r$和零空间中的分量$\boldsymbol x_n$，即$\boldsymbol x = \boldsymbol x_r + \boldsymbol x_n$，$\boldsymbol {Ax=b}$可以进行如下拆解</p>
+<script type="math/tex; mode=display">
+零空间分量：\boldsymbol {Ax}_n = \boldsymbol 0 \\
+行空间分量：\boldsymbol {Ax}_r = \boldsymbol b</script><p>这表示零空间包含所有和行空间正交的向量，反之亦然。 想想我们之前提到的黑板和地板平面不是正交子空间的例子，二者都在 3 维空间中，分别为 2 维空间，因此不可能正交。<font color="red">一个空间中正交子空间的维数之和不可能超过原空间的维数</font>。</p>
+<p><strong>我们可以称目前讨论的这部分内容是线性代数基本定理的第二部分。第一部分是给出四个子空间和它们的维数，第二部分说明它们是两两互为正交补，第三部分讨论子空间的正交基。 这些内容都反映在了本讲座开始的那幅图上。</strong></p>
+<h4 id="14-5-矩阵-boldsymbol-A-text-T-boldsymbol-A"><a href="#14-5-矩阵-boldsymbol-A-text-T-boldsymbol-A" class="headerlink" title="14.5 矩阵$\boldsymbol A^{\text T} \boldsymbol A$"></a>14.5 矩阵$\boldsymbol A^{\text T} \boldsymbol A$</h4><p>下面讨论如何求解一个<strong>无解</strong>方程组$\boldsymbol {Ax} = \boldsymbol b$的解($\boldsymbol b$不在$\boldsymbol A$的列空间中)。如果$\boldsymbol A$是长方形矩阵，$m$大于$n$(方程数大于未知数)。当左侧方程数特别多的时候，容易混入“坏”数据，方程变得无解。但是对于数据的可信度我们无从判断，线性代数要做的就是在这种条件下求一个方程的“最优解”（把好数据筛选出来）。其中一种求解方法是删掉一些方程，使得矩阵变成可逆的方阵，然后进行求解。但是由于无法判断哪些数据是好数据，哪些是坏数据。希望利用所有测量值求出最优解，从而得到最完整的信息。</p>
+<p>矩阵$\boldsymbol A^{\text T} \boldsymbol A$会发挥重要作用，它是一个$n \times n$方阵，并且是对称阵，$(\boldsymbol A^{\text T} \boldsymbol A)^{\text T} = \boldsymbol A^{\text T} \boldsymbol A$。本章的核心内容就是当$\boldsymbol {Ax} = \boldsymbol b$无解的时候，求解$\boldsymbol A^{\text T}\boldsymbol A \hat {\boldsymbol x}= \boldsymbol A^{\text T} \boldsymbol b$得到<strong>最优解</strong>。<br><img src="https://pic.imgdb.cn/item/6254d8cd239250f7c5e5984d.jpg"></p>
+<p>实际上$N(\boldsymbol A^{\text T} \boldsymbol A) = N(\boldsymbol A)$，并且矩阵$\boldsymbol A^{\text T} \boldsymbol A$的秩等于$\boldsymbol A$的秩。因此矩阵$\boldsymbol A^{\text T} \boldsymbol A$可逆要求$\boldsymbol A$的零空间只有零向量，即$\boldsymbol A$的列向量线性无关(或者说$\boldsymbol A$列满秩)。</p>
+<h3 id="第十五讲-子空间投影"><a href="#第十五讲-子空间投影" class="headerlink" title="第十五讲 子空间投影"></a>第十五讲 子空间投影</h3><h4 id="15-1-投影-射影-Projections"><a href="#15-1-投影-射影-Projections" class="headerlink" title="15.1 投影(射影)Projections"></a>15.1 投影(射影)Projections</h4><p>简单来说，两个向量之间的投影是将其中一个向量转换到另外一个向量的方向上，然后求内积。 </p>
+<p><img src="https://pic.imgdb.cn/item/6254ea45239250f7c5fe5d00.jpg" style="zoom:70%"></p>
+<p><strong>投影问题的几何解释就是：如何在向量$\boldsymbol a$的方向上寻找与向量$\boldsymbol b$距离最近的一点</strong>。从图中可以看出，这个距离最近的点$\boldsymbol p$就位于穿过$\boldsymbol b$点并与向量$\boldsymbol a$正交的直线与向量$\boldsymbol a$所在直线的交点上。这就是$\boldsymbol b$在$\boldsymbol a$上的投影。如果我们将向量$\boldsymbol p$视为$\boldsymbol b$的一种近似，则长度$\boldsymbol {e = b-p}$就是这一近似的误差。</p>
+<p>因为在向量$\boldsymbol a$的方向上，因此可以令$\boldsymbol p = x \boldsymbol a$，而因为它和$\boldsymbol e$正交，我们可以得到方程：$\boldsymbol a^{\text T}(\boldsymbol b - x \boldsymbol a) = 0$。（该结果是把$\boldsymbol p$与$\boldsymbol e$正交转换成了$\boldsymbol a$与$\boldsymbol e$正交，本质上只是两边同除了个数）。</p>
+<p>解得： $x = \dfrac{\boldsymbol a^{\text T} \boldsymbol b}{\boldsymbol a^{\text T} \boldsymbol a}$，$\boldsymbol p = x \boldsymbol a = \boldsymbol a x = \boldsymbol a \dfrac{\boldsymbol a^{\text T} \boldsymbol b}{\boldsymbol a^{\text T} \boldsymbol a}$</p>
+<p>如果$\boldsymbol b$变为原来的2倍，则$\boldsymbol  p$也变为原来的2倍。 而如果$\boldsymbol  a$变为原来的2倍，$\boldsymbol p$不发生变化。从几何上和计算中都会得到验证。</p>
+<h4 id="15-2-投影矩阵"><a href="#15-2-投影矩阵" class="headerlink" title="15.2 投影矩阵"></a>15.2 投影矩阵</h4><p>我们将投影问题用投影矩阵的方式进行描述，即为$\boldsymbol p = \boldsymbol {Pb}$，其中$\boldsymbol P$为投影矩阵。</p>
+<p>Q：为什么是$\boldsymbol p = \boldsymbol {Pb}$，而不是$\boldsymbol p = \boldsymbol {bP}$呢？   </p>
+<p>A：一来是由于上述的推导，二来可以通过反证法，$\boldsymbol p = \boldsymbol {Pb}$很显然的是$\boldsymbol p$的维度和$\boldsymbol b$的是一致的（维度相同的列向量）。而反之不成立。 </p>
+<p>$\boldsymbol p = \boldsymbol a x = \boldsymbol a \dfrac{\boldsymbol a^{\text T} \boldsymbol b}{\boldsymbol a^{\text T} \boldsymbol a}$，则有$\boldsymbol P = \dfrac{\boldsymbol a \boldsymbol a^{\text T} }{\boldsymbol a^{\text T} \boldsymbol a}$，其分子$\boldsymbol a  \boldsymbol a^{\text T}$ 是一个矩阵，而分母是一个数。</p>
+<p>观察这个矩阵可知，矩阵$\boldsymbol P$的列空间就是向量$\boldsymbol a$所在的直线，矩阵的秩是1。投影矩阵$\boldsymbol P$是一个对称矩阵。另一方面，如果做两次投影则有第二次投影还在原来的位置。因此矩阵$\boldsymbol P$有如下性质：</p>
+<ul>
+<li>$\boldsymbol P^{\text T} = \boldsymbol P$</li>
+<li>$\boldsymbol P^2 = \boldsymbol P$</li>
+</ul>
+<h4 id="15-3-为什么要投影-Why-Project"><a href="#15-3-为什么要投影-Why-Project" class="headerlink" title="15.3 为什么要投影 Why Project"></a>15.3 为什么要投影 Why Project</h4><p>如前所述，方程$\boldsymbol {Ax} = \boldsymbol b$有可能无解，我们需要得到方程的“最优解”。这里的题在于向量$\boldsymbol {Ax}$一定在矩阵$\boldsymbol b$的列空间之内，但是$\boldsymbol b$不一定，因此我们希望将$\boldsymbol b$投影到$\boldsymbol A$的列空间得到$\boldsymbol p$，将问题转化为求解$\boldsymbol {A \hat x} = \boldsymbol p$。</p>
+<h4 id="15-4-在高维投影-Projection-in-higher-dimensions"><a href="#15-4-在高维投影-Projection-in-higher-dimensions" class="headerlink" title="15.4 在高维投影 Projection in higher dimensions"></a>15.4 在高维投影 Projection in higher dimensions</h4><p>在$R^3$空间内，如何将向量$\boldsymbol b$投影到它距离平面最近的一点$\boldsymbol p$？<br><img src="https://pic.imgdb.cn/item/6257cb08239250f7c5c15905.jpg"></p>
+<p>如果$\boldsymbol a_1$和$\boldsymbol a_2$构成了平面的一组基，则平面就是矩阵$\boldsymbol A = [\boldsymbol a_1; \boldsymbol a_2]$的列空间。</p>
+<p>已知向量$\boldsymbol p$在平面内，则有$\boldsymbol p = \hat x_1 \boldsymbol a_1 + \hat x_2 \boldsymbol a_2 = \boldsymbol {A \hat x}$。$\boldsymbol e = \boldsymbol{b-p}$与投影平面正交（<strong>重点</strong>），因此 $\boldsymbol e$与$\boldsymbol {a_1,a_2}$均正交，因此可以得到： $\boldsymbol a_1^{\text T}(\boldsymbol b - \boldsymbol {A \hat x})=0$并且$\boldsymbol a_2^{\text T}(\boldsymbol b - \boldsymbol {A \hat x})=0$。因为$\boldsymbol a_1$和$\boldsymbol a_2$分别为矩阵$\boldsymbol A$的列向量，即$\boldsymbol a_1^{\text T}$和$\boldsymbol a_2^{\text T}$分别为矩阵$\boldsymbol A^{\text T}$的行向量，所以将两个方程式写成矩阵形式即为 $\boldsymbol A^{\text T }(\boldsymbol b-\boldsymbol {A \hat x}) = \boldsymbol 0$。这与一维投影的方程形式相同。 </p>
+<p>向量 $\boldsymbol e = \boldsymbol b - \boldsymbol {A \hat x}$存在于矩阵 $\boldsymbol A^{\text T}$的零空间$N(\boldsymbol A^{\text T})$里，从上一讲讨论子空间的正交性可知，向量$\boldsymbol e$与矩阵$\boldsymbol A$的列空间正交，这也正是方程的意义。</p>
+<p>将方程$\boldsymbol A^{\text T}(\boldsymbol b - \boldsymbol{A \hat x})= \boldsymbol 0$改写，可得$\boldsymbol A^{\text T} \boldsymbol{A \hat x} = \boldsymbol A^{\text T} \boldsymbol b$</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\hat{\boldsymbol x}=\left(\boldsymbol A^{\text T} \boldsymbol A\right)^{-1} \boldsymbol A^{\text T} \boldsymbol b \\
+\boldsymbol p=\boldsymbol A \hat{\boldsymbol x}=\boldsymbol A\left(\boldsymbol A^{\text T} \boldsymbol A\right)^{-1} \boldsymbol A^{\text T} \boldsymbol b \\
+\boldsymbol P=\boldsymbol A\left( \boldsymbol A^{\text T}  \boldsymbol A\right)^{-1} \boldsymbol A^{\text T}
+\end{gathered}</script><blockquote>
+<p>注意：这里由于考虑矩阵$\boldsymbol A$是列满秩的，因此$\boldsymbol A^{\text T} \boldsymbol A$一定是方阵可逆。</p>
+</blockquote>
+<p>因为矩阵$\boldsymbol A$不是方阵，无法简单的用$\left(\boldsymbol A^{\text T} \boldsymbol A\right)^{-1}=\boldsymbol A^{-1}\left(\boldsymbol A^{\text T}\right)^{-1}$对投影矩阵公式进行化简。若$\boldsymbol A$是可逆方阵，则化简得到$\boldsymbol{P = I}$。此时$\boldsymbol A$的列空间就是整个$R^n$ 空间，$\boldsymbol b$到这个空间的投影就是其本身，投影矩阵等于单位阵。</p>
+<p>对$\boldsymbol P=\boldsymbol A\left( \boldsymbol A^{\text T}  \boldsymbol A\right)^{-1} \boldsymbol A^{\text T}$用矩阵乘法的结合律和矩阵乘积的转置公式，可以证明投影矩阵的性质： </p>
+<ul>
+<li>$\boldsymbol P^{\text T} = \boldsymbol P$</li>
+<li>$\boldsymbol P^2 = \boldsymbol P$</li>
+</ul>
+<h4 id="15-5-最小二乘法"><a href="#15-5-最小二乘法" class="headerlink" title="15.5 最小二乘法"></a>15.5 最小二乘法</h4><p><img src="https://pic.imgdb.cn/item/6257d401239250f7c5cf756d.jpg"></p>
+<p>应用投影矩阵求方程组最优解的方法，最常用于“最小二乘法”拟合曲线。 </p>
+<p>有三个数据点$(1,1), (2,2), (3,2)$，求直线方程$b = C + Dt $，要求直线尽量接近于三个点。把三个点的数据代入方程则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&C+D=1 \\
+&C+2 D=2 \\
+&C+3 D=2
+\end{aligned}</script><p>矩阵形式为</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+1 & 1 \\
+1 & 2 \\
+1 & 3
+\end{array}\right]\left[\begin{array}{l}
+C \\
+D
+\end{array}\right]=\left[\begin{array}{l}
+1 \\
+2 \\
+2
+\end{array}\right]</script><p>这个的方程$\boldsymbol {Ax=b}$是无解的，解决办法就是求其最优解，即方程$\boldsymbol A^{\text T} \boldsymbol {Ax=A^{\text T}b}$的解。</p>
+<h3 id="第十六讲-投影矩阵和最小二乘法"><a href="#第十六讲-投影矩阵和最小二乘法" class="headerlink" title="第十六讲 投影矩阵和最小二乘法"></a>第十六讲 投影矩阵和最小二乘法</h3><h4 id="16-1-投影-射影-Projections"><a href="#16-1-投影-射影-Projections" class="headerlink" title="16.1 投影(射影)Projections"></a>16.1 投影(射影)Projections</h4><p>上一讲介绍了投影矩阵$\boldsymbol P = \boldsymbol{A(A^{\text T}A)^{-1}A^{\text T}}$，当它作用于向量$\boldsymbol b$，相当于把$\boldsymbol b$投影到矩阵$\boldsymbol A$的列空间中。其中$\boldsymbol p = \boldsymbol{Pb}$，$\boldsymbol p$为投影后的向量。</p>
+<p>如果向量$\boldsymbol b$本身就在$\boldsymbol A$列空间之内，即存在$\boldsymbol x$使得$\boldsymbol {Ax = b}$，则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{P} \boldsymbol{b} &=\boldsymbol{A}\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{-1} \boldsymbol{A}^{\mathrm{T}} \boldsymbol{b}(\text { 将 } \boldsymbol{A} \boldsymbol{x}=\boldsymbol{b} \text { 代入 }) \\
+&=\boldsymbol{A}\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{-1} \boldsymbol{A}^{\mathrm{T}} \boldsymbol{A} \boldsymbol{x} \\
+&=\boldsymbol{A}\left(\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{-1}\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)\right) \boldsymbol{x} \\
+&=\boldsymbol{A} \boldsymbol{x}
+\end{aligned}</script><p>如果向量$\boldsymbol b$与$\boldsymbol A$的列空间正交，即向量$\boldsymbol b$在矩阵$\boldsymbol A$的左零空间$N(\boldsymbol A^{\text T})$中，则有</p>
+<script type="math/tex; mode=display">
+\boldsymbol {Pb}=\boldsymbol{A}\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{-1} \boldsymbol{A}^{\mathrm{T}} \boldsymbol{b} = \boldsymbol{A}\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{-1} (\boldsymbol{A}^{\mathrm{T}} \boldsymbol{b}) = \boldsymbol{A}\left(\boldsymbol{A}^{\mathrm{T}} \boldsymbol{A}\right)^{-1} \boldsymbol 0 = \boldsymbol 0</script><p>向量之间的关系图如下： </p>
+<p><img src="https://pic.imgdb.cn/item/62593a42239250f7c5c2f83d.jpg"></p>
+<p>从图我们可以总结出：</p>
+<ul>
+<li>$\boldsymbol {p+e=b}$，说明$\boldsymbol b$由两部分组成；</li>
+<li>$\boldsymbol {p=Pb}$为$\boldsymbol {A}$的列空间的部分；</li>
+<li>$\boldsymbol {e=(I-P)b}$为$\boldsymbol {A}$的左零空间中的部分；</li>
+<li>$\boldsymbol{I-P}$为左零空间的投影矩阵，可以验证$\boldsymbol{(I-P)}^{\mathrm T} = (\boldsymbol {I-P})$，并且$\boldsymbol {(I-P)}^2 = (\boldsymbol {I-P})$。</li>
+</ul>
+<h4 id="16-2-最小二乘法-Least-Squares"><a href="#16-2-最小二乘法-Least-Squares" class="headerlink" title="16.2 最小二乘法 Least Squares"></a>16.2 最小二乘法 Least Squares</h4><p>应用投影矩阵求方程组最优解的方法，最常用于“最小二乘法”拟合曲线。 </p>
+<p><img src="https://pic.imgdb.cn/item/62593c43239250f7c5c64e48.jpg" style="zoom:80%"></p>
+<p>有三个数据点$(1,1), (2,2), (3,2)$，求直线方程$b = C + Dt $，要求直线尽量接近于三个点。把三个点的数据代入方程则有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&C+D=1 \\
+&C+2 D=2 \\
+&C+3 D=2
+\end{aligned}</script><p>矩阵形式为</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+1 & 1 \\
+1 & 2 \\
+1 & 3
+\end{array}\right]\left[\begin{array}{l}
+C \\
+D
+\end{array}\right]=\left[\begin{array}{l}
+1 \\
+2 \\
+2
+\end{array}\right]</script><p>这个的方程$\boldsymbol {Ax=b}$是无解的，解决办法就是求其最优解，即误差最小，这里误差是指每个方程误差值的平方和$||\boldsymbol e||^2 = ||\boldsymbol {Ax-b}||^2$（误差平方相加），因此就是寻找具有最小误差平方和的解$\boldsymbol x$，这就是所谓的“最小二乘”问题。其中最接近的解为将$\boldsymbol b$投影到$\boldsymbol A$矩阵的系数$\boldsymbol x$。</p>
+<script type="math/tex; mode=display">
+\min \|\boldsymbol{A x-b}\|^{2}=\|\boldsymbol e\|^{2}=\left\|e_{1}\right\|^{2}+\left\|e_{2}\right\|^{2}+\left\|e_{3}\right\|^{2}</script><p>误差即为数据点到直线距离的平方和。这部分工作可称为线性回归，在数据点中没有“<strong>离群值</strong>” 时，这是非常有用的方法。 </p>
+<p><img src="https://pic.imgdb.cn/item/62593d85239250f7c5c871e3.jpg"></p>
+<p>从几何上讨论求解过程，就是试图寻找数据点到直线距离的平方和$e_1^2+e_2^2+e_3^2$最小的情况，此时得到的$C+Dt $分别为$p_1,p_2,p_3$ ，它们是满足方程并最接近于$\boldsymbol b$的结果。另一种看法是，对于$R^3$空间上的向量$\boldsymbol b$，它投影到矩阵$\boldsymbol A$的列空间中会得到向量$\boldsymbol p = [p_1,p_2,p_3]^{\mathrm T}$，投影到矩阵$\boldsymbol A$的零空间中则为$\boldsymbol e$。</p>
+<p>现在求解$\hat {\boldsymbol x} =  \left(\begin{array}{l} \hat C \ \hat D \end{array}\right)$和$\boldsymbol p$。</p>
+<p>老师称为统计上最重要的方程式： </p>
+<script type="math/tex; mode=display">
+\boldsymbol {A^{\mathrm T}A \hat x} = \boldsymbol {A^{\mathrm T} b}</script><script type="math/tex; mode=display">
+\left[\begin{array}{lll}
+1 & 1 & 1 \\
+1 & 2 & 3
+\end{array}\right]\left[\begin{array}{ll:l}
+1 & 1 & 1 \\
+1 & 2 & 2 \\
+1 & 3 & 2
+\end{array}\right]=\left[\begin{array}{rr:r}
+3 & 6 & 5 \\
+6 & 14 & 11
+\end{array}\right] \text {,则有 }\left[\begin{array}{cc}
+3 & 6 \\
+6 & 14
+\end{array}\right]\left[\begin{array}{l}
+\hat{C} \\
+\hat{D}
+\end{array}\right]=\left[\begin{array}{c}
+5 \\
+11
+\end{array}\right]</script><p>得到解为$\hat C = \dfrac{2}{3}, \hat D = \dfrac{1}{2}$。</p>
+<p>还可以从误差最小的角度出发求解： </p>
+<script type="math/tex; mode=display">
+e_{1}^{2}+e_{2}^{2}+e_{3}^{2}=(C+D-1)^{2}+(C+2 D-2)^{2}+(C+3 D-2)^{2}</script><p>对等号右边的表达式求偏导数，极值出现在偏导数为0的位置。<font color="red"><strong>求偏导最终会得到相同的线性方程组和相同的解</strong></font>。展开结果为</p>
+<script type="math/tex; mode=display">
+\|e\|^{2}=3 C^{2}+14 D^{2}+9-10 C-22 D+12 C D</script><p>求偏导可得到和$\boldsymbol {A^{\mathrm T}A \hat x} = \boldsymbol {A^{\mathrm T} b}$的结果相同。</p>
+<p>得到直线表达式$y=2/3+t/2$。将$t=1、2、3$分别代入可得：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{p}=\left(\begin{array}{c}
+\dfrac{7}{6} \\
+\dfrac{5}{3} \\
+\dfrac{13}{6}
+\end{array}\right), \boldsymbol{e}=\left(\begin{array}{c}
+-\dfrac{1}{6} \\
+\dfrac{1}{3} \\
+-\dfrac{1}{6}
+\end{array}\right)</script><p>投影向量$\boldsymbol p$与误差向量$\boldsymbol e$是正交的：</p>
+<script type="math/tex; mode=display">
+\left\{\begin{array}{l}
+\boldsymbol {A^{T} A \hat{x}=A^{T} b \\
+p=A \hat{x}}
+\end{array}\right.</script><h4 id="16-3-矩阵-boldsymbol-A-mathrm-T-A"><a href="#16-3-矩阵-boldsymbol-A-mathrm-T-A" class="headerlink" title="16.3 矩阵$\boldsymbol {A^{\mathrm T}A}$"></a>16.3 矩阵$\boldsymbol {A^{\mathrm T}A}$</h4><p>证明：若$\boldsymbol A$的列向量线性无关时，矩阵$\boldsymbol {A^{\mathrm T}A}$为可逆矩阵。$\boldsymbol A$的各列线性无关，是最小二乘法成立的前提。</p>
+<p>假设存在$\boldsymbol x$使得$\boldsymbol {A^{\mathrm T}Ax = 0}$。则有$\boldsymbol {x^{\mathrm T}A^{\mathrm T}Ax = 0}$(两边同乘以$\boldsymbol x^{\mathrm T}$)，则有</p>
+<script type="math/tex; mode=display">
+\boldsymbol {x^{\mathrm T}A^{\mathrm T}Ax = (Ax)^{\text T}(Ax)=0}</script><p>因此$\boldsymbol {Ax = 0}$，因为$\boldsymbol A$的列向量线性无关，所以只有当$\boldsymbol {x = 0}$时有$\boldsymbol{Ax = 0}$，因此只有当$\boldsymbol {x = 0}$时有$\boldsymbol {A^{\mathrm T}Ax = 0}$。即矩阵$\boldsymbol {A^{\mathrm T}A = 0}$为可逆矩阵。</p>
+<p>如果矩阵的列向量是互相垂直的单位向量，则它们一定是线性无关的。我们将这种向量称之为标准正交组（orthonormal）。 </p>
+<script type="math/tex; mode=display">
+\text { 例如 : }\left[\begin{array}{l}
+1 \\
+0 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+1 \\
+0
+\end{array}\right],\left[\begin{array}{l}
+0 \\
+0 \\
+1
+\end{array}\right] \text { ;  还有 }\left[\begin{array}{c}
+\cos \theta \\
+\sin \theta
+\end{array}\right] \text { 和 }\left[\begin{array}{c}
+\cos \theta \\
+\sin \theta
+\end{array}\right]</script><blockquote>
+<p>本小节我还有一个问题就是最小二乘法中误差$\boldsymbol e$为什么不是做垂直线而是竖直线，不是很明白。【MIT线性代数—-投影矩阵和最小二乘 - August的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/45351889">https://zhuanlan.zhihu.com/p/45351889</a> 】【线性代数视角下的最小二乘法 - 孙孙的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62694878">https://zhuanlan.zhihu.com/p/62694878</a> 】这两篇文章有评论里面有一个解释，可以好好理解一下。</p>
+</blockquote>
+<h3 id="第十七讲-正交矩阵和施密特正交化"><a href="#第十七讲-正交矩阵和施密特正交化" class="headerlink" title="第十七讲 正交矩阵和施密特正交化"></a>第十七讲 正交矩阵和施密特正交化</h3><p>本节是“正交”部分的最后内容。Gram-Schmidt 过程可以将原空间的一组基转变为标准正交基。 </p>
+<h4 id="17-1-标准正交向量-Orthonormal-vectors"><a href="#17-1-标准正交向量-Orthonormal-vectors" class="headerlink" title="17.1 标准正交向量 Orthonormal vectors"></a>17.1 标准正交向量 Orthonormal vectors</h4><p>满足如下条件的向量$\boldsymbol{q_1, q_2, \dots, q_n}$为标准正交向量：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{q_{i}^{T} q_{j}}=\left\{\begin{array}{l}
+0, i \neq j \\
+1, i=j
+\end{array}\right.</script><p>换而言之，它们都具有单位长度 1，并且彼此正交。标准正交向量是线性无关的。很多线性代数的计算都建立在标准正交基础上，它让一切变得简单可控(从来不上溢或者下溢)。 </p>
+<h4 id="17-2-标准正交矩阵-Orthonormal-matrix"><a href="#17-2-标准正交矩阵-Orthonormal-matrix" class="headerlink" title="17.2 标准正交矩阵 Orthonormal matrix"></a>17.2 标准正交矩阵 Orthonormal matrix</h4><p>如果矩阵$\boldsymbol Q$的列向量为标准正交向量，则$\boldsymbol{Q^{\mathrm T} Q = I}$为单位阵。</p>
+<p><img src="https://pic.imgdb.cn/item/6269dc7b239250f7c52e5f8e.jpg" style="zoom:70%"></p>
+<p>注意这里的矩阵$\boldsymbol Q$可以不是方阵。我们已经学过了一系列矩阵，包括三角阵、对角阵、置换矩阵、对称矩阵、行最简梯形矩阵、投影矩阵等等，现在有了“标准正交”矩阵。</p>
+<p>一个<strong>标准正交的方阵</strong>称之为“正交矩阵”（orthogonal matrix）。如果$\boldsymbol Q$为方阵，因为$\boldsymbol{Q^{\mathrm T} Q = I}$，所以$\boldsymbol{Q^{\mathrm T} = Q^{-1}}$ 。 注意必须是方阵，必须是标准正交，而不只是正交。</p>
+<p>例如，置换矩阵 <script type="math/tex">\boldsymbol Q=\left[\begin{array}{lll} 0 & 0 & 1 \\ 1 & 0 & 0 \\ 0 & 1 & 0\end{array}\right]</script>，则有<script type="math/tex">\boldsymbol Q^T=\left[\begin{array}{lll} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 1 & 0 & 0\end{array}\right]</script>，两者皆为正交矩阵，并且两者乘积为单位阵。 </p>
+<p>例如， <script type="math/tex">\boldsymbol Q=\left[\begin{array}{lll} \cos x & -\sin x  \\ \sin x & \cos x \end{array}\right]</script>为正交矩阵。 </p>
+<p>例如， <script type="math/tex">\boldsymbol Q=\dfrac{1}{2}\left[\begin{array}{cccc} 1 & 1 & 1 & 1 \\ 1 & -1 & 1 & -1 \\ 1 & 1 & -1 & -1 \\ 1 & -1 & -1 & 1\end{array}\right]</script>是由-1 和+1 组成的正交矩阵，这种类型的矩阵称之为阿达玛Hadamard矩阵，不同阶数矩阵性质不同并且没有规律，无从判断几阶的阿达玛矩阵为正交阵。</p>
+<h4 id="17-3-标准正交列向量的优势-Orthonormal-columns-are-good"><a href="#17-3-标准正交列向量的优势-Orthonormal-columns-are-good" class="headerlink" title="17.3 标准正交列向量的优势 Orthonormal columns are good"></a>17.3 标准正交列向量的优势 Orthonormal columns are good</h4><p>若$\boldsymbol Q$的列向量为标准正交向量，且我们已知投影到$\boldsymbol Q$的列空间的投影矩阵为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol {P = Q(Q^{\mathrm T}Q)^{-1}Q^{\mathrm T}}</script><p>证明过程略，可以参考笔记。此时根据$\boldsymbol{Q^{\mathrm T} Q = I}$可得：$\boldsymbol{P = QQ^{\mathrm T}}$，这会降低很多运算量。 </p>
+<p>更特殊一点，若$\boldsymbol Q$为方阵，则$\boldsymbol {P=I}$，因为$\boldsymbol Q$的列向量线性无关，$\boldsymbol Q$的列向量张成了整个空间，投影过程不会对向量有任何改变。当$\boldsymbol Q$为方阵时，$\boldsymbol {Q^{-1} = Q^{\mathrm T}}$ 。</p>
+<p>投影矩阵的性质为：投影矩阵为对称矩阵$\boldsymbol {P^{\mathrm T} = P}$；如果投影两次，还会在原有的位置$\boldsymbol {P^{2} = P}$，代入即为$\boldsymbol {(QQ^{\mathrm T})(QQ^{\mathrm T}) = (QQ^{\mathrm T})}$。这是由于$\boldsymbol{Q^{\mathrm T} Q = I}$。</p>
+<p>在很多复杂问题中使用标准正交向量之后都变得简单。如果基为标准正交，则方程</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A^{\mathrm T}A \hat x = A^{\mathrm T}b} {\longrightarrow} \boldsymbol{Q^{\mathrm T}Q \hat x = Q^{\mathrm T}b}</script><p>的解变为$\boldsymbol {\hat x = Q^{\mathrm T}b}$，$\boldsymbol {\hat x}$的分量$\hat x_i = \boldsymbol {q^{\mathrm T}_i b}$</p>
+<h4 id="17-4-施密特正交化-Gram-Schmidt-A-gt-Q"><a href="#17-4-施密特正交化-Gram-Schmidt-A-gt-Q" class="headerlink" title="17.4 施密特正交化 Gram-Schmidt(A-&gt;Q)"></a>17.4 施密特正交化 Gram-Schmidt(A-&gt;Q)</h4><p>从两个线性无关的向量$\boldsymbol a$和$\boldsymbol b$开始，它们张成了一个空间，我们的目标是希望找到两个标准正交的向量$\boldsymbol {q_1, q_2}$能张成同样的空间。Schmidt 给出的结论是如果我们有一组正交基$\boldsymbol A$和$\boldsymbol B$，那么令它们除以自己的长度就得到标准正交基：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{q_{1}=\frac{A}{\|A\|}, q_{2}=\frac{B}{\|B\|}}</script><p>Gram做了重要的工作，令$\boldsymbol {A = a}$，在向量$\boldsymbol a$和$\boldsymbol b$张成的空间中，取与$\boldsymbol A$正交向量做成标准正交基，方法就是将$\boldsymbol b$投影到$\boldsymbol a$的方向，然后取$\boldsymbol {B=b-p}$($\boldsymbol B$就是之前谈论过的误差$\boldsymbol e$的方向）<br><img src="https://pic.imgdb.cn/item/6269e662239250f7c53b67b8.jpg"></p>
+<script type="math/tex; mode=display">
+\boldsymbol{B=b-\frac{A^{T} b}{A^{T} A} A}</script><p>如果从等式两端左乘$\boldsymbol A^{\mathrm T}$，可以得到$\boldsymbol{A^{\mathrm T}B = 0}$。</p>
+<p>从三个线性无关的向量$\boldsymbol {a, b, c}$出发，则可以通过从$\boldsymbol c$中减去其在$\boldsymbol A$和$\boldsymbol B$两个方向的投影来得到$\boldsymbol C$。 </p>
+<script type="math/tex; mode=display">
+\boldsymbol {C=c-\frac{A^{T} c}{A^{T} A} A-\frac{B^{T} c}{B^{T} B} B}</script><p>例如：<script type="math/tex">\boldsymbol a = \left(\begin{array}{l} 1 \\ 1 \\ 1 \end{array}\right)</script>，<script type="math/tex">\boldsymbol b = \left(\begin{array}{l} 1 \\ 0 \\ 2 \end{array}\right)</script> ，则有$\boldsymbol {A = a}$，<script type="math/tex">\boldsymbol B=\left[\begin{array}{l} 1 \\ 0 \\ 2 \end{array}\right]-\dfrac{3}{3}\left[\begin{array}{l} 1 \\  1 \\ 1 \end{array}\right]=\left[\begin{array}{l} 0 \\ 1 \\ -1\end{array}\right]</script> ，验证计算得到$\boldsymbol{A^{\mathrm T}B = 0}$。</p>
+<p>写出$\boldsymbol q_1, \boldsymbol q_2$ 所组成的矩阵为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol Q=\left[\begin{array}{ll}
+\boldsymbol q_{1} & \boldsymbol q_{2}
+\end{array}\right]=\left[\begin{array}{cc}
+\frac{1}{\sqrt{3}} & 0 \\
+\frac{1}{\sqrt{3}} & \frac{-1}{\sqrt{2}} \\
+\frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}}
+\end{array}\right]</script><p>$\boldsymbol Q$列向量的空间就是向量$\boldsymbol a$和$\boldsymbol b$张成的空间。 因此矩阵$\boldsymbol Q$和矩阵<script type="math/tex">\boldsymbol W = \boldsymbol{[a,b]} = \left[\begin{array}{ll} 1 & 1 \\ 1 & 0 \\ 1 & 2\end{array}\right]</script>有相同的列空间。</p>
+<p>在消元过程中，可以对矩阵进行分解得到$\boldsymbol {W = LU}$，而在对$\boldsymbol  W$做施密特正交化的过程也可以用矩阵运算的方式表示为$\boldsymbol {W = QR}$。此处$\boldsymbol R$为上三角阵。</p>
+<p><img src="https://pic.imgdb.cn/item/6269f252239250f7c551223b.jpg"></p>
+<p>$\boldsymbol R$为上三角阵，则$\boldsymbol {a^{\mathrm T}_1q_2} = 0$。这是因为$\boldsymbol a^{\mathrm T}_1$就是$\boldsymbol q_1$的方向，而$\boldsymbol q_1$和$\boldsymbol q_2$为标准正交向量，因此$\boldsymbol q_2$的方向与$\boldsymbol a_1$ 垂直，因此内积为 0。$\boldsymbol R$在$\boldsymbol Q$右侧相当于对$\boldsymbol Q$做列操作，即$\boldsymbol W$的列向量是$\boldsymbol Q$列向量的线性组合，而$\boldsymbol Q$为列空间的$\boldsymbol W$一组标准正交基，则$\boldsymbol R$的元素实际上是$\boldsymbol W$的列向量基于$\boldsymbol Q$这组标准正交基的权。</p>
+<p>左下角为0，但需要注意的是右上角并不一定为0。</p>
+<ul>
+<li>采用矩阵的QR分解来帮助求解$\boldsymbol{Ax = b}$的问题，最大的优势是提高了数值的稳定性。<ul>
+<li>QR分解可以改善矩阵条件数，从而提高数值稳定</li>
+<li>参考1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/84415000">https://zhuanlan.zhihu.com/p/84415000</a></li>
+</ul>
+</li>
+</ul>
+<h3 id="第十八讲-行列式及其性质"><a href="#第十八讲-行列式及其性质" class="headerlink" title="第十八讲 行列式及其性质"></a>第十八讲 行列式及其性质</h3><p>之前学习了大量长方形矩阵的性质，现在我们集中讨论方阵的性质，行列式和特征值将我们的又一个重点，求行列式则与特征值息息相关。 </p>
+<h4 id="18-1-行列式-Determinants"><a href="#18-1-行列式-Determinants" class="headerlink" title="18.1 行列式 Determinants"></a>18.1 行列式 Determinants</h4><p>行列式是一个每个方阵都具有的数值，我们将矩阵$\boldsymbol A$的行列式记作$\det(\boldsymbol A) = |\boldsymbol A|$。它将尽可能多的矩阵信息压缩在这一个数里。例如矩阵不可逆或称奇异与矩阵的行列式等于0等价，因此可以用行列式来判定矩阵是否可逆。</p>
+<h4 id="18-2-性质-Properties"><a href="#18-2-性质-Properties" class="headerlink" title="18.2 性质 Properties"></a>18.2 性质 Properties</h4><p>直接给出$n$阶行列式的公式，则一下子代入了大量信息，并不利于接受这个概念，我们从行列式的三个基本性质开始讲起。</p>
+<ul>
+<li><p><strong>性质1：</strong> $|\boldsymbol I| = 1$</p>
+</li>
+<li><p><strong>性质2：</strong> 如果交换行列式的两行，则行列式的数值会反号。从前两条可以推知置换矩阵的行列式是+1 或者-1（交换的次数是奇数还是偶数决定了正负号）。</p>
+</li>
+<li><p><strong>性质3：</strong></p>
+<ul>
+<li>a. 如果在矩阵的一行乘上$t$，则行列式的值就要乘上$t$，<script type="math/tex">\left|\begin{array}{cc} t a & t b \\ c & d\end{array}\right|=t\left|\begin{array}{ll} a & b \\ c & d \end{array}\right|</script>；</li>
+<li>b. 行列式是“矩阵的行”的线性函数，<script type="math/tex">\left|\begin{array}{cc} a+a^{\prime} & b+b^{\prime} \\ c & d \end{array}\right|=\left|\begin{array}{cc} a & b \\ c & d \end{array}\right|+\left|\begin{array}{cc} a^{\prime} & b^{\prime} \\ c & d \end{array}\right|</script></li>
+</ul>
+<blockquote>
+<ol>
+<li>行列式本身是有显式的，但是直接给出显式真的无益于理解行列式，我觉得G.Strang这里做了一个类似公理化的办法来给出行列式，是一个比较高明的办法。如他所言，很少有人用公式进行行列式计算，计算机也是用<strong>消元法</strong>来求解的。窃以为把大量时间花在“逆序”这一概念上对学习线代帮助并不大。 </li>
+<li>通过高斯消元法(初等行变换)可以计算矩阵的行列式：<ul>
+<li>第一类初等变换（交换矩阵的两行）：行列式值变号；</li>
+<li>第二类初等变换（以一个非零数k乘矩阵的某一行所有元素）：行列式值变k倍；</li>
+<li>第三类初等变换（把矩阵的某一行所有元素乘以一个数k后加到另一行对应的元素）：行列式值不变。</li>
+</ul>
+</li>
+<li>为什么行列式的某一行的各元素乘以同一个数，然后加到另一行元素上，行列式的值不变？<ul>
+<li>根据行列式按行裂项性质，而裂项根据乘法对加法分配律 </li>
+<li>即利用了行列式的性质2和性质3.a和性质3.b，也就是<strong>性质5</strong>。</li>
+</ul>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<p><strong>更多的性质可以从以上的三条性质中推导出来：</strong></p>
+<ul>
+<li><p><strong>性质4：</strong>如果矩阵的两行是完全相同的，则它的行列式为0。</p>
+<blockquote>
+<p>这可以从第二条性质推导出来，因为交换这个相同的两行，行列式应该变号；但是新生成的矩阵跟原矩阵没有区别，因此行列式应该不变，所以有det=-det，所以det等于0。 </p>
+</blockquote>
+</li>
+<li><p><strong>性质5：</strong>从矩阵的某行$k$减去另一行$i$的倍数，并不改变行列式的数值，也就是说行/列变换不改变行列式的值，以二阶为例： </p>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/626a023d239250f7c5751f1d.jpg"></p>
+<ul>
+<li><p><strong>性质6：</strong>如矩阵$\boldsymbol A$的某一行都是0，则其行列式为0。可以应用<strong>性质3.a</strong>，取$t=0$证明。</p>
+</li>
+<li><p><strong>性质7：</strong>三角阵的行列式的值等于其对角线上数值（主元）的乘积。 </p>
+<p><img src="https://pic.imgdb.cn/item/626a02bb239250f7c576089b.jpg"></p>
+<blockquote>
+<p>性质5告诉我们三角阵通过行消元法得到对角阵的过程中，行列式的数值没有发生变化。性质3(a)告诉我们对角阵的行列式等于其主元的乘积再乘以单位阵的行列式。而性质1表明单位阵行列式为1。 </p>
+</blockquote>
+</li>
+<li><p><strong>性质8：</strong>当且仅当矩阵$\boldsymbol A$为奇异矩阵时，其行列式为0。 </p>
+<blockquote>
+<p>如果矩阵$\boldsymbol A$为奇异阵，则必可通过消元法使得矩阵的某行全等于零，则按照性质6，$\boldsymbol A$的行列式为0。</p>
+<p>如果其不是奇异阵，则通过消元可以得到一个上三角矩阵，且其主元均不为0，则按照性质7，行列式的数值等于主元的乘积也不等于0。</p>
+<p>计算非奇异矩阵的行列式有确切的公式，但通常计算机是靠消元的方法来转化为三角阵，然后将主元相乘来进行计算的。</p>
+</blockquote>
+</li>
+<li><p><strong>性质9：</strong>$\det(\boldsymbol {AB})=\det(\boldsymbol A) \det(\boldsymbol B) $</p>
+<blockquote>
+<p>尽管矩阵的和的行列式不等于行列式的和，但矩阵乘积的行列式等于矩阵行列式的乘积。 </p>
+<p>如果$\boldsymbol A$为可逆矩阵，则$\boldsymbol {A^{-1}A = I}$ ，所以有$\det(\boldsymbol A^{-1}) = \dfrac{1}{\det(\boldsymbol A)}$</p>
+<p>此外，$\det(\boldsymbol A^2) = \det(\boldsymbol A)^2$并且有。$\det(\boldsymbol 2A) = 2^n\det(\boldsymbol A)$后一个公式让我们容易联想到体积，当长宽高都倍增之后，体积变成了原来的$2^3=8$倍。</p>
+</blockquote>
+</li>
+<li><p><strong>性质10</strong>：$\det(\boldsymbol {A^{\mathrm T}})=\det(\boldsymbol A) $</p>
+<blockquote>
+<p>证明： 矩阵消元可得$\boldsymbol {A = LU}$，则$\boldsymbol {A^T = L^TU^T}$，由性质9可知$\det(\boldsymbol {A})=\det(\boldsymbol L) \det(\boldsymbol U)$，$\det(\boldsymbol {A^T})=\det(\boldsymbol L^T) \det(\boldsymbol U^T)$，根据性质7可知 $\det(\boldsymbol {L^T})=\det(\boldsymbol L)$，$\det(\boldsymbol {U^T})=\det(\boldsymbol U)$，则二者乘积相等。</p>
+<p>因为性质10成立，所以性质2,3,4,5,6可以用在行列式的列性质上。</p>
+<p>行列式的性质2中隐藏着一个内容，这就是置换隐藏着奇偶性，一个矩阵不可能经过奇数次置换得到和偶数次置换相同的方阵。</p>
+</blockquote>
+</li>
+</ul>
+<h3 id="第十九讲-行列式公式和代数余子式与伴随矩阵"><a href="#第十九讲-行列式公式和代数余子式与伴随矩阵" class="headerlink" title="第十九讲 行列式公式和代数余子式与伴随矩阵"></a>第十九讲 行列式公式和代数余子式与伴随矩阵</h3><p>我们已经认识到了行列式的性质，应该推导出其公式了。</p>
+<h4 id="19-1-行列式公式-Formula-for-the-determinant"><a href="#19-1-行列式公式-Formula-for-the-determinant" class="headerlink" title="19.1 行列式公式 Formula for the determinant"></a>19.1 行列式公式 Formula for the determinant</h4><p>根据上节可知，由三条基本性质可以推导出后续的七条性质，从这十个性质出发可以得到二阶方阵的行列式公式： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\left|\begin{array}{ll}
+a & b \\
+c & d
+\end{array}\right| &=\left|\begin{array}{ll}
+a & 0 \\
+c & d
+\end{array}\right|+\left|\begin{array}{ll}
+0 & b \\
+c & d
+\end{array}\right| \\
+&=\left|\begin{array}{ll}
+a & 0 \\
+c & 0
+\end{array}\right|+\left|\begin{array}{ll}
+a & 0 \\
+0 & d
+\end{array}\right|+\left|\begin{array}{ll}
+0 & b \\
+c & 0
+\end{array}\right|+\left|\begin{array}{ll}
+0 & b \\
+0 & d
+\end{array}\right| \\
+&=0+a d-b c+0 \\
+&=a d-b c
+\end{aligned}</script><p>通过性质3对n阶矩阵的行列式进行拆分，我们可以得到所有只包含n个非零元素的行列式，对于二阶行列式我们从1个拆分为2个，然后拆分成4个。而对于三阶矩阵我们从1个拆分成3个，然后拆分成9个，最后要拆分成27个。但最终这些行列式中有很大一部分等于0。 </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\left|\begin{array}{lll}
+a_{11} & a_{12} & a_{13} \\
+a_{21} & a_{22} & a_{23} \\
+a_{31} & a_{32} & a_{33}
+\end{array}\right| &=\left|\begin{array}{ccc}
+a_{11} & 0 & 0 \\
+0 & a_{22} & 0 \\
+0 & 0 & a_{33}
+\end{array}\right|+\left|\begin{array}{ccc}
+a_{11} & 0 & 0 \\
+0 & 0 & a_{23} \\
+0 & a_{32} & 0
+\end{array}\right|+\left|\begin{array}{ccc}
+0 & a_{12} & 0 \\
+a_{21} & 0 & 0 \\
+0 & 0 & a_{33}
+\end{array}\right| \\
+&+\left|\begin{array}{ccc}
+0 & a_{12} & 0 \\
+0 & 0 & a_{23} \\
+a_{31} & 0 & 0
+\end{array}\right|+\left|\begin{array}{ccc}
+0 & 0 & a_{13} \\
+a_{21} & 0 & 0 \\
+0 & a_{32} & 0
+\end{array}\right|+\left|\begin{array}{ccc}
+0 & 0 & a_{13} \\
+0 & a_{22} & 0 \\
+a_{31} & 0 & 0
+\end{array}\right| \\
+&=a_{11} a_{22} a_{33}-a_{11} a_{23} a_{33}-a_{12} a_{21} a_{33} \\
+&+a_{12} a_{23} a_{31}+a_{13} a_{21} a_{32}-a_{13} a_{22} a_{31}
+\end{aligned}</script><p>每一个拆分出来的非0行列式都是在每行每列都有且只有一个元素，就如同置换矩阵的元素分布。应用性质3可以将元素从行列式中提出来，而置换矩阵的行列式值为+1或者-1，因此可以给出行列式的公式。n阶拆分矩阵非0行列式的个数的计算方法就如同计算置换矩阵的个数一样，第一行放置一个非0元素的位置有n个选择，第二行为n-1个……。最后得到共n!个矩阵。</p>
+<p>对于拆分得到的三阶矩阵，元素从上至下朝向右侧方向的，其行列式的数值为正，朝向左侧方向的则为负。但是这个规律只适用于三阶矩阵，不适用于高阶矩阵。</p>
+<p><img src="https://pic.imgdb.cn/item/626a0d14239250f7c58d3ad9.jpg"></p>
+<p>行列式的公式： </p>
+<script type="math/tex; mode=display">
+\operatorname{det}(\boldsymbol{A})=\sum_{n !} \pm a_{1 \alpha} a_{2 \beta} a_{3 \gamma} \cdots a_{n \omega}</script><p>其中列标号$(\alpha, \beta, \gamma, \dots)$是列标号$(1, 2, 3, \dots, n)$的某个排列。比如说对于单位阵而言，只有$\alpha = 1, \beta = 2, \dots, \omega = n$所得到的行列式为+1，其它都为零，所以单位阵的行列式为1。 </p>
+<p>例如： </p>
+<script type="math/tex; mode=display">
+\left|\begin{array}{llll}
+0 & 0 & 1 & 1 \\
+0 & 1 & 1 & 0 \\
+1 & 1 & 0 & 0 \\
+1 & 0 & 0 & 1
+\end{array}\right|=\left|\begin{array}{llll}
+0 & 0 & 0 & 1 \\
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0
+\end{array}\right|+\left|\begin{array}{llll}
+0 & 0 & 1 & 0 \\
+0 & 1 & 0 & 0 \\
+1 & 0 & 0 & 0 \\
+0 & 0 & 0 & 1
+\end{array}\right|</script><p>列标号取$(4,3,2,1)$得到第一个拆分行列式，符号为正，因为只要经两次交换就能变为$(1,2,3,4)$。第二个为$(3,2,1,4)$，因为只需交换一次就可变为正序，所以符号为负。因此本行列式为0。 </p>
+<h4 id="19-2-代数余子式-Cofactor-formula"><a href="#19-2-代数余子式-Cofactor-formula" class="headerlink" title="19.2 代数余子式 Cofactor formula"></a>19.2 代数余子式 Cofactor formula</h4><p> <strong>代数余子式是用较小的矩阵的行列式来写出$n$阶行列式的公式</strong>。 </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\operatorname{det}(\boldsymbol{A})=a_{11}\left(a_{22} a_{33}-a_{23} a_{32}\right)+a_{12}\left(-a_{21} a_{33}+a_{23} a_{31}\right)+a_{13}\left( a_{21} a_{32}-a_{22} a_{31}\right) \\
+&=\left|\begin{array}{ccc}
+a_{11} & 0 & 0 \\
+0 & a_{22} & a_{23} \\
+0 & a_{32} & a_{33}
+\end{array}\right|+\left|\begin{array}{ccc}
+0 & a_{12} & 0 \\
+a_{21} & 0 & a_{23} \\
+a_{31} & 0 & a_{33}
+\end{array}\right|+\left|\begin{array}{ccc}
+0 & 0 & a_{13} \\
+a_{21} & a_{22} & 0 \\
+a_{31} & a_{32} & 0
+\end{array}\right|
+\end{aligned}</script><p>将原公式中属于矩阵第一行的$a<em>{1j}$提出来，其系数即为代数余子式，是一个低阶行列式的值。这个低阶行列式是由原矩阵去掉$a</em>{1j}$所在的行和列组成的。</p>
+<p><strong><font color="red">对矩阵中任意元素$a<em>{ij}$而言，其代数余子式$C</em>{ij}$就是矩阵的行列式的公式中$a<em>{ij}$的系数。$C</em>{ij}$等于原矩阵移除第$i$行和第$j$列后剩余元素组成的$n-1$阶矩阵的行列式数值乘以$(-1)^{i+j}$。（$C_{ij}$在$i+j$为偶数时为正，奇数时为负数。）</font></strong></p>
+<p>对于$n$阶方阵，其行列式的代数余子式公式为：</p>
+<script type="math/tex; mode=display">
+\operatorname{det}(\boldsymbol{A})=a_{11} \mathrm{C}_{11}+a_{12} \mathrm{C}_{12}+\cdots+a_{1 \mathrm{n}} \mathrm{C}_{1 \mathrm{n}}</script><p>对于二阶矩阵，按照代数余子式公式则有： <script type="math/tex">\left|\begin{array}{ll} a & b \\ c & d\end{array}\right|=a d+b(-c)</script></p>
+<p>对于矩阵行列式的计算，消元的得到主元是一个很好的方法，与之相比行列式的展开公式较为复杂，而代数余子式的方法介于两者之间，它的核心想法是通过降阶来将原来的行列式展开成更简单的行列式。</p>
+<p>举”三对角阵”（tridiagonal matrix）为例，它除了对角线和对角线两侧相邻的元素之外，其它元素均为0。例如由1组成的4阶三对角阵为： <script type="math/tex">\boldsymbol{A}_{4}=\left[\begin{array}{llll} 1 & 1 & 0 & 0 \\ 1 & 1 & 1 & 0 \\ 0 & 1 & 1 & 1 \\ 0 & 0 & 1 & 1\end{array}\right]</script></p>
+<p>由1组成的$n$阶三对角阵的行列式等于多少？</p>
+<p>从矩阵的特殊结构我们可以得到： <script type="math/tex">\left|\boldsymbol{A}_{\mathrm{n}}\right|=\left|\boldsymbol{A}_{\mathrm{n}-1}\right|-1\left|\boldsymbol{A}_{\mathrm{n}-2}\right|</script></p>
+<p>由1组成的$n$阶三对角阵的行列式从1阶开始按照$1，0，-1，-1，0，1$进行循环。 </p>
+<h4 id="19-3-伴随矩阵-adjoint-matrix"><a href="#19-3-伴随矩阵-adjoint-matrix" class="headerlink" title="19.3 伴随矩阵 adjoint matrix"></a>19.3 伴随矩阵 adjoint matrix</h4><p><img src="https://pic.imgdb.cn/item/627e0a0709475431296a2889.jpg" style="zoom:50%"></p>
+<p>上图中，$\boldsymbol A^<em>$即为矩阵$\boldsymbol A$的伴随矩阵，伴随矩阵$\boldsymbol A^</em>$的元素计算方法为：</p>
+<ul>
+<li>$a<em>{11}$的代数余子式为$\boldsymbol A</em>{11}$，$a<em>{12}$的代数余子式为$\boldsymbol A</em>{12}$，$a<em>{1n}$的代数余子式为$\boldsymbol A</em>{1n}$；</li>
+<li>原矩阵的行对应伴随矩阵的列。</li>
+</ul>
+<h3 id="第二十讲-行列式应用：克莱默法则、逆矩阵、体积"><a href="#第二十讲-行列式应用：克莱默法则、逆矩阵、体积" class="headerlink" title="第二十讲 行列式应用：克莱默法则、逆矩阵、体积"></a>第二十讲 行列式应用：克莱默法则、逆矩阵、体积</h3><h4 id="20-1-逆矩阵的公式"><a href="#20-1-逆矩阵的公式" class="headerlink" title="20.1 逆矩阵的公式"></a>20.1 逆矩阵的公式</h4><p>我们已经知道二阶矩阵的逆矩阵公式为：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ll}
+a & b \\
+c & d
+\end{array}\right] \stackrel{逆矩阵}\Longrightarrow \frac{1}{a d-b c}\left[\begin{array}{cc}
+d & -b \\
+-c & a
+\end{array}\right]</script><p>那么我们能写出三阶甚至高阶的公式么？通过观察二阶矩阵逆矩阵的公式，我们可以用同样的策略来构造高阶矩阵的求逆公式，为： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}^{-1}=\frac{1}{\operatorname{det}(\boldsymbol{A})} \boldsymbol{C}^{T}</script><p>等式右侧矩阵外的因子，其分母是矩阵的行列式的值，而矩阵$\boldsymbol C$是“代数余子式矩阵”的转置矩阵，又称<strong>伴随矩阵</strong>($\boldsymbol C$矩阵的值是由行列式组成的)。</p>
+<p>矩阵$\boldsymbol A$的行列式的计算中包含的都是$n$个元素的乘积： </p>
+<script type="math/tex; mode=display">
+\operatorname{det} \boldsymbol{A}=\sum_{n} \pm a_{1 \alpha} a_{2 \beta} a_{3 \gamma} \cdots a_{n \omega}</script><p>而伴随矩阵中的元素都是$n-1$阶行列式，它的运算中出现的是$n-1$个矩阵$\boldsymbol A$中元素的乘积。所以矩阵$\boldsymbol A$与两者相乘才能完全消去，而得到单位矩阵。下面我们就用矩阵$\boldsymbol A$与矩阵$\boldsymbol C^{\mathrm T}$相乘来验证$\boldsymbol {AC}^{\mathrm T} = \det(\boldsymbol A) \boldsymbol I$ ，并且理解逆矩阵的构造策略。 </p>
+<script type="math/tex; mode=display">
+\boldsymbol{A} \boldsymbol{C}^{T}=\left[\begin{array}{ccc}
+a_{11} & \ldots & a_{1 n} \\
+\vdots & \ddots & \vdots \\
+a_{n 1} & \cdots & a_{n n}
+\end{array}\right]\left[\begin{array}{ccc}
+C_{11} & \ldots & C_{n 1} \\
+\vdots & \ddots & \vdots \\
+C_{1 n} & \cdots & C_{n n}
+\end{array}\right]</script><p>矩阵$\boldsymbol {AC}^{\mathrm T}$第一行第一列的元素等于矩阵$\boldsymbol A$第一行和矩阵$\boldsymbol {C}^{\mathrm T} $第一列进行点积，计算可得： </p>
+<script type="math/tex; mode=display">
+\sum_{j=1}^{n} a_{1 j} C_{1 j}=\operatorname{det}(\boldsymbol{A})</script><p>点积的算式本身就是矩阵$\boldsymbol A$的计算公式，因此结果为$\boldsymbol A$行列式的值。而矩阵$\boldsymbol {AC}^{\mathrm T}$对角线上所有的元素都是如此，因此其对角戏上的元素都等于$\det(\boldsymbol A)$，即：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{llll}
+\operatorname{det}(A) & & & \\
+& \operatorname{det}(A) & \\
+& & \ddots & \\
+& & & \operatorname{det}(A)
+\end{array}\right]</script><p>而对于非对角线元素，我们以第二行第一列的元素为例，其计算公式为：</p>
+<script type="math/tex; mode=display">
+\sum_{j=1}^{n} a_{2 j} C_{1 j}=\operatorname{det}\left(\boldsymbol{A}_{s}\right)</script><p>这可以视为矩阵$\boldsymbol A_s$的行列式数值，各个代数余子式的形式不变，但是与代数余子式相乘的变为了矩阵$\boldsymbol A$第二行第$j$列元素。因此$\boldsymbol A_s$的形式相当于用矩阵$\boldsymbol A$第二行的元素替代第一行的元素得到的矩阵。因为该矩阵中前两行完全相同，因此按照行列式性质4，$\det(\boldsymbol A_s) = 0$（G.Strang在课堂上是用二阶矩阵为例），其他列类似，所以有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A} \boldsymbol{C}^{T}=\left[\begin{array}{rrrrrr}
+\operatorname{det} \boldsymbol{A} & 0 & 0 & \cdots & 0 \\
+0 & \operatorname{det} \boldsymbol{A} & 0 & \cdots & 0 \\
+0 & 0 & \ddots & & 0 \\
+\vdots & & & \ddots & \vdots \\
+0 & 0 & 0 & \cdots & \operatorname{det} \boldsymbol{A}
+\end{array}\right]=\operatorname{det}(\boldsymbol{A}) \boldsymbol{I}</script><p>即<script type="math/tex">\boldsymbol{A} \dfrac{1}{\operatorname{det}(\boldsymbol{A})} \boldsymbol{C}^{T}=\boldsymbol{I}</script> ，因此有 </p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}^{-1}=\frac{1}{\operatorname{det}(\boldsymbol{A})} \boldsymbol{C}^{T}</script><p>逆矩阵公式的一个好处就是，我们从中可以看到，当改变原矩阵中的一个元素时，给逆矩阵带来了怎样的变化。</p>
+<h4 id="20-2-克莱默法则"><a href="#20-2-克莱默法则" class="headerlink" title="20.2 克莱默法则"></a>20.2 克莱默法则</h4><p>对于可逆矩阵$\boldsymbol A$，方程$\boldsymbol {Ax = b}$必然有解<script type="math/tex">\boldsymbol {x = A^{-1}b}</script>，将逆矩阵的公式带入其中，则有： </p>
+<script type="math/tex; mode=display">
+\boldsymbol {x}=\boldsymbol{A}^{-1} \boldsymbol {b}=\frac{1}{\operatorname{det}(\boldsymbol{A})} \boldsymbol{C}^{T} \boldsymbol{b}</script><p>克莱姆法则是从另一个角度来看待这个公式。实际上$\boldsymbol x$的分量<script type="math/tex">x_{j}=\dfrac{\operatorname{det}\left(\boldsymbol{B}_{j}\right)}{\operatorname{det}(\boldsymbol{A})}</script></p>
+<p>其中我们需要思考一下矩阵<script type="math/tex">\boldsymbol{B}_{j}</script>是什么，由于<script type="math/tex">\boldsymbol{C}^{\mathrm T}</script>由<script type="math/tex">\boldsymbol{A}</script>的代数余子式构成，那么<script type="math/tex">\boldsymbol{C}^{\mathrm T}*\boldsymbol b</script>可以视为用向量<script type="math/tex">\boldsymbol{b}</script>替换矩阵<script type="math/tex">\boldsymbol A</script>的第<script type="math/tex">j</script>列所得到的新矩阵，这就是<strong>克莱默发现的规律</strong>——矩阵<script type="math/tex">\boldsymbol{B}_{j}</script>的构成规律，例如： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{B}_{1}=\left[\begin{array}{ccccc}
+b_{1} & a_{12} & \cdots & \cdots & a_{1 n} \\
+b_{2} & a_{22} & \cdots & \cdots & a_{2 n} \\
+b_{3} & a_{32} & \ddots & & a_{3 n} \\
+\vdots & & & \ddots & \vdots \\
+b_{n} & a_{n 2} & \cdots & \cdots & a_{n n}
+\end{array}\right]</script><script type="math/tex; mode=display">
+\boldsymbol{B}_{n}=\left[\begin{array}{rrrrr}
+a_{11} & \cdots & \cdots & a_{1 n-1} & b_{1} \\
+a_{21} & \cdots & \cdots & a_{2 n-1} & b_{2} \\
+\vdots & & \ddots & \vdots & \vdots \\
+\vdots & & & a_{n-1 n-1} & b_{n-1} \\
+a_{n 1} & a_{n 2} & \cdots & a_{n n-1} & b_{n}
+\end{array}\right]</script><p>矩阵$\boldsymbol{B}_{j}$的行列式的数值从第$j$列用代数余子式进行展开计算，正好是伴随矩阵$\boldsymbol{C}^{\mathrm T}$的第$j$行与向量$\boldsymbol{b}$点积的结果。此处我们用到了行列式的<strong>性质10</strong>。</p>
+<p>相比于消元法，采用克莱姆法则计算方程的解，效率较低。</p>
+<h4 id="20-3-体积-面积"><a href="#20-3-体积-面积" class="headerlink" title="20.3  体积/面积"></a>20.3  体积/面积</h4><p>为什么行列式等价于空间“箱子”的体积，老师的证明思路是证明空间“箱子”体积满足行列式的三条基本性质。</p>
+<p>矩阵$\boldsymbol A$行列式的绝对值等于以矩阵$\boldsymbol A$行（列）向量为边所构成的平行六面体的体积。行列式的正负对应左手系和右手系。</p>
+<ul>
+<li>如果矩阵$\boldsymbol A$是单位矩阵，则其构成的是三个边长均为1且互相垂直的立方体，其体积为1，这与上面的结论相符。这也是行列式的性质1。</li>
+<li>而如果矩阵$\boldsymbol A$为正交矩阵$\boldsymbol Q$，则其构成的也是三个边边长为1且三边互相垂直的立方体，其体积也为1只是取向与单位阵不同。这也与上面的结论相符，因为$\boldsymbol{Q^{\mathrm T} Q = I}$，且$\operatorname{det}(\boldsymbol{Q})=\operatorname{det}\left(\boldsymbol{Q}^{T}\right)$，所以$\det(\boldsymbol Q)=1$。 </li>
+</ul>
+<p>交换矩阵$\boldsymbol A$中的行并不会改变其行列式的绝对值，显然也不会改变向量围成的体积，因此这也和体积理论相符。这是行列式的性质2。 </p>
+<p><img src="https://pic.imgdb.cn/item/626a544b239250f7c53692a2.jpg"></p>
+<p>对于长方体，也非常直观，当你将其中一条边的边长增加2倍时，平行六面体的体积也会增加2倍，这相当于性质3a。</p>
+<p>对于性质3b，实际上是要求体积理论摆脱角度的限制（之前几条完全都是在直角的背景下讨论得），我们可以在二维条件下简单证明。</p>
+<ul>
+<li><strong>证明二阶行列式是平行四边形的面积</strong>：</li>
+</ul>
+<p>如图所示，向量$\boldsymbol a$和$\boldsymbol b$围成的平行四边形的面积，就等于向量$\boldsymbol a$和高$\boldsymbol h$的长度之积，就等于两个互相垂直的向量$\boldsymbol a$和高$\boldsymbol h$围成的长方形的面积，按照前面所述即为 <script type="math/tex">\left|\begin{array}{ll} a_{1} & a_{2} \\ h_{1} & h_{2}\end{array}\right|</script> 。根据行列式运算法则有：</p>
+<script type="math/tex; mode=display">
+\left|\begin{array}{ll}
+a_{1} & a_{2} \\
+h_{1} & h_{2}
+\end{array}\right|=\left|\begin{array}{ll}
+a_{1} & a_{2} \\
+b_{1} & b_{2}
+\end{array}\right|-\left|\begin{array}{ll}
+a_{1} & a_{2} \\
+p_{1} & p_{2}
+\end{array}\right|</script><p>而$\boldsymbol p$和$\boldsymbol a$同方向因此第二项为0，因此平行四边形的面积等于<script type="math/tex">\left|\begin{array}{ll} a_{1} & a_{2} \\ b_{1} & b_{2}\end{array}\right|</script>结果可以推广到高维。 </p>
+<p>二阶行列式的值等于平行四边形的面积，同时其一半也是{(a,b),(c,d),(0,0)}围成的三角形的面积。</p>
+<p>若三角形不过原点，为<script type="math/tex">{(x_1,y_1),(x_2,y_2),(x_3,y_3)}</script>围成，则其面积等于<script type="math/tex">\dfrac{1}{2}\left|\begin{array}{lll} x_{1} & y_{1} & 1 \\ x_{2} & y_{2} & 1 \\ x_{3} & y_{3} & 1\end{array}\right|</script></p>
+<p>这个公式可以从第三列用代数余子式展开，所得结果可以看做是从一个过原点的大三角形中减去两个过原点的小三角形。 </p>
+<p>除以上各条之外性质4也比较直观，当有两条边重合时，平行六面体或平行四边形被压扁，体积或者面积为0。 </p>
+<h3 id="第二十一讲-特征值与特征向量"><a href="#第二十一讲-特征值与特征向量" class="headerlink" title="第二十一讲 特征值与特征向量"></a>第二十一讲 特征值与特征向量</h3><p>本单元后面的课程主要围绕特征值和特征向量。在这个议题下讨论得都是<font color="red"><strong>方阵</strong></font>。 </p>
+<h4 id="21-1-特征向量和特征值-Eigenvectors-and-eigenvalues"><a href="#21-1-特征向量和特征值-Eigenvectors-and-eigenvalues" class="headerlink" title="21.1 特征向量和特征值 Eigenvectors and eigenvalues"></a>21.1 特征向量和特征值 Eigenvectors and eigenvalues</h4><p>将矩阵$\boldsymbol A$与向量$\boldsymbol x$相乘当做是对向量的一种操作或者函数，输入$\boldsymbol x$而输出$\boldsymbol {Ax}$。特征向量即在特定的向量$\boldsymbol x$ 方向上输出的$\boldsymbol {Ax}$平行于$\boldsymbol x$，即为： </p>
+<script type="math/tex; mode=display">
+\boldsymbol {Ax} = \lambda \boldsymbol x</script><p>其中$\boldsymbol x$为矩阵$\boldsymbol A$的特征向量，而$\lambda$为$\boldsymbol A$的特征值。 </p>
+<p>如果0是矩阵的特征值，则有$\boldsymbol{Ax = 0x = 0}$。特征值0所对应的向量生成了矩阵的零空间。如果矩阵为$\boldsymbol A$不可逆矩阵，则0是其特征值之一。 </p>
+<p><strong>例1：</strong>矩阵$\boldsymbol P$是朝向一个平面的投影矩阵。对于这个平面之内的$\boldsymbol x$，均有$\boldsymbol{Px=x}$，因此$\boldsymbol x$是特征向量而1为特征值。垂直于该平面的向量$\boldsymbol x$经投影得到$\boldsymbol {Px=0}$，这个$\boldsymbol x$也是矩阵的特征向量而0为特征值。矩阵$\boldsymbol P$的所有特征向量张成了整个空间。 </p>
+<p><strong>例2：</strong>矩阵<script type="math/tex">\boldsymbol A=\left[\begin{array}{ll} 0 & 1 \\ 1 & 0\end{array}\right]</script>，具有特征向量 <script type="math/tex">\boldsymbol  x=\left[\begin{array}{l} 1 \\ 1\end{array}\right]</script> ，对应的特征向量为1；另一个特征向量为<script type="math/tex">\boldsymbol  x=\left[\begin{array}{l} 1 \\ -1\end{array}\right]</script>，对应的特征向量为-1。这些特征向量张成了整个空间。<strong>因为是<font color="red">对称矩阵</font>，其特征向量互相<font color="red">垂直</font></strong> </p>
+<h4 id="21-2-特征值计算与性质"><a href="#21-2-特征值计算与性质" class="headerlink" title="21.2 特征值计算与性质"></a>21.2 特征值计算与性质</h4><p>方程$\boldsymbol {Ax} = \lambda \boldsymbol x$中特征值和特征向量均未知，没法直接求解。因此我们做如下数学处理： $\boldsymbol {Ax} - \lambda \boldsymbol x = (\boldsymbol A - \lambda \boldsymbol I)\boldsymbol x = 0$，此时可知$(\boldsymbol A - \lambda \boldsymbol I)$为奇异阵，也就是</p>
+<script type="math/tex; mode=display">
+\det(\boldsymbol A - \lambda \boldsymbol I) = 0</script><p>在这个没有$\boldsymbol x$的方程中，可以解得$n$个特征值，但是有可能方程有重根，则会得到重复的特征值。 </p>
+<p>得到特征值之后，可以用消元法解$(\boldsymbol A - \lambda \boldsymbol I)$这一矩阵零空间中的向量为矩阵的$\boldsymbol A$特征向量。 </p>
+<ul>
+<li><strong>性质1:</strong></li>
+</ul>
+<p><strong><font color="green"> 任意$n \times n$矩阵具$\boldsymbol A$有$n$个特征值，并且它们的和等于矩阵对角线上的元素之和，这个数值为矩阵的迹(trace) </font></strong>。对于二阶矩阵，在已知一个特征值的条件下，可以据此得到另一个特征值。 </p>
+<script type="math/tex; mode=display">
+\text{trace}(\boldsymbol A) = 对角元素和 = \lambda_1+ \lambda_2+ \dots +\lambda_n</script><ul>
+<li><strong>性质2：</strong></li>
+</ul>
+<p><strong><font color="green"> 矩阵$\boldsymbol A$的特征值的乘积等于矩阵的行列式 </font></strong></p>
+<script type="math/tex; mode=display">
+\det(\boldsymbol A) = \lambda_1 \lambda_2 \dots \lambda_n</script><ul>
+<li><strong>性质3：</strong></li>
+</ul>
+<p><strong><font color="green"> 对称矩阵的特征向量正交  </font></strong></p>
+<p><img src="https://pic.imgdb.cn/item/626c8dc7239250f7c590bdca.jpg" style="zoom:70%"></p>
+<blockquote>
+<p>证明：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/83669028">https://zhuanlan.zhihu.com/p/83669028</a></p>
+</blockquote>
+<ul>
+<li><strong>性质4：</strong></li>
+</ul>
+<p><strong><font color="green">对称矩阵永远具有实数的特征值，而反对称矩阵（antisymmetric matrices），即满足$\boldsymbol A^{\mathrm T} = - \boldsymbol A$的矩阵，具有纯虚数的特征值</font></strong>。 <em>实数特征值让特征向量<strong>伸缩</strong>而虚数让其<strong>旋转</strong></em>。</p>
+<ul>
+<li><strong>性质5：</strong></li>
+</ul>
+<p><strong><font color="green">三角阵特征值就是矩阵对角线上的元素。 </font></strong>重特征值 Triangular matrices and repeated eigenvalues</p>
+<ul>
+<li><strong>性质6：</strong></li>
+</ul>
+<p><strong><font color="green">矩阵$\boldsymbol A^2$的特征向量与$\boldsymbol A$的相同，但是特征值变为$\lambda^2$ </font></strong></p>
+<script type="math/tex; mode=display">
+\boldsymbol {A^2x} = \boldsymbol A(\boldsymbol {Ax}) = \boldsymbol A (\lambda \boldsymbol x) = \lambda \boldsymbol{Ax} = \lambda ( \lambda\boldsymbol x ) = \lambda^2 \boldsymbol x</script><p>这个性质可以进一步推广到$\boldsymbol A^n$。这个性质是计算矩阵幂的一种方式。</p>
+<blockquote>
+<p>需要注意的是，两个矩阵的和的特征值不是两特征值直接相加之和，因为特征向量并不相同。 </p>
+</blockquote>
+<h3 id="第二十二讲-对角化和矩阵乘幂"><a href="#第二十二讲-对角化和矩阵乘幂" class="headerlink" title="第二十二讲 对角化和矩阵乘幂"></a>第二十二讲 对角化和矩阵乘幂</h3><p>本讲中我们学习如何对角化含有n个线性无关特征向量的矩阵，以及对角化是怎样简化计算的。 </p>
+<h4 id="22-1-对角化矩阵-Diagonalizing-a-matrix-boldsymbol-S-1-boldsymbol-A-boldsymbol-S-boldsymbol-Lambda"><a href="#22-1-对角化矩阵-Diagonalizing-a-matrix-boldsymbol-S-1-boldsymbol-A-boldsymbol-S-boldsymbol-Lambda" class="headerlink" title="22.1 对角化矩阵 Diagonalizing a matrix $\boldsymbol{S}^{-1} \boldsymbol{A} \boldsymbol{S}=\boldsymbol{\Lambda}$"></a>22.1 对角化矩阵 Diagonalizing a matrix $\boldsymbol{S}^{-1} \boldsymbol{A} \boldsymbol{S}=\boldsymbol{\Lambda}$</h4><p>如果矩阵$\boldsymbol A$具有$n$个线性无关的特征向量，将它们作为列向量可以组成一个可逆方阵$\boldsymbol S$(这是前提，因为特征向量组成的方阵不一定是可逆的)，并且有：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{A} \boldsymbol{S} &=\boldsymbol{A}\left[\begin{array}{llll}
+\boldsymbol{x}_{1} & \boldsymbol{x}_{2} & \cdots & \boldsymbol{x}_{\mathrm{n}}
+\end{array}\right] \\
+&=\left[\begin{array}{lllll}
+\lambda_{1} \boldsymbol{x}_{1} & \lambda_{2} \boldsymbol{x}_{2} & \cdots & \lambda_{\mathrm{n}} \boldsymbol{x}_{\mathrm{n}}
+\end{array}\right] \\
+&=\boldsymbol{S}\left[\begin{array}{cccc}
+\lambda_{1} & 0 & \cdots & 0 \\
+0 & \lambda_{2} & & 0 \\
+\vdots & & \ddots & \vdots \\
+0 & \cdots & 0 & \lambda_{\mathrm{n}}
+\end{array}\right] \\
+&=\boldsymbol{S} \boldsymbol{\Lambda}
+\end{aligned}</script><p>这里的矩阵$\boldsymbol{\Lambda}$为对角阵，它的非零元素就是矩阵$\boldsymbol{A}$的特征值。因为矩阵$\boldsymbol{S}$中的列向量线性无关，因此逆矩阵$\boldsymbol{S}^{-1}$存在。在等式两侧左乘逆矩阵，得到$\boldsymbol{S}^{-1} \boldsymbol{A} \boldsymbol{S}=\boldsymbol{\Lambda}$，同样地， $\boldsymbol{A}=\boldsymbol{S} \boldsymbol{\Lambda} \boldsymbol{S}^{-1}$。</p>
+<p>对于消元法而言，矩阵有$\boldsymbol{LU}$分解，对于施密特正交法，矩阵有$\boldsymbol{QR}$分解，而上面的推导是一种新的矩阵分解。 </p>
+<blockquote>
+<p>之前曾经提到过消元进行行操作和列操作最后会得到“相抵标准型”。现在我们得到的是矩阵的“相似标准形”,它还保有矩阵操作的基本性质——特征值，而相抵标准型只剩下最内核的秩信息还保留着。 </p>
+</blockquote>
+<h4 id="22-2-矩阵的幂-Powers-of-boldsymbol-A"><a href="#22-2-矩阵的幂-Powers-of-boldsymbol-A" class="headerlink" title="22.2 矩阵的幂 Powers of $\boldsymbol{A}$"></a>22.2 矩阵的幂 Powers of $\boldsymbol{A}$</h4><p>参考第二十一讲<strong>性质6</strong>。</p>
+<p>如果矩阵$\boldsymbol{A}$具有$n$个线性无关的特征向量，如果所有的特征值均满足$|\lambda_i|&lt;1$，则当$k \to \infty$ 时，$\boldsymbol{A}^k \to \boldsymbol 0$。</p>
+<h4 id="22-3-重特征值-Repeated-eigenvalues"><a href="#22-3-重特征值-Repeated-eigenvalues" class="headerlink" title="22.3 重特征值 Repeated eigenvalues"></a>22.3 重特征值 Repeated eigenvalues</h4><p> 如果矩阵$\boldsymbol{A}$没有重特征值，则其一定具有$n$个线性无关的特征向量。</p>
+<p>如果矩阵$\boldsymbol{A}$有重特征值，它有可能具有$n$个线性无关的特征向量，也可能没有。比如单位阵的特征值为重特征值1，但是其具有$n$个线性无关的特征向量。</p>
+<p>对于如 <script type="math/tex">\boldsymbol{A}=\left[\begin{array}{ll} 2 & 1 \\ 0 & 2\end{array}\right]</script>的三角矩阵，特征值就是矩阵对角线上的元素2。其特征向量在$(\boldsymbol A - \lambda \boldsymbol I)$的零空间中，满足</p>
+<script type="math/tex; mode=display">
+(\boldsymbol{A}-\lambda \boldsymbol{I}) \boldsymbol{x}=\left[\begin{array}{ll}
+0 & 1 \\
+0 & 0
+\end{array}\right] \mathbf{x}=\mathbf{0}</script><p>求解可得<script type="math/tex">\boldsymbol x=\left[\begin{array}{l} 1 \\ 0\end{array}\right]</script>，而没有第二个特征向量。 </p>
+<h4 id="22-4-差分方程-Difference-equations"><a href="#22-4-差分方程-Difference-equations" class="headerlink" title="22.4 差分方程 Difference equations"></a>22.4 差分方程 Difference equations</h4><p>从给定的一个向量<strong><em>u</em></strong>0出发，我们可以通过对前一项乘以矩阵得到下一项的方式，得到一个向量序列：</p>
+<script type="math/tex; mode=display">
+\boldsymbol u_{k+1}=\boldsymbol{Au}_k</script><p>上式为一个一阶差分方程，易知</p>
+<script type="math/tex; mode=display">
+\boldsymbol u_{k+1}=\boldsymbol{A}^k {\boldsymbol u}_0</script><p>是方程的解。但这种简洁形式并没有给出足够的信息，我们需要通过特征向量和矩阵的幂运算给出真实解的结构。 </p>
+<p>将<strong><em>u</em></strong>0写成特征向量的线性组合： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\boldsymbol{u}_{0}=c_{1} \boldsymbol{x}_{1}+c_{2} \boldsymbol{x}_{2}+\ldots+c_{n} \boldsymbol{x}_{n}=\boldsymbol{S c} \\
+&\boldsymbol{A} \boldsymbol{u}_{0}=c_{1} \lambda_{1} \boldsymbol{x}_{1}+c_{2} \lambda_{2} \boldsymbol{x}_{2}+\ldots+c_{n} \lambda_{n} \boldsymbol{x}_{n} \\
+&\boldsymbol{u}_{k}=\boldsymbol{A}^{k} \boldsymbol{u}_{0}=c_{1} \lambda_{1}^{k} \boldsymbol{x}_{1}+c_{2} \lambda_{2}^{k} \boldsymbol{x}_{2}+\ldots+c_{n} \lambda_{n}^{k} \boldsymbol{x}_{n}= \boldsymbol{S} \boldsymbol{\Lambda}^{k} \boldsymbol{c}
+\end{aligned}</script><blockquote>
+<p>很多人会问矩阵的特征值特征向量为什么这么神奇，可以把矩阵的操作变成一个简单的参数。还有人会问道为什么特征值在物理中出现非常频繁。对此我只能简单解释一下，物理中常见的被研究物体都有一个自身的内禀结构，这个内在结构的方向往往和观察者也就是外场的坐标有区别。当我们给物体施加一个外场刺激的时候，比如说外力或者电场极化等等，物体沿着其内在结构的取向来响应外场，但是观察者从外场坐标下采集反馈。实际上矩阵在不同坐标之间实现变换，特征向量显示了物体内结构的方向，特征值则是在这个主方向上物体对外场的响应参数。在有的领域直接将特征值称为伸缩系数，实际上它反应了在其所对应的特征向量方向上，内结构与外场之间的相互关系。 特征值还有一个应用是作为降维的判据，比如在图像压缩过程中，极小的特征值会被赋值为0，以此节省存储空间，也便于其它操作。反应在图像上，降维后的图像基本轮廓依旧清晰，图像细节有所牺牲。 </p>
+</blockquote>
+<h3 id="第二十三讲-微分方程和-e-boldsymbol-A-t"><a href="#第二十三讲-微分方程和-e-boldsymbol-A-t" class="headerlink" title="第二十三讲 微分方程和$e^{\boldsymbol A t}$"></a>第二十三讲 微分方程和$e^{\boldsymbol A t}$</h3><p>本讲将面对微分方程，将一阶常系数微分方程转化为线性代数问题进行处理。主要思路基于常系数线性方程的解是指数形式，而寻找其指数和系数就是线代主要研究的问题。这里会涉及到矩阵型指数的运算$e^{\boldsymbol A t}$。</p>
+<h4 id="23-1-微分方程-Differential-equations"><a href="#23-1-微分方程-Differential-equations" class="headerlink" title="23.1 微分方程 Differential equations"></a>23.1 微分方程 Differential equations</h4><p>例： <script type="math/tex">\begin{aligned} &\frac{\mathrm d u_{1}}{\mathrm d t}=-u_{1}+2 u_{2} \\ &\frac{\mathrm d u_{2}}{\mathrm d t}=u_{1}-2 u_{2}\end{aligned}</script>，初值条件$u_1(0)=1，u_2(0)=0$</p>
+<p>则有<script type="math/tex">\dfrac{\mathrm d \mathbf{u}}{\mathrm d t}=\boldsymbol{A} \boldsymbol{u}</script>，<script type="math/tex">\boldsymbol{A}=\left[\begin{array}{cc} -1 & 2 \\ 1 & -2\end{array}\right], \boldsymbol{u}(0)=\left[\begin{array}{l} 1 \\ 0\end{array}\right]</script></p>
+<p>分析矩阵$\boldsymbol{A}$的目的是要追踪$\boldsymbol{u}$随时间的变化，而首先要做的是找到矩阵的特征值和特征向量。矩阵$\boldsymbol{A}$为奇异矩阵，因此存在一个特征值$\lambda_1 = 0$ ，而矩阵的迹为-3，因此还有一个特征值为$\lambda_2 = -3$。</p>
+<p>一阶线性微分方程的解的形式是$e^{\boldsymbol \lambda t}$。两个特征值中，0会使结果达到稳态，而-3所对应的$e^{\boldsymbol -3 t}$会随时间增大而变小。 </p>
+<p>方程的通解为<script type="math/tex">\boldsymbol{u}(\mathrm{t})=c_{1} e^{\lambda_{1} t} \boldsymbol{x}_{1}+c_{2} e^{\lambda_{2} t} \boldsymbol{x}_{2}</script></p>
+<blockquote>
+<p>尽管直接代入可以验证。。。</p>
+</blockquote>
+<p>将<script type="math/tex">\lambda_{1}=0, \quad \lambda_{2}=-3</script>代入<script type="math/tex">(\boldsymbol{A}-\lambda \boldsymbol{I}) \boldsymbol{x}=\boldsymbol{0}</script>，分别求得对应的特征向量<script type="math/tex">\boldsymbol x_1=\left[\begin{array}{l} 2 \\ 1\end{array}\right], \boldsymbol x_2=\left[\begin{array}{l} 1 \\ -1\end{array}\right]</script>，即解为：</p>
+<script type="math/tex; mode=display">
+\mathbf{u}(\boldsymbol{t})=c_{1} e^{\lambda_{1} t} \boldsymbol {x}_{1}+c_{2} e^{\lambda_{2} t} \boldsymbol {x}_{2}=c_{1} e^{0}\left[\begin{array}{l}
+2 \\
+1
+\end{array}\right]+c_{2} e^{-3 t}\left[\begin{array}{c}
+1 \\
+-1
+\end{array}\right]</script><p>由初始条件得</p>
+<script type="math/tex; mode=display">
+\boldsymbol{u}(0)=c_{1}\left[\begin{array}{l}
+2 \\
+1
+\end{array}\right]+c_{2}\left[\begin{array}{c}
+1 \\
+-1
+\end{array}\right]=\left[\begin{array}{l}
+1 \\
+0
+\end{array}\right]</script><p> 解为$c_1 = c_2 = \dfrac{1}{3}$，因此 </p>
+<script type="math/tex; mode=display">
+\boldsymbol{u}(\mathrm{t})=\frac{1}{3}\left[\begin{array}{l}
+2 \\
+1
+\end{array}\right]+\frac{1}{3} e^{-3 t}\left[\begin{array}{c}
+1 \\
+-1
+\end{array}\right]</script><p>前一项为稳态状态，后一项随着时间衰减。 </p>
+<p>稳定性：并不是所有的系统都会达到稳态，矩阵的特征值会告诉我们$\boldsymbol u(t)$的发展趋势。</p>
+<ul>
+<li><strong>Stability(稳定性)：</strong>$\mathrm{Re}(\lambda) &lt; 0$，则有$\boldsymbol u(t) \to 0$（支配稳定性的是实部，虚部的作用是在单位圆上转圈。）</li>
+<li><strong>Steady State(稳态)：</strong>有一个特征值为0，并且其它所有的特征值实部为负数$\mathrm{Re}(\lambda) &lt; 0$。</li>
+<li><strong>Bolw Up(不收敛)：</strong>至少有一个特征值满足$\mathrm{Re}(\lambda) &gt; 0$，则发散。</li>
+</ul>
+<p>如果二阶矩阵<script type="math/tex">\boldsymbol{A}=\left[\begin{array}{ll} a & b \\ c & d\end{array}\right]</script>的两个特征值实部为负数，则矩阵的迹$a+d$也是负数。反之并不一定成立，例如矩阵<script type="math/tex">\left[\begin{array}{cc} -2 & 0 \\ 0 & 1\end{array}\right]</script>的迹为-1，但是一个特征值为1。如果二阶矩阵的行列式为正而迹为负，则解为收敛的。 </p>
+<p>在方程<script type="math/tex">\dfrac{\mathbf d \boldsymbol {u}}{\mathbf d \boldsymbol t}=\boldsymbol{A} \boldsymbol {u}</script>中，是矩阵$\boldsymbol A$使得不同分量之间相互耦合(<font color="red">我们的方程表明两个变量相互耦合，特征值和特征向量的作用就在于可以实现<strong>解耦</strong>（又称对角化）</font> )。令$\boldsymbol {u=Sv}$其中$\boldsymbol S$是由矩阵$\boldsymbol A$的特征向量组成。则有： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{S} \frac{\mathrm d \boldsymbol{v}}{\mathrm d t}=\boldsymbol{A} \boldsymbol{S} \boldsymbol{v} \Rightarrow \frac{\mathrm d \boldsymbol{v}}{\mathrm d t}=\boldsymbol{S}^{-1} \boldsymbol{A} \boldsymbol{S} \boldsymbol{v}=\boldsymbol{\Lambda} \boldsymbol{v}</script><p>新的方程不再耦合，则方程组的对角线为： <script type="math/tex">\dfrac{\mathrm d v_{i}}{\mathrm d t}=\lambda_{i} v_{i}</script>，方程组的通解为： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{v}(t)=e^{\boldsymbol{\Lambda} t} \boldsymbol{v}(0), \quad \boldsymbol{u}(t)=\boldsymbol{S} e^{\boldsymbol{\Lambda} t} \boldsymbol{S}^{-1} \boldsymbol{u}(0)=e^{\boldsymbol{A} t} \boldsymbol{u}(0)</script><h4 id="23-2-矩阵指数函数-Matrix-exponential-e-boldsymbol-At"><a href="#23-2-矩阵指数函数-Matrix-exponential-e-boldsymbol-At" class="headerlink" title="23.2 矩阵指数函数 Matrix exponential $e^{\boldsymbol At}$"></a>23.2 矩阵指数函数 Matrix exponential $e^{\boldsymbol At}$</h4><p>我们可以用幂级数的公式： </p>
+<script type="math/tex; mode=display">
+e^{x}=\sum_{n=0}^{\infty} \frac{x^{n}}{n !}=1+x+\frac{x^{2}}{2}+\frac{x^{3}}{6}+\cdots</script><p>来定义矩阵型指数运算$e^{\boldsymbol At}$：</p>
+<script type="math/tex; mode=display">
+e^{\boldsymbol{A} t}=I+\boldsymbol{A} t+\frac{(\boldsymbol{A} t)^{2}}{2}+\frac{(\boldsymbol{A} t)^{3}}{6}+\cdots</script><p>如果$\boldsymbol At$的特征值很小，满足收敛条件$|\lambda({\boldsymbol At})|&lt;1$，则可以用几何级数来定义矩阵型指数： </p>
+<script type="math/tex; mode=display">
+\frac{1}{1-x}=\sum_{n=0}^{\infty} x^{n} \rightarrow(I-\boldsymbol{A} t)^{-1}=I+\boldsymbol{A} t+(\boldsymbol{A} t)^{2}+(\boldsymbol{A} t)^{3}+\cdots</script><p>前文中我们已经写出了矩阵指数函数的公式$e^{\boldsymbol At} = \boldsymbol {Se^{\Lambda t}S^{-1}}$。如果矩阵$\boldsymbol A$具有$n$个线性无关的特征向量，我们可以从幂级数定义的矩阵指数公式来再次验证： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+e^{\boldsymbol{A} t} &=I+\boldsymbol{A} t+\frac{(\boldsymbol{A} t)^{2}}{2}+\frac{(\boldsymbol{A} t)^{3}}{6}+\cdots \\
+&=\boldsymbol{S} \boldsymbol{S}^{-1}+\boldsymbol{S} \boldsymbol{\Lambda} \boldsymbol{S}^{-1} t+\frac{\boldsymbol{S \Lambda}^{2} \boldsymbol{S}^{-1}}{2} t^{2}+\frac{\boldsymbol{S} \boldsymbol{\Lambda}^{3} \boldsymbol{S}^{-1}}{6} t^{3}+\cdots \\
+&=\boldsymbol{S}\left(I+\boldsymbol{\Lambda} t+\frac{\Lambda^{2}}{2} t^{2}+\frac{\Lambda^{3}}{6} t^{3}+\cdots\right) \boldsymbol{S}^{-1} \\
+&=\boldsymbol{S} e^{\boldsymbol{\Lambda} t} \boldsymbol{S}^{-1}
+\end{aligned}</script><p>能够对角化的矩阵都可以表示为上式。 </p>
+<script type="math/tex; mode=display">
+e^{\boldsymbol{\Lambda} t}=\left[\begin{array}{cccc}
+e^{\lambda_{1} t} & 0 & \cdots & 0 \\
+0 & e^{\lambda_{2} t} & & 0 \\
+\vdots & & \ddots & \vdots \\
+0 & \cdots & 0 & e^{\lambda_{n} t}
+\end{array}\right]</script><p><img src="https://pic.imgdb.cn/item/62709bcb239250f7c5026d84.jpg" style="zoom:50%"></p>
+<p><img src="https://pic.imgdb.cn/item/62709c1d239250f7c503214b.jpg" style="zoom:55%"></p>
+<h4 id="23-3-二阶微分方程-Second-order-differential-equations"><a href="#23-3-二阶微分方程-Second-order-differential-equations" class="headerlink" title="23.3 二阶微分方程 Second order differential equations"></a>23.3 二阶微分方程 Second order differential equations</h4><p>我们可以将二阶微分方程$y’’ + by’ + ky = 0$转化为$2\times2$的一阶问题进行处理，构造方法类似于我们对斐波那契数列的处理方法。 </p>
+<p> 令<script type="math/tex">\boldsymbol {u}=\left[\begin{array}{l} y^{\prime} \\ y\end{array}\right]</script>，则有</p>
+<script type="math/tex; mode=display">
+\boldsymbol{u}^{\prime}=\left[\begin{array}{l}
+y^{\prime \prime} \\
+y^{\prime}
+\end{array}\right]=\left[\begin{array}{cc}
+-b & -k \\
+1 & 0
+\end{array}\right]\left[\begin{array}{l}
+y^{\prime} \\
+y
+\end{array}\right]</script><p>如果是$k$阶微分方程，那么需要一个$k \times k$矩阵，除了第一行和对角线下面一排斜线上的元素之外，这个系数矩阵其它元素均为0。 </p>
+<h3 id="第二十四-马尔可夫矩阵和傅里叶级数"><a href="#第二十四-马尔可夫矩阵和傅里叶级数" class="headerlink" title="第二十四 马尔可夫矩阵和傅里叶级数"></a>第二十四 马尔可夫矩阵和傅里叶级数</h3><p><font color="red"><strong>两者是关于特征值和投影矩阵的应用</strong></font>。</p>
+<h4 id="24-1-马尔可夫矩阵-Markov-matrices"><a href="#24-1-马尔可夫矩阵-Markov-matrices" class="headerlink" title="24.1 马尔可夫矩阵 Markov matrices"></a>24.1 马尔可夫矩阵 Markov matrices</h4><h5 id="一-定义"><a href="#一-定义" class="headerlink" title="(一) 定义"></a>(一) 定义</h5><p>若某一矩阵$\boldsymbol A$，其所有元素非负，且每列的元素加和为1的矩阵被称为马尔可夫矩阵。马尔可夫矩阵主要应用在概率领域。将一个马尔可夫矩阵进行方幂运算得到的矩阵仍旧是马尔可夫矩阵。例如：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}=\left[\begin{array}{ccc}
+0.1 & 0.01 & 0.3 \\
+0.2 & 0.99 & 0.3 \\
+0.7 & 0 & 0.4
+\end{array}\right]</script><p>由23讲可知：当处理一个微分方程问题时，特征值0意味着得到一个稳态。但当进行矩阵的方幂运算时，特征值给出稳态的条件包括： </p>
+<ul>
+<li><strong>条件1：</strong>$\lambda_1 = 1$是矩阵的特征值之一</li>
+<li><strong>条件2：</strong>$|\lambda_i| &lt; 1$其它特征值的绝对值都比1小 </li>
+</ul>
+<p><strong>条件1和条件2 是马尔可夫矩阵的特征值的特点。</strong></p>
+<p>如果矩阵具有$n$个线性无关的特征向量，则有： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{u}_{k}=\boldsymbol{A}^{k} \boldsymbol{u}_{0}=c_{1} \lambda_{1}{ }^{k} \boldsymbol{x}_{1}+c_{2} \lambda_{2}{ }^{k} \boldsymbol{x}_{2}+\ldots+c_{n} \lambda_{n}{ }^{k} \boldsymbol{x}_{n}</script><p>如果$\lambda_1 = 1$并且其他的特征值都小于1，则系统在$k$增大过程中趋近于$\boldsymbol u_0$的分量$c_1 \boldsymbol x_1$，即给出了一个稳态状况。这里特征向量$\boldsymbol x_1$的每一分量都是正的，因此若初始值为正，则最终的稳态也是正的。</p>
+<p>Markov矩阵每一列的元素加和为1这个条件，保证了矩阵具有1这个特征值。</p>
+<script type="math/tex; mode=display">
+\boldsymbol{A}-\boldsymbol{I}=\left[\begin{array}{rrr}
+-0.9 & 0.01 & 0.3 \\
+0.2 & -0.01 & 0.3 \\
+0.7 & 0 & -0.6
+\end{array}\right]</script><p>从每一列减去1，则每列的加和都从1变为0。这时候行向量相加的结构就是$\boldsymbol 0$向量，因此行向量线性相关，矩阵为奇异矩阵。矩阵$\boldsymbol A$有特征向量在$\boldsymbol{A-I}$的零空间中，其对应的特征值为1。回代计算可得<script type="math/tex">\boldsymbol {x}_1=\left[\begin{array}{l} 0.6 \\ 33 \\ 0.7\end{array}\right]</script>。</p>
+<p><strong>转置矩阵的特征值：</strong>转置矩阵$\boldsymbol A^{\mathrm T}$具有和原矩阵$\boldsymbol A$相同的特征值。 </p>
+<script type="math/tex; mode=display">
+(\boldsymbol A - \lambda \boldsymbol I)^{\mathrm T} = \boldsymbol A^{\mathrm T} -  \lambda \boldsymbol I</script><p>则由行列式的性质10可知：$\det(\boldsymbol A - \lambda \boldsymbol I) = \det(\boldsymbol A^{\mathrm T} -  \lambda \boldsymbol I)$。如果$\lambda$是矩阵$\boldsymbol A$的特征值，则其满足$\det(\boldsymbol A^{\mathrm T} -  \lambda \boldsymbol I) = 0$，因此它也是转置矩阵$\boldsymbol A^{\mathrm T}$的特征值。但是两者特征向量有所区别，<strong>零空间不等同于左零空间</strong>。</p>
+<h5 id="二-例子——人口流动"><a href="#二-例子——人口流动" class="headerlink" title="(二) 例子——人口流动"></a>(二) 例子——人口流动</h5><p>用马尔可夫矩阵来研究人口流动问题：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{c}
+u_{\text {Cal }} \\
+u_{\text {Mass }}
+\end{array}\right]_{t=k+1}=\left[\begin{array}{cc}
+0.9 & 0.2 \\
+0.1 & 0.8
+\end{array}\right]\left[\begin{array}{c}
+u_{\text {Cal }} \\
+u_{\text {Mass }}
+\end{array}\right]_{t=k}</script><p>方程中$\boldsymbol u$的分量分别代表加州和麻省的人口，矩阵中的每一列中元素代表着人口去留比例，比如第一列$0.9$表示留在加州的人口占加州人口的$90\%$，而$10\%$进入麻省，第二列中由麻省进入加州的人口占麻省的$20\%$，而$80\%$选择留在麻省。如果取初值<script type="math/tex">\left[\begin{array}{c} u_{\text {Cal }} \\ u_{\text {Mass }} \end{array}\right]_{0}=\left[\begin{array}{c} 0 \\ 1000\end{array}\right]</script>，则经过一次迁徙<script type="math/tex">\left[\begin{array}{c} u_{\text {Cal }} \\ u_{\text {Mass }} \end{array}\right]_{1}=\left[\begin{array}{cc} 0.9 & 0.2 \\ 0.1 & 0.8\end{array}\right]\left[\begin{array}{c} 0 \\ 1000\end{array}\right] = \left[\begin{array}{c} 200 \\ 800\end{array}\right]</script>。</p>
+<p>为了获取长时间后的人口分布，我们需要了解矩阵的特征值和特征向量。因为这是马尔可夫矩阵，所以有一个特征值1，则另一个特征值为$0.9+0.8-1=0.7$。可以求得<script type="math/tex">\boldsymbol {x}_1=\left[\begin{array}{l} 2 \\ 1 \end{array}\right], \boldsymbol {x}_2=\left[\begin{array}{l} 1 \\ -1 \end{array}\right]</script>，从$\boldsymbol x_1$可知最后的稳态为加州人口$2/3$，麻省人口$1/3$。 通解为： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{u}_{k}=c_{1}\left[\begin{array}{l}
+2 \\
+1
+\end{array}\right]+c_{2}(0.7)^{k}\left[\begin{array}{c}
+-1 \\
+1
+\end{array}\right]</script><p>可以从$\boldsymbol u_0$解得$c1=1000/3$、$c2=2000/3$。 </p>
+<h4 id="24-2-傅里叶级数和投影矩阵-Fourier-series-amp-Projections"><a href="#24-2-傅里叶级数和投影矩阵-Fourier-series-amp-Projections" class="headerlink" title="24.2 傅里叶级数和投影矩阵 Fourier series &amp; Projections"></a>24.2 傅里叶级数和投影矩阵 Fourier series &amp; Projections</h4><p>如果有一组标准正交基为$\boldsymbol q_1，\boldsymbol q_2, \dots, \boldsymbol q_n$，则任意向量$\boldsymbol v$可以写成： </p>
+<script type="math/tex; mode=display">
+\boldsymbol{v}=x_{1} \boldsymbol{q}_{1}+x_{2} \boldsymbol{q}_{2}+\ldots+x_{n} \boldsymbol{q}_{n}</script><p>因为当$i，j$不相等时有$\boldsymbol q_1^{\mathrm T}\boldsymbol q_2$。因此有</p>
+<script type="math/tex; mode=display">
+\boldsymbol{q}_{i}^{T} \boldsymbol{v}=x_{1} \boldsymbol{q}_{i}^{T} \boldsymbol{q}_{1}+x_{2} \boldsymbol{q}_{i}^{T} \boldsymbol{q}_{2}+\ldots+x_{n} \boldsymbol{q}_{i}^{T} \boldsymbol{q}_{n}=x_{i}</script><p>我们得到了分量$x_i$的公式：$x_i = \boldsymbol q_i^{\mathrm T} \boldsymbol v$。</p>
+<p>因为<script type="math/tex">\boldsymbol{v}=\left[\begin{array}{lll} \boldsymbol{q}_{1} & \cdots & \boldsymbol{q}_{n} \end{array}\right]\left[\begin{array}{c} x_{1} \\ \vdots \\x_{n}\end{array}\right]</script>，即$\boldsymbol v = \boldsymbol {Qx}$，所以$\boldsymbol x = \boldsymbol Q^{-1} \boldsymbol v$，<strong>因为$\boldsymbol Q$为<font color="red">正交矩阵</font>，所以有</strong>$\boldsymbol Q^{-1} = \boldsymbol Q^{\mathrm T}$，可得$\boldsymbol x = \boldsymbol Q^{\mathrm T} \boldsymbol v$ 。这与我们之前得到的$x_i = \boldsymbol q_i^{\mathrm T} \boldsymbol v$完全相同。这里给出了求分量的思路就是用空间的一组标准正交基去点乘目标向量，利用其标准正交的性质得到所求。</p>
+<p>标准正交是此处的核心概念。而傅里叶级数也是在这个概念上构建的。我们可以对任意函数做傅里叶展开，得到表达式： </p>
+<script type="math/tex; mode=display">
+f(x)=a_{0}+a_{1} \cos x+b_{1} \sin x+a_{2} \cos 2 x+b_{2} \sin 2 x+\cdots</script><p>与之前的有限个标准正交向量组成的正交矩阵不同，这个空间是无限维，它的一组基是：</p>
+<script type="math/tex; mode=display">
+1, \cos x, \sin x, \cos 2x, \sin 2x, \dots</script><p>此处的正交概念与$R^n$空间不同，点积的概念也不同。 </p>
+<ul>
+<li>向量正交：<script type="math/tex">\boldsymbol{v}^{T} \boldsymbol{w}=v_{1} w_{1}+v_{2} w_{2}+\ldots+v_{n} w_{n}</script></li>
+<li>函数正交：$f^{T} g=\int_{0}^{2 \pi} f(x) g(x) d x$</li>
+</ul>
+<p>计算基$\sin x$和$\cos x$的点积可以验证其正交性。 </p>
+<p>采用和标准正交基相同的策略可以得到傅里叶变换的参数。 </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\int_{0}^{2 \pi} f(x) \cos x d x &=\int_{0}^{2 \pi}\left(a_{0}+a_{1} \cos x+b_{1} \sin x+a_{2} \cos 2 x+\cdots\right) \cos x d x \\
+&=0+\int_{0}^{2 \pi} a_{1} \cos ^{2} x d x+0+0 \cdots \\
+&=a_{1} \pi
+\end{aligned}</script><p>可以得到：</p>
+<script type="math/tex; mode=display">
+a_{1}=\frac{1}{\pi} \int_{0}^{2 \pi} f(x) \cos x d x</script><p>同理可以求得其它参数。 </p>
+<hr>
+<p>参考笔记：<a target="_blank" rel="noopener" href="https://blog.csdn.net/herosunly?type=blog">https://blog.csdn.net/herosunly?type=blog</a></p>
+<p>笔记链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_16829085/article/details/102908029">https://blog.csdn.net/qq_16829085/article/details/102908029</a></p>
+<p>MIT 公开课：Gilbert Strang《线性代数》课程笔记（汇总）<a target="_blank" rel="noopener" href="https://blog.csdn.net/xhf0374/article/details/63250083">https://blog.csdn.net/xhf0374/article/details/63250083</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/04/05/LinearAlgebra2/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%9C%AC%E8%B4%A8%E9%97%AE%E9%A2%98/" rel="tag">本质问题</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BA%BF%E4%BB%A3/" rel="tag">线代</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/04/17/Foundation-of-Python/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            Python基础
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/05/Mathematics-learning-route/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">数学基础学习路线</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

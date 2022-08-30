@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>编程软件基础知识——杂记 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Basic-knowledge-of-programming-software"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  编程软件基础知识——杂记
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/04/26/Basic-knowledge-of-programming-software/" class="article-date">
+  <time datetime="2022-04-26T11:58:42.000Z" itemprop="datePublished">2022-04-26</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">编程与深度学习</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E7%BC%96%E7%A8%8B%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0/">编程语言学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">3.2k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">11 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1-电脑知识"><a href="#1-电脑知识" class="headerlink" title="1 电脑知识"></a>1 电脑知识</h3><h3 id="2-编程语言——编译型和解释型"><a href="#2-编程语言——编译型和解释型" class="headerlink" title="2 编程语言——编译型和解释型"></a>2 编程语言——编译型和解释型</h3><h4 id="2-1-编译型语言"><a href="#2-1-编译型语言" class="headerlink" title="2.1 编译型语言"></a>2.1 编译型语言</h4><p>C和C++这两种语言是编译型语言，编译型语言的特点是执行速度快，缺点是什么呢？编译型语言需要编译器处理，主要工作流程如下：</p>
+<p><strong>源代码 (source code) → 预处理器 (preprocessor) → 编译器 (compiler) → 目标代码 (object code) → 链接器 (Linker) → 可执行程序 (executables)</strong></p>
+<p>编译器调用预处理器进行相关处理，将源代码进行优化转换（包括清除注释、宏定义、包含文件和条件编译），然后，通过将经过预处理的源代码编译成目标代码（二进制机器语言），再通过调用链接器外加库文件（例如操作系统提供的API），从而形成可执行程序，让机器能够执行。在这个工作流程中，目标代码要和机器的CPU架构相匹配，库文件要和操作系统相匹配。如果想在不同CPU的机器或者系统上运行C语言的源代码，就需要针对不同的CPU架构和操作系统进行编译，这样才能够在机器上运行程序。所以，编译型语言的缺点我们就看到了，它不适合跨平台。而且，到这里大家应该能知道，为什么CPU一样，但是exe程序只能Windows中运行，而不能在Mac中运行了。 </p>
+<p><img src="https://pic.imgdb.cn/item/6267dfd1239250f7c578ce42.png"></p>
+<h4 id="2-2-解释型语言"><a href="#2-2-解释型语言" class="headerlink" title="2.2 解释型语言"></a>2.2 解释型语言</h4><p>解释型语言源代码无需预先编译成可执行程序，在程序执行时，解释器读取一句源代码之后，先进行词法分析和语法分析，再将源代码转换为解释器能够执行的中间代码（字节码），最后，由解释器将中间代码解释为可执行的机器指令。所以，编译型语言的可执行程序产生的是直接执行机器指令，而解释型语言的每一句源代码都要经过解释器解释为可以执行的机器指令，相比之下解释型语言的执行效率会低一些。 </p>
+<p><img src="https://pic.imgdb.cn/item/6267e0ba239250f7c57ac7d8.png"></p>
+<p>例如：Python程序运行时，先将源代码完整的进行转换，编译成更有效率的字节码，保存成后缀为“.pyc”的字节码文件，然后，翻译器再通过这个文件一句一句的翻译为机器语言去执行。 </p>
+<p><img src="https://pic.imgdb.cn/item/6267e0e4239250f7c57b2434.png"></p>
+<h5 id="2-2-1-JIT即时编译器（Just-In-Time-Compiler）"><a href="#2-2-1-JIT即时编译器（Just-In-Time-Compiler）" class="headerlink" title="2.2.1 JIT即时编译器（Just-In-Time Compiler）"></a>2.2.1 JIT即时编译器（Just-In-Time Compiler）</h5><p>无论是使用解释器进行解释执行，还是使用编译器进行编译后执行，最终源代码都需要被转换为对应平台的本地机器指令。那么，一些重复出现的代码，就可以将其编译为本地机器指令，重复使用，从而提高效率。这些重复出现的代码包括多次调用的方法和多次执行的循环体。 </p>
+<p>JIT即时编译器比较典型的例子是在JVM（Java虚拟机）中。Java程序最初是通过解释器进行解释执行的，当Java虚拟机发现某个方法或代码块运行特别频繁的时候，就会认为这是“热点代码”（Hot Spot Code)。JIT即时编译器会将这些“热点代码”编译成与本地机器相关的机器指令，进行各个层次的优化。 </p>
+<p><img src="https://pic.imgdb.cn/item/6267e128239250f7c57bc2ab.png"></p>
+<h3 id="3-操作系统、环境变量、服务器"><a href="#3-操作系统、环境变量、服务器" class="headerlink" title="3 操作系统、环境变量、服务器"></a>3 操作系统、环境变量、服务器</h3><h4 id="3-1-为什么你需要操作系统"><a href="#3-1-为什么你需要操作系统" class="headerlink" title="3.1 为什么你需要操作系统"></a>3.1 为什么你需要操作系统</h4><p>假设你是一个程序员, 你写了一个C程序，如下所示： </p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> b = <span class="number">2</span>; </span><br><span class="line">    <span class="keyword">int</span> c = a + b;</span><br><span class="line">    <span class="built_in">printf</span>(%d, c);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你的程序经过编译大概变成了这样的CPU指令 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"># 初始化a和b , mov指令把前一个操作数的值赋值给后一个操作数</span><br><span class="line">Mov 1, a</span><br><span class="line">Mov 2, b</span><br><span class="line"># %开头的是CPU寄存器, 你可能还记得它是最快最小的存储设备, 我们要把a和b从内存里拿出来, 放进寄存器里</span><br><span class="line"># 接下来Add指令才能工作 </span><br><span class="line">Mov a, %eax</span><br><span class="line">Mov b, %ecx</span><br><span class="line"># 加两个寄存器的值, 和写入后一个寄存器中, 在这里是写入eax寄存器</span><br><span class="line">Add %ecx, %eax</span><br><span class="line"># 把这个值写回内存</span><br><span class="line">Mov %eax, c</span><br><span class="line">#打印, 即把内存里的值送到显示器,这里涉及一系列系统调用，现在先不管</span><br></pre></td></tr></table></figure>
+<p>指令送进内存，CPU从内存里读取指令(读取指令和执行指令是CPU硬件实现的)，执行访问内存，执行计算。 一起看起来都很美好，看起来我们不需要一个操作系统。</p>
+<p>没错！恭喜你发现一个惊天大秘密！我们就是不需要操作系统！</p>
+<p>如果我们的程序就一直这么简单的运行，那可能的确不需要。可这不符合我们对现代计算机的认知。浏览器和音乐播放器是两个不同的程序，为什么你能一边刷网页一边听歌？一定是这两个程序一起运行了，可是按说你只有一个CPU， 一套内存，只能跑一个程序，为什么你能同时运行好几个程序呢？是的, 这就是操作系统最基本的功能，<strong>操作系统负责管理CPU和内存，让每一个程序都觉得自己是独立运行的。</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6267e209239250f7c57dba4d.png" style="zoom:70%"></p>
+<h4 id="3-2-环境变量"><a href="#3-2-环境变量" class="headerlink" title="3.2 环境变量"></a>3.2 环境变量</h4><p>环境变量的作用就是指明操作系统的重要具录在哪里 </p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1w741147G9?from=search&amp;seid=17903121616999271166&amp;spm_id_from=333.337.0.0">『教程』什么是环境变量 哔哩哔哩 bilibili</a>  </p>
+<h4 id="3-3-服务器"><a href="#3-3-服务器" class="headerlink" title="3.3 服务器"></a>3.3 服务器</h4><h5 id="3-3-1-什么是服务器"><a href="#3-3-1-什么是服务器" class="headerlink" title="3.3.1 什么是服务器"></a>3.3.1 什么是服务器</h5><div class="bvideo">
+    <a href="//www.bilibili.com/video/BV1bk4y1m79S" target="_blank">
+        <div class="bvideo-box">
+            <div class="bvideo-cover">
+                <div class="cover-default"></div>
+                <div class="bvideo-cover-layer" style="background-image:url(https://images.weserv.nl/?url=http://i0.hdslb.com/bfs/archive/0a16f645b008f3e5654185407ef3b135d778dcc7.jpg)">
+                    <i class="icon-video"></i>
+                </div>
+                <span class="duration">00:07:03</span>
+            </div>
+            <div class="bvideo-info">
+                <p class="title">【白话科普】服务器是什么 ｜能做什么  | 和电脑有什么区别 | 什么是云服务器 | 网站上线系列分享</p>
+                <p class="card-status">
+                    <span class="play-num">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>2.8万</span></span>
+                    <span>
+                        <i class="fa fa-list-alt"></i>
+                        <span>64</span></span></p>
+                <div class="partition">
+                    <label class="card-label">视频</label>
+                    <label class="up-label"></label>
+                    <label class="up-name">好奇代码的三木</label>
+                </div>
+                <div class="actions hide"></div>
+            </div>
+        </div>
+    </a>
+</div>
+<p>首先可以很明确地说服务器也是电脑，<strong>服务器是为电脑提供服务的电脑</strong>，既然是电脑，那么它也一样是由CPU，主板，内存条，硬盘，机箱，电源等硬件组成。 </p>
+<blockquote>
+<p>还是拿人类来举例子，如果说电脑是人类的话，那么，服务器就是人类中的医生或者公务员或者其他不同的角色，也就是说，都是人类，只是不同人通过学习一些专业技能然后赋予了不同的角色。</p>
+<p>现在理解一些了么？也就是说一台电脑，如果它安装某些特殊的软件用于某种专业的用途，那么它就可以叫做是某种服务器。这是软件层面的，硬件层面的后面再说。  </p>
+</blockquote>
+<p>比如最常见的网站服务器，当你在浏览器里敲入<a href="https://link.zhihu.com/?target=http%3A//www.baidu.com">http://www.baidu.com</a>的时候，最终你的电脑是访问到的另外一台电脑，这台电脑会被安装网站服务的软件，并且会有网站方面的网站程序，最终起作用的是这些软件跟程序，这台电脑啥事情都不干，专门用来响应大家的访问请求，于是乎，他就叫做网站服务器，也叫web服务器，现实中并不是一台电脑，而是很多很多台电脑专门干这个事情，因为全球这么大的用户量，如果都访问一台电脑，不光是网络带宽问题，就这一台电脑早就累死掉了，这背后有很深层次的技术问题。 </p>
+<p>再说两种服务器，一种是文件服务器，一种是数据库服务器，直观一些的你可以把百度网盘理解为文件服务器，虽然背后其实更加的综合，但是这种专门用来做文件存储的电脑就可以称为文件服务器了。 </p>
+<p>跟另外两种服务器一样，数据库服务器也是专门只干一件事情，就是存储数据，数据库服务器一般不对外，它再为网站服务器或者其他的程序来提供服务，而且它会安装专门的数据库管理软件，来进行数据管理，这些数据的组织形式有点像excel表格里面的数据，其他电脑对他进行操作的时候，就好像跟他吼一声： “hey，帮我查查那个谁的什么什么信息。”，数据库服务器的软件就会把需要的数据给它返回回去。 </p>
+<p>所以当你访问百度搜素某个关键词的时候，首先你访问到的是百度的某台网站服务器，网站服务器只是负责请求的处理跟结果的反馈，具体的数据它得更数据库服务器要去，数据库服务器把数据反馈给网站服务器，网站服务器再把结果组织输出成为你看到的模样。 </p>
+<h5 id="3-3-2-为什么要为深度学习配置专门的服务器"><a href="#3-3-2-为什么要为深度学习配置专门的服务器" class="headerlink" title="3.3.2 为什么要为深度学习配置专门的服务器"></a>3.3.2 为什么要为深度学习配置专门的服务器</h5><p>首先解释一下深度学习为什么需要显卡计算，GPU是为大规模的并行运算而优化，GPU上则更多的是运算单元，GPU往往拥有更大宽带的显存，因此在大吞吐量的应用中也会有很好的性能，所以显卡选择最重要。专门的深度学习服务器可以方便实现实验室计算资源共享，多用户可以在个人电脑编写程序，远程访问到深度学习服务器上排队使用计算资源，减少购买设备的开支。因此准备基于CUDA计算是NVIDIA开发的GPU并行计算环境，英伟达产品系列是个不错的选择，或者选择英伟达国内代理商。</p>
+<ul>
+<li>深度学习需要大量的并行计算资源，而且动辄计算几天甚至数周，而显卡（GPU)恰好适合这种工作，提供几十上百倍的加速，性能强劲的GPU能在几个小时内完成原本CPU需要数月完成的任务，所以目前深度学习乃至于机器学习领域已经全面转向GPU架构，使用GPU完成训练任务。</li>
+<li>如今即使使用GPU的深度学习任务也要持续数天乃至数月（取决于数据规模和深度学习网络模型），需要使用单独的设备保障保证训练任务能够7x24小时长期稳定运行。 </li>
+<li>独立的深度学习工作站(服务器)可以方便实现实验室计算资源共享，多用户可以在个人电脑写程序，远程访问到深度学习服务器上排队使用计算资源，减少购买设备的开支且避免了在本地计算机配置复杂的软件环境。 </li>
+</ul>
+<h5 id="3-3-3-如何免费使用Google-colab服务器训练网络"><a href="#3-3-3-如何免费使用Google-colab服务器训练网络" class="headerlink" title="3.3.3 如何免费使用Google colab服务器训练网络"></a>3.3.3 如何免费使用Google colab服务器训练网络</h5><div class="bvideo">
+    <a href="//www.bilibili.com/video/BV13K4y1P7dx" target="_blank">
+        <div class="bvideo-box">
+            <div class="bvideo-cover">
+                <div class="cover-default"></div>
+                <div class="bvideo-cover-layer" style="background-image:url(https://images.weserv.nl/?url=http://i1.hdslb.com/bfs/archive/84653d2d5e398cda5317954a991dc2d0d2bd0149.jpg)">
+                    <i class="icon-video"></i>
+                </div>
+                <span class="duration">00:10:09</span>
+            </div>
+            <div class="bvideo-info">
+                <p class="title">Google colab使用分享/小白上手Google colab</p>
+                <p class="card-status">
+                    <span class="play-num">
+                        <i class="fa fa-youtube-play"></i>
+                        <span>8018</span></span>
+                    <span>
+                        <i class="fa fa-list-alt"></i>
+                        <span>8</span></span></p>
+                <div class="partition">
+                    <label class="card-label">视频</label>
+                    <label class="up-label"></label>
+                    <label class="up-name">一只乌龟大王</label>
+                </div>
+                <div class="actions hide"></div>
+            </div>
+        </div>
+    </a>
+</div>
+<h3 id="4-Pycharm的基本使用"><a href="#4-Pycharm的基本使用" class="headerlink" title="4 Pycharm的基本使用"></a>4 Pycharm的基本使用</h3><h4 id="4-1-Python安装前必须知道的三个概念"><a href="#4-1-Python安装前必须知道的三个概念" class="headerlink" title="4.1 Python安装前必须知道的三个概念"></a>4.1 Python安装前必须知道的三个概念</h4><h5 id="4-1-1-Python解释器"><a href="#4-1-1-Python解释器" class="headerlink" title="4.1.1 Python解释器"></a>4.1.1 Python解释器</h5><p>Python解释器是将Python源码高级语言解析(<strong>翻译</strong>)为二进制机器语言的工具。通常说安装Python就是指安装Python解释器。目前最新的Python解释器版本是Python 3.8x。另外，Python 2.x和Python 3.x<strong>不兼容</strong>。 </p>
+<p><img src="https://pic.imgdb.cn/item/6267e304239250f7c57fcec3.png" style="zoom:60%"></p>
+<h5 id="4-1-2-Python编辑器"><a href="#4-1-2-Python编辑器" class="headerlink" title="4.1.2 Python编辑器"></a>4.1.2 Python编辑器</h5><p>正如在电脑上编辑文档需要用Word、处理数据需要用Excel、做演示文稿需要用PPT、修图需要用PS一样，<strong>编写代码也需要特定的工具，而这个用来编写代码的工具就叫做编辑器</strong>。Python的编辑器有很多，有Python解释器自带的<strong>IDLE</strong>、基于iPython的<strong>Jupyter Notebook</strong>、也有如<strong>PyCharm</strong>、<strong>Spyder</strong>、<strong>WinglDE</strong>等主要针对Python代码编辑的编辑器；还有很多编辑器，如Sublime Text、Vim、<strong>VSCode等适合各种编程语言的编辑器</strong>。 </p>
+<h5 id="4-1-3-包管理工具"><a href="#4-1-3-包管理工具" class="headerlink" title="4.1.3 包管理工具"></a>4.1.3 包管理工具</h5><p>Python最大的优点之一就在于其丰富的库，<strong>pip ( package installer for Python)</strong>就是库管理工具，通过pip就可以安装、卸载、更新众多的库。 </p>
+<p>Python3.4以后的版本的解释器自带pip功能 </p>
+<h5 id="4-1-4-小结"><a href="#4-1-4-小结" class="headerlink" title="4.1.4 小结"></a>4.1.4 小结</h5><ul>
+<li>一般说的安装python就是指安装python解释器，因此python解释器必须安装。</li>
+<li>出于编写代码效率的考虑，有必要安装专业的代码编辑工具，最常用的包括Python解释器自带的IDLE、Anaconda中的Jupyter Notebook以及专门针对Python的PyCharm。</li>
+<li>Python 3.4以后版本的解释器自带pip工具，因此不用自行安装。 </li>
+</ul>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/04/26/Basic-knowledge-of-programming-software/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%BC%96%E7%A8%8B%E8%BD%AF%E4%BB%B6%E5%9F%BA%E7%A1%80/" rel="tag">编程软件基础</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/04/29/English-grammar-learning/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            英语语法学习
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/04/26/Foundation-of-DeepLearning/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">深度学习_吴恩达_Part_1</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2022
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
