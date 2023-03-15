@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>编码规范 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-coding-standard"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  编码规范
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/12/13/coding-standard/" class="article-date">
+  <time datetime="2022-12-13T03:53:08.000Z" itemprop="datePublished">2022-12-13</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">编程与深度学习</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">2.7k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">9 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1-Matlab编码规范"><a href="#1-Matlab编码规范" class="headerlink" title="1 Matlab编码规范"></a>1 Matlab编码规范</h3><h4 id="1-1-命名规则"><a href="#1-1-命名规则" class="headerlink" title="1.1 命名规则"></a>1.1 命名规则</h4><h5 id="1-1-1-变量"><a href="#1-1-1-变量" class="headerlink" title="1.1.1 变量"></a>1.1.1 变量</h5><ul>
+<li><p><strong>小驼峰命名法</strong></p>
+<ul>
+<li>第一个单词以小写字母开始，后面单词的首字母大写。例如：<code>firstName</code>、<code>lastName</code>。</li>
+</ul>
+</li>
+<li><p><strong>使用英文</strong></p>
+<ul>
+<li>变量名最重要的原则就是，一看就知道这个变量是什么意思。 </li>
+</ul>
+</li>
+<li><strong>大范围的变量应带有意义的名称，小范围变量可用短变量名(无意义)</strong> <ul>
+<li>例如：<code>stepSize</code>：大范围意义、<code>dt</code>(δt)：小范围。</li>
+</ul>
+</li>
+<li><strong>循环变量</strong><ul>
+<li>应该以<code>i</code>、<code>j</code>、<code>k</code>为前缀。例如：<code>iFiles</code>、<code>jPositions</code>。不使用<code>i</code>、<code>j</code>的原因是：这两个在matlab中是虚数。 </li>
+</ul>
+</li>
+<li><strong>代表单个实体数据的变量可以加以后缀No</strong><ul>
+<li>例如：<code>tableNo</code>、<code>employeeNo</code>。</li>
+</ul>
+</li>
+<li><strong>避免否定式的布尔变量命名</strong> <ul>
+<li>例如：若命名<code>isNotFound</code>，在使用判断的时候，<code>~isNotFound</code>，搞半天才知道啥意思。所以不适用否定式布尔变量命名。</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-1-2-常数"><a href="#1-1-2-常数" class="headerlink" title="1.1.2 常数"></a>1.1.2 常数</h5><ul>
+<li><strong>全大写字母+下划线</strong> <ul>
+<li>例如：<code>MAX_ITERATIONS</code>、<code>COLOR_RED</code>。</li>
+</ul>
+</li>
+<li><strong>参数可以以某些通用类型名作为前缀</strong><ul>
+<li>例如：<code>COLOR_RED</code>，<code>COLOR_GREEN</code>，<code>COLOR_BLUE</code>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-1-3-结构体"><a href="#1-1-3-结构体" class="headerlink" title="1.1.3 结构体"></a>1.1.3 结构体</h5><ul>
+<li><strong>大驼峰命名法</strong><ul>
+<li>这是区别一般变量，例如：<code>ParameterSet</code>。</li>
+</ul>
+</li>
+<li><strong>结构体的命名应该是隐性的，并且不需要包括字段名</strong><ul>
+<li>例如：用<code>Segment.length</code>，避免<code>Segment.segmentLength</code>。</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-1-4-函数"><a href="#1-1-4-函数" class="headerlink" title="1.1.4 函数"></a>1.1.4 函数</h5><ul>
+<li><strong>函数名应该采用全小写字母+下划线</strong></li>
+<li><strong>函数名与它的.m文件名必须相同</strong></li>
+<li><strong>函数名应该有具体的意义</strong><ul>
+<li>避免短的函数名/缩写，这经常使得其名字含糊不清。</li>
+<li>例如：采用：<code>compute_total_width()</code>，避免：<code>compwid()</code></li>
+</ul>
+</li>
+<li><strong>避免无意识地覆盖</strong><ul>
+<li>有时候我们取的名字，可能在MATLAB中含有这个函数名了，可以用<code>exist</code>检查是否含有了。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-2-文件与程序结构"><a href="#1-2-文件与程序结构" class="headerlink" title="1.2 文件与程序结构"></a>1.2 文件与程序结构</h4><h5 id="1-2-1-M文件"><a href="#1-2-1-M文件" class="headerlink" title="1.2.1  .M文件"></a>1.2.1  .M文件</h5><ul>
+<li><p><strong>模块化</strong></p>
+<ul>
+<li>编写一个大程序的最好的方法是将它以好的设计分化为小块（通常采用函数的方式）。</li>
+<li>这种方式通过减少为了理解代码的作用而必须阅读的代码数量使得程序的可读性、易于理解性和可测试性得到了增强。超过编辑器两屏幕的代码都应该考虑进行分割。并且设计规划很好的函数也使得它在其他的应用中可用性增强了。</li>
+</ul>
+</li>
+<li><p><strong>确保交互过程清晰</strong></p>
+<ul>
+<li>函数通过输入输出参数以及全局变量与其他代码交互通信。使用参数几乎总是比使用全局变量清楚明了。采用<font color="blue">结构体</font>可以避免那种一长串儿的输入输出参数的形式。</li>
+</ul>
+</li>
+<li><p><strong>分割与封装</strong></p>
+<ul>
+<li>所有的子函数和所有的函数都应只把一件事情做好。每个函数应该隐藏(hide)一些东西。</li>
+<li>任何在多个.m文件中出现的代码块都应该考虑用函数的形式封装起来。</li>
+</ul>
+</li>
+<li><p><strong>利用现有的函数</strong></p>
+<ul>
+<li>开发一个有正确功能的、可读的、合理灵活性的函数是一项有重大意义的任务。或许寻找一个现成的提供了要求的部分、甚至全部功能的函数应该更快也更具有正确性。</li>
+</ul>
+</li>
+<li><p><strong>子函数</strong></p>
+<ul>
+<li>只被另外一个函数调用的函数应该作为一个子函数写在同一个文件中。这使得代码更加利于理解与维护。</li>
+</ul>
+</li>
+<li><p><strong>测试脚本</strong></p>
+<ul>
+<li>为每一个函数写一个测试脚本。这样可以提高初期版本的质量和改进版本的可靠性。</li>
+</ul>
+</li>
+</ul>
+<h4 id="1-3-注释、文档与排版"><a href="#1-3-注释、文档与排版" class="headerlink" title="1.3 注释、文档与排版"></a>1.3 注释、文档与排版</h4><h5 id="1-3-1-注释"><a href="#1-3-1-注释" class="headerlink" title="1.3.1 注释"></a>1.3.1 注释</h5><p>注释的目的是为代码增加信息。注释的典型应用是解释用法、提供参考信息、证明结果、阐述需要的改进等。经验表明，在写代码的同时就加上注释比后来再补充注释要好。 </p>
+<ul>
+<li><strong>注释文字应该简洁易读</strong><ul>
+<li>一个糟糕的或者是无用的注释反而会影响读者的正常理解。N.Schryer提到：“如果代码与注释不一致，那么或许两者都是错误的。”</li>
+<li>一个通常更重要的是注释应该讲的是“为什么(Why)”和“怎么做(how)“，而不是“是什么(what)”。</li>
+</ul>
+</li>
+<li><strong>函数的注释写法（英文好的话尽量使用英文）</strong> </li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%================================================================</span></span><br><span class="line"><span class="comment">% 功能：       传统LMS滤波算法</span></span><br><span class="line"><span class="comment">% 输入参数：   </span></span><br><span class="line"><span class="comment">%              xn           输入信号</span></span><br><span class="line"><span class="comment">%              mu           步长因子</span></span><br><span class="line"><span class="comment">%              dn           参考信号</span></span><br><span class="line"><span class="comment">%              numIte       迭代次数</span></span><br><span class="line"><span class="comment">%              M            滤波器阶数</span></span><br><span class="line"><span class="comment">% 输出参数：</span></span><br><span class="line"><span class="comment">%              theta        滤波器的系数矩阵</span></span><br><span class="line"><span class="comment">%              en           误差信号</span></span><br><span class="line"><span class="comment">%              yn           滤波器的输出信号</span></span><br><span class="line"><span class="comment">% 备注：		入射角只考虑一个维度的</span></span><br><span class="line"><span class="comment">% 调用方法：	   见XXX文件</span></span><br><span class="line"><span class="comment">% 日期：   	2011/7/12 20:37</span></span><br><span class="line"><span class="comment">%================================================================</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="params">[theta,en,yn]</span> = <span class="title">my_lms</span><span class="params">(un, dn, mu, Num_iteration, M)</span></span></span><br><span class="line">。。。（具体编程开始）</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%================================================================</span></span><br><span class="line"><span class="comment">% 功能：	求圆孔的夫琅禾费衍射光强分布</span></span><br><span class="line"><span class="comment">% 参数：	CircleHoleFD为圆孔结构体，包含圆孔衍射相关信息；</span></span><br><span class="line"><span class="comment">% 		   theta为衍射场的次波方向，可以为向量，求取各方向的光强</span></span><br><span class="line"><span class="comment">% 返回值：	I为衍射光强分布</span></span><br><span class="line"><span class="comment">% 主要思路：使用夫琅禾费单缝衍射公式计算</span></span><br><span class="line"><span class="comment">% 备注：	入射角只考虑一个维度的</span></span><br><span class="line"><span class="comment">% 调用方法：见CalcCircleHoleFD_Test文件</span></span><br><span class="line"><span class="comment">% 日期：   2011/7/12 20:37</span></span><br><span class="line"><span class="comment">%================================================================</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">I</span> = <span class="title">calcCircleholefd</span><span class="params">(circleHoleFD, theta)</span></span></span><br><span class="line">。。。（具体编程开始）</span><br><span class="line"><span class="keyword">end</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>一段代码注释写法</strong><ul>
+<li>用于理解一小段代码含义的注释，统一写在代码上方，如：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">%（1）初始化 </span></span><br><span class="line">Number = <span class="built_in">zeros</span>(<span class="number">1</span>,PNumber);</span><br><span class="line"><span class="keyword">for</span> <span class="built_in">i</span> = <span class="number">1</span>:PNumber </span><br><span class="line">    Number(<span class="built_in">i</span>) = MNumber;</span><br><span class="line"><span class="keyword">end</span>  </span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>一句代码注释写法</strong><ul>
+<li>用于理解一句代码的意思可以写在代码后方，但是注意不能超过180字符。太长可以考虑写在代码上方，如：</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">gen = <span class="number">0</span>;  <span class="comment">%迭代计数器 </span></span><br><span class="line">JmNumber = Max_Cell(Jm);               <span class="comment">% 调用Max_Cell子函数求机器的数量 </span></span><br><span class="line">[PNumber,MNumber] = <span class="built_in">size</span>(Jm);          <span class="comment">% PNumber为工件个数，MNumber为工序个数 </span></span><br><span class="line">trace = <span class="built_in">zeros</span>(<span class="number">2</span>, MAXGEN);               <span class="comment">% 寻优结果的初始值，一行存放各代的最优解，一行存放各代解的均值 </span></span><br><span class="line">TotalOP_Number = PNumber*MNumber;      <span class="comment">% 工序总个数 </span></span><br></pre></td></tr></table></figure>
+<h5 id="1-3-2-文档"><a href="#1-3-2-文档" class="headerlink" title="1.3.2 文档"></a>1.3.2 文档</h5><ul>
+<li><strong>文档规范化</strong><ul>
+<li>作为有用的文档应该包含一个对如下内容的可读性的描述：代码打算干什么（要求），它是如何工作的（设计），它依赖于什其他什么函数以及怎么被其他代码调用（接口），以及它是如何测试的等。对于额外的考虑，文档可以包含解决方案的选择性的讨论以及扩展与维护的建议。</li>
+</ul>
+</li>
+<li><p><strong>首先考虑书写文档</strong></p>
+<ul>
+<li>一些程序员相信的方法是：“代码第一，回答问题是以后的事情。”而通过经验，我们绝大多数人知道先开发设计然后再实现可以导致更加满意的结果。如果将测试与文档留在最后，那么开发项目几乎不能够按期完成的。<font color="red">首先书写文档</font>可以确保其按时完成甚至可能减少开发时间。</li>
+</ul>
+</li>
+<li><p><strong>修改</strong></p>
+<ul>
+<li>一个专业的对代码修改进行管理和写文档的方法是采用源程序控制工具。对于很简单的工程，在函数文件的<font color="red">注释中加入修改历史</font>比什么都不做要好。</li>
+</ul>
+</li>
+</ul>
+<h5 id="1-3-3-排版"><a href="#1-3-3-排版" class="headerlink" title="1.3.3 排版"></a>1.3.3 排版</h5><ul>
+<li><strong>空格的使用</strong><ul>
+<li>在二元运算符两边各空一格[=,-,+=,==,&gt;,in,is not, and]；</li>
+<li>函数的参数列表中，<code>,</code>之后要有空格；</li>
+<li>函数的参数列表中，默认值等号两边不要添加空格；</li>
+<li>左括号之后，右括号之前不要加多余的空格；</li>
+<li>不要为对齐赋值语句而使用的额外空格</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>本文转自：何亮科学网博客。 </p>
+<p>链接地址：<a target="_blank" rel="noopener" href="https://blog.sciencenet.cn/blog-437026-779476.html">https://blog.sciencenet.cn/blog-437026-779476.html</a> </p>
+<p>其他参考链接</p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150926389">https://zhuanlan.zhihu.com/p/150926389</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wuwuku123/article/details/106666382">https://blog.csdn.net/wuwuku123/article/details/106666382</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/magic_yu42/article/details/111467556">https://blog.csdn.net/magic_yu42/article/details/111467556</a></p>
+</blockquote>
+<p>王老师关于绘图、字体设置的一些简单设置：<code>PlotCurvesFontSizeFontName.m</code></p>
+<h3 id="2-Python编码规范"><a href="#2-Python编码规范" class="headerlink" title="2 Python编码规范"></a>2 Python编码规范</h3><h4 id="2-1-编码"><a href="#2-1-编码" class="headerlink" title="2.1 编码"></a>2.1 编码</h4><p>无特殊情况，建议Python脚本程序一律使用 UTF-8 编码，并且在文件头部必须加入<code>#-*-coding:utf-8-*-</code>标识，声明文件编码方式，程序文件编码要和声明编码保持一致。 </p>
+<h4 id="2-2-命名规范"><a href="#2-2-命名规范" class="headerlink" title="2.2 命名规范"></a>2.2 命名规范</h4><p><strong>模块</strong>： 模块尽量使用小写命名，首字母保持小写，尽量不要用下划线(除非多个单词，且数量不多的情况)</p>
+<p><strong>类名</strong>： 类名使用驼峰(CamelCase)命名风格，首字母大写，私有类可用一个下划线开头；将相关的类和顶级函数放在同一个模块里。不像Java，没必要限制一个类一个模块。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Farm</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimalFarm</span>(<span class="params">Farm</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_PrivateFarm</span>(<span class="params">Farm</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p><strong>函数名：</strong></p>
+<p>函数名一律小写，如有多个单词，用<strong>下划线</strong>隔开；</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_with_env</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<p><strong>变量名</strong></p>
+<ul>
+<li>变量名尽量小写，如有多个单词，用下划线隔开；</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    school_name = <span class="string">&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>常量采用全大写，如有多个单词，使用下划线隔开；</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MAX_CLIENT = <span class="number">100</span></span><br><span class="line">MAX_CONNECTION = <span class="number">1000</span></span><br><span class="line">CONNECTION_TIMEOUT = <span class="number">600</span></span><br></pre></td></tr></table></figure>
+<p>【参考资料1】：<a target="_blank" rel="noopener" href="https://blog.csdn.net/meiqi0538/article/details/104993760">https://blog.csdn.net/meiqi0538/article/details/104993760</a></p>
+<p>【参考资料2：】<a target="_blank" rel="noopener" href="https://python.freelycode.com/contribution/detail/47">https://python.freelycode.com/contribution/detail/47</a></p>
+<h4 id="2-3-注释"><a href="#2-3-注释" class="headerlink" title="2.3 注释"></a>2.3 注释</h4><ul>
+<li><strong>行注释：</strong> 以 <code>#</code> 开头，<code>#</code> 右边的所有内容都被当做说明文字，只起到辅助说明作用。 </li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello python&quot;</span>)  <span class="comment"># 输出 `hello python`</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注：为了保证代码的可读性，<code>#</code> 后面建议先添加一个空格，然后再编写相应的说明文字。</p>
+</blockquote>
+<ul>
+<li><strong>多行注释(块注释)</strong> ：<code>#</code>号后空一格，段落件用空行分开（同样需要“#”号）。<ul>
+<li>如果希望编写的 <strong>注释信息很多，一行无法显示</strong>，就可以使用多行注释。</li>
+<li>要在 Python 程序中使用多行注释，可以用 <strong>一对连续的 三个引号</strong>(单引号和双引号都可以)。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">这是一个多行注释；</span></span><br><span class="line"><span class="string">......</span></span><br><span class="line"><span class="string">在多行注释之间，可以写很多很多的内容</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span> </span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello python&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>补充：</strong> 什么时候需要使用注释？</p>
+<p>1、 <strong>注释不是越多越好</strong>，对于一目了然的代码，不需要添加注释；<br>2、 对于<strong>复杂的操作</strong>，应该在操作开始前写上若干行注释；<br>3、 对于<strong>不是一目了然的代码</strong>，应在其行尾添加注释（为了提高可读性，注释应该至少离开代码 2 个空格）。</p>
+<h4 id="2-4-空格使用"><a href="#2-4-空格使用" class="headerlink" title="2.4 空格使用"></a>2.4 空格使用</h4><ul>
+<li><p>在二元运算符两边各空一格[=,-,+=,==,&gt;,in,is not, and]</p>
+</li>
+<li><p>函数的参数列表中，<code>,</code>之后要有空格</p>
+</li>
+<li>函数的参数列表中，默认值等号两边不要添加空格</li>
+<li>左括号之后，右括号之前不要加多余的空格</li>
+<li>字典对象的左括号之前不要多余的空格</li>
+<li>不要为对齐赋值语句而使用的额外空格</li>
+</ul>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/12/13/coding-standard/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Pytorch%E5%9F%BA%E7%A1%80/" rel="tag">Pytorch基础</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag">深度学习</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2023/01/12/Google-Search-Tips/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            信息搜索技巧
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/11/14/thinking-and-record/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">thinking and record</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>

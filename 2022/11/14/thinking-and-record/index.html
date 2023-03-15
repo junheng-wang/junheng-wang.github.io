@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>thinking and record |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-thinking-and-record"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  thinking and record
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2022/11/14/thinking-and-record/" class="article-date">
+  <time datetime="2022-11-14T03:50:02.000Z" itemprop="datePublished">2022-11-14</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">16.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">63 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="1-统计信号估计理论：滤波、预测、平滑-参数估计、状态估计"><a href="#1-统计信号估计理论：滤波、预测、平滑-参数估计、状态估计" class="headerlink" title="1 统计信号估计理论：滤波、预测、平滑 + 参数估计、状态估计"></a>1 统计信号估计理论：滤波、预测、平滑 + 参数估计、状态估计</h3><h4 id="1-1-什么是估计理论（Estimation）"><a href="#1-1-什么是估计理论（Estimation）" class="headerlink" title="1.1 什么是估计理论（Estimation）"></a>1.1 什么是估计理论（Estimation）</h4><p>估计理论是从被噪声污染后的量测数据中恢复无法直接观测的随机变量、随机过程或者系统某些特征的统计信号处理方法。</p>
+<h4 id="1-2-估计的三种基本形式"><a href="#1-2-估计的三种基本形式" class="headerlink" title="1.2 估计的三种基本形式"></a>1.2 估计的三种基本形式</h4><h5 id="1-2-1-解释1"><a href="#1-2-1-解释1" class="headerlink" title="1.2.1 解释1"></a>1.2.1 解释1</h5><p>(1) 滤波——Filtering</p>
+<p>滤波是用当前时刻及以前的数据来估计当前时刻感兴趣信息的一种运算过程。</p>
+<p>(2) 预测——Prediction</p>
+<p>预测是用当前时刻及以前的数据来估计未来某时刻感兴趣的信息。</p>
+<p>(3) 平滑——Smoothing</p>
+<p>平滑是利用感兴趣时刻之后的所有观测数据估计感兴趣时刻的信息，因此它是一种后验形式的估计。</p>
+<h5 id="1-2-2-解释2"><a href="#1-2-2-解释2" class="headerlink" title="1.2.2 解释2"></a>1.2.2 解释2</h5><p>自适应滤波器的三种状态：滤波，预测，平滑</p>
+<p>平滑只是滤波器的一种工作状态，如果感兴趣的信号部分在过去，现在，未来，那么滤波器是在分别做平滑，滤波，预测。根据时间序号$k$和信号样本集$N$，通过统计规则实现的自适应滤波器有三种效果：</p>
+<p>(1) 预测：当$N&lt;k$，这是在预测未来的状态，我们在做预测估计(predicted estimate)，也就是预测；</p>
+<p>(2) 滤波：当$N=k$，这是在用所有过去的观测值和当前的观测值估计当前的状态，这是在做滤波估计(filtered estimate)，也就是滤波；</p>
+<p>(3) 平滑：当$N&gt;k$，这是在估计过去的状态，这是在做平滑估计(smoothed estimate)，也就是平滑。</p>
+<blockquote>
+<p>解释2来自：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/35073143/answer/531133735">在信号处理和图像处理领域，滤波，平滑和去噪几个词的区别和联系？ - 甜草莓的回答 - 知乎</a></p>
+</blockquote>
+<h5 id="1-2-3-解释3"><a href="#1-2-3-解释3" class="headerlink" title="1.2.3 解释3"></a>1.2.3 解释3</h5><p>一个系统不可避免的受到外界的干扰，因而系统的状态一般是不能精确量测的。这样就存在着基于系统量测(输出)对系统状态进行估计(estimation)的问题</p>
+<p>首先需要了解参数估计的一般理论。对于一个未知参数向量，量测是一个随机向量，一组量测构成了样本，对样本的统计量就称为对参数的一个估计量。利用样本对参数的估计量本质上是随机的，而当样本值给定时所得到的参数估计值一般与真值并不相同，因而需要用某些准则进行评价：</p>
+<ul>
+<li><p>如果所得估计量的数学期望等于真值，则称这个估计是对参数的一个无偏估计；</p>
+</li>
+<li><p>如果所得估计量依概率收敛于真值，称其是对参数的一个一致估计量。</p>
+</li>
+</ul>
+<p>最常用的参数估计方法有最小二乘估计算法、极大似然估计算法等。近年来还发展有期望极大化算法等。</p>
+<p>对于控制系统而言，状态估计问题是一个动态估计问题，分为三种不同的类型：</p>
+<p>(1) 滤波问题：利用直到当前时刻的实时信息对当前的状态进行估计；</p>
+<p>(2) 预测问题：利用直到当前时刻的实时信息对未来的状态进行估计；</p>
+<p>(3) 平滑问题：利用直到当前时刻的实时信息对过去的状态进行估计。</p>
+<p>仅仅就滤波问题而言，如果系统是线性的，一般可采用所谓卡尔曼(Kalman)滤波算法进行状态估计。由于相当多的系统不满足线性随机系统的条件，所以标准卡尔曼滤波算法并不适用。为此，针对非线性情况，早年就发展了所谓扩展卡尔曼滤波算法，即利用在线的线性化方法，把非线性系统在一个名义值附近进行线性近似，然后利用标准卡尔曼滤波算法进行一步滤波处理，然后递推实现在线滤波。</p>
+<blockquote>
+<p>解释3来自：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/24877642/answer/263267371">滤波、预测和平滑之间的关系是什么？ - 繁星丶落幕的回答 - 知乎</a></p>
+</blockquote>
+<h5 id="1-2-4-解释4"><a href="#1-2-4-解释4" class="headerlink" title="1.2.4 解释4"></a>1.2.4 解释4</h5><p>这里讨论的是对信号波形进行估计的问题，或者是对函数的估计问题。一般是用某一个时间点$t$以前测量得到的信息，对某一时刻$t +\Delta t$上面的信号值进行估计。随着估计时间的不断推移，就可以得到全部信号。</p>
+<p>(1) 平滑或内插：如果时间差$\Delta t &lt; 0$，这时的估计工作称为平滑或内插。其作用是一致已经得到观测点上的信号值，是对过去观测值的处理。</p>
+<p>(2) 滤波：如果时间差$\Delta t = 0$，这时的估计工作称为滤波。它是对目前时间点上的信号值进行估计，一般用于抑制当前时间点上的观测噪声。</p>
+<p>(3) 预测：如果时间差$\Delta t &gt; 0$，这时的估计工作是对将来时间点上的信号值进行估计，是一种预测。<br>在实际应用中，滤波应用得比较多。</p>
+<blockquote>
+<p>解释4来自：<a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/0288465b01768e9951e79b89680203d8ce2f6afc.html?_wkts_=1668424284360&amp;bdQuery=%E6%BB%A4%E6%B3%A2%E3%80%81%E9%A2%84%E6%B5%8B%E5%92%8C%E5%B9%B3%E6%BB%91">第五章 统计滤波 - 百度文库</a></p>
+</blockquote>
+<h4 id="1-3-滤波、预测和平滑的区别"><a href="#1-3-滤波、预测和平滑的区别" class="headerlink" title="1.3 滤波、预测和平滑的区别"></a>1.3 滤波、预测和平滑的区别</h4><p>滤波和预测是能够根据当前获得的数据实现对所期望时刻的数据估计，因此它们是一类实时(Online)运算。而平滑因需要所有观测数据进行处理，所以它是一类离线(Offline)运算或者批处理运算。</p>
+<h4 id="1-4-估计的两种形式"><a href="#1-4-估计的两种形式" class="headerlink" title="1.4 估计的两种形式"></a>1.4 估计的两种形式</h4><p>(1) 参数估计：根据量测数据来估计系统中随时间不变或缓慢变化的参数，其中被估计的参数包括随机变量和非随机变量。</p>
+<p>(2) 状态估计：基于状态空间模型，根据量测数据来估计系统中随时间连续变化的状态，其中包括离散时间状态和连续时间状态。</p>
+<h4 id="1-5-参数估计和状态估计区别"><a href="#1-5-参数估计和状态估计区别" class="headerlink" title="1.5 参数估计和状态估计区别"></a>1.5 参数估计和状态估计区别</h4><p>参数估计本质上属于概率论和数理统计理论的一个分支。而状态估计是控制理论、计算机技术及概率论与数理统计理论相结合的产物，是现代控制理论的一个重要分支。</p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="http://www.suanfajun.com/%e7%bb%9f%e8%ae%a1%e4%bf%a1%e5%8f%b7%e4%bc%b0%e8%ae%a1%e7%90%86%e8%ae%ba%e6%bb%a4%e6%b3%a2%e9%a2%84%e6%b5%8b%e5%b9%b3%e6%bb%91%e5%8f%82%e6%95%b0%e4%bc%b0%e8%ae%a1%e7%8a%b6%e6%80%81%e4%bc%b0%e8%ae%a1.html">统计信号估计理论：滤波、预测、平滑 + 参数估计、状态估计</a></p>
+</blockquote>
+<h3 id="2-维纳滤波"><a href="#2-维纳滤波" class="headerlink" title="2 维纳滤波"></a>2 维纳滤波</h3><h4 id="2-1-维纳滤波基本原理和概述"><a href="#2-1-维纳滤波基本原理和概述" class="headerlink" title="2.1 维纳滤波基本原理和概述"></a>2.1 维纳滤波基本原理和概述</h4><p>维纳(Wiener)是用来解决从噪声中提取信号的一种过滤(或滤波)方法。这种线性滤波问题，可以看做是一种估计问题或一种线性估计问题。</p>
+<p>一个线性系统，如果它的单位样本响应为$h(n)$，当输入一个随机信号$x(n)$，且：</p>
+<script type="math/tex; mode=display">
+x(n) = s(n) + v(n) \tag{2.1.1}</script><p>其中，$x(n)$表示信号，$v(n)$表示噪声，则输出$y(n)$为：</p>
+<script type="math/tex; mode=display">
+y(n) = \sum_m h(m)x(n-m) \tag{2.1.2}</script><p>我们希望$x(n)$通过线性系统$h(n)$后得到的$y(n)$尽量接近于$s(n)$，因此称$y(n)$为$s(n)$的<br>估计值，用$\hat s(n)$表示，即：</p>
+<script type="math/tex; mode=display">
+y(n) = \hat s(n) \tag{2.1.3}</script><p>则维纳滤波器的输入—输出关系可用下面图表示。</p>
+<p><img src="https://pic.imgdb.cn/item/637238eb16f2c2beb1dad908.jpg" style="zoom:80%"></p>
+<p>实际上，式$(2.1.2)$所示的卷积可理解为从当前和过去的观察值$x(n), x(n-1), \cdots, x(n-m), \cdots$ 来估计信号的当前值$s(n)$。因此，用$h(n)$进行过滤问题实际上是一种统计估计问题。</p>
+<p>一般地滤波、预测、平滑可以从如下划分：</p>
+<ul>
+<li>从当前的和过去的观察值$x(n), x(n-1), x(n-2), \cdots$估计当前的信号值$y(n)=\hat s(n)$称为过滤或滤波；</li>
+<li>从过去的观察值，估计当前的或者将来的信号值$y(n)=\hat s(n +N), (N≥0)$称为外推或预测；</li>
+<li>从过去的观察值，估计过去的信号值$y(n)=\hat s(n-N), (N&gt;1)$称为平滑或内插。</li>
+</ul>
+<p>因此维纳滤波器又常常被称为最佳线性过滤与预测或线性最优估计。这里所谓的最佳与最优是以最小均方误差为准则的。</p>
+<p>如果分别以$s(n)$与$\hat s(n)$表示信号的真实值与估计值，而用$e(n)$表示它们之间的误差，即：</p>
+<script type="math/tex; mode=display">
+e(n)= s(n)-s(n) \tag{2.1.4}</script><p>显然$e(n)$可能是正值，也可能是负值，并且它是一个随机变量。因此，用它的均方误差来表达误差是合理的，所谓均方误差最小即它的平方的统计期望最小：</p>
+<script type="math/tex; mode=display">
+\xi (n) = \min E[e^2(n)] \tag{2.1.5}</script><p>用最小均方误差准则作为最佳过滤准则的原因还在于其理论分析比较简单，不要求对概率的描述。</p>
+<p><strong><font color="red">维纳-霍夫方程的求解</font></strong></p>
+<p>为了按$(2.1.5)$式所示的最小均方误差准则来确定维纳滤波器的冲激响应$h(n)$，令$\xi(n)$对$h(j)$的导数等于零，即可得：</p>
+<script type="math/tex; mode=display">
+R_{xs}(m) = \sum_i h(i)R_{xx}(m-i) \tag{2.1.6}</script><p>式中，$R<em>{xs}(m)$是$s(n)$与$x(n)$的互相关函数，$R</em>{xx}(m)$是$x(n)$的自相关函数，分别定义为：</p>
+<script type="math/tex; mode=display">
+R_{xx} = E[x(n)s(n+m)] \qquad R_{xx} = E[x(n)x(n+m)]</script><p>式$(2.1.6)$称为维纳滤波器的标准方程或维纳-霍夫(Wiener-Hopf)方程。若已知$R<em>{xs}(m)$和$R</em>{xx}(m)$，那么解此方程即可求的维纳滤波器的冲激响应。</p>
+<p>式$(2.1.6)$所示标准方程右端的求和范围即$i$的取值范围没有具体标明，实际上有三种情况：</p>
+<ul>
+<li>有限冲激响应(FIR)维纳滤波器，$i$从$0$到$N-1$取得有限个整数值；</li>
+<li>非因果无限冲激响应(非因果IIR)维纳滤波器，$i$从$-\infty$到$+\infty$所有整数值;</li>
+<li>因果无限冲激响应(因果IIR)维纳滤波器，$i$从$0$到$+\infty$取正整数值。</li>
+</ul>
+<p>上述三种情况下标准方程的解法不同，本文只描述FIR维纳滤波器的求解。设滤波器冲激响应序列的长度为$N$，冲激响应矢量为：</p>
+<script type="math/tex; mode=display">
+h = [h(0), h(1), \cdots,h(N-1) ]^{\mathrm T} \tag{2.1.7}</script><p>滤波器的输入数据矢量：</p>
+<script type="math/tex; mode=display">
+x = [x(n), x(n-1), \cdots, x(n-N+1)]^{\mathrm T} \tag{2.1.8}</script><p>则滤波器的输出为：</p>
+<script type="math/tex; mode=display">
+y(n) = \hat s(n) = x^{\mathrm T}h = h^{\mathrm T}x \tag{2.1.9}</script><p>这样，式$(2.1.6)$所示的维纳-霍夫方程可写成：</p>
+<script type="math/tex; mode=display">
+P^{\mathrm T} = h^{\mathrm T}R \quad {\mathrm{OR}} \quad P =  R^{\mathrm T}h \tag{2.1.10}</script><p>其中，$P = E[x(n)s(n)]$是$s(n)$与$x(n)$的互相关函数，它是一个$N$维列矢量；$R$是$x(n)$的自相关函数，是$N$阶方阵，$R = E[x(n)x^{\mathrm T}(x)]$</p>
+<p>利用求逆矩阵的方法直接求解式$(2.1.10)$，得：</p>
+<script type="math/tex; mode=display">
+h_{\mathrm{opt}} = R^{-1}P</script><p>这里opt表示“最佳”，这就是FIR维纳滤波器的冲激响应。</p>
+<blockquote>
+<p>以上内容主要转自：<a target="_blank" rel="noopener" href="https://www.renrendoc.com/paper/179876044.html">维纳滤波器</a></p>
+</blockquote>
+<h3 id="3-卡尔曼滤波"><a href="#3-卡尔曼滤波" class="headerlink" title="3 卡尔曼滤波"></a>3 卡尔曼滤波</h3><p> <a target="_blank" rel="noopener" href="https://www.cnblogs.com/laozhu1234/p/14932627.html">关于卡尔曼滤波中协方差矩阵Q,R的一些思考,卡尔曼原理讲解</a>：这个人写的感觉挺不错，但没有细看。</p>
+<p>卡尔曼滤波算法从名称上来看落脚点是一个滤波算法，一般的滤波算法都是频域滤波，而卡尔曼滤波算法是一个时域滤波，时域就是它的强大之处。卡尔曼滤波也是一种最优估计算法，常见的最优估计算法有“最小二乘法”等，卡尔曼滤波也是一个迭代器，根据以知的先验值，预测下一时刻的估计值。<br>再说说滤波这个名词，本质上就是给加权。既然是加权，那么卡尔曼滤波算法本质就是数据融合的操作(Data fusion)，卡尔曼增益就是融合过程中的权重，融合的内容有两个：分别是满足一定分布的先验状态估计值和满足一定分布的观测值之间的融合（也就是你们可能在其他资料上看到的两个椭圆相乘，其实就是数据的融合），融合后得到后验状态估计值。</p>
+<p>其实深度学习中的卷积操作也是加权求和，本质上也是滤波，本质上也是求导，比如边缘检测的离散微分算子sobel的计算过程，也是分别在x和y两个方向上求导，提取出边缘特征。（下面是我个人的思考）由点及面，我们就可以想像到一个大尺寸的卷积核，其实就相当于“变形求导”，通过卷积核内部权重数值大小给定求导曲线，卷积就是求解在这条曲线上的导数。 一个卷积核是提取特征，那么多个卷积核组合起来就有无限可能，提取到的就是高维特征（高维特征对应图片的纹理等深层次的语义信息），组合起来非常之强大，就能够实现深度学习中的分类、边框回归等功能。</p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39523365/article/details/109094713">深入理解卡尔曼滤波算法</a></p>
+</blockquote>
+<p>维纳滤波与卡尔曼滤波比较：</p>
+<p>解释1：</p>
+<p>维纳滤波和卡尔曼滤波都是解决线性滤波和预测问题的方法，并且都是以均方误差最小为准则的，在平稳条件下两者的稳态结果是一致的。但是它们解决问题的方法有很大区别。维纳滤波是根据全部过去观测值和当前观测值来估计信号的当前值，因此它的解形式是系统的传递函数$S(k) = A(k)S(k-1)+w_1(k-1)$</p>
+<p>卡尔曼滤波是用当前一个估计值和最近一个观测值来估计信号的当前值,它的解形式是状态变量值。维纳滤波只适用于平稳随机过程,卡尔曼滤波就没有这个限制。设计维纳滤波器要求已知信号与噪声的相关函数,设计卡尔曼滤波要求已知状态方程和量测方程,当然两者之间也有联系。 </p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://easylearn.baidu.com/edu-page/tiangong/questiondetail?id=1721316694860560840&amp;fr=search">比较维纳滤波和卡尔曼滤波方法的区别和联系</a></p>
+</blockquote>
+<p>解释2：</p>
+<ul>
+<li><p>共同点：都解决最佳线性滤波和预测问题，都以均方误差最小为最优准则，平稳条件下它们得到的稳态结果一致。</p>
+</li>
+<li><p>不同点:</p>
+<ul>
+<li><p>维纳滤波根据$x(n),x(n-1),…,x(1)$估计信号的当前值，它的解以系统的系统函数$H(z)$或单位脉冲响应$h(n)$形式给出。这种系统常称为最佳线性滤波器。</p>
+<p>卡尔曼滤波用前一个估计值和最近一个观察数据来估计信号当前值，它用状态方程和递推的方法进行估计，它的解以估计值（常是状态变量值）形式给出。系统常称为线性最优估计器。</p>
+</li>
+<li><p>维纳滤波只适用于平稳随机过程；卡尔曼滤波适用于平稳和非平稳随机过程。</p>
+</li>
+<li><p>维纳滤波设计时要已知信号与噪声的统计分布规律。卡尔曼滤波设计时要求已知状态方程和量测方程。</p>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://www.docin.com/p-1404646080.html">维纳滤波和卡尔曼滤波 - 豆丁网 (docin.com)</a> </p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="http://t.zoukankan.com/dushikang-p-8310821.html">卡尔曼滤波的原理与思想 - 走看看</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/xiaoma_bk/article/details/82491083">卡尔曼滤波 kalman  理解</a></p>
+<p><a target="_blank" rel="noopener" href="https://bbs.21ic.com/icview-292853-1-1.html">授之以渔： 卡尔曼滤波器 ….大泻蜜</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/miraito_wa/article/details/125968274">卡尔曼滤波算法总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shanzsz/article/details/87282192">其他-卡尔曼滤波</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_64007201/article/details/127410885">卡尔曼滤波介绍</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/Mr_sticker/article/details/106918752">卡尔曼滤波的个人理解</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv17659049">世界上应用最广泛的算法之一的卡尔曼滤波算法原理-从放弃到精通-无人机/机器人应用 - 哔哩哔哩 (bilibili.com)</a> ：卡尔曼滤波器的通俗举例 - 好了，现在对于某一分钟我们有两个有关于该房间的温度值。</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43096365/article/details/122447840">卡尔曼滤波算法 - 生命不止，学习不息的博客-CSDN博客</a> </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/sillykog/article/details/78535767">卡尔曼滤波和维纳滤波 - sillykog的博客-CSDN博客_卡尔曼滤波和维纳滤波的区别</a> </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42570192/article/details/122265199">维纳滤波和卡尔曼滤波 - 西岸贤的博客-CSDN博客_维纳滤波和卡尔曼滤波</a> </p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/victor_zy/article/details/82862904?utm_medium=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-BlogCommendFromBaidu-1.control">卡尔曼滤波算法详细推导 - victorzy的博客-CSDN博客_卡尔曼滤波推导</a> </p>
+<h3 id="4-协方差"><a href="#4-协方差" class="headerlink" title="4 协方差"></a>4 协方差</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46021869/article/details/117334362">初学）从协方差到协方差矩阵，再到特征向量和特征值</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/17/0810/21/37752273_678258912.shtml">协方差矩阵的特征向量指的是什么</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.lianxh.cn/news/9a0b602dbe8fb.html">主成分分析-交互固定效应基础：协方差矩阵的几何意义</a>：好像写的很好！！！</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_38148024/article/details/97269169">协方差的几何意义</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/goodshot/article/details/50961720">协方差的意义和计算公式</a></p>
+<h3 id="5-距离分辨率与带宽"><a href="#5-距离分辨率与带宽" class="headerlink" title="5 距离分辨率与带宽"></a>5 距离分辨率与带宽</h3><h4 id="5-1-距离分辨力"><a href="#5-1-距离分辨力" class="headerlink" title="5.1 距离分辨力"></a>5.1 距离分辨力</h4><p>距离分辨力本质上是和脉冲宽度有关，脉宽越窄，距离分辨力越高，但是由于在发射机峰值功率一定的情况下，脉宽越窄，对应的平均功率越小，这会导致雷达最大可测距离减小，这就是俗称的距离分辨力与最大可测距离之间的矛盾。</p>
+<p>为了解决这个矛盾，雷达接收机中频信号处理引入匹配滤波技术(时宽近似为带宽分之一)，可以解决这个矛盾。chirp信号发射的一般是大时宽带宽积的信号，大时宽保证最大可测距离，大带宽(MF之后对应小时宽)保证高的距离分辨力。</p>
+<ul>
+<li>距离分辨率本质上到底是看脉宽还是看带宽？ <ul>
+<li>早期的确是时宽，因为考虑到最大可测距离与距离分辨力的矛盾，引入脉压技术，所以现代雷达说的都是带宽。  本质是时(脉)宽，但一般现代雷达中脉宽和带宽存在一个倒数关系，所以经常用那个带宽的公式。</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-2-速度分辨力"><a href="#5-2-速度分辨力" class="headerlink" title="5.2 速度分辨力"></a>5.2 速度分辨力</h4><p>至于速度分辨力(多普勒分辨力)和雷达对目标回波做的相参积累时间T有关，近似等于$\dfrac{1}{T}$。</p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/318858527/answer/643253088">线性调频脉冲信号的距离分辨率和速度分辨率与什么因素有关？ - fever wong的回答 - 知乎</a></p>
+</blockquote>
+<h3 id="6-随机信号处理笔记之白噪声"><a href="#6-随机信号处理笔记之白噪声" class="headerlink" title="6 随机信号处理笔记之白噪声"></a>6 随机信号处理笔记之白噪声</h3><h4 id="6-1-白噪声的概念"><a href="#6-1-白噪声的概念" class="headerlink" title="6.1 白噪声的概念"></a>6.1 白噪声的概念</h4><p>“白噪声”，Additive White Gaussian Noise(AWGN)。“白”的概念来自于光学，和白光的“白”是同一个意思，指的是包含所有频率分量的噪声，且这所有的频率分量是等值的。</p>
+<p>白噪声，就是说功率谱为一常数；即其协方差函数在时延$\tau = 0$时不为0，在$\tau \neq 0$时值为0； 换句话说，样本点互不相关。 所以“白”与“不白”是和分布没有关系的。 当随机地从高斯分布中获取采样值时，采样点所组成的随机过程就是<strong>“高斯白噪声”</strong>； 同理，随机从均匀分布中获取采样值时，采样点所组成的随机过程就是<strong>“均匀白噪声”</strong>。 </p>
+<h4 id="6-2-白噪声的统计学定义"><a href="#6-2-白噪声的统计学定义" class="headerlink" title="6.2 白噪声的统计学定义"></a>6.2 白噪声的统计学定义</h4><p>如果白噪声的功率谱密度在所有频率上都是一个常数(功率谱密度只与白噪声与否有关，即与自相关函数有关，与高斯与否无关。 )：</p>
+<script type="math/tex; mode=display">
+P(\omega) = \frac{N_0}{2}</script><p>其中，$N_0&gt;0, \omega \in (-\infty, \infty)$，则称该噪声为白噪声。 白噪声的单边功率谱密度： </p>
+<script type="math/tex; mode=display">
+P_{单}(\omega) = N_0</script><p>其中，$N_0&gt;0, \omega \in (0, \infty)$。</p>
+<h4 id="6-3-白噪声的自相关函数"><a href="#6-3-白噪声的自相关函数" class="headerlink" title="6.3 白噪声的自相关函数"></a>6.3 白噪声的自相关函数</h4><p>根据维纳-辛钦定理，平稳随机过程的功率谱密度函数和自相关函数是傅里叶变换对。</p>
+<p>白噪声的自相关函数：</p>
+<script type="math/tex; mode=display">
+R(\tau) = \frac{N_0}{2}\delta(\tau)</script><p>对于所有的$\tau \neq 0$，都有$R(\tau) = 0$，说明白噪声仅在$\tau=0$时刻才是相关的，而在其他时刻（$\tau \neq 0$)的随机变量都是不相关的。</p>
+<p>白噪声的平均功率： </p>
+<script type="math/tex; mode=display">
+R(0) = \frac{N_0}{2}\delta(0) = \infty</script><p>因此真正“白”的噪声是不存在的。实际工程应用中，只要噪声的功率谱密度均匀分布的频率范围远大于通信系统的工作频带($3 \text{ dB}$带宽)，就可将其视作白噪声。 </p>
+<blockquote>
+<p>以上内容主要转自：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43045275/article/details/106472372">随机信号处理笔记之白噪声</a></p>
+</blockquote>
+<h3 id="7-窄带噪声、高斯噪声、白噪声"><a href="#7-窄带噪声、高斯噪声、白噪声" class="headerlink" title="7 窄带噪声、高斯噪声、白噪声"></a>7 窄带噪声、高斯噪声、白噪声</h3><h4 id="7-1-概念解析"><a href="#7-1-概念解析" class="headerlink" title="7.1 概念解析"></a>7.1 概念解析</h4><ul>
+<li>高斯噪声是指它的概率密度函数服从高斯分布(即正态分布)的一类噪声；</li>
+<li>窄带噪声是指频带范围较窄的一类噪声，系统的频带宽度远远小于其中心频率的系统；</li>
+<li>白噪声是指它的功率谱密度函数在整个频域内是常数。</li>
+</ul>
+<p>可以看出他们描述的属于不同的领域，<strong>高斯噪声是从概率方面描述</strong>，<strong>窄带是从带宽方面描述</strong>，<strong>白噪声是从功率方面描述</strong>。</p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/131593352">窄带噪声、高斯噪声、白噪声 - 嵌入式随笔的文章 - 知乎</a></p>
+</blockquote>
+<h4 id="7-2-高斯白噪声"><a href="#7-2-高斯白噪声" class="headerlink" title="7.2 高斯白噪声"></a>7.2 高斯白噪声</h4><p>高斯型白噪声也称高斯白噪声，是指噪声的概率密度函数满足正态分布统计特性，同时它的功率谱密度函数是常数的一类噪声。高斯型白噪声同时涉及到噪声的两个不同方面，即概率密度函数的正态分布性和功率谱密度函数均匀性，二者缺一不可。 </p>
+<p>假设高斯白噪声服从$(0, \sigma^2)$正态分布，则其自相关函数为：</p>
+<script type="math/tex; mode=display">
+R(\tau) = \sigma^2 \delta(\tau)</script><p>高斯白噪声的功率谱密度$P(\omega)$是其自相关函数$\R(\tau)$的傅里叶变换，有：</p>
+<script type="math/tex; mode=display">
+P(\omega) = \frac{N_0}{2} = \sigma^2</script><p>也就是在通信信道中，一般噪声的均值$\mu = 0$，那么当噪声的均值是零的时候，噪声的平均功率等于其方差。 </p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/35577235/answer/1368652133">高斯白噪声的自相关函数是什么？ - 高宏的回答 - 知乎</a></p>
+</blockquote>
+<ul>
+<li><strong>高斯色噪声</strong></li>
+</ul>
+<p>那么，是否有“非白的高斯”噪声呢？答案是肯定的，这就是”高斯色噪声“。</p>
+<p>这种噪声其分布是高斯的，但是它的频谱不是一个常数，或者说，对高斯信号采样的时候不是随机采样的，而是按照某种规律来采样的。</p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/angel/articles/459650.html">噪声的讨论 - 博客园</a></p>
+</blockquote>
+<h4 id="7-3-几个问题的辨析解释"><a href="#7-3-几个问题的辨析解释" class="headerlink" title="7.3 几个问题的辨析解释"></a>7.3 几个问题的辨析解释</h4><h5 id="7-3-1-白噪声的方差等于什么"><a href="#7-3-1-白噪声的方差等于什么" class="headerlink" title="7.3.1 白噪声的方差等于什么"></a>7.3.1 白噪声的方差等于什么</h5><p>当均值为零时，高斯白噪声的功率谱密度等于方差，此时的功率谱密度为双边功率谱密度，数字信号处理上面有关于这些的推导，$\dfrac{n_0}{2}$是双边功率谱密度，$n_0$为单边功率谱密度，一般都是考虑双边的。</p>
+<p>通常文献所说的噪声的方差，是指加性高斯白噪声(AWGN)的经过采样后的采样值的方差，具体说，就是数字通信原理里说的在<strong>相关接收/或匹配滤波</strong>后的输出，此时的方差是$\dfrac{N_0}{2}$（见Proakis的digital communcations的第五章第一、二节）。</p>
+<p>若说某个白高斯过程的方差是$\dfrac{N_0}{2}$，这个提法本身就是不严格的，因为对于均值为0的高斯白噪声，方差就是总功率，因为：</p>
+<script type="math/tex; mode=display">
+总功率=直流功率+交流功率=0+交流功率=0+方差</script><p>因为均值为0，所以直流功率为0，方差就是交流功率，亦即总功率。</p>
+<p>根据白噪声的定义，其功率谱在整个频段上都是一个常数，此时总功率是对功率谱在整个频段上的积分，这个总功率自然就是无穷大的了。 实际上，即使输入的噪声真的是AWGN，经过相关接收/或匹配滤波后，噪声项就不再是白的了，因为相关接收/匹配滤波器本身就可以被看作是一个滤波器(积分器的系统函数为1,即是个低通)，<strong>wgn经过滤波器后，功率自然就不再是无穷大了</strong>，虽然它的相关接收/匹配滤波器输出采样值分布仍然是高斯的。</p>
+<p><strong>如果有作者说“高斯白噪声服从的是均值为0，方差为$\dfrac{N_0}{2}$的高斯分布”，那一定是指白噪声经过相关接收/或匹配滤波后并采样获得的离散随机过程是均值为0，方差为$\dfrac{N_0}{2}$的高斯分。</strong> </p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/369362806302624204.html">白噪声的方差等于什么_百度知道 (baidu.com)</a></p>
+</blockquote>
+<h5 id="7-3-2-为什么高斯白噪声的平均功率等于方差"><a href="#7-3-2-为什么高斯白噪声的平均功率等于方差" class="headerlink" title="7.3.2 为什么高斯白噪声的平均功率等于方差"></a>7.3.2 为什么高斯白噪声的平均功率等于方差</h5><p>高斯白噪声$\xi(t)$是一种平稳的随机过程，假设该过程为<em>ξ</em>(<em>t</em>)，那么其自相关函数的定义如下： </p>
+<script type="math/tex; mode=display">
+R(t) =E(\xi(t) \xi(t+\tau))</script><p>随机过程的自相关函数非常重要，它有两条非常重要的性质： </p>
+<ul>
+<li>$R(0) = E(\xi^2(t)]$，表示平均功率</li>
+<li>$R(\infty) = E^2(\xi(t))$，表示直流功率</li>
+</ul>
+<p>为什么$R(0)$表示平均功率，$R(\infty)$表示直流功率呢？</p>
+<p>其实$R(0)$表示平均功率相对好理解一些，输入的信号是$ξ(t)$，信号的平方就是功率，对功率取个$E(\cdot)$，就是取平均，那就是平均功率了。</p>
+<p>当$τ$为无穷大时，$ξ(t)$和$ξ(t+\tau)$相当于独立同分布的两个随机变量了，因此：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+R(\infty) &=E[\xi(t) \xi(t+\tau)] \\
+&=E[\xi(t)] \cdot E[\xi(t+\tau)] \\
+&=E[\xi(t)] \cdot E[\xi(t)] \\
+&=E^2[\xi(t)]
+\end{aligned}</script><p>这个就是信号先求平均(即直流分量)，再平方结果自然就是直流的功率了。 </p>
+<p><strong>自相关函数$R(\tau)$也叫二阶原点矩，而自协方差函数$C(\tau)$是二阶中心矩</strong>，它的定义为： </p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+C(\tau) &=E[[\xi(t)-m(t)][\xi(t+\tau)-m(t+\tau)]] \\
+&=E[\xi(t) \xi(t+\tau)]-m(t)) \cdot m(t+\tau)
+\end{aligned}</script><p>其中，$m(t)$表示$t$时刻的平均值。当$\tau = 0$时，$C(0) = E[\xi^2 (t)]−m^2 (t) = R(0) − m^2 (t)$，即平均功率减去均值平方，表示方差。所以，对于高斯白噪声来说，它的均值为0，即$m(t)$为0，因此平均功率等于方差。</p>
+<blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/345016734">为什么高斯白噪声的平均功率等于方差？ - 张大侠的文章 - 知乎</a></p>
+</blockquote>
+<h5 id="7-3-3-待定。。。之后根据下面的链接进行补充"><a href="#7-3-3-待定。。。之后根据下面的链接进行补充" class="headerlink" title="7.3.3 待定。。。之后根据下面的链接进行补充"></a>7.3.3 待定。。。之后根据下面的链接进行补充</h5><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/52360072">为何连续高斯白噪声的方差定义是无穷大？ - 知乎</a>；<a target="_blank" rel="noopener" href="https://blog.csdn.net/bananashoes/article/details/83029099">高斯白噪声解惑_hupipi96的博客-CSDN博客</a> ；<a target="_blank" rel="noopener" href="https://blog.csdn.net/gllnupt/article/details/41149671?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-41149671-blog-83029099.pc_relevant_3mothn_strategy_recovery&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-4-41149671-blog-83029099.pc_relevant_3mothn_strategy_recovery&amp;utm_relevant_index=5">学了3,4年，终于明白了高斯白噪声的那些东西。_gllnupt的博客-CSDN博客</a> ；<a target="_blank" rel="noopener" href="https://blog.csdn.net/lsg32/article/details/8646407?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-8646407-blog-83029099.pc_relevant_3mothn_strategy_recovery&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-8646407-blog-83029099.pc_relevant_3mothn_strategy_recovery&amp;utm_relevant_index=1">高斯噪声和高斯白噪声相关介绍_咆哮的狼的博客-CSDN博客</a> ；<a target="_blank" rel="noopener" href="https://blog.csdn.net/hltt3838/article/details/125206849">高斯白噪声（white Gaussian noise，WGN）_他人是一面镜子，保持谦虚的态度的博客-CSDN博客</a> ；<a target="_blank" rel="noopener" href="https://blog.csdn.net/From0_to1_/article/details/120947023">高斯白噪声与信噪比 - CSDN</a>；<a target="_blank" rel="noopener" href="http://www.360doc.com/content/20/0119/23/13328254_887072728.shtml">噪声相关笔记 - 360个人图书馆</a>；<a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~wyzhou/chapter2%20basic.pdf">通信基本概念与基础知识</a>；<a target="_blank" rel="noopener" href="https://www.sohu.com/a/155330773_464087">白噪声高斯噪声高斯白噪声的区别 - 搜狐</a>；<a target="_blank" rel="noopener" href="https://blog.csdn.net/u011650143/article/details/69047456">高斯白噪声 - CSDN</a>；<a target="_blank" rel="noopener" href="https://xk.qust.edu.cn/__local/5/48/53/C8018705C781490F59C28EDBA88_6B7849BC_7F781.pdf?e=.pdf">3.4 信道的加性噪声 一、噪声的分类 </a></p>
+<h3 id="8-自相关矩阵与协方差矩阵"><a href="#8-自相关矩阵与协方差矩阵" class="headerlink" title="8 自相关矩阵与协方差矩阵"></a>8 自相关矩阵与协方差矩阵</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_39910711/article/details/112726698?ops_request_misc=&amp;request_id=&amp;biz_id=102&amp;utm_term=%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduweb~default-2-112726698.nonecase&amp;spm=1018.2226.3001.4187">自相关函数与互相关函数 - CSDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/shulianghan/article/details/123248041?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166878585816782414963883%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=166878585816782414963883&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_click~default-4-123248041-null-null.142^v65^pc_rank_34_queryrelevant25,201^v3^control_2,213^v2^t3_esquery_v2&amp;utm_term=%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0&amp;spm=1018.2226.3001.4187">【数字信号处理】相关函数应用 ( 高斯白噪声 的 自相关函数 分析 )</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/feng__shuai/article/details/53609543?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522166878585816782414963883%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=166878585816782414963883&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~top_positive~default-1-53609543-null-null.142^v65^pc_rank_34_queryrelevant25,201^v3^control_2,213^v2^t3_esquery_v2&amp;utm_term=%E8%87%AA%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0&amp;spm=1018.2226.3001.4187">自相关函数的理解 - CSDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41691212/article/details/121870083">【什么是自相关矩阵，自协方差矩阵，互相关矩阵，互协方差矩阵？】 - CSDN</a></p>
+<h3 id="9-卷积和相关"><a href="#9-卷积和相关" class="headerlink" title="9 卷积和相关"></a>9 卷积和相关</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22298352">如何通俗易懂地解释卷积？ - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.eet-china.com/mp/a80624.html">信号处理绕不过去的坎：相关与卷积 - 面包板</a></p>
+<h3 id="10-条件期望"><a href="#10-条件期望" class="headerlink" title="10 条件期望"></a>10 条件期望</h3><h4 id="10-1-条件期望的定义-摘自Wiki"><a href="#10-1-条件期望的定义-摘自Wiki" class="headerlink" title="10.1 条件期望的定义(摘自Wiki)"></a>10.1 条件期望的定义(摘自Wiki)</h4><p>(1) 设$X$和$Y$都是离散型随机变量，则$X$在给定事件$Y=y_k$条件时的条件期望： </p>
+<script type="math/tex; mode=display">
+E(X \mid Y=y) = \sum_i x_i P(X=x_i \mid Y=y_k)</script><p>(2) 设$X$是连续型随机变量，$Y$是离散型随机变量，$X$在给定事件$Y=y_k$条件时的条件期望： </p>
+<script type="math/tex; mode=display">
+E(X \mid Y=y) = \int_{-\infty}^{\infty} x f_{X \mid Y}(x \mid Y=y_k) \text{ d}x</script><p> (3) 设$X$和$Y$都是连续型随机变量，联合概率密度为$f_{X,Y}(x,y)$，$Y$的密度函数为$f_Y(y)$，则$X$的条件概率密度函数：</p>
+<script type="math/tex; mode=display">
+f_{X \mid Y}(x \mid y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}</script><p>在给定事件$Y=y$条件时的条件期望：</p>
+<script type="math/tex; mode=display">
+E(X \mid Y=y) = \int_{-\infty}^{\infty} x f_{X \mid Y}(x \mid y) \text{ d}x = \frac{1}{f_Y(y)}\int_{-\infty}^{\infty} x f_{X,Y}(x,y) \text{ d}x</script><h4 id="10-2-区分-E-X-、-E-X-mid-Y-、-E-X-mid-Y-y"><a href="#10-2-区分-E-X-、-E-X-mid-Y-、-E-X-mid-Y-y" class="headerlink" title="10.2 区分$E(X)$、$E(X \mid Y)$、$E(X \mid Y=y)$"></a>10.2 区分$E(X)$、$E(X \mid Y)$、$E(X \mid Y=y)$</h4><ul>
+<li>$E(X)$：一个数；</li>
+<li>$E(X \mid Y)$：随机变量，关于$Y$的函数，没有固定的$y$值；</li>
+<li>$E(X \mid Y=y)$ ：不是随机变量，而是一个关于$y$的函数$f(y)$，对于给定的$y$，有唯一确定值与之对应。</li>
+</ul>
+<p>$E(X)$是对所有$\omega \in \Omega$， $X(\omega)$取值<strong>全体的加权平均</strong>；而$E(X \mid Y=y)$是局限在$\omega \in \begin{Bmatrix} \omega \mid Y(\omega)=y \end{Bmatrix}$时，$X(\omega)$ 取值<strong>局部的加权平均</strong>。</p>
+<h4 id="10-4-全期望公式-Law-of-total-expectation"><a href="#10-4-全期望公式-Law-of-total-expectation" class="headerlink" title="10.4 全期望公式(Law of total expectation)"></a>10.4 全期望公式(Law of total expectation)</h4><p>设$X,Y$为随机变量，下列期望和条件期望均存在，则：</p>
+<script type="math/tex; mode=display">
+E(X) = E(E(X \mid Y))</script><ul>
+<li>若$Y$为连续型随机变量，则：</li>
+</ul>
+<script type="math/tex; mode=display">
+E(X) = E(E(X \mid Y)) = \int_{-\infty}^{\infty} E(X \mid Y = y) f_Y(y) \text{ d}y</script><ul>
+<li>若$Y$为离散型随机变量，则：</li>
+</ul>
+<script type="math/tex; mode=display">
+E(X) = E(E(X \mid Y)) = \sum_i E(X \mid Y = y_i) P(Y = y_i)</script><blockquote>
+<p>以上内容转自：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/417592820">条件期望与全期望公式 - Ryan的文章 - 知乎</a></p>
+</blockquote>
+<h4 id="10-5-其他几点"><a href="#10-5-其他几点" class="headerlink" title="10.5 其他几点"></a>10.5 其他几点</h4><h5 id="10-5-1-条件期望是否能去掉"><a href="#10-5-1-条件期望是否能去掉" class="headerlink" title="10.5.1 条件期望是否能去掉"></a>10.5.1 条件期望是否能去掉</h5><p>(1) 设$h(\cdot)$是一个函数，则：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(X \cdot h(Y))  &=  E[E(X \cdot h(Y) \mid Y)] \\
+&=  \int_{-\infty}^{\infty} E(X \cdot h(Y) \mid Y = y) f_Y(y) \text{ d}y \\
+&= \int_{-\infty}^{\infty} E(X \cdot h(y) \mid Y = y) f_Y(y) \text{ d}y \\
+&=  \int_{-\infty}^{\infty} h(y)E(X \mid Y = y) f_Y(y) \text{ d}y \\
+&= \int_{-\infty}^{\infty} h(y) [E(X)](Y)_{Y = y} f_Y(y) \text{ d}y \\
+&= \int_{-\infty}^{\infty} h(y) G(Y)_{Y = y} f_Y(y) \text{ d}y
+\end{aligned}</script><p>e.g. $X \sim \text{Exp}(Y)$，则：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+E(X)  &= E(E(X \mid Y)) \\
+&=  \int_{-\infty}^{\infty} E(X \mid Y = y) f_Y(y) \text{ d}y \\
+&= \int_{-\infty}^{\infty} G(Y)_{Y = y} f_Y(y) \text{ d}y \\
+&= \int_{-\infty}^{\infty} \frac{1}{Y} \mid_{Y = y} f_Y(y) \text{ d}y \\
+&= \int_{-\infty}^{\infty} \frac{1}{y} f_Y(y) \text{ d}y 
+\end{aligned}</script><h3 id="11-群延时与相位延时"><a href="#11-群延时与相位延时" class="headerlink" title="11 群延时与相位延时"></a>11 群延时与相位延时</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_37335890/article/details/83043204?spm=1001.2101.3001.6650.19&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-19-83043204-blog-79203927.pc_relevant_3mothn_strategy_recovery&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EBlogCommendFromBaidu%7ERate-19-83043204-blog-79203927.pc_relevant_3mothn_strategy_recovery&amp;utm_relevant_index=21">信号与系统学习难点（一）群时延与相频特性</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/zhoupian/article/details/117935161">一文读懂群延时(Group Delay)：非常简单易懂</a></p>
+<h3 id="12-幅频特性和相频特性"><a href="#12-幅频特性和相频特性" class="headerlink" title="12 幅频特性和相频特性"></a>12 幅频特性和相频特性</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/christiedong10/article/details/122115486?spm=1001.2101.3001.6650.12&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-12-122115486-blog-83043204.pc_relevant_3mothn_strategy_recovery&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-12-122115486-blog-83043204.pc_relevant_3mothn_strategy_recovery&amp;utm_relevant_index=19">幅频特性和相频特性的物理意义</a></p>
+<h3 id="13-维纳滤波器和平时所说的低通频域滤波器的区别"><a href="#13-维纳滤波器和平时所说的低通频域滤波器的区别" class="headerlink" title="13 维纳滤波器和平时所说的低通频域滤波器的区别"></a>13 维纳滤波器和平时所说的低通频域滤波器的区别</h3><p><a target="_blank" rel="noopener" href="https://web.xidian.edu.cn/kywang/files/20171213_190142.pdf">第五章 数字滤波器的基本概念及一些特殊滤波器</a></p>
+<h3 id="14-线性代数中各种矩阵的简介及其性质"><a href="#14-线性代数中各种矩阵的简介及其性质" class="headerlink" title="14 线性代数中各种矩阵的简介及其性质"></a>14 线性代数中各种矩阵的简介及其性质</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/wnma3mz/article/details/90182652?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-4-90182652-blog-647511.pc_relevant_recovery_v2&amp;spm=1001.2101.3001.4242.3&amp;utm_relevant_index=7">线性代数中各种矩阵的简介</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/myan/article/details/647511?spm=1001.2101.3001.6650.6&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-6-647511-blog-105778485.pc_relevant_recovery_v2&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-6-647511-blog-105778485.pc_relevant_recovery_v2&amp;utm_relevant_index=10">理解矩阵（一）</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/I_canjnu/article/details/105778485?spm=1001.2101.3001.6650.3&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3-105778485-blog-104575987.pc_relevant_3mothn_strategy_and_data_recovery&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-3-105778485-blog-104575987.pc_relevant_3mothn_strategy_and_data_recovery&amp;utm_relevant_index=6">矩阵相关定义性质全总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41157212/article/details/104575987?utm_medium=distribute.pc_relevant.none-task-blog-2~default~baidujs_baidulandingword~default-0-104575987-blog-74169484.pc_relevant_default&amp;spm=1001.2101.3001.4242.1&amp;utm_relevant_index=3">矩阵的分类以及性质</a></p>
+<h3 id="15-向量的模和范数"><a href="#15-向量的模和范数" class="headerlink" title="15 向量的模和范数"></a>15 向量的模和范数</h3><h4 id="15-1-向量的模"><a href="#15-1-向量的模" class="headerlink" title="15.1 向量的模"></a>15.1 向量的模</h4><p>向量的模，表示向量的长度；向量$\boldsymbol x = (x_1, x_2, \cdots, x_n)^{\mathrm T}$它的模的计算公式：</p>
+<script type="math/tex; mode=display">
+|\boldsymbol x| = \sqrt{x_1^2+x_2^2+ \cdots + x_n^2}</script><h4 id="15-2-向量的常见范数"><a href="#15-2-向量的常见范数" class="headerlink" title="15.2 向量的常见范数"></a>15.2 向量的常见范数</h4><h5 id="15-2-0-向量的0范数"><a href="#15-2-0-向量的0范数" class="headerlink" title="15.2.0 向量的0范数"></a>15.2.0 向量的0范数</h5><p>向量中非零元素的个数 ；</p>
+<h5 id="15-2-1-向量的1范数-L1范数、曼哈顿范数"><a href="#15-2-1-向量的1范数-L1范数、曼哈顿范数" class="headerlink" title="15.2.1 向量的1范数(L1范数、曼哈顿范数)"></a>15.2.1 向量的1范数(L1范数、曼哈顿范数)</h5><script type="math/tex; mode=display">
+\|\boldsymbol x \|_1 = \sum_{i = 1}^{n} |x_i|</script><h5 id="15-2-2-向量的2范数-L2范数、欧式范数"><a href="#15-2-2-向量的2范数-L2范数、欧式范数" class="headerlink" title="15.2.2 向量的2范数(L2范数、欧式范数)"></a>15.2.2 向量的2范数(L2范数、欧式范数)</h5><script type="math/tex; mode=display">
+\|\boldsymbol x \|_2 = \sqrt{\sum_{i = 1}^{n} x_i^2}</script><p><strong><font color="red">向量的2范数等价于向量的模长</font></strong>。</p>
+<h5 id="15-2-3-向量的无穷范数-infty-范数、最大值范数"><a href="#15-2-3-向量的无穷范数-infty-范数、最大值范数" class="headerlink" title="15.2.3 向量的无穷范数($\infty$范数、最大值范数)"></a>15.2.3 向量的无穷范数($\infty$范数、最大值范数)</h5><script type="math/tex; mode=display">
+\| \boldsymbol x \|_{\infty} = \max_{1 \leq i \leq n} |x_i|</script><h5 id="15-2-4-向量的p范数"><a href="#15-2-4-向量的p范数" class="headerlink" title="15.2.4 向量的p范数"></a>15.2.4 向量的p范数</h5><script type="math/tex; mode=display">
+\| \boldsymbol x \|_p = \left( \sum _{i = 1}^{n} |x_i|^p \right)^{\frac{1}{p}}</script><blockquote>
+<p>临时补充：复数的模</p>
+<p>$z_1 = a + bi$、$z_2 = c + di$</p>
+<p>$|z_1 \times z_2| = |z_1| \times |z_2|$</p>
+<p>$\left|\dfrac{z_1}{z_2} \right| = \dfrac{|z_1|}{|z_2|}$</p>
+</blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/geter_CS/article/details/85100045?spm=1001.2101.3001.6650.13&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-13-85100045-blog-87282642.pc_relevant_multi_platform_whitelistv4&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-13-85100045-blog-87282642.pc_relevant_multi_platform_whitelistv4&amp;utm_relevant_index=21">熟悉陌生的2-范数（向量的模）</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/linkequa/article/details/87282642?spm=1001.2101.3001.6650.4&amp;utm_medium=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-4-87282642-blog-81698878.pc_relevant_landingrelevant&amp;depth_1-utm_source=distribute.pc_relevant.none-task-blog-2%7Edefault%7EESLANDING%7Edefault-4-87282642-blog-81698878.pc_relevant_landingrelevant&amp;utm_relevant_index=9">向量 模（module） 范数（norm）</a></p>
+<h3 id="16-充分性，必要性，充分条件，必要条件的区别"><a href="#16-充分性，必要性，充分条件，必要条件的区别" class="headerlink" title="16 充分性，必要性，充分条件，必要条件的区别"></a>16 充分性，必要性，充分条件，必要条件的区别</h3><h4 id="16-1-概述"><a href="#16-1-概述" class="headerlink" title="16.1 概述"></a>16.1 概述</h4><p>令：$A$是命题，$B$是结论，则有：</p>
+<ul>
+<li>$A \longrightarrow B$：$A$是$B$的充分条件；<ul>
+<li>$A$成立$B$一定成立，$A$不成立$B$不一定不成立。</li>
+</ul>
+</li>
+<li>$B \longrightarrow A$：$A$是$B$的必要条件；<ul>
+<li>$A$成立$B$不一定成立，$A$不成立$B$一定不成立。</li>
+</ul>
+</li>
+<li>$A \longleftrightarrow B$：$A$和$B$互为充要条件（充分必要），即$B$成立当且仅当$A$成立。</li>
+</ul>
+<blockquote>
+<p>E.g. 说$B$的充要条件是$A$，是把后者作为条件：</p>
+<p>即证$B$的充要条件是$A$，是：证充分性（$A \longrightarrow B$），证必要性（$B \longrightarrow A$）</p>
+</blockquote>
+<p>转载于：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/acha/p/6263887.html">充分性，必要性，充分条件，必要条件的区别 - 博客园 - 用户_zwl </a></p>
+<h4 id="16-2-充分条件、必要条件、充要条件"><a href="#16-2-充分条件、必要条件、充要条件" class="headerlink" title="16.2 充分条件、必要条件、充要条件"></a>16.2 充分条件、必要条件、充要条件</h4><p>以初中平面几何中的全等三角形的判定定理1：若两个三角形的三条对应边均相等，则这两个三角形全等为例，首先引入充分条件与必要条件。</p>
+<ul>
+<li><strong>充分条件：</strong> 若已知两三角形三边对应相等，则两三角形全等 ，也就是说：两个三角形三边对应相等是这两个三角形全等成立的充分条件 。其中充分条件的含义是，若两三角形三边对应相等，则有充分理由断定“这两个三角形全等”成立。</li>
+<li><strong>必要条件：</strong> 若已知两个三角形全等，则这两个三角形三条边对应相等 ，也就是说：两个三角形三边对应相等是这两个三角形全等成立的必要条件 。其中必要条件的含义是，若两个三角形全等，则必定需要 满足一个条件：“两三角形三边对应相等”，即只有满足了这个条件，这两个三角形全等才成立。</li>
+<li><strong>充分必要条件：</strong> 结合上述两部分论断，我们可以得到如下的命题：两三角形全等的充要条件是这两个三角形的三边对应相等。</li>
+</ul>
+<h4 id="16-3-充分性、必要性"><a href="#16-3-充分性、必要性" class="headerlink" title="16.3 充分性、必要性"></a>16.3 充分性、必要性</h4><ul>
+<li><strong>充分性：</strong>常用箭头$\Longleftarrow$表示，即由条件推出结论（假设两三角形三边对应相等成立，来证明两三角形全等）。</li>
+<li><strong>必要性：</strong>常用箭头$\Longrightarrow$表示，即由结论推条件（假设两三角形全等成立，来证明三角形三边对应相等）。</li>
+</ul>
+<h4 id="16-4-定义"><a href="#16-4-定义" class="headerlink" title="16.4 定义"></a>16.4 定义</h4><p>有了上面的例子，很容易得到充分条件、必要条件等的定义：</p>
+<p>设$A$、$B$是两个命题，并且有：$A$成立的充要条件是$B$成立，则：</p>
+<ul>
+<li><strong>充分条件：</strong>若$B$成立则$A$成立，即$B$成立是$A$成立的充分条件。</li>
+<li><strong>必要条件：</strong>若$A$成立则$B$成立，即$B$成立是$A$成立的必要条件。</li>
+<li><strong>充分性：</strong> 用 $\Longleftarrow$代替，即“假定$B$成立，去证明$A$成立”(条件推结论)。</li>
+<li><strong>必要性：</strong> 用$\Longrightarrow$代替，即“假定$A$成立，去证明$B$成立”(结论推条件)。</li>
+</ul>
+<h4 id="16-5-“当且仅当”（if-and-only-if）"><a href="#16-5-“当且仅当”（if-and-only-if）" class="headerlink" title="16.5 “当且仅当”（if and only if）"></a>16.5 “当且仅当”（if and only if）</h4><p>有时候也会用到<strong>“当且仅当”</strong>一词来表示<strong>充要条件</strong> 。仍用上面所举三角形全等的例子，就可以说：两三角形全等当且仅当两三角形三边对应相等。也可以一般化为：$A$成立当且仅当$B$成立，这时：</p>
+<ul>
+<li><strong>充分条件：</strong>当$B$成立时$A$成立（$B$成立能充分说明$A$成立）。</li>
+<li><strong>必要条件：</strong>仅当$B$成立时$A$才成立（$B$成立是$A$成立所必定需要的）。</li>
+</ul>
+<h4 id="16-6-补充：充分必要条件的意义"><a href="#16-6-补充：充分必要条件的意义" class="headerlink" title="16.6 补充：充分必要条件的意义"></a>16.6 补充：充分必要条件的意义</h4><p>$A$成立的充要条件是$B$成立，说明命题$A$与$B$是相互等价的，是同一现象（事物）的不同表现形式。<br>也即：若$A$成立的充要条件是$B$成立，则得到$A$与$B$互为充要条件。</p>
+<h4 id="16-7-找准哪个命题是“充要条件”"><a href="#16-7-找准哪个命题是“充要条件”" class="headerlink" title="16.7 找准哪个命题是“充要条件”"></a>16.7 找准哪个命题是“充要条件”</h4><p>实际运用中，常会出现两种十分相似的表述，但是二者仍有很大区别，即</p>
+<ul>
+<li>$A$成立的充要条件是$B$。</li>
+<li>$A$成立是$B$成立的充要条件。</li>
+</ul>
+<p>在第一种表述中，可以认为$A$是“结论”，$B$是“条件”；</p>
+<p>而第二种表述恰恰相反。如果在实际分析中出现了第二种表述，就不能简单地认为$A\Longrightarrow B$是必要性了，还需要找到哪个命题是“条件”，哪个命题是“结论”，然后进行进一步的分析。</p>
+<p>转载于：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_41437512/article/details/108066877">理解充分条件与必要条件 - CSDN - CSDN用户zorchp </a></p>
+<h3 id="17-概率论——总体、样本、统计量-顺序统计量-的基本概念"><a href="#17-概率论——总体、样本、统计量-顺序统计量-的基本概念" class="headerlink" title="17 概率论——总体、样本、统计量(顺序统计量)的基本概念"></a>17 概率论——总体、样本、统计量(顺序统计量)的基本概念</h3><h4 id="17-1-总体"><a href="#17-1-总体" class="headerlink" title="17.1 总体"></a>17.1 总体</h4><p>总体是与我们所研究的问题有关的所有个体组成，而样本是总体中抽取的一部分个体。若总体中个体的数目为有限个，则称为有限总体, 否则称为无限总体。 </p>
+<p><strong>关于总体的一个争论：总体是不是一个随机变量？</strong></p>
+<p>具体可以参考下面这个链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/301826927">为什么总体和样本都是随机变量？ - 知乎</a></p>
+<h4 id="17-2-样本"><a href="#17-2-样本" class="headerlink" title="17.2 样本"></a>17.2 样本</h4><p><strong><font color="red">样本具有两重性</font></strong>，意思是样本<strong>既可看成具体的数，又可以看成随机变量(或随机向量)</strong>。在完成抽样后，它是具体的数；在实施抽样前，它被看成随机变量。因为在实施具体抽样之前无法预料抽样的结果，只 能预料它可能取值的范围，故可把它看成一个随机变量，因此才有概率分布可言。为区别起见，今后用大写的英文字母表示随机变量或随机向量，用小写字母表示具体的观察值。</p>
+<h4 id="17-3-统计量"><a href="#17-3-统计量" class="headerlink" title="17.3 统计量"></a>17.3 统计量</h4><p><strong>数理统计的任务是通过样本去推断总体</strong>。而样本自身是一些杂乱无章的数字，要对这些数字进行加工整理，计算出一些有用的量。可以这样理解：这种由样本算出来的量，把样本中与所要解决的问题有关的信息集中起来了我们把这种量称为统计量，其定义如下：</p>
+<p><strong>由样本算出的量是统计量，或者是统计量是样本的函数</strong>。对这一定义我们作如下几点说明: </p>
+<ul>
+<li><p>统计量只与样本有关，不能与未知参数有关。</p>
+<ul>
+<li>例如，$X \sim N(\mu, \sigma^2)$，当$\mu$和$\sigma^2$皆为未知参数时，$\sum\limits<em>{i=1}^{n}(X_i-\mu)^2$和$\sum\limits</em>{i=1}^{n}\dfrac{X<em>i^2}{\sigma^2}$都不是统计量，而$\sum\limits</em>{i=1}^{n}X<em>i ^2$和$\sum\limits</em>{i=1}^{n}X_i^2$均是统计量</li>
+</ul>
+</li>
+<li>由于样本具有两重性，同时统计量是样本的函数，因此统计量也具有两重性。正因为统计量可视为随机变量(或随机向量)，因此才有概率分布可言，这是利用统计量进行统计推断的依据。 </li>
+<li>在什么问题中选用什么统计量，要看问题的性质。一般说来，所提出的统计量应是最好的集中了样本中与所讨论问题有关的信息，这不是容易做到的。</li>
+</ul>
+<h4 id="17-4-顺序统计量"><a href="#17-4-顺序统计量" class="headerlink" title="17.4 顺序统计量"></a>17.4 顺序统计量</h4><p>首先直接说明几点前提和结论：</p>
+<ul>
+<li>随机变量不可以比较大小；</li>
+<li>顺序统计量属于随机变量。</li>
+</ul>
+<h5 id="17-4-1-顺序统计量的定义"><a href="#17-4-1-顺序统计量的定义" class="headerlink" title="17.4.1 顺序统计量的定义"></a>17.4.1 顺序统计量的定义</h5><p>顺序统计量：</p>
+<script type="math/tex; mode=display">
+X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X <em> {(1)}=\min\begin{Bmatrix}X_1,\dots,X_n\end{Bmatrix}$，$X</em>{(n)}=\max\begin{Bmatrix}X<em>1, \cdots, X_n\end{Bmatrix}$，$X</em>{(k)}$为$X<em>1, \cdots, X_n$的递增排序的第$k$位。$X </em> {(n)}-X{(1)}$样本极差。</p>
+<h5 id="17-4-2-关于顺序统计量的理解"><a href="#17-4-2-关于顺序统计量的理解" class="headerlink" title="17.4.2 关于顺序统计量的理解"></a>17.4.2 关于顺序统计量的理解</h5><p>其实到写到这为止感觉还是没有透彻理解顺序统计量，我自己关于顺序统计量主要有两个疑点：</p>
+<ul>
+<li>从表面上看，顺序统计量就是对随机变量大小排序，但是我们知道随机变量是不能比较大小的。</li>
+<li>其次，为什么顺序统计量是一个随机变量，感觉随机变量排序后只是一个大小的比较结果，咋就能视为一个随机变量了呢？</li>
+</ul>
+<p>首先，先说一下我的简单理解：</p>
+<p>从总体中抽出$n$个样本$X<em>1, \cdots, X_n$，我们想要了解这些样本中大小排第$k$的样本(随机变量)的分布情况$F</em>{X<em>{(k)}}(x_k) = P(X </em> {(k)} &lt; x_k)$，由于$k$的取值可以从$1 \sim n$，即我们先研究排序中每一位置的分布情况，所以何不就直接从小到大排个序，这也就导出了顺序统计量。</p>
+<p>其次，我们看一下ChatGPT的回答：</p>
+<ul>
+<li>问：随机变量能比较大小吗？<ul>
+<li>答：不可以，随机变量是数值不确定的变量，它们本身并不具有可比性，不能比较大小。但是我们可以对随机变量的概率分布进行比较，即可以比较两个随机变量所代表的概率分布的差异程度。 </li>
+</ul>
+</li>
+<li>问：随机变量不能比较大小为什么会出现顺序统计量？<ul>
+<li>答1：顺序统计量并不是指对随机变量进行大小比较，而是指对样本数据进行排序，将数据按照其大小排列，并编号。顺序统计量是样本中某一数值的排名，通常用于研究样本分布的性质，如判断样本的正态性等。因此，顺序统计量是由样本数据而不是随机变量生成的。 </li>
+<li>答2：随机变量是描述随机现象的数学概念，不能直接比较大小。但是，我们可以通过研究其特定分布情况，对其进行统计分析，以得到有关其大小关系的统计结论。因此，出现了顺序统计量的概念，即对随机变量的样本数据进行排序，从而对其分布情况进行研究。 </li>
+</ul>
+</li>
+<li>问：顺序统计量是随机变量但随机变量不是不能比较大小吗？<ul>
+<li>答：顺序统计量和随机变量是两个不同的概念，顺序统计量是对随机变量的一种排列（即大小顺序）的统计描述。顺序统计量是随机变量，因为其值取决于随机变量的值，并且随机变量值不同时顺序统计量值也不同。然而，随机变量本身不能比较大小，因为它是一个概率分布，只能描述数据的可能性，而不能对数据的大小进行比较。 </li>
+</ul>
+</li>
+<li>问：如何理解你说的“顺序统计量是对随机变量的一种排列（即大小顺序）的统计描述”，你的意思不就是对随机变量比较大小然后排序吗 ？<ul>
+<li>答：是的，顺序统计量通过比较随机变量的大小并将其进行排序，得出其大小顺序，以此作为对随机变量的统计描述。但是这种比较大小和排序行为仅仅是在计算上的表现，并不能说明随机变量本身具有大小关系，因为随机变量本身并不具有确定的值。 </li>
+</ul>
+</li>
+<li>问：请问“但是这种比较大小和排序行为仅仅是在计算上的表现，并不能说明随机变量本身具有大小关系”这句话能不能详细解释一下？<ul>
+<li>答：所谓“比较大小和排序行为仅仅是在计算上的表现”，是指我们在研究统计问题时，常常需要对一组随机变量的取值进行比较和排序，以得到更直观、客观的描述。然而，这种比较大小和排序的行为，只是计算的一种方法，并不能真实反映出随机变量本身的大小关系，因为随机变量的大小关系是不确定的，只能通过概率的方式来表示。 </li>
+</ul>
+</li>
+</ul>
+<p>关于这一部分，主要参考下面的链接，特别注意第一个链接特别好：</p>
+<p><a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~zwp/teach/Prob-Stat/Lec12_slides.pdf">概率论与数理统计课件 - 张伟平 - USTC</a>；<a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~zwp/index.html">张伟平个人主页 - 统计与金融系教授</a></p>
+<p><a target="_blank" rel="noopener" href="https://bookdown.org/hezhijian/book/intro.html#section-8">数理统计讲义</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/jy333/p/14345941.html">数理统计1：数理统计的概念，总体与样本，统计量 - 江景平个人</a></p>
+<h3 id="18-条件概率和事件的交的概率有什么区别"><a href="#18-条件概率和事件的交的概率有什么区别" class="headerlink" title="18 条件概率和事件的交的概率有什么区别"></a>18 条件概率和事件的交的概率有什么区别</h3><p>简单来说：</p>
+<ul>
+<li><p>条件概率是已知前提条件中描述的事件发生了。</p>
+</li>
+<li><p>事件的交则是涉及到的事件均还没有发生，求这几个事件一块发生的概率。</p>
+</li>
+</ul>
+<blockquote>
+<p>本质上来说，条件概率减小了事件的空间，而一般事件的交仍然是整个样本空间$\Omega$</p>
+</blockquote>
+<p>常见题目中的字眼：</p>
+<ul>
+<li>若出现“在已知。。。”，则一般为条件概率；</li>
+<li>若一般出现“并且、且”等字眼，则为事件的交。</li>
+</ul>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://zhidao.baidu.com/question/988259011390372139.html">概率论中，条件概率和事件的交的概率有什么区别</a></p>
+<h3 id="19-随机向量"><a href="#19-随机向量" class="headerlink" title="19 随机向量"></a>19 随机向量</h3><ul>
+<li>根据参考链接[19.1]的评论区：<ul>
+<li>总体研究的是一项数量指标还是多个维度的数量指标？比如一个班上的学生是一个总体，$X_1$是身高，$X_2$是体重，样本是$(X_1, X_2)$是个二维随机变量。还是总体只研究一个指标，比如身高$X$，$(X_1, X_2)$是样本，代表第一个学生和第二个学生的身高值。知乎博主给出的回答是：都可以，看你怎么定义研究的内容。 </li>
+</ul>
+</li>
+<li>根据参考链接[19.2]给的例子：<ul>
+<li>当个体上的数量指标不止一项时，我们用随机向量来表示总体。例如研究某地区小学生的发育状况时，人们关心的是其身高$X$和体重$Y$这两个数量指标，此时总体就可以用二维随机向量$ (X，Y)$或其联合分布$F(x, y)$表示。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>此外，我还从今天(2023.02.08)发现的最强大的智能对话ChatGPT上，通过问答获得以下结果：</p>
+<p><img src="https://pic.imgdb.cn/item/63e3b44c4757feff33bd3f3b.jpg" style="zoom:70%"></p>
+</blockquote>
+<p>参考链接：</p>
+<p>【19.1】<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/301826927/answer/528085629">为什么总体和样本都是随机变量？ - 杜克清风侠的回答 - 知乎</a></p>
+<p>【19.2】<a target="_blank" rel="noopener" href="http://staff.ustc.edu.cn/~zwp/teach/Prob-Stat/Lec12_slides.pdf">概率论与数理统计课件 - 张伟平 - USTC</a></p>
+<h3 id="20-矩阵相关定义性质全总结"><a href="#20-矩阵相关定义性质全总结" class="headerlink" title="20 矩阵相关定义性质全总结"></a>20 矩阵相关定义性质全总结</h3><h4 id="20-1-基本概念"><a href="#20-1-基本概念" class="headerlink" title="20.1 基本概念"></a>20.1 基本概念</h4><ul>
+<li><strong>矩阵定义：</strong>$m \times n$矩阵为$m \times n$个数排成的$m$行$n$列的表格，当$m=n$时，矩阵$\boldsymbol A$称为$n$阶方阵。</li>
+<li><strong>零矩阵：</strong>矩阵所有元素都为0，在下文中用$\boldsymbol O$表示。</li>
+<li><strong>单位阵：</strong>对角线全为1，其他全为0的方阵，一般用$\boldsymbol I$或$\boldsymbol E$表示，本文用$\boldsymbol I$，用$\boldsymbol E$表示初等矩阵。</li>
+<li><strong>同型矩阵：</strong>$\boldsymbol A$矩阵为$m \times n$矩阵，$\boldsymbol B$矩阵为$s \times t$矩阵，若$m=s,n=t$，$\boldsymbol A$和$\boldsymbol B$为同型矩阵。</li>
+<li><strong>矩阵相等：</strong>$\boldsymbol A$和$\boldsymbol B$相等意味着两个同型矩阵对应的元素都相等。</li>
+<li><strong>矩阵行列式：</strong>$n$阶方阵$\boldsymbol A$构成的行列式，一般记为：$\det \boldsymbol A$或者$|\boldsymbol A|$。</li>
+</ul>
+<blockquote>
+<p>注意：<br>只有方阵才有行列式；矩阵$\boldsymbol A$是表格，而行列式$|\boldsymbol A|$是数。</p>
+</blockquote>
+<h4 id="20-2-基本运算"><a href="#20-2-基本运算" class="headerlink" title="20.2 基本运算"></a>20.2 基本运算</h4><ul>
+<li><strong>乘法：</strong>设$\boldsymbol A$是一个$m \times s$矩阵，$\boldsymbol B$是一个$s \times t$矩阵(即左矩阵的列数=右矩阵的行数)，则乘积$\boldsymbol{AB}$是一个$m \times t$矩阵，记为$\boldsymbol C$。</li>
+<li><strong>矩阵多项式：</strong> 设$\boldsymbol A$是$n$阶矩阵，$f(x)=a<em>m x^m+ \cdots +a_1 x+a_0$是$x$的多项式，则称$a_m\boldsymbol A^m+a</em>{m-1}\boldsymbol A^{m-1}+ \cdots +a_1\boldsymbol A+a_0 \boldsymbol I$为矩阵多项式，记为$f(\boldsymbol A)$。</li>
+</ul>
+<p>注意一下几点：</p>
+<ol>
+<li>一般情况$\boldsymbol{AB} \neq \boldsymbol{BA}$；</li>
+<li>$\boldsymbol A \neq \boldsymbol O$，$\boldsymbol B \neq \boldsymbol O$，但有可能$\boldsymbol{AB} = \boldsymbol O$；</li>
+<li>$\boldsymbol{AB} = \boldsymbol{AC}, \boldsymbol A \neq \boldsymbol O$不能推出$\boldsymbol B = \boldsymbol C$；</li>
+<li>$\boldsymbol{AB} = \boldsymbol O$可推出$\boldsymbol B$的列向量是$\boldsymbol{Ax}= \boldsymbol 0$的解；</li>
+</ol>
+<h4 id="20-3-矩阵基础操作"><a href="#20-3-矩阵基础操作" class="headerlink" title="20.3 矩阵基础操作"></a>20.3 矩阵基础操作</h4><h5 id="20-3-1-矩阵转置"><a href="#20-3-1-矩阵转置" class="headerlink" title="20.3.1 矩阵转置"></a>20.3.1 矩阵转置</h5><p><strong>(一) 定义</strong></p>
+<p>将$m \times n$型矩阵$\boldsymbol A=(a<em>{ij})</em>{m \times n}$的行列互换的到的$n \times m$矩阵$(a<em>{ji})</em>{n \times m}$，称为$\boldsymbol A$的转置矩阵。 </p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li>$(\boldsymbol A + \boldsymbol B)^{\mathrm T} = \boldsymbol A^{\mathrm{T}} + \boldsymbol B^{\mathrm{T}}$</li>
+<li>$(k\boldsymbol A)^{\mathrm T} = k\boldsymbol A^{\mathrm T}$</li>
+<li>$(\boldsymbol A \boldsymbol B)^{\mathrm T} = \boldsymbol B^{\mathrm T}\boldsymbol A^{\mathrm T}$</li>
+</ol>
+<h5 id="20-3-2-伴随矩阵"><a href="#20-3-2-伴随矩阵" class="headerlink" title="20.3.2 伴随矩阵"></a>20.3.2 伴随矩阵</h5><p><strong>(一) 余子式和代数余子式</strong></p>
+<ul>
+<li><strong>余子式：</strong>是指在$n$阶行列式中，把元素$a<em>{ij}$(其中$i$和$j$分别表示行和列)所在的第$i$行和第$j$列划去后，留下来的$n-1$阶行列式叫做元素$a</em>{ij}$的余子式，记做$M_{ij}$。</li>
+<li><strong>代数余子式：</strong>在余子式的基础上，记$A<em>{ij}=(-1)^{i+j}M</em>{ij}$，叫做元素$a_{ij}$的代数余子式。</li>
+</ul>
+<blockquote>
+<p>注意：<br>只有方阵才有余子式，余子式和代数余子式都是一个行列式，其结果是一个数而不是矩阵。 </p>
+</blockquote>
+<p>只讲概念比较枯燥，通过例题计算更直观，例如计算下面这个行列式的$a_{32}$元素的余子式和代数余子式分别是多少： </p>
+<script type="math/tex; mode=display">
+\left|\begin{array}{lll}
+a_ {11}& a_ {12} & a_ {13} \\
+a_ {21} & a_ {22} & a_ {23} \\
+a_ {31} & a_ {32} & a_ {33}
+\end{array}\right|</script><p>根据概念，所谓$a<em>{32}$的余子式就是把$a</em>{32}$所在的行和列划去，留下来的行列式，那么$a_{32}$的余子式就是：</p>
+<script type="math/tex; mode=display">
+M_{32}= \left|\begin{array}{ll}
+a_ {11}& a_ {13} \\
+a_ {21} & a_ {23}
+\end{array}\right|</script><p>那么，顺势而推，$a_{32}$的代数余子式就是：</p>
+<script type="math/tex; mode=display">
+A_{32} = (-1)^{3+2}\left|\begin{array}{ll}
+a_ {11}& a_ {13} \\
+a_ {21} & a_ {23}
+\end{array}\right|</script><p><strong>(二) 伴随矩阵</strong></p>
+<p>矩阵$\boldsymbol A​$的伴随矩阵一般记为$\boldsymbol A^*​$。由矩阵$\boldsymbol A​$的所有代数余子式构成，列对应行。</p>
+<p>方阵$\boldsymbol A = (a<em>{ij})</em>{n \times n}$的各个元素的代数余子式转置构成伴随矩阵$\boldsymbol A^*$：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A^* = \left(\begin{array}{cccc}
+A_{11} & A_{21} & \cdots & A_{n1} \\
+A_{12} & A_{22} & \cdots & A_{n2} \\
+\vdots & \vdots & \ddots & \vdots\\
+A_{1n} & A_{2n} & \cdots & A_{nn}
+\end{array}\right)</script><p><strong>(三) 相关性质</strong></p>
+<ol>
+<li>$\boldsymbol A \boldsymbol A^<em> = \boldsymbol A^</em>\boldsymbol A = |\boldsymbol A|\boldsymbol I$</li>
+<li>$(\boldsymbol A^<em>)^{-1} = (\boldsymbol A^{-1})^</em>$</li>
+<li>$(k \boldsymbol A)^<em> = k^{n-1}\boldsymbol A^</em>$</li>
+<li>$(\boldsymbol A^<em>)^{\mathrm{T}} = (\boldsymbol A^{\mathrm{T}})^</em>$</li>
+<li>$|\boldsymbol A^*| = |\boldsymbol A|^{n-1}$</li>
+<li>$\boldsymbol A^{-1} = \dfrac{1}{|\boldsymbol A|}\boldsymbol A^*$</li>
+<li>$(\boldsymbol{AB})^<em> = \boldsymbol B^</em> \boldsymbol A^*$</li>
+<li><p>伴随矩阵的秩：</p>
+<ul>
+<li>$\mathrm{rank}(\boldsymbol A^*) = n, \mathrm{rank}(\boldsymbol A) = n$</li>
+<li>$\mathrm{rank}(\boldsymbol A^*) = 1, \mathrm{rank}(\boldsymbol A) = n-1$</li>
+<li>$\mathrm{rank}(\boldsymbol A^*) = 0, \mathrm{rank}(\boldsymbol A) &lt; n-1$</li>
+</ul>
+<blockquote>
+<p>矩阵的秩等于0的充分必要条件是这个矩阵是零矩阵。 </p>
+</blockquote>
+</li>
+</ol>
+<h5 id="20-3-3-逆矩阵"><a href="#20-3-3-逆矩阵" class="headerlink" title="20.3.3 逆矩阵"></a>20.3.3 逆矩阵</h5><p><strong>(一) 定义</strong></p>
+<p>只有方阵才有逆矩阵，非方阵可以定义伪逆。</p>
+<p>若$\boldsymbol A$、$\boldsymbol B$为$n$阶方阵，且满足：$\boldsymbol{AB} = \boldsymbol{BA} = \boldsymbol I$，则$\boldsymbol A$和$\boldsymbol B$互为逆矩阵，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A^{-1} = \boldsymbol B; \quad \boldsymbol B^{-1} = \boldsymbol A</script><p><strong>(二) $n$阶矩阵$\boldsymbol A$可逆的充分必要条件</strong></p>
+<ol>
+<li>存在$n$阶矩阵$\boldsymbol A$，使$\boldsymbol{AB} = \boldsymbol I$或者$\boldsymbol{BA} = \boldsymbol I$；</li>
+<li>$|\boldsymbol A|≠ 0​$，或者$\boldsymbol A​$满秩，或者$\boldsymbol A​$的列(行)向量线性无关；</li>
+<li>齐次方程组$\boldsymbol{Ax = 0}$只有零解；</li>
+<li>任意$\boldsymbol b$，非齐次线性方程组$\boldsymbol{Ax = b}$总有唯一解；</li>
+<li>矩阵$\boldsymbol A$的所有特征值均不等于0；</li>
+<li>能表示成一些初等矩阵的乘积：PN…P2P1A=E</li>
+</ol>
+<p><strong>(三) 性质</strong></p>
+<ol>
+<li>$k≠0$，$(k\boldsymbol A)^{-1}=\dfrac{1}{k} \boldsymbol A^{-1}$</li>
+<li>$(\boldsymbol A \boldsymbol B)^{-1} = \boldsymbol B^{-1} \boldsymbol A^{-1}$</li>
+<li>$(\boldsymbol A^{\mathrm T})^{-1} = (\boldsymbol A^{-1})^{\mathrm T}$</li>
+<li>$|\boldsymbol A^{-1}| = \dfrac{1}{|\boldsymbol A|}$</li>
+</ol>
+<blockquote>
+<p>注意：即使$\boldsymbol A$、$\boldsymbol B$和$\boldsymbol A + \boldsymbol B$都可逆，一般的$(\boldsymbol A + \boldsymbol B)^{-1} \neq  \boldsymbol A^{-1}+\boldsymbol B^{-1}$。</p>
+</blockquote>
+<p><strong>(四) 矩阵求逆方法</strong></p>
+<ul>
+<li><strong>公式法：</strong>$|\boldsymbol A| \neq 0$，则$\boldsymbol A^{-1} = \dfrac{1}{|\boldsymbol A|}\boldsymbol A^*$</li>
+<li><strong>初等变换：</strong>$(\boldsymbol A \mid \boldsymbol I) \longrightarrow (\boldsymbol I \mid \boldsymbol A^{-1})$</li>
+</ul>
+<h5 id="20-3-4-初等矩阵、行阶梯矩阵和行最简矩阵"><a href="#20-3-4-初等矩阵、行阶梯矩阵和行最简矩阵" class="headerlink" title="20.3.4 初等矩阵、行阶梯矩阵和行最简矩阵"></a>20.3.4 初等矩阵、行阶梯矩阵和行最简矩阵</h5><p><strong>(一) 初等变换</strong></p>
+<p>设$\boldsymbol A$是$m \times n$矩阵，进行初等倍乘、互换、倍加行(列)变换，统称为初等变换。</p>
+<ol>
+<li><strong>倍乘：</strong>用某个非零常数$k(k≠0)$乘A的某行(列)的每个元素。</li>
+<li><strong>互换</strong>：互换$\boldsymbol A$的某两行(列)的位置。</li>
+<li><strong>倍加行(列)：</strong>将$\boldsymbol A$的某行(列)元素的$k$倍加到另一行(列)。</li>
+</ol>
+<p><strong>(二) 初等矩阵</strong></p>
+<p>单位矩阵经<strong>一次</strong>初等变换得到的矩阵为初等矩阵。 常见初等矩阵的表示可用$\boldsymbol E$、$\boldsymbol P$或者$\boldsymbol Q$这3个字母。</p>
+<p><strong>(三) 等价矩阵</strong></p>
+<p>在线性代数和矩阵论中，有两个$m \times n$阶矩阵$\boldsymbol A$和$\boldsymbol B$，如果这两个矩阵满足：</p>
+<script type="math/tex; mode=display">
+\boldsymbol P \boldsymbol A \boldsymbol Q = \boldsymbol B</script><p>其中，$\boldsymbol P$是$m \times m$阶可逆矩阵，$\boldsymbol Q$是$n \times n$阶可逆矩阵），那么这两个矩阵之间是等价关系。也就是说，存在可逆矩阵$\boldsymbol P、\boldsymbol Q$，使得$\boldsymbol A$经过有限次的初等变换得到$\boldsymbol B$。 </p>
+<blockquote>
+<p>注意：<br><strong><font color="green">左乘矩阵</font></strong>相当于对原矩阵进行了初等行变换，<strong><font color="green">右乘矩阵</font></strong>相当于对原矩阵进行了初等列变换。 </p>
+</blockquote>
+<p><strong>(四) 性质</strong></p>
+<ol>
+<li>初等矩阵的<strong>转置</strong>仍然是初等矩阵；</li>
+<li>初等矩阵均是可逆矩阵($\boldsymbol E$，满秩)，且其逆矩阵仍是初等矩阵；</li>
+<li>用初等矩阵$\boldsymbol E$左乘(右乘)$\boldsymbol A$，其结果$\boldsymbol{EA}$($\boldsymbol{AE}$)相当于对$\boldsymbol A$作相应的初等行(列)变换。</li>
+</ol>
+<p><strong>(五) 行阶梯矩阵、行最简矩阵</strong></p>
+<ul>
+<li><strong>行阶梯矩阵</strong><ul>
+<li>如果矩阵有零行(即这一行元素全是0)，则零行在最底部；</li>
+<li>每个非零元素的主元(即该行的最左边的第一个非零元)，它们的列指标随着行指标的递增而严格增大。</li>
+</ul>
+</li>
+<li><strong>行最简矩阵</strong>：<ul>
+<li>是行阶梯矩阵；</li>
+<li>非零行的主元都是1；</li>
+<li>主元所在的列的其他元素都是0。</li>
+</ul>
+</li>
+</ul>
+<h4 id="20-4-矩阵的几种属性"><a href="#20-4-矩阵的几种属性" class="headerlink" title="20.4 矩阵的几种属性"></a>20.4 矩阵的几种属性</h4><h5 id="20-4-1-方阵的行列式"><a href="#20-4-1-方阵的行列式" class="headerlink" title="20.4.1 方阵的行列式"></a>20.4.1 方阵的行列式</h5><p><strong>(一) 概念</strong></p>
+<p>矩阵行列式是指矩阵的全部元素构成的行列式，$\boldsymbol A$是数域$\mathbb{R}$上的一个$n$阶矩阵，则所有$\boldsymbol A$中的元素组成的行列式称为矩阵$\boldsymbol A$的行列式，记为$|\boldsymbol A|$或$\det(\boldsymbol A)$。行列式的意义是变换后，<strong>空间的膨胀系数</strong>。</p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li>$|\boldsymbol A^{\mathrm T}| = |\boldsymbol A| = \lambda_1 \times \lambda_2 \times \cdots \times \lambda_n$</li>
+<li>$|k\boldsymbol A| = k^n |\boldsymbol A|$</li>
+<li>$|\boldsymbol{AB}| = |\boldsymbol A| |\boldsymbol B|$</li>
+<li>$|\boldsymbol A^*| = |\boldsymbol A|^{n-1}$</li>
+<li>$|\boldsymbol A^{-1}| = |\boldsymbol A|^{-1}$</li>
+</ol>
+<h5 id="20-4-2-矩阵的秩"><a href="#20-4-2-矩阵的秩" class="headerlink" title="20.4.2 矩阵的秩"></a>20.4.2 矩阵的秩</h5><p><strong>(一) k阶子式(数)</strong></p>
+<p>在$m \times n​$矩阵$\boldsymbol A​$中，任取$k​$行与$k​$列($k \leq m,k \leq n​$)，位于这些行与列的交叉点上的$k^2​$个元素按其在原来矩阵$\boldsymbol A​$中的次序可构成一个$k​$阶<strong>行列式</strong>，称其为矩阵$\boldsymbol A​$的一个$k​$阶子式。 </p>
+<ul>
+<li><strong>顺序主子式</strong></li>
+</ul>
+<p>顺序主子式是$n$阶方阵的$n$个行列式的序列，第$k$个行列式由方阵的前$k$行和前$k$列组成。 </p>
+<p><img src="https://pic.imgdb.cn/item/63e4f0394757feff33a046a4.jpg"></p>
+<p><strong>(二) 秩的概念</strong></p>
+<p>设$\boldsymbol A$为$m \times n$矩阵，若$\boldsymbol A$中存在$r$阶子式不等于0，$r$阶以上子式均等于0，则称矩阵$\boldsymbol A$的秩为$r$，记为$r(\boldsymbol A)=\mathrm{rank}(\boldsymbol A)$。零矩阵的秩规定为0。</p>
+<p><strong>(三) 性质</strong></p>
+<ol>
+<li>$r(\boldsymbol A)=0$等价于$\boldsymbol A=\boldsymbol O$，同时也有$\boldsymbol A\neq \boldsymbol O$等价于$r(\boldsymbol A) \geq 1$；</li>
+<li>$\boldsymbol A$是$n$阶矩阵，$r(\boldsymbol A) = n$等价于$|\boldsymbol A| \neq 0$等价于$\boldsymbol A$可逆，$r(A)&lt;n$等价于$|\boldsymbol A| = 0$等价于$\boldsymbol A$不可逆;</li>
+<li>若$\boldsymbol A$是$m \times n$矩阵，则$r(\boldsymbol A) \leq \min(m,n)$；</li>
+<li>经过初等变换矩阵的秩不变；</li>
+</ol>
+<p><strong>(四) 拓展性质(公式)</strong></p>
+<ol>
+<li>$r(\boldsymbol A)=r(\boldsymbol A^{\mathrm T})$；$r(\boldsymbol A \boldsymbol A^{\mathrm T})=r(\boldsymbol A)$</li>
+<li>$r(\boldsymbol A+\boldsymbol B)&lt;=r(\boldsymbol A)+r(\boldsymbol B)$</li>
+<li>$r(\boldsymbol{AB}) \leq \min(r(\boldsymbol A), r(\boldsymbol B)) \leq \max(r(\boldsymbol A), r(\boldsymbol B)) \leq r(\boldsymbol A + \boldsymbol B) \leq r(\boldsymbol A)+r(\boldsymbol B)$</li>
+<li>若$\boldsymbol A$可逆，则$r(\boldsymbol{AB})=r(\boldsymbol B)$，$r(\boldsymbol{BA})=r(\boldsymbol B)$</li>
+<li>若$\boldsymbol A$是$m \times n$矩阵，$\boldsymbol B$是$n×s$矩阵且$\boldsymbol{AB=O}$，则$r(\boldsymbol A)+r(\boldsymbol B) \leq n$</li>
+</ol>
+<h5 id="20-4-3-矩阵的迹"><a href="#20-4-3-矩阵的迹" class="headerlink" title="20.4.3 矩阵的迹"></a>20.4.3 矩阵的迹</h5><h5 id="20-4-4-矩阵的特征值"><a href="#20-4-4-矩阵的特征值" class="headerlink" title="20.4.4 矩阵的特征值"></a>20.4.4 矩阵的特征值</h5><p><strong>n阶矩阵一定有n个特征值。</strong>因为特征值是特征多项式的根,n阶方阵的特征多项式是个n次多项式,根据代数基本定理,n次多项式有且只有n个根(重根按重数计算),这些根可能是实数,也可能是复数。</p>
+<p>更加详细的说法为：一个n阶矩阵一定有n个特征值（包括重根），也可能是复根。一个n阶实对称矩阵一定有n个实特征值（包括重根）。每一个特征值至少有一个特征向量（不止一个）。不同特征值对应特征向量线性无关。</p>
+<p><strong>特征根是特征多项式的根的概念，对特征根t当有特征向量a满足Aa-ta等于0成立，称特征根为特征值。当方阵不能对角化时，不是所有特征根都能称为特征值。</strong> </p>
+<h4 id="20-5-几种特殊矩阵"><a href="#20-5-几种特殊矩阵" class="headerlink" title="20.5 几种特殊矩阵"></a>20.5 几种特殊矩阵</h4><h5 id="20-5-1-奇异矩阵"><a href="#20-5-1-奇异矩阵" class="headerlink" title="20.5.1 奇异矩阵"></a>20.5.1 奇异矩阵</h5><p>行列式为零的方阵称为奇异矩阵。</p>
+<p>该定义蕴含着奇异矩阵是方阵，因为行列式是对方阵而言的。行列式恰好为零，是不是就很“奇异”呢？换个问题，行列式恰好为1的矩阵奇异不奇异呢？行列式恰好为2呢？3呢？素数呢？从某种意义上说，这些矩阵确实都很奇异。但为何只说行列式为零的矩阵才奇异呢？</p>
+<p>这很可能是由线性方程组的解的个数引出的名词。对于系数行列式非零的情况，方程组的解是唯一的；否则，就有无穷多解。换句话说，系数行列式可能取各种值，但不管是什么值，只要不为零，相应的方程组的解一定是唯一的。但是，如果系数行列式恰巧为零，方程组的解就可以有无穷多。这样，行列式为零的矩阵就显得很“突出”、很“不一样”、很“另类”、很“奇怪”，等等。而“奇异”包含了奇怪和异端两种意思，正好用于描述这种矩阵。 </p>
+<p>参考链接：<br>本文来自李毅伟科学网博客。 链接地址：<a target="_blank" rel="noopener" href="https://blog.sciencenet.cn/blog-315774-889594.html">https://blog.sciencenet.cn/blog-315774-889594.html </a>   </p>
+<h5 id="20-5-2-正交矩阵"><a href="#20-5-2-正交矩阵" class="headerlink" title="20.5.2 正交矩阵"></a>20.5.2 正交矩阵</h5><p><strong>(一) 定义</strong></p>
+<p>设$\boldsymbol Q$为$n$阶方阵，若$\boldsymbol {QQ}^{\mathrm T} = \boldsymbol Q^{\mathrm T} \boldsymbol Q=\boldsymbol I$，则称$\boldsymbol Q$为正交矩阵。 </p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li>$\boldsymbol Q^{\mathrm T} = \boldsymbol Q^{-1}$；</li>
+<li>$\boldsymbol Q$的行(列)向量都是单位向量且两两正交；</li>
+<li>$|\boldsymbol Q| = \pm 1$；</li>
+<li>对任意一向量$\boldsymbol x$，有$|\boldsymbol{Qx}| = |\boldsymbol x|$，即正交阵不改变向量模长；</li>
+<li>正交阵的特征值一定是1或-1；</li>
+<li>正交阵的每一个行(列)向量都是模为1的向量；</li>
+<li>正交阵每个元素绝对值都$\leq1$，若有一个元素为1，则该元素所在的行和列的其余元素均为0。 </li>
+</ol>
+<h5 id="20-5-3-相似矩阵"><a href="#20-5-3-相似矩阵" class="headerlink" title="20.5.3 相似矩阵"></a>20.5.3 相似矩阵</h5><p><strong>(一) 定义</strong></p>
+<p>设$\boldsymbol A$、$\boldsymbol B$都是$n$阶矩阵，若存在<strong>可逆矩阵</strong>$\boldsymbol P$，使得$\boldsymbol P^{-1}\boldsymbol{AP}= \boldsymbol B$，则称$\boldsymbol B$是$\boldsymbol A$的相似矩阵，或$\boldsymbol A$相似于$\boldsymbol B$，记为$\boldsymbol A \sim \boldsymbol B$。</p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li>$\boldsymbol A \sim \boldsymbol A$；</li>
+<li>$\boldsymbol A \sim \boldsymbol B \Longleftrightarrow \boldsymbol B \sim \boldsymbol A$；</li>
+<li>若$\boldsymbol A \sim \boldsymbol B$，$\boldsymbol B \sim \boldsymbol C$ 则可以推导出$\boldsymbol A \sim \boldsymbol C$；</li>
+<li>$n$阶<strong>方阵</strong>$\boldsymbol A$可对角化的<strong><font color="blue">充分必要条件</font></strong>是$\boldsymbol A$有$n$个线性无关的特征向量。(可得若$n$阶矩阵$\boldsymbol A$有$n$个不同的特征值$\lambda_1, \lambda_2, \cdots, \lambda_n$，则$\boldsymbol A$可相似对角化，且对角矩阵元素一一对应特征值。)</li>
+<li>$n$阶矩阵$\boldsymbol A$可相似对角化的充分必要条件是$\boldsymbol A$的每个特征值中，线性无关的特征向量的个数恰好等于该特征值的重数。</li>
+<li>若$\boldsymbol A \sim \boldsymbol \Lambda$，其中$\boldsymbol \Lambda$为<strong>对角阵</strong>，则称$\boldsymbol A$可相似对角化，$\boldsymbol \Lambda$是$\boldsymbol A$的相似标准形。</li>
+</ol>
+<p><strong>(三) 相似的必要条件</strong></p>
+<ol>
+<li>特征多项式相同：$|\lambda\boldsymbol I - \boldsymbol A|=|\lambda \boldsymbol I-\boldsymbol B|$</li>
+<li>$r(\boldsymbol A)=r(\boldsymbol A)$</li>
+<li>$\boldsymbol A$和$\boldsymbol B$有相同的特征值</li>
+<li>$|\boldsymbol A|=|\boldsymbol B|=特征值之积$</li>
+<li>$\mathrm{tr}(\boldsymbol A) = \mathrm{tr}(\boldsymbol B) = 特征值之和$</li>
+<li>$\boldsymbol A^2 \sim \boldsymbol B^2(\boldsymbol A^n \sim \boldsymbol B^n)$</li>
+<li>$\boldsymbol A+k\boldsymbol I \sim \boldsymbol B+k\boldsymbol I$</li>
+<li>如果$\boldsymbol A$可逆，$\boldsymbol A^{-1} \sim \boldsymbol B^{-1}$</li>
+</ol>
+<h5 id="20-5-4-实对称矩阵"><a href="#20-5-4-实对称矩阵" class="headerlink" title="20.5.4 实对称矩阵"></a>20.5.4 实对称矩阵</h5><p><strong>(一) 定义</strong></p>
+<p>除了主对角线，两侧相对应的数相同的矩阵，也即满足：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A = \boldsymbol A^{\mathrm T}</script><p><strong>(二) 性质</strong></p>
+<ol>
+<li>实对称矩阵<strong>&lt;/font color=red&gt;必可相似对角化&lt;/font&gt;</strong>；</li>
+<li>实对称矩阵的属于不同特征值对应的特征向量相互<strong><font color="red">正交</font></strong>；</li>
+<li>设$\boldsymbol A$为$n$阶实对称矩阵，则必存在正交阵$\boldsymbol Q$，使得$\boldsymbol Q^{-1}\boldsymbol A\boldsymbol Q = \boldsymbol Q^{T}\boldsymbol A\boldsymbol Q = \boldsymbol \Lambda$</li>
+</ol>
+<h5 id="20-5-5-酉矩阵-幺正矩阵"><a href="#20-5-5-酉矩阵-幺正矩阵" class="headerlink" title="20.5.5 酉矩阵(幺正矩阵 )"></a>20.5.5 酉矩阵(幺正矩阵 )</h5><p><strong>(一) 定义</strong></p>
+<p><strong>酉矩阵（unitary matrix）</strong>也叫<strong>幺正矩阵</strong>。当矩阵元为实数时也叫<strong>正交矩阵</strong>，是正交矩阵的复数拓展，即矩阵元可以是复数。酉矩阵$\boldsymbol U$的定义同样为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol U^{\mathrm H} \boldsymbol U = \boldsymbol U \boldsymbol U^{\mathrm H} = \boldsymbol I</script><p>其中，$\boldsymbol U^{\mathrm H}$表示共轭转置。酉矩阵一定是方阵。</p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li>$\boldsymbol U^{-1} = \boldsymbol U^{\mathrm H}$，同样就有$\boldsymbol U^{-1}$和$\boldsymbol U^{\mathrm T}$也是酉矩阵；</li>
+<li>$|\boldsymbol U| = 1$；</li>
+</ol>
+<p><strong>(三) 充要条件</strong></p>
+<p>复矩阵$\boldsymbol A \in \mathbb{C}_{n \times n}$是酉矩阵的充要条件是$\boldsymbol A$的$n$个列向量是标准的正交向量。 可见，快速判断一个复矩阵是不是酉矩阵可以看它任意两个列向量是不是<strong>正交</strong>且<strong>单位</strong>的。</p>
+<h5 id="20-5-6-正定矩阵"><a href="#20-5-6-正定矩阵" class="headerlink" title="20.5.6 正定矩阵"></a>20.5.6 正定矩阵</h5><p><strong>(一) 定义</strong><br>对于$n$阶方阵$\boldsymbol A$，若对于任何非零向量$\boldsymbol x$，都有：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x^{\mathrm T}\boldsymbol {Ax} > 0</script><p>则$\boldsymbol A$为正定矩阵。正定矩阵在实数域上好像前提是<strong>实对称矩阵</strong>。</p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li>正定阵行列式恒为正，即正定矩阵一定可逆；</li>
+<li>实对称矩阵$\boldsymbol A$正定当且仅当$\boldsymbol A$与单位矩阵<strong>合同</strong>；</li>
+<li>若$\boldsymbol A$是正定矩阵，则$\boldsymbol A$的逆矩阵也是正定矩阵；</li>
+<li>两个正定矩阵的<strong>和</strong>是正定矩阵；</li>
+</ol>
+<p><strong>(三) 充要条件</strong></p>
+<ol>
+<li>$\boldsymbol A$的特征值均为正；</li>
+<li>存在可逆矩阵$\boldsymbol P$，使得$\boldsymbol A = \boldsymbol P^{\mathrm T} \boldsymbol P$，即$\boldsymbol A$与$\boldsymbol I$合同；</li>
+<li>$\boldsymbol A$的顺序主子式均大于零；</li>
+</ol>
+<h4 id="20-6-小结：常见几种矩阵变换——合同、相似、等价"><a href="#20-6-小结：常见几种矩阵变换——合同、相似、等价" class="headerlink" title="20.6 小结：常见几种矩阵变换——合同、相似、等价"></a>20.6 小结：常见几种矩阵变换——合同、相似、等价</h4><h5 id="20-6-1-矩阵合同"><a href="#20-6-1-矩阵合同" class="headerlink" title="20.6.1 矩阵合同"></a>20.6.1 矩阵合同</h5><p><strong>(一) 定义</strong></p>
+<p>设$\boldsymbol A$和$\boldsymbol B$是两个$n$阶方阵，若存在可逆阵$\boldsymbol C$，使得$\boldsymbol C^{\mathrm T}\boldsymbol A\boldsymbol C=\boldsymbol B$，则称$\boldsymbol A$合同于$\boldsymbol B$，记成$\boldsymbol A \simeq \boldsymbol B$.</p>
+<p>在线性代数，特别是二次型理论中，常常用到矩阵间的合同关系。 </p>
+<p><strong>(二) 性质</strong></p>
+<ol>
+<li><strong>反身性：</strong>任意矩阵都与其自身合同；</li>
+<li><strong>对称性：</strong>矩阵$\boldsymbol A$合同于矩阵$\boldsymbol A$，则可以推出矩阵$\boldsymbol A$合同于矩阵$\boldsymbol B$；</li>
+<li><strong>传递性：</strong>矩阵$\boldsymbol A$合同于矩阵$\boldsymbol B$，矩阵$\boldsymbol B$合同于矩阵$\boldsymbol C$，则可以推出矩阵$\boldsymbol A$合同于矩阵$\boldsymbol C$。</li>
+</ol>
+<p><strong>(三) 矩阵合同的判别/充要条件</strong></p>
+<ul>
+<li>$r(\boldsymbol A) = r(\boldsymbol B)$<ul>
+<li>设$\boldsymbol A$和$\boldsymbol B$均为复数域上的$n$阶对称矩阵，则$\boldsymbol A$与$\boldsymbol B$在复数域上合同等价于$\boldsymbol A$与$\boldsymbol B$的秩相同。</li>
+<li>设$\boldsymbol A$与$\boldsymbol B$均为实数域上的$n$阶对称矩阵，则$\boldsymbol A$与$\boldsymbol B$在实数域上合同等价于$\boldsymbol A$与$\boldsymbol B$有相同的正、负惯性指数(即正、负特征值的个数相等)。</li>
+</ul>
+</li>
+</ul>
+<h5 id="20-6-2-小结：相似、合同、等价"><a href="#20-6-2-小结：相似、合同、等价" class="headerlink" title="20.6.2 小结：相似、合同、等价"></a>20.6.2 小结：相似、合同、等价</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>合同</th>
+<th>相似</th>
+<th>等价</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>$\boldsymbol C^{\mathrm T}\boldsymbol A\boldsymbol C=\boldsymbol B$</td>
+<td>$\boldsymbol P^{-1}\boldsymbol A\boldsymbol P=\boldsymbol B$</td>
+<td>$\boldsymbol P\boldsymbol A\boldsymbol Q=\boldsymbol B$</td>
+</tr>
+<tr>
+<td>记作</td>
+<td>$\boldsymbol A \sim \boldsymbol B$</td>
+<td>$\boldsymbol A \simeq \boldsymbol B$</td>
+<td>$\boldsymbol A \cong \boldsymbol B$</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>相似矩阵必为等价矩阵，等价矩阵未必为相似矩阵，满足$\boldsymbol{PQ=I}$的等价矩阵是相似矩阵。</li>
+<li>合同矩阵必为等价矩阵，等价矩阵未必为合同矩阵，满足 pA=pB,qA=qB的等价矩阵是合同矩阵。</li>
+<li>相似矩阵未必合同，合同矩阵未必相似。</li>
+<li>正交相似矩阵必合同，正交合同矩阵必相似。</li>
+<li>实对称矩阵相似必合同，实对称矩阵合同未必相似。</li>
+</ul>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2022/11/14/thinking-and-record/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%97%AE%E9%A2%98/" rel="tag">问题</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+      <a href="/2022/12/13/coding-standard/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            编码规范
+          
+        </div>
+      </a>
+    
+    
+      <a href="/2022/08/30/Random-process-exercise-knowledge/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">随机过程习题知识</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
