@@ -116,7 +116,7 @@
   <h3 id="1-极限"><a href="#1-极限" class="headerlink" title="1 极限"></a>1 极限</h3><p>微积分，既是一种工具也思想。方法虽看似繁多其实背后蕴含的道理浅显而直观莫要迷失于众多的题目中，关键在于体会方法背后的想。</p>
 <h4 id="1-1-认识极限"><a href="#1-1-认识极限" class="headerlink" title="1.1 认识极限"></a>1.1 认识极限</h4><center><img src="https://pic.imgdb.cn/item/62b6d79a0947543129609682.jpg" style="zoom:50%"></center>
 
-<p>极限式如$\lim\limits<em>{x \to a}f(x)$、$\lim\limits</em>{x \to \infty}f(x)$的含义是：当$x$向某个值(或无穷远)处靠近时，$f(x)$向那个值靠近。例如：$\lim\limits_{x \to 2}(x+3) = 5$。</p>
+<p>极限式如$\lim\limits_{x \to a}f(x)$、$\lim\limits_{x \to \infty}f(x)$的含义是：当$x$向某个值(或无穷远)处靠近时，$f(x)$向那个值靠近。例如：$\lim\limits_{x \to 2}(x+3) = 5$。</p>
 <h4 id="1-2-理解极限"><a href="#1-2-理解极限" class="headerlink" title="1.2 理解极限"></a>1.2 理解极限</h4><p>极限过程是一个动态的过程，不是一个“死”的数字。而至于“$\lim$”符号，是解算出接近的目标。要体会“$x \to a$”和“$x = a$”之间的区别。当$x \to a$时，$(x - a)$是无穷小的，所以我们研究极限时，大部分时候都是在和“无穷小”以及“无穷大”打交道。</p>
 <h4 id="1-3-求函数极限"><a href="#1-3-求函数极限" class="headerlink" title="1.3 求函数极限"></a>1.3 求函数极限</h4><h5 id="1-3-1-求解函数极限"><a href="#1-3-1-求解函数极限" class="headerlink" title="1.3.1 求解函数极限"></a>1.3.1 求解函数极限</h5><ul>
 <li>第一步，代入：将自变量极限值代入极限表达式，如果不能得到结果，继续下一步；<ul>
@@ -245,7 +245,7 @@
 &=\sum_{k=0}^{n} C_{n}^{k} u^{(k)} \cdot v^{(n-k)}
 \end{aligned}</script><p>掌握莱布尼茨公式并不难，它类似于我们高中的“二项式定理”。</p>
 <h5 id="3-2-6-隐函数求导"><a href="#3-2-6-隐函数求导" class="headerlink" title="3.2.6 隐函数求导"></a>3.2.6 隐函数求导</h5><p>隐函数，例如：$y - xe^y = 1$，可以写为$y - xe^y - 1 = 0$，但是无法改写为$y = f(x)$的形式。这时求$y’$，左右两侧同时对$x$求导。注意，有时候我们遇到需要求导的问题，给出的函数并非隐函数的形式，但是转化成隐函数求导反而更简单。</p>
-<h5 id="3-2-7-参数方程求导"><a href="#3-2-7-参数方程求导" class="headerlink" title="3.2.7 参数方程求导"></a>3.2.7 参数方程求导</h5><p>形如$\left{\begin{array}{l}y=f(t) \ x=g(t)\end{array}\right.$，如果求$\dfrac{\text{d}y}{\text{d}x}$，则就等于$\dfrac{\text{d}y}{\text{d}x} = \dfrac{\dfrac{\text{d}y}{\text{d}t}}{\dfrac{\text{d}x}{\text{d}t}}$，也就是分别求出$\dfrac{\text{d}f}{\text{d}t}$、$\dfrac{\text{d}g}{\text{d}t}$再相除。</p>
+<h5 id="3-2-7-参数方程求导"><a href="#3-2-7-参数方程求导" class="headerlink" title="3.2.7 参数方程求导"></a>3.2.7 参数方程求导</h5><p>形如$\left\{\begin{array}{l}y=f(t) \\ x=g(t)\end{array}\right.$，如果求$\dfrac{\text{d}y}{\text{d}x}$，则就等于$\dfrac{\text{d}y}{\text{d}x} = \dfrac{\dfrac{\text{d}y}{\text{d}t}}{\dfrac{\text{d}x}{\text{d}t}}$，也就是分别求出$\dfrac{\text{d}f}{\text{d}t}$、$\dfrac{\text{d}g}{\text{d}t}$再相除。</p>
 <h4 id="3-3-泰勒公式"><a href="#3-3-泰勒公式" class="headerlink" title="3.3 泰勒公式"></a>3.3 泰勒公式</h4><h5 id="3-3-1-什么是泰勒公式"><a href="#3-3-1-什么是泰勒公式" class="headerlink" title="3.3.1 什么是泰勒公式"></a>3.3.1 什么是泰勒公式</h5><p>$x$的多项式函数：$y = a_0 + a_1 x + a_2 x^2 + \cdots + a_n x^n$，$x$的多项式次数越高，对应的曲线形状就越多变。于是我们可以用高次多项式来逼近其他函数，比如三角函数、对数函数、指数函数等等，如下图所示：</p>
 <center><img src="https://img2022.cnblogs.com/blog/2609360/202206/2609360-20220626122151174-193995127.png" style="zoom:50%"></center>
 
@@ -322,9 +322,9 @@ S &=\lim _{n \rightarrow \infty} \frac{1}{n} \mathrm{e}^{\frac{1}{n}}+\frac{1}{n
 (\int_0^x f(t) \text{d}t)' = f(x)</script><p>而这种题目有相应的变体，我们也需要掌握：</p>
 <ul>
 <li>$(\int_0^{g(x)} f(t) \text{d}t)’ = f(g(x)) \cdot g’(x)$，变化的上限是$g(x)$，利用复合函数求导；</li>
-<li>$(\int<em>{a(x)}^{b(x)} f(t) \text{d}t)’ = (\int</em>{0}^{b(x)} f(t) \text{d}t - \int_{0}^{a(x)} f(t) \text{d}t)’$，上下限中均含有变量；</li>
-<li>$(\int<em>{0}^{x} x f(t) \mathrm{d} t)^{\prime}=(x \int</em>{0}^{x} f(t) \mathrm{d} t)^{\prime}=x f(x)+\int_{0}^{x} f(t) \mathrm{d} t$，被积表达式中有可提取的$x$；</li>
-<li>$(\int<em>{0}^{x} f(x t) \mathrm{d} t)^{\prime}=(\int</em>{0}^{x^{2}} \frac{f(u)}{x} \mathrm{~d} u)^{\prime}=(\frac{1}{x} \int_{0}^{x^{2}} f(u) \mathrm{d} u)$，被积函数中$x$和$t$结合。</li>
+<li>$(\int_{a(x)}^{b(x)} f(t) \text{d}t)’ = (\int_{0}^{b(x)} f(t) \text{d}t - \int_{0}^{a(x)} f(t) \text{d}t)’$，上下限中均含有变量；</li>
+<li>$(\int_{0}^{x} x f(t) \mathrm{d} t)^{\prime}=(x \int_{0}^{x} f(t) \mathrm{d} t)^{\prime}=x f(x)+\int_{0}^{x} f(t) \mathrm{d} t$，被积表达式中有可提取的$x$；</li>
+<li>$(\int_{0}^{x} f(x t) \mathrm{d} t)^{\prime}=(\int_{0}^{x^{2}} \frac{f(u)}{x} \mathrm{~d} u)^{\prime}=(\frac{1}{x} \int_{0}^{x^{2}} f(u) \mathrm{d} u)$，被积函数中$x$和$t$结合。</li>
 </ul>
 <h4 id="4-5-定积分运算"><a href="#4-5-定积分运算" class="headerlink" title="4.5 定积分运算"></a>4.5 定积分运算</h4><p>定积分与不定积分类似，也需要求函数的原函数。但是不同的是定积分指定了上、下限，在求得原函数后需要代入、作差，例如$\int_{a}^{b} f(x) \text{d}x = F(b) - F(a) $。</p>
 <p>相比于不定积分，定积分还需要格外注意在引用新字母进行换元方法时，<strong>上下限也需要更换</strong>。</p>

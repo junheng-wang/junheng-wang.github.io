@@ -290,7 +290,7 @@ f(\boldsymbol x_k) - f(\boldsymbol x_{k-n}) \leq \varepsilon</script><p><strong>
 \sum\limits_{k=1}^{\infty} \cos^2 \theta_k \|\triangledown f(\boldsymbol x_k) \|^2 < \infty</script><p>证明部分没有细看，太复杂了。。。！！！</p>
 <blockquote>
 <p>此外，这里感觉很难理解，找了一些参考材料，有时间看看吧</p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010182633/article/details/76554599">漫步最优化二十一——全局收敛</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36342854/article/details/103737901">约束优化方法<em>1</em>——Zoutendijk可行方向法</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/121001066">数值优化|笔记整理（2）——线搜索：步长选取条件的收敛性 - 学弱猹的文章 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010182633/article/details/76554599">漫步最优化二十一——全局收敛</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36342854/article/details/103737901">约束优化方法_1_——Zoutendijk可行方向法</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/121001066">数值优化|笔记整理（2）——线搜索：步长选取条件的收敛性 - 学弱猹的文章 - 知乎</a></p>
 </blockquote>
 <h3 id="第六讲-无约束优化问题（贰）"><a href="#第六讲-无约束优化问题（贰）" class="headerlink" title="第六讲 无约束优化问题（贰）"></a>第六讲 无约束优化问题（贰）</h3><p><img src="https://pic.imgdb.cn/item/629311dc09475431290ae7c7.jpg" style="zoom:50%"></p>
 <h4 id="6-1-收敛速度"><a href="#6-1-收敛速度" class="headerlink" title="6.1 收敛速度"></a>6.1 收敛速度</h4><p>设序列<script type="math/tex">\begin{Bmatrix} \boldsymbol x_k \end{Bmatrix}_{k=1}^{\infty}</script>收敛到<script type="math/tex">\boldsymbol x^*</script>，若存在极限：</p>
@@ -591,7 +591,7 @@ f(\hat{\boldsymbol x}) = \dfrac{1}{2} \hat{\boldsymbol x}^{\mathrm T} \boldsymbo
 <p>注意，有几类特殊的非光滑函数存在不可微点，但是可以将其转化，例如：</p>
 <script type="math/tex; mode=display">f(x) = \max  \begin{Bmatrix} x, x^2 \end{Bmatrix} $$，绘图易知该函数存在两个不可微的点，那么优化问题：</script><p>\min f( x)</p>
 <script type="math/tex; mode=display">
-可以转化为：令$$t = f(\boldsymbol x) $$：</script><p>\min f( x) \<br>\Downarrow \<br>\begin{cases}\text { min } &amp;t \<br>\text{ s.t.} &amp; f( x) \leq t\end{cases} \<br>\Downarrow \<br>\begin{cases}\text { min } &amp;t \<br>\text{ s.t.} &amp;  x \leq t\<br>&amp; x^2\leq t\end{cases}<br><script type="math/tex">推广来看：</script>f(x) = \max \begin{Bmatrix} a_i x + b_i \end{Bmatrix}$$这一类函数可以进行转换。</p>
+可以转化为：令$$t = f(\boldsymbol x) $$：</script><p>\min f( x) \\<br>\Downarrow \\<br>\begin{cases}\text { min } &amp;t \\<br>\text{ s.t.} &amp; f( x) \leq t\end{cases} \\<br>\Downarrow \\<br>\begin{cases}\text { min } &amp;t \\<br>\text{ s.t.} &amp;  x \leq t\\<br>&amp; x^2\leq t\end{cases}<br><script type="math/tex">推广来看：</script>f(x) = \max \begin{Bmatrix} a_i x + b_i \end{Bmatrix}$$这一类函数可以进行转换。</p>
 </blockquote>
 <p>&gt;</p>
 </li>

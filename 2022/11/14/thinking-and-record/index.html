@@ -184,9 +184,9 @@ e(n)= s(n)-s(n) \tag{2.1.4}</script><p>显然$e(n)$可能是正值，也可能�
 <p><strong><font color="red">维纳-霍夫方程的求解</font></strong></p>
 <p>为了按$(2.1.5)$式所示的最小均方误差准则来确定维纳滤波器的冲激响应$h(n)$，令$\xi(n)$对$h(j)$的导数等于零，即可得：</p>
 <script type="math/tex; mode=display">
-R_{xs}(m) = \sum_i h(i)R_{xx}(m-i) \tag{2.1.6}</script><p>式中，$R<em>{xs}(m)$是$s(n)$与$x(n)$的互相关函数，$R</em>{xx}(m)$是$x(n)$的自相关函数，分别定义为：</p>
+R_{xs}(m) = \sum_i h(i)R_{xx}(m-i) \tag{2.1.6}</script><p>式中，$R_{xs}(m)$是$s(n)$与$x(n)$的互相关函数，$R_{xx}(m)$是$x(n)$的自相关函数，分别定义为：</p>
 <script type="math/tex; mode=display">
-R_{xx} = E[x(n)s(n+m)] \qquad R_{xx} = E[x(n)x(n+m)]</script><p>式$(2.1.6)$称为维纳滤波器的标准方程或维纳-霍夫(Wiener-Hopf)方程。若已知$R<em>{xs}(m)$和$R</em>{xx}(m)$，那么解此方程即可求的维纳滤波器的冲激响应。</p>
+R_{xx} = E[x(n)s(n+m)] \qquad R_{xx} = E[x(n)x(n+m)]</script><p>式$(2.1.6)$称为维纳滤波器的标准方程或维纳-霍夫(Wiener-Hopf)方程。若已知$R_{xs}(m)$和$R_{xx}(m)$，那么解此方程即可求的维纳滤波器的冲激响应。</p>
 <p>式$(2.1.6)$所示标准方程右端的求和范围即$i$的取值范围没有具体标明，实际上有三种情况：</p>
 <ul>
 <li>有限冲激响应(FIR)维纳滤波器，$i$从$0$到$N-1$取得有限个整数值；</li>
@@ -481,7 +481,7 @@ E(X)  &= E(E(X \mid Y)) \\
 <ul>
 <li><p>统计量只与样本有关，不能与未知参数有关。</p>
 <ul>
-<li>例如，$X \sim N(\mu, \sigma^2)$，当$\mu$和$\sigma^2$皆为未知参数时，$\sum<em>{i=1}^{n}(X_i-\mu)^2$和$\sum</em>{i=1}^{n}\dfrac{X<em>i^2}{\sigma^2}$都不是统计量，而$\sum</em>{i=1}^{n}X<em>i ^2$和$\sum</em>{i=1}^{n}X_i^2$均是统计量</li>
+<li>例如，$X \sim N(\mu, \sigma^2)$，当$\mu$和$\sigma^2$皆为未知参数时，$\sum_{i=1}^{n}(X_i-\mu)^2$和$\sum_{i=1}^{n}\dfrac{X_i^2}{\sigma^2}$都不是统计量，而$\sum_{i=1}^{n}X_i ^2$和$\sum_{i=1}^{n}X_i^2$均是统计量</li>
 </ul>
 </li>
 <li>由于样本具有两重性，同时统计量是样本的函数，因此统计量也具有两重性。正因为统计量可视为随机变量(或随机向量)，因此才有概率分布可言，这是利用统计量进行统计推断的依据。 </li>
@@ -494,14 +494,14 @@ E(X)  &= E(E(X \mid Y)) \\
 </ul>
 <h5 id="17-4-1-顺序统计量的定义"><a href="#17-4-1-顺序统计量的定义" class="headerlink" title="17.4.1 顺序统计量的定义"></a>17.4.1 顺序统计量的定义</h5><p>顺序统计量：</p>
 <script type="math/tex; mode=display">
-X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X <em> {(1)}=\min\begin{Bmatrix}X_1,\dots,X_n\end{Bmatrix}$，$X</em>{(n)}=\max\begin{Bmatrix}X<em>1, \cdots, X_n\end{Bmatrix}$，$X</em>{(k)}$为$X<em>1, \cdots, X_n$的递增排序的第$k$位。$X </em> {(n)}-X{(1)}$样本极差。</p>
+X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X _ {(1)}=\min\begin{Bmatrix}X_1,\dots,X_n\end{Bmatrix}$，$X_{(n)}=\max\begin{Bmatrix}X_1, \cdots, X_n\end{Bmatrix}$，$X_{(k)}$为$X_1, \cdots, X_n$的递增排序的第$k$位。$X _ {(n)}-X{(1)}$样本极差。</p>
 <h5 id="17-4-2-关于顺序统计量的理解"><a href="#17-4-2-关于顺序统计量的理解" class="headerlink" title="17.4.2 关于顺序统计量的理解"></a>17.4.2 关于顺序统计量的理解</h5><p>其实到写到这为止感觉还是没有透彻理解顺序统计量，我自己关于顺序统计量主要有两个疑点：</p>
 <ul>
 <li>从表面上看，顺序统计量就是对随机变量大小排序，但是我们知道随机变量是不能比较大小的。</li>
 <li>其次，为什么顺序统计量是一个随机变量，感觉随机变量排序后只是一个大小的比较结果，咋就能视为一个随机变量了呢？</li>
 </ul>
 <p>首先，先说一下我的简单理解：</p>
-<p>从总体中抽出$n$个样本$X<em>1, \cdots, X_n$，我们想要了解这些样本中大小排第$k$的样本(随机变量)的分布情况$F</em>{X<em>{(k)}}(x_k) = P(X </em> {(k)} &lt; x_k)$，由于$k$的取值可以从$1 \sim n$，即我们先研究排序中每一位置的分布情况，所以何不就直接从小到大排个序，这也就导出了顺序统计量。</p>
+<p>从总体中抽出$n$个样本$X_1, \cdots, X_n$，我们想要了解这些样本中大小排第$k$的样本(随机变量)的分布情况$F_{X_{(k)}}(x_k) = P(X _ {(k)} &lt; x_k)$，由于$k$的取值可以从$1 \sim n$，即我们先研究排序中每一位置的分布情况，所以何不就直接从小到大排个序，这也就导出了顺序统计量。</p>
 <p>其次，我们看一下ChatGPT的回答：</p>
 <ul>
 <li>问：随机变量能比较大小吗？<ul>
@@ -576,7 +576,7 @@ X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X <em> {(1)}=\min\be
 </blockquote>
 <h4 id="20-2-基本运算"><a href="#20-2-基本运算" class="headerlink" title="20.2 基本运算"></a>20.2 基本运算</h4><ul>
 <li><strong>乘法：</strong>设$\boldsymbol A$是一个$m \times s$矩阵，$\boldsymbol B$是一个$s \times t$矩阵(即左矩阵的列数=右矩阵的行数)，则乘积$\boldsymbol{AB}$是一个$m \times t$矩阵，记为$\boldsymbol C$。</li>
-<li><strong>矩阵多项式：</strong> 设$\boldsymbol A$是$n$阶矩阵，$f(x)=a<em>m x^m+ \cdots +a_1 x+a_0$是$x$的多项式，则称$a_m\boldsymbol A^m+a</em>{m-1}\boldsymbol A^{m-1}+ \cdots +a_1\boldsymbol A+a_0 \boldsymbol I$为矩阵多项式，记为$f(\boldsymbol A)$。</li>
+<li><strong>矩阵多项式：</strong> 设$\boldsymbol A$是$n$阶矩阵，$f(x)=a_m x^m+ \cdots +a_1 x+a_0$是$x$的多项式，则称$a_m\boldsymbol A^m+a_{m-1}\boldsymbol A^{m-1}+ \cdots +a_1\boldsymbol A+a_0 \boldsymbol I$为矩阵多项式，记为$f(\boldsymbol A)$。</li>
 </ul>
 <p>注意一下几点：</p>
 <ol>
@@ -586,7 +586,7 @@ X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X <em> {(1)}=\min\be
 <li>$\boldsymbol{AB} = \boldsymbol O$可推出$\boldsymbol B$的列向量是$\boldsymbol{Ax}= \boldsymbol 0$的解；</li>
 </ol>
 <h4 id="20-3-矩阵基础操作"><a href="#20-3-矩阵基础操作" class="headerlink" title="20.3 矩阵基础操作"></a>20.3 矩阵基础操作</h4><h5 id="20-3-1-矩阵转置"><a href="#20-3-1-矩阵转置" class="headerlink" title="20.3.1 矩阵转置"></a>20.3.1 矩阵转置</h5><p><strong>(一) 定义</strong></p>
-<p>将$m \times n$型矩阵$\boldsymbol A=(a<em>{ij})</em>{m \times n}$的行列互换的到的$n \times m$矩阵$(a<em>{ji})</em>{n \times m}$，称为$\boldsymbol A$的转置矩阵。 </p>
+<p>将$m \times n$型矩阵$\boldsymbol A=(a_{ij})_{m \times n}$的行列互换的到的$n \times m$矩阵$(a_{ji})_{n \times m}$，称为$\boldsymbol A$的转置矩阵。 </p>
 <p><strong>(二) 性质</strong></p>
 <ol>
 <li>$(\boldsymbol A + \boldsymbol B)^{\mathrm T} = \boldsymbol A^{\mathrm{T}} + \boldsymbol B^{\mathrm{T}}$</li>
@@ -595,8 +595,8 @@ X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X <em> {(1)}=\min\be
 </ol>
 <h5 id="20-3-2-伴随矩阵"><a href="#20-3-2-伴随矩阵" class="headerlink" title="20.3.2 伴随矩阵"></a>20.3.2 伴随矩阵</h5><p><strong>(一) 余子式和代数余子式</strong></p>
 <ul>
-<li><strong>余子式：</strong>是指在$n$阶行列式中，把元素$a<em>{ij}$(其中$i$和$j$分别表示行和列)所在的第$i$行和第$j$列划去后，留下来的$n-1$阶行列式叫做元素$a</em>{ij}$的余子式，记做$M_{ij}$。</li>
-<li><strong>代数余子式：</strong>在余子式的基础上，记$A<em>{ij}=(-1)^{i+j}M</em>{ij}$，叫做元素$a_{ij}$的代数余子式。</li>
+<li><strong>余子式：</strong>是指在$n$阶行列式中，把元素$a_{ij}$(其中$i$和$j$分别表示行和列)所在的第$i$行和第$j$列划去后，留下来的$n-1$阶行列式叫做元素$a_{ij}$的余子式，记做$M_{ij}$。</li>
+<li><strong>代数余子式：</strong>在余子式的基础上，记$A_{ij}=(-1)^{i+j}M_{ij}$，叫做元素$a_{ij}$的代数余子式。</li>
 </ul>
 <blockquote>
 <p>注意：<br>只有方阵才有余子式，余子式和代数余子式都是一个行列式，其结果是一个数而不是矩阵。 </p>
@@ -607,7 +607,7 @@ X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X <em> {(1)}=\min\be
 a_ {11}& a_ {12} & a_ {13} \\
 a_ {21} & a_ {22} & a_ {23} \\
 a_ {31} & a_ {32} & a_ {33}
-\end{array}\right|</script><p>根据概念，所谓$a<em>{32}$的余子式就是把$a</em>{32}$所在的行和列划去，留下来的行列式，那么$a_{32}$的余子式就是：</p>
+\end{array}\right|</script><p>根据概念，所谓$a_{32}$的余子式就是把$a_{32}$所在的行和列划去，留下来的行列式，那么$a_{32}$的余子式就是：</p>
 <script type="math/tex; mode=display">
 M_{32}= \left|\begin{array}{ll}
 a_ {11}& a_ {13} \\
@@ -619,7 +619,7 @@ a_ {11}& a_ {13} \\
 a_ {21} & a_ {23}
 \end{array}\right|</script><p><strong>(二) 伴随矩阵</strong></p>
 <p>矩阵$\boldsymbol A​$的伴随矩阵一般记为$\boldsymbol A^*​$。由矩阵$\boldsymbol A​$的所有代数余子式构成，列对应行。</p>
-<p>方阵$\boldsymbol A = (a<em>{ij})</em>{n \times n}$的各个元素的代数余子式转置构成伴随矩阵$\boldsymbol A^*$：</p>
+<p>方阵$\boldsymbol A = (a_{ij})_{n \times n}$的各个元素的代数余子式转置构成伴随矩阵$\boldsymbol A^*$：</p>
 <script type="math/tex; mode=display">
 \boldsymbol A^* = \left(\begin{array}{cccc}
 A_{11} & A_{21} & \cdots & A_{n1} \\

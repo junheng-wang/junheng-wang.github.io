@@ -277,7 +277,7 @@ $$
 \Delta R_w = \frac{1}{T}</script><p>其中，T是实际信号的时间长度。</p>
 <p><strong>(2) FFT分辨率</strong></p>
 <script type="math/tex; mode=display">
-\Delta R_f = \frac{f_s}{N_{\rm{FFT}}}</script><p>其中，$f<em>s$为采样频率(the sampling frequency)，$N</em>{\rm{FFT}}$为FFT的点数。$\Delta R_f $代表了FFT频率轴上的频率取值的间隔(Spacing)。 </p>
+\Delta R_f = \frac{f_s}{N_{\rm{FFT}}}</script><p>其中，$f_s$为采样频率(the sampling frequency)，$N_{\rm{FFT}}$为FFT的点数。$\Delta R_f $代表了FFT频率轴上的频率取值的间隔(Spacing)。 </p>
 <p>值得注意的是，可能有很好的FFT分辨率，但却不一定能够很好的把2个频率成分简单的分开。同样，可能有很高的波形分辨率，但波形的能量峰值会通过整个频谱而分散开（这是因为FFT的频率泄漏现象）。</p>
 <p>我们知道，信号的离散傅里叶变换（DFT）或快速傅里叶变换（FFT）是对波形的任何一边补零形成的无限序列进行计算的。这就是，为什么FFT的每个频率单元（bin）都具有明显的sinc 波的形状。</p>
 <p>波形频率分辨率1/<em>T</em>与一个sinc函数空值间隔（the space between nulls）是一样的。<font color="red"><strong>[1]</strong></font></p>

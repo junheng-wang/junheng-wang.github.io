@@ -284,13 +284,13 @@ x(n) = x_e(n)+x_o(n)</script><p>其中：共轭对称分量——$x_e(n) = \dfra
 <p>因此，得到圆周共轭对称分量和圆周共轭反对称分量的定义：</p>
 <p>$N$点长的序列$x(n)$，可以分解为<font color="red">圆周共轭对称分量+圆周共轭反对称分量</font></p>
 <script type="math/tex; mode=display">
-x(n) = x_{ep}(n) + x_{op}(n)</script><p>其中：圆周共轭对称分量——$x<em>{ep}(n) = \dfrac{x(n)+x^*(N-n)}{2}$，圆周共轭反对称分量——$x</em>{op}(n) = \dfrac{x(n)-x^*(N-n)}{2}$</p>
+x(n) = x_{ep}(n) + x_{op}(n)</script><p>其中：圆周共轭对称分量——$x_{ep}(n) = \dfrac{x(n)+x^<em>(N-n)}{2}$，圆周共轭反对称分量——$x_{op}(n) = \dfrac{x(n)-x^</em>(N-n)}{2}$</p>
 <p>注意，前提是$x(n)$为$N$点长序列，并且n的范围是$0≤n≤N-1$，圆周共轭对称/反对称分量的长度仍是$N$，$n$的范围也不变。而且如前所述，$n=0$时，$x(N-0)=x(N)=x(0)$。<br>上面，是以$x(n)$为例，同样，对于DFT $X(k)$，也可以定义圆周共扼对称/反对称分量，不再赘述。<br>解释完这些，我们的核心公式就出来啦（证明过程省略，直接看结论)。<br>序列$x(n)$及其DFT的实部/虚部与圆周共轭对称/反对称分量之间的关系，见下图：</p>
 <p><img src="https://pic.imgdb.cn/item/61fa317c2ab3f51d91e0bda3.jpg" style="zoom:70%"></p>
 <p>(此处省略若干公式)<br>翻译成人话(绕口令)就是:<br>序列实部的DFT是序列DFT的共轭对称分量<br>序列虚部×j的DFT是序列DFT的共轭反对称分量<br>序列共轭对称分量的DFT是序列DFT的实部<br>序列共轭反对称分量的DFT是序列DFT的虚部巧j<br>是不是像绕口令，但总比公式强多了。<br>这—切，意义何在?<br><strong>第一，从图形上可以淋漓尽致地体现DFT隐含的周期性。</strong><br><strong>第二，为DFT的简化运算提供了思路。</strong></p>
 </li>
 </ul>
-<h5 id="4-Parseval定理"><a href="#4-Parseval定理" class="headerlink" title="4. Parseval定理"></a>4. Parseval定理</h5><p>有限长序列的能量：$\sum\limits<em>{n=0}^{N-1}|x(n)|^{2}=\dfrac{1}{N} \sum\limits</em>{k=0}^{N-1}|X(k)|^{2}$</p>
+<h5 id="4-Parseval定理"><a href="#4-Parseval定理" class="headerlink" title="4. Parseval定理"></a>4. Parseval定理</h5><p>有限长序列的能量：$\sum\limits_{n=0}^{N-1}|x(n)|^{2}=\dfrac{1}{N} \sum\limits_{k=0}^{N-1}|X(k)|^{2}$</p>
 <h4 id="五-频域抽样"><a href="#五-频域抽样" class="headerlink" title="(五) 频域抽样"></a>(五) 频域抽样</h4><p>实际上，<font color="red"><strong>DFT就是频域抽样</strong></font>。包括三个问题，这三个问题环环相扣、层层推进。</p>
 <h5 id="1-DFT与DTFT、z变换的关系"><a href="#1-DFT与DTFT、z变换的关系" class="headerlink" title="1. DFT与DTFT、z变换的关系"></a>1. DFT与DTFT、z变换的关系</h5><p>先从公式上看三个变换的关系，再结合z平面的单位圆的概念，从图形上理解。如下图:</p>
 <p><img src="https://pic.imgdb.cn/item/61fa339a2ab3f51d91e2d239.jpg" style="zoom:70%"></p>
