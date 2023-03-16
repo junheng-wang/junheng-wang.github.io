@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">9.2k</span>
+            <span class="post-count">9k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">35 分钟</span>
+            <span class="post-count">34 分钟</span>
         </span>
     </span>
 </div>
@@ -113,7 +113,7 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="一、模拟频率、模拟角频率、数字频率"><a href="#一、模拟频率、模拟角频率、数字频率" class="headerlink" title="一、模拟频率、模拟角频率、数字频率"></a>一、模拟频率、模拟角频率、数字频率</h3><h4 id="1-模拟频率-f"><a href="#1-模拟频率-f" class="headerlink" title="1. 模拟频率$f$"></a>1. 模拟频率$f$</h4><p>包括在模拟电路、高频电路以及传感器课程上，都是以f作为频率响应函数的横坐标。使用f的好处是其真实反映了实际系统的工作情况，从$0$到$\infty$，反映了实际模拟信号振荡速度的快慢。  </p>
+  <h3 id="一、模拟频率、模拟角频率、数字频率"><a href="#一、模拟频率、模拟角频率、数字频率" class="headerlink" title="一、模拟频率、模拟角频率、数字频率"></a>一、模拟频率、模拟角频率、数字频率</h3><h4 id="1-模拟频率-f"><a href="#1-模拟频率-f" class="headerlink" title="1. 模拟频率$f$"></a>1. 模拟频率$f$</h4><p>包括在模拟电路、高频电路以及传感器课程上，都是以$f$作为频率响应函数的横坐标。使用f的好处是其真实反映了实际系统的工作情况，从$0$到$\infty$，反映了实际模拟信号振荡速度的快慢。  </p>
 <h4 id="2-模拟角频率-Omega"><a href="#2-模拟角频率-Omega" class="headerlink" title="2. 模拟角频率$\Omega$"></a>2. 模拟角频率$\Omega$</h4><p>$\Omega=2πf$，写成$\cos(\Omega t)$来描述模拟余弦函数。此时$\Omega$的取值也是从$0$到$\infty$，这体现出模拟(角)频率没有周期性的特点。</p>
 <h4 id="3-数字角频率-omega"><a href="#3-数字角频率-omega" class="headerlink" title="3. 数字角频率$\omega$"></a>3. 数字角频率$\omega$</h4><p>$\omega$完全颠覆了我们过往对于频率的认识，首先要明确的是数字信号的获得是通过对模拟信号采样的方式。</p>
 <p>它的引入可从$\cos(\Omega t)$开始：$\cos(\Omega t)$中相位变化一周期($2π$)所需时间为$T$，则模拟角频率定义成$\Omega = \dfrac{2π}{T}=2πf$。对于该余弦信号，采样后变成了一个离散数字序列，此时再谈过了多少时间走完一个周期已经没有意义，而是过了间隔$N$相位刚好变化一个周期。故数字角频率推导出为$\omega = \dfrac{2\pi}{N}$，余弦信号则为$cos(\omega n)$。既然$N$是由对应一段时间$T$采样而来，那么$N = T*f_s = \dfrac{T}{t_s}$($f_s$为采样率，$t_s$为对应的采样间隔)，自然而然，$\omega = \dfrac{\Omega}{f_s} = \dfrac{\Omega}{t_s} = \dfrac{2πf}{f_s}$。</p>
@@ -125,9 +125,13 @@
 <p>分析信号的频谱特性时，经常要对信号进行傅里叶变换，但傅里叶变换是以$2π$为周期，而时域里的信号角频率的范围是很宽的，为什么傅里叶变换中的$0 \sim 2π$就可以代表信号整个频率范围呢？</p>
 </blockquote>
 <p>1、模拟信号的频率：模拟频率越大，信号变化越快。拿构成模拟信号的频率分量来说，比如$\cos(\Omega t)$。</p>
-<p>2、数字信号是对模拟信号[等间隔]抽样得到的，即$\cos(\Omega t_s n)=\cos(\omega n)​$，$ω=Ω t_s​$[称为数字频率]，由于<strong>离散[数字]信号的自变量<font color="red">n是整数</font></strong>，因此数字频率$\omega​$与$ω+2πM​$是同一个数字频率——即$\cos(\omega n) = \cos[(\omega+2πM)n]​$。对离散信号作傅里叶变换，实际上是将离散信号[量化后就是数字信号]分解为$e^{jωn}​$的线性组合，其频谱就具有周期性，频率为$\omega​$的频谱等于频率为$\omega+2πM​$的频谱。</p>
-<p>3、再来看$\cos(\omega n)$是构成实数离散信号的基本信号，它最大的频率是多少呢？周期最小$N=1$，故变化最快的是$ω=π$；变化最慢的是直流$ω=0$。故$ω=0$频率最小，$w=π$最高频率，对应模拟信号频率为$\Omega=\dfrac{ω}{T}=\dfrac{π}{T}=\dfrac{f_s}{2}$(采样频率的一半)。对实数离散信号来说，$0 \sim 2π$的频谱图是以$\omega=\pi$对称的。</p>
-<p>4、由时域采样定理，采样频率$f_s$最小为被采样模拟信号最高频率的2倍；故可认为被采样模拟信号最高频率为$\dfrac{f_s}{2}$，这个频率对应数字频率的$π$。</p>
+<p>2、数字信号是对模拟信号[等间隔]抽样得到的，即$\cos(\Omega t_s n)=\cos(\omega n)$，$ω=Ω t_s$[称为数字频率]，由于<strong>离散[数字]信号的自变量<font color="red">n是整数</font></strong>，因此数字频率$\omega$与$ω+2πM$是同一个数字频率，即：</p>
+<script type="math/tex; mode=display">
+\cos(\omega n) = \cos[(\omega+2πM)n]</script><p>因此对离散信号作傅里叶变换，实际上是将离散信号[量化后就是数字信号]分解为$e^{jωn}$的线性组合，其频谱就具有周期性，频率为$\omega$的频谱等于频率为$\omega+2πM$的频谱。</p>
+<p>3、再来看$\cos(\omega n)$是构成实数离散信号的基本信号，它最大的频率是多少呢？周期最小$N=1$，故变化最快的是$ω=π$；变化最慢的是直流$ω=0$。故$ω=0$频率最小，$w=π$最高频率，对应模拟信号频率为：</p>
+<script type="math/tex; mode=display">
+\Omega=\dfrac{ω}{T}=\dfrac{π}{T}=\dfrac{f_s}{2}</script><p>即为采样频率的一半。对实数离散信号来说，$0 \sim 2π$的频谱图是以$\omega=\pi$对称的。</p>
+<p>4、由时域采样定理，采样频率$f_s$最小为被采模拟信号最高频率的2倍；故可认为被采模拟信号最高频率为$\dfrac{f_s}{2}$，这个频率对应数字频率的$π$。</p>
 <p>5、实际中即使模拟信号的最高频率是无穷大，但是可以通过滤波，滤去无用的高频分量，再对他抽样以避免频谱混叠。</p>
 <p><strong>e.g.</strong> $f_s=1 \mathrm{Hz}$，$\Omega$分别等于$\dfrac{π}{8}$和$\dfrac{17\pi}{8}$，得到如下两幅图。可以看出虽然模拟角频率$\Omega$增加了$2π$，但由于采样点数和采样值都相同，所以实际的离散信号是一回事。 </p>
 <p><img src="https://pic1.zhimg.com/80/v2-f23a15fb4a8a85a2c9885597f2d54a70_720w.jpg" alt> </p>
@@ -240,117 +244,72 @@ x[n] = \sum_{k=0}^{N-1}X[k]e^{j\frac{2\pi}{N}kn}</script><p>由上知， <strong
 <p>另外，<strong>DFT</strong>也可以从<strong>DTFT</strong>抽样过来，<strong>DTFT</strong>作为连续信号，均匀采样$N$个点，就变成<strong>DFT</strong>了。</p>
 <script type="math/tex; mode=display">
 X[k] = \sum_{n = 0}^{N-1} x[n]e^{-j\frac{2\pi}{N}nk}</script><script type="math/tex; mode=display">
-x[n] = \frac{1}{N} \sum_{k = 0}^{N-1} X[k]e^{j\frac{2\pi}{N}nk}</script><font color="red">**[6]**</font>可以发现，DFT与离散傅里叶级数（DFS）仅有一点点区别，那就是DFT在逆变换时，即在合成源信号时，会乘上1/N，而DFS相反，除开这一点并无区别，所以这就表示是，<font color="red">**DFT实际上是，以信号的N点为周期的信号的DFS**</font>，那么DFT和DTFT是什么关系呢？从上述角度上来讲，只能说当DFT所取点数趋于无穷时，那么DFT就可以趋近于DTFT，这也是傅里叶变换的来源，那么书上不是有DFT是DTFT的采样的结论么？该结论是怎样来的？有条件么？
-
-在ω轴上$0 \leq \omega \leq 2\pi$范围内，对DTFT的变换结果$X(e^{j\omega})$以N个等间隔频率$\omega_k = \dfrac{2\pi k}{N}，(0 \leq k \leq N-1)$均匀抽样，可得：
-$$
-X(e^{j\omega})|_{\omega = \frac{2\pi k}{N}}=\sum_{ n= 0}^{N-1}x[n]e^{\frac{j2\pi kn}{N}}，0 \leq k \leq N-1
-$$
-个人认为，这也解答了为何DFS与DFT有个系数上的差异，这就是为了在DTFT与DFT的满足采样特点的吻合。
-
-在许多书上，离散时间傅里叶变换都是由是连续信号采样得到的离散信号而得到，这样来介绍，由于有采样频率等的影响，这样会对连续、离散信号产生一定的混淆，个人认为，离散傅里叶变换时离散时间信号的频域特性，并不一定非得和采样、连续信号等产生关系，离散信号可以是由连续信号采样，归一化产生，也可以是其本身就是离散的，如年月日，像素坐标等，如果离散信号是由连续信号采样得到的，那么，当用给定的采样频率，对连续信号采样，归一化后，那么就产生了一个新的离散信号，至于其傅里叶变换和原来的傅里叶变换有何关系，这就是另外一个话题了。
-
-傅里叶变换的核心思想便是能让任意一个信号都可以由一种基本信号来合成，这个基本信号对于**连续时间信号便是：exp(jωt)，离散时间信号便是：exp(jωn)**。
-
-对于DTFT的定义式，可以发现其积分是由[-π, π]，而对于FT的定义式积分是从（-∞, ∞），<font color="red">**其根本原因就是——基本信号存在差异**</font>，对于exp(jωt)，由于t可以取任意值因此其不存在周期，当ω取任意值，exp(jωt)都会变为一个独一无二的信号，故FT需要从（-∞, ∞），让每一个exp(jωt)都能成为被合成信号的成分（当然这还得取决于前面系数，即傅里叶系数），而对于DTFT而言，由于其基本信号exp(jωn)中n只能取正整数故周期为2π，故当要合成新信号时，只需要取任何一个2pi区段就可获得合成信号的所有成分，故上式取[-π, π]即可，当然，这样也很容易得出F(exp(jw))也是周期的。<font color="red">**[6]**</font>
-
-
-
-
-
+x[n] = \frac{1}{N} \sum_{k = 0}^{N-1} X[k]e^{j\frac{2\pi}{N}nk}</script><p><strong><font color="red">[6]</font></strong>可以发现，DFT与离散傅里叶级数(DFS)仅有一点点区别，那就是DFT在逆变换时，即在合成源信号时，会乘上1/N，而DFS相反，除开这一点并无区别，所以这就表示是，<strong><font color="red">DFT实际上是，以信号的N点为周期的信号的DFS</font></strong>，那么DFT和DTFT是什么关系呢？从上述角度上来讲，只能说当DFT所取点数趋于无穷时，那么DFT就可以趋近于DTFT，这也是傅里叶变换的来源，那么书上不是有DFT是DTFT的采样的结论么？该结论是怎样来的？有条件么？</p>
+<p>在$\omega$轴上$[0 ,2\pi]$范围内，对DTFT的变换结果$X(e^{j\omega})$以$N$个等间隔频率$\omega_k = \dfrac{2\pi k}{N}，(0 \leq k \leq N-1)$均匀抽样，可得：</p>
+<script type="math/tex; mode=display">
+X(e^{j\omega})|_{\omega = \frac{2\pi k}{N}}=\sum_{ n= 0}^{N-1}x[n]e^{\frac{j2\pi kn}{N}}，0 \leq k \leq N-1</script><p>个人认为，这也解答了为何DFS与DFT有个系数上的差异，这就是为了在DTFT与DFT的满足采样特点的吻合。</p>
+<p>在许多书上，离散时间傅里叶变换都是由是连续信号采样得到的离散信号而得到，这样来介绍，由于有采样频率等的影响，这样会对连续、离散信号产生一定的混淆，个人认为，离散傅里叶变换时离散时间信号的频域特性，并不一定非得和采样、连续信号等产生关系，离散信号可以是由连续信号采样，归一化产生，也可以是其本身就是离散的，如年月日，像素坐标等，如果离散信号是由连续信号采样得到的，那么，当用给定的采样频率，对连续信号采样，归一化后，那么就产生了一个新的离散信号，至于其傅里叶变换和原来的傅里叶变换有何关系，这就是另外一个话题了。</p>
+<p>傅里叶变换的核心思想便是能让任意一个信号都可以由一种基本信号来合成，这个基本信号对于连续时间信号便是：$\exp(j\omega t)$，离散时间信号便是：$\exp(j\omega n)$。</p>
+<p>对于DTFT的定义式，可以发现其积分是由$[-\pi, \pi]$，而对于FT的定义式积分是从$(-\infty, \infty)$，<strong><font color="red">其根本原因就是——基本信号存在差异</font></strong>，对于$\exp(j\omega t)$，由于$t$可以取任意值因此其不存在周期，当$\omega$取任意值，$\exp(j\omega t)$都会变为一个独一无二的信号，故FT需要从$(-\infty, \infty)$，让每一个$\exp(j\omega t)$都能成为被合成信号的成分（当然这还得取决于前面系数，即傅里叶系数），而对于DTFT而言，由于其基本信号$\exp(j\omega n)$中$n$只能取正整数故周期为$2\pi$，故当要合成新信号时，只需要取任何一个$2\pi$区段就可获得合成信号的所有成分，故上式取$[-\pi, \pi]$即可，当然，这样也很容易得出$F(\exp(jw))$也是周期的。<strong><font color="red">[6]</font></strong></p>
 <h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p>[1]数字信号处理（DTFT与DFT、DFS的详细讲解以及FFT算法）<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554964/article/details/108025590">https://blog.csdn.net/qq_44554964/article/details/108025590</a></p>
 <p>[2]傅里叶变换系列学习（3)——FS,FT,DTFT,DFS,DFT,FFT - 技术派到了中年的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/97835957">https://zhuanlan.zhihu.com/p/97835957</a> </p>
 <p>[3]一幅图弄清DFT与DTFT,DFS的关系 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/BitArt/archive/2012/11/24/2786390.html">https://www.cnblogs.com/BitArt/archive/2012/11/24/2786390.html</a></p>
-<p>[4]学习笔记-DTFT、DFS和DFT的联系 <a target="_blank" rel="noopener" href="https://blog.csdn.net/wuyiqingtian/article/details/78838503?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164346473116780269843335%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164346473116780269843335&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-78838503.first_rank_v2_pc_rank_v29&amp;utm_term=dft%E4%B8%8Edfs%E7%9A%84%E5%85%B3%E7%B3%BB&amp;spm=1018.2226.3001.4187">https://blog.csdn.net/wuyiqingtian/article/details/78838503?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522164346473116780269843335%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=164346473116780269843335&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-78838503.first_rank_v2_pc_rank_v29&amp;utm_term=dft%E4%B8%8Edfs%E7%9A%84%E5%85%B3%E7%B3%BB&amp;spm=1018.2226.3001.4187</a></p>
-<p>[5]五种傅里叶变换的分析（FT、FS、DTFT、DFT、DFS）<a target="_blank" rel="noopener" href="https://www.codenong.com/cs106440896">https://www.codenong.com/cs106440896</a></p>
-<p>[6]关于对傅里叶变换的一些理解 <a target="_blank" rel="noopener" href="https://blog.51cto.com/rainlee/1629264">https://blog.51cto.com/rainlee/1629264</a></p>
-<p>[7]数字信号处理系列串讲第6篇（离散信号的频域分析之三）——离散傅里叶变换DFT（1）<a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808337.shtml">http://www.360doc.com/content/19/0611/18/908538_841808337.shtml</a></p>
+<p>[4]五种傅里叶变换的分析（FT、FS、DTFT、DFT、DFS）<a target="_blank" rel="noopener" href="https://www.codenong.com/cs106440896">https://www.codenong.com/cs106440896</a></p>
+<p>[5]关于对傅里叶变换的一些理解 <a target="_blank" rel="noopener" href="https://blog.51cto.com/rainlee/1629264">https://blog.51cto.com/rainlee/1629264</a></p>
+<p>[6]数字信号处理系列串讲第6篇（离散信号的频域分析之三）——离散傅里叶变换DFT（1）<a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808337.shtml">http://www.360doc.com/content/19/0611/18/908538_841808337.shtml</a></p>
 <hr>
 <h3 id="五、采样频率、频率分辨率"><a href="#五、采样频率、频率分辨率" class="headerlink" title="五、采样频率、频率分辨率"></a>五、采样频率、频率分辨率</h3><h4 id="1-采样定理"><a href="#1-采样定理" class="headerlink" title="1. 采样定理"></a>1. 采样定理</h4><ul>
 <li>时域采样定理的一种表述方式是：当时间信号函数$f(t)$的最高频率分量为$f_M$时，$f(t)$的值可由一系列采样间隔$t_s \leq \dfrac{1}{2×f_M}$的采样值来确定，即采样点的重复频率$f ≥ 2×f_M$。时域采样定理是采样误差理论、随机变量采样理论和多变量采样理论的基础。  </li>
-<li>频域采样定理：对于时间上受限制的连续信号$f(t)$ (即当$│t│&gt;t_m $时，$f(t)=0$，这里信号的持续时间是$-t_m,t_m$)，若其频谱为$F(ω)$，则可在频域上用一系列离散的采样值来表示，只要这些采样点的频率间隔$\omega \leq \dfrac{\pi}{t_m}$</li>
+<li>频域采样定理：对于时间上受限制的连续信号$f(t)$ (即当$│t│&gt;t_m $时，$f(t)=0$，这里信号的持续时间是$(-t_m,t_m)$，若其频谱为$F(ω)$，则可在频域上用一系列离散的采样值来表示，只要这些采样点的频率间隔$\omega \leq \dfrac{\pi}{t_m}$</li>
 </ul>
-<h4 id="2-FFT频率分辨率"><a href="#2-FFT频率分辨率" class="headerlink" title="2. FFT频率分辨率"></a>2. FFT频率分辨率</h4><p><strong><font color="red">[1]</font></strong>这里涉及到两种意义下的分辨率问题，一种叫“波形频率分辨率（Waveform frequency resolution）”，另一种则叫做“FFT分辨率”。虽然，这个分类和命名不一定是很专业的术语，但却有助于对“频率分辨率”概念的理解。在没有补零的情况下，这两个概念通常容易被混淆，因为它们是等价的。</p>
-<p>波形频率分辨率是指可以被分辨的2个频率的最小间隔（Spacing）；而FFT 分辨率则是频谱中的数据点数（The number of points in the spectrum），它是与做FFT的点数直接相关的。</p>
+<h4 id="2-FFT频率分辨率"><a href="#2-FFT频率分辨率" class="headerlink" title="2. FFT频率分辨率"></a>2. FFT频率分辨率</h4><p><strong><font color="red">[1]</font></strong>这里涉及到两种意义下的分辨率问题，一种叫“波形频率分辨率(Waveform frequency resolution)”，另一种则叫做“FFT分辨率”。虽然，这个分类和命名不一定是很专业的术语，但却有助于对“频率分辨率”概念的理解。在没有补零的情况下，这两个概念通常容易被混淆，因为它们是等价的。</p>
+<p>波形频率分辨率是指可以被分辨的2个频率的最小间隔（Spacing）；而FFT 分辨率则是频谱中的数据点数(The number of points in the spectrum)，它是与做FFT的点数直接相关的。</p>
 <p><strong>(1) 波形分辨率/物理分辨率</strong></p>
 <script type="math/tex; mode=display">
-\Delta R_w = \frac{1}{T}</script><p>其中，T是实际信号的时间长度。</p>
+\Delta R_w = \frac{1}{T}</script><p>其中，$T$是实际信号的时间长度。</p>
 <p><strong>(2) FFT分辨率</strong></p>
 <script type="math/tex; mode=display">
 \Delta R_f = \frac{f_s}{N_{\rm{FFT}}}</script><p>其中，$f_s$为采样频率(the sampling frequency)，$N_{\rm{FFT}}$为FFT的点数。$\Delta R_f $代表了FFT频率轴上的频率取值的间隔(Spacing)。 </p>
-<p>值得注意的是，可能有很好的FFT分辨率，但却不一定能够很好的把2个频率成分简单的分开。同样，可能有很高的波形分辨率，但波形的能量峰值会通过整个频谱而分散开（这是因为FFT的频率泄漏现象）。</p>
-<p>我们知道，信号的离散傅里叶变换（DFT）或快速傅里叶变换（FFT）是对波形的任何一边补零形成的无限序列进行计算的。这就是，为什么FFT的每个频率单元（bin）都具有明显的sinc 波的形状。</p>
-<p>波形频率分辨率1/<em>T</em>与一个sinc函数空值间隔（the space between nulls）是一样的。<font color="red"><strong>[1]</strong></font></p>
+<p>值得注意的是，可能有很好的FFT分辨率，但却不一定能够很好的把2个频率成分简单的分开。同样，可能有很高的波形分辨率，但波形的能量峰值会通过整个频谱而分散开(这是因为FFT的频率泄漏现象)。</p>
+<p>我们知道，信号的离散傅里叶变换(DFT)或快速傅里叶变换(FFT)是对波形的任何一边补零形成的无限序列进行计算的。这就是，为什么FFT的每个频率单元(bin)都具有明显的$\mathrm{sinc}$波的形状。</p>
+<p>波形频率分辨率$1/T$与一个$\mathrm{sinc}$函数空值间隔(the space between nulls)是一样的。<strong><font color="red">[1]</font></strong></p>
 <p><strong>(3) 区别辨析</strong></p>
-<font color="red">**[2]**</font>用MATLAB做FFT并不要求数据点个数必须为以2为基数的整数次方。之所以很多资料上说控制数据点数为以2为基数的整数次方，是因为这样就能采用以2为基的FFT算法，提升运算性能。
-
-如果数据点数不是以2为基数的整数次方，处理方法有两种，一种是在原始数据开头或末尾补零，即将数据补到以2为基数的整数次方，**这是“补零”的一个用处**；第二种是采用以任意数为基数的FFT算法。
-
-而MATLAB的$\rm{fft}(x,N)$函数参数 N 正好就是数据 x 的长度，但又不是以2为基数的整数次方时，并不会采用补零的方法，而是采用以任意数为基数的FFT算法，这样也能得到很好的结果，只不过速度要稍稍慢了一些，但一般的计算量是体现不出来的。 
-
-比如，现在我有一个信号，这个信号中仅包含两个正（余）弦波，一个是$1MHz$，一个是$1.05MHz$，即$x = \cos(2\pi × 1000000t) + \cos(2\pi × 1050000t)$，设采样频率为$f_s = 100MHz$，如果采1000个点，那么对应的时域信号时长为$\rm T = 10\mu s$。
-
-![img](https://pic2.zhimg.com/80/v2-01f2dfe21d8ba98ff8e6c9e40c935d3d_720w.jpg)
-
-直接对这1000个数据点其做快速傅里叶变换，将得到频谱图： 
-
-![img](https://pic1.zhimg.com/80/v2-2aa8d1c2ea81ceca939656cace132fb0_720w.jpg)
-
-可以发现，频谱点稀疏，在1MHz附近根本无法将1 MHz 和1.05 MHz 的两个频率分开。 发现频率成分无法被区分开来，第一反应应该就是：**频率分辨率不够**。那么如何提高频率分辨率呢？这里就涉及两种分辨率的区别了。之所以要区分，是因为后面要进行“补零”操作。**如果不补零，直接对原始数据做FFT，那么这两种分辨率是相等的。**
-$$
-\Delta R_w = \frac{1}{10\mu s} = \Delta R_{\rm{fft}} = \frac{100MHz}{1000} = 100kHz
-$$
-那么，如果现在在原始数据点后补零会有什么效果呢？假设在这 1000个原始数据点后面再补充零达到7000个点，那么数据变成了： 
-
-![img](https://pic1.zhimg.com/80/v2-0bed54499d2710feebc61caa15e18ed8_720w.jpg)
-
-此时对其做快速傅里叶变换，结果如下： 
-
-![img](https://pic3.zhimg.com/80/v2-0a8ad57d53988753f9cd3a988209b78e_720w.jpg)
-
-可以发现，频谱点密集了不少，但是在$1MHz$ 附近依然无法将$1MHz$ 和$1.05MHz$  的两个频率成分分开。这是因为从波形分辨率公式可以看出，**波形分辨率只与原始数据的时长 $\rm T$ 有关**，而与参与FFT的数据点数无关。所以，虽然补了很多零，但波形分辨率依然为：$\Delta R_w = \dfrac{1}{10 \mu s} = 100kHz$，该分辨率大于$1MHz$ 和$1.05MHz$ 这两个频率成分之间的距离$50kHz$  。<u>这就好比用筛子分黄豆和大米，分辨率就好像是筛子上孔的大小，如果筛子的孔太大了，就没有办法把这两者分开。<\u>
-
-而“时域补零相当于频域插值”，也就是说，补零操作增加了频域的插值点数，让频域曲线看起来更加光滑，也就是增加了FFT频率分辨率， **这是“补零”的另一个原因**。
-
-显然，根据上面的分析可知，在采样频率不变的情况下，要想将$1MHz$ 和$1.05MHz$这两个频率成分分析出来，光靠“补零”是不够的，必须要改变波形分辨率，也就是要延长原始数据的时长。现在以相同的采样频率对信号采 7000个点作为原始信号： 
-
-![img](https://pic3.zhimg.com/80/v2-32029919adbe12a30b90c8e98ff27006_720w.jpg)
-
-对其做快速傅里叶变换，结果如下： 
-
-![img](https://pic1.zhimg.com/80/v2-9556ee10b97ab311bf903a1736f72408_720w.jpg)
-
-因为此时的波形分辨率为：$\Delta R_w = \dfrac{1}{70 \mu s} \approx  14kHz$ ，小于两个频率成分之间的距离 $50kHz$ ，所以可以看出有两个明显的峰值。
-
-但是会发现$1MHz$对应的幅值为1，与原始信号中该频率成分的幅值一致，但$1.05MHz$ 对应的幅值明显低于1，但是其周边的点上却都有不小的幅值，这就是所谓的**频谱泄露**，因为数据点的个数影响，使得在$1MHz$ 处有谱线存在，但在$1.05MHz$处没有谱线存在，使测量结果偏离实际值 ,同时在实际频率点的能量分散到两侧的其它频率点上，并出现一些幅值较小的假谱。
-
-为了解决这个问题，可以设法使得谱线同时经过$1MHz$ 和$1.05MHz$ 这两个频率点，找到他们的公约数。
-
-如果原始数据不变，在后面再补充1000个零点：
-
-![img](https://pic2.zhimg.com/80/v2-fe63f79cccb30f13e6ae20bd874aff5d_720w.jpg)
-
-那么FFT分辨率就是$12.5kHz$，是这两个频率的公约数，$1MHz = 80×12.5kHz，1.05MHz = 84×12.5kHz$ ，所以谱线同时经过 $1MHz$ 和 $1.05MHz$ 这两个频率点。
-
-对其做快速傅里叶变换，结果如下：
-
-![img](https://pic3.zhimg.com/80/v2-47b7734d4bc41139bd63fcd4e5a1c56e_720w.jpg)
-
-会发现两个频率对应的幅值均为1，与原始信号一致。
-
-**这也是一种补零操作带来的影响???(这里有点问题，频谱泄露与补零没有关系，后续修改补充)**。 
-
-上图会有一些旁瓣出现，这是因为补零影响了原始信号，如果，直接采8000个点作为原始数据，那么有： 
-
-![img](https://pic2.zhimg.com/80/v2-ccb254206114c54cba6d7206d7c3cd09_720w.jpg)
-
-并对其做FFT，结果如下 
-
-![img](https://pic3.zhimg.com/80/v2-47cba941d29fc331bde5241921dab2ca_720w.jpg)
-
-这样就不存在补零带来的误差了。 <font color="red">**[2]**</font>
-
-<p><img src="/2022/01/27/signal-and-system-essence/Users\27275\AppData\Local\Temp\1643602118945.png" alt="1643602118945"></p>
+<p><strong><font color="red">[2]</font></strong>用MATLAB做FFT并不要求数据点个数必须为以2为基数的整数次方。之所以很多资料上说控制数据点数为以2为基数的整数次方，是因为这样就能采用以2为基的FFT算法，提升运算性能。</p>
+<p>如果数据点数不是以2为基数的整数次方，处理方法有两种，一种是在原始数据开头或末尾补零，即将数据补到以2为基数的整数次方，<strong>这是“补零”的一个用处</strong>；第二种是采用以任意数为基数的FFT算法。</p>
+<p>而MATLAB的$\rm{fft}(x, N)$函数参数$N$正好就是数据$x$的长度，但又不是以2为基数的整数次方时，并不会采用补零的方法，而是采用以任意数为基数的FFT算法，这样也能得到很好的结果，只不过速度要稍稍慢了一些，但一般的计算量是体现不出来的。 </p>
+<p>比如，现在我有一个信号，这个信号中仅包含两个正（余）弦波，一个是$1MHz$，一个是$1.05MHz$，即：</p>
+<script type="math/tex; mode=display">
+x = \cos(2\pi × 1000000t) + \cos(2\pi × 1050000t)</script><p>设采样频率为$f_s = 100\mathrm{MHz}$，如果采1000个点，那么对应的时域信号时长为$\rm T = 10\mu s$。</p>
+<p><img src="https://pic.imgdb.cn/item/6412b628ebf10e5d5376b4b3.jpg"></p>
+<p>直接对这1000个数据点其做快速傅里叶变换，将得到频谱图： </p>
+<p><img src="https://pic.imgdb.cn/item/6412b64debf10e5d53770c1c.jpg"></p>
+<p>可以发现，频谱点稀疏，在1MHz附近根本无法将$1 \mathrm{MHz}$和$1.05 \mathrm{MHz}$的两个频率分开。 发现频率成分无法被区分开来，第一反应应该就是：<strong>频率分辨率不够</strong>。那么如何提高频率分辨率呢？这里就涉及两种分辨率的区别了。之所以要区分，是因为后面要进行“补零”操作。<strong>如果不补零，直接对原始数据做FFT，那么这两种分辨率是相等的。</strong></p>
+<script type="math/tex; mode=display">
+\Delta R_w = \frac{1}{10\mu s} = \Delta R_{\rm{fft}} = \frac{100MHz}{1000} = 100kHz</script><p>那么，如果现在在原始数据点后补零会有什么效果呢？假设在这 1000个原始数据点后面再补充零达到7000个点，那么数据变成了： </p>
+<p><img src="https://pic.imgdb.cn/item/6412b712ebf10e5d5378c59b.jpg"></p>
+<p>此时对其做快速傅里叶变换，结果如下： </p>
+<p><img src="https://pic.imgdb.cn/item/6412b75eebf10e5d5379a933.jpg"></p>
+<p>可以发现，频谱点密集了不少，但是在$1MHz$ 附近依然无法将$1MHz$ 和$1.05MHz$  的两个频率成分分开。这是因为从波形分辨率公式可以看出，<strong>波形分辨率只与原始数据的时长 $\rm T$ 有关</strong>，而与参与FFT的数据点数无关。所以，虽然补了很多零，但波形分辨率依然为：$\Delta R_w = \dfrac{1}{10 \mu s} = 100kHz$，该分辨率大于$1MHz$ 和$1.05MHz$ 这两个频率成分之间的距离$50kHz$  。这就好比用筛子分黄豆和大米，分辨率就好像是筛子上孔的大小，如果筛子的孔太大了，就没有办法把这两者分开。</p>
+<p>而“时域补零相当于频域插值”，也就是说，补零操作增加了频域的插值点数，让频域曲线看起来更加光滑，也就是增加了FFT频率分辨率， <strong>这是“补零”的另一个原因</strong>。</p>
+<p>显然，根据上面的分析可知，在采样频率不变的情况下，要想将$1MHz$ 和$1.05MHz$这两个频率成分分析出来，光靠“补零”是不够的，必须要改变波形分辨率，也就是要延长原始数据的时长。现在以相同的采样频率对信号采 7000个点作为原始信号： </p>
+<p><img src="https://pic.imgdb.cn/item/6412b78debf10e5d537a3bb2.jpg"></p>
+<p>对其做快速傅里叶变换，结果如下： </p>
+<p><img src="https://pic.imgdb.cn/item/6412b7baebf10e5d537ac60f.jpg"></p>
+<p>因为此时的波形分辨率为：$\Delta R_w = \dfrac{1}{70 \mu s} \approx  14kHz$ ，小于两个频率成分之间的距离 $50kHz$ ，所以可以看出有两个明显的峰值。</p>
+<p>但是会发现$1MHz$对应的幅值为1，与原始信号中该频率成分的幅值一致，但$1.05MHz$ 对应的幅值明显低于1，但是其周边的点上却都有不小的幅值，这就是所谓的<strong>频谱泄露</strong>，因为数据点的个数影响，使得在$1MHz$ 处有谱线存在，但在$1.05MHz$处没有谱线存在，使测量结果偏离实际值 ,同时在实际频率点的能量分散到两侧的其它频率点上，并出现一些幅值较小的假谱。</p>
+<p>为了解决这个问题，可以设法使得谱线同时经过$1MHz$ 和$1.05MHz$ 这两个频率点，找到他们的公约数。</p>
+<p>如果原始数据不变，在后面再补充1000个零点：</p>
+<p><img src="https://pic.imgdb.cn/item/6412b7d3ebf10e5d537b05d1.jpg"></p>
+<p>那么FFT分辨率就是$12.5kHz$，是这两个频率的公约数，$1MHz = 80×12.5kHz，1.05MHz = 84×12.5kHz$ ，所以谱线同时经过 $1MHz$ 和 $1.05MHz$ 这两个频率点。</p>
+<p>对其做快速傅里叶变换，结果如下：</p>
+<p><img src="https://pic.imgdb.cn/item/6412b81bebf10e5d537bc164.jpg"></p>
+<p>会发现两个频率对应的幅值均为1，与原始信号一致。</p>
+<p><strong>这也是一种补零操作带来的影响???(这里有点问题，频谱泄露与补零没有关系，后续修改补充)</strong>。 </p>
+<p>上图会有一些旁瓣出现，这是因为补零影响了原始信号，如果，直接采8000个点作为原始数据，那么有： </p>
+<p><img src="https://pic.imgdb.cn/item/6412b851ebf10e5d537c506e.jpg"></p>
+<p>并对其做FFT，结果如下 </p>
+<p><img src="https://pic.imgdb.cn/item/6412b870ebf10e5d537cba2e.jpg"></p>
+<p>这样就不存在补零带来的误差了。 <strong><font color="red">[2]</font></strong></p>
 <h4 id="参考链接-3"><a href="#参考链接-3" class="headerlink" title="参考链接"></a>参考链接</h4><p>[1]傅里叶变换的波形分辨率与频率分辨率 <a target="_blank" rel="noopener" href="https://wap.sciencenet.cn/blog-425437-1043431.html?mobile=1">https://wap.sciencenet.cn/blog-425437-1043431.html?mobile=1</a></p>
 <p>[2]快速傅里叶变换(FFT)中为什么要“补零”？ - 李狗嗨的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/85863024">https://zhuanlan.zhihu.com/p/85863024</a> </p>
 <p>[3]观察频谱的窗口——物理与计算分辨率 <a target="_blank" rel="noopener" href="http://www.360doc.com/content/20/0402/23/32196507_903494495.shtml">http://www.360doc.com/content/20/0402/23/32196507_903494495.shtml</a></p>
@@ -414,7 +373,7 @@ $$
 <p>典型信号傅里叶变换 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Einstellung/article/details/77579386">https://blog.csdn.net/Einstellung/article/details/77579386</a> </p>
 <p>典型信号的傅立叶变换 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36276953">https://zhuanlan.zhihu.com/p/36276953</a></p>
 <p>工程中常用到的几个典型周期函数的傅里叶级数展开式 <a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/ef3eef4601f69e3143329475.html?rec_flag=defa">https://wenku.baidu.com/view/ef3eef4601f69e3143329475.html?rec_flag=defa</a></p>
-</\u></u><link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
       <div id="reword-out">

@@ -494,7 +494,7 @@ E(X)  &= E(E(X \mid Y)) \\
 </ul>
 <h5 id="17-4-1-顺序统计量的定义"><a href="#17-4-1-顺序统计量的定义" class="headerlink" title="17.4.1 顺序统计量的定义"></a>17.4.1 顺序统计量的定义</h5><p>顺序统计量：</p>
 <script type="math/tex; mode=display">
-X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X _ {(1)}=\min\begin{Bmatrix}X_1,\dots,X_n\end{Bmatrix}$，$X_{(n)}=\max\begin{Bmatrix}X_1, \cdots, X_n\end{Bmatrix}$，$X_{(k)}$为$X_1, \cdots, X_n$的递增排序的第$k$位。$X _ {(n)}-X{(1)}$样本极差。</p>
+X_{(1)}\le X_{(2)}\le \dots\le X_{(n)}</script><p>其中，$X _ {(1)}=\min\begin{Bmatrix}X_1,\dots,X_n\end{Bmatrix}$，$X_{(n)}=\max\begin{Bmatrix}X_1, \cdots, X_n\end{Bmatrix}$，$X_{(k)}$为$X_1, \cdots, X_n$的递增排序的第$k$位。$X _ {(n)}-X_{(1)}$样本极差。</p>
 <h5 id="17-4-2-关于顺序统计量的理解"><a href="#17-4-2-关于顺序统计量的理解" class="headerlink" title="17.4.2 关于顺序统计量的理解"></a>17.4.2 关于顺序统计量的理解</h5><p>其实到写到这为止感觉还是没有透彻理解顺序统计量，我自己关于顺序统计量主要有两个疑点：</p>
 <ul>
 <li>从表面上看，顺序统计量就是对随机变量大小排序，但是我们知道随机变量是不能比较大小的。</li>
@@ -628,18 +628,18 @@ A_{12} & A_{22} & \cdots & A_{n2} \\
 A_{1n} & A_{2n} & \cdots & A_{nn}
 \end{array}\right)</script><p><strong>(三) 相关性质</strong></p>
 <ol>
-<li>$\boldsymbol A \boldsymbol A^<em> = \boldsymbol A^</em>\boldsymbol A = |\boldsymbol A|\boldsymbol I$</li>
-<li>$(\boldsymbol A^<em>)^{-1} = (\boldsymbol A^{-1})^</em>$</li>
-<li>$(k \boldsymbol A)^<em> = k^{n-1}\boldsymbol A^</em>$</li>
-<li>$(\boldsymbol A^<em>)^{\mathrm{T}} = (\boldsymbol A^{\mathrm{T}})^</em>$</li>
-<li>$|\boldsymbol A^*| = |\boldsymbol A|^{n-1}$</li>
-<li>$\boldsymbol A^{-1} = \dfrac{1}{|\boldsymbol A|}\boldsymbol A^*$</li>
-<li>$(\boldsymbol{AB})^<em> = \boldsymbol B^</em> \boldsymbol A^*$</li>
+<li>$\boldsymbol A \boldsymbol A^<em> = \boldsymbol A^</em>\boldsymbol A = |\boldsymbol A|\boldsymbol I​$</li>
+<li>$(\boldsymbol A^ <em> )^{-1} = (\boldsymbol A^{-1})^ </em> $</li>
+<li>$(k \boldsymbol A)^ <em>  = k^{n-1}\boldsymbol A^ </em> $</li>
+<li>$(\boldsymbol A^ <em> )^{\mathrm{T}} = (\boldsymbol A^{\mathrm{T}})^</em>$</li>
+<li>$|\boldsymbol A^ * | = |\boldsymbol A|^{n-1}$</li>
+<li>$\boldsymbol A^{-1} = \dfrac{1}{|\boldsymbol A|}\boldsymbol A^ * $</li>
+<li>$(\boldsymbol{AB})^<em> = \boldsymbol B^ </em> \boldsymbol A^ * $</li>
 <li><p>伴随矩阵的秩：</p>
 <ul>
-<li>$\mathrm{rank}(\boldsymbol A^*) = n, \mathrm{rank}(\boldsymbol A) = n$</li>
-<li>$\mathrm{rank}(\boldsymbol A^*) = 1, \mathrm{rank}(\boldsymbol A) = n-1$</li>
-<li>$\mathrm{rank}(\boldsymbol A^*) = 0, \mathrm{rank}(\boldsymbol A) &lt; n-1$</li>
+<li>$\mathrm{rank}(\boldsymbol A^ * ) = n, \mathrm{rank}(\boldsymbol A) = n$</li>
+<li>$\mathrm{rank}(\boldsymbol A^ * ) = 1, \mathrm{rank}(\boldsymbol A) = n-1$</li>
+<li>$\mathrm{rank}(\boldsymbol A^ * ) = 0, \mathrm{rank}(\boldsymbol A) &lt; n-1$</li>
 </ul>
 <blockquote>
 <p>矩阵的秩等于0的充分必要条件是这个矩阵是零矩阵。 </p>
@@ -834,7 +834,7 @@ A_{1n} & A_{2n} & \cdots & A_{nn}
 <ul>
 <li>$r(\boldsymbol A) = r(\boldsymbol B)$<ul>
 <li>设$\boldsymbol A$和$\boldsymbol B$均为复数域上的$n$阶对称矩阵，则$\boldsymbol A$与$\boldsymbol B$在复数域上合同等价于$\boldsymbol A$与$\boldsymbol B$的秩相同。</li>
-<li>设$\boldsymbol A$与$\boldsymbol B$均为实数域上的$n$阶对称矩阵，则$\boldsymbol A$与$\boldsymbol B$在实数域上合同等价于$\boldsymbol A$与$\boldsymbol B$有相同的正、负惯性指数(即正、负特征值的个数相等)。</li>
+<li>设$\boldsymbol A​$与$\boldsymbol B​$均为实数域上的$n​$阶对称矩阵，则$\boldsymbol A​$与$\boldsymbol B​$在实数域上合同等价于$\boldsymbol A​$与$\boldsymbol B​$有相同的正、负惯性指数(即正、负特征值的个数相等)。</li>
 </ul>
 </li>
 </ul>
@@ -857,8 +857,8 @@ A_{1n} & A_{2n} & \cdots & A_{nn}
 </tr>
 <tr>
 <td>记作</td>
-<td>$\boldsymbol A \sim \boldsymbol B$</td>
 <td>$\boldsymbol A \simeq \boldsymbol B$</td>
+<td>$\boldsymbol A \sim \boldsymbol B$</td>
 <td>$\boldsymbol A \cong \boldsymbol B$</td>
 </tr>
 </tbody>
