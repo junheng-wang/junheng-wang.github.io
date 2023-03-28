@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">9.8k</span>
+            <span class="post-count">10.4k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">37 分钟</span>
+            <span class="post-count">39 分钟</span>
         </span>
     </span>
 </div>
@@ -477,6 +477,13 @@ N(\frac{N}{2}-1)+N \approx \frac{N^2}{2}</script><p>当$N$很大时，运算量�
 <p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808231.shtml">http://www.360doc.com/content/19/0611/18/908538_841808231.shtml</a></p>
 <p><a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808103.shtml">http://www.360doc.com/content/19/0611/18/908538_841808103.shtml</a></p>
 <hr>
+<h3 id="八、Matlab中的fftshift函数"><a href="#八、Matlab中的fftshift函数" class="headerlink" title="八、Matlab中的fftshift函数"></a>八、Matlab中的fftshift函数</h3><p>一般情况下，在<code>fft()</code>之间先对输入数据进行<code>fftshift()</code>处理是没有必要的。没有什么必然性。<code>fftshift()</code>这个函数的存在的目的并不是为了这个，单纯地就是上面所说的为了让频谱观测显得更自然一些而已。 </p>
+<p>这里先给出一个简单的解释（有时间再来补详细的解释）。这是从根本上来说是因为<code>fft()</code>处理的离散数据，进行的是离散傅里叶变换（DFT）。如果所要解析的数据本身就是一个离散周期性信号，那<code>fft()</code>给出的结果就反映了真实情况。但是现实应用中，所分析的信号并不是离散周期性信号，而我们所能做的又只能是调用<code>fft()</code>执行离散傅里叶变换进行分析，这种情况下<code>fft()</code>结果并没有完全反映真实情况，而是一种近似的或者“变形”的体现。这个时候我们就需要对<code>fft()</code>结果进行合理的解释间接地得到真实的情况，某种意义上<code>fftshift()</code>将频域数据前后半颠倒以使得频域数据显示出来的效果显得更自然也是属于这种情况。</p>
+<p>比如(4)中给出的例子是对对称时域信号进行调用<code>fft()</code>处理，然后将其结果与傅里叶变换的理论解析结果进行对比。原始信号的时间区间是$[-\dfrac{T}{2}, \dfrac{T}{2}]$，这个数据采样后直接用<code>fft()</code>进行处理的话，由于<code>fft()</code>自然地认为数据是从<code>t=0</code>开始，所以可以理解为<code>fft()</code>的输入数据其实是将原始信号在时域上右移$\dfrac{T}{2}$所得到的信号，而<code>fft()</code>的变换结果则代表着这个时域上右移$\dfrac{T}{2}$所得到的信号的周期性拓展后的信号的离散时间傅里叶变换（DTFT）的一个周期内的数据。接下来从这个结果进行解析可反推得到原始信号的DFT结果。在<code>fft()</code>之前做<code>fftshift()</code>可以看作是一个小的trick, as an alternative to the post-analysis of the fft() result, without physical significance and necessity.</p>
+<p>参考链接8.1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/396863191">fftshift讲解 - 信号处理小王子的文章 - 知乎</a></p>
+<p>参考链接8.2：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/zxhyxiao/p/12359243.html">关于MATLAB中fft，fftshift，fftshift(fft(fftshift(x)))，FFT要乘以dx 等问题理解 - 博客园</a></p>
+<p>参考链接8.3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/chenxy_bwave/article/details/119185124">Matlab fftshift and ifftshift and some confusions - 笨牛慢耕 - CSDN</a></p>
+<p>参考链接8.4：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/limanjihe/p/10014142.html">fftshift函数详解 - 博客园</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
