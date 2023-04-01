@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">16.4k</span>
+            <span class="post-count">17k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">63 分钟</span>
+            <span class="post-count">65 分钟</span>
         </span>
     </span>
 </div>
@@ -677,9 +677,9 @@ A_{1n} & A_{2n} & \cdots & A_{nn}
 <h5 id="20-3-4-初等矩阵、行阶梯矩阵和行最简矩阵"><a href="#20-3-4-初等矩阵、行阶梯矩阵和行最简矩阵" class="headerlink" title="20.3.4 初等矩阵、行阶梯矩阵和行最简矩阵"></a>20.3.4 初等矩阵、行阶梯矩阵和行最简矩阵</h5><p><strong>(一) 初等变换</strong></p>
 <p>设$\boldsymbol A$是$m \times n$矩阵，进行初等倍乘、互换、倍加行(列)变换，统称为初等变换。</p>
 <ol>
-<li><strong>倍乘：</strong>用某个非零常数$k(k≠0)$乘A的某行(列)的每个元素。</li>
-<li><strong>互换</strong>：互换$\boldsymbol A$的某两行(列)的位置。</li>
-<li><strong>倍加行(列)：</strong>将$\boldsymbol A$的某行(列)元素的$k$倍加到另一行(列)。</li>
+<li><strong>倍乘：</strong>用某个非零常数$k(k≠0)$乘$\boldsymbol A$的某行(列)的每个元素，此时行列式的值乘以$k$。</li>
+<li><strong>互换</strong>：互换$\boldsymbol A$的某两行(列)的位置，此时行列式变为相反数，即行列式的值会乘以-1。</li>
+<li><strong>倍加行(列)：</strong>将$\boldsymbol A$的某行(列)元素的$k$倍加到另一行(列)，此时行列式不变。</li>
 </ol>
 <p><strong>(二) 初等矩阵</strong></p>
 <p>单位矩阵经<strong>一次</strong>初等变换得到的矩阵为初等矩阵。 常见初等矩阵的表示可用$\boldsymbol E$、$\boldsymbol P$或者$\boldsymbol Q$这3个字母。</p>
@@ -807,19 +807,20 @@ A_{1n} & A_{2n} & \cdots & A_{nn}
 <p>复矩阵$\boldsymbol A \in \mathbb{C}_{n \times n}$是酉矩阵的充要条件是$\boldsymbol A$的$n$个列向量是标准的正交向量。 可见，快速判断一个复矩阵是不是酉矩阵可以看它任意两个列向量是不是<strong>正交</strong>且<strong>单位</strong>的。</p>
 <h5 id="20-5-6-正定矩阵"><a href="#20-5-6-正定矩阵" class="headerlink" title="20.5.6 正定矩阵"></a>20.5.6 正定矩阵</h5><p><strong>(一) 定义</strong><br>对于$n$阶方阵$\boldsymbol A$，若对于任何非零向量$\boldsymbol x$，都有：</p>
 <script type="math/tex; mode=display">
-\boldsymbol x^{\mathrm T}\boldsymbol {Ax} > 0</script><p>则$\boldsymbol A$为正定矩阵。正定矩阵在实数域上好像前提是<strong>实对称矩阵</strong>。</p>
+\boldsymbol x^{\mathrm T}\boldsymbol {Ax} > 0</script><p>则$\boldsymbol A$为正定矩阵。在实数域上，正定矩阵是<strong>实对称矩阵</strong>，在复数域上，正定矩阵是<strong>Hermit矩阵</strong>。</p>
 <p><strong>(二) 性质</strong></p>
 <ol>
 <li>正定阵行列式恒为正，即正定矩阵一定可逆；</li>
 <li>实对称矩阵$\boldsymbol A$正定当且仅当$\boldsymbol A$与单位矩阵<strong>合同</strong>；</li>
 <li>若$\boldsymbol A$是正定矩阵，则$\boldsymbol A$的逆矩阵也是正定矩阵；</li>
 <li>两个正定矩阵的<strong>和</strong>是正定矩阵；</li>
+<li>在实数域中，正定矩阵的主对角线元素均大于0。</li>
 </ol>
-<p><strong>(三) 充要条件</strong></p>
+<p><strong>(三) 一个矩阵是正定矩阵的充要条件</strong></p>
 <ol>
 <li>$\boldsymbol A$的特征值均为正；</li>
 <li>存在可逆矩阵$\boldsymbol P$，使得$\boldsymbol A = \boldsymbol P^{\mathrm T} \boldsymbol P$，即$\boldsymbol A$与$\boldsymbol I$合同；</li>
-<li>$\boldsymbol A$的顺序主子式均大于零；</li>
+<li>$\boldsymbol A$的前$k(k = 1,2,\cdots,n)$阶顺序主子式均大于零；</li>
 </ol>
 <h4 id="20-6-小结：常见几种矩阵变换——合同、相似、等价"><a href="#20-6-小结：常见几种矩阵变换——合同、相似、等价" class="headerlink" title="20.6 小结：常见几种矩阵变换——合同、相似、等价"></a>20.6 小结：常见几种矩阵变换——合同、相似、等价</h4><h5 id="20-6-1-矩阵合同"><a href="#20-6-1-矩阵合同" class="headerlink" title="20.6.1 矩阵合同"></a>20.6.1 矩阵合同</h5><p><strong>(一) 定义</strong></p>
 <p>设$\boldsymbol A$和$\boldsymbol B$是两个$n$阶方阵，若存在可逆阵$\boldsymbol C$，使得$\boldsymbol C^{\mathrm T}\boldsymbol A\boldsymbol C=\boldsymbol B$，则称$\boldsymbol A$合同于$\boldsymbol B$，记成$\boldsymbol A \simeq \boldsymbol B$.</p>
@@ -871,6 +872,19 @@ A_{1n} & A_{2n} & \cdots & A_{nn}
 <li>正交相似矩阵必合同，正交合同矩阵必相似。</li>
 <li>实对称矩阵相似必合同，实对称矩阵合同未必相似。</li>
 </ul>
+<p>矩阵合同、矩阵相似、矩阵等价是矩阵理论中常见的三个概念，它们的定义如下：</p>
+<ol>
+<li>矩阵合同：设$\boldsymbol A, \boldsymbol B$是 $n$ 阶实（或复）矩阵，若存在一个$n$阶可逆实（或复）矩阵$\boldsymbol P$，使得$\boldsymbol B = \boldsymbol{P^\mathrm T A P}$，则称矩阵$\boldsymbol A$和$\boldsymbol B$合同。记为$\boldsymbol A \simeq \boldsymbol B$。</li>
+<li>矩阵相似：设$\boldsymbol A, \boldsymbol B$是$n$阶实（或复）矩阵，若存在一个$n$阶可逆实（或复）矩阵$\boldsymbol P$，使得$\boldsymbol B=\boldsymbol{P^{-1}AP}$，则称矩阵$\boldsymbol A$和$\boldsymbol B$相似。记为$\boldsymbol A \sim \boldsymbol B$。</li>
+<li>矩阵等价：设$\boldsymbol A, \boldsymbol B$是$n$阶实（或复）矩阵，若存在$n$阶可逆实（或复）矩阵$\boldsymbol P, \boldsymbol Q$，使得$\boldsymbol B = \boldsymbol{P^{-1}AQ}$，则称矩阵$\boldsymbol A$和$\boldsymbol B$等价。记为$\boldsymbol A \approx \boldsymbol B$。</li>
+</ol>
+<p>三者的联系与区别如下：</p>
+<ol>
+<li>矩阵合同是一种特殊的矩阵等价关系，即如果矩阵$\boldsymbol A$ 和$\boldsymbol B$合同，则它们等价，即$\boldsymbol A \approx \boldsymbol B$。但反之不成立，即等价的矩阵不一定合同。</li>
+<li>矩阵相似是一种更加严格的关系，如果矩阵$\boldsymbol A$和$\boldsymbol B$相似，则它们一定等价，即$\boldsymbol A \sim \boldsymbol B$蕴含$\boldsymbol A \approx \boldsymbol B$。但反之不成立，即等价的矩阵不一定相似。</li>
+<li>矩阵等价是最一般的关系，如果矩阵$\boldsymbol A$和$\boldsymbol B$等价，则它们具有一些共同的性质，例如它们的秩、行列式、迹等都相同，但它们不一定相似或合同。</li>
+</ol>
+<p>总的来说，矩阵等价是最一般的关系，矩阵相似是一种较为特殊的等价关系，而矩阵合同是在实对称矩阵和复Hermitian矩阵中的等价关系。</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
