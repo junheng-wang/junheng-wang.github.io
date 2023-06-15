@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">26.9k</span>
+            <span class="post-count">18k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">107 分钟</span>
+            <span class="post-count">72 分钟</span>
         </span>
     </span>
 </div>
@@ -692,697 +692,485 @@ X:=\frac{X-\mu}{\sigma^{2}}
 <p>为了解决这一问题，我们可以把<script type="math/tex">m</script>个训练样本分成若干个子集，称为<strong>mini-batches</strong>，这样每个子集包含的数据量就小了，例如只有1000，然后每次在单一子集上进行神经网络训练，速度就会大大提高。这种梯度下降算法叫做<strong>Mini-batch Gradient Descent</strong>。</p>
 <p>假设总的训练样本个数<script type="math/tex">m=5000000</script>，其维度为<script type="math/tex">(n_x,m)</script>。将其分成<script type="math/tex">5000</script>个子集，每个mini-batch含有<script type="math/tex">1000</script>个样本。我们将每个mini-batch记为<script type="math/tex">X^{\{ t \}}</script>，其维度为<script type="math/tex">(n_x,1000)</script>。相应的每个mini-batch的输出记为<script type="math/tex">Y^{\{ t \}}</script>，其维度为<script type="math/tex">(1,1000)</script>，且<script type="math/tex">t=1,2,⋯,5000</script>。</p>
 <p>这里顺便总结一下我们遇到的神经网络中几类字母的上标含义：</p>
-<script type="math/tex; mode=display">X^{(i)}$$**：第**$$i$$**个样本**
-
-$$Z^{[l]}$$**：神经网络第**$$l$$**层网络的线性输出**
-
- $$X^{\{t\}},Y^{\{t\}}$$**：第**$$t$$**组mini-batch**
-
-ini-batches Gradient Descent的实现过程是先将总的训练样本分成$$T$$个子集(mini-batches)，然后对每个mini-batch进行神经网络训练，包括Forward Propagation，Compute Cost Function，Backward Propagation，循环至$$T$$个mini-batch都训练完毕。
-
-<img src="https://pic.imgdb.cn/item/648adc111ddac507ccae58b0.png" style="zoom:70%" />
-
-经过$$T$$次循环之后，所有$$m$$个训练样本都进行了梯度下降计算。这个过程，我们称之为经历了一个**epoch**。对于Batch Gradient Descent而言，一个epoch只进行一次梯度下降算法；而Mini-Batches Gradient Descent，一个epoch会进行$$T$$次梯度下降算法。
-
-值得一提的是，对于Mini-Batches Gradient Descent，可以进行多次epoch训练。而且，每次epoch，最好是将总体训练数据**重新打乱**、**重新分成**$$T$$**组**mini-batches，这样有利于训练出最佳的神经网络模型。
-
-#### 6.2 理解**Mini-batch 梯度下降法**
-
-Batch gradient descent和Mini-batch gradient descent的cost曲线如下图所示：
-
-<img src="https://pic.imgdb.cn/item/648add1e1ddac507ccb1c568.png">
-
-对于一般的神经网络模型，使用Batch gradient descent，随着迭代次数增加，cost是不断减小的。然而，使用Mini-batch gradient descent，随着在不同的mini-batch上迭代训练，其cost不是单调下降，而是受类似noise的影响，出现振荡。但整体的趋势是下降的，最终也能得到较低的cost值。
-
-之所以出现细微振荡的原因是不同的mini-batch之间是有差异的。例如可能第一个子集$$(X^{\{1\}},Y^{\{1\}})$$是好的子集，而第二个子集$$(X^{\{2\}},Y^{\{2\}})$$包含了一些噪声noise。出现细微振荡是正常的。
-
-如何选择每个mini-batch的大小，即包含的样本个数呢？有两个极端：
-
-(1) 如果mini-batch size=m，即为Batch gradient descent，只包含一个子集为$$(X^{\{1\}},Y^{\{1\}}) = (X,Y)$$；
-
-(2) 如果mini-batch size=1，即为Stachastic gradient descent，每个样本就是一个子集$$(X^{\{1\}},Y^{\{1\}}) = (x^{(i)},y^{(i)})$$，共有$$m$$个子集。
-
-我们来比较一下Batch gradient descent和Stachastic gradient  descent的梯度下降曲线。如下图所示，蓝线代表Batch gradient descent，紫线代表Stachastic  gradient descent。Batch gradient  descent会比较平稳地接近全局最小值，但是因为使用了所有$$m$$个样本，每次前进的速度有些慢。Stachastic gradient  descent每次前进速度很快，但是路线曲折，有较大的振荡，最终会在最小值附近来回波动，难以真正达到最小值处。而且在数值处理上就不能使用向量化的方法来提高运算速度。
-
-<img src="https://pic.imgdb.cn/item/648add4a1ddac507ccb24ba3.png" style="zoom:50%" />
-
-实际使用中，mini-batch size不能设置得太大(Batch gradient descent)，也不能设置得太小(Stachastic gradient descent)。这样，相当于结合了Batch gradient descent和Stachastic gradient descent各自的优点，既能使用向量化优化算法，又能叫快速地找到最小值。mini-batch gradient descent的梯度下降曲线如下图绿色所示，每次前进速度较快，且振荡较小，基本能接近全局最小值。
-
-<img src="https://pic.imgdb.cn/item/648add6c1ddac507ccb2b3fe.png" style="zoom:50%" />
-
-一般来说，如果总体样本数量$$m$$不太大时，例如$$m≤2000$$，建议直接使用Batch  gradient descent。如果总体样本数量$$m$$很大时，建议将样本分成许多mini-batches。推荐常用的mini-batch  size为$$64$$,$$128$$,$$256$$,$$512$$。这些都是**2的幂**。之所以这样设置的原因是计算机存储数据一般是2的幂，这样设置可以提高运算速度。
-
-本小节参考链接：[关于Mini-batch梯度下降法的困惑，为什么会比批量梯度下降法快？](https://www.zhihu.com/question/501172146/answer/2247473794)
-
-#### 6.3 指数加权平均
-
-举个例子，记录半年内伦敦市的气温变化，并在二维平面上绘制出来，如下图所示：
-
-<img src="https://pic.imgdb.cn/item/648addbb1ddac507ccb3a2ad.png">
-
-看上去，温度数据似乎有noise，而且抖动较大。如果我们希望看到半年内气温的整体变化趋势，可以通过移动平均（moving average）的方法来对每天气温进行平滑处理。
-
-例如我们可以设$$V_0=0$$，当成第$$0$$天的气温值。
-
-第一天的气温与第$$0$$天的气温有关：</script><p>V_{1}=0.9 V_{0}+0.1 \theta_{1}</p>
+<ul>
+<li>$X^{(i)}$<strong>：第</strong>$i$<strong>个样本</strong></li>
+<li>$Z^{[l]}$<strong>：神经网络第</strong>$l$<strong>层网络的线性输出</strong></li>
+<li>$X^{\{t\}},Y^{\{t\}}$<strong>：第</strong>$t$<strong>组mini-batch</strong></li>
+</ul>
+<p>ini-batches Gradient Descent的实现过程是先将总的训练样本分成<script type="math/tex">T​</script>个子集(mini-batches)，然后对每个mini-batch进行神经网络训练，包括Forward Propagation，Compute Cost Function，Backward Propagation，循环至<script type="math/tex">T​</script>个mini-batch都训练完毕。</p>
+<p><img src="https://pic.imgdb.cn/item/648adc111ddac507ccae58b0.png" style="zoom:70%"></p>
+<p>经过<script type="math/tex">T</script>次循环之后，所有<script type="math/tex">m</script>个训练样本都进行了梯度下降计算。这个过程，我们称之为经历了一个<strong>epoch</strong>。对于Batch Gradient Descent而言，一个epoch只进行一次梯度下降算法；而Mini-Batches Gradient Descent，一个epoch会进行<script type="math/tex">T</script>次梯度下降算法。</p>
+<p>值得一提的是，对于Mini-Batches Gradient Descent，可以进行多次epoch训练。而且，每次epoch，最好是将总体训练数据<strong>重新打乱</strong>、<strong>重新分成</strong><script type="math/tex">T</script><strong>组</strong>mini-batches，这样有利于训练出最佳的神经网络模型。</p>
+<h4 id="6-2-理解Mini-batch-梯度下降法"><a href="#6-2-理解Mini-batch-梯度下降法" class="headerlink" title="6.2 理解Mini-batch 梯度下降法"></a>6.2 理解<strong>Mini-batch 梯度下降法</strong></h4><p>Batch gradient descent和Mini-batch gradient descent的cost曲线如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648add1e1ddac507ccb1c568.png"></p>
+<p>对于一般的神经网络模型，使用Batch gradient descent，随着迭代次数增加，cost是不断减小的。然而，使用Mini-batch gradient descent，随着在不同的mini-batch上迭代训练，其cost不是单调下降，而是受类似noise的影响，出现振荡。但整体的趋势是下降的，最终也能得到较低的cost值。</p>
+<p>之所以出现细微振荡的原因是不同的mini-batch之间是有差异的。例如可能第一个子集<script type="math/tex">(X^{\{1\}},Y^{\{1\}})</script>是好的子集，而第二个子集<script type="math/tex">(X^{\{2\}},Y^{\{2\}})</script>包含了一些噪声noise。出现细微振荡是正常的。</p>
+<p>如何选择每个mini-batch的大小，即包含的样本个数呢？有两个极端：</p>
+<p>(1) 如果mini-batch size=m，即为Batch gradient descent，只包含一个子集为<script type="math/tex">(X^{\{1\}},Y^{\{1\}}) = (X,Y)</script>；</p>
+<p>(2) 如果mini-batch size=1，即为Stachastic gradient descent，每个样本就是一个子集<script type="math/tex">(X^{\{1\}},Y^{\{1\}}) = (x^{(i)},y^{(i)})</script>，共有<script type="math/tex">m</script>个子集。</p>
+<p>我们来比较一下Batch gradient descent和Stachastic gradient  descent的梯度下降曲线。如下图所示，蓝线代表Batch gradient descent，紫线代表Stachastic  gradient descent。Batch gradient  descent会比较平稳地接近全局最小值，但是因为使用了所有<script type="math/tex">m</script>个样本，每次前进的速度有些慢。Stachastic gradient  descent每次前进速度很快，但是路线曲折，有较大的振荡，最终会在最小值附近来回波动，难以真正达到最小值处。而且在数值处理上就不能使用向量化的方法来提高运算速度。</p>
+<p><img src="https://pic.imgdb.cn/item/648add4a1ddac507ccb24ba3.png" style="zoom:50%"></p>
+<p>实际使用中，mini-batch size不能设置得太大(Batch gradient descent)，也不能设置得太小(Stachastic gradient descent)。这样，相当于结合了Batch gradient descent和Stachastic gradient descent各自的优点，既能使用向量化优化算法，又能叫快速地找到最小值。mini-batch gradient descent的梯度下降曲线如下图绿色所示，每次前进速度较快，且振荡较小，基本能接近全局最小值。</p>
+<p><img src="https://pic.imgdb.cn/item/648add6c1ddac507ccb2b3fe.png" style="zoom:50%"></p>
+<p>一般来说，如果总体样本数量<script type="math/tex">m</script>不太大时，例如<script type="math/tex">m≤2000</script>，建议直接使用Batch  gradient descent。如果总体样本数量<script type="math/tex">m</script>很大时，建议将样本分成许多mini-batches。推荐常用的mini-batch  size为<script type="math/tex">64</script>,<script type="math/tex">128</script>,<script type="math/tex">256</script>,<script type="math/tex">512</script>。这些都是<strong>2的幂</strong>。之所以这样设置的原因是计算机存储数据一般是2的幂，这样设置可以提高运算速度。</p>
+<p>本小节参考链接：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/501172146/answer/2247473794">关于Mini-batch梯度下降法的困惑，为什么会比批量梯度下降法快？</a></p>
+<h4 id="6-3-指数加权平均"><a href="#6-3-指数加权平均" class="headerlink" title="6.3 指数加权平均"></a>6.3 指数加权平均</h4><p>举个例子，记录半年内伦敦市的气温变化，并在二维平面上绘制出来，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648addbb1ddac507ccb3a2ad.png"></p>
+<p>看上去，温度数据似乎有noise，而且抖动较大。如果我们希望看到半年内气温的整体变化趋势，可以通过移动平均（moving average）的方法来对每天气温进行平滑处理。</p>
+<p>例如我们可以设<script type="math/tex">V_0=0</script>，当成第<script type="math/tex">0</script>天的气温值。</p>
+<p>第一天的气温与第<script type="math/tex">0</script>天的气温有关：</p>
 <script type="math/tex; mode=display">
-第二天的气温与第一天的气温有关：</script><p>\begin{aligned}<br>V_{2} &amp;=0.9 V_{1}+0.1 \theta_{2} \\<br>&amp;=0.9\left(0.9 V_{0}+0.1 \theta_{1}\right)+0.1 \theta_{2} \\<br>&amp;=0.9^{2} V_{0}+0.9 \cdot 0.1 \theta_{1}+0.1 \theta_{2}<br>\end{aligned}</p>
+V_{1}=0.9 V_{0}+0.1 \theta_{1}</script><p>第二天的气温与第一天的气温有关：</p>
 <script type="math/tex; mode=display">
-即第$$t$$天与第$$t-1$$天的气温迭代关系为：</script><p>\begin{aligned}V_{t} &amp;=0.9 V_{t-1}+0.1 \theta_{t} \\&amp;=0.9^{t} V_{0}+0.9^{t-1} \cdot 0.1 \theta_{1}+0.9^{t-2} \cdot 0.1 \theta_{2}+\cdots+0.9 \cdot 0.1 \theta_{t-1}+0.1 \theta_{t}\end{aligned}</p>
+\begin{aligned}
+V_{2} &=0.9 V_{1}+0.1 \theta_{2} \\
+&=0.9\left(0.9 V_{0}+0.1 \theta_{1}\right)+0.1 \theta_{2} \\
+&=0.9^{2} V_{0}+0.9 \cdot 0.1 \theta_{1}+0.1 \theta_{2}
+\end{aligned}</script><p>即第<script type="math/tex">t</script>天与第<script type="math/tex">t-1</script>天的气温迭代关系为：</p>
 <script type="math/tex; mode=display">
-经过移动平均处理得到的气温如下图红色曲线所示：
-
-<img src="https://pic.imgdb.cn/item/648adf601ddac507ccb8d5ff.png">
-
-这种**滑动平均算法**称为**指数加权平均(exponentially weighted average)**。根据之前的推导公式，其一般形式为：</script><p>V_t = (1-\beta)V_{t-1}+\beta \theta_t</p>
+\begin{aligned}V_{t} &=0.9 V_{t-1}+0.1 \theta_{t} \\&=0.9^{t} V_{0}+0.9^{t-1} \cdot 0.1 \theta_{1}+0.9^{t-2} \cdot 0.1 \theta_{2}+\cdots+0.9 \cdot 0.1 \theta_{t-1}+0.1 \theta_{t}\end{aligned}</script><p>经过移动平均处理得到的气温如下图红色曲线所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648adf601ddac507ccb8d5ff.png"></p>
+<p>这种<strong>滑动平均算法</strong>称为<strong>指数加权平均(exponentially weighted average)</strong>。根据之前的推导公式，其一般形式为：</p>
 <script type="math/tex; mode=display">
-上面的例子中$$β=0.9$$。$$\beta$$**值决定了指数加权平均的天数**，近似表示为：</script><p>\frac{1}{1-\beta}</p>
+V_t = (1-\beta)V_{t-1}+\beta \theta_t</script><p>上面的例子中<script type="math/tex">β=0.9</script>。<script type="math/tex">\beta</script><strong>值决定了指数加权平均的天数</strong>，近似表示为：</p>
 <script type="math/tex; mode=display">
-例如，$$β=0.9$$，则$$1/(1−β)=10$$，表示将前$$10$$天进行指数加权平均。$$β=0.98$$，则$$1/(1−β)=50$$，表示将前$$50$$天进行指数加权平均。$$\beta$$**越大**，则指数加权平均的天数**越多**，平均后的趋势线就**越平缓**，但是同时也会向右平移。下图绿色曲线和黄色曲线分别表示了$$β=0.98$$和$$β=0.5$$时，指数加权平均的结果。
-
-<img src="https://pic.imgdb.cn/item/648ae02f1ddac507ccbb94b6.png">
-
-这里简单解释一下公式$$1/{(1−β)}$$是怎么来的。准确来说，指数加权平均算法跟之前所有天的数值都有关系，根据之前的推导公式就能看出。但是指数是衰减的，**一般认为衰减到**$$1/e$$**就可以忽略不计了**。因此，根据之前的推导公式，我们只要证明</script><p>\beta^{\frac{1}{1-\beta}} = \frac1e</p>
+\frac{1}{1-\beta}</script><p>例如，<script type="math/tex">β=0.9</script>，则<script type="math/tex">1/(1−β)=10</script>，表示将前<script type="math/tex">10</script>天进行指数加权平均。<script type="math/tex">β=0.98</script>，则<script type="math/tex">1/(1−β)=50</script>，表示将前<script type="math/tex">50</script>天进行指数加权平均。<script type="math/tex">\beta</script><strong>越大</strong>，则指数加权平均的天数<strong>越多</strong>，平均后的趋势线就<strong>越平缓</strong>，但是同时也会向右平移。下图绿色曲线和黄色曲线分别表示了<script type="math/tex">β=0.98</script>和<script type="math/tex">β=0.5</script>时，指数加权平均的结果。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae02f1ddac507ccbb94b6.png"></p>
+<p>这里简单解释一下公式<script type="math/tex">1/{(1−β)}</script>是怎么来的。准确来说，指数加权平均算法跟之前所有天的数值都有关系，根据之前的推导公式就能看出。但是指数是衰减的，<strong>一般认为衰减到</strong><script type="math/tex">1/e</script><strong>就可以忽略不计了</strong>。因此，根据之前的推导公式，我们只要证明</p>
 <script type="math/tex; mode=display">
-令$$\dfrac{1}{1-\beta}=N, N>0$$，则$$\beta=1-\dfrac{1}{N}, \dfrac{1}{N}<1$$。即证明转化为：</script><p>\left(1-\frac{1}{N}\right)^{N}=\frac{1}{e}</p>
+\beta^{\frac{1}{1-\beta}} = \frac1e</script><p>令<script type="math/tex">\dfrac{1}{1-\beta}=N, N>0</script>，则<script type="math/tex">\beta=1-\dfrac{1}{N}, \dfrac{1}{N}<1</script>。即证明转化为：</p>
 <script type="math/tex; mode=display">
-显然，当$$N>>0$$时，上述等式是近似成立的。至此，简单解释了为什么指数加权平均的天数的计算公式为$$1/{(1−β)}$$。
-
-#### 6.4 理解指数加权平均
-
-我们将指数加权平均公式的一般形式写下来：</script><p>\begin{aligned}V_{t}=&amp; \beta V_{t-1}+(1-\beta) \theta_{t} \\=&amp;(1-\beta) \theta_{t}+(1-\beta) \cdot \beta \cdot \theta_{t-1}+(1-\beta) \cdot \beta^{2} \cdot \theta_{t-2}+\cdots \\&amp;+(1-\beta) \cdot \beta^{t-1} \cdot \theta_{1}+\beta^{t} \cdot V_{0}\end{aligned}</p>
+\left(1-\frac{1}{N}\right)^{N}=\frac{1}{e}</script><p>显然，当<script type="math/tex">N>>0</script>时，上述等式是近似成立的。至此，简单解释了为什么指数加权平均的天数的计算公式为<script type="math/tex">1/{(1−β)}</script>。</p>
+<h4 id="6-4-理解指数加权平均"><a href="#6-4-理解指数加权平均" class="headerlink" title="6.4 理解指数加权平均"></a>6.4 理解指数加权平均</h4><p>我们将指数加权平均公式的一般形式写下来：</p>
 <script type="math/tex; mode=display">
-上式中$$\theta_{t}, \theta_{t-1}, \theta_{t-2}, \cdots, \theta_{1}$$是原始数据值，$$(1-\beta),(1-\beta) \beta,(1-\beta) \beta^{2}, \cdots,(1-\beta) \beta^{t-1}$$是类似指数曲线，从右向左，呈指数下降的。$$V_t$$的值就是这两个子式的点乘，将原始数据值与衰减指数点乘，相当于做了指数衰减，离得越近，影响越大，离得越远，影响越小，衰减越厉害。
-
-<img src="https://pic.imgdb.cn/item/648ae0fd1ddac507ccbe7f06.png" style="zoom:50%" />
-
-我们已经知道了指数加权平均的递推公式。实际应用中为了**减少内存**的使用，我们可以使用这样的语句来实现指数加权平均算法：
-
-<img src="https://pic.imgdb.cn/item/648ae16e1ddac507ccc01a03.png" style="zoom:70%" />
-
-本小节的参考链接：[为什么在优化算法中使用指数加权平均](https://www.jianshu.com/p/41218cb5e099)
-
-#### 6.5 指数加权平均的偏差修正
-
-上文中提到当$$β=0.98$$时，指数加权平均结果如下图绿色曲线所示。但是实际上，真实曲线如紫色曲线所示。
-
-<img src="https://pic.imgdb.cn/item/648ae1b81ddac507ccc14d37.png">
-
-我们注意到，紫色曲线与绿色曲线的区别是，紫色曲线开始的时候相对较低一些。这是因为开始时我们设置$$V_0=0$$，所以初始值会相对小一些，直到后面受前面的影响渐渐变小，趋于正常。
-
-修正这种问题的方法是进行**偏移校正(bias correction)**，即在每次计算完$$V_t$$后，对$$V_t$$进行下式处理：</script><p>\frac{V_t}{1-\beta^t}</p>
+\begin{aligned}V_{t}=& \beta V_{t-1}+(1-\beta) \theta_{t} \\=&(1-\beta) \theta_{t}+(1-\beta) \cdot \beta \cdot \theta_{t-1}+(1-\beta) \cdot \beta^{2} \cdot \theta_{t-2}+\cdots \\&+(1-\beta) \cdot \beta^{t-1} \cdot \theta_{1}+\beta^{t} \cdot V_{0}\end{aligned}</script><p>上式中<script type="math/tex">\theta_{t}, \theta_{t-1}, \theta_{t-2}, \cdots, \theta_{1}</script>是原始数据值，<script type="math/tex">(1-\beta),(1-\beta) \beta,(1-\beta) \beta^{2}, \cdots,(1-\beta) \beta^{t-1}</script>是类似指数曲线，从右向左，呈指数下降的。<script type="math/tex">V_t</script>的值就是这两个子式的点乘，将原始数据值与衰减指数点乘，相当于做了指数衰减，离得越近，影响越大，离得越远，影响越小，衰减越厉害。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae0fd1ddac507ccbe7f06.png" style="zoom:50%"></p>
+<p>我们已经知道了指数加权平均的递推公式。实际应用中为了<strong>减少内存</strong>的使用，我们可以使用这样的语句来实现指数加权平均算法：</p>
+<p><img src="https://pic.imgdb.cn/item/648ae16e1ddac507ccc01a03.png" style="zoom:70%"></p>
+<p>本小节的参考链接：<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/41218cb5e099">为什么在优化算法中使用指数加权平均</a></p>
+<h4 id="6-5-指数加权平均的偏差修正"><a href="#6-5-指数加权平均的偏差修正" class="headerlink" title="6.5 指数加权平均的偏差修正"></a>6.5 指数加权平均的偏差修正</h4><p>上文中提到当<script type="math/tex">β=0.98</script>时，指数加权平均结果如下图绿色曲线所示。但是实际上，真实曲线如紫色曲线所示。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae1b81ddac507ccc14d37.png"></p>
+<p>我们注意到，紫色曲线与绿色曲线的区别是，紫色曲线开始的时候相对较低一些。这是因为开始时我们设置<script type="math/tex">V_0=0</script>，所以初始值会相对小一些，直到后面受前面的影响渐渐变小，趋于正常。</p>
+<p>修正这种问题的方法是进行<strong>偏移校正(bias correction)</strong>，即在每次计算完<script type="math/tex">V_t</script>后，对<script type="math/tex">V_t</script>进行下式处理：</p>
 <script type="math/tex; mode=display">
-在刚开始的时候，$$t$$比较小，$$(1−β^t)<1$$，这样就将$$V_t$$修正得更大一些，效果是把紫色曲线开始部分向上提升一些，与绿色曲线接近重合。随着$$t$$增大，$$(1−β^t)≈1$$，$$V_t$$基本不变，紫色曲线与绿色曲线依然重合。这样就实现了简单的偏移校正，得到我们希望的绿色曲线。
-
-注意机器学习中，偏移校正并不是必须的。因为，在迭代一次次数后($$t$$较大)，$$V_t$$受初始值影响微乎其微，紫色曲线与绿色曲线基本重合。所以，一般可以忽略初始迭代过程，等到一定迭代之后再取值，这样就不需要进行偏移校正了。
-
-#### 6.6 动量(**momentum**)梯度下降法
-
-动量梯度下降与梯度下降相比，就是对梯度使用[指数加权平均](https://www.zhihu.com/search?q=%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra=%7B%22sourceType%22%3A%22article%22%2C%22sourceId%22%3A30743067%7D)，其他的都保存一致
-
-该部分将介绍动量梯度下降算法，其速度要比传统的梯度下降算法快很多。做法是在每次训练时，对梯度进行指数加权平均处理，然后用得到的梯度值更新权重$$W$$和常数项$$b$$。下面介绍具体的实现过程。
-
-<img src="https://pic.imgdb.cn/item/648ae1d51ddac507ccc1d475.png">
-
-原始的梯度下降算法如上图蓝色折线所示。在梯度下降过程中，梯度下降的振荡较大，尤其对于$$W、b$$之间数值范围差别较大的情况。此时每一点处的梯度只与当前方向有关，产生类似折线的效果，前进缓慢。而如果**对梯度进行指数加权平均**，这样使当前梯度不仅与当前方向有关，还与之前的方向有关，这样处理让梯度前进方向更加平滑，减少振荡，能够更快地到达最小值处。
-
-权重$$W$$和常数项$$b$$的指数加权平均表达式如下：</script><p>\begin{gathered}<br>V_{\mathrm d W}=\beta \cdot V_{\mathrm d W}+(1-\beta) \cdot \mathrm d W \\<br>V_{\mathrm d b}=\beta \cdot V_{\mathrm d b}+(1-\beta) \cdot \mathrm d b<br>\end{gathered}</p>
+\frac{V_t}{1-\beta^t}</script><p>在刚开始的时候，<script type="math/tex">t</script>比较小，<script type="math/tex">(1−β^t)<1</script>，这样就将<script type="math/tex">V_t</script>修正得更大一些，效果是把紫色曲线开始部分向上提升一些，与绿色曲线接近重合。随着<script type="math/tex">t</script>增大，<script type="math/tex">(1−β^t)≈1</script>，<script type="math/tex">V_t</script>基本不变，紫色曲线与绿色曲线依然重合。这样就实现了简单的偏移校正，得到我们希望的绿色曲线。</p>
+<p>注意机器学习中，偏移校正并不是必须的。因为，在迭代一次次数后(<script type="math/tex">t</script>较大)，<script type="math/tex">V_t</script>受初始值影响微乎其微，紫色曲线与绿色曲线基本重合。所以，一般可以忽略初始迭代过程，等到一定迭代之后再取值，这样就不需要进行偏移校正了。</p>
+<h4 id="6-6-动量-momentum-梯度下降法"><a href="#6-6-动量-momentum-梯度下降法" class="headerlink" title="6.6 动量(momentum)梯度下降法"></a>6.6 动量(<strong>momentum</strong>)梯度下降法</h4><p>动量梯度下降与梯度下降相比，就是对梯度使用<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?q=%E6%8C%87%E6%95%B0%E5%8A%A0%E6%9D%83%E5%B9%B3%E5%9D%87&amp;search_source=Entity&amp;hybrid_search_source=Entity&amp;hybrid_search_extra=%7B%22sourceType%22%3A%22article%22%2C%22sourceId%22%3A30743067%7D">指数加权平均</a>，其他的都保存一致</p>
+<p>该部分将介绍动量梯度下降算法，其速度要比传统的梯度下降算法快很多。做法是在每次训练时，对梯度进行指数加权平均处理，然后用得到的梯度值更新权重<script type="math/tex">W</script>和常数项<script type="math/tex">b</script>。下面介绍具体的实现过程。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae1d51ddac507ccc1d475.png"></p>
+<p>原始的梯度下降算法如上图蓝色折线所示。在梯度下降过程中，梯度下降的振荡较大，尤其对于<script type="math/tex">W、b</script>之间数值范围差别较大的情况。此时每一点处的梯度只与当前方向有关，产生类似折线的效果，前进缓慢。而如果<strong>对梯度进行指数加权平均</strong>，这样使当前梯度不仅与当前方向有关，还与之前的方向有关，这样处理让梯度前进方向更加平滑，减少振荡，能够更快地到达最小值处。</p>
+<p>权重<script type="math/tex">W</script>和常数项<script type="math/tex">b</script>的指数加权平均表达式如下：</p>
 <script type="math/tex; mode=display">
-从动量的角度来看，以权重$$W$$为例，$$V_{\mathrm dW}$$可以成速度V，$$\mathrm dW$$可以看成是加速度$$a$$。指数加权平均实际上是计算当前的速度，当前速度由之前的速度和现在的加速度共同影响。而$$β<1$$，又能限制速度$$V_{\mathrm dW}$$过大。也就是说，当前的速度是渐变的，而不是瞬变的，是动量的过程。这保证了梯度下降的平稳性和准确性，减少振荡，较快地达到最小值处。
-
-动量梯度下降算法的过程如下：
-
-<img src="https://pic.imgdb.cn/item/648ae2051ddac507ccc2b4f9.png" style="zoom:70%" />
-
-初始时，令$$V_{\mathrm dW}=0,V_{\mathrm db}=0$$。一般设置$$β=0.9$$，即指数加权平均前10天的数据，实际应用效果较好。
-
-另外，关于偏移校正，可以不使用。因为经过10次迭代后，随着滑动平均的过程，偏移情况会逐渐消失。
-
-补充一下，在其它文献资料中，动量梯度下降还有另外一种写法：</script><p>\begin{gathered}<br>V_{\mathrm d W}=\beta V_{\mathrm d W}+d W \\<br>V_{\mathrm d b}=\beta V_{\mathrm d b}+\mathrm d b<br>\end{gathered}</p>
+\begin{gathered}
+V_{\mathrm d W}=\beta \cdot V_{\mathrm d W}+(1-\beta) \cdot \mathrm d W \\
+V_{\mathrm d b}=\beta \cdot V_{\mathrm d b}+(1-\beta) \cdot \mathrm d b
+\end{gathered}</script><p>从动量的角度来看，以权重<script type="math/tex">W</script>为例，<script type="math/tex">V_{\mathrm dW}</script>可以成速度V，<script type="math/tex">\mathrm dW</script>可以看成是加速度<script type="math/tex">a</script>。指数加权平均实际上是计算当前的速度，当前速度由之前的速度和现在的加速度共同影响。而<script type="math/tex">β<1</script>，又能限制速度<script type="math/tex">V_{\mathrm dW}</script>过大。也就是说，当前的速度是渐变的，而不是瞬变的，是动量的过程。这保证了梯度下降的平稳性和准确性，减少振荡，较快地达到最小值处。</p>
+<p>动量梯度下降算法的过程如下：</p>
+<p><img src="https://pic.imgdb.cn/item/648ae2051ddac507ccc2b4f9.png" style="zoom:70%"></p>
+<p>初始时，令<script type="math/tex">V_{\mathrm dW}=0,V_{\mathrm db}=0</script>。一般设置<script type="math/tex">β=0.9</script>，即指数加权平均前10天的数据，实际应用效果较好。</p>
+<p>另外，关于偏移校正，可以不使用。因为经过10次迭代后，随着滑动平均的过程，偏移情况会逐渐消失。</p>
+<p>补充一下，在其它文献资料中，动量梯度下降还有另外一种写法：</p>
 <script type="math/tex; mode=display">
-即消去了$$dW$$和$$db$$前的系数$$(1−β)$$。这样简化了表达式，但是学习因子$$\alpha$$相当于变成了$$\dfrac{α}{1−β}$$，表示$$\alpha$$也受$$\beta$$的影响。从效果上来说，这种写法也是可以的，但是不够直观，且调参涉及到$$\alpha$$，不够方便。所以，实际应用中，推荐第一种动量梯度下降的表达式。
-
-#### 6.7 **root mean square prop(**RMSprop**)**
-
-RMSprop是另外一种优化梯度下降速度的算法。每次迭代训练过程中，其权重W和常数项b的更新表达式为：</script><p>\begin{gathered}S_{W}=<br>\beta S_{\mathrm d W}+(1-\beta) d W^{2} \\S_{b}=\beta S_{\mathrm d b}+(1-\beta) \mathrm d b^{2} \\<br>W:=W-\alpha \frac{\mathrm d W}{\sqrt{S_{W}}}, b:=b-\alpha \frac{\mathrm d b}{\sqrt{S_{b}}}<br>\end{gathered}</p>
+\begin{gathered}
+V_{\mathrm d W}=\beta V_{\mathrm d W}+d W \\
+V_{\mathrm d b}=\beta V_{\mathrm d b}+\mathrm d b
+\end{gathered}</script><p>即消去了<script type="math/tex">dW</script>和<script type="math/tex">db</script>前的系数<script type="math/tex">(1−β)</script>。这样简化了表达式，但是学习因子<script type="math/tex">\alpha</script>相当于变成了<script type="math/tex">\dfrac{α}{1−β}</script>，表示<script type="math/tex">\alpha</script>也受<script type="math/tex">\beta</script>的影响。从效果上来说，这种写法也是可以的，但是不够直观，且调参涉及到<script type="math/tex">\alpha</script>，不够方便。所以，实际应用中，推荐第一种动量梯度下降的表达式。</p>
+<h4 id="6-7-root-mean-square-prop-RMSprop"><a href="#6-7-root-mean-square-prop-RMSprop" class="headerlink" title="6.7 root mean square prop(RMSprop)"></a>6.7 <strong>root mean square prop(</strong>RMSprop<strong>)</strong></h4><p>RMSprop是另外一种优化梯度下降速度的算法。每次迭代训练过程中，其权重W和常数项b的更新表达式为：</p>
 <script type="math/tex; mode=display">
-下面简单解释一下RMSprop算法的原理，仍然以下图为例，为了便于分析，令水平方向为$$W$$的方向，垂直方向为$$b$$的方向。
-
-<img src="https://pic.imgdb.cn/item/648ae2e81ddac507ccc614ab.png">
-
-从图中可以看出，梯度下降(蓝色折线)在垂直方向($$b$$)上振荡较大，在水平方向($$W$$)上振荡较小，表示在$$b$$方向上梯度较大，即$$db$$较大，而在$$W$$方向上梯度较小，即$$dW$$较小。因此，上述表达式中$$S_b$$较大，而$$S_W$$较小。在更新$$W$$和$$b$$的表达式中，变化值$$\dfrac{\mathrm dW}{\sqrt{S_W}}$$较大，而$$\dfrac{\mathrm db}{\sqrt{S_b}}$$较小。也就使得$$W$$变化得多一些，$$b$$变化得少一些。即加快了$$W$$方向的速度，减小了$$b$$方向的速度，减小振荡，实现快速梯度下降算法，其梯度下降过程如绿色折线所示。总得来说，就是如果哪个方向振荡大，就减小该方向的更新速度，从而减小振荡。
-
-还有一点需要注意的是为了避免RMSprop算法中**分母为零**，通常可以在分母增加一个极小的常数$$\varepsilon$$：</script><p>W:=W-\alpha \frac{d W}{\sqrt{S_{W}}+\varepsilon}, b:=b-\alpha \frac{d b}{\sqrt{S_{b}}+\varepsilon}</p>
+\begin{gathered}S_{W}=
+\beta S_{\mathrm d W}+(1-\beta) d W^{2} \\S_{b}=\beta S_{\mathrm d b}+(1-\beta) \mathrm d b^{2} \\
+W:=W-\alpha \frac{\mathrm d W}{\sqrt{S_{W}}}, b:=b-\alpha \frac{\mathrm d b}{\sqrt{S_{b}}}
+\end{gathered}</script><p>下面简单解释一下RMSprop算法的原理，仍然以下图为例，为了便于分析，令水平方向为<script type="math/tex">W</script>的方向，垂直方向为<script type="math/tex">b</script>的方向。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae2e81ddac507ccc614ab.png"></p>
+<p>从图中可以看出，梯度下降(蓝色折线)在垂直方向(<script type="math/tex">b</script>)上振荡较大，在水平方向(<script type="math/tex">W</script>)上振荡较小，表示在<script type="math/tex">b</script>方向上梯度较大，即<script type="math/tex">db</script>较大，而在<script type="math/tex">W</script>方向上梯度较小，即<script type="math/tex">dW</script>较小。因此，上述表达式中<script type="math/tex">S_b</script>较大，而<script type="math/tex">S_W</script>较小。在更新<script type="math/tex">W</script>和<script type="math/tex">b</script>的表达式中，变化值<script type="math/tex">\dfrac{\mathrm dW}{\sqrt{S_W}}</script>较大，而<script type="math/tex">\dfrac{\mathrm db}{\sqrt{S_b}}</script>较小。也就使得<script type="math/tex">W</script>变化得多一些，<script type="math/tex">b</script>变化得少一些。即加快了<script type="math/tex">W</script>方向的速度，减小了<script type="math/tex">b</script>方向的速度，减小振荡，实现快速梯度下降算法，其梯度下降过程如绿色折线所示。总得来说，就是如果哪个方向振荡大，就减小该方向的更新速度，从而减小振荡。</p>
+<p>还有一点需要注意的是为了避免RMSprop算法中<strong>分母为零</strong>，通常可以在分母增加一个极小的常数<script type="math/tex">\varepsilon</script>：</p>
 <script type="math/tex; mode=display">
-其中，$$ε=10^{−8}$$，或者其它较小值。
-
-#### 6.8 Adam优化算法
-
-Adam(Adaptive Moment Estimation)算法**结合**了动量梯度下降算法和RMSprop算法。其算法流程为：
-
-<img src="https://pic.imgdb.cn/item/648ae7221ddac507ccd65acc.png" style="zoom:70%" />
-
-Adam算法包含了几个超参数，分别是：$$α,β_1,β_2,ε$$。
-
-- $$β_1$$通常设置为$$0.9$$；
-- $$β_2$$通常设置为$$0.999$$；
-- $$\varepsilon$$通常设置为$$10^{−8}$$。
-  一般只需要对$$β_1$$和$$β_2$$进行调试。
-
-实际应用中，Adam算法结合了动量梯度下降和RMSprop各自的优点，使得神经网络训练速度大大提高。
-
-#### 6.9 学习率衰减
-
-减小学习因子$$\alpha$$也能有效提高神经网络训练速度，这种方法被称为learning rate decay。
-
-Learning rate decay就是随着迭代次数增加，学习因子$$\alpha$$**逐渐减小**。下面用图示的方式来解释这样做的好处。下图中，蓝色折线表示使用恒定的学习因子$$\alpha$$，由于每次训练$$\alpha$$相同，步进长度不变，在接近最优值处的振荡也大，在最优值附近较大范围内振荡，与最优值距离就比较远。绿色折线表示使用不断减小的$$\alpha$$，随着训练次数增加，$$\alpha$$逐渐减小，步进长度减小，使得能够在最优值处较小范围内微弱振荡，不断逼近最优值。相比较恒定的$$\alpha$$来说，learning rate decay更接近最优值。
-
-<img src="https://pic.imgdb.cn/item/648ae8241ddac507ccdab00c.png">
-
-Learning rate decay中对$$\alpha$$可由下列公式得到：</script><p>\begin{equation}<br>\alpha=\frac{1}{1+\text { decay_rate } * \text { epoch }} \alpha_{0}<br>\end{equation}</p>
+W:=W-\alpha \frac{d W}{\sqrt{S_{W}}+\varepsilon}, b:=b-\alpha \frac{d b}{\sqrt{S_{b}}+\varepsilon}</script><p>其中，<script type="math/tex">ε=10^{−8}</script>，或者其它较小值。</p>
+<h4 id="6-8-Adam优化算法"><a href="#6-8-Adam优化算法" class="headerlink" title="6.8 Adam优化算法"></a>6.8 Adam优化算法</h4><p>Adam(Adaptive Moment Estimation)算法<strong>结合</strong>了动量梯度下降算法和RMSprop算法。其算法流程为：</p>
+<p><img src="https://pic.imgdb.cn/item/648ae7221ddac507ccd65acc.png" style="zoom:70%"></p>
+<p>Adam算法包含了几个超参数，分别是：<script type="math/tex">α,β_1,β_2,ε</script>。</p>
+<ul>
+<li><script type="math/tex">β_1</script>通常设置为<script type="math/tex">0.9</script>；</li>
+<li><script type="math/tex">β_2</script>通常设置为<script type="math/tex">0.999</script>；</li>
+<li><script type="math/tex">\varepsilon</script>通常设置为<script type="math/tex">10^{−8}</script>。<br>一般只需要对<script type="math/tex">β_1</script>和<script type="math/tex">β_2</script>进行调试。</li>
+</ul>
+<p>实际应用中，Adam算法结合了动量梯度下降和RMSprop各自的优点，使得神经网络训练速度大大提高。</p>
+<h4 id="6-9-学习率衰减"><a href="#6-9-学习率衰减" class="headerlink" title="6.9 学习率衰减"></a>6.9 学习率衰减</h4><p>减小学习因子<script type="math/tex">\alpha</script>也能有效提高神经网络训练速度，这种方法被称为learning rate decay。</p>
+<p>Learning rate decay就是随着迭代次数增加，学习因子<script type="math/tex">\alpha</script><strong>逐渐减小</strong>。下面用图示的方式来解释这样做的好处。下图中，蓝色折线表示使用恒定的学习因子<script type="math/tex">\alpha</script>，由于每次训练<script type="math/tex">\alpha</script>相同，步进长度不变，在接近最优值处的振荡也大，在最优值附近较大范围内振荡，与最优值距离就比较远。绿色折线表示使用不断减小的<script type="math/tex">\alpha</script>，随着训练次数增加，<script type="math/tex">\alpha</script>逐渐减小，步进长度减小，使得能够在最优值处较小范围内微弱振荡，不断逼近最优值。相比较恒定的<script type="math/tex">\alpha</script>来说，learning rate decay更接近最优值。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae8241ddac507ccdab00c.png"></p>
+<p>Learning rate decay中对<script type="math/tex">\alpha</script>可由下列公式得到：</p>
 <script type="math/tex; mode=display">
-其中，$$\text{deacy\_rate}$$是参数(可调)，**epoch是训练完所有样本的次数**。随着epoch增加，$$\alpha$$会不断变小。除了上面计算$$\alpha$$的公式之外，还有其它可供选择的计算公式：</script><p>\begin{gathered}<br>\alpha=0.95^{\text {epoch }} \cdot \alpha_{0} \\<br>\alpha=\frac{k}{\sqrt{\text { epoch }}} \cdot \alpha_{0} \quad \text { or } \quad \frac{k}{\sqrt{t}} \cdot \alpha_{0}<br>\end{gathered}</p>
+\begin{equation}
+\alpha=\frac{1}{1+\text { decay\_rate } * \text { epoch }} \alpha_{0}
+\end{equation}</script><p>其中，<script type="math/tex">\text{deacy\_rate}</script>是参数(可调)，<strong>epoch是训练完所有样本的次数</strong>。随着epoch增加，<script type="math/tex">\alpha</script>会不断变小。除了上面计算<script type="math/tex">\alpha</script>的公式之外，还有其它可供选择的计算公式：</p>
 <script type="math/tex; mode=display">
-其中，$$k$$为可调参数，$$t$$为mini-bach number。除此之外，还可以设置$$\alpha$$为关于$$t$$的离散值，随着$$t$$增加，$$\alpha$$呈阶梯式减小。当然，也可以根据训练情况灵活调整当前的$$\alpha$$值，但会比较耗时间。
-
-#### 6.10局部最优问题
-
-在使用梯度下降算法不断减小cost function时，可能会得到局部最优解(local optima)而不是全局最优解(global optima)。之前我们对局部最优解的理解是形如碗状的凹槽，如下图左边所示。但是在神经网络中，local optima的概念发生了变化。准确地来说，大部分梯度为零的“最优点”并不是这些凹槽处，而是形如右边所示的马鞍状，称为**saddle point**。也就是说，梯度为零并不能保证都是convex(极小值)，也有可能是concave(极大值)。特别是在神经网络中参数很多的情况下，所有参数梯度为零的点很可能都是右边所示的马鞍状的saddle point，而不是左边那样的local optimum。
-
-<img src="https://pic.imgdb.cn/item/648ae86d1ddac507ccdbc60a.png">
-
-类似马鞍状的plateaus会**降低**神经网络学习速度。Plateaus是梯度接近于零的平缓区域，如下图所示。在plateaus上梯度很小，前进缓慢，到达saddle point需要很长时间。到达saddle point后，由于随机扰动，梯度一般能够沿着图中绿色箭头，离开saddle point，继续前进，只是在plateaus上花费了太多时间。
-
-<img src="https://pic.imgdb.cn/item/648ae8921ddac507ccdc670a.png">
-
-### 第七章 超参数调试、Batch正则化和编程框架
-
-#### 7.1 超参数调试处理
-
-深度神经网络需要调试的超参数（Hyperparameters）较多，包括：
-
-| **参数**                          | **意义**                     |
-| :-------------------------------- | :--------------------------- |
-| $$\alpha$$                        | 学习因子/速率                |
-| $$\beta$$                         | 动量梯度下降因子             |
-| $$\beta_1, \beta_2, \varepsilon$$ | Adam算法参数                 |
-| #layers                           | 神经网络层数                 |
-| #hidden units                     | 各层隐藏神经元个数           |
-| learning rate decay               | 学习因子下降参数             |
-| mini-batch size                   | 批量训练样本数的包含样本个数 |
-| 。。。                            | 。。。                       |
-
-超参数之间也有重要性差异。通常来说，学习因子$$α$$是最重要的超参数，也是需要重点调试的超参数。动量梯度下降因子$$β$$、各隐藏层神经元个数#hidden units和mini-batch size的重要性仅次于$$α$$。然后就是神经网络层数#layers和学习因子下降参数learning rate decay。最后，Adam算法的三个参数$$β_1, β_2, ε$$一般常设置为$$0.9，0.999$$和$$10^{−8}$$，不需要反复调试。当然，这里超参数重要性的排名并不是绝对的，具体情况，具体分析。
-
-如何选择和调试超参数？传统的机器学习中，我们对每个参数等距离选取任意个数的点，然后，分别使用不同点对应的参数组合进行训练，最后根据验证集上的表现好坏，来选定最佳的参数。例如有两个待调试的参数，分别在每个参数上选取5个点，这样构成了5x5=25中参数组合，如下图所示：
-
-<img src="https://pic.imgdb.cn/item/648ae96e1ddac507ccdfd1c7.png" style="zoom:50%" />
-
-这种做法在参数比较少的时候效果较好。但是在深度神经网络模型中，我们一般不采用这种均匀间隔取点的方法，比较好的做法是使用**随机选择**。也就是说，对于上面这个例子，我们随机选择25个点，作为待调试的超参数，如下图所示：
-
-<img src="https://pic.imgdb.cn/item/648aea321ddac507cce264c1.png" style="zoom:50%" />
-
-随机化选择参数的目的是为了尽可能地得到更多种参数组合。还是上面的例子，如果使用均匀采样的话，每个参数只有5种情况；而使用随机采样的话，每个参数有25种可能的情况，因此更有可能得到最佳的参数组合。
-
-这种做法的另一个好处就是对重要性不同的参数之间的选择效果更好。设hyperparameter1为$$\alpha$$，hyperparameter2为$$\varepsilon$$，显然二者的重要性是不一样的。如果使用第一种均匀采样的方法，$$\varepsilon$$的影响很小，相当于只选择了$$5$$个$$\alpha$$值。而如果使用第二种随机采样的方法，$$\varepsilon$$和$$\alpha$$都有可能选择$$25$$种不同值。这大大增加了$$\alpha$$调试的个数，更有可能选择到最优值。其实，在实际应用中完全不知道哪个参数更加重要的情况下，随机采样的方式能有效解决这一问题，但是均匀采样做不到这点。
-
-在经过随机采样之后，我们可能得到某些区域模型的表现较好。为了得到更精确的最佳参数，我们应该继续对选定的区域进行**由粗到细**的采样(coarse to fine sampling scheme)。也就是放大表现较好的区域，再对此区域做更密集的随机采样。例如，对下图中右下角的方形区域再做25点的随机采样，以获得最佳参数。
-
-<img src="https://pic.imgdb.cn/item/648aea541ddac507cce2d585.png" style="zoom:50%" />
-
-#### 7.2 为超参数选择合适的范围
-
-上一部分讲的调试参数使用随机采样，对于某些超参数是可以进行尺度均匀采样的，但是某些超参数需要选择不同的合适尺度进行随机采样。
-
-例如对于超参数#layers和#hidden units，都是正整数，是可以进行均匀随机采样的，即**超参数每次变化的尺度都是一致的**(如每次变化为1，犹如一个刻度尺一样，刻度是均匀的)。
-
-但是，对于某些超参数，可能需要**非均匀随机采样(即非均匀刻度尺)**。例如超参数$$\alpha$$，待调范围是$$[0.0001, 1]$$。如果使用均匀随机采样，那么有$$90\%$$的采样点分布在$$[0.1, 1]$$之间，只有$$10\%$$分布在$$[0.0001, 0.1]$$之间。这在实际应用中是不太好的，因为最佳的$$\alpha$$值可能主要分布在$$[0.0001, 0.1]$$之间，而$$[0.1, 1]$$范围内$$\alpha$$值效果并不好。因此我们更关注的是区间$$[0.0001, 0.1]$$，应该在这个区间内细分更多刻度。
-
-通常的做法是将**linear scale转换为log scale**，将均匀尺度转化为非均匀尺度，然后再在log scale下进行均匀采样。这样$$[0.0001, 0.001]$$，$$[0.001, 0.01]$$，$$[0.01, 0.1]$$，$$[0.1, 1]$$各个区间内随机采样的超参数个数基本一致，也就扩大了之前$$[0.0001, 0.1]$$区间内采样值个数。
-
-<img src="https://pic.imgdb.cn/item/648aea921ddac507cce3abf1.png">
-
-一般解法是，如果线性区间为$$[a, b]$$，令$$m=\log(a)，n=\log(b)$$，则对应的$$\log$$区间为$$[m,n]$$。对$$\log$$区间的$$[m,n]$$进行随机均匀采样，然后得到的采样值$$r$$，最后反推到线性区间，即$$10^r$$就是最终采样的超参数。相应的Python语句为：
-
+\begin{gathered}
+\alpha=0.95^{\text {epoch }} \cdot \alpha_{0} \\
+\alpha=\frac{k}{\sqrt{\text { epoch }}} \cdot \alpha_{0} \quad \text { or } \quad \frac{k}{\sqrt{t}} \cdot \alpha_{0}
+\end{gathered}</script><p>其中，<script type="math/tex">k</script>为可调参数，<script type="math/tex">t</script>为mini-bach number。除此之外，还可以设置<script type="math/tex">\alpha</script>为关于<script type="math/tex">t</script>的离散值，随着<script type="math/tex">t</script>增加，<script type="math/tex">\alpha</script>呈阶梯式减小。当然，也可以根据训练情况灵活调整当前的<script type="math/tex">\alpha</script>值，但会比较耗时间。</p>
+<h4 id="6-10局部最优问题"><a href="#6-10局部最优问题" class="headerlink" title="6.10局部最优问题"></a>6.10局部最优问题</h4><p>在使用梯度下降算法不断减小cost function时，可能会得到局部最优解(local optima)而不是全局最优解(global optima)。之前我们对局部最优解的理解是形如碗状的凹槽，如下图左边所示。但是在神经网络中，local optima的概念发生了变化。准确地来说，大部分梯度为零的“最优点”并不是这些凹槽处，而是形如右边所示的马鞍状，称为<strong>saddle point</strong>。也就是说，梯度为零并不能保证都是convex(极小值)，也有可能是concave(极大值)。特别是在神经网络中参数很多的情况下，所有参数梯度为零的点很可能都是右边所示的马鞍状的saddle point，而不是左边那样的local optimum。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae86d1ddac507ccdbc60a.png"></p>
+<p>类似马鞍状的plateaus会<strong>降低</strong>神经网络学习速度。Plateaus是梯度接近于零的平缓区域，如下图所示。在plateaus上梯度很小，前进缓慢，到达saddle point需要很长时间。到达saddle point后，由于随机扰动，梯度一般能够沿着图中绿色箭头，离开saddle point，继续前进，只是在plateaus上花费了太多时间。</p>
+<p><img src="https://pic.imgdb.cn/item/648ae8921ddac507ccdc670a.png"></p>
+<h3 id="第七章-超参数调试、Batch正则化和编程框架"><a href="#第七章-超参数调试、Batch正则化和编程框架" class="headerlink" title="第七章 超参数调试、Batch正则化和编程框架"></a>第七章 超参数调试、Batch正则化和编程框架</h3><h4 id="7-1-超参数调试处理"><a href="#7-1-超参数调试处理" class="headerlink" title="7.1 超参数调试处理"></a>7.1 超参数调试处理</h4><p>深度神经网络需要调试的超参数（Hyperparameters）较多，包括：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>参数</strong></th>
+<th style="text-align:left"><strong>意义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><script type="math/tex">\alpha</script></td>
+<td style="text-align:left">学习因子/速率</td>
+</tr>
+<tr>
+<td style="text-align:left"><script type="math/tex">\beta</script></td>
+<td style="text-align:left">动量梯度下降因子</td>
+</tr>
+<tr>
+<td style="text-align:left"><script type="math/tex">\beta_1, \beta_2, \varepsilon</script></td>
+<td style="text-align:left">Adam算法参数</td>
+</tr>
+<tr>
+<td style="text-align:left">#layers</td>
+<td style="text-align:left">神经网络层数</td>
+</tr>
+<tr>
+<td style="text-align:left">#hidden units</td>
+<td style="text-align:left">各层隐藏神经元个数</td>
+</tr>
+<tr>
+<td style="text-align:left">learning rate decay</td>
+<td style="text-align:left">学习因子下降参数</td>
+</tr>
+<tr>
+<td style="text-align:left">mini-batch size</td>
+<td style="text-align:left">批量训练样本数的包含样本个数</td>
+</tr>
+<tr>
+<td style="text-align:left">。。。</td>
+<td style="text-align:left">。。。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>超参数之间也有重要性差异。通常来说，学习因子<script type="math/tex">α</script>是最重要的超参数，也是需要重点调试的超参数。动量梯度下降因子<script type="math/tex">β</script>、各隐藏层神经元个数#hidden units和mini-batch size的重要性仅次于<script type="math/tex">α</script>。然后就是神经网络层数#layers和学习因子下降参数learning rate decay。最后，Adam算法的三个参数<script type="math/tex">β_1, β_2, ε</script>一般常设置为<script type="math/tex">0.9，0.999</script>和<script type="math/tex">10^{−8}</script>，不需要反复调试。当然，这里超参数重要性的排名并不是绝对的，具体情况，具体分析。</p>
+<p>如何选择和调试超参数？传统的机器学习中，我们对每个参数等距离选取任意个数的点，然后，分别使用不同点对应的参数组合进行训练，最后根据验证集上的表现好坏，来选定最佳的参数。例如有两个待调试的参数，分别在每个参数上选取5个点，这样构成了5x5=25中参数组合，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648ae96e1ddac507ccdfd1c7.png" style="zoom:50%"></p>
+<p>这种做法在参数比较少的时候效果较好。但是在深度神经网络模型中，我们一般不采用这种均匀间隔取点的方法，比较好的做法是使用<strong>随机选择</strong>。也就是说，对于上面这个例子，我们随机选择25个点，作为待调试的超参数，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648aea321ddac507cce264c1.png" style="zoom:50%"></p>
+<p>随机化选择参数的目的是为了尽可能地得到更多种参数组合。还是上面的例子，如果使用均匀采样的话，每个参数只有5种情况；而使用随机采样的话，每个参数有25种可能的情况，因此更有可能得到最佳的参数组合。</p>
+<p>这种做法的另一个好处就是对重要性不同的参数之间的选择效果更好。设hyperparameter1为<script type="math/tex">\alpha</script>，hyperparameter2为<script type="math/tex">\varepsilon</script>，显然二者的重要性是不一样的。如果使用第一种均匀采样的方法，<script type="math/tex">\varepsilon</script>的影响很小，相当于只选择了<script type="math/tex">5</script>个<script type="math/tex">\alpha</script>值。而如果使用第二种随机采样的方法，<script type="math/tex">\varepsilon</script>和<script type="math/tex">\alpha</script>都有可能选择<script type="math/tex">25</script>种不同值。这大大增加了<script type="math/tex">\alpha</script>调试的个数，更有可能选择到最优值。其实，在实际应用中完全不知道哪个参数更加重要的情况下，随机采样的方式能有效解决这一问题，但是均匀采样做不到这点。</p>
+<p>在经过随机采样之后，我们可能得到某些区域模型的表现较好。为了得到更精确的最佳参数，我们应该继续对选定的区域进行<strong>由粗到细</strong>的采样(coarse to fine sampling scheme)。也就是放大表现较好的区域，再对此区域做更密集的随机采样。例如，对下图中右下角的方形区域再做25点的随机采样，以获得最佳参数。</p>
+<p><img src="https://pic.imgdb.cn/item/648aea541ddac507cce2d585.png" style="zoom:50%"></p>
+<h4 id="7-2-为超参数选择合适的范围"><a href="#7-2-为超参数选择合适的范围" class="headerlink" title="7.2 为超参数选择合适的范围"></a>7.2 为超参数选择合适的范围</h4><p>上一部分讲的调试参数使用随机采样，对于某些超参数是可以进行尺度均匀采样的，但是某些超参数需要选择不同的合适尺度进行随机采样。</p>
+<p>例如对于超参数#layers和#hidden units，都是正整数，是可以进行均匀随机采样的，即<strong>超参数每次变化的尺度都是一致的</strong>(如每次变化为1，犹如一个刻度尺一样，刻度是均匀的)。</p>
+<p>但是，对于某些超参数，可能需要<strong>非均匀随机采样(即非均匀刻度尺)</strong>。例如超参数<script type="math/tex">\alpha</script>，待调范围是<script type="math/tex">[0.0001, 1]</script>。如果使用均匀随机采样，那么有<script type="math/tex">90\%</script>的采样点分布在<script type="math/tex">[0.1, 1]</script>之间，只有<script type="math/tex">10\%</script>分布在<script type="math/tex">[0.0001, 0.1]</script>之间。这在实际应用中是不太好的，因为最佳的<script type="math/tex">\alpha</script>值可能主要分布在<script type="math/tex">[0.0001, 0.1]</script>之间，而<script type="math/tex">[0.1, 1]</script>范围内<script type="math/tex">\alpha</script>值效果并不好。因此我们更关注的是区间<script type="math/tex">[0.0001, 0.1]</script>，应该在这个区间内细分更多刻度。</p>
+<p>通常的做法是将<strong>linear scale转换为log scale</strong>，将均匀尺度转化为非均匀尺度，然后再在log scale下进行均匀采样。这样<script type="math/tex">[0.0001, 0.001]</script>，<script type="math/tex">[0.001, 0.01]</script>，<script type="math/tex">[0.01, 0.1]</script>，<script type="math/tex">[0.1, 1]</script>各个区间内随机采样的超参数个数基本一致，也就扩大了之前<script type="math/tex">[0.0001, 0.1]</script>区间内采样值个数。</p>
+<p><img src="https://pic.imgdb.cn/item/648aea921ddac507cce3abf1.png"></p>
+<p>一般解法是，如果线性区间为<script type="math/tex">[a, b]</script>，令<script type="math/tex">m=\log(a)，n=\log(b)</script>，则对应的<script type="math/tex">\log</script>区间为<script type="math/tex">[m,n]</script>。对<script type="math/tex">\log</script>区间的<script type="math/tex">[m,n]</script>进行随机均匀采样，然后得到的采样值<script type="math/tex">r</script>，最后反推到线性区间，即<script type="math/tex">10^r</script>就是最终采样的超参数。相应的Python语句为：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m = np.log10(a)</span><br><span class="line">n = np.log10(b)</span><br><span class="line">r = np.random.rand()</span><br><span class="line">r = m + (n-m)*r</span><br><span class="line">r = np.power(<span class="number">10</span>,r)</span><br></pre></td></tr></table></figure>
-
-除了$$\alpha$$外，动量梯度因子$$\beta$$也是一样，在超参数调试的时候需要进行非均匀采样。一般$$\beta$$的取值范围$$[0.9, 0.999]$$，$$1−β$$的取值范围就在$$[0.001, 0.1]$$。那么直接对$$1−β$$在$$[0.001, 0.1]$$区间内进行$$\log$$变换即可。
-
-> 这里解释下为什么$$\beta$$也需要向$$\alpha$$那样做非均匀采样。假设$$\beta$$从$$0.9000$$变化为$$0.9005$$，那么$$\frac 1{1−β}$$基本没有变化。但假设$$\beta$$从$$0.9990$$变化为$$0.9995$$，那么$$\frac 1{1−β}$$前后差别$$1000$$。$$\beta$$越接近$$1$$，指数加权平均的个数越多，变化越大。所以对$$\beta$$接近$$1$$的区间，应该采集得更密集一些。
-
-#### 7.3 超参数训练的实践：**Pandas vs. Caviar**
-
-经过调试选择完最佳的超参数并不是一成不变的，一段时间之后（例如一个月），需要根据新的数据和实际情况，再次调试超参数，以获得实时的最佳模型。
-
-在训练深度神经网络时，一种情况是受计算能力所限，我们只能对一个模型进行训练，调试不同的超参数，使得这个模型有最佳的表现。我们称之为Babysitting one model。另外一种情况是可以对多个模型同时进行训练，每个模型上调试不同的超参数，根据表现情况，选择最佳的模型。我们称之为Training many models in parallel。
-
-<img src="https://pic.imgdb.cn/item/648aeab31ddac507cce41e0f.png" style="zoom:50%" />
-
-因为第一种情况只使用一个模型，所以类比做Panda approach；第二种情况同时训练多个模型，类比做Caviar  approach。使用哪种模型是由计算资源、计算能力所决定的。一般来说，对于非常复杂或者数据量很大的模型，使用Panda  approach更多一些。
-
-#### 7.4 正则化网络的激活函数
-
-Sergey Ioffe和Christian Szegedy两位学者提出了Batch Normalization方法。Batch Normalization不仅可以让调试超参数更加简单，而且可以让神经网络模型更加“健壮”。也就是说较好模型可接受的超参数范围更大一些，包容性更强，使得更容易去训练一个深度神经网络。接下来，我们就来介绍什么是Batch Normalization，以及它是如何工作的。
-
-之前，我们在**第五章**中提到过在训练神经网络时，**标准化输入可以提高训练的速度**。方法是对训练数据集进行**归一化**的操作，即将原始数据减去其均值$$\mu$$后，再除以其方差$$σ^2$$。但是标准化输入只是对输入进行了处理，那么对于神经网络，又该如何对各隐藏层的输入进行标准化处理呢？
-
-其实在神经网络中，第$$l$$层隐藏层的输入就是第$$l−1$$层隐藏层的输出$$A^{[l−1]}$$。对$$A^{[l−1]}$$进行标准化处理，从原理上来说可以提高$$W^{[l]}$$和$$b^{[l]}$$的训练速度和准确度。这种对各隐藏层的标准化处理就是Batch Normalization。值得注意的是，实际应用中，一般是对$$Z^{[l−1]}$$进行标准化处理而不是$$A^{[l−1]}$$，其实差别不是很大。
-
-Batch Normalization对第$$l$$层隐藏层的输入$$Z^{[l−1]}$$做如下标准化处理，忽略上标$$[l−1]$$：</script><p>\begin{gathered}<br>\mu=\frac{1}{m} \sum_{i} z^{(i)} \\<br>\sigma^{2}=\frac{1}{m} \sum_{i}\left(z_{i}-\mu\right)^{2} \\z_{\text {norm }}^{(i)}=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}}<br>\end{gathered}</p>
+<p>除了<script type="math/tex">\alpha</script>外，动量梯度因子<script type="math/tex">\beta</script>也是一样，在超参数调试的时候需要进行非均匀采样。一般<script type="math/tex">\beta</script>的取值范围<script type="math/tex">[0.9, 0.999]</script>，<script type="math/tex">1−β</script>的取值范围就在<script type="math/tex">[0.001, 0.1]</script>。那么直接对<script type="math/tex">1−β</script>在<script type="math/tex">[0.001, 0.1]</script>区间内进行<script type="math/tex">\log</script>变换即可。</p>
+<blockquote>
+<p>这里解释下为什么<script type="math/tex">\beta</script>也需要向<script type="math/tex">\alpha</script>那样做非均匀采样。假设<script type="math/tex">\beta</script>从<script type="math/tex">0.9000</script>变化为<script type="math/tex">0.9005</script>，那么<script type="math/tex">\frac 1{1−β}</script>基本没有变化。但假设<script type="math/tex">\beta</script>从<script type="math/tex">0.9990</script>变化为<script type="math/tex">0.9995</script>，那么<script type="math/tex">\frac 1{1−β}</script>前后差别<script type="math/tex">1000</script>。<script type="math/tex">\beta</script>越接近<script type="math/tex">1</script>，指数加权平均的个数越多，变化越大。所以对<script type="math/tex">\beta</script>接近<script type="math/tex">1</script>的区间，应该采集得更密集一些。</p>
+</blockquote>
+<h4 id="7-3-超参数训练的实践：Pandas-vs-Caviar"><a href="#7-3-超参数训练的实践：Pandas-vs-Caviar" class="headerlink" title="7.3 超参数训练的实践：Pandas vs. Caviar"></a>7.3 超参数训练的实践：<strong>Pandas vs. Caviar</strong></h4><p>经过调试选择完最佳的超参数并不是一成不变的，一段时间之后（例如一个月），需要根据新的数据和实际情况，再次调试超参数，以获得实时的最佳模型。</p>
+<p>在训练深度神经网络时，一种情况是受计算能力所限，我们只能对一个模型进行训练，调试不同的超参数，使得这个模型有最佳的表现。我们称之为Babysitting one model。另外一种情况是可以对多个模型同时进行训练，每个模型上调试不同的超参数，根据表现情况，选择最佳的模型。我们称之为Training many models in parallel。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeab31ddac507cce41e0f.png" style="zoom:50%"></p>
+<p>因为第一种情况只使用一个模型，所以类比做Panda approach；第二种情况同时训练多个模型，类比做Caviar  approach。使用哪种模型是由计算资源、计算能力所决定的。一般来说，对于非常复杂或者数据量很大的模型，使用Panda  approach更多一些。</p>
+<h4 id="7-4-正则化网络的激活函数"><a href="#7-4-正则化网络的激活函数" class="headerlink" title="7.4 正则化网络的激活函数"></a>7.4 正则化网络的激活函数</h4><p>Sergey Ioffe和Christian Szegedy两位学者提出了Batch Normalization方法。Batch Normalization不仅可以让调试超参数更加简单，而且可以让神经网络模型更加“健壮”。也就是说较好模型可接受的超参数范围更大一些，包容性更强，使得更容易去训练一个深度神经网络。接下来，我们就来介绍什么是Batch Normalization，以及它是如何工作的。</p>
+<p>之前，我们在<strong>第五章</strong>中提到过在训练神经网络时，<strong>标准化输入可以提高训练的速度</strong>。方法是对训练数据集进行<strong>归一化</strong>的操作，即将原始数据减去其均值<script type="math/tex">\mu</script>后，再除以其方差<script type="math/tex">σ^2</script>。但是标准化输入只是对输入进行了处理，那么对于神经网络，又该如何对各隐藏层的输入进行标准化处理呢？</p>
+<p>其实在神经网络中，第<script type="math/tex">l</script>层隐藏层的输入就是第<script type="math/tex">l−1</script>层隐藏层的输出<script type="math/tex">A^{[l−1]}</script>。对<script type="math/tex">A^{[l−1]}</script>进行标准化处理，从原理上来说可以提高<script type="math/tex">W^{[l]}</script>和<script type="math/tex">b^{[l]}</script>的训练速度和准确度。这种对各隐藏层的标准化处理就是Batch Normalization。值得注意的是，实际应用中，一般是对<script type="math/tex">Z^{[l−1]}</script>进行标准化处理而不是<script type="math/tex">A^{[l−1]}</script>，其实差别不是很大。</p>
+<p>Batch Normalization对第<script type="math/tex">l</script>层隐藏层的输入<script type="math/tex">Z^{[l−1]}</script>做如下标准化处理，忽略上标<script type="math/tex">[l−1]</script>：</p>
 <script type="math/tex; mode=display">
-其中，$$m$$是单个mini-batch包含样本个数，$$\varepsilon$$是为了防止分母为零，可取值$$10^{−8}$$。这样，使得该隐藏层的所有输入$$z^{(i)}$$均值为$$0$$，方差为$$1$$。但是，大部分情况下并不希望所有的$$z^{(i)}$$均值都为$$0$$，方差都为$$1$$，也不太合理。通常需要对$$z^{(i)}$$进行进一步处理：</script><p>\tilde{z}^{(i)}=\gamma \cdot z_{\text {norm }}^{(i)}+\beta</p>
+\begin{gathered}
+\mu=\frac{1}{m} \sum_{i} z^{(i)} \\
+\sigma^{2}=\frac{1}{m} \sum_{i}\left(z_{i}-\mu\right)^{2} \\z_{\text {norm }}^{(i)}=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}}
+\end{gathered}</script><p>其中，<script type="math/tex">m</script>是单个mini-batch包含样本个数，<script type="math/tex">\varepsilon</script>是为了防止分母为零，可取值<script type="math/tex">10^{−8}</script>。这样，使得该隐藏层的所有输入<script type="math/tex">z^{(i)}</script>均值为<script type="math/tex">0</script>，方差为<script type="math/tex">1</script>。但是，大部分情况下并不希望所有的<script type="math/tex">z^{(i)}</script>均值都为<script type="math/tex">0</script>，方差都为<script type="math/tex">1</script>，也不太合理。通常需要对<script type="math/tex">z^{(i)}</script>进行进一步处理：</p>
 <script type="math/tex; mode=display">
-上式中，$$γ$$和$$\beta$$是learnable parameters，类似于$$W$$和$$b$$一样，可以通过梯度下降等算法求得。这里，$$γ$$和$$\beta$$的作用是让$$\tilde z^{(i)}$$的均值和方差为任意值，只需调整其值就可以了。例如，令：</script><p>\gamma=\sqrt{\sigma^{2}+\varepsilon}, \quad \beta=u</p>
+\tilde{z}^{(i)}=\gamma \cdot z_{\text {norm }}^{(i)}+\beta</script><p>上式中，<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>是learnable parameters，类似于<script type="math/tex">W</script>和<script type="math/tex">b</script>一样，可以通过梯度下降等算法求得。这里，<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>的作用是让<script type="math/tex">\tilde z^{(i)}</script>的均值和方差为任意值，只需调整其值就可以了。例如，令：</p>
 <script type="math/tex; mode=display">
-则$$\tilde z^{(i)}=z^{(i)}$$，即identity function。可见，设置$$γ$$和$$\beta$$为不同的值，可以得到任意的均值和方差。
-
-这样，通过Batch Normalization，对隐藏层的各个$$z^{[l](i)}$$进行标准化处理，得到$$\tilde z^{[l](i)}$$，替代$$z^{[l](i)}$$。
-
-注意，**输入标准化**处理Normalizing inputs和**隐藏层标准化**处理Batch  Normalization是有区别的。Normalizing inputs使所有输入的均值为$$0$$，方差为$$1$$。而Batch  Normalization可使各隐藏层输入的**均值和方差为任意值**。实际上，从激活函数的角度来说，如果各隐藏层的输入均值在靠近$$0$$的区域即处于激活函数的线性区域，这样不利于训练好的非线性神经网络，得到的模型效果也不会太好。这也解释了为什么需要用$$γ$$和$$\beta$$是来对$$z^{[l](i)}$$作进一步处理。
-
-#### 7.5 将Batch Norm拟合进神经网络
-
-我们已经知道了如何对某单一隐藏层的所有神经元进行Batch Norm，接下来将研究如何把Bath Norm应用到整个神经网络中。
-
-对于$$L$$层神经网络，经过Batch Norm的作用，整体流程如下：
-
-<img src="https://pic.imgdb.cn/item/648aeae71ddac507cce4e5b1.png">
-
-实际上，Batch Norm经常使用在mini-batch上，这也是其名称的由来。值得注意的是，因为Batch Norm对各隐藏层$$Z^{[l]}=W^{[l]} A^{[l-1]}+b^{[l]}$$有去均值的操作，所以这里的常数项$$b^{[l]}$$可以消去，其数值效果完全可以由$$\tilde Z^{[l]}$$中的$$\beta$$来实现。因此，我们在使用Batch Norm的时候，可以忽略各隐藏层的常数项$$b^{[l]}$$。在使用梯度下降算法时，分别对$$W^{[l]}，β^{[l]}~ \text 和 ~γ^{[l]}$$进行迭代更新。除了传统的梯度下降算法之外，还可以使用我们之前介绍过的动量梯度下降、RMSprop或者Adam等优化算法。
-
-#### 7.6 Batch Norm为什么有效
-
-我们可以把输入特征做均值为$$0$$，方差为$$1$$的规范化处理，来加快学习速度。而Batch Norm也是对隐藏层各神经元的输入做类似的规范化处理。总的来说，Batch Norm不仅能够提高神经网络训练速度，而且能让神经网络的权重$$W$$的更新更加“稳健”，尤其在深层神经网络中更加明显。比如神经网络很后面的$$W$$对前面的$$W$$**包容性更强**，即前面的$$W$$的变化对后面$$W$$造成的影响很小，整体网络更加健壮。
-
-举个例子来说明，假如用一个浅层神经网络(类似逻辑回归)来训练识别猫的模型。如下图所示，提供的所有猫的训练样本都是黑猫。然后，用这个训练得到的模型来对各种颜色的猫样本进行测试，测试的结果可能并不好。其原因是训练样本不具有一般性(即不是所有的猫都是黑猫)，这种训练样本(黑猫)和测试样本(猫)分布的变化称之为**covariate shift**。
-
-<img src="https://pic.imgdb.cn/item/648aeafd1ddac507cce53503.png" style="zoom:50%" />
-
-对于这种情况，如果实际应用的样本与训练样本分布不同，即发生了covariate shift，则一般是要对模型**重新训练**的。在神经网络，尤其是深度神经网络中，covariate shift会导致模型预测效果变差，重新训练的模型各隐藏层的$$W^{[l]}$$和$$B^{[l]}$$均产生偏移、变化。而Batch Norm的作用恰恰是减小covariate shift的影响，让模型变得更加健壮，鲁棒性更强。Batch Norm减少了各层$$W^{[l]}$$、$$B^{[l]}$$之间的耦合性，让各层更加独立，实现自我训练学习的效果。也就是说，如果输入发生covariate shift，那么因为Batch Norm的作用，对个隐藏层输出$$Z^{[l]}$$进行均值和方差的归一化处理，$$W^{[l]}$$和$$B^{[l]}$$更加稳定，使得原来的模型也有不错的表现。针对上面这个黑猫的例子，如果我们使用深层神经网络，使用Batch Norm，那么该模型对花猫的识别能力应该也是不错的。
-
-从另一个方面来说，**Batch Norm也起到轻微的正则化**(regularization)效果。具体表现在：
-
-- **每个mini-batch都进行均值为**$$0$$**，方差为**$$1$$**的归一化操作**
-- **每个mini-batch中，对各个隐藏层的**$$Z^{[l]}$$**添加了随机噪声，效果类似于Dropout**
-- **mini-batch越小，正则化效果越明显**
-  但是，Batch Norm的正则化效果比较微弱，正则化也不是Batch Norm的主要功能。
-
-#### 7.7 测试时的Batch Norm
-
-训练过程中，Batch Norm是对单个mini-batch进行操作的，但在测试过程中，如果是单个样本，该如何使用Batch Norm进行处理呢？
-
-首先，回顾一下训练过程中Batch Norm的主要过程：</script><p>\begin{gathered}<br>\mu=\frac{1}{m} \sum_{i} z^{(i)} \\<br>\sigma^{2}=\frac{1}{m} \sum_{i}\left(z^{(i)}-\mu\right)^{2} \\<br>z_{\text {norm }}^{(i)}=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}} \\<br>\tilde{z}^{(i)}=\gamma \cdot z_{\text {norm }}^{(i)}+\beta<br>\end{gathered}</p>
+\gamma=\sqrt{\sigma^{2}+\varepsilon}, \quad \beta=u</script><p>则<script type="math/tex">\tilde z^{(i)}=z^{(i)}</script>，即identity function。可见，设置<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>为不同的值，可以得到任意的均值和方差。</p>
+<p>这样，通过Batch Normalization，对隐藏层的各个<script type="math/tex">z^{[l](i)}</script>进行标准化处理，得到<script type="math/tex">\tilde z^{[l](i)}</script>，替代<script type="math/tex">z^{[l](i)}</script>。</p>
+<p>注意，<strong>输入标准化</strong>处理Normalizing inputs和<strong>隐藏层标准化</strong>处理Batch  Normalization是有区别的。Normalizing inputs使所有输入的均值为<script type="math/tex">0</script>，方差为<script type="math/tex">1</script>。而Batch  Normalization可使各隐藏层输入的<strong>均值和方差为任意值</strong>。实际上，从激活函数的角度来说，如果各隐藏层的输入均值在靠近<script type="math/tex">0</script>的区域即处于激活函数的线性区域，这样不利于训练好的非线性神经网络，得到的模型效果也不会太好。这也解释了为什么需要用<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>是来对<script type="math/tex">z^{[l](i)}</script>作进一步处理。</p>
+<h4 id="7-5-将Batch-Norm拟合进神经网络"><a href="#7-5-将Batch-Norm拟合进神经网络" class="headerlink" title="7.5 将Batch Norm拟合进神经网络"></a>7.5 将Batch Norm拟合进神经网络</h4><p>我们已经知道了如何对某单一隐藏层的所有神经元进行Batch Norm，接下来将研究如何把Bath Norm应用到整个神经网络中。</p>
+<p>对于<script type="math/tex">L</script>层神经网络，经过Batch Norm的作用，整体流程如下：</p>
+<p><img src="https://pic.imgdb.cn/item/648aeae71ddac507cce4e5b1.png"></p>
+<p>实际上，Batch Norm经常使用在mini-batch上，这也是其名称的由来。值得注意的是，因为Batch Norm对各隐藏层<script type="math/tex">Z^{[l]}=W^{[l]} A^{[l-1]}+b^{[l]}</script>有去均值的操作，所以这里的常数项<script type="math/tex">b^{[l]}</script>可以消去，其数值效果完全可以由<script type="math/tex">\tilde Z^{[l]}</script>中的<script type="math/tex">\beta</script>来实现。因此，我们在使用Batch Norm的时候，可以忽略各隐藏层的常数项<script type="math/tex">b^{[l]}</script>。在使用梯度下降算法时，分别对<script type="math/tex">W^{[l]}，β^{[l]}~ \text 和 ~γ^{[l]}</script>进行迭代更新。除了传统的梯度下降算法之外，还可以使用我们之前介绍过的动量梯度下降、RMSprop或者Adam等优化算法。</p>
+<h4 id="7-6-Batch-Norm为什么有效"><a href="#7-6-Batch-Norm为什么有效" class="headerlink" title="7.6 Batch Norm为什么有效"></a>7.6 Batch Norm为什么有效</h4><p>我们可以把输入特征做均值为<script type="math/tex">0</script>，方差为<script type="math/tex">1</script>的规范化处理，来加快学习速度。而Batch Norm也是对隐藏层各神经元的输入做类似的规范化处理。总的来说，Batch Norm不仅能够提高神经网络训练速度，而且能让神经网络的权重<script type="math/tex">W</script>的更新更加“稳健”，尤其在深层神经网络中更加明显。比如神经网络很后面的<script type="math/tex">W</script>对前面的<script type="math/tex">W</script><strong>包容性更强</strong>，即前面的<script type="math/tex">W</script>的变化对后面<script type="math/tex">W</script>造成的影响很小，整体网络更加健壮。</p>
+<p>举个例子来说明，假如用一个浅层神经网络(类似逻辑回归)来训练识别猫的模型。如下图所示，提供的所有猫的训练样本都是黑猫。然后，用这个训练得到的模型来对各种颜色的猫样本进行测试，测试的结果可能并不好。其原因是训练样本不具有一般性(即不是所有的猫都是黑猫)，这种训练样本(黑猫)和测试样本(猫)分布的变化称之为<strong>covariate shift</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeafd1ddac507cce53503.png" style="zoom:50%"></p>
+<p>对于这种情况，如果实际应用的样本与训练样本分布不同，即发生了covariate shift，则一般是要对模型<strong>重新训练</strong>的。在神经网络，尤其是深度神经网络中，covariate shift会导致模型预测效果变差，重新训练的模型各隐藏层的<script type="math/tex">W^{[l]}</script>和<script type="math/tex">B^{[l]}</script>均产生偏移、变化。而Batch Norm的作用恰恰是减小covariate shift的影响，让模型变得更加健壮，鲁棒性更强。Batch Norm减少了各层<script type="math/tex">W^{[l]}</script>、<script type="math/tex">B^{[l]}</script>之间的耦合性，让各层更加独立，实现自我训练学习的效果。也就是说，如果输入发生covariate shift，那么因为Batch Norm的作用，对个隐藏层输出<script type="math/tex">Z^{[l]}</script>进行均值和方差的归一化处理，<script type="math/tex">W^{[l]}</script>和<script type="math/tex">B^{[l]}</script>更加稳定，使得原来的模型也有不错的表现。针对上面这个黑猫的例子，如果我们使用深层神经网络，使用Batch Norm，那么该模型对花猫的识别能力应该也是不错的。</p>
+<p>从另一个方面来说，<strong>Batch Norm也起到轻微的正则化</strong>(regularization)效果。具体表现在：</p>
+<ul>
+<li><strong>每个mini-batch都进行均值为</strong><script type="math/tex">0</script><strong>，方差为</strong><script type="math/tex">1</script><strong>的归一化操作</strong></li>
+<li><strong>每个mini-batch中，对各个隐藏层的</strong><script type="math/tex">Z^{[l]}</script><strong>添加了随机噪声，效果类似于Dropout</strong></li>
+<li><strong>mini-batch越小，正则化效果越明显</strong><br>但是，Batch Norm的正则化效果比较微弱，正则化也不是Batch Norm的主要功能。</li>
+</ul>
+<h4 id="7-7-测试时的Batch-Norm"><a href="#7-7-测试时的Batch-Norm" class="headerlink" title="7.7 测试时的Batch Norm"></a>7.7 测试时的Batch Norm</h4><p>训练过程中，Batch Norm是对单个mini-batch进行操作的，但在测试过程中，如果是单个样本，该如何使用Batch Norm进行处理呢？</p>
+<p>首先，回顾一下训练过程中Batch Norm的主要过程：</p>
 <script type="math/tex; mode=display">
-其中，$$\mu$$和$$σ^2$$是对单个mini-batch中所有$$m$$个样本求得的。在测试过程中，如果只有一个样本，求其均值和方差是没有意义的，就需要对$$\mu$$和$$σ^2$$进行估计。估计的方法很多，理论上可以将所有训练集放入最终的神经网络模型中，然后将每个隐藏层计算得到的$$\mu^{[l]}$$和$$σ^{2[l]}$$直接作为测试过程的$$\mu$$和$$σ^2$$来使用。但是，实际应用中一般不使用这种方法，而是使用我们之前介绍过的指数加权平均(exponentially weighted average)的方法来预测测试过程单个样本的$$\mu$$和$$σ^2$$。
-
-指数加权平均的做法为，对第$$l$$层隐藏层，考虑所有mini-batch在该隐藏层下的$$\mu^{[l]}$$和$$σ^{2[l]}$$，然后用指数加权平均的方式来预测得到当前单个样本的$$\mu^{[l]}$$和$$σ^{2[l]}$$。这样就实现了对测试过程单个样本的均值和方差估计。最后，再利用训练过程得到的$$\gamma$$和$$\beta$$值计算出各层的$$\tilde z^{(i)}$$值。
-
-#### 7.8 Softmax回归
-
-目前我们介绍的都是二分类问题，神经网络输出层只有一个神经元，表示预测输出$$\hat y$$是正类的概率$$P(y = 1|x)$$，若$$\hat y>0.5$$则判断为正类，否则判断为负类。
-
-对于多分类问题，用$$C$$表示种类个数，神经网络中输出层就有$$C$$个神经元，即$$n^{[L]}=C$$。其中，每个神经元的输出依次对应属于该类的概率，即$$P(y=c|x)$$。为了处理多分类问题，一般使用Softmax回归模型。Softmax回归模型输出层的激活函数如下所示：</script><p>\begin{gathered}<br>z^{[L]}=W^{[L]} a^{[L-1]}+b^{[L]} \\<br>a_{i}^{[L]}=\frac{e^{z_{i}^{[L]}}}{\sum_{i=1}^{C} e^{z_{i}^{[L]}}}<br>\end{gathered}</p>
+\begin{gathered}
+\mu=\frac{1}{m} \sum_{i} z^{(i)} \\
+\sigma^{2}=\frac{1}{m} \sum_{i}\left(z^{(i)}-\mu\right)^{2} \\
+z_{\text {norm }}^{(i)}=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}} \\
+\tilde{z}^{(i)}=\gamma \cdot z_{\text {norm }}^{(i)}+\beta
+\end{gathered}</script><p>其中，<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>是对单个mini-batch中所有<script type="math/tex">m</script>个样本求得的。在测试过程中，如果只有一个样本，求其均值和方差是没有意义的，就需要对<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>进行估计。估计的方法很多，理论上可以将所有训练集放入最终的神经网络模型中，然后将每个隐藏层计算得到的<script type="math/tex">\mu^{[l]}</script>和<script type="math/tex">σ^{2[l]}</script>直接作为测试过程的<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>来使用。但是，实际应用中一般不使用这种方法，而是使用我们之前介绍过的指数加权平均(exponentially weighted average)的方法来预测测试过程单个样本的<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>。</p>
+<p>指数加权平均的做法为，对第<script type="math/tex">l</script>层隐藏层，考虑所有mini-batch在该隐藏层下的<script type="math/tex">\mu^{[l]}</script>和<script type="math/tex">σ^{2[l]}</script>，然后用指数加权平均的方式来预测得到当前单个样本的<script type="math/tex">\mu^{[l]}</script>和<script type="math/tex">σ^{2[l]}</script>。这样就实现了对测试过程单个样本的均值和方差估计。最后，再利用训练过程得到的<script type="math/tex">\gamma</script>和<script type="math/tex">\beta</script>值计算出各层的<script type="math/tex">\tilde z^{(i)}</script>值。</p>
+<h4 id="7-8-Softmax回归"><a href="#7-8-Softmax回归" class="headerlink" title="7.8 Softmax回归"></a>7.8 Softmax回归</h4><p>目前我们介绍的都是二分类问题，神经网络输出层只有一个神经元，表示预测输出<script type="math/tex">\hat y</script>是正类的概率<script type="math/tex">P(y = 1|x)</script>，若<script type="math/tex">\hat y>0.5</script>则判断为正类，否则判断为负类。</p>
+<p>对于多分类问题，用<script type="math/tex">C</script>表示种类个数，神经网络中输出层就有<script type="math/tex">C</script>个神经元，即<script type="math/tex">n^{[L]}=C</script>。其中，每个神经元的输出依次对应属于该类的概率，即<script type="math/tex">P(y=c|x)</script>。为了处理多分类问题，一般使用Softmax回归模型。Softmax回归模型输出层的激活函数如下所示：</p>
 <script type="math/tex; mode=display">
-输出层每个神经元的输出$$a^{[L]}_i$$对应属于该类的概率，满足：</script><p>\sum_{i=1}^{C} a_{i}^{[L]}=1</p>
+\begin{gathered}
+z^{[L]}=W^{[L]} a^{[L-1]}+b^{[L]} \\
+a_{i}^{[L]}=\frac{e^{z_{i}^{[L]}}}{\sum_{i=1}^{C} e^{z_{i}^{[L]}}}
+\end{gathered}</script><p>输出层每个神经元的输出<script type="math/tex">a^{[L]}_i</script>对应属于该类的概率，满足：</p>
 <script type="math/tex; mode=display">
-所有的$$a^{[L]}_i$$，即$$\hat y$$，维度为$$(C, 1)$$。
-
-下面给出几个简单的线性多分类的例子(只有一个输出层)：
-
-<img src="https://pic.imgdb.cn/item/648aeb7e1ddac507cce6d5bb.png">
-
-如果使用神经网络，特别是深层神经网络，可以得到更复杂、更精确的非线性模型。
-
-#### 7.9 训练一个Softmax回归
-
-Softmax classifier的训练过程与我们之前介绍的二元分类问题有所不同。先来看一下softmax classifier的loss function。举例假如$$C=4$$，某个样本的预测输出$$\hat y$$和真实输出$$y$$为：</script><p>\begin{gathered}<br>\hat{y}=\left[\begin{array}{l}0.3 \\0.2 \\0.1 \\0.4<br>\end{array}\right]<br>\qquad y=\left[\begin{array}{l}0 \\1 \\0 \\0<br>\end{array}\right]<br>\end{gathered}</p>
+\sum_{i=1}^{C} a_{i}^{[L]}=1</script><p>所有的<script type="math/tex">a^{[L]}_i</script>，即<script type="math/tex">\hat y</script>，维度为<script type="math/tex">(C, 1)</script>。</p>
+<p>下面给出几个简单的线性多分类的例子(只有一个输出层)：</p>
+<p><img src="https://pic.imgdb.cn/item/648aeb7e1ddac507cce6d5bb.png"></p>
+<p>如果使用神经网络，特别是深层神经网络，可以得到更复杂、更精确的非线性模型。</p>
+<h4 id="7-9-训练一个Softmax回归"><a href="#7-9-训练一个Softmax回归" class="headerlink" title="7.9 训练一个Softmax回归"></a>7.9 训练一个Softmax回归</h4><p>Softmax classifier的训练过程与我们之前介绍的二元分类问题有所不同。先来看一下softmax classifier的loss function。举例假如<script type="math/tex">C=4</script>，某个样本的预测输出<script type="math/tex">\hat y</script>和真实输出<script type="math/tex">y</script>为：</p>
 <script type="math/tex; mode=display">
-从$$\hat y$$值来看，$$P(y=4|x)=0.4$$，概率最大，而真实样本属于第$$2$$类，因此该预测效果不佳。我们定义softmax classifier的loss function为：</script><p>L(\hat{y}, y)=-\sum_{j=1}^{4} y_{j} \cdot \log \hat{y}_{j}</p>
+\begin{gathered}
+\hat{y}=\left[\begin{array}{l}0.3 \\0.2 \\0.1 \\0.4
+\end{array}\right] 
+\qquad y=\left[\begin{array}{l}0 \\1 \\0 \\0
+\end{array}\right]
+\end{gathered}</script><p>从<script type="math/tex">\hat y</script>值来看，<script type="math/tex">P(y=4|x)=0.4</script>，概率最大，而真实样本属于第<script type="math/tex">2</script>类，因此该预测效果不佳。我们定义softmax classifier的loss function为：</p>
 <script type="math/tex; mode=display">
-然而，由于只有当$$j=2$$时，$$y_2=1$$，其它情况下，$$y_j=0$$。所以，上式中的$$L(\hat y,y)$$可以简化为：</script><p>L(\hat{y}, y)=-y_{2} \cdot \log \hat{y}_{2}=-\log \hat{y}_{2}</p>
+L(\hat{y}, y)=-\sum_{j=1}^{4} y_{j} \cdot \log \hat{y}_{j}</script><p>然而，由于只有当<script type="math/tex">j=2</script>时，<script type="math/tex">y_2=1</script>，其它情况下，<script type="math/tex">y_j=0</script>。所以，上式中的<script type="math/tex">L(\hat y,y)</script>可以简化为：</p>
 <script type="math/tex; mode=display">
-要让$$L(\hat y,y)$$更小，就应该让$$\hat y_2$$越大越好。$$\hat y_2$$反映的是概率，完全符合我们之前的定义。
-
-所有$$m$$个样本的cost function为：</script><p>J=\frac{1}{m} \sum_{i=1}^{m} L(\hat{y}, y)</p>
+L(\hat{y}, y)=-y_{2} \cdot \log \hat{y}_{2}=-\log \hat{y}_{2}</script><p>要让<script type="math/tex">L(\hat y,y)</script>更小，就应该让<script type="math/tex">\hat y_2</script>越大越好。<script type="math/tex">\hat y_2</script>反映的是概率，完全符合我们之前的定义。</p>
+<p>所有<script type="math/tex">m</script>个样本的cost function为：</p>
 <script type="math/tex; mode=display">
-其预测输出向量$$A^{[L]}$$即$$\hat Y$$的维度为$$(4, m)$$。
-
-softmax classifier的反向传播过程仍然使用梯度下降算法，其推导过程与二元分类有一点点不一样。因为只有输出层的激活函数不一样，我们先推导$$dZ^{[L]}$$：</script><p>\begin{gathered}<br>\mathrm d a^{[L]}=-\frac{1}{a^{[L]}} \\<br>\frac{\partial a^{[L]}}{\partial z^{[L]}}=\frac{\partial}{\partial z^{[L]}} \cdot\left(\frac{e^{z_{i}^{[L]}}}{\sum_{i=1}^{C} e^{z_{i}^{[L]}}}\right)=a^{[L]} \cdot\left(1-a^{[L]}\right) \\<br>\mathrm d z^{[L]}=d a^{[L]} \cdot \frac{\partial a^{[L]}}{\partial z^{[L]}}=a^{[L]}-1=a^{[L]}-y<br>\end{gathered}</p>
+J=\frac{1}{m} \sum_{i=1}^{m} L(\hat{y}, y)</script><p>其预测输出向量<script type="math/tex">A^{[L]}</script>即<script type="math/tex">\hat Y</script>的维度为<script type="math/tex">(4, m)</script>。</p>
+<p>softmax classifier的反向传播过程仍然使用梯度下降算法，其推导过程与二元分类有一点点不一样。因为只有输出层的激活函数不一样，我们先推导<script type="math/tex">dZ^{[L]}</script>：</p>
 <script type="math/tex; mode=display">
-对于所有m个训练样本：</script><p>d Z^{[L]}=A^{[L]}-Y</p>
+\begin{gathered}
+\mathrm d a^{[L]}=-\frac{1}{a^{[L]}} \\
+\frac{\partial a^{[L]}}{\partial z^{[L]}}=\frac{\partial}{\partial z^{[L]}} \cdot\left(\frac{e^{z_{i}^{[L]}}}{\sum_{i=1}^{C} e^{z_{i}^{[L]}}}\right)=a^{[L]} \cdot\left(1-a^{[L]}\right) \\
+\mathrm d z^{[L]}=d a^{[L]} \cdot \frac{\partial a^{[L]}}{\partial z^{[L]}}=a^{[L]}-1=a^{[L]}-y
+\end{gathered}</script><p>对于所有m个训练样本：</p>
 <script type="math/tex; mode=display">
-可见$$\mathrm dZ^{[L]}$$的表达式与二元分类结果是一致的，虽然推导过程不太一样。然后就可以继续进行反向传播过程的梯度下降算法了，推导过程与二元分类神经网络完全一致。
-
-#### 7.10 深度学习框架
-
-深度学习框架有很多，例如：
-
-- **Caffe/Caffe2**
-- **CNTK**
-- **DL4J**
-- **Keras**
-- **Lasagne**
-- **mxnet**
-- **PaddlePaddle**
-- **TensorFlow**
-- **Theano**
-- **Torch(Pytorch)**
-  一般选择深度学习框架的基本准则是：
-- **Ease of programming(development and deployment)**
-- **Running speed**
-- **Truly open(open source with good governance)**
-
-#### **7.11 TensorFlow**
-
-这里简单介绍一下最近几年比较火的一个深度学习框架：TensorFlow。
-
-举个例子来说明，例如cost function是参数w的函数：</script><p>J(w) = w^{2}-10 w+25</p>
+d Z^{[L]}=A^{[L]}-Y</script><p>可见<script type="math/tex">\mathrm dZ^{[L]}</script>的表达式与二元分类结果是一致的，虽然推导过程不太一样。然后就可以继续进行反向传播过程的梯度下降算法了，推导过程与二元分类神经网络完全一致。</p>
+<h4 id="7-10-深度学习框架"><a href="#7-10-深度学习框架" class="headerlink" title="7.10 深度学习框架"></a>7.10 深度学习框架</h4><p>深度学习框架有很多，例如：</p>
+<ul>
+<li><strong>Caffe/Caffe2</strong></li>
+<li><strong>CNTK</strong></li>
+<li><strong>DL4J</strong></li>
+<li><strong>Keras</strong></li>
+<li><strong>Lasagne</strong></li>
+<li><strong>mxnet</strong></li>
+<li><strong>PaddlePaddle</strong></li>
+<li><strong>TensorFlow</strong></li>
+<li><strong>Theano</strong></li>
+<li><strong>Torch(Pytorch)</strong><br>一般选择深度学习框架的基本准则是：</li>
+<li><strong>Ease of programming(development and deployment)</strong></li>
+<li><strong>Running speed</strong></li>
+<li><strong>Truly open(open source with good governance)</strong></li>
+</ul>
+<h4 id="7-11-TensorFlow"><a href="#7-11-TensorFlow" class="headerlink" title="7.11 TensorFlow"></a><strong>7.11 TensorFlow</strong></h4><p>这里简单介绍一下最近几年比较火的一个深度学习框架：TensorFlow。</p>
+<p>举个例子来说明，例如cost function是参数w的函数：</p>
 <script type="math/tex; mode=display">
-如果使用TensorFlow对cost function进行优化，求出最小值对应的$$w$$程序如下：
-
+J(w) = w^{2}-10 w+25</script><p>如果使用TensorFlow对cost function进行优化，求出最小值对应的<script type="math/tex">w</script>程序如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">w = tf.Variable(<span class="number">0</span>,dtype=tf.float32)</span><br><span class="line"><span class="comment">#cost = tf.add(tf.add(w**2,tf.multiply(-10,w)),25)</span></span><br><span class="line">cost = w**<span class="number">2</span> - <span class="number">10</span>*w +<span class="number">25</span></span><br><span class="line">train = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cost)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.0</span></span><br><span class="line">session.run(train)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    session.run(train)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;4.99999</span></span><br></pre></td></tr></table></figure>
-
-TensorFlow框架内可以直接调用梯度下降优化算法，不需要我们自己再写程序了，大大提高了效率。在运行$$1000$$次梯度下降算法后，$$w$$的解为$$4.99999$$，已非常接近$$w$$的最优值$$5$$了。
-
-针对上面这个例子，如果对$$w$$前的系数用变量$$x$$来代替，程序如下：
-
+<p>TensorFlow框架内可以直接调用梯度下降优化算法，不需要我们自己再写程序了，大大提高了效率。在运行<script type="math/tex">1000</script>次梯度下降算法后，<script type="math/tex">w</script>的解为<script type="math/tex">4.99999</script>，已非常接近<script type="math/tex">w</script>的最优值<script type="math/tex">5</script>了。</p>
+<p>针对上面这个例子，如果对<script type="math/tex">w</script>前的系数用变量<script type="math/tex">x</script>来代替，程序如下：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">cofficients = np.array([[<span class="number">1.</span>],[-<span class="number">10.</span>],[<span class="number">25.</span>]])</span><br><span class="line">w = tf.Variable(<span class="number">0</span>,dtype=tf.float32)</span><br><span class="line">x = tf.placeholder(tf.float32,[<span class="number">3</span>,<span class="number">1</span>])</span><br><span class="line"><span class="comment">#cost = tf.add(tf.add(w**2,tf.multiply(-10,w)),25)</span></span><br><span class="line"><span class="comment">#cost = w**2 - 10*w +25</span></span><br><span class="line">cost = x[<span class="number">0</span>][<span class="number">0</span>]*w**<span class="number">2</span> + x[<span class="number">1</span>][<span class="number">0</span>]*w + x[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line">train = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cost)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.0</span></span><br><span class="line">session.run(train, feed_dict=(x:coefficients))</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    session.run(train, feed_dict=(x:coefficients))</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;4.99999</span></span><br></pre></td></tr></table></figure>
-
-结果跟之前一样。此外，还可以更改$$x$$即cofficients的值，而得到不同的优化结果$$w$$。
-
-另外，上段程序中的：
-
+<p>结果跟之前一样。此外，还可以更改<script type="math/tex">x</script>即cofficients的值，而得到不同的优化结果<script type="math/tex">w</script>。</p>
+<p>另外，上段程序中的：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br></pre></td></tr></table></figure>
-
-有另外一种写法：
-
+<p>有另外一种写法：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> session:</span><br><span class="line">    session.run(init)</span><br><span class="line">    <span class="built_in">print</span>(session.run(w))</span><br></pre></td></tr></table></figure>
-
-TensorFlow的最大优点就是采用**数据流图(data flow graphs)**来进行数值运算。图中的节点(Nodes)表示数学操作，图中的线(edges)则表示在节点间相互联系的多维数据数组，即张量(tensor)。而且它灵活的架构让你可以在多种平台上展开计算，例如台式计算机中的一个或多个CPU(或GPU)，服务器，移动设备等等。
-关于TensorFlow更多的原理和编程技巧这里就不在赘述了，感兴趣的朋友可以关注更详细的TensorFlow相关文档。
-
-### 第八章 机器学习策略
-
-《Structuring Machine Learning Projects》(构建机器学习项目)这门课是Andrw  Ng深度学习专项课程中的第三门课。这门课主要介绍机器学习中的一些策略和方法，让我们能够更快更有效地让机器学习系统工作，该门课共有两周的课时。
-
-#### 8.1.1为什么是Machine Learning(ML)策略
-
-当我们最初得到一个深度神经网络模型时，我们可能希望从很多方面来对它进行优化，例如：
-
-- Collect more data
-- Collect more diverse training set
-- Train algorithm longer with gradient descent
-- Try Adam instead of gradient descent
-- Try bigger network
-- Try smaller network
-- Try dropout
-- Add L2 regularization
-- Network architecture: Activation functions, #hidden units…
-  可选择的方法很多，也很复杂、繁琐。盲目选择、尝试不仅耗费时间而且可能收效甚微。因此，使用快速、有效的策略来优化机器学习模型是非常必要的。
-
-#### 8.1.2 正交化
-
-机器学习中有许多参数、超参数需要调试。通过每次只调试一个参数，保持其它参数不变，而得到的模型某一性能改变是一种最常用的调参策略，称之为**正交化方法(Orthogonalization)**。
-
-Orthogonalization的核心在于**每次调试一个参数只会影响模型的某一个性能**。例如老式电视机旋钮，每个旋钮就对应一个功能，调整旋钮会调整对应的功能，而不会影响其它功能。也就是说彼此旋钮之间是互不影响的，是正交的，这也是Orthogonalization名称的由来。这种方法能够让我们更快更有效地进行机器学习模型的调试和优化。
-
-对应到机器学习监督式学习模型中，可以大致分成四个独立的“功能”，每个“功能”对应一些可调节的唯一的旋钮。四个“功能”如下：
-
-- **Fit training set well on cost function**
-- **Fit dev set well on cost function**
-- **Fit test set well on cost function**
-- **Performs well in real world**
-  第一条优化训练集可以通过使用更复杂NN，使用Adam等优化算法来实现；
-
-第二条优化验证集可以通过正则化，采用更多训练样本来实现；
-
-第三条优化测试集可以通过使用更多的验证集样本来实现；
-
-第四条提升实际应用模型可以通过更换验证集，使用新的cost function来实现。
-
-概括来说，每一种“功能”对应不同的调节方法。而这些调节方法（旋钮）只会对应一个“功能”，是正交的。
-
-顺便提一下，**early stopping在模型功能调试中并不推荐使用**。因为early stopping在提升验证集性能的同时降低了训练集的性能。也就是说early stopping同时影响两个“功能”，不具有独立性、正交性。
-
-#### 8.1.3 单—数字评估指标
-
-构建、优化机器学习模型时，单值评价指标非常必要。有了量化的单值评价指标后，我们就能根据这一指标比较不同超参数对应的模型的优劣，从而选择最优的那个模型。
-
-举个例子，比如有A和B两个模型，它们的**准确率(Precision)**和**召回率(Recall)**分别如下：
-
-<img src="https://pic.imgdb.cn/item/648aeddf1ddac507ccef3d76.png" style="zoom:80%" />
-
-如果只看Precision的话，B模型更好。如果只看Recall的话，A模型更好。实际应用中，我们通常使用单值评价指标**F1 Score**来评价模型的好坏。F1 Score综合了Precision和Recall的大小，计算方法如下：</script><p>F 1=\frac{2}{\frac1P+\frac1R}</p>
+<p>TensorFlow的最大优点就是采用<strong>数据流图(data flow graphs)</strong>来进行数值运算。图中的节点(Nodes)表示数学操作，图中的线(edges)则表示在节点间相互联系的多维数据数组，即张量(tensor)。而且它灵活的架构让你可以在多种平台上展开计算，例如台式计算机中的一个或多个CPU(或GPU)，服务器，移动设备等等。<br>关于TensorFlow更多的原理和编程技巧这里就不在赘述了，感兴趣的朋友可以关注更详细的TensorFlow相关文档。</p>
+<h3 id="第八章-机器学习策略"><a href="#第八章-机器学习策略" class="headerlink" title="第八章 机器学习策略"></a>第八章 机器学习策略</h3><p>《Structuring Machine Learning Projects》(构建机器学习项目)这门课是Andrw  Ng深度学习专项课程中的第三门课。这门课主要介绍机器学习中的一些策略和方法，让我们能够更快更有效地让机器学习系统工作，该门课共有两周的课时。</p>
+<h4 id="8-1-1为什么是Machine-Learning-ML-策略"><a href="#8-1-1为什么是Machine-Learning-ML-策略" class="headerlink" title="8.1.1为什么是Machine Learning(ML)策略"></a>8.1.1为什么是Machine Learning(ML)策略</h4><p>当我们最初得到一个深度神经网络模型时，我们可能希望从很多方面来对它进行优化，例如：</p>
+<ul>
+<li>Collect more data</li>
+<li>Collect more diverse training set</li>
+<li>Train algorithm longer with gradient descent</li>
+<li>Try Adam instead of gradient descent</li>
+<li>Try bigger network</li>
+<li>Try smaller network</li>
+<li>Try dropout</li>
+<li>Add L2 regularization</li>
+<li>Network architecture: Activation functions, #hidden units…<br>可选择的方法很多，也很复杂、繁琐。盲目选择、尝试不仅耗费时间而且可能收效甚微。因此，使用快速、有效的策略来优化机器学习模型是非常必要的。</li>
+</ul>
+<h4 id="8-1-2-正交化"><a href="#8-1-2-正交化" class="headerlink" title="8.1.2 正交化"></a>8.1.2 正交化</h4><p>机器学习中有许多参数、超参数需要调试。通过每次只调试一个参数，保持其它参数不变，而得到的模型某一性能改变是一种最常用的调参策略，称之为<strong>正交化方法(Orthogonalization)</strong>。</p>
+<p>Orthogonalization的核心在于<strong>每次调试一个参数只会影响模型的某一个性能</strong>。例如老式电视机旋钮，每个旋钮就对应一个功能，调整旋钮会调整对应的功能，而不会影响其它功能。也就是说彼此旋钮之间是互不影响的，是正交的，这也是Orthogonalization名称的由来。这种方法能够让我们更快更有效地进行机器学习模型的调试和优化。</p>
+<p>对应到机器学习监督式学习模型中，可以大致分成四个独立的“功能”，每个“功能”对应一些可调节的唯一的旋钮。四个“功能”如下：</p>
+<ul>
+<li><strong>Fit training set well on cost function</strong></li>
+<li><strong>Fit dev set well on cost function</strong></li>
+<li><strong>Fit test set well on cost function</strong></li>
+<li><strong>Performs well in real world</strong><br>第一条优化训练集可以通过使用更复杂NN，使用Adam等优化算法来实现；</li>
+</ul>
+<p>第二条优化验证集可以通过正则化，采用更多训练样本来实现；</p>
+<p>第三条优化测试集可以通过使用更多的验证集样本来实现；</p>
+<p>第四条提升实际应用模型可以通过更换验证集，使用新的cost function来实现。</p>
+<p>概括来说，每一种“功能”对应不同的调节方法。而这些调节方法（旋钮）只会对应一个“功能”，是正交的。</p>
+<p>顺便提一下，<strong>early stopping在模型功能调试中并不推荐使用</strong>。因为early stopping在提升验证集性能的同时降低了训练集的性能。也就是说early stopping同时影响两个“功能”，不具有独立性、正交性。</p>
+<h4 id="8-1-3-单—数字评估指标"><a href="#8-1-3-单—数字评估指标" class="headerlink" title="8.1.3 单—数字评估指标"></a>8.1.3 单—数字评估指标</h4><p>构建、优化机器学习模型时，单值评价指标非常必要。有了量化的单值评价指标后，我们就能根据这一指标比较不同超参数对应的模型的优劣，从而选择最优的那个模型。</p>
+<p>举个例子，比如有A和B两个模型，它们的<strong>准确率(Precision)</strong>和<strong>召回率(Recall)</strong>分别如下：</p>
+<p><img src="https://pic.imgdb.cn/item/648aeddf1ddac507ccef3d76.png" style="zoom:80%"></p>
+<p>如果只看Precision的话，B模型更好。如果只看Recall的话，A模型更好。实际应用中，我们通常使用单值评价指标<strong>F1 Score</strong>来评价模型的好坏。F1 Score综合了Precision和Recall的大小，计算方法如下：</p>
 <script type="math/tex; mode=display">
-然后得到了A和B模型各自的F1 Score：
-
-<img src="https://pic.imgdb.cn/item/648aedfc1ddac507ccefa608.png" style="zoom:80%" />
-
-从F1 Score来看，A模型比B模型更好一些。通过引入单值评价指标F1 Score，很方便对不同模型进行比较。
-
-除了F1 Score之外，我们还可以使用**平均值**作为单值评价指标来对模型进行评估。如下图所示，A, B, C, D, E, F六个模型对不同国家样本的错误率不同，可以计算其平均性能，然后选择平均错误率最小的那个模型(C模型)。
-
-<img src="https://pic.imgdb.cn/item/648aeee81ddac507ccf2bf9c.png">
-
-#### 8.1.4 满足和优化指标
-
-有时候，要把所有的性能指标都综合在一起，构成单值评价指标是比较困难的。解决办法是，我们可以把某些性能作为**优化指标(Optimizing metic)**，寻求最优化值；而某些性能作为**满意指标(Satisficing metic)**，只要满足阈值就行了。
-
-举个猫类识别的例子，有A，B，C三个模型，各个模型的Accuracy和Running time如下表中所示：
-
-<img src="https://pic.imgdb.cn/item/648aef171ddac507ccf359ea.png">
-
-Accuracy和Running time这两个性能不合适综合成单值评价指标。因此，可以将Accuracy作为优化指标(Optimizing metic)，将Running time作为满意指标(Satisficing metic)。也就是说，给Running time设定一个阈值，在其满足阈值的情况下，选择Accuracy最大的模型。如果设定Running time必须在100ms以内，那么很明显，模型C不满足阈值条件，首先剔除；模型B相比较模型A而言，Accuracy更高，性能更好。
-
-概括来说，性能指标(Optimizing metic)是需要优化的，越优越好；而满意指标(Satisficing metic)只要满足设定的阈值就好了。
-
-## 8.1.5 训练_验证(开发)_测试集划分
-
-Train/dev/test sets如何设置对机器学习的模型训练非常重要，合理设置能够大大提高模型训练效率和模型质量。
-
-原则上应该尽量保证dev sets和test sets来源于**同一分布**且都反映了实际样本的情况。如果dev sets和test sets不来自同一分布，那么我们从dev sets上选择的“最佳”模型往往不能够在test sets上表现得很好。
-
-## 8.1.6 开发集和测试集的大小
-
-在之前的课程中我们已经介绍过，当样本数量不多(小于一万)的时候，通常将Train/dev/test sets的比例设为60%/20%/20%，在没有dev sets的情况下，Train/test sets的比例设为70%/30%。当样本数量很大(百万级别)的时候，通常将相应的比例设为98%/1%/1%或者99%/1%。
-
-对于dev sets数量的设置，应该遵循的准则是通过dev sets能够检测不同算法或模型的区别，以便选择出更好的模型。
-
-对于test sets数量的设置，应该遵循的准则是通过test sets能够反映出模型在实际中的表现。
-
-实际应用中，可能只有train/dev sets，而没有test sets。这种情况也是允许的，只要算法模型没有对dev sets过拟合。但是，条件允许的话，最好是有test sets，实现**无偏估计**。
-
-## 8.1.7什么时候该改变开发_测试集和指标
-
-算法模型的评价标准有时候需要根据实际情况进行动态调整，目的是让算法模型在实际应用中有更好的效果。
-
-举个猫类识别的例子。初始的评价标准是错误率，算法A错误率为3%，算法B错误率为5%。显然，A更好一些。但是，实际使用时发现算法A会通过一些色情图片，但是B没有出现这种情况。从用户的角度来说，他们可能更倾向选择B模型，虽然B的错误率高一些。这时候，我们就需要改变之前单纯只是使用错误率作为评价标准，而考虑新的情况进行改变。例如增加色情图片的权重，增加其代价。
-
-原来的cost function：</script><p>J=\frac{1}{m} \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)</p>
+F 1=\frac{2}{\frac1P+\frac1R}</script><p>然后得到了A和B模型各自的F1 Score：</p>
+<p><img src="https://pic.imgdb.cn/item/648aedfc1ddac507ccefa608.png" style="zoom:80%"></p>
+<p>从F1 Score来看，A模型比B模型更好一些。通过引入单值评价指标F1 Score，很方便对不同模型进行比较。</p>
+<p>除了F1 Score之外，我们还可以使用<strong>平均值</strong>作为单值评价指标来对模型进行评估。如下图所示，A, B, C, D, E, F六个模型对不同国家样本的错误率不同，可以计算其平均性能，然后选择平均错误率最小的那个模型(C模型)。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeee81ddac507ccf2bf9c.png"></p>
+<h4 id="8-1-4-满足和优化指标"><a href="#8-1-4-满足和优化指标" class="headerlink" title="8.1.4 满足和优化指标"></a>8.1.4 满足和优化指标</h4><p>有时候，要把所有的性能指标都综合在一起，构成单值评价指标是比较困难的。解决办法是，我们可以把某些性能作为<strong>优化指标(Optimizing metic)</strong>，寻求最优化值；而某些性能作为<strong>满意指标(Satisficing metic)</strong>，只要满足阈值就行了。</p>
+<p>举个猫类识别的例子，有A，B，C三个模型，各个模型的Accuracy和Running time如下表中所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648aef171ddac507ccf359ea.png"></p>
+<p>Accuracy和Running time这两个性能不合适综合成单值评价指标。因此，可以将Accuracy作为优化指标(Optimizing metic)，将Running time作为满意指标(Satisficing metic)。也就是说，给Running time设定一个阈值，在其满足阈值的情况下，选择Accuracy最大的模型。如果设定Running time必须在100ms以内，那么很明显，模型C不满足阈值条件，首先剔除；模型B相比较模型A而言，Accuracy更高，性能更好。</p>
+<p>概括来说，性能指标(Optimizing metic)是需要优化的，越优越好；而满意指标(Satisficing metic)只要满足设定的阈值就好了。</p>
+<h2 id="8-1-5-训练-验证-开发-测试集划分"><a href="#8-1-5-训练-验证-开发-测试集划分" class="headerlink" title="8.1.5 训练_验证(开发)_测试集划分"></a>8.1.5 训练_验证(开发)_测试集划分</h2><p>Train/dev/test sets如何设置对机器学习的模型训练非常重要，合理设置能够大大提高模型训练效率和模型质量。</p>
+<p>原则上应该尽量保证dev sets和test sets来源于<strong>同一分布</strong>且都反映了实际样本的情况。如果dev sets和test sets不来自同一分布，那么我们从dev sets上选择的“最佳”模型往往不能够在test sets上表现得很好。</p>
+<h2 id="8-1-6-开发集和测试集的大小"><a href="#8-1-6-开发集和测试集的大小" class="headerlink" title="8.1.6 开发集和测试集的大小"></a>8.1.6 开发集和测试集的大小</h2><p>在之前的课程中我们已经介绍过，当样本数量不多(小于一万)的时候，通常将Train/dev/test sets的比例设为60%/20%/20%，在没有dev sets的情况下，Train/test sets的比例设为70%/30%。当样本数量很大(百万级别)的时候，通常将相应的比例设为98%/1%/1%或者99%/1%。</p>
+<p>对于dev sets数量的设置，应该遵循的准则是通过dev sets能够检测不同算法或模型的区别，以便选择出更好的模型。</p>
+<p>对于test sets数量的设置，应该遵循的准则是通过test sets能够反映出模型在实际中的表现。</p>
+<p>实际应用中，可能只有train/dev sets，而没有test sets。这种情况也是允许的，只要算法模型没有对dev sets过拟合。但是，条件允许的话，最好是有test sets，实现<strong>无偏估计</strong>。</p>
+<h2 id="8-1-7什么时候该改变开发-测试集和指标"><a href="#8-1-7什么时候该改变开发-测试集和指标" class="headerlink" title="8.1.7什么时候该改变开发_测试集和指标"></a>8.1.7什么时候该改变开发_测试集和指标</h2><p>算法模型的评价标准有时候需要根据实际情况进行动态调整，目的是让算法模型在实际应用中有更好的效果。</p>
+<p>举个猫类识别的例子。初始的评价标准是错误率，算法A错误率为3%，算法B错误率为5%。显然，A更好一些。但是，实际使用时发现算法A会通过一些色情图片，但是B没有出现这种情况。从用户的角度来说，他们可能更倾向选择B模型，虽然B的错误率高一些。这时候，我们就需要改变之前单纯只是使用错误率作为评价标准，而考虑新的情况进行改变。例如增加色情图片的权重，增加其代价。</p>
+<p>原来的cost function：</p>
 <script type="math/tex; mode=display">
-更改评价标准后的cost function：</script><p>\begin{aligned}J<br>&amp;=\frac{1}{w^{(i)}} \sum_{i=1}^{m} w^{(i)} L\left(\hat{y}^{(i)}, y^{(i)}\right) \\<br>w^{(i)} &amp;= \begin{cases}1, &amp; x^{(i)} \text { is non-porn } \\10,<br>&amp; x^{(i)} \text { is porn }<br>\end{cases}<br>\end{aligned}</p>
+J=\frac{1}{m} \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)</script><p>更改评价标准后的cost function：</p>
 <script type="math/tex; mode=display">
-概括来说，机器学习可分为两个过程：
-
-    **(1)** Define a metric to evaluate classifiers
-
-    **(2)** How to do well on this metric
-
-也就是说，第一步是找靶心，第二步是通过训练，射中靶心。但是在训练的过程中可能会根据实际情况改变算法模型的评价标准，进行动态调整。
-
-另外一个需要动态改变评价标准的情况是dev/test sets与实际使用的样本分布不一致。比如猫类识别样本图像分辨率差异。
-
-<img src="https://pic.imgdb.cn/item/648aeffc1ddac507ccf70033.png">
-
-## 8.1.8 为什么是人的表现
-
-机器学习模型的表现通常会跟人类水平表现作比较，如下图所示：
-
-<img src="https://pic.imgdb.cn/item/648af01f1ddac507ccf77cd4.png" style="zoom:50%" />
-
-图中，横坐标是训练时间，纵坐标是准确性。机器学习模型经过训练会不断接近human-level performance甚至超过它。但是，超过human-level performance之后，准确性会上升得比较缓慢，最终不断接近理想的最优情况，称之为**贝叶斯最优误差(bayes optimal error)**。理论上任何模型都不能超过它，bayes optimal error代表了最佳表现。
-
-实际上，human-level performance在某些方面有不俗的表现。例如图像识别、语音识别等领域，人类是很擅长的。所以，让机器学习模型性能不断接近human-level performance非常必要也做出很多努力：
-
-- Get labeled data from humans.
-- Gain insight from manual error analysis: Why did a person get this right?
-- Better analysis of bias/variance.
-
-## 8.1.9 可避免偏差
-
-实际应用中，要看human-level error，training error和dev error的相对值。例如猫类识别的例子中，如果human-level error为1%，training error为8%，dev error为10%。由于training error与human-level error相差7%，dev error与training error只相差2%，所以目标是尽量在训练过程中减小training error，即减小偏差bias。如果图片很模糊，肉眼也看不太清，human-level error提高到7.5%。这时，由于training error与human-level error只相差0.5%，dev error与training error只相差2%，所以目标是尽量在训练过程中减小dev error，即方差variance。这是相对而言的。
-
-对于物体识别这类CV问题，human-level error是很低的，很接近理想情况下的bayes optimal error。因此，上面例子中的1%和7.5%都可以近似看成是两种情况下对应的bayes optimal error。实际应用中，我们一般会用human-level error代表bayes optimal error。
-
-通常，**把training error与human-level error的差值称为bias，也称作avoidable bias**；**把dev error与training error之间的差值称为variance**。根据bias和variance值的相对大小，可以知道算法模型是否发生了欠拟合或者过拟合。
-
-## 8.1.10 理解人的表现
-
-我们说过human-level performance能够代表bayes optimal error。但是，human-level performance如何定义呢？举个医学图像识别的例子，不同人群的error有所不同：
-
-- **Typical human : 3% error**
-- **Typical doctor : 1% error**
-- **Experienced doctor : 0.7% error**
-- **Team of experienced doctors : 0.5% error**
-  不同人群他们的错误率不同。一般来说，我们将表现最好的那一组，即Team of experienced doctors作为human-level performance。那么，这个例子中，human-level error就为0.5%。但是实际应用中，不同人可能选择的human-level performance基准是不同的，这会带来一些影响。
-
-假如该模型training error为0.7%，dev error为0.8。如果选择Team of experienced doctors，即human-level error为0.5%，则bias比variance更加突出。如果选择Experienced doctor，即human-level error为0.7%，则variance更加突出。也就是说，选择什么样的human-level error，有时候会影响bias和variance值的相对变化。当然这种情况一般只会在模型表现很好，接近bayes optimal error的时候出现。越接近bayes optimal error，模型越难继续优化，因为这时候的human-level performance可能是比较模糊难以准确定义的。
-
-## 8.1.11 超过人的表现
-
-对于自然感知类问题，例如视觉、听觉等，机器学习的表现不及人类。但是在很多其它方面，机器学习模型的表现已经超过人类了，包括：
-
-- Online advertising
-- Product recommendations
-- Logistics(predicting transit time)
-- Loan approvals
-  实际上，机器学习模型超过human-level performance是比较困难的。但是只要提供足够多的样本数据，训练复杂的神经网络，模型预测准确性会大大提高，很有可能接近甚至超过human-level performance。值得一提的是当算法模型的表现超过human-level performance时，很难再通过人的直觉来解决如何继续提高算法模型性能的问题。
-
-## 8.1.12 改善你模型的表现
-
-提高机器学习模型性能主要要解决两个问题：**avoidable bias和variance**。我们之前介绍过，training error与human-level error之间的差值反映的是avoidable bias，dev error与training error之间的差值反映的是variance。
-
-解决avoidable bias的常用方法包括：
-
-- Train bigger model
-- Train longer/better optimization algorithms: momentum, RMSprop, Adam
-- NN architecture/hyperparameters search
-  解决variance的常用方法包括：
-- More data
-- Regularization: L2, dropout, data augmentation
-- NN architecture/hyperparameters search
-
-<img src="https://pic.imgdb.cn/item/648af1351ddac507ccfaeda9.png">
-
-## 8.2.1 进行误差分析
-
-对已经建立的机器学习模型进行错误分析(error analysis)十分必要，而且有针对性地、正确地进行error analysis更加重要。
-
-举个例子，猫类识别问题，已经建立的模型的错误率为10%。为了提高正确率，我们发现该模型会将一些狗类图片错误分类成猫。一种常规解决办法是扩大狗类样本，增强模型对够类(负样本)的训练。但是，这一过程可能会花费几个月的时间，耗费这么大的时间成本到底是否值得呢？也就是说扩大狗类样本，重新训练模型，对提高模型准确率到底有多大作用？这时候我们就需要进行error analysis，帮助我们做出判断。
-
-方法很简单，我们可以从分类错误的样本中**统计**出狗类的样本数量。根据狗类样本所占的比重，判断这一问题的重要性。假如狗类样本所占比重仅为5%，即时我们花费几个月的时间扩大狗类样本，提升模型对其识别率，改进后的模型错误率最多只会降低到9.5%。相比之前的10%，并没有显著改善。我们把这种性能限制称为**ceiling on performance**。相反，假如错误样本中狗类所占比重为50%，那么改进后的模型错误率有望降低到5%，性能改善很大。因此，值得去花费更多的时间扩大狗类样本。
-
-这种error analysis虽然简单，但是能够避免花费大量的时间精力去做一些对提高模型性能收效甚微的工作，让我们专注解决影响模型正确率的主要问题，十分必要。
-
-这种error analysis可以同时评估多个影响模型性能的因素，通过各自在错误样本中所占的比例来判断其重要性。例如，猫类识别模型中，可能有以下几个影响因素：
-
-- Fix pictures of dogs being recognized as cats
-- Fix great cats(lions, panthers, etc…) being misrecognized
-- Improve performance on blurry images
-  通常来说，比例越大，影响越大，越应该花费时间和精力着重解决这一问题。这种error analysis让我们改进模型更加有针对性，从而提高效率。
-
-## 8.2.2 清除错误的数据
-
-监督式学习中，训练样本有时候会出现输出$$y$$标注错误的情况，即incorrectly labeled examples。如果这些label标错的情况是随机性的(random errors)，DL算法对其包容性是比较强的，即健壮性好，一般可以直接忽略，无需修复。然而，如果是系统错误(systematic errors)，这将对DL算法造成影响，降低模型性能。
-
-刚才说的是训练样本中出现incorrectly labeled data，如果是dev/test sets中出现incorrectly labeled data，该怎么办呢？
-
-方法很简单，利用上节内容介绍的error analysis，统计dev sets中所有分类错误的样本中incorrectly labeled data所占的比例。根据该比例的大小，决定是否需要修正所有incorrectly labeled data，还是可以忽略。举例说明，若：
-
-- Overall dev set error: 10%
-- Errors due incorrect labels: 0.6%
-- Errors due to other causes: 9.4%
-  上面数据表明Errors due incorrect labels所占的比例仅为0.6%，占dev set error的6%，而其它类型错误占dev set error的94%。因此，这种情况下，可以忽略incorrectly labeled data。
-
-如果优化DL算法后，出现下面这种情况：
-
-- Overall dev set error: 2%
-- Errors due incorrect labels: 0.6%
-- Errors due to other causes: 1.4%
-  上面数据表明Errors due incorrect labels所占的比例依然为0.6%，但是却占dev set error的30%，而其它类型错误占dev set error的70%。因此，这种情况下，incorrectly labeled data不可忽略，需要手动修正。
-
-我们知道，dev set的主要作用是在不同算法之间进行比较，选择错误率最小的算法模型。但是，如果有incorrectly labeled data的存在，当不同算法错误率比较接近的时候，我们无法仅仅根据Overall dev set error准确指出哪个算法模型更好，必须修正incorrectly labeled data。
-
-关于**修正incorrect dev/test set data**，有几条建议：
-
-- Apply same process to your dev and test sets to make sure they continue to come from the same distribution
-- Consider examining examples your algorithm got right as well as ones it got wrong
-- Train and dev/test data may now come from slightly different distributions
-
-## 8.2.3 快速搭建你的第一个系统
-
-对于如何构建一个机器学习应用模型，Andrew给出的建议是先快速构建第一个简单模型，然后再反复迭代优化。
-
-- Set up dev/test set and metric
-- Build initial system quickly
-- Use Bias/Variance analysis & Error analysis to prioritize next steps
-
-## 8.2.4 在不同的划分上进行训练并测试
-
-当train set与dev/test set不来自同一个分布的时候，我们应该如何解决这一问题，构建准确的机器学习模型呢？
-
-以猫类识别为例，train set来自于网络下载(webpages)，图片比较清晰；dev/test set来自用户手机拍摄(mobile app)，图片比较模糊。假如train set的大小为200000，而dev/test set的大小为10000，显然train set要远远大于dev/test set。
-
-<img src="https://pic.imgdb.cn/item/648af1f21ddac507ccfd9ad4.png">
-
-虽然dev/test set质量不高，但是模型最终主要应用在对这些模糊的照片的处理上。面对train set与dev/test set分布不同的情况，有两种解决方法。
-
-第一种方法是将train set和dev/test set完全混合，然后在随机选择一部分作为train set，另一部分作为dev/test set。例如，混合210000例样本，然后随机选择205000例样本作为train set，2500例作为dev set，2500例作为test set。这种做法的优点是实现train set和dev/test set分布一致，缺点是dev/test set中webpages图片所占的比重比mobile app图片大得多。例如dev set包含2500例样本，大约有2381例来自webpages，只有119例来自mobile app。这样，dev set的算法模型对比验证，仍然主要由webpages决定，实际应用的mobile app图片所占比重很小，达不到验证效果。因此，这种方法并不是很好。
-
-第二种方法是将原来的train set和一部分dev/test set组合当成train set，剩下的dev/test set分别作为dev set和test set。例如，200000例webpages图片和5000例mobile app图片组合成train set，剩下的2500例mobile app图片作为dev set，2500例mobile app图片作为test set。其关键在于dev/test set全部来自于mobile app。这样保证了验证集最接近实际应用场合。这种方法较为常用，而且性能表现比较好。
-
-## 8.2.5 不匹配数据划分的偏差和方差
-
-我们之前介绍过，根据human-level error、training error和dev error的相对值可以判定是否出现了bias或者variance。但是，需要注意的一点是，**如果train set和dev/test set来源于不同分布，则无法直接根据相对值大小来判断。**例如某个模型human-level error为0%，training error为1%，dev error为10%。根据我们之前的理解，显然该模型出现了variance。但是，training error与dev error之间的差值9%可能来自**算法本身(variance)**，也可能来自于**样本分布不同**。比如dev set都是很模糊的图片样本，本身就难以识别，跟算法模型关系不大。因此不能简单认为出现了variance。
-
-在可能伴有train set与dev/test set分布不一致的情况下，定位是否出现variance的方法是**设置train-dev set**。Andrew给train-dev set的定义是：“Same distribution as training set, but not used for training.”也就是说，从原来的train set中分割出一部分作为train-dev set，train-dev set不作为训练模型使用，而是**与dev set一样用于验证**。
-
-这样，我们就有training error、training-dev error和dev error三种error。其中，training error与training-dev error的差值反映了variance；training-dev error与dev error的差值反映了data mismatch problem，即样本分布不一致。
-
-举例说明，如果training error为1%，training-dev error为9%，dev error为10%，则variance问题比较突出。如果training error为1%，training-dev error为1.5%，dev error为10%，则data mismatch problem比较突出。通过引入train-dev set，能够比较准确地定位出现了variance还是data mismatch。
-
-总结一下human-level error、training error、training-dev error、dev error以及test error之间的差值关系和反映的问题：
-
-<img src="https://pic.imgdb.cn/item/648af21f1ddac507ccfe4d12.png" style="zoom:60%" />
-
-一般情况下，human-level error、training error、training-dev error、dev error以及test error的数值是递增的，但是也会出现dev error和test error下降的情况。这主要可能是因为训练样本比验证/测试样本更加复杂，难以训练。
-
-<img src="https://pic.imgdb.cn/item/648af3071ddac507cc01d8e0.png">
-
-## 8.2.6 解决数据不匹配
-
-关于如何解决train set与dev/test set样本分布不一致的问题，有两条建议：
-
-- Carry out manual error analysis to try to understand difference between training dev/test sets
-- Make training data more similar; or collect more data similar to dev/test sets
-  为了让train set与dev/test set类似，可以用**人工数据合成(artificial data synthesis)**方法。例如说话人识别问题，实际应用场合(dev/test set)是包含背景噪声的，而训练样本train set很可能没有背景噪声。为了让train set与dev/test set分布一致，我们可以在train set上人工添加背景噪声，合成类似实际场景的声音。这样会让模型训练的效果更准确。
-
-但需要注意的是，我们不能给每段语音都增加同一段背景噪声，这样会出现对背景噪音的**过拟合**，效果不佳。这就是人工数据合成需要注意的地方。
-
-## 8.2.7 迁移学习
-
-深度学习非常强大的一个功能之一就是有时候你可以将已经训练好的模型的一部分知识（网络结构）直接应用到另一个类似模型中去。比如我们已经训练好一个猫类识别的神经网络模型，那么我们可以直接把该模型中的一部分网络结构应用到使用X光片预测疾病的模型中去。这种学习方法被称为**迁移学习(Transfer Learning)**。
-
-如果我们已经有一个训练好的神经网络，用来做图像识别。现在，我们想要构建另外一个通过X光片进行诊断的模型。迁移学习的做法是无需重新构建新的模型，而是利用之前的神经网络模型，只改变样本输入、输出以及输出层的权重系数$$W^{[L]}, b^{[L]}$$。也就是说对新的样本$$(X,Y)$$，重新训练输出层权重系数$$W^{[L]}, b^{[L]}$$，而其它层所有的权重系数$$W^{[L]}, b^{[L]}$$保持不变。
-
-<img src="https://pic.imgdb.cn/item/648af3561ddac507cc02ff49.png">
-
-迁移学习，重新训练权重系数，如果需要构建新模型的样本数量较少，那么可以像刚才所说的，只训练输出层的权重系数$$W^{[L]}, b^{[L]}$$，保持其它层所有的权重系数$$W^{[L]}, b^{[L]}$$不变。这种做法相对来说比较简单。如果样本数量足够多，那么也可以只保留网络结构，重新训练所有层的权重系数。这种做法使得模型更加精确，因为毕竟样本对模型的影响最大。选择哪种方法通常由数据量决定。
-
-顺便提一下，如果重新训练所有权重系数，初始$$W^{[L]}, b^{[L]}$$由之前的模型训练得到，这一过程称为**pre-training**。之后不断调试、优化$$W^{[L]}, b^{[L]}$$的过程称为**fine-tuning**。pre-training和fine-tuning分别对应上图中的黑色箭头和红色箭头。
-
-迁移学习之所以能这么做的原因是，神经网络浅层部分能够检测出许多图片固有**特征**，例如图像边缘、曲线等。使用之前训练好的神经网络部分结果有助于我们更快更准确地提取X光片特征。二者处理的都是图片，而图片处理是有相同的地方，第一个训练好的神经网络已经帮我们实现如何提取图片有用特征了。 因此，即便是即将训练的第二个神经网络样本数目少，仍然可以根据第一个神经网络结构和权重系数得到健壮性好的模型。
-
-迁移学习可以保留原神经网络的一部分，再添加新的网络层。具体问题，具体分析，可以去掉输出层后再增加额外一些神经层。
-
-<img src="https://pic.imgdb.cn/item/648af3a01ddac507cc040506.png">
-
-总体来说，迁移学习的应用场合主要包括三点：
-
-- Task A and B have the same input x.
-- You have a lot more data for Task A than Task B.
-- Low level features from A could be helpful for learning B.
-
-## 8.2.8 多任务学习
-
-多任务学习(multi-task learning)就是构建神经网络同时执行多个任务。这跟二元分类或者多元分类都不同，多任务学习类似将多个神经网络融合在一起，用一个网络模型来实现多种分类效果。如果有$$C$$个，那么输出$$y$$的维度是$$(C,1)$$。
-
-例如汽车自动驾驶中，需要实现的多任务为行人、车辆、交通标志和信号灯。如果检测出汽车和交通标志，则$$y$$为：</script><p>y = [1,0,0,1]^{\text T}</p>
+\begin{aligned}J 
+&=\frac{1}{w^{(i)}} \sum_{i=1}^{m} w^{(i)} L\left(\hat{y}^{(i)}, y^{(i)}\right) \\
+w^{(i)} &= \begin{cases}1, & x^{(i)} \text { is non-porn } \\10, 
+& x^{(i)} \text { is porn }
+\end{cases}
+\end{aligned}</script><p>概括来说，机器学习可分为两个过程：</p>
+<pre><code>**(1)** Define a metric to evaluate classifiers
+
+**(2)** How to do well on this metric
+</code></pre><p>也就是说，第一步是找靶心，第二步是通过训练，射中靶心。但是在训练的过程中可能会根据实际情况改变算法模型的评价标准，进行动态调整。</p>
+<p>另外一个需要动态改变评价标准的情况是dev/test sets与实际使用的样本分布不一致。比如猫类识别样本图像分辨率差异。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeffc1ddac507ccf70033.png"></p>
+<h2 id="8-1-8-为什么是人的表现"><a href="#8-1-8-为什么是人的表现" class="headerlink" title="8.1.8 为什么是人的表现"></a>8.1.8 为什么是人的表现</h2><p>机器学习模型的表现通常会跟人类水平表现作比较，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648af01f1ddac507ccf77cd4.png" style="zoom:50%"></p>
+<p>图中，横坐标是训练时间，纵坐标是准确性。机器学习模型经过训练会不断接近human-level performance甚至超过它。但是，超过human-level performance之后，准确性会上升得比较缓慢，最终不断接近理想的最优情况，称之为<strong>贝叶斯最优误差(bayes optimal error)</strong>。理论上任何模型都不能超过它，bayes optimal error代表了最佳表现。</p>
+<p>实际上，human-level performance在某些方面有不俗的表现。例如图像识别、语音识别等领域，人类是很擅长的。所以，让机器学习模型性能不断接近human-level performance非常必要也做出很多努力：</p>
+<ul>
+<li>Get labeled data from humans.</li>
+<li>Gain insight from manual error analysis: Why did a person get this right?</li>
+<li>Better analysis of bias/variance.</li>
+</ul>
+<h2 id="8-1-9-可避免偏差"><a href="#8-1-9-可避免偏差" class="headerlink" title="8.1.9 可避免偏差"></a>8.1.9 可避免偏差</h2><p>实际应用中，要看human-level error，training error和dev error的相对值。例如猫类识别的例子中，如果human-level error为1%，training error为8%，dev error为10%。由于training error与human-level error相差7%，dev error与training error只相差2%，所以目标是尽量在训练过程中减小training error，即减小偏差bias。如果图片很模糊，肉眼也看不太清，human-level error提高到7.5%。这时，由于training error与human-level error只相差0.5%，dev error与training error只相差2%，所以目标是尽量在训练过程中减小dev error，即方差variance。这是相对而言的。</p>
+<p>对于物体识别这类CV问题，human-level error是很低的，很接近理想情况下的bayes optimal error。因此，上面例子中的1%和7.5%都可以近似看成是两种情况下对应的bayes optimal error。实际应用中，我们一般会用human-level error代表bayes optimal error。</p>
+<p>通常，<strong>把training error与human-level error的差值称为bias，也称作avoidable bias</strong>；<strong>把dev error与training error之间的差值称为variance</strong>。根据bias和variance值的相对大小，可以知道算法模型是否发生了欠拟合或者过拟合。</p>
+<h2 id="8-1-10-理解人的表现"><a href="#8-1-10-理解人的表现" class="headerlink" title="8.1.10 理解人的表现"></a>8.1.10 理解人的表现</h2><p>我们说过human-level performance能够代表bayes optimal error。但是，human-level performance如何定义呢？举个医学图像识别的例子，不同人群的error有所不同：</p>
+<ul>
+<li><strong>Typical human : 3% error</strong></li>
+<li><strong>Typical doctor : 1% error</strong></li>
+<li><strong>Experienced doctor : 0.7% error</strong></li>
+<li><strong>Team of experienced doctors : 0.5% error</strong><br>不同人群他们的错误率不同。一般来说，我们将表现最好的那一组，即Team of experienced doctors作为human-level performance。那么，这个例子中，human-level error就为0.5%。但是实际应用中，不同人可能选择的human-level performance基准是不同的，这会带来一些影响。</li>
+</ul>
+<p>假如该模型training error为0.7%，dev error为0.8。如果选择Team of experienced doctors，即human-level error为0.5%，则bias比variance更加突出。如果选择Experienced doctor，即human-level error为0.7%，则variance更加突出。也就是说，选择什么样的human-level error，有时候会影响bias和variance值的相对变化。当然这种情况一般只会在模型表现很好，接近bayes optimal error的时候出现。越接近bayes optimal error，模型越难继续优化，因为这时候的human-level performance可能是比较模糊难以准确定义的。</p>
+<h2 id="8-1-11-超过人的表现"><a href="#8-1-11-超过人的表现" class="headerlink" title="8.1.11 超过人的表现"></a>8.1.11 超过人的表现</h2><p>对于自然感知类问题，例如视觉、听觉等，机器学习的表现不及人类。但是在很多其它方面，机器学习模型的表现已经超过人类了，包括：</p>
+<ul>
+<li>Online advertising</li>
+<li>Product recommendations</li>
+<li>Logistics(predicting transit time)</li>
+<li>Loan approvals<br>实际上，机器学习模型超过human-level performance是比较困难的。但是只要提供足够多的样本数据，训练复杂的神经网络，模型预测准确性会大大提高，很有可能接近甚至超过human-level performance。值得一提的是当算法模型的表现超过human-level performance时，很难再通过人的直觉来解决如何继续提高算法模型性能的问题。</li>
+</ul>
+<h2 id="8-1-12-改善你模型的表现"><a href="#8-1-12-改善你模型的表现" class="headerlink" title="8.1.12 改善你模型的表现"></a>8.1.12 改善你模型的表现</h2><p>提高机器学习模型性能主要要解决两个问题：<strong>avoidable bias和variance</strong>。我们之前介绍过，training error与human-level error之间的差值反映的是avoidable bias，dev error与training error之间的差值反映的是variance。</p>
+<p>解决avoidable bias的常用方法包括：</p>
+<ul>
+<li>Train bigger model</li>
+<li>Train longer/better optimization algorithms: momentum, RMSprop, Adam</li>
+<li>NN architecture/hyperparameters search<br>解决variance的常用方法包括：</li>
+<li>More data</li>
+<li>Regularization: L2, dropout, data augmentation</li>
+<li>NN architecture/hyperparameters search</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/648af1351ddac507ccfaeda9.png"></p>
+<h2 id="8-2-1-进行误差分析"><a href="#8-2-1-进行误差分析" class="headerlink" title="8.2.1 进行误差分析"></a>8.2.1 进行误差分析</h2><p>对已经建立的机器学习模型进行错误分析(error analysis)十分必要，而且有针对性地、正确地进行error analysis更加重要。</p>
+<p>举个例子，猫类识别问题，已经建立的模型的错误率为10%。为了提高正确率，我们发现该模型会将一些狗类图片错误分类成猫。一种常规解决办法是扩大狗类样本，增强模型对够类(负样本)的训练。但是，这一过程可能会花费几个月的时间，耗费这么大的时间成本到底是否值得呢？也就是说扩大狗类样本，重新训练模型，对提高模型准确率到底有多大作用？这时候我们就需要进行error analysis，帮助我们做出判断。</p>
+<p>方法很简单，我们可以从分类错误的样本中<strong>统计</strong>出狗类的样本数量。根据狗类样本所占的比重，判断这一问题的重要性。假如狗类样本所占比重仅为5%，即时我们花费几个月的时间扩大狗类样本，提升模型对其识别率，改进后的模型错误率最多只会降低到9.5%。相比之前的10%，并没有显著改善。我们把这种性能限制称为<strong>ceiling on performance</strong>。相反，假如错误样本中狗类所占比重为50%，那么改进后的模型错误率有望降低到5%，性能改善很大。因此，值得去花费更多的时间扩大狗类样本。</p>
+<p>这种error analysis虽然简单，但是能够避免花费大量的时间精力去做一些对提高模型性能收效甚微的工作，让我们专注解决影响模型正确率的主要问题，十分必要。</p>
+<p>这种error analysis可以同时评估多个影响模型性能的因素，通过各自在错误样本中所占的比例来判断其重要性。例如，猫类识别模型中，可能有以下几个影响因素：</p>
+<ul>
+<li>Fix pictures of dogs being recognized as cats</li>
+<li>Fix great cats(lions, panthers, etc…) being misrecognized</li>
+<li>Improve performance on blurry images<br>通常来说，比例越大，影响越大，越应该花费时间和精力着重解决这一问题。这种error analysis让我们改进模型更加有针对性，从而提高效率。</li>
+</ul>
+<h2 id="8-2-2-清除错误的数据"><a href="#8-2-2-清除错误的数据" class="headerlink" title="8.2.2 清除错误的数据"></a>8.2.2 清除错误的数据</h2><p>监督式学习中，训练样本有时候会出现输出<script type="math/tex">y</script>标注错误的情况，即incorrectly labeled examples。如果这些label标错的情况是随机性的(random errors)，DL算法对其包容性是比较强的，即健壮性好，一般可以直接忽略，无需修复。然而，如果是系统错误(systematic errors)，这将对DL算法造成影响，降低模型性能。</p>
+<p>刚才说的是训练样本中出现incorrectly labeled data，如果是dev/test sets中出现incorrectly labeled data，该怎么办呢？</p>
+<p>方法很简单，利用上节内容介绍的error analysis，统计dev sets中所有分类错误的样本中incorrectly labeled data所占的比例。根据该比例的大小，决定是否需要修正所有incorrectly labeled data，还是可以忽略。举例说明，若：</p>
+<ul>
+<li>Overall dev set error: 10%</li>
+<li>Errors due incorrect labels: 0.6%</li>
+<li>Errors due to other causes: 9.4%<br>上面数据表明Errors due incorrect labels所占的比例仅为0.6%，占dev set error的6%，而其它类型错误占dev set error的94%。因此，这种情况下，可以忽略incorrectly labeled data。</li>
+</ul>
+<p>如果优化DL算法后，出现下面这种情况：</p>
+<ul>
+<li>Overall dev set error: 2%</li>
+<li>Errors due incorrect labels: 0.6%</li>
+<li>Errors due to other causes: 1.4%<br>上面数据表明Errors due incorrect labels所占的比例依然为0.6%，但是却占dev set error的30%，而其它类型错误占dev set error的70%。因此，这种情况下，incorrectly labeled data不可忽略，需要手动修正。</li>
+</ul>
+<p>我们知道，dev set的主要作用是在不同算法之间进行比较，选择错误率最小的算法模型。但是，如果有incorrectly labeled data的存在，当不同算法错误率比较接近的时候，我们无法仅仅根据Overall dev set error准确指出哪个算法模型更好，必须修正incorrectly labeled data。</p>
+<p>关于<strong>修正incorrect dev/test set data</strong>，有几条建议：</p>
+<ul>
+<li>Apply same process to your dev and test sets to make sure they continue to come from the same distribution</li>
+<li>Consider examining examples your algorithm got right as well as ones it got wrong</li>
+<li>Train and dev/test data may now come from slightly different distributions</li>
+</ul>
+<h2 id="8-2-3-快速搭建你的第一个系统"><a href="#8-2-3-快速搭建你的第一个系统" class="headerlink" title="8.2.3 快速搭建你的第一个系统"></a>8.2.3 快速搭建你的第一个系统</h2><p>对于如何构建一个机器学习应用模型，Andrew给出的建议是先快速构建第一个简单模型，然后再反复迭代优化。</p>
+<ul>
+<li>Set up dev/test set and metric</li>
+<li>Build initial system quickly</li>
+<li>Use Bias/Variance analysis &amp; Error analysis to prioritize next steps</li>
+</ul>
+<h2 id="8-2-4-在不同的划分上进行训练并测试"><a href="#8-2-4-在不同的划分上进行训练并测试" class="headerlink" title="8.2.4 在不同的划分上进行训练并测试"></a>8.2.4 在不同的划分上进行训练并测试</h2><p>当train set与dev/test set不来自同一个分布的时候，我们应该如何解决这一问题，构建准确的机器学习模型呢？</p>
+<p>以猫类识别为例，train set来自于网络下载(webpages)，图片比较清晰；dev/test set来自用户手机拍摄(mobile app)，图片比较模糊。假如train set的大小为200000，而dev/test set的大小为10000，显然train set要远远大于dev/test set。</p>
+<p><img src="https://pic.imgdb.cn/item/648af1f21ddac507ccfd9ad4.png"></p>
+<p>虽然dev/test set质量不高，但是模型最终主要应用在对这些模糊的照片的处理上。面对train set与dev/test set分布不同的情况，有两种解决方法。</p>
+<p>第一种方法是将train set和dev/test set完全混合，然后在随机选择一部分作为train set，另一部分作为dev/test set。例如，混合210000例样本，然后随机选择205000例样本作为train set，2500例作为dev set，2500例作为test set。这种做法的优点是实现train set和dev/test set分布一致，缺点是dev/test set中webpages图片所占的比重比mobile app图片大得多。例如dev set包含2500例样本，大约有2381例来自webpages，只有119例来自mobile app。这样，dev set的算法模型对比验证，仍然主要由webpages决定，实际应用的mobile app图片所占比重很小，达不到验证效果。因此，这种方法并不是很好。</p>
+<p>第二种方法是将原来的train set和一部分dev/test set组合当成train set，剩下的dev/test set分别作为dev set和test set。例如，200000例webpages图片和5000例mobile app图片组合成train set，剩下的2500例mobile app图片作为dev set，2500例mobile app图片作为test set。其关键在于dev/test set全部来自于mobile app。这样保证了验证集最接近实际应用场合。这种方法较为常用，而且性能表现比较好。</p>
+<h2 id="8-2-5-不匹配数据划分的偏差和方差"><a href="#8-2-5-不匹配数据划分的偏差和方差" class="headerlink" title="8.2.5 不匹配数据划分的偏差和方差"></a>8.2.5 不匹配数据划分的偏差和方差</h2><p>我们之前介绍过，根据human-level error、training error和dev error的相对值可以判定是否出现了bias或者variance。但是，需要注意的一点是，<strong>如果train set和dev/test set来源于不同分布，则无法直接根据相对值大小来判断。</strong>例如某个模型human-level error为0%，training error为1%，dev error为10%。根据我们之前的理解，显然该模型出现了variance。但是，training error与dev error之间的差值9%可能来自<strong>算法本身(variance)</strong>，也可能来自于<strong>样本分布不同</strong>。比如dev set都是很模糊的图片样本，本身就难以识别，跟算法模型关系不大。因此不能简单认为出现了variance。</p>
+<p>在可能伴有train set与dev/test set分布不一致的情况下，定位是否出现variance的方法是<strong>设置train-dev set</strong>。Andrew给train-dev set的定义是：“Same distribution as training set, but not used for training.”也就是说，从原来的train set中分割出一部分作为train-dev set，train-dev set不作为训练模型使用，而是<strong>与dev set一样用于验证</strong>。</p>
+<p>这样，我们就有training error、training-dev error和dev error三种error。其中，training error与training-dev error的差值反映了variance；training-dev error与dev error的差值反映了data mismatch problem，即样本分布不一致。</p>
+<p>举例说明，如果training error为1%，training-dev error为9%，dev error为10%，则variance问题比较突出。如果training error为1%，training-dev error为1.5%，dev error为10%，则data mismatch problem比较突出。通过引入train-dev set，能够比较准确地定位出现了variance还是data mismatch。</p>
+<p>总结一下human-level error、training error、training-dev error、dev error以及test error之间的差值关系和反映的问题：</p>
+<p><img src="https://pic.imgdb.cn/item/648af21f1ddac507ccfe4d12.png" style="zoom:60%"></p>
+<p>一般情况下，human-level error、training error、training-dev error、dev error以及test error的数值是递增的，但是也会出现dev error和test error下降的情况。这主要可能是因为训练样本比验证/测试样本更加复杂，难以训练。</p>
+<p><img src="https://pic.imgdb.cn/item/648af3071ddac507cc01d8e0.png"></p>
+<h2 id="8-2-6-解决数据不匹配"><a href="#8-2-6-解决数据不匹配" class="headerlink" title="8.2.6 解决数据不匹配"></a>8.2.6 解决数据不匹配</h2><p>关于如何解决train set与dev/test set样本分布不一致的问题，有两条建议：</p>
+<ul>
+<li>Carry out manual error analysis to try to understand difference between training dev/test sets</li>
+<li>Make training data more similar; or collect more data similar to dev/test sets<br>为了让train set与dev/test set类似，可以用<strong>人工数据合成(artificial data synthesis)</strong>方法。例如说话人识别问题，实际应用场合(dev/test set)是包含背景噪声的，而训练样本train set很可能没有背景噪声。为了让train set与dev/test set分布一致，我们可以在train set上人工添加背景噪声，合成类似实际场景的声音。这样会让模型训练的效果更准确。</li>
+</ul>
+<p>但需要注意的是，我们不能给每段语音都增加同一段背景噪声，这样会出现对背景噪音的<strong>过拟合</strong>，效果不佳。这就是人工数据合成需要注意的地方。</p>
+<h2 id="8-2-7-迁移学习"><a href="#8-2-7-迁移学习" class="headerlink" title="8.2.7 迁移学习"></a>8.2.7 迁移学习</h2><p>深度学习非常强大的一个功能之一就是有时候你可以将已经训练好的模型的一部分知识（网络结构）直接应用到另一个类似模型中去。比如我们已经训练好一个猫类识别的神经网络模型，那么我们可以直接把该模型中的一部分网络结构应用到使用X光片预测疾病的模型中去。这种学习方法被称为<strong>迁移学习(Transfer Learning)</strong>。</p>
+<p>如果我们已经有一个训练好的神经网络，用来做图像识别。现在，我们想要构建另外一个通过X光片进行诊断的模型。迁移学习的做法是无需重新构建新的模型，而是利用之前的神经网络模型，只改变样本输入、输出以及输出层的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>。也就是说对新的样本<script type="math/tex">(X,Y)</script>，重新训练输出层权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>，而其它层所有的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>保持不变。</p>
+<p><img src="https://pic.imgdb.cn/item/648af3561ddac507cc02ff49.png"></p>
+<p>迁移学习，重新训练权重系数，如果需要构建新模型的样本数量较少，那么可以像刚才所说的，只训练输出层的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>，保持其它层所有的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>不变。这种做法相对来说比较简单。如果样本数量足够多，那么也可以只保留网络结构，重新训练所有层的权重系数。这种做法使得模型更加精确，因为毕竟样本对模型的影响最大。选择哪种方法通常由数据量决定。</p>
+<p>顺便提一下，如果重新训练所有权重系数，初始<script type="math/tex">W^{[L]}, b^{[L]}</script>由之前的模型训练得到，这一过程称为<strong>pre-training</strong>。之后不断调试、优化<script type="math/tex">W^{[L]}, b^{[L]}</script>的过程称为<strong>fine-tuning</strong>。pre-training和fine-tuning分别对应上图中的黑色箭头和红色箭头。</p>
+<p>迁移学习之所以能这么做的原因是，神经网络浅层部分能够检测出许多图片固有<strong>特征</strong>，例如图像边缘、曲线等。使用之前训练好的神经网络部分结果有助于我们更快更准确地提取X光片特征。二者处理的都是图片，而图片处理是有相同的地方，第一个训练好的神经网络已经帮我们实现如何提取图片有用特征了。 因此，即便是即将训练的第二个神经网络样本数目少，仍然可以根据第一个神经网络结构和权重系数得到健壮性好的模型。</p>
+<p>迁移学习可以保留原神经网络的一部分，再添加新的网络层。具体问题，具体分析，可以去掉输出层后再增加额外一些神经层。</p>
+<p><img src="https://pic.imgdb.cn/item/648af3a01ddac507cc040506.png"></p>
+<p>总体来说，迁移学习的应用场合主要包括三点：</p>
+<ul>
+<li>Task A and B have the same input x.</li>
+<li>You have a lot more data for Task A than Task B.</li>
+<li>Low level features from A could be helpful for learning B.</li>
+</ul>
+<h2 id="8-2-8-多任务学习"><a href="#8-2-8-多任务学习" class="headerlink" title="8.2.8 多任务学习"></a>8.2.8 多任务学习</h2><p>多任务学习(multi-task learning)就是构建神经网络同时执行多个任务。这跟二元分类或者多元分类都不同，多任务学习类似将多个神经网络融合在一起，用一个网络模型来实现多种分类效果。如果有<script type="math/tex">C</script>个，那么输出<script type="math/tex">y</script>的维度是<script type="math/tex">(C,1)</script>。</p>
+<p>例如汽车自动驾驶中，需要实现的多任务为行人、车辆、交通标志和信号灯。如果检测出汽车和交通标志，则<script type="math/tex">y</script>为：</p>
 <script type="math/tex; mode=display">
-多任务学习模型的cost function为：</script><p>\begin{equation}<br>\frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{c} L\left(\hat{y}_{j}^{(i)}, y_{j}^{(i)}\right)<br>\end{equation}</p>
+y = [1,0,0,1]^{\text T}</script><p>多任务学习模型的cost function为：</p>
 <script type="math/tex; mode=display">
-其中，$$j$$表示任务下标，总有$$c$$个任务。对应的loss function为：</script><p>L\left(\hat{y}_{j}^{(i)}, y_{j}^{(i)}\right)=-y_{j}^{(i)} \log \hat{y}_{j}^{(i)}-\left(1-y_{j}^{(i)}\right) \log \left(1-\hat{y}_{j}^{(i)}\right)</p>
-<p>$$<br>值得一提的是，Multi-task learning与Softmax regression的区别在于Softmax regression是single label的，即输出向量y只有一个元素为1；而Multi-task learning是multiple labels的，即输出向量y可以有多个元素为1。</p>
+\begin{equation}
+\frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{c} L\left(\hat{y}_{j}^{(i)}, y_{j}^{(i)}\right)
+\end{equation}</script><p>其中，<script type="math/tex">j</script>表示任务下标，总有<script type="math/tex">c</script>个任务。对应的loss function为：</p>
+<script type="math/tex; mode=display">
+L\left(\hat{y}_{j}^{(i)}, y_{j}^{(i)}\right)=-y_{j}^{(i)} \log \hat{y}_{j}^{(i)}-\left(1-y_{j}^{(i)}\right) \log \left(1-\hat{y}_{j}^{(i)}\right)</script><p>值得一提的是，Multi-task learning与Softmax regression的区别在于Softmax regression是single label的，即输出向量y只有一个元素为1；而Multi-task learning是multiple labels的，即输出向量y可以有多个元素为1。</p>
 <p>多任务学习是使用单个神经网络模型来实现多个任务。实际上，也可以分别构建多个神经网络来实现。但是，如果各个任务之间是相似问题(例如都是图片类别检测)，则可以使用多任务学习模型。另外，多任务学习中，可能存在训练样本<script type="math/tex">Y</script>某些label空白的情况，这并不影响多任务模型的训练。</p>
 <p>总体来说，多任务学习的应用场合主要包括三点：</p>
 <pre><code>Training on a set of tasks that could benefit from having shared lower-level features.
@@ -1931,22 +1719,6 @@ Excludes potentially useful hand-designed
     
 
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 
 </html>
