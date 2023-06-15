@@ -922,9 +922,7 @@ N(\frac{N}{2}-1)+N \approx \frac{N^2}{2}</script><p>当$N$很大时，运算量�
     <title>深度学习_吴恩达_Part_1</title>
     <url>/2022/04/26/Foundation-of-DeepLearning/</url>
     <content><![CDATA[<h3 id="第一章-绪论"><a href="#第一章-绪论" class="headerlink" title="第一章 绪论"></a>第一章 绪论</h3><h4 id="1-0-深度学习发展历史"><a href="#1-0-深度学习发展历史" class="headerlink" title="1.0 深度学习发展历史"></a>1.0 深度学习发展历史</h4><p><img src="https://pic.imgdb.cn/item/6267f189239250f7c59f6a42.png"></p>
-<p>本小节参考链接：</p>
-<p>[1] 深度学习(deep learning)发展史-知乎, <a href="https://zhuanlan.zhihu.com/p/29096536">https://zhuanlan.zhihu.com/p/29096536</a></p>
-<p>[2] 深度学习发展历程(MindSpore)-哔哩哔哩, <a href="https://b23.tv/t4osJ6I">https://b23.tv/t4osJ6I</a></p>
+<p>本小节参考链接：<br>参考链接1.1：<a href="https://zhuanlan.zhihu.com/p/29096536">深度学习(deep learning)发展史 - 极海·GeoHey的文章 - 知乎</a><br>参考链接1.2：深度学习发展历程(MindSpore)-哔哩哔哩, <a href="https://b23.tv/t4osJ6I">https://b23.tv/t4osJ6I</a></p>
 <h4 id="1-1-欢迎"><a href="#1-1-欢迎" class="headerlink" title="1.1 欢迎"></a>1.1 欢迎</h4><p>从本节课我们将学到：</p>
 <ul>
 <li>学习神经网络的基础——神经网络与深度学习；</li>
@@ -963,7 +961,31 @@ N(\frac{N}{2}-1)+N \approx \frac{N^2}{2}</script><p>当$N$很大时，运算量�
 <h3 id="第二章-神经网络基础之逻辑回归"><a href="#第二章-神经网络基础之逻辑回归" class="headerlink" title="第二章 神经网络基础之逻辑回归"></a>第二章 神经网络基础之逻辑回归</h3><p>下面开始介绍神经网络的基础：逻辑回归（Logistic Regression）。通过对逻辑回归模型结构的分析，为后面学习神经网络模型打下基础。 </p>
 <h4 id="2-1-二分类-Binary-Classification"><a href="#2-1-二分类-Binary-Classification" class="headerlink" title="2.1 二分类(Binary Classification)"></a>2.1 二分类(Binary Classification)</h4><p>逻辑回归模型一般用来解决二分类(Binary Classification)问题。二分类就是输出只有{0,1\}两个离散值(也有{-1,1}的情况)。以一个图像识别问题为例，判断图片中是否有猫存在，0代表not cat，1代表cat。 </p>
 <p><img src="https://pic.imgdb.cn/item/6267f7e7239250f7c5aece58.png" style="zoom:50%"></p>
-<p>如上图所示，这是一个典型的二分类问题。一般来说，彩色图片包含RGB三个通道。 </p>
+<p>如上图所示，这是一个典型的二分类问题。一般来说，彩色图片包含RGB三个通道。例如该cat图片的尺寸为<script type="math/tex">(64, 64, 3)</script>。在神经网络模型中，我们首先要将图片输入<script type="math/tex">x</script>(维度是<script type="math/tex">(64, 64, 3)</script>)转化为一维的特征向量(feature vector)。方法是每个通道一行一行取，再连接起来。由于<script type="math/tex">64\times 64\times 3=12288</script>，则转化后的输入特征向量维度为<script type="math/tex">(12288, 1)</script>。此特征向量<script type="math/tex">x</script>是列向量，维度一般记为<script type="math/tex">n_x</script>。</p>
+<p>如果训练样本共有<script type="math/tex">m</script>张图片，那么整个训练样本<script type="math/tex">X</script>组成了矩阵，维度是<script type="math/tex">(n_x,m)</script>。注意，这里矩阵<script type="math/tex">X</script>的行<script type="math/tex">n_x</script>代表了每个样本<script type="math/tex">x^{(i)}</script>特征个数，列<script type="math/tex">m</script>代表了样本个数。这里，Andrew解释了<script type="math/tex">X</script>的维度之所以是<script type="math/tex">(n_x, m)</script>而不是<script type="math/tex">(m, n_x)</script>的原因是为了之后矩阵运算的方便。算是Andrew给我们的一个小小的经验吧。而所有训练样本的输出<script type="math/tex">Y</script>也组成了一维的行向量，写成矩阵的形式后，它的维度就是<script type="math/tex">(1, m)</script>。</p>
+<blockquote>
+<p>后面课程会用到的一些符号<br>用一对<script type="math/tex">(x, y)</script>来表示一个单独的样本，其中<script type="math/tex">x</script>是<script type="math/tex">n_x</script>维特征向量(可记为<script type="math/tex">x \in \mathbb{R}^{n_x}</script>)，<script type="math/tex">y \in \{0, 1\}</script>，训练集由<script type="math/tex">m</script>个训练样本组成，<script type="math/tex">(x^{(i)}, y^{(i)})</script>表示样本<script type="math/tex">n</script>的输入输出。为了便于表示和区分，有时训练集表示为<script type="math/tex">m = m_{\text{train}}</script>，测试集表示为<script type="math/tex">m = m_{\text{test}}</script>，可进一步将训练集表示为更紧凑的形式，用矩阵<script type="math/tex">X</script>表示：<script type="math/tex">X=\left(\begin{array}{cccc}\vdots & \vdots & & \vdots \\x^{(1)} & x^{(2)} & \cdots & x^{(m)} \\\vdots & \vdots & & \vdots \\\end{array}\right)</script>，<script type="math/tex">X</script>的大小为<script type="math/tex">(n_x, m)</script>，<script type="math/tex">X \in \mathbb{R}^{n_x \times m}</script>，输出用<script type="math/tex">Y</script>表示：<script type="math/tex">Y = [y^{(1)}, y^{(1)}, \cdots, y^{(m)}]</script>，<script type="math/tex">Y</script>的大小为<script type="math/tex">(1, m)</script>，<script type="math/tex">Y \in \mathbb{R}^{1\times m}</script></p>
+</blockquote>
+<h4 id="2-2-logistic回归"><a href="#2-2-logistic回归" class="headerlink" title="2.2 logistic回归"></a>2.2 logistic回归</h4><p>这是一个学习算法，用于监督学习中输出<script type="math/tex">y​</script>是<script type="math/tex">0​</script>或<script type="math/tex">1​</script>的二元分类问题。</p>
+<p>逻辑回归中，预测值<script type="math/tex">\hat{h} = \text{P}(y=1|x)</script>表示为输入<script type="math/tex">x</script>输出为<script type="math/tex">y = 1</script>的概率，取值范围在<script type="math/tex">[0,1]</script>之间，这是其与二分类模型不同的地方。使用线性模型，引入参数<script type="math/tex">w</script>和<script type="math/tex">b</script>。权重<script type="math/tex">w</script>的维度是<script type="math/tex">(n_x, 1)</script>，<script type="math/tex">b</script>是一个常数项，即<script type="math/tex">w \in \mathbb{R}^{n_x \times 1}, b \in \mathbb{R}</script>。这样，逻辑回归的线性预测输出可以写成：</p>
+<script type="math/tex; mode=display">
+\hat{y} = w^{\text{T}}x+b</script><p>值得注意的是，很多其它机器学习资料中，可能把常数<script type="math/tex">b</script>当做<script type="math/tex">w_0</script>处理，并引入<script type="math/tex">x_0=1</script>。这样从维度上来看，<script type="math/tex">x</script>和<script type="math/tex">w</script>都会增加一维。但在本课程中，为了简化计算和便于理解，Andrew建议还是使用上式这种形式将<script type="math/tex">w</script>和<script type="math/tex">b</script>分开比较好。</p>
+<p>上式的线性输出区间为整个实数范围，而<strong>逻辑回归要求输出范围在</strong><script type="math/tex">[0,1]</script><strong>之间</strong>，所以还需要对上式的线性函数输出进行处理。方法是引入sigmoid函数，让输出限定在<script type="math/tex">[0,1]</script>之间。这样，逻辑回归的预测输出就可以完整写成：</p>
+<script type="math/tex; mode=display">
+\hat{y} = \text{sigmoid}(w^{\text T}x+b) = \sigma(w^{\text T}x+b)</script><p>sigmoid函数是一种非线性的S型函数，输出被限定在<script type="math/tex">[0,1]</script>之间，通常被用在神经网络中当作<strong>激活函数(Activation function)</strong>使用。Sigmoid函数的表达式：</p>
+<script type="math/tex; mode=display">
+\text{sigmoid}(z) = \frac{1}{1+e^{-z}}</script><p> 通过Sigmoid函数，就能够将逻辑回归的输出限定在<script type="math/tex">[0,1]</script>之间了。</p>
+<h4 id="2-3-logistic回归损失函数"><a href="#2-3-logistic回归损失函数" class="headerlink" title="2.3 logistic回归损失函数"></a>2.3 logistic回归损失函数</h4><p>逻辑回归中，<script type="math/tex">w</script>和<script type="math/tex">b</script>都是未知参数，需要反复训练优化得到。因此，我们需要定义一个成本函数(cost function)，包含了参数<script type="math/tex">w</script>和<script type="math/tex">b</script>。通过优化cost function，当cost function取值最小时，得到对应的<script type="math/tex">w</script>和<script type="math/tex">b</script>。</p>
+<p>如何定义所有<script type="math/tex">m</script>个样本的cost function呢？先从单个样本出发，我们希望该样本的预测值<script type="math/tex">\hat y</script>与真实值越相似越好。我们把单个样本的cost function用<strong>Loss function</strong>来表示，根据以往经验，如果使用平方错误(squared error)来衡量，如下所示：</p>
+<script type="math/tex; mode=display">
+L(\hat y, y) = \frac{1}{2}(\hat y-y)^2</script><p>但是，对于逻辑回归，我们一般不使用平方错误来作为Loss function。原因是这种Loss function一般是<strong>非凸(non-convex)</strong>的。non-convex函数在使用梯度下降算法时，容易得到局部最小值(local minumum)，即<strong>局部最优化</strong>。而我们最优化的目标是计算得到全局最优化(Global optimization)。因此，我们一般选择的Loss function应该是convex的。因此，我们可以构建另外一种Loss function，且是convex的，如下所示：</p>
+<script type="math/tex; mode=display">
+L(\hat y, y) = -(y\log \hat y + (1-y)\log(1-\hat y))</script><p>我们来分析一下这个Loss function，它是衡量错误大小的，Loss function越小越好。</p>
+<p>当<script type="math/tex">y = 1</script>时，我们带入上式容易得知<script type="math/tex">\hat y\rightarrow1</script>时<script type="math/tex">L(\hat y, y)\rightarrow0</script>，预测效果越好；同理，当<script type="math/tex">y=0</script>时，<script type="math/tex">\hat y \rightarrow 0</script>则<script type="math/tex">L(\hat y,y)\rightarrow0</script>，预测效果越好。后续将会提到这个损失函数是如何推导出来的。</p>
+<p>上面介绍的Loss function是针对单个样本的。那对于<script type="math/tex">m</script>个样本，我们定义Cost function，Cost function是<script type="math/tex">m</script>个样本的Loss function的平均值，反映了<script type="math/tex">m</script>个样本的预测输出<script type="math/tex">\hat y</script>与真实样本输出<script type="math/tex">y</script>的平均接近程度。Cost function可表示为：</p>
+<script type="math/tex; mode=display">
+J(w,b) = \frac1m \sum_{i=0}^{m}L(\hat y^{(i)}, y^{(i)})</script><p>Cost function已经推导出来了，Cost function是关于待求系数w和b的函数。我们的目标就是迭代计算出最佳的w和b值，<strong>最小化Cost function</strong>，让Cost function尽可能地接近于零。</p>
+<p>其实逻辑回归问题可以看成是一个简单的神经网络，只包含<strong>一个神经元</strong>。这也是我们这里先介绍逻辑回归的原因。</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
@@ -4780,12 +4802,9 @@ a_{1}=\frac{1}{\pi} \int_{0}^{2 \pi} f(x) \cos x d x</script><p>同理可以求�
       </tags>
   </entry>
   <entry>
-    <title>MyBook</title>
+    <title>我的阅读</title>
     <url>/2023/01/15/MyBook/</url>
-    <content><![CDATA[<h3 id="一、《南京大屠杀》-【2023-01-09-】"><a href="#一、《南京大屠杀》-【2023-01-09-】" class="headerlink" title="一、《南京大屠杀》 【2023/01/09 】"></a>一、《南京大屠杀》 【2023/01/09 】</h3><hr>
-<p>南京大屠杀 - 豆瓣链接</p>
-<p><a href="https://book.douban.com/subject/26545308/">https://book.douban.com/subject/26545308/</a></p>
-<hr>
+    <content><![CDATA[<h3 id="一、《南京大屠杀》-【2023-01-09-】"><a href="#一、《南京大屠杀》-【2023-01-09-】" class="headerlink" title="一、《南京大屠杀》 【2023/01/09 】"></a>一、《南京大屠杀》 【2023/01/09 】</h3><p><a target="_blank" href="https://book.douban.com/subject/26545308/" style="position: relative; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; box-sizing: border-box; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 390px; min-height: 84px; border-radius: 8px; max-width: 100%; overflow: hidden; margin: 16px auto; padding: 12px 12px 9px 12px; background-color: #F6F6F6;"><span class="LinkCard-contents"><span style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 40px; line-height: 1.25; color: #121212;">南京大屠杀 - 豆瓣链接</span><span style="display: -webkit-box; font-size: 13px; height: 18px; line-height: 18px; color: #999; word-break: break-all; text-overflow: ellipsis; overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"><span style="display: inline-flex; align-items: center;"><svg class="Zi Zi--InsertLink" fill="currentColor" viewbox="0 0 24 24" width="14" height="14"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"/></svg></span><span>https://book.douban.com/subject/26545308/</span>&lt;/span&gt;&lt;/span&gt;</span></span></a></p>
 <div class="bvideo">
     <a href="//www.bilibili.com/video/BV1ET411E7Ln" target="_blank">
         <div class="bvideo-box">
@@ -4836,10 +4855,7 @@ a_{1}=\frac{1}{\pi} \int_{0}^{2 \pi} f(x) \cos x d x</script><p>同理可以求�
 <p>原文链接：<a href="https://book.douban.com/review/1258849/">https://book.douban.com/review/1258849/</a></p>
 <p>侵删</p>
 </blockquote>
-<h3 id="二、《尼罗河上的惨案》-【2023-01-09-】"><a href="#二、《尼罗河上的惨案》-【2023-01-09-】" class="headerlink" title="二、《尼罗河上的惨案》 【2023/01/09 】"></a>二、《尼罗河上的惨案》 【2023/01/09 】</h3><hr>
-<p>尼罗河上的惨案 - 豆瓣链接</p>
-<p><a href="https://book.douban.com/subject/25697546/">https://book.douban.com/subject/25697546/</a></p>
-<hr>
+<h3 id="二、《尼罗河上的惨案》-【2023-01-09-】"><a href="#二、《尼罗河上的惨案》-【2023-01-09-】" class="headerlink" title="二、《尼罗河上的惨案》 【2023/01/09 】"></a>二、《尼罗河上的惨案》 【2023/01/09 】</h3><p><a target="_blank" href="https://book.douban.com/subject/25697546/" style="position: relative; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; box-sizing: border-box; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 390px; min-height: 84px; border-radius: 8px; max-width: 100%; overflow: hidden; margin: 16px auto; padding: 12px 12px 9px 12px; background-color: #F6F6F6;"><span class="LinkCard-contents"><span style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 40px; line-height: 1.25; color: #121212;">尼罗河上的惨案 - 豆瓣链接</span><span style="display: -webkit-box; font-size: 13px; height: 18px; line-height: 18px; color: #999; word-break: break-all; text-overflow: ellipsis; overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"><span style="display: inline-flex; align-items: center;"><svg class="Zi Zi--InsertLink" fill="currentColor" viewbox="0 0 24 24" width="14" height="14"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"/></svg></span><span>https://book.douban.com/subject/25697546/</span>&lt;/span&gt;&lt;/span&gt;</span></span></a></p>
 <div class="bvideo">
     <a href="//www.bilibili.com/video/BV1ET411E7Ln" target="_blank">
         <div class="bvideo-box">
@@ -4889,7 +4905,7 @@ a_{1}=\frac{1}{\pi} \int_{0}^{2 \pi} f(x) \cos x d x</script><p>同理可以求�
       </tags>
   </entry>
   <entry>
-    <title>我的电影</title>
+    <title>我的观影</title>
     <url>/2022/02/12/MyFilm/</url>
     <content><![CDATA[<h3 id="一、鬼子来了【22-02-11】"><a href="#一、鬼子来了【22-02-11】" class="headerlink" title="一、鬼子来了【22-02-11】"></a>一、鬼子来了【22-02-11】</h3><p><a target="_blank" href="https://movie.douban.com/subject/1291858/" style="position: relative; display: -webkit-box; display: -webkit-flex; display: -ms-flexbox; display: flex; box-sizing: border-box; -webkit-flex-direction: row; -ms-flex-direction: row; flex-direction: row; -webkit-align-items: center; -webkit-box-align: center; -ms-flex-align: center; align-items: center; width: 390px; min-height: 84px; border-radius: 8px; max-width: 100%; overflow: hidden; margin: 16px auto; padding: 12px 12px 9px 12px; background-color: #F6F6F6;"><span class="LinkCard-contents"><span style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis; max-height: 40px; line-height: 1.25; color: #121212;">鬼子来了 - 豆瓣链接</span><span style="display: -webkit-box; font-size: 13px; height: 18px; line-height: 18px; color: #999; word-break: break-all; text-overflow: ellipsis; overflow: hidden; -webkit-line-clamp: 1; -webkit-box-orient: vertical;"><span style="display: inline-flex; align-items: center;"><svg class="Zi Zi--InsertLink" fill="currentColor" viewbox="0 0 24 24" width="14" height="14"><path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"/></svg></span><span>https://movie.douban.com/subject/1291858/</span>&lt;/span&gt;&lt;/span&gt;</span></span></a></p>
 <div class="bvideo">
@@ -5267,7 +5283,7 @@ a_{1}=\frac{1}{\pi} \int_{0}^{2 \pi} f(x) \cos x d x</script><p>同理可以求�
                         <span>103.2万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>5357</span></span></p>
+                        <span>5361</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -7474,7 +7490,7 @@ f_Z(z)=\int_{-\infty}^{+\infty} |y|f_X(yz) f_Y(y) \mathrm{d} y, \quad-\infty<z<+
 </ul>
 <h5 id="1-3-3-排版"><a href="#1-3-3-排版" class="headerlink" title="1.3.3 排版"></a>1.3.3 排版</h5><ul>
 <li><strong>空格的使用</strong><ul>
-<li>在二元运算符两边各空一格[=,-,+=,==,&gt;,in,is not, and]；</li>
+<li>在二元运算符两边各空一格[=, -, +=, ==, &gt;, in, is not, and]；</li>
 <li>函数的参数列表中，<code>,</code>之后要有空格；</li>
 <li>函数的参数列表中，默认值等号两边不要添加空格；</li>
 <li>左括号之后，右括号之前不要加多余的空格；</li>
@@ -7484,11 +7500,11 @@ f_Z(z)=\int_{-\infty}^{+\infty} |y|f_X(yz) f_Y(y) \mathrm{d} y, \quad-\infty<z<+
 </ul>
 <blockquote>
 <p>本文转自：何亮科学网博客。 </p>
-<p>链接地址：<a href="https://blog.sciencenet.cn/blog-437026-779476.html">https://blog.sciencenet.cn/blog-437026-779476.html</a> </p>
+<p>链接地址：<a href="https://blog.sciencenet.cn/blog-437026-779476.html">一些MATLAB的编程规范总结1.0版</a></p>
 <p>其他参考链接</p>
-<p><a href="https://zhuanlan.zhihu.com/p/150926389">https://zhuanlan.zhihu.com/p/150926389</a></p>
-<p><a href="https://blog.csdn.net/wuwuku123/article/details/106666382">https://blog.csdn.net/wuwuku123/article/details/106666382</a></p>
-<p><a href="https://blog.csdn.net/magic_yu42/article/details/111467556">https://blog.csdn.net/magic_yu42/article/details/111467556</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/150926389">科研小技巧——MATLAB的编码规范 - 西涯先生的文章 - 知乎</a></p>
+<p><a href="https://blog.csdn.net/wuwuku123/article/details/106666382">matlab 编程之代码规范 -枯荣有常的文章 - CSDN</a></p>
+<p><a href="https://blog.csdn.net/magic_yu42/article/details/111467556">MATLAB编程规范 - magic_yu42的文章 - CSDN</a></p>
 </blockquote>
 <h5 id="1-3-4-绘图、字体设置"><a href="#1-3-4-绘图、字体设置" class="headerlink" title="1.3.4 绘图、字体设置"></a>1.3.4 绘图、字体设置</h5><p>王老师关于绘图、字体设置的一些简单设置：<code>PlotCurvesFontSizeFontName.m</code></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% MATLAB曲线图示例设置字号字体</span></span><br><span class="line"></span><br><span class="line">clear all; clc; close all;</span><br><span class="line"><span class="comment">%% Lena512.bmp图像</span></span><br><span class="line"><span class="comment">%% X Y分别为编码比特率和峰值信噪比</span></span><br><span class="line">X1=[<span class="number">0.15</span> <span class="number">0.20</span> <span class="number">0.25</span> <span class="number">0.30</span> <span class="number">0.40</span> <span class="number">0.50</span> <span class="number">0.60</span> <span class="number">0.75</span> <span class="number">1.00</span> <span class="number">1.25</span>];</span><br><span class="line">X2=X1; X3=X1; X4=X1;</span><br><span class="line">Y1=[<span class="number">22.0370</span> <span class="number">23.4718</span> <span class="number">24.3595</span> <span class="number">25.1125</span> <span class="number">26.5516</span> <span class="number">27.8992</span> <span class="number">29.1981</span> <span class="number">30.8826</span> <span class="number">33.2239</span> <span class="number">35.0960</span>];</span><br><span class="line">Y2=[<span class="number">22.5249</span> <span class="number">23.5379</span> <span class="number">24.2606</span> <span class="number">24.9596</span> <span class="number">26.3507</span> <span class="number">27.5956</span> <span class="number">28.7035</span> <span class="number">30.0974</span> <span class="number">32.1077</span> <span class="number">33.7383</span>];</span><br><span class="line">Y3=[<span class="number">22.5594</span> <span class="number">23.6605</span> <span class="number">24.3931</span> <span class="number">25.1403</span> <span class="number">26.5922</span> <span class="number">27.8500</span> <span class="number">28.9936</span> <span class="number">30.4864</span> <span class="number">32.5300</span> <span class="number">34.1851</span>];</span><br><span class="line">Y4=[<span class="number">22.6049</span> <span class="number">23.7881</span> <span class="number">24.6194</span> <span class="number">25.4626</span> <span class="number">27.0361</span> <span class="number">28.3933</span> <span class="number">29.6686</span> <span class="number">31.3865</span> <span class="number">33.5905</span> <span class="number">35.3823</span>];</span><br><span class="line"><span class="built_in">plot</span>(X1, Y1, <span class="string">&#x27;- r .&#x27;</span>, X2, Y2, <span class="string">&#x27;-. b o&#x27;</span>, X3, Y3, <span class="string">&#x27;: m *&#x27;</span>, X4, Y4, <span class="string">&#x27;-- k p&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;DCT-JPEG&#x27;</span>, <span class="string">&#x27;APWBT-JPEG&#x27;</span>, <span class="string">&#x27;APDCBT-JPEG&#x27;</span>, <span class="string">&#x27;APIDCBT-JPEG&#x27;</span>)</span><br><span class="line">axis([<span class="number">0</span>, <span class="number">1.4</span>, <span class="number">22</span>, <span class="number">36</span>]);</span><br><span class="line"><span class="comment">%% MATLAB的默认字体是Helvetica，fontname的设置，中文字体：宋体、楷体、仿宋、隶书、微软雅黑、幼圆等</span></span><br><span class="line"><span class="comment">%% 英文字体: Times New Roman, Arial, Bodoni, Calibri, Courier New, Frutiger, Futura, Garamond, Geogia, Platino Linotype, Verdana等</span></span><br><span class="line">xlabel(<span class="string">&#x27;\fontsize&#123;12&#125;\fontname&#123;宋体&#125;码率\fontname&#123;Times New Roman&#125;(bpp)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;\fontsize&#123;12&#125;\fontname&#123;Times New Roman&#125;PSNR (dB)&#x27;</span>)</span><br><span class="line">set(gca, <span class="string">&#x27;xtick&#x27;</span>, [<span class="number">0</span>:<span class="number">0.2</span>:<span class="number">1.4</span>], <span class="string">&#x27;ytick&#x27;</span>, [<span class="number">22</span>:<span class="number">2</span>:<span class="number">36</span>], <span class="string">&#x27;FontSize&#x27;</span>, <span class="number">12</span>, <span class="string">&#x27;Fontname&#x27;</span>, <span class="string">&#x27;Times New Roman&#x27;</span>);</span><br></pre></td></tr></table></figure>
@@ -7508,8 +7524,8 @@ f_Z(z)=\int_{-\infty}^{+\infty} |y|f_X(yz) f_Y(y) \mathrm{d} y, \quad-\infty<z<+
 <li>常量采用全大写，如有多个单词，使用下划线隔开；</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">MAX_CLIENT = <span class="number">100</span></span><br><span class="line">MAX_CONNECTION = <span class="number">1000</span></span><br><span class="line">CONNECTION_TIMEOUT = <span class="number">600</span></span><br></pre></td></tr></table></figure>
-<p>【参考资料1】：<a href="https://blog.csdn.net/meiqi0538/article/details/104993760">https://blog.csdn.net/meiqi0538/article/details/104993760</a></p>
-<p>【参考资料2：】<a href="https://python.freelycode.com/contribution/detail/47">https://python.freelycode.com/contribution/detail/47</a></p>
+<p>【参考资料1】：<a href="https://blog.csdn.net/meiqi0538/article/details/104993760">【Python】编程代码书写规范！- 科皮子菊的文章  - CSDN</a></p>
+<p>【参考资料2】：<a href="https://python.freelycode.com/contribution/detail/47">PEP8中文版 — Python编码风格指南</a></p>
 <h4 id="2-3-注释"><a href="#2-3-注释" class="headerlink" title="2.3 注释"></a>2.3 注释</h4><ul>
 <li><strong>行注释：</strong> 以 <code>#</code> 开头，<code>#</code> 右边的所有内容都被当做说明文字，只起到辅助说明作用。 </li>
 </ul>
@@ -7528,7 +7544,7 @@ f_Z(z)=\int_{-\infty}^{+\infty} |y|f_X(yz) f_Y(y) \mathrm{d} y, \quad-\infty<z<+
 <p><strong>补充：</strong> 什么时候需要使用注释？</p>
 <p>1、 <strong>注释不是越多越好</strong>，对于一目了然的代码，不需要添加注释；<br>2、 对于<strong>复杂的操作</strong>，应该在操作开始前写上若干行注释；<br>3、 对于<strong>不是一目了然的代码</strong>，应在其行尾添加注释（为了提高可读性，注释应该至少离开代码 2 个空格）。</p>
 <h4 id="2-4-空格使用"><a href="#2-4-空格使用" class="headerlink" title="2.4 空格使用"></a>2.4 空格使用</h4><ul>
-<li><p>在二元运算符两边各空一格[=,-,+=,==,&gt;,in,is not, and]</p>
+<li><p>在二元运算符两边各空一格[=, -, +=, ==, &gt;, in, is not, and]</p>
 </li>
 <li><p>函数的参数列表中，<code>,</code>之后要有空格</p>
 </li>
