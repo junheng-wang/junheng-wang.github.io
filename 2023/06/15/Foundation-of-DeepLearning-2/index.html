@@ -135,16 +135,18 @@ A^{[l]}=g^{[l]}\left(Z^{[l]}\right)
 <h4 id="4-3-核对矩阵的维数"><a href="#4-3-核对矩阵的维数" class="headerlink" title="4.3 核对矩阵的维数"></a>4.3 核对矩阵的维数</h4><p>对于单个训练样本，输入<script type="math/tex">x</script>的维度是<script type="math/tex">(n^{[0]},1)</script>神经网络的参数<script type="math/tex">W^{[l]}</script>和<script type="math/tex">b^{[l]}</script>的维度分别是：</p>
 <script type="math/tex; mode=display">
 \begin{gathered}W^{[l]}:\left(n^{[l]}, n^{[l-1]}\right) \\b^{[l]}:\left(n^{[l]}, 1\right)\end{gathered}</script><p>其中，<script type="math/tex">l=1,⋯,L</script>，<script type="math/tex">n^{[l]}</script>和<script type="math/tex">n^{[l−1]}</script>分别表示第<script type="math/tex">l</script>层和<script type="math/tex">l−1</script>层的所含单元个数。<script type="math/tex">n^{[0]}=n_x</script>，表示输入层特征数目。</p>
-<p>顺便提一下，反向传播过程中的<script type="math/tex">dW^{[l]}</script>、<script type="math/tex">db^{[l]}</script>的维度和<script type="math/tex">W</script>、<script type="math/tex">b</script>的<strong>维度相同</strong>。</p>
+<p>顺便提一下，反向传播过程中的<script type="math/tex">\mathrm dW^{[l]}</script>、<script type="math/tex">\mathrm db^{[l]}</script>的维度和<script type="math/tex">W</script>、<script type="math/tex">b</script>的<strong>维度相同</strong>。</p>
 <p>正向传播过程中的<script type="math/tex">z^{[l]}</script>和<script type="math/tex">a^{[l]}</script>的维度分别是：</p>
 <script type="math/tex; mode=display">
-\begin{aligned}&z^{[l]}:\left(n^{[l]}, 1\right) \\&a^{[l]}:\left(n^{[l]}, 1\right)\end{aligned}</script><script type="math/tex; mode=display">z^{[l]}$$和$$a^{[l]}$$的维度是一样的，且$$dz^{[l]}$$和$$da^{[l]}$$的维度均与$$z^{[l]}$$和$$a^{[l]}$$的维度一致。
-
-对于$$m$$个训练样本，输入矩阵$$X$$的维度是$$(n^{[0]},m)$$。需要注意的是$$W^{[l]}$$和$$b^{[l]}$$的维度与只有单个样本是一致的：</script><p>\begin{gathered}W^{[l]}:\left(n^{[l]}, n^{[l-1]}\right) \\b^{[l]}:\left(n^{[l]}, 1\right)\end{gathered}</p>
+\begin{aligned}&z^{[l]}:\left(n^{[l]}, 1\right) \\&a^{[l]}:\left(n^{[l]}, 1\right)\end{aligned}</script><p>$z^{[l]}$和$a^{[l]}$的维度是一样的，且$\mathrm dz^{[l]}$和$\mathrm da^{[l]}$的维度均与$z^{[l]}$和$a^{[l]}$的维度一致。</p>
+<p>对于$m$个训练样本，输入矩阵$X$的维度是$(n^{[0]},m)$。需要注意的是$W^{[l]}$和$b^{[l]}$的维度与只有单个样本是一致的：</p>
 <script type="math/tex; mode=display">
-只不过在运算$$Z^{[l]}=W^{[l]}A^{[l−1]}+b^{[l]}$$中，$$b^{[l]}$$会被当成$$(n^{[l]},m)$$矩阵进行运算，这是因为python的广播性质，且$$b^{[l]}$$每一列向量都是一样的。$$dW^{[l]}$$和$$db^{[l]}$$的维度分别与$$W$$和$$b$$的相同。但是，$$Z^{[l]}$$和$$A^{[l]}$$的维度发生了变化：</script><p>\begin{gathered}<br>Z^{[l]}:\left(n^{[l]}, m\right)\\<br>A^{[l]}:\left(n^{[l]}, m\right)<br>\end{gathered}</p>
+\begin{gathered}W^{[l]}:\left(n^{[l]}, n^{[l-1]}\right) \\b^{[l]}:\left(n^{[l]}, 1\right)\end{gathered}</script><p>只不过在运算$Z^{[l]}=W^{[l]}A^{[l−1]}+b^{[l]}$中，$b^{[l]}$会被当成$(n^{[l]},m)$矩阵进行运算，这是因为python的广播性质，且$b^{[l]}$每一列向量都是一样的。$\mathrm dW^{[l]}$和$\mathrm db^{[l]}$的维度分别与$W$和$b$的相同。但是，$Z^{[l]}$和$A^{[l]}$的维度发生了变化：</p>
 <script type="math/tex; mode=display">
-$$dZ^{[l]}$$和$$dA^{[l]}$$的维度分别与$$Z^{[l]}$$和$$A^{[l]}$$的相同。
+\begin{gathered}
+Z^{[l]}:\left(n^{[l]}, m\right)\\
+A^{[l]}:\left(n^{[l]}, m\right)
+\end{gathered}</script><script type="math/tex; mode=display">dZ^{[l]}$$和$$dA^{[l]}$$的维度分别与$$Z^{[l]}$$和$$A^{[l]}$$的相同。
 
 #### 4.4 为什么使用深层表示
 
