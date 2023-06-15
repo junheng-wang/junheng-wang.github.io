@@ -122,8 +122,7 @@
 <li>其他：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6951679886557708302">参考链接-如何搭建个人博客 ：几种方案比较 + 个人实现</a> </li>
 </ul>
 <h5 id="2-静态网站生成技术比较"><a href="#2-静态网站生成技术比较" class="headerlink" title="(2) 静态网站生成技术比较"></a>(2) 静态网站生成技术比较</h5><p>在该方法当中，也与许多可供选择的方案，像 Jekyll、Hugo、Hexo、Typecho、Wordpress等等，那么它们各有什么优缺点呢，这里我就不说了(不是我的重点)，请参考链接：<a target="_blank" rel="noopener" href="https://blog.laoda.de/archives/blog-choosing">Hexo还是Hugo？Typecho还是Wordpress？读完这篇或许你就有答案了！</a></p>
-<h4 id="2-安装相应软件"><a href="#2-安装相应软件" class="headerlink" title="2. 安装相应软件"></a>2. 安装相应软件</h4><h5 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="(1) 安装Node.js"></a>(1) 安装Node.js</h5><p>Node.js的官方网站：<a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">https://nodejs.org/zh-cn/</a> </p>
-<p>下载好了之后直接安装，安装过程中会出现</p>
+<h4 id="2-安装相应软件"><a href="#2-安装相应软件" class="headerlink" title="2. 安装相应软件"></a>2. 安装相应软件</h4><h5 id="1-安装Node-js"><a href="#1-安装Node-js" class="headerlink" title="(1) 安装Node.js"></a>(1) 安装Node.js</h5><p><a target="_blank" rel="noopener" href="https://nodejs.org/zh-cn/">Node.js的官方网站</a>，下载好了之后直接安装，安装过程中会出现</p>
 <p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2599.png" alt="&lt;font color=red&gt;图1&lt;/font&gt;  Node安装"></p>
 <p>要点第四个，添加到Path(环境变量)。</p>
 <h5 id="2-Git安装"><a href="#2-Git安装" class="headerlink" title="(2) Git安装"></a>(2) Git安装</h5><p>Git的安装则是傻瓜式安装即可，虽然步骤多，但是按照默认的来就行；</p>
@@ -153,33 +152,30 @@
 <p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc25a2.png" alt="&lt;font color=red&gt; 图3&lt;/font&gt;  url修改"></p>
 <p>如图3所示，这里url的修改十分重要，一定要记得修改。要改成你将来要部署的网站！！！比如你要用GitHub Pages部署，就必须是那一节你部署过的网站链接！！！ </p>
 <p><img src="https://pic.imgdb.cn/item/61e64e022ab3f51d91dc2594.png" alt="&lt;font color=red&gt; 图4&lt;/font&gt;  git链接修改"></p>
-<font color="red">**注意，下面这几处修改十分重要！！！**</font>
-
-<p>第100行的主题名改为之前让你复制的那个文件夹名(记得空格，在你没有下载新主题之前不用管，默认即可)；</p>
-<p>第105行“type”后面填写“git”；</p>
-<p>第106行加上“repo”，然后加上链接——不是GitHub Pages的链接，是GitHub Pages的库的链接！！</p>
+<p><strong><font color="red">注意，下面这几处修改十分重要！！！</font></strong></p>
+<ul>
+<li>第100行的主题名改为之前让你复制的那个文件夹名(记得空格，在你没有下载新主题之前不用管，默认即可)；</li>
+<li>第105行“type”后面填写“git”；</li>
+<li>第106行加上“repo”，然后加上链接——不是GitHub Pages的链接，是GitHub Pages的库的链接！！</li>
+</ul>
 <blockquote>
-<p>注意：这里由于Github在2021年进行了一次更新，应该是不能再使用https协议了，转而应该示意SSH，但是我这里使用了https好像也没什么问题，其实我自己现在对Git、GitHub的使用也还是模模糊糊，对一些操作、概念(如：密钥、公钥、令牌等)不明白，所以也就是稀里糊涂，后面我还要仔细学习学习Git的知识，如果你的使用https不行，建议参考链接进行设置——<a target="_blank" rel="noopener" href="https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91">https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91</a> </p>
+<p>注意：这里由于Github在2021年进行了一次更新，应该是不能再使用https协议了，转而应该示意SSH，但是我这里使用了https好像也没什么问题，其实我自己现在对Git、GitHub的使用也还是模模糊糊，对一些操作、概念(如：密钥、公钥、令牌等)不明白，所以也就是稀里糊涂，后面我还要仔细学习学习Git的知识，如果你的使用https不行，建议参考链接进行设置——<a target="_blank" rel="noopener" href="https://vabzjaby.github.io/2021/10/05/pwh/#%E7%AC%AC%E5%9B%9B%E6%AD%A5-%E7%BC%96%E8%BE%91">如何在手机端搭建并部署Hexo - 听话的便当 - 个人博客</a></p>
 </blockquote>
-<p>第107行加上“branch”，名字起main；</p>
-<blockquote>
-<p>注意：这里与Github在2021年进行了一次更新有关，之前应该是填写master，现在填写main即可；</p>
-</blockquote>
-<p>完成这些之后，我们可以再次用“hexo s”这个指令查看预览，发现已经更新主题了。</p>
+<ul>
+<li>第107行加上“branch”，名字起main。注意，这里与Github在2021年进行了一次更新有关，之前应该是填写master，现在填写main即可；</li>
+</ul>
+<p>完成这些后，可以再次用<code>hexo s</code>这个指令查看预览，发现已经更新主题了。</p>
 <h4 id="2-Hexo的常用命令"><a href="#2-Hexo的常用命令" class="headerlink" title="2. Hexo的常用命令"></a>2. Hexo的常用命令</h4><ul>
-<li>hexo s：在本地演示网站</li>
-<li>hexo g：在本地渲染静态页面(就是将md转换为html)</li>
-<li>hexo d：把静态页面一键上传到Github Pages</li>
-<li>hexo new：<ul>
-<li>标题(直接加标题则是在source/_posts文件夹生成—个”标题.md”文件作为文章)<ul>
-<li>建议∶生成新文章和页面时最好用阿拉伯数字或者英文,这样链接不会很长</li>
+<li><code>hexo s</code>：在本地演示网站</li>
+<li><code>hexo g</code>：在本地渲染静态页面(就是将md转换为html)</li>
+<li><code>hexo d</code>：把静态页面一键上传到Github Pages</li>
+<li><code>hexo new</code>：<ul>
+<li><code>标题</code>(直接加标题则是在source/_posts文件夹生成—个”标题.md”文件作为文章，建议生成新文章和页面时最好用阿拉伯数字或者英文，这样链接不会很长)</li>
+<li><code>page+标题</code>(标题前加page则是生成一个新页面，hexo刚开始只有默认的首页和归档页，创建其他页面，例如标签、关于等页面都需要此指令生成)</li>
+<li><code>post+标题</code>(在_config.yml中将post_asset_folder设为true之后hexo new post “first-page”之后新建了一篇文章，就会同时在hexo/source/_post文件夹下生成一个.md文件和一个同名文件夹，文件夹存放文章中的图片)</li>
 </ul>
 </li>
-<li>page+标题(标题前加page则是生成一个新页面,hexo刚开始只有默认的首页和归档页,创建其他页面,例如标签,关于页面,都需要此指令生成)</li>
-<li>post+标题(在_config.yml中将post_asset_folder设为true之后hexo new post “first-page”之后新建了一篇文章，就会同时在hexo/source/_post文件夹下生成一个.md文件和一个同名文件夹，文件夹存放文章中的图片)</li>
-</ul>
-</li>
-<li>hexo clean：清理已有的静态页面(不是删干净重来)</li>
+<li><code>hexo clean</code>：清理已有的静态页面(不是删干净重来)</li>
 </ul>
 <h4 id="3-示例配置过程"><a href="#3-示例配置过程" class="headerlink" title="3. 示例配置过程"></a>3. 示例配置过程</h4><p>在执行<code>hexo init</code>之后，可以再执行<code>hexg g</code> 在本地渲染页面，完成后文件夹中会出现<strong>public</strong>文件夹。然后再执行<code>hexo new ts</code> 这时在source文件夹下会生成_post文件夹，里面有hello-world.md(默认自带)和ts.md(代码新生成的)，然后我们可以在ts.md中写一些东西，就是日后的博客文章。还可以使用命令<code>hexo new page about</code> 生成一个新的about文件夹，里面有index.md，可以写一些介绍自己的内容。</p>
 <p>弄好上面的之后，我们可以执行命令<code>hexo s</code> 在本地演示网站，此时cmd窗口会生成一个<a target="_blank" rel="noopener" href="http://localhost:4000">http://localhost:4000</a> 的链接，我们在浏览器打开就可以看到渲染的博客页面了。</p>
@@ -753,6 +749,22 @@
     
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 
 </html>

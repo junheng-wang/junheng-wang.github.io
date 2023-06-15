@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+  
+
+    <head>
+      <meta charset="utf-8" />
+       
+      <meta name="keywords" content="���͡�ѧϰ�����˼�������С�����" />
+       
+      <meta name="description" content="���˺�����" />
+      
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1"
+      />
+      <title>Foundation-of-DeepLearning-3 |  Wang Junheng</title>
+  <meta name="generator" content="hexo-theme-ayer">
+      
+      <link rel="shortcut icon" href="/favicon.ico" />
+       
+<link rel="stylesheet" href="/dist/main.css">
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css"
+      />
+      
+<link rel="stylesheet" href="/css/custom.css">
+ 
+      <script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+       
+ 
+
+      <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma@5.0.1/bulma.min.css"
+      />
+      <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.19/dist/sweetalert2.min.js"></script>
+
+      <!-- mermaid -->
+      
+      <style>
+        .swal2-styled.swal2-confirm {
+          font-size: 1.6rem;
+        }
+      </style>
+    </head>
+  </html>
+</html>
+
+
+<body>
+  <div id="app">
+    
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Foundation-of-DeepLearning-3"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Foundation-of-DeepLearning-3
+</h1>
+ 
+
+      
+    </header>
+     
+    <div class="article-meta">
+      <a href="/2023/06/15/Foundation-of-DeepLearning-3/" class="article-date">
+  <time datetime="2023-06-15T14:41:25.000Z" itemprop="datePublished">2023-06-15</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/">学习提升</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/">编程与深度学习</a> / <a class="article-category-link" href="/categories/%E5%AD%A6%E4%B9%A0%E6%8F%90%E5%8D%87/%E7%BC%96%E7%A8%8B%E4%B8%8E%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/">深度学习基础</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">12.9k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">50 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="第七章-超参数调试、Batch正则化和编程框架"><a href="#第七章-超参数调试、Batch正则化和编程框架" class="headerlink" title="第七章 超参数调试、Batch正则化和编程框架"></a>第七章 超参数调试、Batch正则化和编程框架</h3><h4 id="7-1-超参数调试处理"><a href="#7-1-超参数调试处理" class="headerlink" title="7.1 超参数调试处理"></a>7.1 超参数调试处理</h4><p>深度神经网络需要调试的超参数（Hyperparameters）较多，包括：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:left"><strong>参数</strong></th>
+<th style="text-align:left"><strong>意义</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><script type="math/tex">\alpha</script></td>
+<td style="text-align:left">学习因子/速率</td>
+</tr>
+<tr>
+<td style="text-align:left"><script type="math/tex">\beta</script></td>
+<td style="text-align:left">动量梯度下降因子</td>
+</tr>
+<tr>
+<td style="text-align:left"><script type="math/tex">\beta_1, \beta_2, \varepsilon</script></td>
+<td style="text-align:left">Adam算法参数</td>
+</tr>
+<tr>
+<td style="text-align:left">#layers</td>
+<td style="text-align:left">神经网络层数</td>
+</tr>
+<tr>
+<td style="text-align:left">#hidden units</td>
+<td style="text-align:left">各层隐藏神经元个数</td>
+</tr>
+<tr>
+<td style="text-align:left">learning rate decay</td>
+<td style="text-align:left">学习因子下降参数</td>
+</tr>
+<tr>
+<td style="text-align:left">mini-batch size</td>
+<td style="text-align:left">批量训练样本数的包含样本个数</td>
+</tr>
+<tr>
+<td style="text-align:left">。。。</td>
+<td style="text-align:left">。。。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>超参数之间也有重要性差异。通常来说，学习因子<script type="math/tex">α</script>是最重要的超参数，也是需要重点调试的超参数。动量梯度下降因子<script type="math/tex">β</script>、各隐藏层神经元个数#hidden units和mini-batch size的重要性仅次于<script type="math/tex">α</script>。然后就是神经网络层数#layers和学习因子下降参数learning rate decay。最后，Adam算法的三个参数<script type="math/tex">β_1, β_2, ε</script>一般常设置为<script type="math/tex">0.9，0.999</script>和<script type="math/tex">10^{−8}</script>，不需要反复调试。当然，这里超参数重要性的排名并不是绝对的，具体情况，具体分析。</p>
+<p>如何选择和调试超参数？传统的机器学习中，我们对每个参数等距离选取任意个数的点，然后，分别使用不同点对应的参数组合进行训练，最后根据验证集上的表现好坏，来选定最佳的参数。例如有两个待调试的参数，分别在每个参数上选取5个点，这样构成了5x5=25中参数组合，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648ae96e1ddac507ccdfd1c7.png" style="zoom:50%"></p>
+<p>这种做法在参数比较少的时候效果较好。但是在深度神经网络模型中，我们一般不采用这种均匀间隔取点的方法，比较好的做法是使用<strong>随机选择</strong>。也就是说，对于上面这个例子，我们随机选择25个点，作为待调试的超参数，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648aea321ddac507cce264c1.png" style="zoom:50%"></p>
+<p>随机化选择参数的目的是为了尽可能地得到更多种参数组合。还是上面的例子，如果使用均匀采样的话，每个参数只有5种情况；而使用随机采样的话，每个参数有25种可能的情况，因此更有可能得到最佳的参数组合。</p>
+<p>这种做法的另一个好处就是对重要性不同的参数之间的选择效果更好。设hyperparameter1为<script type="math/tex">\alpha</script>，hyperparameter2为<script type="math/tex">\varepsilon</script>，显然二者的重要性是不一样的。如果使用第一种均匀采样的方法，<script type="math/tex">\varepsilon</script>的影响很小，相当于只选择了<script type="math/tex">5</script>个<script type="math/tex">\alpha</script>值。而如果使用第二种随机采样的方法，<script type="math/tex">\varepsilon</script>和<script type="math/tex">\alpha</script>都有可能选择<script type="math/tex">25</script>种不同值。这大大增加了<script type="math/tex">\alpha</script>调试的个数，更有可能选择到最优值。其实，在实际应用中完全不知道哪个参数更加重要的情况下，随机采样的方式能有效解决这一问题，但是均匀采样做不到这点。</p>
+<p>在经过随机采样之后，我们可能得到某些区域模型的表现较好。为了得到更精确的最佳参数，我们应该继续对选定的区域进行<strong>由粗到细</strong>的采样(coarse to fine sampling scheme)。也就是放大表现较好的区域，再对此区域做更密集的随机采样。例如，对下图中右下角的方形区域再做25点的随机采样，以获得最佳参数。</p>
+<p><img src="https://pic.imgdb.cn/item/648aea541ddac507cce2d585.png" style="zoom:50%"></p>
+<h4 id="7-2-为超参数选择合适的范围"><a href="#7-2-为超参数选择合适的范围" class="headerlink" title="7.2 为超参数选择合适的范围"></a>7.2 为超参数选择合适的范围</h4><p>上一部分讲的调试参数使用随机采样，对于某些超参数是可以进行尺度均匀采样的，但是某些超参数需要选择不同的合适尺度进行随机采样。</p>
+<p>例如对于超参数#layers和#hidden units，都是正整数，是可以进行均匀随机采样的，即<strong>超参数每次变化的尺度都是一致的</strong>(如每次变化为1，犹如一个刻度尺一样，刻度是均匀的)。</p>
+<p>但是，对于某些超参数，可能需要<strong>非均匀随机采样(即非均匀刻度尺)</strong>。例如超参数<script type="math/tex">\alpha</script>，待调范围是<script type="math/tex">[0.0001, 1]</script>。如果使用均匀随机采样，那么有<script type="math/tex">90\%</script>的采样点分布在<script type="math/tex">[0.1, 1]</script>之间，只有<script type="math/tex">10\%</script>分布在<script type="math/tex">[0.0001, 0.1]</script>之间。这在实际应用中是不太好的，因为最佳的<script type="math/tex">\alpha</script>值可能主要分布在<script type="math/tex">[0.0001, 0.1]</script>之间，而<script type="math/tex">[0.1, 1]</script>范围内<script type="math/tex">\alpha</script>值效果并不好。因此我们更关注的是区间<script type="math/tex">[0.0001, 0.1]</script>，应该在这个区间内细分更多刻度。</p>
+<p>通常的做法是将<strong>linear scale转换为log scale</strong>，将均匀尺度转化为非均匀尺度，然后再在log scale下进行均匀采样。这样<script type="math/tex">[0.0001, 0.001]</script>，<script type="math/tex">[0.001, 0.01]</script>，<script type="math/tex">[0.01, 0.1]</script>，<script type="math/tex">[0.1, 1]</script>各个区间内随机采样的超参数个数基本一致，也就扩大了之前<script type="math/tex">[0.0001, 0.1]</script>区间内采样值个数。</p>
+<p><img src="https://pic.imgdb.cn/item/648aea921ddac507cce3abf1.png"></p>
+<p>一般解法是，如果线性区间为<script type="math/tex">[a, b]</script>，令<script type="math/tex">m=\log(a)，n=\log(b)</script>，则对应的<script type="math/tex">\log</script>区间为<script type="math/tex">[m,n]</script>。对<script type="math/tex">\log</script>区间的<script type="math/tex">[m,n]</script>进行随机均匀采样，然后得到的采样值<script type="math/tex">r</script>，最后反推到线性区间，即<script type="math/tex">10^r</script>就是最终采样的超参数。相应的Python语句为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">m = np.log10(a)</span><br><span class="line">n = np.log10(b)</span><br><span class="line">r = np.random.rand()</span><br><span class="line">r = m + (n-m)*r</span><br><span class="line">r = np.power(<span class="number">10</span>,r)</span><br></pre></td></tr></table></figure>
+<p>除了<script type="math/tex">\alpha</script>外，动量梯度因子<script type="math/tex">\beta</script>也是一样，在超参数调试的时候需要进行非均匀采样。一般<script type="math/tex">\beta</script>的取值范围<script type="math/tex">[0.9, 0.999]</script>，<script type="math/tex">1−β</script>的取值范围就在<script type="math/tex">[0.001, 0.1]</script>。那么直接对<script type="math/tex">1−β</script>在<script type="math/tex">[0.001, 0.1]</script>区间内进行<script type="math/tex">\log</script>变换即可。</p>
+<blockquote>
+<p>这里解释下为什么<script type="math/tex">\beta</script>也需要向<script type="math/tex">\alpha</script>那样做非均匀采样。假设<script type="math/tex">\beta</script>从<script type="math/tex">0.9000</script>变化为<script type="math/tex">0.9005</script>，那么<script type="math/tex">\frac 1{1−β}</script>基本没有变化。但假设<script type="math/tex">\beta</script>从<script type="math/tex">0.9990</script>变化为<script type="math/tex">0.9995</script>，那么<script type="math/tex">\frac 1{1−β}</script>前后差别<script type="math/tex">1000</script>。<script type="math/tex">\beta</script>越接近<script type="math/tex">1</script>，指数加权平均的个数越多，变化越大。所以对<script type="math/tex">\beta</script>接近<script type="math/tex">1</script>的区间，应该采集得更密集一些。</p>
+</blockquote>
+<h4 id="7-3-超参数训练的实践：Pandas-vs-Caviar"><a href="#7-3-超参数训练的实践：Pandas-vs-Caviar" class="headerlink" title="7.3 超参数训练的实践：Pandas vs. Caviar"></a>7.3 超参数训练的实践：<strong>Pandas vs. Caviar</strong></h4><p>经过调试选择完最佳的超参数并不是一成不变的，一段时间之后（例如一个月），需要根据新的数据和实际情况，再次调试超参数，以获得实时的最佳模型。</p>
+<p>在训练深度神经网络时，一种情况是受计算能力所限，我们只能对一个模型进行训练，调试不同的超参数，使得这个模型有最佳的表现。我们称之为Babysitting one model。另外一种情况是可以对多个模型同时进行训练，每个模型上调试不同的超参数，根据表现情况，选择最佳的模型。我们称之为Training many models in parallel。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeab31ddac507cce41e0f.png" style="zoom:50%"></p>
+<p>因为第一种情况只使用一个模型，所以类比做Panda approach；第二种情况同时训练多个模型，类比做Caviar  approach。使用哪种模型是由计算资源、计算能力所决定的。一般来说，对于非常复杂或者数据量很大的模型，使用Panda  approach更多一些。</p>
+<h4 id="7-4-正则化网络的激活函数"><a href="#7-4-正则化网络的激活函数" class="headerlink" title="7.4 正则化网络的激活函数"></a>7.4 正则化网络的激活函数</h4><p>Sergey Ioffe和Christian Szegedy两位学者提出了Batch Normalization方法。Batch Normalization不仅可以让调试超参数更加简单，而且可以让神经网络模型更加“健壮”。也就是说较好模型可接受的超参数范围更大一些，包容性更强，使得更容易去训练一个深度神经网络。接下来，我们就来介绍什么是Batch Normalization，以及它是如何工作的。</p>
+<p>之前，我们在<strong>第五章</strong>中提到过在训练神经网络时，<strong>标准化输入可以提高训练的速度</strong>。方法是对训练数据集进行<strong>归一化</strong>的操作，即将原始数据减去其均值<script type="math/tex">\mu</script>后，再除以其方差<script type="math/tex">σ^2</script>。但是标准化输入只是对输入进行了处理，那么对于神经网络，又该如何对各隐藏层的输入进行标准化处理呢？</p>
+<p>其实在神经网络中，第<script type="math/tex">l</script>层隐藏层的输入就是第<script type="math/tex">l−1</script>层隐藏层的输出<script type="math/tex">A^{[l−1]}</script>。对<script type="math/tex">A^{[l−1]}</script>进行标准化处理，从原理上来说可以提高<script type="math/tex">W^{[l]}</script>和<script type="math/tex">b^{[l]}</script>的训练速度和准确度。这种对各隐藏层的标准化处理就是Batch Normalization。值得注意的是，实际应用中，一般是对<script type="math/tex">Z^{[l−1]}</script>进行标准化处理而不是<script type="math/tex">A^{[l−1]}</script>，其实差别不是很大。</p>
+<p>Batch Normalization对第<script type="math/tex">l</script>层隐藏层的输入<script type="math/tex">Z^{[l−1]}</script>做如下标准化处理，忽略上标<script type="math/tex">[l−1]</script>：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\mu=\frac{1}{m} \sum_{i} z^{(i)} \\
+\sigma^{2}=\frac{1}{m} \sum_{i}\left(z_{i}-\mu\right)^{2} \\z_{\text {norm }}^{(i)}=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}}
+\end{gathered}</script><p>其中，<script type="math/tex">m</script>是单个mini-batch包含样本个数，<script type="math/tex">\varepsilon</script>是为了防止分母为零，可取值<script type="math/tex">10^{−8}</script>。这样，使得该隐藏层的所有输入<script type="math/tex">z^{(i)}</script>均值为<script type="math/tex">0</script>，方差为<script type="math/tex">1</script>。但是，大部分情况下并不希望所有的<script type="math/tex">z^{(i)}</script>均值都为<script type="math/tex">0</script>，方差都为<script type="math/tex">1</script>，也不太合理。通常需要对<script type="math/tex">z^{(i)}</script>进行进一步处理：</p>
+<script type="math/tex; mode=display">
+\tilde{z}^{(i)}=\gamma \cdot z_{\text {norm }}^{(i)}+\beta</script><p>上式中，<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>是learnable parameters，类似于<script type="math/tex">W</script>和<script type="math/tex">b</script>一样，可以通过梯度下降等算法求得。这里，<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>的作用是让<script type="math/tex">\tilde z^{(i)}</script>的均值和方差为任意值，只需调整其值就可以了。例如，令：</p>
+<script type="math/tex; mode=display">
+\gamma=\sqrt{\sigma^{2}+\varepsilon}, \quad \beta=u</script><p>则<script type="math/tex">\tilde z^{(i)}=z^{(i)}</script>，即identity function。可见，设置<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>为不同的值，可以得到任意的均值和方差。</p>
+<p>这样，通过Batch Normalization，对隐藏层的各个<script type="math/tex">z^{[l](i)}</script>进行标准化处理，得到<script type="math/tex">\tilde z^{[l](i)}</script>，替代<script type="math/tex">z^{[l](i)}</script>。</p>
+<p>注意，<strong>输入标准化</strong>处理Normalizing inputs和<strong>隐藏层标准化</strong>处理Batch  Normalization是有区别的。Normalizing inputs使所有输入的均值为<script type="math/tex">0</script>，方差为<script type="math/tex">1</script>。而Batch  Normalization可使各隐藏层输入的<strong>均值和方差为任意值</strong>。实际上，从激活函数的角度来说，如果各隐藏层的输入均值在靠近<script type="math/tex">0</script>的区域即处于激活函数的线性区域，这样不利于训练好的非线性神经网络，得到的模型效果也不会太好。这也解释了为什么需要用<script type="math/tex">γ</script>和<script type="math/tex">\beta</script>是来对<script type="math/tex">z^{[l](i)}</script>作进一步处理。</p>
+<h4 id="7-5-将Batch-Norm拟合进神经网络"><a href="#7-5-将Batch-Norm拟合进神经网络" class="headerlink" title="7.5 将Batch Norm拟合进神经网络"></a>7.5 将Batch Norm拟合进神经网络</h4><p>我们已经知道了如何对某单一隐藏层的所有神经元进行Batch Norm，接下来将研究如何把Bath Norm应用到整个神经网络中。</p>
+<p>对于<script type="math/tex">L</script>层神经网络，经过Batch Norm的作用，整体流程如下：</p>
+<p><img src="https://pic.imgdb.cn/item/648aeae71ddac507cce4e5b1.png"></p>
+<p>实际上，Batch Norm经常使用在mini-batch上，这也是其名称的由来。值得注意的是，因为Batch Norm对各隐藏层<script type="math/tex">Z^{[l]}=W^{[l]} A^{[l-1]}+b^{[l]}</script>有去均值的操作，所以这里的常数项<script type="math/tex">b^{[l]}</script>可以消去，其数值效果完全可以由<script type="math/tex">\tilde Z^{[l]}</script>中的<script type="math/tex">\beta</script>来实现。因此，我们在使用Batch Norm的时候，可以忽略各隐藏层的常数项<script type="math/tex">b^{[l]}</script>。在使用梯度下降算法时，分别对<script type="math/tex">W^{[l]}，β^{[l]}~ \text 和 ~γ^{[l]}</script>进行迭代更新。除了传统的梯度下降算法之外，还可以使用我们之前介绍过的动量梯度下降、RMSprop或者Adam等优化算法。</p>
+<h4 id="7-6-Batch-Norm为什么有效"><a href="#7-6-Batch-Norm为什么有效" class="headerlink" title="7.6 Batch Norm为什么有效"></a>7.6 Batch Norm为什么有效</h4><p>我们可以把输入特征做均值为<script type="math/tex">0</script>，方差为<script type="math/tex">1</script>的规范化处理，来加快学习速度。而Batch Norm也是对隐藏层各神经元的输入做类似的规范化处理。总的来说，Batch Norm不仅能够提高神经网络训练速度，而且能让神经网络的权重<script type="math/tex">W</script>的更新更加“稳健”，尤其在深层神经网络中更加明显。比如神经网络很后面的<script type="math/tex">W</script>对前面的<script type="math/tex">W</script><strong>包容性更强</strong>，即前面的<script type="math/tex">W</script>的变化对后面<script type="math/tex">W</script>造成的影响很小，整体网络更加健壮。</p>
+<p>举个例子来说明，假如用一个浅层神经网络(类似逻辑回归)来训练识别猫的模型。如下图所示，提供的所有猫的训练样本都是黑猫。然后，用这个训练得到的模型来对各种颜色的猫样本进行测试，测试的结果可能并不好。其原因是训练样本不具有一般性(即不是所有的猫都是黑猫)，这种训练样本(黑猫)和测试样本(猫)分布的变化称之为<strong>covariate shift</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeafd1ddac507cce53503.png" style="zoom:50%"></p>
+<p>对于这种情况，如果实际应用的样本与训练样本分布不同，即发生了covariate shift，则一般是要对模型<strong>重新训练</strong>的。在神经网络，尤其是深度神经网络中，covariate shift会导致模型预测效果变差，重新训练的模型各隐藏层的<script type="math/tex">W^{[l]}</script>和<script type="math/tex">B^{[l]}</script>均产生偏移、变化。而Batch Norm的作用恰恰是减小covariate shift的影响，让模型变得更加健壮，鲁棒性更强。Batch Norm减少了各层<script type="math/tex">W^{[l]}</script>、<script type="math/tex">B^{[l]}</script>之间的耦合性，让各层更加独立，实现自我训练学习的效果。也就是说，如果输入发生covariate shift，那么因为Batch Norm的作用，对个隐藏层输出<script type="math/tex">Z^{[l]}</script>进行均值和方差的归一化处理，<script type="math/tex">W^{[l]}</script>和<script type="math/tex">B^{[l]}</script>更加稳定，使得原来的模型也有不错的表现。针对上面这个黑猫的例子，如果我们使用深层神经网络，使用Batch Norm，那么该模型对花猫的识别能力应该也是不错的。</p>
+<p>从另一个方面来说，<strong>Batch Norm也起到轻微的正则化</strong>(regularization)效果。具体表现在：</p>
+<ul>
+<li><strong>每个mini-batch都进行均值为</strong><script type="math/tex">0</script><strong>，方差为</strong><script type="math/tex">1</script><strong>的归一化操作</strong></li>
+<li><strong>每个mini-batch中，对各个隐藏层的</strong><script type="math/tex">Z^{[l]}</script><strong>添加了随机噪声，效果类似于Dropout</strong></li>
+<li><strong>mini-batch越小，正则化效果越明显</strong><br>但是，Batch Norm的正则化效果比较微弱，正则化也不是Batch Norm的主要功能。</li>
+</ul>
+<h4 id="7-7-测试时的Batch-Norm"><a href="#7-7-测试时的Batch-Norm" class="headerlink" title="7.7 测试时的Batch Norm"></a>7.7 测试时的Batch Norm</h4><p>训练过程中，Batch Norm是对单个mini-batch进行操作的，但在测试过程中，如果是单个样本，该如何使用Batch Norm进行处理呢？</p>
+<p>首先，回顾一下训练过程中Batch Norm的主要过程：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\mu=\frac{1}{m} \sum_{i} z^{(i)} \\
+\sigma^{2}=\frac{1}{m} \sum_{i}\left(z^{(i)}-\mu\right)^{2} \\
+z_{\text {norm }}^{(i)}=\frac{z^{(i)}-\mu}{\sqrt{\sigma^{2}+\varepsilon}} \\
+\tilde{z}^{(i)}=\gamma \cdot z_{\text {norm }}^{(i)}+\beta
+\end{gathered}</script><p>其中，<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>是对单个mini-batch中所有<script type="math/tex">m</script>个样本求得的。在测试过程中，如果只有一个样本，求其均值和方差是没有意义的，就需要对<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>进行估计。估计的方法很多，理论上可以将所有训练集放入最终的神经网络模型中，然后将每个隐藏层计算得到的<script type="math/tex">\mu^{[l]}</script>和<script type="math/tex">σ^{2[l]}</script>直接作为测试过程的<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>来使用。但是，实际应用中一般不使用这种方法，而是使用我们之前介绍过的指数加权平均(exponentially weighted average)的方法来预测测试过程单个样本的<script type="math/tex">\mu</script>和<script type="math/tex">σ^2</script>。</p>
+<p>指数加权平均的做法为，对第<script type="math/tex">l</script>层隐藏层，考虑所有mini-batch在该隐藏层下的<script type="math/tex">\mu^{[l]}</script>和<script type="math/tex">σ^{2[l]}</script>，然后用指数加权平均的方式来预测得到当前单个样本的<script type="math/tex">\mu^{[l]}</script>和<script type="math/tex">σ^{2[l]}</script>。这样就实现了对测试过程单个样本的均值和方差估计。最后，再利用训练过程得到的<script type="math/tex">\gamma</script>和<script type="math/tex">\beta</script>值计算出各层的<script type="math/tex">\tilde z^{(i)}</script>值。</p>
+<h4 id="7-8-Softmax回归"><a href="#7-8-Softmax回归" class="headerlink" title="7.8 Softmax回归"></a>7.8 Softmax回归</h4><p>目前我们介绍的都是二分类问题，神经网络输出层只有一个神经元，表示预测输出<script type="math/tex">\hat y</script>是正类的概率<script type="math/tex">P(y = 1|x)</script>，若<script type="math/tex">\hat y>0.5</script>则判断为正类，否则判断为负类。</p>
+<p>对于多分类问题，用<script type="math/tex">C</script>表示种类个数，神经网络中输出层就有<script type="math/tex">C</script>个神经元，即<script type="math/tex">n^{[L]}=C</script>。其中，每个神经元的输出依次对应属于该类的概率，即<script type="math/tex">P(y=c|x)</script>。为了处理多分类问题，一般使用Softmax回归模型。Softmax回归模型输出层的激活函数如下所示：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+z^{[L]}=W^{[L]} a^{[L-1]}+b^{[L]} \\
+a_{i}^{[L]}=\frac{e^{z_{i}^{[L]}}}{\sum_{i=1}^{C} e^{z_{i}^{[L]}}}
+\end{gathered}</script><p>输出层每个神经元的输出<script type="math/tex">a^{[L]}_i</script>对应属于该类的概率，满足：</p>
+<script type="math/tex; mode=display">
+\sum_{i=1}^{C} a_{i}^{[L]}=1</script><p>所有的<script type="math/tex">a^{[L]}_i</script>，即<script type="math/tex">\hat y</script>，维度为<script type="math/tex">(C, 1)</script>。</p>
+<p>下面给出几个简单的线性多分类的例子(只有一个输出层)：</p>
+<p><img src="https://pic.imgdb.cn/item/648aeb7e1ddac507cce6d5bb.png"></p>
+<p>如果使用神经网络，特别是深层神经网络，可以得到更复杂、更精确的非线性模型。</p>
+<h4 id="7-9-训练一个Softmax回归"><a href="#7-9-训练一个Softmax回归" class="headerlink" title="7.9 训练一个Softmax回归"></a>7.9 训练一个Softmax回归</h4><p>Softmax classifier的训练过程与我们之前介绍的二元分类问题有所不同。先来看一下softmax classifier的loss function。举例假如<script type="math/tex">C=4</script>，某个样本的预测输出<script type="math/tex">\hat y</script>和真实输出<script type="math/tex">y</script>为：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\hat{y}=\left[\begin{array}{l}0.3 \\0.2 \\0.1 \\0.4
+\end{array}\right] 
+\qquad y=\left[\begin{array}{l}0 \\1 \\0 \\0
+\end{array}\right]
+\end{gathered}</script><p>从<script type="math/tex">\hat y</script>值来看，<script type="math/tex">P(y=4|x)=0.4</script>，概率最大，而真实样本属于第<script type="math/tex">2</script>类，因此该预测效果不佳。我们定义softmax classifier的loss function为：</p>
+<script type="math/tex; mode=display">
+L(\hat{y}, y)=-\sum_{j=1}^{4} y_{j} \cdot \log \hat{y}_{j}</script><p>然而，由于只有当<script type="math/tex">j=2</script>时，<script type="math/tex">y_2=1</script>，其它情况下，<script type="math/tex">y_j=0</script>。所以，上式中的<script type="math/tex">L(\hat y,y)</script>可以简化为：</p>
+<script type="math/tex; mode=display">
+L(\hat{y}, y)=-y_{2} \cdot \log \hat{y}_{2}=-\log \hat{y}_{2}</script><p>要让<script type="math/tex">L(\hat y,y)</script>更小，就应该让<script type="math/tex">\hat y_2</script>越大越好。<script type="math/tex">\hat y_2</script>反映的是概率，完全符合我们之前的定义。</p>
+<p>所有<script type="math/tex">m</script>个样本的cost function为：</p>
+<script type="math/tex; mode=display">
+J=\frac{1}{m} \sum_{i=1}^{m} L(\hat{y}, y)</script><p>其预测输出向量<script type="math/tex">A^{[L]}</script>即<script type="math/tex">\hat Y</script>的维度为<script type="math/tex">(4, m)</script>。</p>
+<p>softmax classifier的反向传播过程仍然使用梯度下降算法，其推导过程与二元分类有一点点不一样。因为只有输出层的激活函数不一样，我们先推导<script type="math/tex">dZ^{[L]}</script>：</p>
+<script type="math/tex; mode=display">
+\begin{gathered}
+\mathrm d a^{[L]}=-\frac{1}{a^{[L]}} \\
+\frac{\partial a^{[L]}}{\partial z^{[L]}}=\frac{\partial}{\partial z^{[L]}} \cdot\left(\frac{e^{z_{i}^{[L]}}}{\sum_{i=1}^{C} e^{z_{i}^{[L]}}}\right)=a^{[L]} \cdot\left(1-a^{[L]}\right) \\
+\mathrm d z^{[L]}=d a^{[L]} \cdot \frac{\partial a^{[L]}}{\partial z^{[L]}}=a^{[L]}-1=a^{[L]}-y
+\end{gathered}</script><p>对于所有m个训练样本：</p>
+<script type="math/tex; mode=display">
+d Z^{[L]}=A^{[L]}-Y</script><p>可见<script type="math/tex">\mathrm dZ^{[L]}</script>的表达式与二元分类结果是一致的，虽然推导过程不太一样。然后就可以继续进行反向传播过程的梯度下降算法了，推导过程与二元分类神经网络完全一致。</p>
+<h4 id="7-10-深度学习框架"><a href="#7-10-深度学习框架" class="headerlink" title="7.10 深度学习框架"></a>7.10 深度学习框架</h4><p>深度学习框架有很多，例如：</p>
+<ul>
+<li><strong>Caffe/Caffe2</strong></li>
+<li><strong>CNTK</strong></li>
+<li><strong>DL4J</strong></li>
+<li><strong>Keras</strong></li>
+<li><strong>Lasagne</strong></li>
+<li><strong>mxnet</strong></li>
+<li><strong>PaddlePaddle</strong></li>
+<li><strong>TensorFlow</strong></li>
+<li><strong>Theano</strong></li>
+<li><strong>Torch(Pytorch)</strong><br>一般选择深度学习框架的基本准则是：</li>
+<li><strong>Ease of programming(development and deployment)</strong></li>
+<li><strong>Running speed</strong></li>
+<li><strong>Truly open(open source with good governance)</strong></li>
+</ul>
+<h4 id="7-11-TensorFlow"><a href="#7-11-TensorFlow" class="headerlink" title="7.11 TensorFlow"></a><strong>7.11 TensorFlow</strong></h4><p>这里简单介绍一下最近几年比较火的一个深度学习框架：TensorFlow。</p>
+<p>举个例子来说明，例如cost function是参数w的函数：</p>
+<script type="math/tex; mode=display">
+J(w) = w^{2}-10 w+25</script><p>如果使用TensorFlow对cost function进行优化，求出最小值对应的<script type="math/tex">w</script>程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">w = tf.Variable(<span class="number">0</span>,dtype=tf.float32)</span><br><span class="line"><span class="comment">#cost = tf.add(tf.add(w**2,tf.multiply(-10,w)),25)</span></span><br><span class="line">cost = w**<span class="number">2</span> - <span class="number">10</span>*w +<span class="number">25</span></span><br><span class="line">train = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cost)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.0</span></span><br><span class="line">session.run(train)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    session.run(train)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;4.99999</span></span><br></pre></td></tr></table></figure>
+<p>TensorFlow框架内可以直接调用梯度下降优化算法，不需要我们自己再写程序了，大大提高了效率。在运行<script type="math/tex">1000</script>次梯度下降算法后，<script type="math/tex">w</script>的解为<script type="math/tex">4.99999</script>，已非常接近<script type="math/tex">w</script>的最优值<script type="math/tex">5</script>了。</p>
+<p>针对上面这个例子，如果对<script type="math/tex">w</script>前的系数用变量<script type="math/tex">x</script>来代替，程序如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">cofficients = np.array([[<span class="number">1.</span>],[-<span class="number">10.</span>],[<span class="number">25.</span>]])</span><br><span class="line">w = tf.Variable(<span class="number">0</span>,dtype=tf.float32)</span><br><span class="line">x = tf.placeholder(tf.float32,[<span class="number">3</span>,<span class="number">1</span>])</span><br><span class="line"><span class="comment">#cost = tf.add(tf.add(w**2,tf.multiply(-10,w)),25)</span></span><br><span class="line"><span class="comment">#cost = w**2 - 10*w +25</span></span><br><span class="line">cost = x[<span class="number">0</span>][<span class="number">0</span>]*w**<span class="number">2</span> + x[<span class="number">1</span>][<span class="number">0</span>]*w + x[<span class="number">2</span>][<span class="number">0</span>]</span><br><span class="line">train = tf.train.GradientDescentOptimizer(<span class="number">0.01</span>).minimize(cost)</span><br><span class="line">init = tf.global_variables_initializer()</span><br><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.0</span></span><br><span class="line">session.run(train, feed_dict=(x:coefficients))</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;0.1</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1000</span>):</span><br><span class="line">    session.run(train, feed_dict=(x:coefficients))</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br><span class="line"><span class="comment"># &gt;&gt;4.99999</span></span><br></pre></td></tr></table></figure>
+<p>结果跟之前一样。此外，还可以更改<script type="math/tex">x</script>即cofficients的值，而得到不同的优化结果<script type="math/tex">w</script>。</p>
+<p>另外，上段程序中的：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">session = tf.Session()</span><br><span class="line">session.run(init)</span><br><span class="line"><span class="built_in">print</span>(session.run(w))</span><br></pre></td></tr></table></figure>
+<p>有另外一种写法：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> session:</span><br><span class="line">    session.run(init)</span><br><span class="line">    <span class="built_in">print</span>(session.run(w))</span><br></pre></td></tr></table></figure>
+<p>TensorFlow的最大优点就是采用<strong>数据流图(data flow graphs)</strong>来进行数值运算。图中的节点(Nodes)表示数学操作，图中的线(edges)则表示在节点间相互联系的多维数据数组，即张量(tensor)。而且它灵活的架构让你可以在多种平台上展开计算，例如台式计算机中的一个或多个CPU(或GPU)，服务器，移动设备等等。<br>关于TensorFlow更多的原理和编程技巧这里就不在赘述了，感兴趣的朋友可以关注更详细的TensorFlow相关文档。</p>
+<h3 id="第八章-机器学习策略"><a href="#第八章-机器学习策略" class="headerlink" title="第八章 机器学习策略"></a>第八章 机器学习策略</h3><p>《Structuring Machine Learning Projects》(构建机器学习项目)这门课是Andrw  Ng深度学习专项课程中的第三门课。这门课主要介绍机器学习中的一些策略和方法，让我们能够更快更有效地让机器学习系统工作，该门课共有两周的课时。</p>
+<h4 id="8-1-1为什么是Machine-Learning-ML-策略"><a href="#8-1-1为什么是Machine-Learning-ML-策略" class="headerlink" title="8.1.1为什么是Machine Learning(ML)策略"></a>8.1.1为什么是Machine Learning(ML)策略</h4><p>当我们最初得到一个深度神经网络模型时，我们可能希望从很多方面来对它进行优化，例如：</p>
+<ul>
+<li>Collect more data</li>
+<li>Collect more diverse training set</li>
+<li>Train algorithm longer with gradient descent</li>
+<li>Try Adam instead of gradient descent</li>
+<li>Try bigger network</li>
+<li>Try smaller network</li>
+<li>Try dropout</li>
+<li>Add L2 regularization</li>
+<li>Network architecture: Activation functions, #hidden units…<br>可选择的方法很多，也很复杂、繁琐。盲目选择、尝试不仅耗费时间而且可能收效甚微。因此，使用快速、有效的策略来优化机器学习模型是非常必要的。</li>
+</ul>
+<h4 id="8-1-2-正交化"><a href="#8-1-2-正交化" class="headerlink" title="8.1.2 正交化"></a>8.1.2 正交化</h4><p>机器学习中有许多参数、超参数需要调试。通过每次只调试一个参数，保持其它参数不变，而得到的模型某一性能改变是一种最常用的调参策略，称之为<strong>正交化方法(Orthogonalization)</strong>。</p>
+<p>Orthogonalization的核心在于<strong>每次调试一个参数只会影响模型的某一个性能</strong>。例如老式电视机旋钮，每个旋钮就对应一个功能，调整旋钮会调整对应的功能，而不会影响其它功能。也就是说彼此旋钮之间是互不影响的，是正交的，这也是Orthogonalization名称的由来。这种方法能够让我们更快更有效地进行机器学习模型的调试和优化。</p>
+<p>对应到机器学习监督式学习模型中，可以大致分成四个独立的“功能”，每个“功能”对应一些可调节的唯一的旋钮。四个“功能”如下：</p>
+<ul>
+<li><strong>Fit training set well on cost function</strong></li>
+<li><strong>Fit dev set well on cost function</strong></li>
+<li><strong>Fit test set well on cost function</strong></li>
+<li><strong>Performs well in real world</strong><br>第一条优化训练集可以通过使用更复杂NN，使用Adam等优化算法来实现；</li>
+</ul>
+<p>第二条优化验证集可以通过正则化，采用更多训练样本来实现；</p>
+<p>第三条优化测试集可以通过使用更多的验证集样本来实现；</p>
+<p>第四条提升实际应用模型可以通过更换验证集，使用新的cost function来实现。</p>
+<p>概括来说，每一种“功能”对应不同的调节方法。而这些调节方法（旋钮）只会对应一个“功能”，是正交的。</p>
+<p>顺便提一下，<strong>early stopping在模型功能调试中并不推荐使用</strong>。因为early stopping在提升验证集性能的同时降低了训练集的性能。也就是说early stopping同时影响两个“功能”，不具有独立性、正交性。</p>
+<h4 id="8-1-3-单—数字评估指标"><a href="#8-1-3-单—数字评估指标" class="headerlink" title="8.1.3 单—数字评估指标"></a>8.1.3 单—数字评估指标</h4><p>构建、优化机器学习模型时，单值评价指标非常必要。有了量化的单值评价指标后，我们就能根据这一指标比较不同超参数对应的模型的优劣，从而选择最优的那个模型。</p>
+<p>举个例子，比如有A和B两个模型，它们的<strong>准确率(Precision)</strong>和<strong>召回率(Recall)</strong>分别如下：</p>
+<p><img src="https://pic.imgdb.cn/item/648aeddf1ddac507ccef3d76.png" style="zoom:80%"></p>
+<p>如果只看Precision的话，B模型更好。如果只看Recall的话，A模型更好。实际应用中，我们通常使用单值评价指标<strong>F1 Score</strong>来评价模型的好坏。F1 Score综合了Precision和Recall的大小，计算方法如下：</p>
+<script type="math/tex; mode=display">
+F 1=\frac{2}{\frac1P+\frac1R}</script><p>然后得到了A和B模型各自的F1 Score：</p>
+<p><img src="https://pic.imgdb.cn/item/648aedfc1ddac507ccefa608.png" style="zoom:80%"></p>
+<p>从F1 Score来看，A模型比B模型更好一些。通过引入单值评价指标F1 Score，很方便对不同模型进行比较。</p>
+<p>除了F1 Score之外，我们还可以使用<strong>平均值</strong>作为单值评价指标来对模型进行评估。如下图所示，A, B, C, D, E, F六个模型对不同国家样本的错误率不同，可以计算其平均性能，然后选择平均错误率最小的那个模型(C模型)。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeee81ddac507ccf2bf9c.png"></p>
+<h4 id="8-1-4-满足和优化指标"><a href="#8-1-4-满足和优化指标" class="headerlink" title="8.1.4 满足和优化指标"></a>8.1.4 满足和优化指标</h4><p>有时候，要把所有的性能指标都综合在一起，构成单值评价指标是比较困难的。解决办法是，我们可以把某些性能作为<strong>优化指标(Optimizing metic)</strong>，寻求最优化值；而某些性能作为<strong>满意指标(Satisficing metic)</strong>，只要满足阈值就行了。</p>
+<p>举个猫类识别的例子，有A，B，C三个模型，各个模型的Accuracy和Running time如下表中所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648aef171ddac507ccf359ea.png"></p>
+<p>Accuracy和Running time这两个性能不合适综合成单值评价指标。因此，可以将Accuracy作为优化指标(Optimizing metic)，将Running time作为满意指标(Satisficing metic)。也就是说，给Running time设定一个阈值，在其满足阈值的情况下，选择Accuracy最大的模型。如果设定Running time必须在100ms以内，那么很明显，模型C不满足阈值条件，首先剔除；模型B相比较模型A而言，Accuracy更高，性能更好。</p>
+<p>概括来说，性能指标(Optimizing metic)是需要优化的，越优越好；而满意指标(Satisficing metic)只要满足设定的阈值就好了。</p>
+<h4 id="8-1-5-训练-验证-开发-测试集划分"><a href="#8-1-5-训练-验证-开发-测试集划分" class="headerlink" title="8.1.5 训练_验证(开发)_测试集划分"></a>8.1.5 训练_验证(开发)_测试集划分</h4><p>Train/dev/test sets如何设置对机器学习的模型训练非常重要，合理设置能够大大提高模型训练效率和模型质量。</p>
+<p>原则上应该尽量保证dev sets和test sets来源于<strong>同一分布</strong>且都反映了实际样本的情况。如果dev sets和test sets不来自同一分布，那么我们从dev sets上选择的“最佳”模型往往不能够在test sets上表现得很好。</p>
+<h4 id="8-1-6-开发集和测试集的大小"><a href="#8-1-6-开发集和测试集的大小" class="headerlink" title="8.1.6 开发集和测试集的大小"></a>8.1.6 开发集和测试集的大小</h4><p>在之前的课程中我们已经介绍过，当样本数量不多(小于一万)的时候，通常将Train/dev/test sets的比例设为60%/20%/20%，在没有dev sets的情况下，Train/test sets的比例设为70%/30%。当样本数量很大(百万级别)的时候，通常将相应的比例设为98%/1%/1%或者99%/1%。</p>
+<p>对于dev sets数量的设置，应该遵循的准则是通过dev sets能够检测不同算法或模型的区别，以便选择出更好的模型。</p>
+<p>对于test sets数量的设置，应该遵循的准则是通过test sets能够反映出模型在实际中的表现。</p>
+<p>实际应用中，可能只有train/dev sets，而没有test sets。这种情况也是允许的，只要算法模型没有对dev sets过拟合。但是，条件允许的话，最好是有test sets，实现<strong>无偏估计</strong>。</p>
+<h4 id="8-1-7什么时候该改变开发-测试集和指标"><a href="#8-1-7什么时候该改变开发-测试集和指标" class="headerlink" title="8.1.7什么时候该改变开发_测试集和指标"></a>8.1.7什么时候该改变开发_测试集和指标</h4><p>算法模型的评价标准有时候需要根据实际情况进行动态调整，目的是让算法模型在实际应用中有更好的效果。</p>
+<p>举个猫类识别的例子。初始的评价标准是错误率，算法A错误率为3%，算法B错误率为5%。显然，A更好一些。但是，实际使用时发现算法A会通过一些色情图片，但是B没有出现这种情况。从用户的角度来说，他们可能更倾向选择B模型，虽然B的错误率高一些。这时候，我们就需要改变之前单纯只是使用错误率作为评价标准，而考虑新的情况进行改变。例如增加色情图片的权重，增加其代价。</p>
+<p>原来的cost function：</p>
+<script type="math/tex; mode=display">
+J=\frac{1}{m} \sum_{i=1}^{m} L\left(\hat{y}^{(i)}, y^{(i)}\right)</script><p>更改评价标准后的cost function：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}J 
+&=\frac{1}{w^{(i)}} \sum_{i=1}^{m} w^{(i)} L\left(\hat{y}^{(i)}, y^{(i)}\right) \\
+w^{(i)} &= \begin{cases}1, & x^{(i)} \text { is non-porn } \\10, 
+& x^{(i)} \text { is porn }
+\end{cases}
+\end{aligned}</script><p>概括来说，机器学习可分为两个过程：</p>
+<pre><code>**(1)** Define a metric to evaluate classifiers
+
+**(2)** How to do well on this metric
+</code></pre><p>也就是说，第一步是找靶心，第二步是通过训练，射中靶心。但是在训练的过程中可能会根据实际情况改变算法模型的评价标准，进行动态调整。</p>
+<p>另外一个需要动态改变评价标准的情况是dev/test sets与实际使用的样本分布不一致。比如猫类识别样本图像分辨率差异。</p>
+<p><img src="https://pic.imgdb.cn/item/648aeffc1ddac507ccf70033.png"></p>
+<h4 id="8-1-8-为什么是人的表现"><a href="#8-1-8-为什么是人的表现" class="headerlink" title="8.1.8 为什么是人的表现"></a>8.1.8 为什么是人的表现</h4><p>机器学习模型的表现通常会跟人类水平表现作比较，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/648af01f1ddac507ccf77cd4.png" style="zoom:50%"></p>
+<p>图中，横坐标是训练时间，纵坐标是准确性。机器学习模型经过训练会不断接近human-level performance甚至超过它。但是，超过human-level performance之后，准确性会上升得比较缓慢，最终不断接近理想的最优情况，称之为<strong>贝叶斯最优误差(bayes optimal error)</strong>。理论上任何模型都不能超过它，bayes optimal error代表了最佳表现。</p>
+<p>实际上，human-level performance在某些方面有不俗的表现。例如图像识别、语音识别等领域，人类是很擅长的。所以，让机器学习模型性能不断接近human-level performance非常必要也做出很多努力：</p>
+<ul>
+<li>Get labeled data from humans.</li>
+<li>Gain insight from manual error analysis: Why did a person get this right?</li>
+<li>Better analysis of bias/variance.</li>
+</ul>
+<h4 id="8-1-9-可避免偏差"><a href="#8-1-9-可避免偏差" class="headerlink" title="8.1.9 可避免偏差"></a>8.1.9 可避免偏差</h4><p>实际应用中，要看human-level error，training error和dev error的相对值。例如猫类识别的例子中，如果human-level error为1%，training error为8%，dev error为10%。由于training error与human-level error相差7%，dev error与training error只相差2%，所以目标是尽量在训练过程中减小training error，即减小偏差bias。如果图片很模糊，肉眼也看不太清，human-level error提高到7.5%。这时，由于training error与human-level error只相差0.5%，dev error与training error只相差2%，所以目标是尽量在训练过程中减小dev error，即方差variance。这是相对而言的。</p>
+<p>对于物体识别这类CV问题，human-level error是很低的，很接近理想情况下的bayes optimal error。因此，上面例子中的1%和7.5%都可以近似看成是两种情况下对应的bayes optimal error。实际应用中，我们一般会用human-level error代表bayes optimal error。</p>
+<p>通常，<strong>把training error与human-level error的差值称为bias，也称作avoidable bias</strong>；<strong>把dev error与training error之间的差值称为variance</strong>。根据bias和variance值的相对大小，可以知道算法模型是否发生了欠拟合或者过拟合。</p>
+<h4 id="8-1-10-理解人的表现"><a href="#8-1-10-理解人的表现" class="headerlink" title="8.1.10 理解人的表现"></a>8.1.10 理解人的表现</h4><p>我们说过human-level performance能够代表bayes optimal error。但是，human-level performance如何定义呢？举个医学图像识别的例子，不同人群的error有所不同：</p>
+<ul>
+<li><strong>Typical human : 3% error</strong></li>
+<li><strong>Typical doctor : 1% error</strong></li>
+<li><strong>Experienced doctor : 0.7% error</strong></li>
+<li><strong>Team of experienced doctors : 0.5% error</strong><br>不同人群他们的错误率不同。一般来说，我们将表现最好的那一组，即Team of experienced doctors作为human-level performance。那么，这个例子中，human-level error就为0.5%。但是实际应用中，不同人可能选择的human-level performance基准是不同的，这会带来一些影响。</li>
+</ul>
+<p>假如该模型training error为0.7%，dev error为0.8。如果选择Team of experienced doctors，即human-level error为0.5%，则bias比variance更加突出。如果选择Experienced doctor，即human-level error为0.7%，则variance更加突出。也就是说，选择什么样的human-level error，有时候会影响bias和variance值的相对变化。当然这种情况一般只会在模型表现很好，接近bayes optimal error的时候出现。越接近bayes optimal error，模型越难继续优化，因为这时候的human-level performance可能是比较模糊难以准确定义的。</p>
+<h4 id="8-1-11-超过人的表现"><a href="#8-1-11-超过人的表现" class="headerlink" title="8.1.11 超过人的表现"></a>8.1.11 超过人的表现</h4><p>对于自然感知类问题，例如视觉、听觉等，机器学习的表现不及人类。但是在很多其它方面，机器学习模型的表现已经超过人类了，包括：</p>
+<ul>
+<li>Online advertising</li>
+<li>Product recommendations</li>
+<li>Logistics(predicting transit time)</li>
+<li>Loan approvals<br>实际上，机器学习模型超过human-level performance是比较困难的。但是只要提供足够多的样本数据，训练复杂的神经网络，模型预测准确性会大大提高，很有可能接近甚至超过human-level performance。值得一提的是当算法模型的表现超过human-level performance时，很难再通过人的直觉来解决如何继续提高算法模型性能的问题。</li>
+</ul>
+<h4 id="8-1-12-改善你模型的表现"><a href="#8-1-12-改善你模型的表现" class="headerlink" title="8.1.12 改善你模型的表现"></a>8.1.12 改善你模型的表现</h4><p>提高机器学习模型性能主要要解决两个问题：<strong>avoidable bias和variance</strong>。我们之前介绍过，training error与human-level error之间的差值反映的是avoidable bias，dev error与training error之间的差值反映的是variance。</p>
+<p>解决avoidable bias的常用方法包括：</p>
+<ul>
+<li>Train bigger model</li>
+<li>Train longer/better optimization algorithms: momentum, RMSprop, Adam</li>
+<li>NN architecture/hyperparameters search<br>解决variance的常用方法包括：</li>
+<li>More data</li>
+<li>Regularization: L2, dropout, data augmentation</li>
+<li>NN architecture/hyperparameters search</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/648af1351ddac507ccfaeda9.png"></p>
+<h4 id="8-2-1-进行误差分析"><a href="#8-2-1-进行误差分析" class="headerlink" title="8.2.1 进行误差分析"></a>8.2.1 进行误差分析</h4><p>对已经建立的机器学习模型进行错误分析(error analysis)十分必要，而且有针对性地、正确地进行error analysis更加重要。</p>
+<p>举个例子，猫类识别问题，已经建立的模型的错误率为10%。为了提高正确率，我们发现该模型会将一些狗类图片错误分类成猫。一种常规解决办法是扩大狗类样本，增强模型对够类(负样本)的训练。但是，这一过程可能会花费几个月的时间，耗费这么大的时间成本到底是否值得呢？也就是说扩大狗类样本，重新训练模型，对提高模型准确率到底有多大作用？这时候我们就需要进行error analysis，帮助我们做出判断。</p>
+<p>方法很简单，我们可以从分类错误的样本中<strong>统计</strong>出狗类的样本数量。根据狗类样本所占的比重，判断这一问题的重要性。假如狗类样本所占比重仅为5%，即时我们花费几个月的时间扩大狗类样本，提升模型对其识别率，改进后的模型错误率最多只会降低到9.5%。相比之前的10%，并没有显著改善。我们把这种性能限制称为<strong>ceiling on performance</strong>。相反，假如错误样本中狗类所占比重为50%，那么改进后的模型错误率有望降低到5%，性能改善很大。因此，值得去花费更多的时间扩大狗类样本。</p>
+<p>这种error analysis虽然简单，但是能够避免花费大量的时间精力去做一些对提高模型性能收效甚微的工作，让我们专注解决影响模型正确率的主要问题，十分必要。</p>
+<p>这种error analysis可以同时评估多个影响模型性能的因素，通过各自在错误样本中所占的比例来判断其重要性。例如，猫类识别模型中，可能有以下几个影响因素：</p>
+<ul>
+<li>Fix pictures of dogs being recognized as cats</li>
+<li>Fix great cats(lions, panthers, etc…) being misrecognized</li>
+<li>Improve performance on blurry images<br>通常来说，比例越大，影响越大，越应该花费时间和精力着重解决这一问题。这种error analysis让我们改进模型更加有针对性，从而提高效率。</li>
+</ul>
+<h4 id="8-2-2-清除错误的数据"><a href="#8-2-2-清除错误的数据" class="headerlink" title="8.2.2 清除错误的数据"></a>8.2.2 清除错误的数据</h4><p>监督式学习中，训练样本有时候会出现输出<script type="math/tex">y</script>标注错误的情况，即incorrectly labeled examples。如果这些label标错的情况是随机性的(random errors)，DL算法对其包容性是比较强的，即健壮性好，一般可以直接忽略，无需修复。然而，如果是系统错误(systematic errors)，这将对DL算法造成影响，降低模型性能。</p>
+<p>刚才说的是训练样本中出现incorrectly labeled data，如果是dev/test sets中出现incorrectly labeled data，该怎么办呢？</p>
+<p>方法很简单，利用上节内容介绍的error analysis，统计dev sets中所有分类错误的样本中incorrectly labeled data所占的比例。根据该比例的大小，决定是否需要修正所有incorrectly labeled data，还是可以忽略。举例说明，若：</p>
+<ul>
+<li>Overall dev set error: 10%</li>
+<li>Errors due incorrect labels: 0.6%</li>
+<li>Errors due to other causes: 9.4%<br>上面数据表明Errors due incorrect labels所占的比例仅为0.6%，占dev set error的6%，而其它类型错误占dev set error的94%。因此，这种情况下，可以忽略incorrectly labeled data。</li>
+</ul>
+<p>如果优化DL算法后，出现下面这种情况：</p>
+<ul>
+<li>Overall dev set error: 2%</li>
+<li>Errors due incorrect labels: 0.6%</li>
+<li>Errors due to other causes: 1.4%<br>上面数据表明Errors due incorrect labels所占的比例依然为0.6%，但是却占dev set error的30%，而其它类型错误占dev set error的70%。因此，这种情况下，incorrectly labeled data不可忽略，需要手动修正。</li>
+</ul>
+<p>我们知道，dev set的主要作用是在不同算法之间进行比较，选择错误率最小的算法模型。但是，如果有incorrectly labeled data的存在，当不同算法错误率比较接近的时候，我们无法仅仅根据Overall dev set error准确指出哪个算法模型更好，必须修正incorrectly labeled data。</p>
+<p>关于<strong>修正incorrect dev/test set data</strong>，有几条建议：</p>
+<ul>
+<li>Apply same process to your dev and test sets to make sure they continue to come from the same distribution</li>
+<li>Consider examining examples your algorithm got right as well as ones it got wrong</li>
+<li>Train and dev/test data may now come from slightly different distributions</li>
+</ul>
+<h4 id="8-2-3-快速搭建你的第一个系统"><a href="#8-2-3-快速搭建你的第一个系统" class="headerlink" title="8.2.3 快速搭建你的第一个系统"></a>8.2.3 快速搭建你的第一个系统</h4><p>对于如何构建一个机器学习应用模型，Andrew给出的建议是先快速构建第一个简单模型，然后再反复迭代优化。</p>
+<ul>
+<li>Set up dev/test set and metric</li>
+<li>Build initial system quickly</li>
+<li>Use Bias/Variance analysis &amp; Error analysis to prioritize next steps</li>
+</ul>
+<h4 id="8-2-4-在不同的划分上进行训练并测试"><a href="#8-2-4-在不同的划分上进行训练并测试" class="headerlink" title="8.2.4 在不同的划分上进行训练并测试"></a>8.2.4 在不同的划分上进行训练并测试</h4><p>当train set与dev/test set不来自同一个分布的时候，我们应该如何解决这一问题，构建准确的机器学习模型呢？</p>
+<p>以猫类识别为例，train set来自于网络下载(webpages)，图片比较清晰；dev/test set来自用户手机拍摄(mobile app)，图片比较模糊。假如train set的大小为200000，而dev/test set的大小为10000，显然train set要远远大于dev/test set。</p>
+<p><img src="https://pic.imgdb.cn/item/648af1f21ddac507ccfd9ad4.png"></p>
+<p>虽然dev/test set质量不高，但是模型最终主要应用在对这些模糊的照片的处理上。面对train set与dev/test set分布不同的情况，有两种解决方法。</p>
+<p>第一种方法是将train set和dev/test set完全混合，然后在随机选择一部分作为train set，另一部分作为dev/test set。例如，混合210000例样本，然后随机选择205000例样本作为train set，2500例作为dev set，2500例作为test set。这种做法的优点是实现train set和dev/test set分布一致，缺点是dev/test set中webpages图片所占的比重比mobile app图片大得多。例如dev set包含2500例样本，大约有2381例来自webpages，只有119例来自mobile app。这样，dev set的算法模型对比验证，仍然主要由webpages决定，实际应用的mobile app图片所占比重很小，达不到验证效果。因此，这种方法并不是很好。</p>
+<p>第二种方法是将原来的train set和一部分dev/test set组合当成train set，剩下的dev/test set分别作为dev set和test set。例如，200000例webpages图片和5000例mobile app图片组合成train set，剩下的2500例mobile app图片作为dev set，2500例mobile app图片作为test set。其关键在于dev/test set全部来自于mobile app。这样保证了验证集最接近实际应用场合。这种方法较为常用，而且性能表现比较好。</p>
+<h4 id="8-2-5-不匹配数据划分的偏差和方差"><a href="#8-2-5-不匹配数据划分的偏差和方差" class="headerlink" title="8.2.5 不匹配数据划分的偏差和方差"></a>8.2.5 不匹配数据划分的偏差和方差</h4><p>我们之前介绍过，根据human-level error、training error和dev error的相对值可以判定是否出现了bias或者variance。但是，需要注意的一点是，<strong>如果train set和dev/test set来源于不同分布，则无法直接根据相对值大小来判断。</strong>例如某个模型human-level error为0%，training error为1%，dev error为10%。根据我们之前的理解，显然该模型出现了variance。但是，training error与dev error之间的差值9%可能来自<strong>算法本身(variance)</strong>，也可能来自于<strong>样本分布不同</strong>。比如dev set都是很模糊的图片样本，本身就难以识别，跟算法模型关系不大。因此不能简单认为出现了variance。</p>
+<p>在可能伴有train set与dev/test set分布不一致的情况下，定位是否出现variance的方法是<strong>设置train-dev set</strong>。Andrew给train-dev set的定义是：“Same distribution as training set, but not used for training.”也就是说，从原来的train set中分割出一部分作为train-dev set，train-dev set不作为训练模型使用，而是<strong>与dev set一样用于验证</strong>。</p>
+<p>这样，我们就有training error、training-dev error和dev error三种error。其中，training error与training-dev error的差值反映了variance；training-dev error与dev error的差值反映了data mismatch problem，即样本分布不一致。</p>
+<p>举例说明，如果training error为1%，training-dev error为9%，dev error为10%，则variance问题比较突出。如果training error为1%，training-dev error为1.5%，dev error为10%，则data mismatch problem比较突出。通过引入train-dev set，能够比较准确地定位出现了variance还是data mismatch。</p>
+<p>总结一下human-level error、training error、training-dev error、dev error以及test error之间的差值关系和反映的问题：</p>
+<p><img src="https://pic.imgdb.cn/item/648af21f1ddac507ccfe4d12.png" style="zoom:60%"></p>
+<p>一般情况下，human-level error、training error、training-dev error、dev error以及test error的数值是递增的，但是也会出现dev error和test error下降的情况。这主要可能是因为训练样本比验证/测试样本更加复杂，难以训练。</p>
+<p><img src="https://pic.imgdb.cn/item/648af3071ddac507cc01d8e0.png"></p>
+<h4 id="8-2-6-解决数据不匹配"><a href="#8-2-6-解决数据不匹配" class="headerlink" title="8.2.6 解决数据不匹配"></a>8.2.6 解决数据不匹配</h4><p>关于如何解决train set与dev/test set样本分布不一致的问题，有两条建议：</p>
+<ul>
+<li>Carry out manual error analysis to try to understand difference between training dev/test sets</li>
+<li>Make training data more similar; or collect more data similar to dev/test sets<br>为了让train set与dev/test set类似，可以用<strong>人工数据合成(artificial data synthesis)</strong>方法。例如说话人识别问题，实际应用场合(dev/test set)是包含背景噪声的，而训练样本train set很可能没有背景噪声。为了让train set与dev/test set分布一致，我们可以在train set上人工添加背景噪声，合成类似实际场景的声音。这样会让模型训练的效果更准确。</li>
+</ul>
+<p>但需要注意的是，我们不能给每段语音都增加同一段背景噪声，这样会出现对背景噪音的<strong>过拟合</strong>，效果不佳。这就是人工数据合成需要注意的地方。</p>
+<h4 id="8-2-7-迁移学习"><a href="#8-2-7-迁移学习" class="headerlink" title="8.2.7 迁移学习"></a>8.2.7 迁移学习</h4><p>深度学习非常强大的一个功能之一就是有时候你可以将已经训练好的模型的一部分知识（网络结构）直接应用到另一个类似模型中去。比如我们已经训练好一个猫类识别的神经网络模型，那么我们可以直接把该模型中的一部分网络结构应用到使用X光片预测疾病的模型中去。这种学习方法被称为<strong>迁移学习(Transfer Learning)</strong>。</p>
+<p>如果我们已经有一个训练好的神经网络，用来做图像识别。现在，我们想要构建另外一个通过X光片进行诊断的模型。迁移学习的做法是无需重新构建新的模型，而是利用之前的神经网络模型，只改变样本输入、输出以及输出层的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>。也就是说对新的样本<script type="math/tex">(X,Y)</script>，重新训练输出层权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>，而其它层所有的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>保持不变。</p>
+<p><img src="https://pic.imgdb.cn/item/648af3561ddac507cc02ff49.png"></p>
+<p>迁移学习，重新训练权重系数，如果需要构建新模型的样本数量较少，那么可以像刚才所说的，只训练输出层的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>，保持其它层所有的权重系数<script type="math/tex">W^{[L]}, b^{[L]}</script>不变。这种做法相对来说比较简单。如果样本数量足够多，那么也可以只保留网络结构，重新训练所有层的权重系数。这种做法使得模型更加精确，因为毕竟样本对模型的影响最大。选择哪种方法通常由数据量决定。</p>
+<p>顺便提一下，如果重新训练所有权重系数，初始<script type="math/tex">W^{[L]}, b^{[L]}</script>由之前的模型训练得到，这一过程称为<strong>pre-training</strong>。之后不断调试、优化<script type="math/tex">W^{[L]}, b^{[L]}</script>的过程称为<strong>fine-tuning</strong>。pre-training和fine-tuning分别对应上图中的黑色箭头和红色箭头。</p>
+<p>迁移学习之所以能这么做的原因是，神经网络浅层部分能够检测出许多图片固有<strong>特征</strong>，例如图像边缘、曲线等。使用之前训练好的神经网络部分结果有助于我们更快更准确地提取X光片特征。二者处理的都是图片，而图片处理是有相同的地方，第一个训练好的神经网络已经帮我们实现如何提取图片有用特征了。 因此，即便是即将训练的第二个神经网络样本数目少，仍然可以根据第一个神经网络结构和权重系数得到健壮性好的模型。</p>
+<p>迁移学习可以保留原神经网络的一部分，再添加新的网络层。具体问题，具体分析，可以去掉输出层后再增加额外一些神经层。</p>
+<p><img src="https://pic.imgdb.cn/item/648af3a01ddac507cc040506.png"></p>
+<p>总体来说，迁移学习的应用场合主要包括三点：</p>
+<ul>
+<li>Task A and B have the same input x.</li>
+<li>You have a lot more data for Task A than Task B.</li>
+<li>Low level features from A could be helpful for learning B.</li>
+</ul>
+<h4 id="8-2-8-多任务学习"><a href="#8-2-8-多任务学习" class="headerlink" title="8.2.8 多任务学习"></a>8.2.8 多任务学习</h4><p>多任务学习(multi-task learning)就是构建神经网络同时执行多个任务。这跟二元分类或者多元分类都不同，多任务学习类似将多个神经网络融合在一起，用一个网络模型来实现多种分类效果。如果有<script type="math/tex">C</script>个，那么输出<script type="math/tex">y</script>的维度是<script type="math/tex">(C,1)</script>。</p>
+<p>例如汽车自动驾驶中，需要实现的多任务为行人、车辆、交通标志和信号灯。如果检测出汽车和交通标志，则<script type="math/tex">y</script>为：</p>
+<script type="math/tex; mode=display">
+y = [1,0,0,1]^{\text T}</script><p>多任务学习模型的cost function为：</p>
+<script type="math/tex; mode=display">
+\begin{equation}
+\frac{1}{m} \sum_{i=1}^{m} \sum_{j=1}^{c} L\left(\hat{y}_{j}^{(i)}, y_{j}^{(i)}\right)
+\end{equation}</script><p>其中，<script type="math/tex">j</script>表示任务下标，总有<script type="math/tex">c</script>个任务。对应的loss function为：</p>
+<script type="math/tex; mode=display">
+L\left(\hat{y}_{j}^{(i)}, y_{j}^{(i)}\right)=-y_{j}^{(i)} \log \hat{y}_{j}^{(i)}-\left(1-y_{j}^{(i)}\right) \log \left(1-\hat{y}_{j}^{(i)}\right)</script><p>值得一提的是，Multi-task learning与Softmax regression的区别在于Softmax regression是single label的，即输出向量y只有一个元素为1；而Multi-task learning是multiple labels的，即输出向量y可以有多个元素为1。</p>
+<p>多任务学习是使用单个神经网络模型来实现多个任务。实际上，也可以分别构建多个神经网络来实现。但是，如果各个任务之间是相似问题(例如都是图片类别检测)，则可以使用多任务学习模型。另外，多任务学习中，可能存在训练样本<script type="math/tex">Y</script>某些label空白的情况，这并不影响多任务模型的训练。</p>
+<p>总体来说，多任务学习的应用场合主要包括三点：</p>
+<pre><code>Training on a set of tasks that could benefit from having shared lower-level features.
+
+Usually: Amount of data you have for each task is quite similar.
+
+Can train a big enough neural network to do well on all the tasks.
+</code></pre><p>顺便提一下，迁移学习和多任务学习在实际应用中，迁移学习使用得更多一些。</p>
+<h4 id="8-2-9-什么是端到端的深度学习"><a href="#8-2-9-什么是端到端的深度学习" class="headerlink" title="8.2.9 什么是端到端的深度学习"></a>8.2.9 什么是端到端的深度学习</h4><p>端到端(end-to-end)深度学习就是将所有不同阶段的数据处理系统或学习系统模块组合在一起，用一个单一的神经网络模型来实现所有的功能。它将所有模块混合在一起，只关心输入和输出。</p>
+<p>以语音识别为例，传统的算法流程和end-to-end模型的区别如下：</p>
+<p><img src="https://pic.imgdb.cn/item/648af3d61ddac507cc04b689.png"></p>
+<p>如果训练样本足够大，神经网络模型足够复杂，那么end-to-end模型性能比传统机器学习分块模型更好。实际上，end-to-end让神经网络模型内部去自我训练模型特征，自我调节，增加了模型整体契合度。</p>
+<h4 id="8-2-10-是否要使用端到端的深度学习"><a href="#8-2-10-是否要使用端到端的深度学习" class="headerlink" title="8.2.10 是否要使用端到端的深度学习"></a>8.2.10 是否要使用端到端的深度学习</h4><p>end-to-end深度学习有优点也有缺点。</p>
+<p>优点：</p>
+<pre><code>Let the data speak
+
+Less hand-designing of components needed
+</code></pre><p>缺点：</p>
+<pre><code>May need large amount of data
+
+Excludes potentially useful hand-designed
+</code></pre><p><strong>到这里这门课程的学习暂告一段落(ps：并不是不学了，接下来学习一些网络CNN、读一些论文看看再决定下一步得计划)</strong></p>
+<hr>
+<h3 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h3><p>参考链接1：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1FT4y1E74V?p=1">吴恩达深度学习deeplearning.ai</a></p>
+<p>参考链接2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/wuzhongqiang/article/details/89702268">本笔记参考链接</a></p>
+<p>参考链接3：<a target="_blank" rel="noopener" href="https://www.zhihu.com/column/c_1007644614324535296">吴恩达机器学习课思维导图</a></p>
+<p>参考链接4：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43061212/article/details/82750763?utm_source=app&amp;app_version=4.20.0">DeepLearning吴恩达深度学习课程笔记思维导图</a></p>
+<p>参考链接5：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yg411K72z">三个月从零入门深度学习，保姆级学习路线图</a></p>
+<p>参考链接6：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yg411K72z">【人工智能学习】逐句阅读100篇核心AI论文（双语字幕）</a></p>
+<p>参考链接7：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/37349519">纯新手自学入门机器/深度学习指南） - 量子位的文章 - 知乎</a></p>
+<p>参考链接8：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Lv41177BW/">Pytorch环境安装配置 - Bilibili</a></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+      <!-- reward -->
+      
+      <div id="reword-out">
+        <div id="reward-btn">
+          打赏
+        </div>
+      </div>
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://junheng-wang.github.io/2023/06/15/Foundation-of-DeepLearning-3/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0%E5%9F%BA%E7%A1%80/" rel="tag">深度学习基础</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/2023/06/15/Foundation-of-DeepLearning-2/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">深度学习_吴恩达_Part_2</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "0DieopImIy7vnuzj4jQ2wk6O-gzGzoHsz",
+    app_key: "j6eRiYtlDSl8eRXVN54blF25",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2015-2023
+        <i class="ri-heart-fill heart_icon"></i> wjh
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></span>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/ayer-side.svg" alt="Wang Junheng"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/Alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="/images/wechatpay.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-3.6.0.min.js"></script>
+ 
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+ 
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: ".tocbot",
+    contentSelector: ".article-entry",
+    headingSelector: "h1, h2, h3, h4, h5, h6",
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: "main",
+    positionFixedSelector: ".tocbot",
+    positionFixedClass: "is-position-fixed",
+    fixedSidebarOffset: "auto",
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+ <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script> 
+<!-- MathJax -->
+ <script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+      tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+  });
+
+  MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for(i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.6/unpacked/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+  var ayerConfig = {
+    mathjax: true,
+  };
+</script>
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+ 
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+ 
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+<!-- CodeCopy -->
+ 
+<link rel="stylesheet" href="/css/clipboard.css">
+ <script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+ 
+<!-- CanvasBackground -->
+
+<script>
+  if (window.mermaid) {
+    mermaid.initialize({ theme: "forest" });
+  }
+</script>
+
+
+    
+    
+
+  </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+</body>
+
+</html>
