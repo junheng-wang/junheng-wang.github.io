@@ -254,44 +254,69 @@ y_c(n) = \sum_{r=-\infty}^{\infty}y_l(n+rN)R_N(n)</script><p><strong>当$N\geq N
 <p><img src="https://pic.imgdb.cn/item/61fa12862ab3f51d91c36961.jpg" style="zoom:70%"></p>
 <h5 id="3-圆周共轭对称性"><a href="#3-圆周共轭对称性" class="headerlink" title="3. 圆周共轭对称性"></a>3. 圆周共轭对称性</h5><p>这里不讲证明(教材上都有)，重点讲怎么理解教材上让人眼花缭乱的公式。我们把“公式”翻译成“人话”。<br>首先说明，文中所说的N点长序列，都指的是自变量取值范围为$[0,N-1]$，除此之外的区间，序列值为0。<br>先看第一个。<br><strong>(1) 共轭序列的DFT</strong><br>时频域有这样一个基本对应关系——时域取共轭，对应频域自变量取负然后函数取共轭。具体到DFT呢？“自变量取负”也就是“反转”，而“DFT隐含着周期性”，所以这里的“反转”要加上“周期延拓，再取主值区间”，所以，公式及证明过程如下</p>
 <p><img src="https://pic.imgdb.cn/item/61fa135b2ab3f51d91c41e2a.jpg" style="zoom:70%"></p>
-<p><strong>时域取共轭，对应DFT是：先周期延拓，再反转，再取主值区间，最后取共扼。</strong>当然，第一步与第二步可以交换次序，取共轮可以放在任意步骤上。关键是理解这个操作用公式的三种描述方式(上图中画红线处)：<br>第①种：$X^<em>((-k))_N R_N(k)$，是最直观地展现上述过程的；<br>第②种：$X^</em>((N-k))_N R_N(k)$，可认为用其周期性(周期延拓得到的当然是以$N$为周期啦)，把$-k$换成$N-k$；<br>第③种：去掉了双括号，也去掉了$R_N(k)$，好像看不出“周期延拓”和“取主值区间”的操作了。大家会心存疑虑，这个等号成立吗?<br>我们用下图的例子来说明一下这个等号成立，为了画图的方便，我们用函数值为实数的情况，图中是以$n$为自变量，换作$k$当然也是一样的。</p>
+<p><strong>时域取共轭，对应DFT是：先周期延拓，再反转，再取主值区间，最后取共扼。</strong>当然，第一步与第二步可以交换次序，取共轮可以放在任意步骤上。关键是理解这个操作用公式的三种描述方式(上图中画红线处)：</p>
+<ul>
+<li>第①种：$X^*((-k))_N R_N(k)$，是最直观地展现上述过程的；</li>
+<li>第②种：$X^*((N-k))_N R_N(k)$，可认为用其周期性(周期延拓得到的当然是以$N$为周期啦)，把$-k$换成$N-k$；</li>
+<li>第③种：去掉了双括号，也去掉了$R_N(k)$，好像看不出“周期延拓”和“取主值区间”的操作了。大家会心存疑虑，这个等号成立吗?</li>
+</ul>
+<p>我们用下图的例子来说明一下这个等号成立，为了画图的方便，我们用函数值为实数的情况，图中是以$n$为自变量，换作$k$当然也是一样的。</p>
 <p><img src="https://pic.imgdb.cn/item/61fa223c2ab3f51d91d25487.jpg"></p>
-<p>$x(N-n)$可以看作简写形式，优点在于形式简洁明了，缺点在于掩盖了周期延拓再取主值的过程。用这种简写形式，要注意一点，$N$点长序列$x(n)$，$n$的取值范围为$0&lt;n&lt;N-1$，也就是说，本来应该$x(N)=0$。但是，此处，当$n=0$时，$x(N-n)=x(N)$，不能认为$x(N)=0$，而要认为$x(N)=x(0)$。也就是说，要把$x(n)$的这$N$个点，认为是周期序列的主值区间，那么$x(N)$就是下一个周期的第一个点，所以$x(N)=x(0)$。<br>用这种简写形式来描述这个性质，就是：时域取共轭，对应的DFT，相当于把序号$k$与序号$N-k$做一个互换，然后取共轭。<br>下面，看这个性质的两个推论。</p>
+<p>$x(N-n)$可以看作简写形式，优点在于形式简洁明了，缺点在于掩盖了周期延拓再取主值的过程。用这种简写形式，要注意一点，$N$点长序列$x(n)$，$n$的取值范围为$0&lt;n&lt;N-1$，也即本应该$x(N)=0$，但此处当$n=0$时，$x(N-n)=x(N)$，不能认为$x(N)=0$，而要认为$x(N)=x(0)$。也就是说，要把$x(n)$的这$N$个点，认为是周期序列的主值区间，那么$x(N)$就是下一个周期的第一个点，所以$x(N)=x(0)$。</p>
+<p>用这种简写形式来描述这个性质，就是：时域取共轭，对应的DFT，相当于把序号$k$与序号$N-k$做一个互换，然后取共轭。</p>
+<p>下面看这个性质的两个推论：</p>
+<p><strong>第一个推论：实序列的DFT是圆周共轭对称序列。</strong></p>
 <ul>
-<li><p><strong>第一个推论：实序列的DFT是圆周共轭对称序列。</strong></p>
-<ul>
-<li>对于实序列$x(n)$，其DFT即$X(k)$满足<script type="math/tex; mode=display">
+<li>对于实序列$x(n)$，其DFT即$X(k)$满足：<script type="math/tex; mode=display">
 X(k) = X^*(N-k)_NR_N(k) = X^*(N-k)</script><font color="red"><strong>实序列的DFT $X(k)$是圆周共轭对称序列</strong></font>。即：实部圆周偶对称，虚部圆周奇对称；模圆周偶对称，相角圆周奇对称。</li>
 </ul>
 <p>“圆周共轭对称”是个什么鬼？我们按照以下几步来解释一下：</p>
-<p>第一步：从“偶对称、奇对称”到“共轭对称/共轭反对称”</p>
-<p>​    偶对称/奇对称地球人都知道吧。共轭对称/反对称就不是地球人都知道了，大学生才知道。</p>
-<p>​    对于实函数$x(n)$，如果$x(-n)=x(n)$，称之为偶对称，$x(-n)=-x(n)$称之为奇对称。</p>
-<p>​    扩展到复函数$x(n)$，如果$x^<em>(-n)=x(n)$，称之为共轭对称，$x^</em>(-n)=-x(n)$称之为共轭反对称。</p>
-<p>第二步：从“共轭对称”到“圆周共轭对称”</p>
-<p>​    圆周共轭对称的定义：对于$N$点长序列$x(n)$，如果$x(n)=x((N-n))_NR_N(n)$，或者用简写形式：$x(n)=x(N-n)$，那么称之为“圆周共轭对称”。<br>可以理解为：把$x(n)$放在一个圆周的$N$个等分点上，或者说把横轴掰弯成一个圆($n=N-1$与原点重合)，则这$N$个序列值关于原点对称，或者说关于$\dfrac{N}{2}$也对称，如下图所示。</p>
+<ul>
+<li><p>第一步：从“偶对称、奇对称”到“共轭对称/共轭反对称”</p>
+<p>偶对称/奇对称地球人都知道吧。共轭对称/反对称就不是地球人都知道了，大学生才知道。</p>
+<p>对于实函数$x(n)$，如果$x(-n)=x(n)$，称之为偶对称，$x(-n)=-x(n)$称之为奇对称。</p>
+<p>扩展到复函数$x(n)$，如果$x^*(-n)=x(n)$，称之为共轭对称，与之相对应的还有共轭反对称。</p>
+</li>
+<li><p>第二步：从“共轭对称”到“圆周共轭对称”</p>
+<p>圆周共轭对称定义：对于$N$点长序列$x(n)$，若$x(n)=x((N-n))_NR_N(n)$，或者用简写形式：$x(n)=x(N-n)$，那么称之为“圆周共轭对称”。</p>
+<p>可以理解为：把$x(n)$放在一个圆周的$N$个等分点上，或者说把横轴掰弯成一个圆($n=N-1$与原点重合)，则这$N$个序列值关于原点对称，或者说关于$\dfrac{N}{2}$也对称，如下图所示。</p>
+</li>
+</ul>
 <p><img src="https://pic.imgdb.cn/item/61fa27d02ab3f51d91d78d3a.jpg" style="zoom:70%"></p>
 <p>我们前面求解过的例题：5点矩形脉冲的DFT，如下图，也体现出圆周偶对称的特点。</p>
 <p><img src="https://pic.imgdb.cn/item/61fa28242ab3f51d91d7e051.jpg" style="zoom:70%"></p>
-</li>
-<li><p><strong>第二个推论：实部/虚部与圆周共轭对称/反对称分量的关系</strong><br>首先解释一下什么叫圆周共轭对称分量和圆周共轭反对称分量。需要经过以下几步循序渐进的理解。<br>第一步：实函数可以分解为偶分量+奇分量</p>
+<p><strong>第二个推论：实部/虚部与圆周共轭对称/反对称分量的关系</strong></p>
+<p>首先解释一下什么叫圆周共轭对称分量和圆周共轭反对称分量。需要经过以下几步循序渐进的理解。</p>
+<ul>
+<li>第一步：实函数可以分解为偶分量+奇分量</li>
+</ul>
 <script type="math/tex; mode=display">
-x(n) = x_e(n)+x_o(n)</script><p>其中：偶分量——$x_e = \dfrac{x(n)+x(-n)}{2}$，奇分量——$x_o = \dfrac{x(n)-x(-n)}{2}$</p>
-<p>第二步：从“偶分量/奇分量”到复函数可以分解为“共轭对称分量+共轭反对称分量”<br>把上式中的$x(-n)$改为$x^*(-n)$即可</p>
+x(n) = x_e(n)+x_o(n)</script><p>其中：偶分量 —— $x_e = \dfrac{x(n)+x(-n)}{2}$，奇分量 —— $x_o = \dfrac{x(n)-x(-n)}{2}$</p>
+<ul>
+<li>第二步：从“偶分量/奇分量”到复函数可以分解为“共轭对称分量+共轭反对称分量”，把上式中的$x(-n)$改为$x^*(-n)$即可</li>
+</ul>
 <script type="math/tex; mode=display">
-x(n) = x_e(n)+x_o(n)</script><p>其中：共轭对称分量——$x_e(n) = \dfrac{x(n)+x^<em>(-n)}{2}$，共轭反对称分量——$x_o = \dfrac{x(n)-x^</em>(-n)}{2}$</p>
-<p>以上两式，无论是对无限长序列，还是有限长序列，都是适用的。如果$x(n)$为$N$点长，并且$0&lt;n&lt;N-1$，那么$x_e(n)$和$x_o(n)$是$2N-1$点长，并且$-(N-1) \leq n \leq N-1$。<br>第三步：改造成适合DFT的<br>凡是涉及到自变量取负(也就是反转)的，都加上“周期延拓，再取主值区间”的操作。也就是把上式中的$x(-n)$改为$x((N-n))_NR_N(n)$，用简写形式表示就是$x(N-n)$  </p>
+x(n) = x_e(n)+x_o(n)</script><p>其中：共轭对称分量 —— $x_e(n) = \dfrac{x(n)+\overline{x(-n)}}{2}$，共轭反对称分量——$x_o = \dfrac{x(n)-\overline {x^*(-n)}}{2}$</p>
+<p>以上两式，无论是对无限长序列，还是有限长序列，都是适用的。如果$x(n)$为$N$点长，并且$0&lt;n&lt;N-1$，那么$x_e(n)$和$x_o(n)$是$2N-1$点长，并且$-(N-1) \leq n \leq N-1$。</p>
+<ul>
+<li>第三步：改造成适合DFT的。凡是涉及到自变量取负(也就是反转)的，都加上“周期延拓，再取主值区间”的操作。也就是把上式中的$x(-n)$改为$x((N-n))_NR_N(n)$，用简写形式表示就是$x(N-n)$。</li>
+</ul>
 <p>因此，得到圆周共轭对称分量和圆周共轭反对称分量的定义：</p>
 <p>$N$点长的序列$x(n)$，可以分解为<font color="red">圆周共轭对称分量+圆周共轭反对称分量</font></p>
 <script type="math/tex; mode=display">
-x(n) = x_{ep}(n) + x_{op}(n)</script><p>其中：圆周共轭对称分量——$x_{ep}(n) = \dfrac{x(n)+x^<em>(N-n)}{2}$，圆周共轭反对称分量——$x_{op}(n) = \dfrac{x(n)-x^</em>(N-n)}{2}$</p>
-<p>注意，前提是$x(n)$为$N$点长序列，并且n的范围是$0≤n≤N-1$，圆周共轭对称/反对称分量的长度仍是$N$，$n$的范围也不变。而且如前所述，$n=0$时，$x(N-0)=x(N)=x(0)$。<br>上面，是以$x(n)$为例，同样，对于DFT $X(k)$，也可以定义圆周共扼对称/反对称分量，不再赘述。<br>解释完这些，我们的核心公式就出来啦（证明过程省略，直接看结论)。<br>序列$x(n)$及其DFT的实部/虚部与圆周共轭对称/反对称分量之间的关系，见下图：</p>
+x(n) = x_{ep}(n) + x_{op}(n)</script><p>其中：圆周共轭对称分量——$x_{ep}(n) = \dfrac{x(n)+\overline{x(N-n)}}{2}$，圆周共轭反对称分量——$x_{op}(n) = \dfrac{x(n)-\overline{x(N-n)}}{2}$</p>
+<blockquote>
+<p>注意，前提是$x(n)$为$N$点长序列，并且n的范围是$0≤n≤N-1$，圆周共轭对称/反对称分量的长度仍是$N$，$n$的范围也不变。而且如前所述，$n=0$时，$x(N-0)=x(N)=x(0)$。</p>
+</blockquote>
+<p>上面，是以$x(n)$为例，同样，对于DFT $X(k)$，也可以定义圆周共扼对称/反对称分量，不再赘述。</p>
+<p>解释完这些，我们的核心公式就出来啦（证明过程省略，直接看结论)。序列$x(n)$及其DFT的实部/虚部与圆周共轭对称/反对称分量之间的关系，见下图：</p>
 <p><img src="https://pic.imgdb.cn/item/61fa317c2ab3f51d91e0bda3.jpg" style="zoom:70%"></p>
-<p>(此处省略若干公式)<br>翻译成人话(绕口令)就是:<br>序列实部的DFT是序列DFT的共轭对称分量<br>序列虚部×j的DFT是序列DFT的共轭反对称分量<br>序列共轭对称分量的DFT是序列DFT的实部<br>序列共轭反对称分量的DFT是序列DFT的虚部巧j<br>是不是像绕口令，但总比公式强多了。<br>这—切，意义何在?<br><strong>第一，从图形上可以淋漓尽致地体现DFT隐含的周期性。</strong><br><strong>第二，为DFT的简化运算提供了思路。</strong></p>
-</li>
-</ul>
-<h5 id="4-Parseval定理"><a href="#4-Parseval定理" class="headerlink" title="4. Parseval定理"></a>4. Parseval定理</h5><p>有限长序列的能量：$\sum\limits_{n=0}^{N-1}|x(n)|^{2}=\dfrac{1}{N} \sum\limits_{k=0}^{N-1}|X(k)|^{2}$</p>
-<h4 id="五-频域抽样"><a href="#五-频域抽样" class="headerlink" title="(五) 频域抽样"></a>(五) 频域抽样</h4><p>实际上，<font color="red"><strong>DFT就是频域抽样</strong></font>。包括三个问题，这三个问题环环相扣、层层推进。</p>
+<p>(此处省略若干公式)，翻译成人话(绕口令)就是：<br>序列实部的DFT是序列DFT的共轭对称分量<br>序列虚部×j的DFT是序列DFT的共轭反对称分量<br>序列共轭对称分量的DFT是序列DFT的实部<br>序列共轭反对称分量的DFT是序列DFT的虚部巧j</p>
+<p>是不是像绕口令，但总比公式强多了。这—切，意义何在?</p>
+<p><strong>第一，从图形上可以淋漓尽致地体现DFT隐含的周期性。</strong><br><strong>第二，为DFT的简化运算提供了思路。</strong></p>
+<h5 id="4-Parseval定理"><a href="#4-Parseval定理" class="headerlink" title="4. Parseval定理"></a>4. Parseval定理</h5><p>有限长序列的能量：</p>
+<script type="math/tex; mode=display">
+\sum\limits_{n=0}^{N-1}|x(n)|^{2}=\dfrac{1}{N} \sum\limits_{k=0}^{N-1}|X(k)|^{2}</script><h4 id="五-频域抽样"><a href="#五-频域抽样" class="headerlink" title="(五) 频域抽样"></a>(五) 频域抽样</h4><p>实际上，<font color="red"><strong>DFT就是频域抽样</strong></font>。包括三个问题，这三个问题环环相扣、层层推进。</p>
 <h5 id="1-DFT与DTFT、z变换的关系"><a href="#1-DFT与DTFT、z变换的关系" class="headerlink" title="1. DFT与DTFT、z变换的关系"></a>1. DFT与DTFT、z变换的关系</h5><p>先从公式上看三个变换的关系，再结合z平面的单位圆的概念，从图形上理解。如下图:</p>
 <p><img src="https://pic.imgdb.cn/item/61fa339a2ab3f51d91e2d239.jpg" style="zoom:70%"></p>
 <p><img src="https://pic.imgdb.cn/item/61fa33b52ab3f51d91e2eb74.jpg" style="zoom:70%"></p>
@@ -304,10 +329,11 @@ x(n) = x_{ep}(n) + x_{op}(n)</script><p>其中：圆周共轭对称分量——$
 <p>对于$M$点长的序列$x(n)$，频域抽样不失真的条件是：<font color="red"> <strong>一个周期内的频域抽样点数$N \geq M$</strong></font> ，此时有：</p>
 <script type="math/tex; mode=display">
 x_N(n) = \sum_{r = -\infty}^{\infty}x(n+rN)R_N(n) = x(n)</script><p>即满足该条件时，$N$个频率抽样值$X(k)$（即$x(n)$的$N$点DFT)能够完全代表$x(e^{j\omega})$及$X(z)$。</p>
-<p>问题又来了，怎么表示?这就是第三个问题：频域的插值恢复。</p>
+<p>问题又来了，怎么表示？这就是第三个问题：频域的插值恢复。</p>
 <h5 id="3-频域的插值恢复"><a href="#3-频域的插值恢复" class="headerlink" title="3. 频域的插值恢复"></a>3. 频域的插值恢复</h5><p>与时域抽样的恢复完全相同的思路，用离散的样本值乘以一个插值函数，得到一个连续的函数，只不过这里的插值函数是关于$\omega$或$z$的函数。下面的任务就是找这个函数$\varphi(w)$或$\varphi(z)$。</p>
 <p><img src="https://pic.imgdb.cn/item/61fa365f2ab3f51d91e58cc6.jpg" style="zoom:70%"></p>
-<p>z变换的形式更为简洁，因此首先解决由$X(k)$得到$X(z)$的问题。<br>以下推导过程的大致思路：把z变换定义式中的$x(n)$用IDFT的公式替换，然后交换求和次序，再利用旋转因子的性质，即可得到。如下图：</p>
+<p>z变换的形式更为简洁，因此首先解决由$X(k)$得到$X(z)$的问题。</p>
+<p>以下推导过程的大致思路：把z变换定义式中的$x(n)$用IDFT的公式替换，然后交换求和次序，再利用旋转因子的性质，即可得到。如下图：</p>
 <p><img src="https://pic.imgdb.cn/item/61fa36922ab3f51d91e5bf47.jpg" style="zoom:70%"></p>
 <p>解决了由$X(k)$得到$X(z)$的问题，将$z$换成$e^{j\omega}$，自然就得到了$X(e^{j\omega})$。如下图：</p>
 <p><img src="https://pic.imgdb.cn/item/61fa37172ab3f51d91e642e8.jpg" style="zoom:70%"></p>
@@ -368,19 +394,22 @@ x_N(n) = \sum_{r = -\infty}^{\infty}x(n+rN)R_N(n) = x(n)</script><p>即满足该
 <p>以1024点为例，复数乘法的次数100万次之多。</p>
 <p>1965年，库利(J.w.Cooley)和图基(J.W.Tukey)在《Mathmatics of Computation》上发表了《AnAlgorithm for the Machine Calculation of Complex Fourier Series》，提出一种DFT的快速算法，后人称为快速傅里叶变换(Fast Fourier Transform ——FFT)。</p>
 <h5 id="2-改进DFT计算效率的基本途径"><a href="#2-改进DFT计算效率的基本途径" class="headerlink" title="2. 改进DFT计算效率的基本途径"></a>2. 改进DFT计算效率的基本途径</h5><p><img src="https://pic.imgdb.cn/item/61fa3b0a2ab3f51d91ea2f7a.jpg" style="zoom:70%"></p>
-<p>$N$点DFT，直接计算，需要$N$的平方次乘法；分成2个$\dfrac{N}{2}$点DFT分别计算，乘法的次数减少了一半；分成4个$\dfrac{N}{4}$点DFT，乘法的次数又减少了一半。如果能够继续下去，前景很让人向往。<br>为了能够一直分下去，我们限定$N$为2的整数次幂，即：$N=2^M$，称为<strong>基2FFT</strong>。由此可见，<font color="red"><strong>FFT的基本思想是：把长序列分成几个较短的序列</strong></font>。<br>但怎么分?不能随便分，基本原则：要保证这几个短序列的DFT组合起来后能够很方便地构成原来长序列的DFT。<br>所以，DFT快速算法要解决的两个核心问题是：<strong>怎么分？怎么合？</strong><br>根据分与合的方式不同，有两种基2FFT算法，分别称为:</p>
+<p>$N$点DFT，直接计算，需要$N$的平方次乘法；分成2个$\dfrac{N}{2}$点DFT分别计算，乘法的次数减少了一半；分成4个$\dfrac{N}{4}$点DFT，乘法的次数又减少了一半。如果能够继续下去，前景很让人向往。</p>
+<p>为了能够一直分下去，我们限定$N$为2的整数次幂，即：$N=2^M$，称为<strong>基2FFT</strong>。由此可见，<font color="red"><strong>FFT的基本思想是：把长序列分成几个较短的序列</strong></font>。</p>
+<p>但怎么分？不能随便分，基本原则：要保证这几个短序列的DFT组合起来后能够很方便地构成原来长序列的DFT。所以DFT快速算法要解决的两个核心问题是：<strong>怎么分？怎么合？</strong></p>
+<p>根据分与合的方式不同，有两种基2FFT算法，分别称为:</p>
 <ul>
 <li>按时间抽取的FFT算法———Decimation-in-Time，简称DIT-FFT。</li>
 <li>按频率抽取的FFT算法———Decimation-in-Frequency，简称DIF-FFT。</li>
 </ul>
 <p>下面我们分别来归纳总结两种基2FFT算法。</p>
-<h4 id="二-两种基2FFT算法"><a href="#二-两种基2FFT算法" class="headerlink" title="(二) 两种基2FFT算法"></a>(二) 两种基2FFT算法</h4><h5 id="1-按时间抽取DIT-FFT算法"><a href="#1-按时间抽取DIT-FFT算法" class="headerlink" title="1. 按时间抽取DIT-FFT算法"></a>1. 按时间抽取DIT-FFT算法</h5><p>以第一次分解($N$点分为2个$\dfrac{N}{2}$点)为例来说明算法原理。<br>首先解决怎么分的问题。</p>
+<h4 id="二-两种基2FFT算法"><a href="#二-两种基2FFT算法" class="headerlink" title="(二) 两种基2FFT算法"></a>(二) 两种基2FFT算法</h4><h5 id="1-按时间抽取DIT-FFT算法"><a href="#1-按时间抽取DIT-FFT算法" class="headerlink" title="1. 按时间抽取DIT-FFT算法"></a>1. 按时间抽取DIT-FFT算法</h5><p>以第一次分解($N$点分为2个$\dfrac{N}{2}$点)为例来说明算法原理，首先解决怎么分的问题。</p>
 <p><img src="https://pic.imgdb.cn/item/61fa3c602ab3f51d91eb7188.jpg" style="zoom:70%"></p>
 <p>通俗地说，就是大家列队、报数（从0开始），报偶数的一组，奇数的一组。</p>
 <p><img src="https://pic.imgdb.cn/item/61fa3c902ab3f51d91eba2c8.jpg" style="zoom:70%"></p>
-<p>然后解决怎么合的问题。<br>我们略过看似艰苦卓绝实际很简单的推导过程，直接上结论：</p>
+<p>然后解决怎么合的问题，我们略过看似艰苦卓绝实际很简单的推导过程，直接上结论：</p>
 <p><img src="https://pic.imgdb.cn/item/61fa3cbd2ab3f51d91ebcde6.jpg" style="zoom:70%"></p>
-<p>公式不好看，有人画了一幅图，并且起了个好听的名字：<strong>蝶形运算符号</strong>。<br>下面的动图演示了蝶形运算的过程:</p>
+<p>公式不好看，有人画了一幅图，并且起了个好听的名字：<strong>蝶形运算符号</strong>。下面的动图演示了蝶形运算的过程:</p>
 <p><img src="https://pic.imgdb.cn/item/61fa3fae2ab3f51d91ee90ff.gif"></p>
 <p>以8点长序列为例，我们来看分解为2个4点长DFT，是如何通过蝶形运算合成8点DFT的： </p>
 <p><img src="https://pic.imgdb.cn/item/61fa3ff22ab3f51d91eecd84.gif"></p>

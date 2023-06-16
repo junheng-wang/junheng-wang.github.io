@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">9k</span>
+            <span class="post-count">8.9k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">34 分钟</span>
+            <span class="post-count">33 分钟</span>
         </span>
     </span>
 </div>
@@ -141,10 +141,10 @@
 <p>3）在运用频域采样法设计IIR时，我们基于的AD/DA转换就是上述的$ω=\dfrac{\Omega}{f_s}$(双线性变化法则不是)。上述说到模拟角频率$\Omega$是没有周期性可言的，但是由于采样率的限制(离散化)，导致说数字角频率$\omega$具有周期性。从映射角度理解，数字角频率$[-π,π]$在模拟角频率上的映射是一对多的。采样间隔$T=\dfrac{1}{f_s}$，在给定$T$时，数字角频率$\omega$受到的影响来源于以$\dfrac{2π}{T}$为单位的模拟角频率$Ω = \dfrac{ω}{T}$）。为了使数字频域不发生混叠，我们需要将模拟角频率$\Omega$框在$[-\dfrac{π}{T}, \dfrac{π}{T}]$，这在设计高通/带阻数字滤波器时是复杂的，如下图展示的用频域采样法设计高通FIR时所需要增加的裁剪步骤。 </p>
 <h5 id="2-如何理解数字频率的归一化？"><a href="#2-如何理解数字频率的归一化？" class="headerlink" title="2-如何理解数字频率的归一化？"></a>2-如何理解数字频率的归一化？</h5><p>频率的归一化与幅度的归一化有不同的出发点，主要是在数字信号处理中，针对采样频率进行归一化，归一化后就可以在数字角频率$0 \sim 2\pi$下进行分析和讨论，这样做的原因有两点：一是类似于最大值的归一化(此时的$2\pi$对应采样率)，二是采样后的频谱是以$2\pi$为周期的。 </p>
 <p>数字角频率是模拟角频率对采样频率的归一化，很好理解，本来模拟信号一秒钟变化5弧度，抽样率为$5 \mathrm{Hz}$，采样后信号变成每抽样点变化1弧度，这里“归一”成“抽样点”了或者说“基准”变成“抽样点”了。 </p>
-<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p>[1]数字角频率ω与模拟角频率Ω的理解 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53664104">https://zhuanlan.zhihu.com/p/53664104</a></p>
-<p>[2]模拟角频率和数字角频率的关系 <a target="_blank" rel="noopener" href="https://blog.csdn.net/jyfu2_12/article/details/78650858">https://blog.csdn.net/jyfu2_12/article/details/78650858</a> </p>
-<p>[3]如果理解数字信号处理中傅里叶变换的周期为2pi？<a target="_blank" rel="noopener" href="http://www.360doc.com/content/18/1008/20/38894361_793066968.shtml">http://www.360doc.com/content/18/1008/20/38894361_793066968.shtml</a></p>
-<p>[4]所有的傅里叶变换之后的频域信号周期都是2π吗？ - 尔尔的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/65441510/answer/298234811">https://www.zhihu.com/question/65441510/answer/298234811</a> </p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><p>参考链接1.1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/53664104">数字角频率ω与模拟角频率Ω的理解 - 知乎</a></p>
+<p>参考链接1.2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jyfu2_12/article/details/78650858">模拟角频率和数字角频率的关系 - CSDN</a></p>
+<p>参考链接1.3：<a target="_blank" rel="noopener" href="http://www.360doc.com/content/18/1008/20/38894361_793066968.shtml">如果理解数字信号处理中傅里叶变换的周期为2pi？- 360文档</a></p>
+<p>参考链接1.4：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/65441510/answer/298234811">所有的傅里叶变换之后的频域信号周期都是2π吗？ - 尔尔的回答 - 知乎</a></p>
 <hr>
 <h3 id="二、傅里叶级数-傅里叶变换推导"><a href="#二、傅里叶级数-傅里叶变换推导" class="headerlink" title="二、傅里叶级数-傅里叶变换推导"></a>二、傅里叶级数-傅里叶变换推导</h3><h4 id="1-傅里叶级数"><a href="#1-傅里叶级数" class="headerlink" title="1. 傅里叶级数"></a>1. 傅里叶级数</h4><h5 id="1-傅里叶级数的普通形式"><a href="#1-傅里叶级数的普通形式" class="headerlink" title="(1) 傅里叶级数的普通形式"></a>(1) 傅里叶级数的普通形式</h5><p>设信号的周期为$T_1$，对应的$\omega_1 = \dfrac{2\pi}{T_1}$</p>
 <p>周期函数可以分解为三角函数系的组合：</p>
@@ -164,8 +164,8 @@ C_n = \frac{1}{T}\int_0^Tf(t)e^{-jn\omega_0 t}dt</script><p>其中：$\omega_0 =
 <script type="math/tex; mode=display">
 f(t) = \frac{1}{2\pi}\int_{-\infty}^{\infty} F(\omega)e^{j\omega t}d\omega</script><p>其中，$F(\omega)$就是$f(t)$的傅里叶变换：</p>
 <script type="math/tex; mode=display">
-F(\omega) = \int_{-\infty}^{\infty}f(t)e^{-j\omega t}dt</script><h4 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h4><p>[1]纯干货数学推导_傅里叶级数与傅里叶变换 <a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Et411R78v?share_source=copy_web">https://www.bilibili.com/video/BV1Et411R78v?share_source=copy_web</a></p>
-<p>[2]傅里叶变换系列学习（1）——从线性变换说起 - 技术派到了中年的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96521358">https://zhuanlan.zhihu.com/p/96521358</a> </p>
+F(\omega) = \int_{-\infty}^{\infty}f(t)e^{-j\omega t}dt</script><h4 id="参考链接-1"><a href="#参考链接-1" class="headerlink" title="参考链接"></a>参考链接</h4><p>参考链接2.1：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Et411R78v?share_source=copy_web">纯干货数学推导_傅里叶级数与傅里叶变换 - Bilibili</a></p>
+<p>参考链接2.2：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/96521358">傅里叶变换系列学习（1）——从线性变换说起 - 技术派到了中年的文章 - 知乎</a></p>
 <hr>
 <h3 id="三、拉普拉斯变换、Z变换"><a href="#三、拉普拉斯变换、Z变换" class="headerlink" title="三、拉普拉斯变换、Z变换"></a>三、拉普拉斯变换、Z变换</h3><h4 id="1-拉普拉斯变换LT"><a href="#1-拉普拉斯变换LT" class="headerlink" title="1. 拉普拉斯变换LT"></a>1. 拉普拉斯变换LT</h4><p>不是所有的信号都能从时域经过傅里叶变换到频域。必须是满足<strong>狄利赫里条件</strong>的信号才能进行傅里叶变换。</p>
 <ul>
@@ -183,8 +183,8 @@ f(t) = \frac{1}{2\pi} \int_{-\infty}^{\infty}F(\omega)e^{(\sigma+j\omega) t}d\om
 X(z) = \sum_{n = -\infty}^{\infty}x(n)z^{-n} = \sum_{n = -\infty}^{\infty}x(n)e^{-\sigma n}e^{-j\omega n}</script><script type="math/tex; mode=display">
 x(n) = \frac{1}{2\pi j} \oint X(z)z^{n-1}dz</script><p>和拉普拉斯变换一样，z变换也有<strong>收敛域</strong>的概念。 拉普拉斯$s = \sigma +j \omega$ 对应的是直角坐标是一个平面。 Z变换$z = e^{\sigma + j\omega}$对应的是一个极坐标系是一个圆。 </p>
 <p><img src="https://pic2.zhimg.com/80/v2-b0771ba027e7d23fed45975f267bb407_720w.jpg?source=1940ef5c" alt> </p>
-<h4 id="参考链接-2"><a href="#参考链接-2" class="headerlink" title="参考链接"></a>参考链接</h4><p>[1]傅里叶变换、拉普拉斯变换、Z 变换的联系是什么？为什么要进行这些变换？ - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22085329">https://www.zhihu.com/question/22085329</a> </p>
-<p>[2] 离散时间信号处理学习笔记 - 8. z逆变换 - 博客园 - TaigaComplex <a target="_blank" rel="noopener" href="https://www.cnblogs.com/taigacon/p/8313482.html">https://www.cnblogs.com/taigacon/p/8313482.html</a></p>
+<h4 id="参考链接-2"><a href="#参考链接-2" class="headerlink" title="参考链接"></a>参考链接</h4><p>参考链接3.1：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/22085329">傅里叶变换、拉普拉斯变换、Z 变换的联系是什么？为什么要进行这些变换？ - 知乎</a></p>
+<p>参考链接3.2：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/taigacon/p/8313482.html">离散时间信号处理学习笔记 - 8. z逆变换 - 博客园 - TaigaComplex</a></p>
 <hr>
 <h3 id="四-、DFS、DTFT、DFT、FFT"><a href="#四-、DFS、DTFT、DFT、FFT" class="headerlink" title="四 、DFS、DTFT、DFT、FFT"></a>四 、DFS、DTFT、DFT、FFT</h3><p>根据前面的学习，对一些信号采样然后进行DTFT之后，得到的信号在频域上还是连续的（也就是对于我们归一化之后的角频率ω还是连续的，是以2π为周期的，以π为对称中心），这样对于计算机来说还是没有办法处理的，所以再在频域内对其采样，采样之后的得到的就是DFT。<br>DFS是对于时域是离散的周期信号来说的，DFS与DFT的区别就是相对于我们之前时域连续信号中的傅里叶级数与傅里叶变换。</p>
 <div class="table-container">
@@ -251,12 +251,12 @@ X(e^{j\omega})|_{\omega = \frac{2\pi k}{N}}=\sum_{ n= 0}^{N-1}x[n]e^{\frac{j2\pi
 <p>在许多书上，离散时间傅里叶变换都是由是连续信号采样得到的离散信号而得到，这样来介绍，由于有采样频率等的影响，这样会对连续、离散信号产生一定的混淆，个人认为，离散傅里叶变换时离散时间信号的频域特性，并不一定非得和采样、连续信号等产生关系，离散信号可以是由连续信号采样，归一化产生，也可以是其本身就是离散的，如年月日，像素坐标等，如果离散信号是由连续信号采样得到的，那么，当用给定的采样频率，对连续信号采样，归一化后，那么就产生了一个新的离散信号，至于其傅里叶变换和原来的傅里叶变换有何关系，这就是另外一个话题了。</p>
 <p>傅里叶变换的核心思想便是能让任意一个信号都可以由一种基本信号来合成，这个基本信号对于连续时间信号便是：$\exp(j\omega t)$，离散时间信号便是：$\exp(j\omega n)$。</p>
 <p>对于DTFT的定义式，可以发现其积分是由$[-\pi, \pi]$，而对于FT的定义式积分是从$(-\infty, \infty)$，<strong><font color="red">其根本原因就是——基本信号存在差异</font></strong>，对于$\exp(j\omega t)$，由于$t$可以取任意值因此其不存在周期，当$\omega$取任意值，$\exp(j\omega t)$都会变为一个独一无二的信号，故FT需要从$(-\infty, \infty)$，让每一个$\exp(j\omega t)$都能成为被合成信号的成分（当然这还得取决于前面系数，即傅里叶系数），而对于DTFT而言，由于其基本信号$\exp(j\omega n)$中$n$只能取正整数故周期为$2\pi$，故当要合成新信号时，只需要取任何一个$2\pi$区段就可获得合成信号的所有成分，故上式取$[-\pi, \pi]$即可，当然，这样也很容易得出$F(\exp(jw))$也是周期的。<strong><font color="red">[6]</font></strong></p>
-<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p>[1]数字信号处理（DTFT与DFT、DFS的详细讲解以及FFT算法）<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554964/article/details/108025590">https://blog.csdn.net/qq_44554964/article/details/108025590</a></p>
-<p>[2]傅里叶变换系列学习（3)——FS,FT,DTFT,DFS,DFT,FFT - 技术派到了中年的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/97835957">https://zhuanlan.zhihu.com/p/97835957</a> </p>
-<p>[3]一幅图弄清DFT与DTFT,DFS的关系 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/BitArt/archive/2012/11/24/2786390.html">https://www.cnblogs.com/BitArt/archive/2012/11/24/2786390.html</a></p>
-<p>[4]五种傅里叶变换的分析（FT、FS、DTFT、DFT、DFS）<a target="_blank" rel="noopener" href="https://www.codenong.com/cs106440896">https://www.codenong.com/cs106440896</a></p>
-<p>[5]关于对傅里叶变换的一些理解 <a target="_blank" rel="noopener" href="https://blog.51cto.com/rainlee/1629264">https://blog.51cto.com/rainlee/1629264</a></p>
-<p>[6]数字信号处理系列串讲第6篇（离散信号的频域分析之三）——离散傅里叶变换DFT（1）<a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808337.shtml">http://www.360doc.com/content/19/0611/18/908538_841808337.shtml</a></p>
+<h4 id="参考链接："><a href="#参考链接：" class="headerlink" title="参考链接："></a>参考链接：</h4><p>参考链接4.1：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_44554964/article/details/108025590">数字信号处理（DTFT与DFT、DFS的详细讲解以及FFT算法）- CSDN</a></p>
+<p>参考链接4.2：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/97835957">傅里叶变换系列学习（3)——FS,FT,DTFT,DFS,DFT,FFT - 技术派到了中年的文章 - 知乎</a></p>
+<p>参考链接4.3：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/BitArt/archive/2012/11/24/2786390.html">一幅图弄清DFT与DTFT,DFS的关系 - 博客园</a></p>
+<p>参考链接4.4：<a target="_blank" rel="noopener" href="https://www.codenong.com/cs106440896">五种傅里叶变换的分析（FT、FS、DTFT、DFT、DFS）</a></p>
+<p>参考链接4.5：<a target="_blank" rel="noopener" href="https://blog.51cto.com/rainlee/1629264">关于对傅里叶变换的一些理解 - 51博客</a></p>
+<p>参考链接4.6：<a target="_blank" rel="noopener" href="http://www.360doc.com/content/19/0611/18/908538_841808337.shtml">数字信号处理系列串讲第6篇（离散信号的频域分析之三）——离散傅里叶变换DFT（1）- 360文档</a></p>
 <hr>
 <h3 id="五、采样频率、频率分辨率"><a href="#五、采样频率、频率分辨率" class="headerlink" title="五、采样频率、频率分辨率"></a>五、采样频率、频率分辨率</h3><h4 id="1-采样定理"><a href="#1-采样定理" class="headerlink" title="1. 采样定理"></a>1. 采样定理</h4><ul>
 <li>时域采样定理的一种表述方式是：当时间信号函数$f(t)$的最高频率分量为$f_M$时，$f(t)$的值可由一系列采样间隔$t_s \leq \dfrac{1}{2×f_M}$的采样值来确定，即采样点的重复频率$f ≥ 2×f_M$。时域采样定理是采样误差理论、随机变量采样理论和多变量采样理论的基础。  </li>
@@ -317,9 +317,9 @@ x = \cos(2\pi × 1000000t) + \cos(2\pi × 1050000t)</script><p>设采样频率�
 <p>[5]DFT中人为地补零加长序列对频谱的影响？ - 杨树下的狐狸的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/30312644/answer/47615752">https://www.zhihu.com/question/30312644/answer/47615752</a> </p>
 <hr>
 <h3 id="六、能量信号、功率信号"><a href="#六、能量信号、功率信号" class="headerlink" title="六、能量信号、功率信号"></a>六、能量信号、功率信号</h3><hr>
-<h3 id="七、信号的频谱，频谱密度，能量谱"><a href="#七、信号的频谱，频谱密度，能量谱" class="headerlink" title="七、信号的频谱，频谱密度，能量谱"></a>七、信号的频谱，频谱密度，能量谱</h3><h3 id="N、-其他问题"><a href="#N、-其他问题" class="headerlink" title="N、 其他问题"></a>N、 其他问题</h3><p><strong>如何理解奈奎斯特采样定理</strong></p>
-<p>[1]怎样理解Nyquist采样定理？ - 甜草莓的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28792456/answer/491794439">https://www.zhihu.com/question/28792456/answer/491794439</a> </p>
-<p>[2]怎样理解Nyquist采样定理？ - 吃货彪彪的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28792456/answer/2174692083">https://www.zhihu.com/question/28792456/answer/2174692083</a> </p>
+<h3 id="七、信号的频谱，频谱密度，能量谱"><a href="#七、信号的频谱，频谱密度，能量谱" class="headerlink" title="七、信号的频谱，频谱密度，能量谱"></a>七、信号的频谱，频谱密度，能量谱</h3><h3 id="八、-其他问题"><a href="#八、-其他问题" class="headerlink" title="八、 其他问题"></a>八、 其他问题</h3><p><strong>如何理解奈奎斯特采样定理</strong></p>
+<p>参考链接8.1：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28792456/answer/491794439">怎样理解Nyquist采样定理？ - 甜草莓的回答 - 知乎</a></p>
+<p>参考链接8.2：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28792456/answer/2174692083">怎样理解Nyquist采样定理？ - 吃货彪彪的回答 - 知乎</a></p>
 <p><strong>卷积与插值(内插)</strong></p>
 <p>在CFA去马赛克和图像旋转放大时都需要进行插值运算。在空间域内，<font color="red"><strong>插值是卷积计算</strong></font>。</p>
 <p>当已知数据点位于整数格点上时，插值函数h(x)应该有：h(0)=1;h(n)=0; n是非零整数。</p>
@@ -339,40 +339,34 @@ x = \cos(2\pi × 1000000t) + \cos(2\pi × 1050000t)</script><p>设采样频率�
 <p>4）sinc插值<br>sinc函数在频率域是一个矩形，看起来似乎最适合做内插。在+-1/2频点，矩形函数的值降低到1/2而非0，因此如果存在混叠则无法得到抑制。从实际来看，很难限制图像的带宽。因此使用sinc函数做插值在图像的边缘等地方会很敏感。另一方面，sinc函数做插值时收敛较慢，需要的采样点要多得多。在采样点较少时，在+-1/2频点会出现振荡，产生失真。</p>
 <p><img src="http://www.baas1995.org/digitalprocessing/interp/interp03.jpg" alt></p>
 <p>5）加窗sinc插值（选自<a target="_blank" rel="noopener" href="http://www.all-in-one.ee/~dersch/interpolator/interpolator.html）">http://www.all-in-one.ee/~dersch/interpolator/interpolator.html）</a> 将两个不等宽矩形脉冲做卷积，得到梯形脉冲。使用这个函数在频域做乘积，则图像中的高频分量受到较少的衰减，图像细节被保留，而超出采样带宽较多的分量被阻断，不会产生类似振铃的效应。 在空间域，插值函数为sinc(x)*sinc(x/w)，w是窗口宽度。与立方或线性插值相比，所需要的采样点多很多。 </p>
-<p>[1]数字图像处理（九）插值算法之二 <a target="_blank" rel="noopener" href="http://www.baas1995.org/digitalprocessing/interp/interp.htm">http://www.baas1995.org/digitalprocessing/interp/interp.htm</a></p>
-<p>[2]图像处理中的三次卷积插值(Cubic Convolution) <a target="_blank" rel="noopener" href="https://blog.csdn.net/shiyimin1/article/details/80141333">https://blog.csdn.net/shiyimin1/article/details/80141333</a></p>
-<p>[3]图像插值算法——双立方（三次）卷积插值 <a target="_blank" rel="noopener" href="https://blog.csdn.net/dx199771/article/details/111940754">https://blog.csdn.net/dx199771/article/details/111940754</a></p>
+<p>参考链接8.3：<a target="_blank" rel="noopener" href="http://www.baas1995.org/digitalprocessing/interp/interp.htm">数字图像处理（九）插值算法之二</a></p>
+<p>参考链接8.4：<a target="_blank" rel="noopener" href="https://blog.csdn.net/shiyimin1/article/details/80141333">图像处理中的三次卷积插值(Cubic Convolution) - CSDN</a></p>
+<p>参考链接8.5：<a target="_blank" rel="noopener" href="https://blog.csdn.net/dx199771/article/details/111940754">图像插值算法——双立方（三次）卷积插值 - CSDN</a></p>
 <p><strong>卷积与互相关函数的关系</strong></p>
-<p>[1]信号处理中的卷积、深度学习中的卷积和反卷积 - 初识CV的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366472797">https://zhuanlan.zhihu.com/p/366472797</a> </p>
-<p>[2]卷积(convolution)为什么叫「卷」积(「convolut」ion)？ - 初识CV的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/54677157/answer/1849389835">https://www.zhihu.com/question/54677157/answer/1849389835</a> </p>
+<p>参考链接8.6：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/366472797">信号处理中的卷积、深度学习中的卷积和反卷积 - 初识CV的文章 - 知乎</a></p>
+<p>参考链接8.7：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/54677157/answer/1849389835">卷积(convolution)为什么叫「卷」积(「convolut」ion)？ - 初识CV的回答 - 知乎</a></p>
 <p><strong>sinc函数是一组正交基？</strong></p>
-<p>[1]信号与系统（5）：采样定理和多分辨分析 <a target="_blank" rel="noopener" href="http://www.360doc.com/content/15/0321/23/202378_457041010.shtml">http://www.360doc.com/content/15/0321/23/202378_457041010.shtml</a></p>
+<p>参考链接8.8：<a target="_blank" rel="noopener" href="http://www.360doc.com/content/15/0321/23/202378_457041010.shtml">信号与系统（5）：采样定理和多分辨分析</a></p>
 <p><strong>为什么Sinc是完美插值函数？</strong></p>
-<p>[1]为什么Sinc是完美插值函数 - starimpact的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150876542">https://zhuanlan.zhihu.com/p/150876542</a> </p>
+<p>参考链接8.9：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/150876542">为什么Sinc是完美插值函数 - starimpact的文章 - 知乎</a></p>
 <p><strong>如何理解非周期的离散时间信号的傅里叶变换在频域上连续？</strong></p>
 <p>题主问的是为什么频域上连续，其实频域的连续只和信号在时域上是否是周期信号有关，与信号是否离散还是连续没有关系。 如果题主明白连续非周期信号为什么在频域上连续，可以同理理解离散信号。由于周期的无穷大导致了频率幅度的无穷小，但也导致了频率的连续，但频率幅度之间的相对大小没有发生变化，所以序列傅立叶变换后的幅度值是一个相对值，叫频谱密度。 </p>
 <p><strong>补零方式</strong></p>
 <p>时域的末尾补零，提高频域计算分辨率，时域的中间补零，相当于是尺度变换，那么在频域，末尾补零，提高时域计算分辨率，中间补零，频域尺度变换，频域之间间隔越小，极限近似于连续，那么时域间断，那么相对的，频域之间间隔越大，时域平滑。 </p>
 <p>时域上的f(t)变成f(2t)时，在频域上他的频谱就会压缩。这是时频之间的相反特性。 </p>
-<p>[1]实现时域内插可以fft、频域补零，再ifft，那么频域补零为何要在中间部位补零呢？ - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/270235354">https://www.zhihu.com/question/270235354</a></p>
-<p>[2]信号与系统 时域与频域尺度变换的二个简单问题_百度知道 <a target="_blank" rel="noopener" href="http://zhidao.baidu.com/question/357985740?sharesource=weibo">http://zhidao.baidu.com/question/357985740?sharesource=weibo</a></p>
-<h4 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h4><p>[1]概率密度函数及其在信号方面的简单理解（上）概率密度函数 <a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45102840/article/details/105408476">https://blog.csdn.net/weixin_45102840/article/details/105408476</a></p>
-<p>[2]信号的频谱，功率谱，能量谱，傅立叶级数，傅立叶展开，这几个有什么区别和联系吗，感觉很懵。？ - 张大侠的回答 - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/333121021/answer/738658182">https://www.zhihu.com/question/333121021/answer/738658182</a> </p>
-<p>[3]功率谱密度（PSD） - 菜狗的文章 - 知乎 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/417454806">https://zhuanlan.zhihu.com/p/417454806</a> </p>
-<p>[4]信号的频谱，频谱密度，能力谱区别 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/yongzhewudi/p/5911003.html">https://www.cnblogs.com/yongzhewudi/p/5911003.html</a></p>
-<p>[5]能量信号、功率信号、频谱、能量谱、功率谱、及一些定理 <a target="_blank" rel="noopener" href="https://www.cnblogs.com/htj10/p/8638275.html">https://www.cnblogs.com/htj10/p/8638275.html</a></p>
-<p>[6]功率谱密度（功率信号）、能量谱密度（能量信号）<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_65d374720100kzms.html">http://blog.sina.com.cn/s/blog_65d374720100kzms.html</a></p>
-<hr>
-<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/449608778">离散时间傅立叶变换（DTFT） - 知乎 (zhihu.com)</a> </p>
-<p>做DFT时频率分辨能力的定义到底是什么？（程佩青《数字信号处理》） - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39196097">https://www.zhihu.com/question/39196097</a> </p>
-<p>在离散傅里叶变换（DFT）中如何理解采样频率、模拟频率和数字频率三者之间的关系？ - 知乎 <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/489681533">https://www.zhihu.com/question/489681533</a> </p>
-<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u010237785/article/details/73881889">关于采样与DFT的一点点思考_u010237785的博客-CSDN博客_dft 采样定理</a> </p>
-<p>复信号处理（1）——复信号理解<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36756600/article/details/117700771">https://blog.csdn.net/qq_36756600/article/details/117700771</a></p>
-<hr>
-<p>常见信号的FT</p>
-<p>典型信号傅里叶变换 <a target="_blank" rel="noopener" href="https://blog.csdn.net/Einstellung/article/details/77579386">https://blog.csdn.net/Einstellung/article/details/77579386</a> </p>
-<p>典型信号的傅立叶变换 <a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/36276953">https://zhuanlan.zhihu.com/p/36276953</a></p>
-<p>工程中常用到的几个典型周期函数的傅里叶级数展开式 <a target="_blank" rel="noopener" href="https://wenku.baidu.com/view/ef3eef4601f69e3143329475.html?rec_flag=defa">https://wenku.baidu.com/view/ef3eef4601f69e3143329475.html?rec_flag=defa</a></p>
+<p>参考链接8.10：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/270235354">实现时域内插可以fft、频域补零，再ifft，那么频域补零为何要在中间部位补零呢？ - 知乎</a></p>
+<p>参考链接8.11：<a target="_blank" rel="noopener" href="http://zhidao.baidu.com/question/357985740?sharesource=weibo">信号与系统 时域与频域尺度变换的二个简单问题 - 百度知道</a></p>
+<h4 id="参考链接：-1"><a href="#参考链接：-1" class="headerlink" title="参考链接："></a>参考链接：</h4><p>参考链接1：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_45102840/article/details/105408476">概率密度函数及其在信号方面的简单理解（上）概率密度函数 - CSDN</a></p>
+<p>参考链接2：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/333121021/answer/738658182">信号的频谱，功率谱，能量谱，傅立叶级数，傅立叶展开，这几个有什么区别和联系吗，感觉很懵。？ - 张大侠的回答 - 知乎</a></p>
+<p>参考链接3：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/417454806">功率谱密度（PSD） - 菜狗的文章 - 知乎</a></p>
+<p>参考链接4：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/yongzhewudi/p/5911003.html">信号的频谱，频谱密度，能力谱区别 - 博客园</a></p>
+<p>参考链接5：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/htj10/p/8638275.html">能量信号、功率信号、频谱、能量谱、功率谱、及一些定理 - 博客园</a></p>
+<p>参考链接6：<a target="_blank" rel="noopener" href="http://blog.sina.com.cn/s/blog_65d374720100kzms.html">功率谱密度（功率信号）、能量谱密度（能量信号）</a></p>
+<p>参考链接7：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/449608778">离散时间傅立叶变换（DTFT） - 知乎 (zhihu.com)</a> </p>
+<p>参考链接8：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/39196097">做DFT时频率分辨能力的定义到底是什么？（程佩青《数字信号处理》） - 知乎</a></p>
+<p>参考链接9：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/489681533">在离散傅里叶变换（DFT）中如何理解采样频率、模拟频率和数字频率三者之间的关系？ - 知乎</a> </p>
+<p>参考链接10：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u010237785/article/details/73881889">关于采样与DFT的一点点思考 - u010237785 - CSDN - dft 采样定理</a> </p>
+<p>参考链接11：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36756600/article/details/117700771">复信号处理（1）——复信号理解 - CSDN</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
@@ -454,9 +448,9 @@ x = \cos(2\pi × 1000000t) + \cos(2\pi × 1050000t)</script><p>设采样频率�
       </a>
     
     
-      <a href="/2022/01/25/Basic-concepts-of-radar/" class="article-nav-link">
+      <a href="/2022/01/24/Basic-concept-of-probability/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">雷达基础概念</div>
+        <div class="article-nav-title">概率基础概念本质的辨析理解</div>
       </a>
     
   </nav>

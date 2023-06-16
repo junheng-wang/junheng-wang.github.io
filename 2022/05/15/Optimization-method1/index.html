@@ -165,7 +165,7 @@
 c_{i}(x)=0, &i=m+1, m+2 \cdots, m+l\}
 \end{aligned}</script><blockquote>
 <p> 参考资料1：<a target="_blank" rel="noopener" href="https://bicmr.pku.edu.cn/~wenzw/optbook/opt1.pdf">课本——最优化：建模、算法与理论</a></p>
-<p>参考资料2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jbb0523/article/details/50596387">https://blog.csdn.net/jbb0523/article/details/50596387</a></p>
+<p> 参考资料2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/jbb0523/article/details/50596387">最优化问题简介 - jbb0523 - CSDN</a></p>
 </blockquote>
 <h4 id="1-3-最优化问题分类"><a href="#1-3-最优化问题分类" class="headerlink" title="1.3 最优化问题分类"></a>1.3 最优化问题分类</h4><h5 id="一-无约束优化-约束优化"><a href="#一-无约束优化-约束优化" class="headerlink" title="(一) 无约束优化/约束优化"></a>(一) 无约束优化/约束优化</h5><ul>
 <li>无约束优化问题：没有约束条件<ul>
@@ -246,7 +246,7 @@ c_{i}(x)=0, &i=m+1, m+2 \cdots, m+l\}
 </div>
 <ul>
 <li><ul>
-<li>例子2：二元最小化问题：<script type="math/tex">\text{min } f(x_1, x_2) = x_1^2 + x_2^2, \text{  s.t.  } x\in S​</script></li>
+<li>例子2：二元最小化问题：<script type="math/tex">\text{min } f(x_1, x_2) = x_1^2 + x_2^2, \text{  s.t.  } x\in S</script></li>
 </ul>
 </li>
 </ul>
@@ -255,21 +255,21 @@ c_{i}(x)=0, &i=m+1, m+2 \cdots, m+l\}
 <thead>
 <tr>
 <th style="text-align:center">凸集</th>
-<th style="text-align:center">非凸集</th>
+<th>非凸集</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td style="text-align:center"><img src="https://pic.imgdb.cn/item/6281115109475431295d3252.jpg" style="zoom:80%"></td>
-<td style="text-align:center"><img src="https://pic.imgdb.cn/item/6281153d09475431296e05df.jpg"></td>
+<td style="text-align:center"><img src="https://pic.imgdb.cn/item/6281115109475431295d3252.jpg" style="zoom:40%"></td>
+<td><img src="https://pic.imgdb.cn/item/6281153d09475431296e05df.jpg"></td>
 </tr>
 <tr>
 <td style="text-align:center">梯度：<script type="math/tex">- \bigtriangledown f(\boldsymbol x^*)</script></td>
-<td style="text-align:center">梯度：<script type="math/tex">- \bigtriangledown f(\boldsymbol x^*)</script></td>
+<td>梯度：<script type="math/tex">- \bigtriangledown f(\boldsymbol x^*)</script></td>
 </tr>
 <tr>
 <td style="text-align:center">优化问题等价为：<script type="math/tex">\theta > 90° \Leftrightarrow - \bigtriangledown f(\boldsymbol x^*) (\boldsymbol{x-x^*}) \leq 0, \forall \boldsymbol x \in S</script></td>
-<td style="text-align:center">优化问题等价为：<script type="math/tex">\theta > 90° \Leftrightarrow - \bigtriangledown f(\boldsymbol x^*) (\boldsymbol{x-x^*}) \leq 0, \forall \boldsymbol x \in S</script></td>
+<td>优化问题等价为：<script type="math/tex">\theta > 90° \Leftrightarrow - \bigtriangledown f(\boldsymbol x^*) (\boldsymbol{x-x^*}) \leq 0, \forall \boldsymbol x \in S</script></td>
 </tr>
 </tbody>
 </table>
@@ -464,7 +464,7 @@ B\left(\boldsymbol x_{c}, r\right)=\left\{ \boldsymbol x \mid \left\| \boldsymbo
 <p>令上式中$k \to \infty$得：</p>
 <script type="math/tex; mode=display">
 \boldsymbol{a^{\mathrm T}x} \leq \boldsymbol{a^{\mathrm T}} \overline{\boldsymbol x}, \forall \boldsymbol x \in \boldsymbol {c|C}</script><blockquote>
-<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42518956/article/details/113943943">https://blog.csdn.net/qq_42518956/article/details/113943943</a></p>
+<p>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42518956/article/details/113943943">最优化理论与方法-第二讲-凸集 - skycrygg - CSDN</a></p>
 </blockquote>
 <h4 id="2-6-凸集之Farkas引理"><a href="#2-6-凸集之Farkas引理" class="headerlink" title="2.6 凸集之Farkas引理"></a>2.6 凸集之Farkas引理</h4><p><strong>Farkas引理好像可以用于<font color="red">升维度</font>。</strong></p>
 <h5 id="一-Farkas引理定义"><a href="#一-Farkas引理定义" class="headerlink" title="(一) Farkas引理定义"></a>(一) Farkas引理定义</h5><p>给定矩阵$\boldsymbol A_{m \times n}$以及$n$维向量$\boldsymbol c$，则以下两个问题<strong>有且只有一个有解</strong>：</p>
@@ -628,9 +628,11 @@ f(\boldsymbol x) \geq f(\overline{\boldsymbol x}^*) + \triangledown f(\overline{
 <p><strong>证明——必要性：</strong>已知<script type="math/tex">\overline{\boldsymbol x}^* \in \boldsymbol S</script>为某一最优化问题的最优解，求证<script type="math/tex">\triangledown f(\overline{\boldsymbol x}^*)^{\mathrm T}(\boldsymbol x - \overline{\boldsymbol x}^*) \geq 0, \forall  \boldsymbol x \in \boldsymbol S</script>。</p>
 <p>(反证法)：设存在<script type="math/tex">\overline{\boldsymbol x} \in \boldsymbol S</script>使得<script type="math/tex">\triangledown f(\overline{\boldsymbol x}^*)^{\mathrm T}(\overline{\boldsymbol x} - \overline{\boldsymbol x}^*) < 0</script>，<script type="math/tex">\lambda \in (0,1)</script></p>
 <script type="math/tex; mode=display">
-f(\overline{\boldsymbol{x}}^*+\lambda(\overline{\boldsymbol{x}}-\overline{\boldsymbol{x}}^*))\xlongequal[]{泰勒展开} f(\overline{\boldsymbol{x}}^*) + \lambda \triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) + o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)</script><p>整理可得：</p>
+f(\overline{\boldsymbol{x}}^*+\lambda(\overline{\boldsymbol{x}}-\overline{\boldsymbol{x}}^*))\overset{泰勒展开}{=} f(\overline{\boldsymbol{x}}^*) + \lambda \triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) + o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)</script><p>整理可得：</p>
 <script type="math/tex; mode=display">
-\frac{f(\overline{\boldsymbol{x}}^*+\lambda(\overline{\boldsymbol{x}}-\overline{\boldsymbol{x}}^*))-f(\overline{\boldsymbol{x}}^*)}{\lambda} = \triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) + \frac{o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)}{\lambda}</script><p>当<script type="math/tex">\lambda \to 0</script>时，<script type="math/tex">\dfrac{o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)}{\lambda} \to 0</script>，<script type="math/tex">\triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) < 0</script>，则<script type="math/tex">\triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) + \dfrac{o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)}{\lambda} < 0</script>，此时等式左边<script type="math/tex">\dfrac{f(\overline{\boldsymbol{x}}^*+\lambda(\overline{\boldsymbol{x}}-\overline{\boldsymbol{x}}^*))-f(\overline{\boldsymbol{x}}^*)}{\lambda} < 0</script>，即我们找到比<script type="math/tex">f(\overline{\boldsymbol x}^*)</script>函数值更小的，即与<script type="math/tex">\overline{\boldsymbol x}^*</script>是最优解矛盾。</p>
+\frac{f(\overline{\boldsymbol{x}}^*+\lambda(\overline{\boldsymbol{x}}-\overline{\boldsymbol{x}}^*))-f(\overline{\boldsymbol{x}}^*)}{\lambda} = \triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) + \frac{o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)}{\lambda}</script><p>当<script type="math/tex">\lambda \to 0</script>时，<script type="math/tex">\dfrac{o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)}{\lambda} \to 0</script>，<script type="math/tex">\triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) < 0</script>，则：</p>
+<script type="math/tex; mode=display">
+\triangledown f (\overline{\boldsymbol{x}}^*)(\boldsymbol x - \overline{\boldsymbol x}^*) + \dfrac{o(\lambda||\boldsymbol x - \overline{\boldsymbol x}^*)||)}{\lambda} < 0</script><p>此时等式左边<script type="math/tex">\dfrac{f(\overline{\boldsymbol{x}}^*+\lambda(\overline{\boldsymbol{x}}-\overline{\boldsymbol{x}}^*))-f(\overline{\boldsymbol{x}}^*)}{\lambda} < 0</script>，即我们找到比<script type="math/tex">f(\overline{\boldsymbol x}^*)</script>函数值更小的，即与<script type="math/tex">\overline{\boldsymbol x}^*</script>是最优解矛盾。</p>
 <p><strong>几何解释：</strong></p>
 <script type="math/tex; mode=display">
 \overline{\boldsymbol x}^* \in \boldsymbol S是最优解 \\
@@ -773,7 +775,7 @@ r l & \lambda_{i} l & 0 \\
  \end{cases}</script><p>本问题涉及两个小知识点：</p>
 <ul>
 <li>S-Procedure：<ul>
-<li><script type="math/tex; mode=display">x^{\top} F_{1} x+2 b_{1}^{\top} x+c_{1} \leq 0 \Rightarrow x^{\top} F_{2} x+2 b_{2}^{\top} x+c_{2} \leq 0$$，当且仅当$$∃ \lambda \geq 0$$使得$$\left(\begin{array}{ll} F_{1} & b_{1} \\ b_{1}^{T} & c_{1} \end{array}\right)-\left(\begin{array}{ll} F_{2} & b_{2} \\ b_{2}^{T} & c_{2} \end{array}\right) \geq 0</script></li>
+<li>$x^{\top} F_{1} x+2 b_{1}^{\top} x+c_{1} \leq 0 \Rightarrow x^{\top} F_{2} x+2 b_{2}^{\top} x+c_{2} \leq 0$，当且仅当$\exist \lambda \geq 0$使得$\left(\begin{array}{ll} F_{1} &amp; b_{1} \\ b_{1}^{T} &amp; c_{1} \end{array}\right)-\left(\begin{array}{ll} F_{2} &amp; b_{2} \\ b_{2}^{T} &amp; c_{2} \end{array}\right) \geq 0$</li>
 </ul>
 </li>
 <li>Schur complement 对称分块矩阵：<ul>
@@ -857,11 +859,11 @@ r l & \lambda_{i} l & 0 \\
    
   <nav class="article-nav">
     
-      <a href="/2022/05/15/Paper-knowledge-Supplement/" class="article-nav-link">
+      <a href="/2022/05/27/Optimization-method2/" class="article-nav-link">
         <strong class="article-nav-caption">上一篇</strong>
         <div class="article-nav-title">
           
-            本科论文知识补充
+            最优化方法_part2
           
         </div>
       </a>
