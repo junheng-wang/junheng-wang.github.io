@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">10.4k</span>
+            <span class="post-count">11.2k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">39 分钟</span>
+            <span class="post-count">43 分钟</span>
         </span>
     </span>
 </div>
@@ -203,7 +203,58 @@ x(n)\overset{N点\text{DFT}}{\longleftrightarrow}X(k)</script><p><img src="https
 <h4 id="三-DFT的计算"><a href="#三-DFT的计算" class="headerlink" title="(三) DFT的计算"></a>(三) DFT的计算</h4><p><strong>重点：DFT的两种计算方法。</strong></p>
 <h5 id="1-方法一：利用DFT定义式"><a href="#1-方法一：利用DFT定义式" class="headerlink" title="1. 方法一：利用DFT定义式"></a>1. 方法一：利用DFT定义式</h5><script type="math/tex; mode=display">
 X(k) = \sum_{n=0}^{N-1}x(n)e^{-j\frac{2\pi}{N}kn},k=0,1,\cdots,N-1</script><h5 id="2-方法二：先求DTFT再抽样"><a href="#2-方法二：先求DTFT再抽样" class="headerlink" title="2. 方法二：先求DTFT再抽样"></a>2. 方法二：先求DTFT再抽样</h5><script type="math/tex; mode=display">
-X(k)=X(e^{j \omega})| _ {\omega=\frac{2 \pi}{N} k} R _ {N}(k)</script><h5 id="3-例题"><a href="#3-例题" class="headerlink" title="3. 例题"></a>3. 例题</h5><p>下面的例题，分别用这两种方法进行求解。</p>
+X(k)=X(e^{j \omega})| _ {\omega=\frac{2 \pi}{N} k} R _ {N}(k)</script><h5 id="3-方法三：DFT矩阵"><a href="#3-方法三：DFT矩阵" class="headerlink" title="3. 方法三：DFT矩阵"></a>3. 方法三：DFT矩阵</h5><p>设有一序列$x(n), n = 0, 1, \cdots, N-1$，求其$N$点DFT有：</p>
+<script type="math/tex; mode=display">
+X(k) = \mathrm{DFT}[x(n)] =  \sum_{n=0}^{N-1} x(n) \exp\left[{-\mathrm j}\dfrac{2\pi}{N}nk\right] = \sum_{n=0}^{N-1} x(n) W_N^{nk}</script><p>其中，$k = 0,1, \cdots, N-1$。</p>
+<p>令 $\boldsymbol x = \left[x(0), x(1),\cdots, x(N-1)\right]^{\mathrm T}$，则DFT计算可以看做向量$\boldsymbol x$和一个矩阵的乘积，我们一般讲这个矩阵称作<strong>DFT矩阵</strong>：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{F_1} 
+&= \left[\begin{array}{ccccc}
+\mathrm e^{-\mathrm j \frac{2\pi}{N} 0 \cdot 0} &\mathrm e^{-\mathrm j \frac{2\pi}{N} 0 \cdot 1} & \mathrm e^{-\mathrm j \frac{2\pi}{N} 0 \cdot 2} & \cdots & \mathrm e^{-\mathrm j \frac{2\pi}{N} 0 \cdot (N-1)} \\
+\mathrm e^{-\mathrm j \frac{2\pi}{N} 1 \cdot 0} &\mathrm e^{-\mathrm j \frac{2\pi}{N} 1 \cdot 1} & \mathrm e^{-\mathrm j \frac{2\pi}{N} 1 \cdot 2} & \cdots & \mathrm e^{-\mathrm j \frac{2\pi}{N} 1 \cdot (N-1)} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\mathrm e^{-\mathrm j \frac{2\pi}{N} (N-1) \cdot 0} &\mathrm e^{-\mathrm j \frac{2\pi}{N} (N-1) \cdot 1} & \mathrm e^{-\mathrm j \frac{2\pi}{N} (N-1) \cdot 2} & \cdots & \mathrm e^{-\mathrm j \frac{2\pi}{N} (N-1) \cdot (N-1)}
+\end{array}\right] \\
+\\
+&= \left[\begin{array}{ccccc}
+W_N^{0 0} & W_N^{0 1} & W_N^{0 2} & \cdots & W_N^{0 (N-1)} \\
+W_N^{1 0} & W_N^{1 1} & W_N^{1 2} & \cdots & W_N^{1 (N-1)} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+W_N^{(N-1) 0} &W_N^{(N-1) 1} & W_N^{(N-1) 2} & \cdots & W_N^{(N-1)(N-1)}
+\end{array}\right]
+\end{aligned}</script><p>此时，序列$x(n)$的DFT为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol X = \left[\begin{array}{c} X(0)  \\ X(1) \\ \vdots \\ X(k) \\ \vdots \\ X(N-1) 
+\end{array}\right] = \boldsymbol{F_1 x} = \boldsymbol{F_1}\left[\begin{array}{c} x(0)  \\ x(1) \\ \vdots \\ x(n) \\ \vdots \\ x(N-1) 
+\end{array}\right]</script><p>或者，若将<strong>DFT矩阵</strong>定义为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol{F_2} = \boldsymbol{F_1}^{\mathrm H} 
+&= \left[\begin{array}{ccccc}
+\mathrm e^{\mathrm j \frac{2\pi}{N} 0 \cdot 0} &\mathrm e^{\mathrm j \frac{2\pi}{N} 0 \cdot 1} & \mathrm e^{\mathrm j \frac{2\pi}{N} 0 \cdot 2} & \cdots & \mathrm e^{\mathrm j \frac{2\pi}{N} 0 \cdot (N-1)} \\
+\mathrm e^{\mathrm j \frac{2\pi}{N} 1 \cdot 0} &\mathrm e^{\mathrm j \frac{2\pi}{N} 1 \cdot 1} & \mathrm e^{\mathrm j \frac{2\pi}{N} 1 \cdot 2} & \cdots & \mathrm e^{\mathrm j \frac{2\pi}{N} 1 \cdot (N-1)} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+\mathrm e^{\mathrm j \frac{2\pi}{N} (N-1) \cdot 0} &\mathrm e^{\mathrm j \frac{2\pi}{N} (N-1) \cdot 1} & \mathrm e^{\mathrm j \frac{2\pi}{N} (N-1) \cdot 2} & \cdots & \mathrm e^{\mathrm j \frac{2\pi}{N} (N-1) \cdot (N-1)}
+\end{array}\right]
+\\
+\\
+&= \left[\begin{array}{ccccc}
+W_N^{-0 0} & W_N^{-0 1} & W_N^{-0 2} & \cdots & W_N^{-0 (N-1)} \\
+W_N^{-1 0} & W_N^{-1 1} & W_N^{-1 2} & \cdots & W_N^{-1 (N-1)} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+W_N^{-(N-1) 0} &W_N^{-(N-1) 1} & W_N^{-(N-1) 2} & \cdots & W_N^{-(N-1)(N-1)}
+\end{array}\right]
+\end{aligned}</script><p>此时，序列$x(n)$的DFT变换为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol X = \left[\begin{array}{c} X(0)  \\ X(1) \\ \vdots \\ X(k) \\ \vdots \\ X(N-1) 
+\end{array}\right] = \boldsymbol{F_2}^{\mathrm H} \boldsymbol x = \boldsymbol{F_2}^{\mathrm H}\left[\begin{array}{c} x(0)  \\ x(1) \\ \vdots \\ x(n) \\ \vdots \\ x(N-1) 
+\end{array}\right]</script><p>容易发现，DFT矩阵具有如下性质：</p>
+<ul>
+<li>① DFT矩阵是对称矩阵，即$\boldsymbol{F_1} = \boldsymbol{F_1}^{\mathrm T} \qquad \boldsymbol{F_2} = \boldsymbol{F_2}^{\mathrm T}$；</li>
+<li>② $\boldsymbol{F_2} = \boldsymbol{F_1}^{\mathrm H}$；</li>
+</ul>
+<h5 id="4-例题"><a href="#4-例题" class="headerlink" title="4. 例题"></a>4. 例题</h5><p>下面的例题，分别用这两种方法进行求解。</p>
 <html>
     <table style="margin-left: auto; margin-right: auto;">
         <tr>
