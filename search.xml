@@ -11871,14 +11871,14 @@ A_{1n} & A_{2n} & \cdots & A_{nn}
 </style></p>
 <table class="tg" style="undefined;table-layout: fixed; width: 574px">
 <colgroup>
-<col style="width: 70.0px">
-<col style="width: 118.0px">
+<col style="width: 50.0px">
+<col style="width: 150.0px">
 <col style="width: 210.0px">
 <col style="width: 280.0px">
 </colgroup>
 <thead>
   <tr>
-    <td class="tg-7btt" rowspan="20"><br><br><br><br><br><br><br><br><br>S<br>T<br>A<br>P<br>算<br>法<br>概<br>述</td>
+    <td class="tg-7btt" rowspan="20"><br><br><br><br><br>S<br>T<br>A<br>P<br>算<br>法<br>概<br>述</td>
     <td class="tg-fymr">关键问题</td>
     <td class="tg-fymr">涉及的相关方法</td>
     <td class="tg-1wig">注释</td>
