@@ -9700,8 +9700,9 @@ P\begin{Bmatrix}(X_1, X_2, \cdots, X_n) \sub \overline W \end{Bmatrix} =1- \alph
     <url>/2023/08/08/STAP-Algorithm-Foundation/</url>
     <content><![CDATA[<h4 id="1-STAP算法简介"><a href="#1-STAP算法简介" class="headerlink" title="1. STAP算法简介"></a>1. STAP算法简介</h4><p>空时自适应处理算法(STAP)最早是由L.E. Brennan等人<sup><a href="#[1]">[1]</a></sup>于1973年提出，利用机载雷达杂波信号存在空时耦合特性。</p>
 <p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。STAP 技术的自适应体现在对外部杂波环境的准确感知及应对，其依赖于待检测距离单元( Rangecell Under Test, RUT) 杂波协方差矩阵(Clutter Covariance Matrix, CCM) 的实时获取，而CCM 在实际应用中通常是未知的，需要通过一定数量的独立同分布( Independent Identically Distributed, IID)训练样本<strong>最大似然估计</strong>得到。根据Reed-Mallett-Brennan准则<sup><a href="#[2]">[2]</a></sup>，确保STAP输出信杂噪比损失小于$3\text{ dB}$以内所需<strong>IID样本</strong>数应至少为<strong>2倍系统自由度</strong>。但机载雷达通常工作在非均匀杂波环境中，难以获得足够的IID训练样本<sup><a href="#[3]">[3]</a></sup>。</p>
-<p>目前，国内外解决上述问题主要两类技术： 一类是将含奇异值样本剔除，使得样本均匀化；另一类是降低均匀样本需求，设计小样本条件下次最优STAP处理器。具体方法划分如下。</p>
-<p><img src="https://pic.imgdb.cn/item/64ddcb58661c6c8e543b0a68.jpg" alt="blob"></p>
+<p>目前，国内外解决上述问题主要两类技术： 一类是将含奇异值样本剔除，使得样本均匀化；另一类是降低均匀样本需求，设计小样本条件下次最优STAP处理器。具体方法划分如图1.1。</p>
+<center><img src="https://pic.imgdb.cn/item/64ddcb58661c6c8e543b0a68.jpg" alt="图1.1 STAP相关算法" style="zoom:50%"></center>
+
 <ul>
 <li>降维STAP将样本需求由全局系统自由度降至局域系统自由度范畴。</li>
 <li>降秩STAP基于子空间处理，摒除了由于噪声发散引起的自适应方向图畸变问题，将样本需求降至杂波秩量级，但性能严重依赖于杂波秩估计准确性，且运算量巨大。</li>
@@ -9794,11 +9795,24 @@ P\begin{Bmatrix}(X_1, X_2, \cdots, X_n) \sub \overline W \end{Bmatrix} =1- \alph
 </thead>
 </table>
 
+<h4 id="2-STAP信号模型"><a href="#2-STAP信号模型" class="headerlink" title="2. STAP信号模型"></a>2. STAP信号模型</h4><p>本部分主要参考文献<a href="#[12]">[12]</a>第二章，机载雷达的相关参数设置如下：</p>
+<ul>
+<li>机载平台高度为$H$，运动速度为$v$且方向平行于$X$轴；</li>
+<li>机载平台的运动方向与阵面天线轴向的夹角为$\alpha$；</li>
+<li>天线为含有$N$个阵元的水平均匀线阵，阵元间距为$d$；</li>
+<li>一个相干处理间隔(CPI)内发射$M$个脉冲；</li>
+<li>脉冲重复频率(PRF)为$f_r = \dfrac{1}{T_r}$，脉冲宽度为$T_p$；</li>
+</ul>
+<p>假设此时存在一个目标，与雷达视线俯仰角为$\varphi$，相对阵面轴向的方位角为$\theta$，目标相对于天线轴向的入射锥角为$\psi$，目标与载机间的相对径向速度为$v_t$。具体示意图如下。</p>
+<center><img src="https://pic.imgdb.cn/item/64ddd312661c6c8e5459c6df.jpg" alt="blob" style="zoom:50%"></center>
 
 
 
 
-<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献 "></a>参考文献 <font face="times new roman"></font></h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
+
+
+
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
 <p><a id="[2]"></a> [2] Reed I S, Mallett J D, Brennan L E. Rapid convergence rate in adaptive arrays[J]. IEEE Transactions on Aerospace and Electronic Systems, 1974 (6): 853-863. </p>
 <p><a id="[3]"></a> [3] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
 <p><a id="[4]"></a> [4] Melvin W L, Guerci J R. Adaptive detection in dense target environments[C]//Proceedings of the 2001 IEEE Radar Conference (Cat. No. 01CH37200). IEEE, 2001: 187-192. </p>
@@ -9809,7 +9823,7 @@ P\begin{Bmatrix}(X_1, X_2, \cdots, X_n) \sub \overline W \end{Bmatrix} =1- \alph
 <p><a id="[9]"></a> [9] Sarkar T K, Wang H, Park S, et al. A deterministic least-squares approach to space-time adaptive processing (STAP)[J]. IEEE Transactions on Antennas and Propagation, 2001, 49(1): 91-103. </p>
 <p><a id="[10]"></a> [10] Parker P, Swindlehurst A. Space-time autoregressive filtering for matched subspace STAP[J]. IEEE Transactions on Aerospace and Electronic Systems, 2003, 39(2): 510-520. </p>
 <p><a id="[11]"></a> [11] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
-<p>&lt;/font&gt;</p>
+<p><a id="[12]"></a> [12] 冯建婷. 宽带机载相控阵雷达空时自适应处理方法研究[D]. 西安电子科技大学, 2021. DOI:10.27389/d.cnki.gxadu.2021.002372.</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
