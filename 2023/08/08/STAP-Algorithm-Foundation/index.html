@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">563</span>
+            <span class="post-count">1.4k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">6 分钟</span>
         </span>
     </span>
 </div>
@@ -113,8 +113,18 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="1-STAP算法简介"><a href="#1-STAP算法简介" class="headerlink" title="1. STAP算法简介"></a>1. STAP算法简介</h4><p>空时自适应处理算法(STAP)最早是由L.E. Brennan等人<sup><a href="#[1]">[1]</a></sup> 于1973年提出，利用机载雷达杂波信号存在空时耦合特性。</p>
-<p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。</p>
+  <h4 id="1-STAP算法简介"><a href="#1-STAP算法简介" class="headerlink" title="1. STAP算法简介"></a>1. STAP算法简介</h4><p>空时自适应处理算法(STAP)最早是由L.E. Brennan等人<sup><a href="#[1]">[1]</a></sup>于1973年提出，利用机载雷达杂波信号存在空时耦合特性。</p>
+<p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。STAP 技术的自适应体现在对外部杂波环境的准确感知及应对，其依赖于待检测距离单元( Rangecell Under Test, RUT) 杂波协方差矩阵(Clutter Covariance Matrix, CCM) 的实时获取，而CCM 在实际应用中通常是未知的，需要通过一定数量的独立同分布( Independent Identically Distributed, IID)训练样本<strong>最大似然估计</strong>得到。根据Reed-Mallett-Brennan准则<sup><a href="#[2]">[2]</a></sup>，确保STAP输出信杂噪比损失小于$3\text{ dB}$以内所需<strong>IID样本</strong>数应至少为<strong>2倍系统自由度</strong>。但机载雷达通常工作在非均匀杂波环境中，难以获得足够的IID训练样本<sup><a href="#[3]">[3]</a></sup>。</p>
+<p>目前，国内外解决上述问题主要两类技术： 一类是将含奇异值样本剔除，使得样本均匀化；另一类是降低均匀样本需求，设计小样本条件下次最优STAP处理器。具体方法划分如下。</p>
+<p><img src="https://pic.imgdb.cn/item/64ddcb58661c6c8e543b0a68.jpg" alt="blob"></p>
+<ul>
+<li>降维STAP将样本需求由全局系统自由度降至局域系统自由度范畴。</li>
+<li>降秩STAP基于子空间处理，摒除了由于噪声发散引起的自适应方向图畸变问题，将样本需求降至杂波秩量级，但性能严重依赖于杂波秩估计准确性，且运算量巨大。</li>
+<li>平滑STAP可利用有限样本的空时平滑获取更多样本，但样本间的强相关性及其固有孔径损失使得该类算法性能不甚理想。</li>
+<li>直接数据域STAP仅利用RUT数据，消除了非均匀杂波影响，但易受噪声影响且存在空时孔径损失导致性能无法达到次最优，同时空域平滑处理也决定了其仅适用于均匀线/面阵机载雷达。</li>
+<li>参数化STAP本质为空-时最小二乘有限冲激响应滤波器，在理想条件下可显著降低样本需求，但在实际应用中性能受其模型准确性影响较大。</li>
+<li>知识辅助STAP利用先验信息所估CCM对杂波进行预白化，以降低后续STAP 处理负担，但如何准确获取及有效利用先验信息仍是当前待解决难题。</li>
+</ul>
 <p><style type="text/css"><br>.tg  {border-collapse:collapse;border-spacing:0;}<br>.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;<br>  overflow:hidden;padding:10px 5px;word-break:normal;}<br>.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;<br>  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}<br>.tg .tg-1wig{font-weight:bold;text-align:left;vertical-align:top}<br>.tg .tg-7btt{border-color:inherit;font-weight:bold;text-align:center;vertical-align:top}<br>.tg .tg-fymr{border-color:inherit;font-weight:bold;text-align:left;vertical-align:top}<br>.tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}<br>.tg .tg-0lax{text-align:left;vertical-align:top}
 </style></p>
 <table class="tg" style="undefined;table-layout: fixed; width: 574px">
@@ -203,7 +213,18 @@
 
 
 
-<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
+<h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献 "></a>参考文献 <font face="times new roman"></font></h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
+<p><a id="[2]"></a> [2] Reed I S, Mallett J D, Brennan L E. Rapid convergence rate in adaptive arrays[J]. IEEE Transactions on Aerospace and Electronic Systems, 1974 (6): 853-863. </p>
+<p><a id="[3]"></a> [3] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
+<p><a id="[4]"></a> [4] Melvin W L, Guerci J R. Adaptive detection in dense target environments[C]//Proceedings of the 2001 IEEE Radar Conference (Cat. No. 01CH37200). IEEE, 2001: 187-192. </p>
+<p><a id="[5]"></a> [5] Guerci J R, Baranoski E J. Knowledge-aided adaptive radar at DARPA: An overview[J]. IEEE Signal Processing Magazine, 2006, 23(1): 41-50. </p>
+<p><a id="[6]"></a> [6] Brown R D, Wicks M C, Zhang Y, et al. A space-time adaptive processing approach for improved performance and affordability[C]//Proceedings of the 1996 IEEE National Radar Conference. IEEE, 1996: 321-326. </p>
+<p><a id="[7]"></a> [7] Goldstein J S, Reed I S. Reduced-rank adaptive filtering[J]. IEEE Transactions on Signal Processing, 1997, 45(2): 492-496. </p>
+<p><a id="[8]"></a> [8] Pillai S U, Lim Y L, Guerci J R. Generalized forward/backward subaperture smoothing techniques for sample starved STAP[J]. IEEE Transactions on Signal Processing, 2000, 48(12): 3569-3574. </p>
+<p><a id="[9]"></a> [9] Sarkar T K, Wang H, Park S, et al. A deterministic least-squares approach to space-time adaptive processing (STAP)[J]. IEEE Transactions on Antennas and Propagation, 2001, 49(1): 91-103. </p>
+<p><a id="[10]"></a> [10] Parker P, Swindlehurst A. Space-time autoregressive filtering for matched subspace STAP[J]. IEEE Transactions on Aerospace and Electronic Systems, 2003, 39(2): 510-520. </p>
+<p><a id="[11]"></a> [11] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
+<p>&lt;/font&gt;</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
