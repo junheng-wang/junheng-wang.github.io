@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.7k</span>
+            <span class="post-count">4.5k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">7 分钟</span>
+            <span class="post-count">20 分钟</span>
         </span>
     </span>
 </div>
@@ -213,15 +213,110 @@
 <h4 id="2-STAP信号模型"><a href="#2-STAP信号模型" class="headerlink" title="2. STAP信号模型"></a>2. STAP信号模型</h4><p>本部分主要参考文献<a href="#[12]">[12]</a>第二章，机载雷达的相关参数设置如下：</p>
 <ul>
 <li>机载平台高度为$H$，运动速度为$v$且方向平行于$X$轴；</li>
+<li>机载雷达的载频为$f_c$，初始相位为$\phi$；</li>
 <li>机载平台的运动方向与阵面天线轴向的夹角为$\alpha$；</li>
 <li>天线为含有$N$个阵元的水平均匀线阵，阵元间距为$d$；</li>
 <li>一个相干处理间隔(CPI)内发射$M$个脉冲；</li>
 <li>脉冲重复频率(PRF)为$f_r = \dfrac{1}{T_r}$，脉冲宽度为$T_p$；</li>
 </ul>
-<p>假设此时存在一个目标，与雷达视线俯仰角为$\varphi$，相对阵面轴向的方位角为$\theta$，目标相对于天线轴向的入射锥角为$\psi$，目标与载机间的相对径向速度为$v_t$。具体示意图如下。</p>
-<center><img src="https://pic.imgdb.cn/item/64ddd312661c6c8e5459c6df.jpg" alt="blob" style="zoom:50%"></center>
+<h5 id="2-1-窄带阵目标信号模型"><a href="#2-1-窄带阵目标信号模型" class="headerlink" title="2.1 窄带阵目标信号模型"></a>2.1 窄带阵目标信号模型</h5><p>假设此时存在一个目标，与雷达视线俯仰角为$\varphi$，相对阵面轴向的方位角为$\theta$，目标相对于天线轴向的入射锥角为$\psi$，目标与载机间的相对径向速度为$v_t$。具体示意图如下。</p>
+<center><img src="https://pic.imgdb.cn/item/64ddd312661c6c8e5459c6df.jpg" alt="图2.1 雷达对目标观测示意图" style="zoom:50%"></center>
 
+<p>发射的时域完整波形为：</p>
+<script type="math/tex; mode=display">
+s^{\mathrm t}(t) = a_t u(t) \mathrm e^{\mathrm j 2 \pi f_c t} \mathrm e^{\mathrm j \phi} \tag{2-1}</script><p>式中上标用字母$t$表示该式为$s^{\mathrm t}(t)$的时域形式，$a_t$表示发射信号的复幅度，$u(t)$为脉<br>冲调制的发射信号基带波形。</p>
+<p>考虑到雷达多脉冲相参处理情况，$t = t_k + t_m$为全时间变量，$t_k$为快时间变量，其取值范围为$[0, T_r]$，$t_m = mT_r \quad (m =1,2, \cdots, M)$为慢时间变量。等效相位中心发射第$m$个脉冲经目标散射回到第$n$个阵元的回波信号可以表示为：</p>
+<script type="math/tex; mode=display">
+s^{\mathrm t}_{n, m}(t_k) = a_r u(t_k - \tau_{c, n, m}) \mathrm e^{\mathrm j 2 \pi f_c (t_k - \tau_{c, n, m})} \mathrm e^{\mathrm j \phi}, \quad n = 1,2, \cdots, N \tag{2-2}</script><p>注意，式(2-2)中时间变量为$t_k$，$a_r$表示回波信号幅度，主要由发射功率、系统损耗、距离、天线方向图和目标后向散射特性等决定。复包络信号$u(t)$的宽度为$T_p$ ，当$0 \leq t \leq T_p$时，$u(t)$为发射信号的复包络；当$T_p \leq t \leq T_r$时，$u(t) = 0$。</p>
+<p>设第1号阵元为参考阵元，第1个脉冲为参考脉冲，则：</p>
+<script type="math/tex; mode=display">
+\tau_{c, n, m} = \dfrac{2R - (n-1)d \cos \psi - 2(m-1)T_r v_t}{c}</script><p>其中，$\tau_c = \dfrac{2R}{c}$是参考脉冲由等效相位中心发射经目标散射返回到参考阵元的双程时延，简称目标距离延时；$\tau_m = \dfrac{2(m-1)T_r v_t}{c}$为第$m$个脉冲相对参考脉冲的时延；$\tau_n = \dfrac{(n-1)d \cos \psi}{c}$为第$n$个阵元相对参考阵元的时延。</p>
+<p>将接收到的回波信号进行混频，搬移到基带后，第$n$个阵元第$m$个脉冲的回波信号表示为：</p>
+<script type="math/tex; mode=display">
+s^{\mathrm t}_{n, m}(t_k) = a_r u(t_k - \tau_{c, n, m}) \mathrm e^{- \mathrm j 2 \pi f_c   \tau_{c, n, m}}  \tag{2-3}</script><p>当相控阵雷达系统为<strong>窄带系统</strong>时，式中<strong><font color="red">回波信号的复包络在阵元间和脉冲间的相对延时可以忽略不计</font></strong>，也即在包络延时中用$\tau_c$代替$\tau_{c, n, m}$，上式表示为：</p>
+<script type="math/tex; mode=display">
+s^{\mathrm t}_{n, m}(t_k) = a_r u(t_k - \tau_{c}) \mathrm e^{- \mathrm j 2 \pi f_c   \tau_{c, n, m}}  \tag{2-4}</script><p>接着，对混频后的回波信号进行离散时间采样，以$f_s$为采样频率均匀采样，脉冲间隔$T_r$时间内可得采样点数$L = T_r f_s$。离散采样后，$N$个阵元$M$个脉冲的回波信号离散形式为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol S^{\mathrm t} = [\boldsymbol s^{\mathrm t}_{1,1} \quad \cdots \quad \boldsymbol s^{\mathrm t}_{N,1} \quad \boldsymbol s^{\mathrm t}_{1,2} \quad  \cdots \quad \boldsymbol s^{\mathrm t}_{N,2} \quad \cdots \quad \boldsymbol s^{\mathrm t}_{1,M} \quad \cdots \quad \boldsymbol s^{\mathrm t}_{N,M} ] \tag{2-5}</script><p>其中，$\boldsymbol s^{\mathrm t}_{n,m}$为第$n$个阵元接收到第$m$个脉冲的$L$ 个离散回波信号组成的矢量：</p>
+<script type="math/tex; mode=display">
+\boldsymbol s^{\mathrm t}_{n,m} = \left[s^{\mathrm t}_{n,m}\left(\dfrac{0}{L}T_r\right) \quad \cdots \quad s^{\mathrm t}_{n,m}\left(\dfrac{l}{L}T_r\right)  \quad \cdots \quad  s^{\mathrm t}_{n,m}\left(\dfrac{L-1}{L}T_r\right) \right]^{\mathrm T} \tag{2-6}</script><p>其中，$s^{\mathrm t}_{n,m}\left(\dfrac{l}{L}T_r\right)$表示第$n$个阵元第$m$个脉冲回波的第$l$ 个采样点的信号：</p>
+<script type="math/tex; mode=display">
+s^{\mathrm t}_{n,m}\left(\dfrac{l}{L}T_r\right) = a_r u\left(\dfrac{l}{L}T_r - \tau_c\right)\mathrm e^{- \mathrm j 2 \pi f_c   \tau_{c, n, m}}  \tag{2-7}</script><p>时间离散后的发射复包络信号的矢量形式为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol u = \left[u\left(\dfrac{0}{L}T_r\right) \quad \cdots \quad u\left(\dfrac{l}{L}T_r\right) \quad \cdots \quad u\left(\dfrac{L-1}{L}T_r\right)\right]^{\mathrm T} \tag{2-8}</script><p>考虑到雷达的脉冲压缩(脉冲的匹配滤波)通常在频域进行，我们对第$n$个阵元<br>接收到第$m$个脉冲的离散回波信号$\boldsymbol s^{\mathrm t}_{n,m}$做快速傅里叶变换(FFT)处理，可以得到距<br>离频域的信号形式：</p>
+<script type="math/tex; mode=display">
+\boldsymbol s^{\mathrm f}_{n,m} = \mathrm{FFT}(\boldsymbol s^{\mathrm t}_{n,m}) = \boldsymbol F^{\mathrm H}\boldsymbol s^{\mathrm t}_{n,m} \tag{2-9}</script><p>式中$\boldsymbol s^{\mathrm f}_{n,m}$为$L \times 1$维列向量，其上标用字母$f$ 表示该式为信号$\boldsymbol s^{\mathrm t}_{n,m}$的频域形式。$\boldsymbol F$为$L \times L$维的FFT矩阵，第$l$列矢量$\boldsymbol f_l$表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol f_l=\left[\begin{array}{c}
+1 \\ \mathrm e^{\mathrm j 2\pi 1 \times (l - L/2)/L} \\ \vdots \\ \mathrm e^{\mathrm j 2\pi (L-1) \times (l - L/2)/L}
+\end{array}\right],
+\quad
+\boldsymbol F=\left[\begin{array}{ccccc}
+\boldsymbol f_0 & \boldsymbol f_1 & \cdots & \boldsymbol f_{L-1}
+\end{array}\right]
+\tag{2-10}</script><p>第$l_f$号滤波器的中心频率为：$f_l = \dfrac{l_f - L_f/2}{L_f}f_s$，其中$l_f = 0,1,\cdots , L_f -1$表示距离频域滤波器序号，$L_f = L$表示距离频域滤波器个数(为了区分时域采样点数和频域滤波器数，在频域使用$L_f$）。根据离散时域信号的DFT时移特性，距离频率为lf 的信号可以写成：</p>
+<script type="math/tex; mode=display">
+\boldsymbol s^{\mathrm f}_{n,m} = a_r U(f_l)  \exp\left(-\mathrm j 2\pi \dfrac{l_f - L_f/2}{L_f} f_s \tau_c\right)  \exp\left(-\mathrm j 2\pi f_c \tau_{c,n,m}\right) \tag{2-11}</script><p>其中，$U(f_l)$是发射脉冲复包络的频谱，是由离散后的发射复包络$u\left(\dfrac{T_r l}{L}\right)$做$L$点FFT处理得到的。</p>
+<p>然后在距离频域进行匹配滤波，使用基带信号匹配滤波函数：</p>
+<script type="math/tex; mode=display">
+h(t) = u^*(-t) \tag{2-12}</script><p>其时间离散后的矢量形式表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol h =  \left[h\left(\dfrac{0}{L}T_r\right) \quad \cdots \quad h\left(\dfrac{l}{L}T_r\right) \quad \cdots \quad h\left(\dfrac{L-1}{L}T_r\right)\right]^{\mathrm T} \tag{2-13}</script><p>上式做$L$点FFT处理，得到距离频域的匹配滤波响应：</p>
+<script type="math/tex; mode=display">
+\boldsymbol H(f) = \mathrm{FFT}(\boldsymbol h) = \boldsymbol F^{\mathrm H} \boldsymbol h \tag{2-14}</script><p>$\boldsymbol H(f)$是$L \times 1$维列向量，表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol H = \left[H\left(\dfrac{-L_f/2}{L_f}f_s\right) \quad \cdots \quad H\left(\dfrac{l_f - L_f/2}{L_f}f_s\right) \quad \cdots \quad H\left(\dfrac{L_f/2-1}{L_f}f_s\right)\right]^{\mathrm T} \tag{2-15}</script><p>其中，$H(f_l)$为距离频率为$f_l = \dfrac{l_f - L_f/2}{L_f}f_s$的匹配滤波信号：</p>
+<script type="math/tex; mode=display">
+H(f_l) = U^*(f_l) \tag{2-16}</script><p>对窄带回波信号在频域进行匹配滤波，匹配滤波后的频域输出为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+x_{n, m, l_{f}}^{\mathrm{f}} & =s_{n, m, l_{f}}^{\mathrm{f}} H_{l_{f}}=s_{n, m}^{\mathrm{f}}\left(f_l\right) H\left(f_l\right) \\
+& =a_r U(f_l) U^*(f_l) \exp\left(-\mathrm j 2 \pi\frac{l_{f}-L_{f} / 2}{L_{f}} f_s \tau_c\right) \exp\left(- \mathrm j 2 \pi f_c \tau_{c, n, m}\right)
+\end{aligned} \tag{2-17}</script><p>其中，$x_{n, m, l_{f}}^{\mathrm{f}}$的上标用字母$f $表示该式为信号的频域形式。再对$L$个距离频域输出进行逆傅里叶变换(IFFT)，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x^{\mathrm t}_{n,m} = \mathrm{IFFT}(\boldsymbol x_{n, m, l_{f}}^{\mathrm{f}}) = \boldsymbol T^{\mathrm H} \boldsymbol x_{n, m}^{\mathrm{f}} \tag{2-18}</script><p>其中，$\boldsymbol x_{n, m}^{\mathrm{f}}$为$L \times 1$维距离频域输出列向量，$\boldsymbol T$为$L \times L$维的IFFT 矩阵，第$l$列矢量$t_l$表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol t_l=\left[\begin{array}{c}
+1 \\ \mathrm e^{-\mathrm j 2\pi 1 \times (l - L/2)/L} \\ \vdots \\ \mathrm e^{-\mathrm j 2\pi (L-1) \times (l - L/2)/L}
+\end{array}\right],
+\quad
+\boldsymbol T=\left[\begin{array}{ccccc}
+\boldsymbol t_0 & \boldsymbol t_1 & \cdots & \boldsymbol t_{L-1}
+\end{array}\right] = \boldsymbol F^{\mathrm H}
+\tag{2-19}</script><p>$\boldsymbol x^{\mathrm t}_{n,m}$为$L \times 1$维距离时域输出列向量，表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol x^{\mathrm t}_{n,m} = \left[x^{\mathrm t}_{n,m, 0} \quad \cdots \quad x^{\mathrm t}_{n,m,l} \quad \cdots \quad x^{\mathrm t}_{n,m,L-1} \right]\tag{2-20}</script><p>其中第$l$个距离时域的信号输出$x^{\mathrm t}_{n,m, l}$可以表示为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& x_{n, m, l}^{\mathrm{t}}=\frac{1}{L} \sum_{l_{f}=0}^{L-1} x_{n, m, l_{f}}^{\mathrm{f}} \exp\left(\mathrm j 2 \pi \dfrac{l_{f}-L / 2}{L} l\right) \\
 
+& =\exp\left(-\mathrm j 2 \pi f_c \tau_{c, n, m}\right) \cdot \frac{1}{L} \sum_{l_{f}=0}^{L-1} a_r U\left(f_l\right) U^*(f_l) \exp\left(-\mathrm j 2 \pi \dfrac{l_{f}-L / 2}{L_{f}} f_s \tau_{\mathrm{c}}\right) \exp \left({\mathrm j 2 \pi \frac{l_{f}-L / 2}{L} l}\right) \\
+
+& \approx \exp\left(-\mathrm j 2 \pi f_c \tau_{c, n, m}\right) \cdot \exp \left(\mathrm j 2 \pi \frac{L}{2}\left(\frac{f_s \tau_{\mathrm{c}}}{L_{f}}-\frac{l}{L}\right)\right) \cdot \xi_0 \sum_{l_{f}=0}^{L-1} \exp\left(-\mathrm j 2 \pi \frac{l_{f}}{L_{f}} f_s \tau_{\mathrm{c}}\right) \exp\left(j 2 \pi \frac{l_{f}}{L} l\right) \\
+
+& =\xi_0 \dfrac{\sin \pi L\left(\dfrac{f_{s} \tau_{c}}{L_{f}}-\dfrac{l}{L}\right)}{\sin \pi\left(\dfrac{f_{s} \tau_{c}}{L_{f}}-\dfrac{l}{L}\right)} \exp\left(\mathrm j 2 \pi \dfrac{L}{2}\left(\dfrac{f_{s} \tau_{c}}{L_{f}}-\dfrac{l}{L}\right)\right)\exp\left(-\mathrm j 2 \pi \frac{L-1}{2}\left(\dfrac{f_{s} \tau_{c}}{L_{f}}-\dfrac{l}{L}\right)\right) \exp\left(-j 2 \pi f_{c} \tau_{c, n, m}\right) \\
+
+& \approx \xi_0 \dfrac{\sin \pi L\left(\dfrac{f_{s} \tau_{c}}{L_{f}}-\dfrac{l}{L}\right)}{\sin \pi\left(\dfrac{f_{s} \tau_{c}}{L_{f}}-\dfrac{l}{L}\right)} \exp\left(-\mathrm j 2 \pi f_c \tau_{\mathrm{c}, n, m}\right) \\
+\end{aligned} \tag{2-21}</script><p>其中，$x_{n, m, l}^{\mathrm{t}}$的上标用字母$t$表示该式为信号的时域形式，$l = 0,1, \cdots, L -1$表示第$l$号距离门。式中指数项为阵元间的延时相位、脉冲间的延时相位和目标距离延时的相位。</p>
+<p>将目标距离延时的相位和信号输出幅度合并，得到窄带信号匹配滤波后的输出信<br>号复幅度：</p>
+<script type="math/tex; mode=display">
+\eta_l = \xi_0 \dfrac{\sin \pi L \left(\dfrac{f_s \tau_c}{L_f} - \dfrac{l}{L}\right)}{\sin \pi \left(\dfrac{f_s \tau_c}{L_f} - \dfrac{l}{L}\right)} \exp(-\mathrm j 2 \pi f_c \tau_c) \tag{2-22}</script><p>代入式$(2-21)$整理得第$l$个距离单元回波信号的形式：</p>
+<script type="math/tex; mode=display">
+x_{n, m, l}^{\mathrm{t}} = \eta_l \exp\left(-\mathrm j 2 \pi f_c \tau_{n, m}\right) =  \eta_l \exp\left(-\mathrm j 2 \pi f_c (\tau_{n} + \tau_m)\right) \tag{2-23}</script><p>观察上式可以发现，当目标出现在第$l$号距离单元时，$\eta_l$取最大值。对于同一个采样时刻，各阵元各脉冲的目标回波信号复幅度相同，目标峰值会出现在同一个距离单元中。</p>
+<p>由上式可以得到窄带相控阵雷达系统的目标空域导向矢量：</p>
+<script type="math/tex; mode=display">
+\boldsymbol a = [1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta} ]^{\mathrm T} \tag{2-24}</script><p>其中，$\vartheta$表示目标的空域频率：</p>
+<script type="math/tex; mode=display">
+\vartheta=f_c \frac{d \cos \psi}{c} \tag{2-25}</script><p>同样地，根据式$(2-23)$可以得出目标时域导向矢量：</p>
+<script type="math/tex; mode=display">
+\boldsymbol b = [1 \quad \mathrm e^{\mathrm j 2 \pi \varpi} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (M-1) \varpi} ]^{\mathrm T} \tag{2-26}</script><p>其中，$\varpi$表示目标的归一化多普勒频率：</p>
+<script type="math/tex; mode=display">
+\varpi=f_c \frac{2 T_r v_{t}}{c} \tag{2-27}</script><p>由此我们可以推导出窄带目标的空时导向矢量：</p>
+<script type="math/tex; mode=display">
+\boldsymbol s = \boldsymbol b(\varpi) \otimes \boldsymbol a(\vartheta) \tag{2-28}</script><p>其中，$\otimes$表示Kronecker积。则第$l$号距离单元的$NM \times 1$维目标回波数据$\boldsymbol{\chi}_l$可表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol{\chi}_l=\eta_l \cdot \boldsymbol{s} \tag{2-29}</script><h5 id="2-2-窄带杂波模型"><a href="#2-2-窄带杂波模型" class="headerlink" title="2.2 窄带杂波模型"></a>2.2 窄带杂波模型</h5><p>机载相控阵雷达与地面杂波的几何关系如图2.2所示。</p>
+<center><img src="https://pic.imgdb.cn/item/64ddf75f661c6c8e54e1b052.jpg" alt="图2.2 雷达对地观测示意图" style="zoom:60%"></center>
 
 
 
