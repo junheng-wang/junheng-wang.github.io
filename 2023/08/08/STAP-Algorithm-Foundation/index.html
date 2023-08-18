@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">7k</span>
+            <span class="post-count">8.5k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">31 分钟</span>
+            <span class="post-count">38 分钟</span>
         </span>
     </span>
 </div>
@@ -324,17 +324,18 @@ x_{n, m, l}^{\mathrm{t}} = \eta_l \exp\left(\mathrm j 2 \pi f_c \tau_{n, m}\righ
 <p><img src="https://pic.imgdb.cn/item/64df0a04661c6c8e54e839e7.jpg" alt="图2.2 信号处理过程示意图"></p>
 <p>由式$(2-23)$可以得到窄带相控阵雷达系统的目标空域导向矢量：</p>
 <script type="math/tex; mode=display">
-\boldsymbol a = [1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta} ]^{\mathrm T} \tag{2-24}</script><p>其中，$\vartheta$表示目标的空域频率，与$\tau_n = \dfrac{d \cos \psi}{c} (n-1)$有关：</p>
+\boldsymbol a^{(t)} = [1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta} ]^{\mathrm T} \tag{2-24}</script><p>其中，$\vartheta$表示目标的空域频率，与$\tau_n = \dfrac{d \cos \psi}{c} (n-1)$有关：</p>
 <script type="math/tex; mode=display">
 \vartheta=f_c \frac{d \cos \psi}{c} \tag{2-25}</script><p>同样地，根据式$(2-23)$可以得出目标时域导向矢量：</p>
 <script type="math/tex; mode=display">
-\boldsymbol b = [1 \quad \mathrm e^{\mathrm j 2 \pi \varpi} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (M-1) \varpi} ]^{\mathrm T} \tag{2-26}</script><p>其中，$\varpi$表示目标的归一化多普勒频率，与$\tau_m = \dfrac{2 T_r v_t}{c} (m-1)$有关：</p>
+\boldsymbol b^{(t)} = [1 \quad \mathrm e^{\mathrm j 2 \pi \varpi} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (M-1) \varpi} ]^{\mathrm T} \tag{2-26}</script><p>其中，$\varpi$表示目标的归一化多普勒频率，与$\tau_m = \dfrac{2 T_r v_t}{c} (m-1)$有关：</p>
 <script type="math/tex; mode=display">
-\varpi=f_c \frac{2 T_r v_{t}}{c} \tag{2-27}</script><p>由此我们可以推导出窄带目标的空时导向矢量：</p>
+\varpi = f_c \frac{2 T_r v_{t}}{c} = f_c \frac{2 v_{t}}{c f_r} \tag{2-27}</script><p>由此我们可以推导出窄带目标的空时导向矢量：</p>
 <script type="math/tex; mode=display">
-\boldsymbol \hbar = \boldsymbol b(\varpi) \otimes \boldsymbol a(\vartheta) \tag{2-28}</script><p>其中，$\otimes$表示Kronecker积。则第$l$号距离单元的$NM \times 1$维目标回波数据$\boldsymbol{\chi}_l$可表示为：</p>
+\boldsymbol \hbar^{(t)} = \boldsymbol b^{(t)}(\varpi) \otimes \boldsymbol a^{(t)}(\vartheta) \tag{2-28}</script><p>其中，$\otimes$表示Kronecker积。则第$l$号距离单元的$NM \times 1$维目标回波数据$\boldsymbol{x}^{(t)}_l$可表示为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol{\chi}_l=\eta_l \cdot \boldsymbol{\hbar} \tag{2-29}</script><h5 id="2-2-窄带杂波模型"><a href="#2-2-窄带杂波模型" class="headerlink" title="2.2 窄带杂波模型"></a>2.2 窄带杂波模型</h5><p>机载相控阵雷达与地面杂波的几何关系如图2.3所示。</p>
+\boldsymbol{x}^{(t)}_l=\eta_l \cdot \boldsymbol{\hbar}^{(t)} \tag{2-29}</script><p>统一在此说明一下，这里用上标$(t)$表示目标target的回波信号，同样下文中会使用上标$(c)$、$(j)$、$(n)$分别表示杂波、干扰、噪声。</p>
+<h5 id="2-2-窄带杂波模型"><a href="#2-2-窄带杂波模型" class="headerlink" title="2.2 窄带杂波模型"></a>2.2 窄带杂波模型</h5><p>机载相控阵雷达与地面杂波的几何关系如图2.3所示。</p>
 <center><img src="https://pic.imgdb.cn/item/64ddf75f661c6c8e54e1b052.jpg" alt="图2.3 雷达对地观测示意图" style="zoom:60%"></center>
 
 <p>载机运动方向与阵面天线轴向的夹角为$\alpha$，杂波块相对雷达视线的俯仰角为$\varphi$，相对阵面轴向的方位角为$\theta$，此时杂波块相对于天线轴向的入射锥角为$\psi$，载机的飞行速度为$v$ 。将雷达所照射到的所有地面杂波区域，按照等距离环均匀划分，每个距离环内又按照等方位角均匀划分，得到众多的独立小杂波块，将各个小杂波块的回波叠加起来，就得到了完整的杂波回波。</p>
@@ -345,25 +346,25 @@ x_{n, m, l}^{\mathrm{t}} = \eta_l \exp\left(\mathrm j 2 \pi f_c \tau_{n, m}\righ
 <script type="math/tex; mode=display">
 \vartheta_{i,j} = f_c \dfrac{d \cos \psi_{i,j}}{c} = f_c \dfrac{d \cos \theta_j \cos \varphi_i}{c} \tag{2-30}</script><p>则有，第$i$个距离环，第$j$个独立杂波块的空域导向矢量为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol a_{c, i, j} = \left[1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta_{i,j}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta_{i,j}} \right]^{\mathrm T} \tag{2-31}</script><p>归一化多普勒频率$\varpi_{i,j}$可表示为：</p>
+\boldsymbol a^{(c)}_{i, j} = \left[1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta_{i,j}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta_{i,j}} \right]^{\mathrm T} \tag{2-31}</script><p>归一化多普勒频率$\varpi_{i,j}$可表示为：</p>
 <script type="math/tex; mode=display">
-\varpi_{i,j} = f_c \dfrac{2vT_r \cos(\theta_j + \alpha) \cos \varphi_i}{c} \tag{2-32}</script><p>则第$i$个距离环，第$j$个独立杂波块的时域导向矢量为：</p>
+\varpi_{i,j} = f_c \dfrac{2vT_r \cos(\theta_j + \alpha) \cos \varphi_i}{c} =  f_c \dfrac{2v \cos(\theta_j + \alpha) \cos \varphi_i}{c f_r}\tag{2-32}</script><p>则第$i$个距离环，第$j$个独立杂波块的时域导向矢量为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol b_{c, i, j} = \left[1 \quad \mathrm e^{\mathrm j 2 \pi \varpi_{i,j}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (M-1) \varpi_{i,j}} \right]^{\mathrm T} \tag{2-33}</script><p>由式$(2-31)$和式$(2-33)$可得，第$i$个距离环，第$j$个独立杂波块$(\theta_j, \varphi_i)$处杂波的空时导向矢量：</p>
+\boldsymbol b^{(c)}_{i, j} = \left[1 \quad \mathrm e^{\mathrm j 2 \pi \varpi_{i,j}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (M-1) \varpi_{i,j}} \right]^{\mathrm T} \tag{2-33}</script><p>由式$(2-31)$和式$(2-33)$可得，第$i$个距离环，第$j$个独立杂波块$(\theta_j, \varphi_i)$处杂波的空时导向矢量：</p>
 <script type="math/tex; mode=display">
-\boldsymbol \hbar_{c, i, j} = \boldsymbol b_{c, i, j}(\varpi) \otimes \boldsymbol a_{c, i, j}(\vartheta) \tag{2-34}</script><p>位于第$i$个距离门，第$j$个杂波块的杂波回波数据形式为：</p>
+\boldsymbol \hbar^{(c)}_{i, j} = \boldsymbol b^{(c)}_{i, j}(\varpi) \otimes \boldsymbol a^{(c)}_{i, j}(\vartheta) \tag{2-34}</script><p>位于第$i$个距离门，第$j$个杂波块的杂波回波数据形式为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol c_{c, i, j} = \kappa_{c, i, j} \cdot \boldsymbol \hbar_{c, i, j} \tag{2-35}</script><p>其中，$\kappa_{c, i, j}$代表该杂波块的复幅度，并且满足以下关系：</p>
+\boldsymbol x^{(c)}_{i, j} = \kappa^{(c)}_{i, j} \cdot \boldsymbol \hbar^{(c)}_{i, j} \tag{2-35}</script><p>其中，$\kappa^{(c)}_{i, j}$代表该杂波块的复幅度，并且满足以下关系：</p>
 <script type="math/tex; mode=display">
-\mathbb{E}\left(|\kappa_{c,i,j}|^2\right) = \sigma^2_n \xi_{i,j } \tag{2-36}</script><p>其中，$\mathbb{E}(\cdot)$表示求解数学期望，$\xi_{i,j}$代表第$i$个距离门，第$j$个杂波块的杂噪比，$\sigma^2_n$表示噪声功率。</p>
+\mathbb{E}\left(\left|\kappa^{(c)}_{i, j}\right|^2\right) = \sigma^2_n \xi_{i,j } \tag{2-36}</script><p>其中，$\mathbb{E}(\cdot)$表示数学期望，$\xi_{i,j}$为第$i$个距离门，第$j$个杂波块的杂噪比(CNR)，$\sigma^2_n$表示噪声功率。</p>
 <table width="50px"><td style="word-wrap:break-word;word-break:break-all;" ; bgcolor="HoneyDew"><font size="3">
 下面解释一个<strong>距离模糊次数</strong>的概念： <br>
 
-机载相控阵雷达信号带宽为$B$，载机高度为$H$，距离分辨率为$\Delta R = \dfrac{c}{2B}$，若地球曲率和载机高度决定的雷达<br>最大视距是$R_{\max}$，以距离分辨率为间隔将杂波区域等分成若干距离环，则地面上距离环的总数为：
+机载相控阵雷达信号带宽为$B$，载机高度为$H$，距离分辨率为$\Delta R = \dfrac{c}{2B}$，若地球曲率和载机高度决定的雷<br>达最大视距是$R_{\max}$，以距离分辨率为间隔将杂波区域等分成若干距离环，则地面上距离环的总数为：
 $$
 L_{\max} = \dfrac{R_{\max} - H}{c/2B}  \tag{2-37}
 $$
-而实际上雷达的最大不模糊距离为$R_u = \dfrac{c}{2f_r}$，以最大不模糊距离为间隔，将雷达视距范围$H \sim R_{\max}$的所有<br>距离区域混叠到最大不模糊距离的各个距离环上。雷达的距离模糊次数$N_r$为：
+而实际上雷达的最大不模糊距离为$R_u = \dfrac{c}{2f_r}$，以最大不模糊距离为间隔，将雷达视距范围$H \sim R_{\max}$的所<br>有距离区域混叠到最大不模糊距离的各个距离环上。雷达的距离模糊次数$N_r$为：
 $$
 N_r = \left \lfloor \dfrac{R_{\max}}{R_u} \right \rfloor + 1  \tag{2-38}
 $$
@@ -374,14 +375,17 @@ $$
 
 <p>综上所述，可以得到第$i$个距离单元的杂波回波数据：</p>
 <script type="math/tex; mode=display">
-\boldsymbol c_{c, i} = \sum_{k=1}^{N_r} \sum_{j = 1}^{N_c} \kappa_{c, k, i, j} \cdot \boldsymbol \hbar_{c, k, i, j} \tag{2-35}</script><p>其中，$\kappa_{c, k, i, j}$表示第$k$次模糊到第$i$个距离单元的第$j$个杂波块的复幅度，$N_c$为每个杂波环内的杂波块数，$\boldsymbol \hbar_{c, k, i, j}$表示相应的空时导向矢量。</p>
+\begin{aligned}
+\boldsymbol x^{(c)}_ i = &\sum_{k=1}^{N_r} \sum_{j = 1}^{N_c} \kappa^{(c)}_{k, i, j} \cdot \boldsymbol \hbar^{(c)}_{k, i, j} \\
+= & \sum_{k=1}^{N_r} \sum_{j = 1}^{N_c} \kappa^{(c)}_{k,i, j} \cdot\boldsymbol b^{(c)}_{k, i, j}(\varpi) \otimes \boldsymbol a^{(c)}_{k, i, j}(\vartheta)
+\end{aligned} \tag{2-35}</script><p>其中，$\kappa^{(c)}_{k,i, j}$表示第$k$次模糊到第$i$个距离单元的第$j$个杂波块的复幅度，$N_c$为每个杂波环内的杂波块数，$\boldsymbol \hbar^{(c)}_{k, i, j}$表示相应的空时导向矢量。</p>
 <h5 id="2-3-干扰模型"><a href="#2-3-干扰模型" class="headerlink" title="2.3 干扰模型"></a>2.3 干扰模型</h5><p>本小节仅研究典型的噪声压制干扰信号，并对其进行建模，其他的干扰方式将在第三章和第四章作详细描述。噪声压制干扰机通常被置于距离敌方雷达较远的地基平台或机载平台，通过发射大功率、宽频带的噪声干扰信号来遮盖有用信号，尽可能地降低目标信噪比，从而实现对接收机的阻塞作用和对目标的压制作用。<strong>根据窄带假设，干扰信号在阵元间的传播时间相较于$1/B$要小得多，所以干扰信号在阵元之间是相关的；当雷达的PRF 明显小于接收机的瞬时带宽时，干扰信号在脉冲之间不相关。</strong>因此，干扰信号在空域上看起来像点目标或离散的杂波源，在时域的干扰效果则类似热噪声。</p>
 <p>第$m$个脉冲重复周期(Pulse Repetition Interval, PRI)的空间快拍的干扰分量表示为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol x_{j,m} = \gamma_m \boldsymbol a_j \tag{2-36}</script><p>其中，$\gamma_m$为第$m$个PRI 的干扰信号幅度，$\boldsymbol a_j$为$N \times 1$维干扰空间导向矢量。</p>
+\boldsymbol x^{(j)}_{m} = \gamma_m \boldsymbol a_j \tag{2-36}</script><p>其中，$\gamma_m$为第$m$个PRI 的干扰信号幅度，$\boldsymbol a_j$为$N \times 1$维干扰空间导向矢量。</p>
 <p>设干扰信号俯仰角$\varsigma$，方位角$\epsilon$，可以得到干扰信号的空时快拍为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol x_j = \boldsymbol \gamma_j \otimes \boldsymbol a_j \tag{2-37}</script><p>其中，$\boldsymbol \gamma_j$是服从复高斯分布的干扰幅度，具体形式如下。</p>
+\boldsymbol x^{(j)} = \boldsymbol \gamma_j \otimes \boldsymbol a_j \tag{2-37}</script><p>其中，$\boldsymbol \gamma_j$是服从复高斯分布的干扰幅度，具体形式如下。</p>
 <script type="math/tex; mode=display">
 \boldsymbol \gamma_j = [\gamma_0  \quad \gamma_1 \quad \cdots \quad \gamma_{M-1}]^{\mathrm T} \tag{2-38}</script><script type="math/tex; mode=display">
 \boldsymbol a_j = \boldsymbol a_j(\epsilon, \varsigma) = \left[ 1 \quad \mathrm e^{\mathrm j 2 \pi (d \cos \varsigma \sin \epsilon)/\lambda_0} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi (N-1)(d \cos \varsigma \sin \epsilon)/\lambda_0}  \right]^{\mathrm T} \tag{2-39}</script><p>已知来自不同脉冲的干扰信号之间互不相关，并进一步假设干扰信号在一个CPI内是平稳的，则有：</p>
@@ -392,7 +396,7 @@ $$
 \tag{2-40}</script><p>可以计算得到其协方差矩阵如下式：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
-\mathbf{R}_j & = \mathbb{E}\left\{\boldsymbol{x}_j \boldsymbol{x}_j^{\mathrm H}\right\}= \mathbb{E}[\boldsymbol \gamma_j \boldsymbol \gamma_j^{\mathrm H}] \otimes \mathbb{E}[ \boldsymbol a_j \boldsymbol a_j^{\mathrm H}]\\
+\mathbf{R}_j & = \mathbb{E}\left\{\boldsymbol{x}^{(j)} \boldsymbol{x}^{(j) \mathrm H}\right\}= \mathbb{E}[\boldsymbol \gamma_j \boldsymbol \gamma_j^{\mathrm H}] \otimes \mathbb{E}[ \boldsymbol a_j \boldsymbol a_j^{\mathrm H}]\\
 
 & =\sigma^2_n \xi_j \boldsymbol{I}_M \otimes \boldsymbol{a}_j \boldsymbol{a}_j^{\mathrm H} \\
 
@@ -407,7 +411,60 @@ $$
 \mathbb{E}[x_{n, n_1,m} x^*_{n, n_2, m}] = \sigma_n^2 \delta(n_1 - n_2) \tag{2-42}</script><script type="math/tex; mode=display">
 \mathbb{E}[x_{n,n,m_1} x^*_{n, n, m_2}] = \sigma_n^2 \delta(m_1 - m_2) \tag{2-43}</script><p>本文仅考虑接收机内部噪声。因为每个阵元有各自的接收机，所以可以认为不同阵元的噪声是不相关的。噪声呈随机分布，所以同一阵元的噪声在时间维也是不相关的。假设噪声信号服从均值为$0$，方差为$\sigma_n^2$的高斯分布。噪声空间的协方差矩阵可表示为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol R_n =\mathbb{E}[\boldsymbol x_n \boldsymbol x_n^{\mathrm H}] =  \sigma_n^2 \boldsymbol I_M \times \boldsymbol I_N =  \sigma_n^2 \boldsymbol I_{MN}</script><h5 id="2-5-窄带阵信号模型适用假设讨论"><a href="#2-5-窄带阵信号模型适用假设讨论" class="headerlink" title="2.5 窄带阵信号模型适用假设讨论"></a>2.5 窄带阵信号模型适用假设讨论</h5><p>在传统的窄带相控阵雷达系统中，点目标的方向$\psi$和与载机的相对径向速度$v_t$在CPI 内均是视为近似不变，目标空域导向矢量和时域导向矢量在CPI 内均不变。</p>
+\boldsymbol R_n =\mathbb{E}[\boldsymbol x^{(n)} \boldsymbol x^{(n)\mathrm H}] =  \sigma_n^2 \boldsymbol I_M \times \boldsymbol I_N =  \sigma_n^2 \boldsymbol I_{MN}</script><h5 id="2-5-窄带阵信号模型适用假设讨论"><a href="#2-5-窄带阵信号模型适用假设讨论" class="headerlink" title="2.5 窄带阵信号模型适用假设讨论"></a>2.5 窄带阵信号模型适用假设讨论</h5><p>在传统的窄带相控阵雷达系统中，点目标的方向$\psi$和与载机的相对径向速度$v_t$在CPI 内均是视为近似不变，目标空域导向矢量和时域导向矢量在CPI 内均不变。</p>
+<h4 id="3-稀疏STAP算法概述"><a href="#3-稀疏STAP算法概述" class="headerlink" title="3 稀疏STAP算法概述"></a>3 稀疏STAP算法概述</h4><h5 id="3-1-SR-STAP-基本原理及杂波稀疏性分析"><a href="#3-1-SR-STAP-基本原理及杂波稀疏性分析" class="headerlink" title="3.1 SR STAP 基本原理及杂波稀疏性分析"></a>3.1 SR STAP 基本原理及杂波稀疏性分析</h5><p><strong>(一) 基本原理</strong></p>
+<p>不考虑距离模糊次数，第$i$个距离单元机载雷达接收杂波(+噪声)数据可表示为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol y =& \boldsymbol x^{(c)}_ i + \boldsymbol x^{(n)} \\
+ = & \sum_{j = 1}^{N_c} \kappa^{(c)}_{i, j} \cdot\boldsymbol b^{(c)}_{i, j}(\varpi) \otimes \boldsymbol a^{(c)}_{i, j}(\vartheta) +  \boldsymbol x^{(n)}
+\end{aligned} \tag{3-1}</script><p>这里再回顾一下各个符号的含义：</p>
+<ul>
+<li>$\boldsymbol x^{(c)}_ i$为第$i$个距离单元的杂波回波数据<ul>
+<li>$\kappa^{(c)}_{i, j}$为该杂波块的回波复幅度；</li>
+<li>$\boldsymbol b^{(c)}_{ i, j}(\varpi)$为第$i$距离环，第$j$个独立杂波块的时域导向矢量；</li>
+<li>归一化多普勒频率$\varpi_{i,j} = f_c \dfrac{2vT_r \cos(\theta_j + \alpha) \cos \varphi_i}{c}$</li>
+<li>$a^{(c)}_{i, j}(\vartheta)$为第$i$距离环，第$j$个独立杂波块的空域导向矢量；</li>
+<li>空域频率$\vartheta_{i,j} = f_c \dfrac{d \cos \theta_j \cos \varphi_i}{c}$</li>
+</ul>
+</li>
+<li>$ \boldsymbol x^{(n)}$表示随机噪声</li>
+</ul>
+<p>由于我们现在只考虑第$i$个杂波距离环内的杂波抑制，因此下标$i$不再标出，并且将下标$j$改为$p$，将信号重写为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\boldsymbol y =& \boldsymbol x^{(c)} + \boldsymbol x^{(n)} \\
+ = & \sum_{p = 1}^{N_c} \kappa^{(c)}_{p} \cdot \boldsymbol \nu^{(c)}_{p}(\varpi, \vartheta) +  \boldsymbol x^{(n)} \\
+ = & \sum_{p = 1}^{N_c} \kappa^{(c)}_{p} \cdot \boldsymbol b^{(c)}_{p}(\varpi) \otimes \boldsymbol a^{(c)}_{p}(\vartheta) +  \boldsymbol x^{(n)}
+\end{aligned} \tag{3-2}</script><p>其中，$\boldsymbol y \in \mathbb C^{NM \times 1}$，$ \kappa^{(c)}_{p}$第$p$个杂波块对应的复幅度，$\boldsymbol \nu^{(c)}_{p}(\varpi, \vartheta)$为空时二维导向矢量，时域导向矢量$\boldsymbol b^{(c)}_{p}(\varpi)$和空域导向矢量$\boldsymbol a^{(c)}_{p}(\vartheta)$分别为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol b^{(c)}_{p}(\varpi) =\left[1 \quad \mathrm e^{\mathrm j 2 \pi \varpi_{p}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (M-1) \varpi_{p}} \right]^{\mathrm T} \tag{3-3}</script><script type="math/tex; mode=display">
+\boldsymbol a^{(c)}_{p}(\vartheta) = \left[1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta_{p}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta_{p}} \right]^{\mathrm T} \tag{3-4}</script><p>由式$(3-2)$看出，机载雷达回波可由不同波束指向(空频)和不同多普勒频率的回波信号叠加而成。若将空频和多普勒频率分别离散化为$N_S = \rho_S N$ 和$N_D = \rho_D M$($\rho_S$和$\rho_D$分别表示空频和多普勒频率离散化倍数，通常取$\rho_S, \rho_D \gg 1$) ，同时忽略量化误差影响，则待雷达回波信号还可表征为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol y = \sum_{q = 1}^{N_S \cdot N_D} \alpha^{(c)}_q \boldsymbol v^{(c)}_{q}(\varpi, \vartheta) + \boldsymbol x^{(n)} = \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} +  \boldsymbol x^{(n)} \tag{3-5}</script><p>其中，$\alpha_q$和$\boldsymbol v_q$分别为空时平面第$q$个网格点对应幅度和空时二维导向矢量。$\boldsymbol V^{(c)}$为空时二维平面所有网格点对应空时二维导向矢量集合，也称为字典：</p>
+<script type="math/tex; mode=display">
+\boldsymbol \alpha^{(c)} = [\alpha_1^{(c)}, \alpha_2^{(c)}, \cdots,\alpha_{N_S N_D}^{(c)}]^{\mathrm T} \in \mathbb C^{N_S N_D \times 1} \tag{3-6}</script><script type="math/tex; mode=display">
+\boldsymbol V^{(c)} = [\boldsymbol v^{(c)}_{1}, \boldsymbol v^{(c)}_{2}, \cdots, \boldsymbol v^{(c)}_{N_SN_D}] \in \mathbb C^{NM \times N_S N_D} \tag{3-7}</script><p>由于$N_S × N_D \gg N × K$，式$(3-5)$为欠定方程． 根据SR理论，如果变量$\boldsymbol \alpha^{(c)}$足够稀疏，则可通过以下约束优化问题获得唯一解：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min & \| \boldsymbol{\alpha} \|_0 \\ 
+\text { s.t. } & \| \boldsymbol y - \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} \|^2_2 \leq \varepsilon 
+\end{cases} \tag{3-8}</script><p>其中，$\varepsilon$为噪声功率，此外，式$(3-8)$还可表述为如下形式：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min & \| \boldsymbol y - \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} \|^2_2\\ 
+\text { s.t. } &  \| \boldsymbol{\alpha} \|_0  \leq r_s
+\end{cases} \tag{3-9}</script><p>其中，$r_s$表示杂波稀疏度。求解式$(3-8)$或式$(3-9)$得到稀疏系数$\boldsymbol \alpha$ 后，当前主要有两大类方法实现目标检测：</p>
+<ul>
+<li>① 是利用训练样本求得稀疏系数来计算CCM，进而设计空时滤波器进行滤波处理后再检测；</li>
+<li>② 是仅利用RUT 数据求得稀疏系数，实现目标和杂波的同时超分辨谱估计，进而在该空时二维谱平面进行目标检测处理。</li>
+</ul>
+<p><strong>(二) 稀疏性分析</strong></p>
+<p>已知机载雷达杂波来向与其相应多普勒频率依从如下关系：</p>
+<script type="math/tex; mode=display">
+f_D = \dfrac{2v}{\lambda} \cos(\theta + \alpha)\cos\psi</script><p>由该式可看出杂波多普勒频率与空频存在依从关系，即一个空频对应一个多普勒频率( 不考虑距离模糊) ，因此杂波在空时二维平面仅分布于满足该依从关系的脊线及附近区域。也就是说，相比于整个空时二维平面，杂波仅分布于小部分特殊区域(一条直线上)，因此在该平面是稀疏的。</p>
+<p>文献<a href="#[17]">[17]</a>分析和讨论了杂波在空时平面的稀疏性问题，并指出理想情况及正侧机载雷达杂波稀疏度$r_s$等于杂波秩$r$，即杂波子空间可由r个正交空时导向矢量完备表<br>述． 但该结论是否适用于非理想或非正侧情况，尚无定论。</p>
+<p>上述讨论均是基于由空时导向矢量构成的过完备字典，其中字典中各导向矢量又称原子。在字典中包含上述$r$个正交原子情况下，通过设计合理SR算法即可求得相应原子位置以及幅度。</p>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
 <p><a id="[2]"></a> [2] Reed I S, Mallett J D, Brennan L E. Rapid convergence rate in adaptive arrays[J]. IEEE Transactions on Aerospace and Electronic Systems, 1974 (6): 853-863. </p>
 <p><a id="[3]"></a> [3] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
@@ -424,6 +481,7 @@ $$
 <p><a id="[14]"></a> [14] Ward J .Space-time adaptive processing for airborne radar[C]//Space-Time Adaptive Processing (Ref. No. 1998/241), IEE Colloquium on.1998.</p>
 <p><a id="[15]"></a> [15] 秦兆锐. 对空时二维处理的干扰技术研究[D]. 陕西:西安电子科技大学,2020.</p>
 <p><a id="[16]"></a> [16] 闵丛丛. 基于学习的空时自适应处理方法研究[D]. 四川:电子科技大学,2017.</p>
+<p><a id="[17]"></a> [17] Yang Z, Li X, Wang H, et al. On clutter sparsity analysis in space–time adaptive processing airborne radar[J]. IEEE Geoscience and Remote Sensing Letters, 2013, 10(5): 1214-1218. </p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
