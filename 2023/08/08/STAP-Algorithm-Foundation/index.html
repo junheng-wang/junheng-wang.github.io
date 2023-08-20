@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">9.3k</span>
+            <span class="post-count">13.5k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">42 分钟</span>
+            <span class="post-count">59 分钟</span>
         </span>
     </span>
 </div>
@@ -114,7 +114,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h4 id="1-STAP算法简介"><a href="#1-STAP算法简介" class="headerlink" title="1. STAP算法简介"></a>1. STAP算法简介</h4><p>空时自适应处理(STAP)是由L.E. Brennan等人<sup><a href="#[1]">[1]</a></sup>于1973年提出，利用机载雷达杂波信号存在空时耦合特性。</p>
-<p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。STAP 技术的自适应体现在对外部杂波环境的准确感知及应对，其依赖于待检测距离单元( Rangecell Under Test, RUT) 杂波协方差矩阵(Clutter Covariance Matrix, CCM) 的实时获取，而CCM 在实际应用中通常是未知的，需要通过一定数量的独立同分布( Independent Identically Distributed, IID)训练样本<strong>最大似然估计</strong>得到。根据Reed-Mallett-Brennan准则<sup><a href="#[2]">[2]</a></sup>，确保STAP输出信杂噪比损失小于$3\text{ dB}$以内所需<strong>IID样本</strong>数应至少为<strong>2倍系统自由度</strong>。但机载雷达通常工作在非均匀杂波环境中，难以获得足够的IID训练样本<sup><a href="#[3]">[3]</a></sup>。</p>
+<p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。STAP 技术的自适应体现在对外部杂波环境的准确感知及应对，其依赖于待检测距离单元( Rangecell Under Test, RUT) 杂波协方差矩阵(Clutter Covariance Matrix, CCM) 的实时获取，而CCM 在实际应用中通常是未知的，需要通过一定数量的独立同分布( Independent Identically Distributed, IID)训练样本<strong>最大似然估计</strong>得到。根据Reed-Mallett-Brennan准则<sup><a href="#[2]">[2]</a></sup>，确保STAP输出信杂噪比损失小于$3\text{ dB}​$以内所需<strong>IID样本</strong>数应至少为<strong>2倍系统自由度</strong>。但机载雷达通常工作在非均匀杂波环境中，难以获得足够的IID训练样本<sup><a href="#[3]">[3]</a></sup>。</p>
 <p>目前，国内外解决上述问题主要两类技术： 一类是将含奇异值样本剔除，使得样本均匀化；另一类是降低均匀样本需求，设计小样本条件下次最优STAP处理器。具体方法划分如图1.1。</p>
 <center><img src="https://pic.imgdb.cn/item/64ddcb58661c6c8e543b0a68.jpg" alt="图1.1 STAP相关算法" style="zoom:50%"></center>
 
@@ -441,19 +441,19 @@ $$
 \boldsymbol b^{(c)}_{p}(\varpi) =\left[1 \quad \mathrm e^{\mathrm j 2 \pi \varpi_{p}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (M-1) \varpi_{p}} \right]^{\mathrm T} \tag{3-3}</script><script type="math/tex; mode=display">
 \boldsymbol a^{(c)}_{p}(\vartheta) = \left[1 \quad \mathrm e^{\mathrm j 2 \pi \vartheta_{p}} \quad \cdots \quad  \mathrm e^{\mathrm j 2 \pi (N-1) \vartheta_{p}} \right]^{\mathrm T} \tag{3-4}</script><p>由式$(3-2)$看出，机载雷达回波可由不同波束指向(空频)和不同多普勒频率的回波信号叠加而成。若将空频和多普勒频率分别离散化为$N_S = \rho_S N$ 和$N_D = \rho_D M$($\rho_S$和$\rho_D$分别为空频和多普勒频率离散化倍数，通常$\rho_S, \rho_D \gg 1$)，同时忽略量化误差影响，则待雷达回波信号还可表征为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol y = \sum_{q = 1}^{N_S \cdot N_D} \alpha^{(c)}_q \boldsymbol v^{(c)}_{q}(\varpi, \vartheta) + \boldsymbol x^{(n)} = \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} +  \boldsymbol x^{(n)} \tag{3-5}</script><p>其中，$\alpha_q$和$\boldsymbol v_q$分别为空时平面第$q$个网格点对应幅度和空时二维导向矢量。$\boldsymbol V^{(c)}$为空时二维平面所有网格点对应空时二维导向矢量集合，也称为字典：</p>
+\boldsymbol y = \sum_{q = 1}^{N_S \cdot N_D} \alpha^{(c)}_q \boldsymbol v^{(c)}_{q}(\varpi, \vartheta) + \boldsymbol x^{(n)} = \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} +  \boldsymbol x^{(n)} \tag{3-5}</script><p>其中，$\alpha^{(c)}_q$和$\boldsymbol v^{(c)}_q$分别为空时平面第$q$个网格点对应幅度和空时二维导向矢量。$\boldsymbol V^{(c)}$为空时二维平面所有网格点对应空时二维导向矢量集合，也称为字典：</p>
 <script type="math/tex; mode=display">
 \boldsymbol \alpha^{(c)} = [\alpha_1^{(c)}, \alpha_2^{(c)}, \cdots,\alpha_{N_S N_D}^{(c)}]^{\mathrm T} \in \mathbb C^{N_S N_D \times 1} \tag{3-6}</script><script type="math/tex; mode=display">
 \boldsymbol V^{(c)} = [\boldsymbol v^{(c)}_{1}, \boldsymbol v^{(c)}_{2}, \cdots, \boldsymbol v^{(c)}_{N_SN_D}] \in \mathbb C^{NM \times N_S N_D} \tag{3-7}</script><p>由于$N_S × N_D \gg N × K$，式$(3-5)$为欠定方程． 根据SR理论，如果变量$\boldsymbol \alpha^{(c)}$足够稀疏，则可通过以下约束优化问题获得唯一解：</p>
 <script type="math/tex; mode=display">
 \begin{cases}
-\min & \| \boldsymbol{\alpha} \|_0 \\ 
+\min & \| \boldsymbol{\alpha}^{(c)} \|_0 \\ 
 \text { s.t. } & \| \boldsymbol y - \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} \|^2_2 \leq \varepsilon 
 \end{cases} \tag{3-8}</script><p>其中，$\varepsilon$为噪声功率，此外，式$(3-8)$还可表述为如下形式：</p>
 <script type="math/tex; mode=display">
 \begin{cases}
 \min & \| \boldsymbol y - \boldsymbol{V}^{(c)}\boldsymbol{\alpha}^{(c)} \|^2_2\\ 
-\text { s.t. } &  \| \boldsymbol{\alpha} \|_0  \leq r_s
+\text { s.t. } &  \| \boldsymbol{\alpha} ^{(c)}\|_0  \leq r_s
 \end{cases} \tag{3-9}</script><p>其中，$r_s$表示杂波稀疏度。求解式$(3-8)$或式$(3-9)$得到稀疏系数$\boldsymbol \alpha$ 后，当前主要有两大类方法实现目标检测：</p>
 <ul>
 <li>① 是利用训练样本求得稀疏系数来计算CCM，进而设计空时滤波器进行滤波处理后再检测；</li>
@@ -472,7 +472,71 @@ f_D = \dfrac{2v}{\lambda} \cos(\theta + \alpha)\cos\psi</script><p>由该式可�
 <p><img src="https://pic.imgdb.cn/item/64e1876b661c6c8e54d80ddc.jpg" alt="3.1 SR-STAP算法的发展"></p>
 <p><strong>(二) 相关问题讨论</strong></p>
 <p><strong>(1) 空时谱估计还是杂波抑制?</strong></p>
-<p>目标由于自身尺寸限制，在空时平面也同样是稀</p>
+<p>目标由于自身尺寸限制，同杂波一样在空时平面也具有稀疏性。因此，不同于杂波抑制后检测目标的方式，若直接采用SR 技术将RUT数据进行稀疏表征，得到目标和杂波的角-多普勒超分辨谱，则无需进行杂波抑制处理，而直接在空时二维谱检测目标，该方法称为SR空时谱估计方法。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>空时谱估计优势</th>
+<th>空时谱缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>① 无需训练样本，适用于严重非均匀杂波环境；<br>② 在检测目标的同时，还可实现对目标方位角和速度的超分辨估计，解决了传统STAP 处理后测角难题；<br>③ 无需杂波抑制，降低了运算复杂度；</td>
+<td>① 仅利用RUT 数据进行恢复，受噪声影响大，导致所恢复空时谱中伪峰较多，引起较大虚警；<br>② 在强杂波背景下，功率较弱目标难以被恢复，导致目标丢失。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>综上所述，实际中采用SR杂波抑制的方式更为稳健，且有利于发现弱小目标。因此，基于SR类空时处理方法的研究应侧重于杂波抑制类方法。</p>
+</blockquote>
+<p><strong>(2) 单观测样本还是多观测样本?</strong></p>
+<p>单观测样本，即仅利用RUT 数据进行恢复处理，但受噪声影响恢复性能不甚理想。在假定各观测数据具有相同稀疏结构，即不同观测数据中对应稀疏系数矢量的非零元素位置和个数均相同的前提下，式$(3-8)$ 在多观测样本条件下可进一步表述为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min & \| \boldsymbol{A} \|_{2,0} \\ 
+\text { s.t. } & \| \boldsymbol Y - \boldsymbol{V}^{(c)}\boldsymbol{A}^{(c)} \|_{\mathrm F} \leq \varepsilon 
+\end{cases} \tag{3-10}</script><p>其中，$\boldsymbol A = \left[\boldsymbol{\alpha}^{(c)}_1, \boldsymbol{\alpha}^{(c)}_2, \cdots, \boldsymbol{\alpha}^{(c)}_L \right]$为稀疏系数矩阵，$\boldsymbol Y$为观测样本矩阵，$L$为观测样本个数。$| \boldsymbol{A} |_{2,0}$表示对矩阵各行取$l_2$范数，然后在列向取$l_0$范数；$| \cdot |_{\mathrm F}$表示对矩阵取Frobenius范数。</p>
+<p>文献<a href="#[40]">[40-44]</a>将各类经典SR算法进行了拓展，并证明了如下结论：即<strong>单观测样本下SR 求得唯一解的充要条件(不考虑噪声)：</strong></p>
+<script type="math/tex; mode=display">
+r_s < \dfrac{\text{spark}(\boldsymbol V^{(c)})}{2} \tag{3-11}</script><p><strong>在多观测样本条件下松弛为：</strong></p>
+<script type="math/tex; mode=display">
+r_s = |\mathrm{supp}| < \dfrac{\boldsymbol V^{(c)} - 1 + \mathrm{rank}(\boldsymbol Y)}{2} \tag{3-12}</script><p>其中，$\mathrm{spark}(·)$表示矩阵的最小线性独立列个数，$\mathrm{rank}(·)$表示矩阵的秩。这也就是说多观测样本对稀疏度的要求显著降低，更有利于获得最优解。该结论同样适用于噪声条件下<sup><a href="#[40]">[40]</a></sup>。</p>
+<p><strong>(3) 白化还是置零?</strong></p>
+<p>从杂波抑制方式来看，现有SR STAP方法主要分为两类，即杂波白化和杂波置零。</p>
+<ul>
+<li>杂波白化主要是基于恢复得到原子及其相应幅度构造CCM，然后再进行自适应滤波处理<sup><a href="#[19]">[19]</a>,<a href="#[23]">[23]</a>,<a href="#[25]">[25]</a></sup>。</li>
+<li>杂波置零则利用SR得到杂波分量对应原子构造杂波子空间，再通过正交投影等方式进行杂波滤除<sup><a href="#[31]">[31]</a></sup>。</li>
+</ul>
+<p>与白化类方法相比，杂波置零类方法基于信号间正交特性进行杂波抑制，因此无需原子幅度信息，这部分降低了SR难度；同时可生成较深零深，将杂波处功率抑制为零，而白化类算法的零深取决于该处杂波功率强弱，且仅能将杂波抑制到噪声电平。 然而，杂波置零类算法性能严重依赖于杂波子空间维度信息的准确性。</p>
+<p>通常来说，子空间维度的略微过估计并不会造成性能下降，但欠估计却可导致性能严重降低，甚至失效<sup><a href="#[45]">[45]</a></sup>. 尽管文献<a href="#[46]">[46]</a>给出了理想情况各类配置情况杂波秩估计准则，但在实际应用中，受各类非理想因素影响，杂波秩很难准确得到，导致置零类SR算法的性能严重受损。尽管白化类SR算法依赖于原子幅度信息，但可通过合理设计算法而准确估计，因此更适用于机载雷达实际应用。</p>
+<p><strong>(4) 重构算法参数依赖还是不依赖?</strong></p>
+<p>通过拉格朗日乘子，式$(3-8)$和式$(3-9)$还可转化为如下优化问题：</p>
+<script type="math/tex; mode=display">
+\min _{\lambda, \boldsymbol \alpha^{(c)}} \dfrac{1}{2} \| \boldsymbol y - \boldsymbol{V}^{(c)} \boldsymbol \alpha^{(c)} \|^2_2 + \lambda \| \boldsymbol \alpha^{(c)} \|_0 \tag{3-13}</script><p>其中，第一项和第二项分别对应信号的保真度和稀疏度，而正则化参数$\lambda$则用于平衡两者间的相对重要性。由式$(3-8)$、$(3-9)$和$(3-10)$可知，参数$\varepsilon$、$r_s$和$\lambda$的设置对于上述优化问题的求解具有重要意义。实质上，$\lambda$可作为式$(3-8)$和$(3-9)$中约束优化问题的对偶形式中的对偶变量，如果已知噪声强度或稀疏度信息，则可对应求得其最优值。</p>
+<p>在机载雷达中，准确噪声功率往往是未知的，特别是在低或中重频条件下。因此，参数设置问题成为影响其SR性能的重要因素。在实际应用中，由于空域幅相误差、杂波起伏和载机偏航等非理想因素的影响，杂波的空时谱展宽或泄漏到其他区域，无论杂波秩还是杂波稀疏度均无法准确获知，因此严重依赖该参数的各类算法在实际应用中往往是不稳健的。</p>
+<p>将$l_0$拟范数松弛为$l_1$范数后，可通过典型凸优化方法求解上述优化问题，但运算量巨大，且性能严重依赖于正则化参数。从贝叶斯分析角度考虑，可将$l_1$范数优化方法转化为最大后验概率估计方法。在该框架下，SBL方法将稀疏系数各分量表征为不同方差且相互独立的零均值高斯随机变量，并且其参数化先验分布的期望形式为具有较强稀疏性的学生$t$分布，最终求取稀疏系数的过程转化为其超参数的迭代学习过程<sup><a href="#[47]">[47]</a></sup>。</p>
+<blockquote>
+<p>与$l_1$范数优化方法相比，SBL方法可获得更稀疏的全局最优解，同时不需要噪声强度先验信息，也无需设置正则化参数，因此也是当前SR STAP 中性能稳健的一类方法<a href="#[48]">[48]</a>。</p>
+</blockquote>
+<p><strong>(5) 非平稳杂波环境下是否适用?</strong></p>
+<p>除单基正侧放置均匀线(面)阵外任意情况下，均存在杂波多普勒随距离变化而变化的情况，即杂波具有非平稳性<sup><a href="#[49]">[49]</a></sup>。</p>
+<p>与表述样本间功率或散射源差异性的非均匀不同，非平稳侧重于表述杂波在不同样本间空时二维分布的差异性。该差异性同样导致各观测样本稀疏结构不同，进而影响多样本SR 性能。那么在非平稳杂波条件下，SR-STAP技术是否仍旧可行呢?</p>
+<p>实质上，机载雷达非平稳杂波由天线俯仰下副瓣引入，主要成份为近程杂波<sup><a href="#[50]">[50]</a>,<a href="#[51]">[51]</a></sup>，因此可通过设计合理的俯仰维波束形成方式进行提前滤除，实现杂波的平稳化<sup><a href="#[50]">[50]</a><a href="#[51]">[51]</a>,<a href="#[52]">[52]</a></sup>。此时各观测样本间具有了相同稀疏结构。</p>
+<p>如前所述，非均匀杂波条件下提升STAP性能的主要策略是<strong>降低样本需求</strong>，提升小样本条件下的算法性能；而非平稳杂波环境下则侧重于<strong>剔除非平稳杂波分量</strong>，将杂波平稳化。现实应用环境中往往是杂波非平稳性和非均匀性交织在一起，因此通过滤除非平稳杂波再级联SR STAP 的方式可有效提升上述背景下的杂波抑制性能。</p>
+<p><strong>(6) 干扰条件下是否可行?</strong></p>
+<p>STAP技术基于空域和时域二维联合自适应处理，对于干扰抑制具有先天优势，因此利用空时自适应滤波同时抑制杂波和干扰是当前机载雷达的重要技术手段。尽管干扰多是宽频带的，但由于其仅来自有限几个方向，因此在空时二维域仍是稀疏的<sup><a href="#[26]">[26]</a>,<a href="#[29]">[29]</a></sup></p>
+<ul>
+<li>对于副瓣压制噪声干扰，直接采用传统STAP处理或者SR STAP处理即可实现对干扰和杂波的同时抑制；</li>
+<li>对于主瓣压制噪声干扰，传统STAP处理由于主瓣畸变引起目标损失，导致算法性能失效，而如果仅利用RUT数据进行稀疏处理得到干扰、杂波和目标空时二维谱，则可期望实现对目标的有效检测和定位，但前提是目标功率相对较强；对于在时域功率变化剧烈的灵巧干扰，传统STAP处理由于无法获取有效样本往往性能较差，如果采用SR STAP进行处理，则可在极少样本条件下实现对干扰和杂波的有效抑制。</li>
+</ul>
+<h4 id="4-未来工作展望"><a href="#4-未来工作展望" class="headerlink" title="4 未来工作展望"></a>4 未来工作展望</h4><h5 id="4-1-网格失配问题"><a href="#4-1-网格失配问题" class="headerlink" title="4.1 网格失配问题"></a>4.1 网格失配问题</h5><p>目前，SR STAP方法中字典由均匀离散化的空间锥角和多普勒频率所对应空时二维导向矢量构成。尽管这种构建字典的方法简单且易于处理，但不可避免存在网格失配问题，即<strong>真实杂波以较低概率落于空时平面网格点</strong>。网格失配导致杂波能量泄露到其他原子而引起杂波谱展宽，进而影响后续空时滤波器性能。加密网格可增大杂波落于网格点的概率，但过于密集的网格会造成基字典中相邻原子间相关性太强，从而降低恢复性能<sup><a href="#[53]">[53]</a></sup>。</p>
+<p>已有SR STAP方法的研究多集中于正侧视且设定杂波脊线与网格点划分吻合，并未考虑网格失配所带来的严重杂波估计损失问题。文献<a href="#[39]">[39]</a>研究了SR STAP中网格失配问题，并提出一种知识辅助的非均匀网格划分方法，以消除网格失配带来的不利影响，但方法依赖于载机速度和偏航角度等先验知识的准确性。</p>
+<p>2012年Candés等<sup><a href="#[54]">[54]</a></sup>提出利用全变分范数可从少量时域采样中重构无限精度的连续频率值，该方法直接在连续域上进行稀疏正则化，由于无需对连续参数空间进行离散化，因此能够提供信号的精确SR模型并从根本上消除网格失配问题；Tang等<sup><a href="#[55]">[55]</a></sup>在此基础上提出无网格压缩感知(Gridless Compressive Sensing, GCS)，通过求解原子范数最小化问题，可从有限随机时域采<br>样中重构出无限精度的连续频率值，但对频率源间隔要求不低于系统自由度的四分之一。</p>
+<p>文献<a href="#[38]">[38]</a>将GCS 理论引入到SR-STAP领域，初步验证了该理论对于消除网格失配的天然优势，但并未从理论上给出GCS适用于连续分布杂波的证明，且仅考虑了理想情况． 在后续的工作中，证明GCS理论适用于连续杂波SR，以及研究基于GCS理论的各类非理想条件下SR-STAP方法是该领域的重要研究方向。</p>
+<h5 id="4-2-空域误差问题"><a href="#4-2-空域误差问题" class="headerlink" title="4.2 空域误差问题"></a>4.2 空域误差问题</h5><p>在实际工程中，由于通道内放大器的增益不一致导致的阵元<strong>幅相误差</strong>不可避免。在传统STAP方法中，误差分量隐含在接收回波数据中，因此基于回波数据所构造的CCM中蕴含了误差信息，只要有足够空域系统自由度参与自适应处理，则相应空时滤波器对误差具有较强的自适应补偿能力。而在SR-STAP方法中，由于误差未知，通常直接采用理想空时二维导向矢量来构建字典，因此各原子与真实阵列流形之间存在偏差，且误差越大，偏差越大。如果采用不准确的字典来进行SR处理，所估CCM 势必与真实情况存在较大偏差，从而造成后续滤波性能恶化甚至失效。因此，由阵元通道幅相误差导致的原子失配是SR-STAP应用于实际工程时必须要解决的问题。<br>在SR源定位应用中<sup><a href="#[56]">[56]</a></sup>，可基于特定稀疏优化准则对信源方位和阵列幅相误差参数进行联合优化估计，以实现对误差参数的在线实时估计和校正，从而提升误差条件下源定位的稳健性。需要注意的是，当前源定位误差校正均基于离散信源背景。Ma 等<sup><a href="#[28]">[28]</a></sup>首次将源定位中误差和信源来向联合优化技术移植到联合SR-STAP技术中，但其仿真实验仅基于有限强散射杂波源进行了验证。Sun等<sup><a href="#[36]">[36]</a></sup>继而提出了误差条件下基于SBL的离散强杂波源抑制方法。Liu 等<sup><a href="#[57]">[57]</a></sup>提出一种误差自校正子空间STAP算法，但严重依赖于对杂波秩的准确估计． 近期，文献<sup><a href="#[58]">[58]</a></sup>提出的幅相误差与杂波联合优化估计方法，提升了误差条件下SR STAP 方法的杂波抑制性能，但该算法性能严重依赖于正则化参数和惩罚因子的设置。因此，进一步验证连续杂波背景下误差自校正SR STAP 技术的可行性，以及在此基础上设计稳健的误差与杂波联合稀疏优化方法是未来解决误差影响问题的重要研究方向。</p>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
 <p><a id="[2]"></a> [2] Reed I S, Mallett J D, Brennan L E. Rapid convergence rate in adaptive arrays[J]. IEEE Transactions on Aerospace and Electronic Systems, 1974 (6): 853-863. </p>
 <p><a id="[3]"></a> [3] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
@@ -491,7 +555,7 @@ f_D = \dfrac{2v}{\lambda} \cos(\theta + \alpha)\cos\psi</script><p>由该式可�
 <p><a id="[16]"></a> [16] 闵丛丛. 基于学习的空时自适应处理方法研究[D]. 四川:电子科技大学,2017.</p>
 <p><a id="[17]"></a> [17] Yang Z, Li X, Wang H, et al. On clutter sparsity analysis in space–time adaptive processing airborne radar[J]. IEEE Geoscience and Remote Sensing Letters, 2013, 10(5): 1214-1218. </p>
 <p><a id="[18]"></a> [18] Maria S, Fuchs J J. Application of the global matched filter to STAP data an efficient algorithmic approach[C]//2006 IEEE International Conference on Acoustics Speech and Signal Processing Proceedings. IEEE, 2006, 4: IV-IV. </p>
-<p><a id="[19]"></a> [19]Sun K, Zhang H, Li G, et al. A novel STAP algorithm in heterogeneous [A]. IEEE International Conference on Geoscience ＆ Remote Sensing Symposium [C]. Cape Town: IEEE, 2009. 336－339. </p>
+<p><a id="[19]"></a> [19] Sun K, Zhang H, Li G, et al. A novel STAP algorithm in heterogeneous [A]. IEEE International Conference on Geoscience ＆ Remote Sensing Symposium [C]. Cape Town: IEEE, 2009. 336－339. </p>
 <p><a id="[20]"></a> [20] Li J, Zhu X, Stoica P, et al. High resolution angle-Doppler imaging for MTI radar[J]. IEEE Transactions on Aerospace and Electronic Systems, 2010, 46(3): 1544-1556. </p>
 <p><a id="[21]"></a> [21] Selesnick I W, Pillai S U, Li K Y, et al. Angle-Doppler processing using sparse regularization[C]//2010 IEEE International Conference on Acoustics, Speech and Signal Processing. IEEE, 2010: 2750-2753. </p>
 <p><a id="[22]"></a> [22] Parker J T, Potter L C. A Bayesian perspective on sparse regularization for STAP post-processing[C]//2010 IEEE Radar Conference. IEEE, 2010: 1471-1475. </p>
@@ -512,6 +576,25 @@ f_D = \dfrac{2v}{\lambda} \cos(\theta + \alpha)\cos\psi</script><p>由该式可�
 <p><a id="[37]"></a> [37] Zetao W, Yongliang W, Fei G, et al. Clutter nulling space‐time adaptive processing algorithm based on sparse representation for airborne radar[J]. IET Radar, Sonar &amp; Navigation, 2017, 11(1): 177-184. </p>
 <p><a id="[38]"></a> [38] Feng W, Guo Y, Zhang Y, et al. Airborne radar space time adaptive processing based on atomic norm minimization[J]. Signal Processing, 2018, 148: 31-40. </p>
 <p><a id="[39]"></a> [39] Duan K, Liu W, Duan G, et al. Off‐grid effects mitigation exploiting knowledge of the clutter ridge for sparse recovery STAP[J]. IET Radar, Sonar &amp; Navigation, 2018, 12(5): 557-564. </p>
+<p><a id="[40]"></a> [40] Cotter S F, Rao B D, Engan K, et al. Sparse solutions to linear inverse problems with multiple measurement vectors[J]. IEEE Transactions on signal processing, 2005, 53(7): 2477-2488. </p>
+<p><a id="[41]"></a> [41] Tropp J A, Gilbert A C, Strauss M J. Algorithms for simultaneous sparse approximation. Part I: Greedy pursuit[J]. Signal processing, 2006, 86(3): 572-588. </p>
+<p><a id="[42]"></a> [42] Tropp J A. Algorithms for simultaneous sparse approximation. Part II: Convex relaxation[J]. Signal Processing, 2006, 86(3): 589-602. </p>
+<p><a id="[43]"></a> [43] Chen J, Huo X. Theoretical results on sparse representations of multiple-measurement vectors[J]. IEEE Transactions on Signal processing, 2006, 54(12): 4634-4643. </p>
+<p><a id="[44]"></a> [44] Wipf D P, Rao B D. An empirical Bayesian strategy for solving the simultaneous sparse approximation problem[J]. IEEE Transactions on Signal Processing, 2007, 55(7): 3704-3716. </p>
+<p><a id="[45]"></a> [45] Tsao T, Himed B, Michels J H. Effects of interference rank estimation on the detection performance of rank reduced STAP algorithms[C]//Proceedings of the 1998 IEEE Radar Conference, RADARCON’98. Challenges in Radar Systems and Solutions (Cat. No. 98CH36197). IEEE, 1998: 147-152. </p>
+<p><a id="[46]"></a> [46] Goodman N A, Stiles J M. On clutter rank observed by arbitrary arrays[J]. IEEE Transactions on Signal processing, 2006, 55(1): 178-186. </p>
+<p><a id="[47]"></a> [47] Tipping M E. Sparse Bayesian learning and the relevance vector machine[J]. Journal of machine learning research, 2001, 1(Jun): 211-244. </p>
+<p><a id="[48]"></a> [48] Wipf D P, Rao B D. Sparse Bayesian learning for basis selection[J]. IEEE Transactions on Signal processing, 2004, 52(8): 2153-2164. </p>
+<p><a id="[49]"></a> [49] Wang Y L, Peng Y N, Bao Z. Space–time adaptive processing for airborne radar with various array orientations[J]. IEE Proceedings-Radar, Sonar and Navigation, 1997, 144(6): 330-340. </p>
+<p><a id="[50]"></a> [50] Meng X, Wang T, Wu J, et al. Short-range clutter suppression for airborne radar by utilizing prefiltering in elevation[J]. IEEE Geoscience and Remote Sensing Letters, 2009, 6(2): 268-272. </p>
+<p><a id="[51]"></a> [51] 段克清, 谢文冲, 陈辉, 等. 基于俯仰维信息的机载雷达非均匀杂波抑制方法[J]. 电子学报, 2011, 39 (3): 585－590. </p>
+<p><a id="[52]"></a> [52] Wu J, Wang T, Meng X, et al. Clutter suppression for airborne non-sidelooking radar using ERCB-STAP algorithm[J]. IET radar, sonar &amp; navigation, 2010, 4(4): 497-506. </p>
+<p><a id="[53]"></a> [53] Yang Z, Xie L. On gridless sparse methods for line spectral estimation from complete and incomplete data[J]. IEEE Transactions on Signal Processing, 2015, 63(12): 3139-3153. </p>
+<p><a id="[54]"></a> [54] Candès E J, Fernandez‐Granda C. Towards a mathematical theory of super‐resolution[J]. Communications on pure and applied Mathematics, 2014, 67(6): 906-956. </p>
+<p><a id="[55]"></a> [55] Tang G, Bhaskar B N, Shah P, et al. Compressed sensing off the grid[J]. IEEE transactions on information theory, 2013, 59(11): 7465-7490. </p>
+<p><a id="[56]"></a> [56] Sun K, Liu Y, Meng H, et al. Adaptive sparse representation for source localization with gain/phase errors[J]. Sensors, 2011, 11: 4780-4793. </p>
+<p><a id="[57]"></a> [57] Liu A, Sun H, Teh K C, et al. Robust space-time adaptive processing for nonhomogeneous clutter in the presence of model errors[J]. IEEE Transactions on Aerospace and Electronic Systems, 2016, 52(1): 155-168. </p>
+<p><a id="[58]"></a> [58] Zhaocheng Y, de Lamare R C, Liu W. Sparsity-based STAP using alternating direction method with gain/phase errors[J]. IEEE Transactions on Aerospace and Electronic Systems, 2017, 53(6): 2756-2768. </p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
