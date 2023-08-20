@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">8.5k</span>
+            <span class="post-count">9.3k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">38 分钟</span>
+            <span class="post-count">42 分钟</span>
         </span>
     </span>
 </div>
@@ -465,6 +465,14 @@ $$
 f_D = \dfrac{2v}{\lambda} \cos(\theta + \alpha)\cos\psi</script><p>由该式可看出杂波多普勒频率与空频存在依从关系，即一个空频对应一个多普勒频率( 不考虑距离模糊) ，因此杂波在空时二维平面仅分布于满足该依从关系的脊线及附近区域。也就是说，相比于整个空时二维平面，杂波仅分布于小部分特殊区域(一条直线上)，因此在该平面是稀疏的。</p>
 <p>文献<a href="#[17]">[17]</a>分析和讨论了杂波在空时平面的稀疏性问题，并指出理想情况及正侧机载雷达杂波稀疏度$r_s$等于杂波秩$r$，即杂波子空间可由r个正交空时导向矢量完备表述。但该结论是否适用于非理想或非正侧情况，尚无定论。</p>
 <p>上述讨论均是基于由空时导向矢量构成的过完备字典，其中字典中各导向矢量又称<strong>原子</strong>。在字典中包含上述$r$个正交原子情况下，通过设计合理SR算法即可求得相应原子位置以及幅度。</p>
+<blockquote>
+<p>注意：<strong>对于非正侧或非理想情况，杂波秩要显著高于理想正侧情况</strong>，因此构成杂波子空间的正交基或正交空时二维导向矢量个数也相应增加。基于该判断，与理想正侧情况相比，非正侧或非理想情况下杂波稀疏度势必变大，同时杂波在空时平面的稀疏性将变差。</p>
+</blockquote>
+<h5 id="3-2-研究进展及相关问题"><a href="#3-2-研究进展及相关问题" class="headerlink" title="3.2 研究进展及相关问题"></a>3.2 研究进展及相关问题</h5><p><strong>(一) 研究进展</strong></p>
+<p><img src="https://pic.imgdb.cn/item/64e1876b661c6c8e54d80ddc.jpg" alt="3.1 SR-STAP算法的发展"></p>
+<p><strong>(二) 相关问题讨论</strong></p>
+<p><strong>(1) 空时谱估计还是杂波抑制?</strong></p>
+<p>目标由于自身尺寸限制，在空时平面也同样是稀</p>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
 <p><a id="[2]"></a> [2] Reed I S, Mallett J D, Brennan L E. Rapid convergence rate in adaptive arrays[J]. IEEE Transactions on Aerospace and Electronic Systems, 1974 (6): 853-863. </p>
 <p><a id="[3]"></a> [3] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>
@@ -482,6 +490,28 @@ f_D = \dfrac{2v}{\lambda} \cos(\theta + \alpha)\cos\psi</script><p>由该式可�
 <p><a id="[15]"></a> [15] 秦兆锐. 对空时二维处理的干扰技术研究[D]. 陕西:西安电子科技大学,2020.</p>
 <p><a id="[16]"></a> [16] 闵丛丛. 基于学习的空时自适应处理方法研究[D]. 四川:电子科技大学,2017.</p>
 <p><a id="[17]"></a> [17] Yang Z, Li X, Wang H, et al. On clutter sparsity analysis in space–time adaptive processing airborne radar[J]. IEEE Geoscience and Remote Sensing Letters, 2013, 10(5): 1214-1218. </p>
+<p><a id="[18]"></a> [18] Maria S, Fuchs J J. Application of the global matched filter to STAP data an efficient algorithmic approach[C]//2006 IEEE International Conference on Acoustics Speech and Signal Processing Proceedings. IEEE, 2006, 4: IV-IV. </p>
+<p><a id="[19]"></a> [19]Sun K, Zhang H, Li G, et al. A novel STAP algorithm in heterogeneous [A]. IEEE International Conference on Geoscience ＆ Remote Sensing Symposium [C]. Cape Town: IEEE, 2009. 336－339. </p>
+<p><a id="[20]"></a> [20] Li J, Zhu X, Stoica P, et al. High resolution angle-Doppler imaging for MTI radar[J]. IEEE Transactions on Aerospace and Electronic Systems, 2010, 46(3): 1544-1556. </p>
+<p><a id="[21]"></a> [21] Selesnick I W, Pillai S U, Li K Y, et al. Angle-Doppler processing using sparse regularization[C]//2010 IEEE International Conference on Acoustics, Speech and Signal Processing. IEEE, 2010: 2750-2753. </p>
+<p><a id="[22]"></a> [22] Parker J T, Potter L C. A Bayesian perspective on sparse regularization for STAP post-processing[C]//2010 IEEE Radar Conference. IEEE, 2010: 1471-1475. </p>
+<p><a id="[23]"></a> [23] Sun K, Meng H, Wang Y, et al. Direct data domain STAP using sparse representation of clutter spectrum[J]. Signal Processing, 2011, 91(9): 2222-2236. </p>
+<p><a id="[24]"></a> [24] Yang Z, de Lamare R C, Li X. $ L_1 $-regularized STAP algorithms with a generalized sidelobe canceler architecture for airborne radar[J]. IEEE Transactions on Signal Processing, 2011, 60(2): 674-686. </p>
+<p><a id="[25]"></a> [25] Ma Z, Liu Y, Meng H, et al. Jointly sparse recovery of multiple snapshots in STAP[C]//2013 IEEE Radar Conference (RadarCon13). IEEE, 2013: 1-4. </p>
+<p><a id="[26]"></a> [26] Sen S. OFDM radar-space-time adaptive processing by exploiting spatio-temporal sparsity [J]. IEEE Transactions on Signal Processing, 2013, 61(1): 118 - 130. </p>
+<p><a id="[27]"></a> [27] Yang Z, Li X, Wang H, et al. On clutter sparsity analysis in space–time adaptive processing airborne radar[J]. IEEE Geoscience and Remote Sensing Letters, 2013, 10(5): 1214-1218. </p>
+<p><a id="[28]"></a> [28] Ma Z, Liu Y, Meng H, et al. Sparse recovery‐based space‐time adaptive processing with array error self‐calibration[J]. Electronics letters, 2014, 50(13): 952-954. </p>
+<p><a id="[29]"></a> [29] Feng W, Zhang Y, He X, et al. Cascaded clutter and jamming suppression method using sparse representation[J]. Electronics Letters, 2015, 51(19): 1524-1526. </p>
+<p><a id="[30]"></a> [30] Wang Z, Wang Y, Duan K, et al. Subspace-augmented clutter suppression technique for STAP radar[J]. IEEE Geoscience and Remote Sensing Letters, 2016, 13(3): 462-466. </p>
+<p><a id="[31]"></a> [31] Yang X, Sun Y, Zeng T, et al. Fast STAP method based on PAST with sparse constraint for airborne phased array radar[J]. IEEE Transactions on Signal Processing, 2016, 64(17): 4550-4561. </p>
+<p><a id="[32]"></a> [32] Yang Z, Li X, Wang H, et al. Knowledge‐aided STAP with sparse‐recovery by exploiting spatio‐temporal sparsity[J]. IET Signal Processing, 2016, 10(2): 150-161. </p>
+<p><a id="[33]"></a> [33] Guo Y, Liao G, Feng W. Sparse representation based algorithm for airborne radar in beam-space post-Doppler reduced-dimension space-time adaptive processing[J]. IEEE Access, 2017, 5: 5896-5903. </p>
+<p><a id="[34]"></a> [34] Duan K, Wang Z, Xie W, et al. Sparsity‐based STAP algorithm with multiple measurement vectors via sparse Bayesian learning strategy for airborne radar[J]. IET Signal Processing, 2017, 11(5): 544-553. </p>
+<p><a id="[35]"></a> [35] Wang Z, Xie W, Duan K, et al. Clutter suppression algorithm based on fast converging sparse Bayesian learning for airborne radar[J]. Signal Processing, 2017, 130: 159-168. </p>
+<p><a id="[36]"></a> [36] Sun Y, Yang X, Long T, et al. Robust sparse Bayesian learning STAP method for discrete interference suppression in nonhomogeneous clutter[C]//2017 IEEE Radar Conference (RadarConf). IEEE, 2017: 1003-1008. </p>
+<p><a id="[37]"></a> [37] Zetao W, Yongliang W, Fei G, et al. Clutter nulling space‐time adaptive processing algorithm based on sparse representation for airborne radar[J]. IET Radar, Sonar &amp; Navigation, 2017, 11(1): 177-184. </p>
+<p><a id="[38]"></a> [38] Feng W, Guo Y, Zhang Y, et al. Airborne radar space time adaptive processing based on atomic norm minimization[J]. Signal Processing, 2018, 148: 31-40. </p>
+<p><a id="[39]"></a> [39] Duan K, Liu W, Duan G, et al. Off‐grid effects mitigation exploiting knowledge of the clutter ridge for sparse recovery STAP[J]. IET Radar, Sonar &amp; Navigation, 2018, 12(5): 557-564. </p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
