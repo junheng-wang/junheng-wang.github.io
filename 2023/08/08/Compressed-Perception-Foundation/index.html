@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.4k</span>
+            <span class="post-count">5.8k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">8 分钟</span>
+            <span class="post-count">24 分钟</span>
         </span>
     </span>
 </div>
@@ -154,9 +154,188 @@
 <h4 id="4-凸优化算法"><a href="#4-凸优化算法" class="headerlink" title="4 凸优化算法"></a>4 凸优化算法</h4><p>除了贪婪算法以外，压缩感知重构算法的另一大类就是凸优化算法，这类方法通过将非凸问题转化为凸问题求解找到信号的逼近。</p>
 <h5 id="4-1-基追踪算法（BP）"><a href="#4-1-基追踪算法（BP）" class="headerlink" title="4.1 基追踪算法（BP）"></a>4.1 基追踪算法（BP）</h5><p>该算法全称为Basis Pursuit，其提出使用$l_1$范数替代$l_0$范数来解决最优化问题，以便使用线性规划方法来求解。即将求解 $\min \limits_{\boldsymbol \alpha} ||\boldsymbol \alpha||_{l_{0}}$ 的问题转化为求解 $\min\limits_{\boldsymbol \alpha} ||\boldsymbol \alpha||_{l_{1}}$ 的问题，其中$\boldsymbol \alpha$是需要构建出来的原始信号(重构信号)。</p>
 <p>参考链接4.1.1：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/290679001/answer/954062882">如何理解“L1范数是L0范数的最优凸近似”？ - 牛狮的回答 - 知乎</a><br>参考链接4.1.2：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/390844225">Basis Pursuit, LASSO, TV三种压缩感知优化求解算法 - SINK IN的文章 - 知乎</a><br>参考链接4.1.3：<a target="_blank" rel="noopener" href="https://jz.docin.com/p-2310356158.html">压缩感知中l1正则化最小二乘问题的算法研究 - 豆丁建筑</a> </p>
-<h4 id="4-2-梯度投影法"><a href="#4-2-梯度投影法" class="headerlink" title="4.2 梯度投影法"></a>4.2 梯度投影法</h4><p>梯度投影法(gradient projection method)利用梯度的投影技巧求约束非线性规划问题最优解的一种方法，求带线性约束的非线性规划问题更为有效。它是从一个基本可行解开始，由约束条件确定出凸约束集边界上梯度的投影，以便求出下次的搜索方向和步长。每次搜索后，都要进行检验，直到满足精度要求为止。具体原理可参考<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A2%AF%E5%BA%A6%E6%8A%95%E5%BD%B1%E6%B3%95/19134105?fr=aladdin">梯度投影法 - 百度百科</a>。</p>
-<p>本文转自：<br>版权声明：本文为CSDN博主「爱学习的一一」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。<br>原文链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42105848/article/details/124280903">https://blog.csdn.net/weixin_42105848/article/details/124280903</a></p>
-<p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22445302">形象易懂讲解算法II——压缩感知 - 咚懂咚懂咚的文章 - 知乎</a>：压缩感知的简要概述。<br>参考链接2：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28552876">如何理解压缩感知(compressive sensing)？ - 知乎</a>：压缩感知的简要概述。<br>参考链接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/FDS99999/article/details/129784658">压缩感知基本理论-飞大圣的博客-CSDN</a>：压缩感知的简要概述。<br>参考链接4：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/AndyJee/category/579870.html">随笔分类 - 压缩感知compressive sensing-AndyJee的博客-博客园</a>：<strong>强推！！！</strong>博客园博主AndyJee关于压缩感知的31篇文章。<br>参考链接5：<a target="_blank" rel="noopener" href="https://www.docin.com/p-777226899.html">Bessel序列与框架的若干刻画 - 豆丁网 (docin.com)</a><br>参考链接6：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/507765573">最优化理论——线性规划的标准形式 - 不喝牛奶的文章 - 知乎</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/375526356">优化理论——线性规划 - 星空爱好者的文章 - 知乎</a></p>
+<h5 id="4-2-梯度投影法"><a href="#4-2-梯度投影法" class="headerlink" title="4.2 梯度投影法"></a>4.2 梯度投影法</h5><p>梯度投影法(gradient projection method)利用梯度的投影技巧求约束非线性规划问题最优解的一种方法，求带线性约束的非线性规划问题更为有效。它是从一个基本可行解开始，由约束条件确定出凸约束集边界上梯度的投影，以便求出下次的搜索方向和步长。每次搜索后，都要进行检验，直到满足精度要求为止。具体原理可参考<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%A2%AF%E5%BA%A6%E6%8A%95%E5%BD%B1%E6%B3%95/19134105?fr=aladdin">梯度投影法 - 百度百科</a>。</p>
+<table width="50px"><td style="word-wrap:break-word;word-break:break-all;" ; bgcolor="lightgrey"><font size="3">
+本文转自： <br>
+
+版权声明：本文为CSDN博主「爱学习的一一」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处<br>及本声明。<br>
+
+原文链接：https://blog.csdn.net/weixin_42105848/article/details/124280903
+
+</font></td></table>
+
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/22445302">形象易懂讲解算法II——压缩感知 - 咚懂咚懂咚的文章 - 知乎</a>：压缩感知的简要概述。<br>参考链接2：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/28552876">如何理解压缩感知(compressive sensing)？ - 知乎</a>：压缩感知的简要概述。<br>参考链接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/FDS99999/article/details/129784658">压缩感知基本理论-飞大圣的博客-CSDN</a>：压缩感知的简要概述。<br>参考链接4：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/AndyJee/category/579870.html">随笔分类 - 压缩感知compressive sensing-AndyJee的博客-博客园</a>：<strong>强推！！！</strong>博客园博主AndyJee关于压缩感知的31篇文章。<br>参考链接5：<a target="_blank" rel="noopener" href="https://www.docin.com/p-777226899.html">Bessel序列与框架的若干刻画 - 豆丁网 (docin.com)</a><br>参考链接6：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/507765573">最优化理论——线性规划的标准形式 - 不喝牛奶的文章 - 知乎</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/375526356">优化理论——线性规划 - 星空爱好者的文章 - 知乎</a><br>参考链接7：<a target="_blank" rel="noopener" href="https://academic-accelerator.com/encyclopedia/zh-cn/compressed-sensing">压缩感知 Compressed Sensing - 百科全书、科学新闻和研究评论</a></p>
+<h4 id="5-原子范数最小化-Atomic-Norm-Minimization"><a href="#5-原子范数最小化-Atomic-Norm-Minimization" class="headerlink" title="5. 原子范数最小化(Atomic Norm Minimization)"></a>5. 原子范数最小化(Atomic Norm Minimization)</h4><p>原子范数最小化算法能在一众算法中登顶的原因也很简单：它既是拥有优良凸优化性质的算法，又没有精度的限制。简单而言，如果说OMP等在有限码本上选取码字的算法为On-grid类型。 那么原子范数最小化算法就是在无穷精度的范围内进行搜索，即Gridless类型。</p>
+<h5 id="5-1问题建模"><a href="#5-1问题建模" class="headerlink" title="5.1问题建模"></a>5.1问题建模</h5><p>考虑通信中常见的DOA问题。 对于$M$根接收天线而言，接收数据可表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol Y = \boldsymbol A(f) \boldsymbol S + \boldsymbol E</script><p>其中，$\boldsymbol Y \in \mathbb C^{M \times L}$，$L$代表接收时隙数(可理解为观测次数)，$\boldsymbol S \in \mathbb C^{K \times L}$代表了这$K$个源在$L$个时隙的发射信号，$\boldsymbol E \in \mathbb C^{M \times L}$为噪声，$\boldsymbol A(f)$为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol A(f) = [\boldsymbol a(f_1), \cdots, \boldsymbol a(f_K)] \in \mathbb C^{M \times K}</script><p>其每一列对应第$k$个源(source)的DOA对应的天线响应矢量，式中：</p>
+<script type="math/tex; mode=display">
+\boldsymbol a(f_i) = \left[1 \quad \mathrm e^{\mathrm j 2 \pi f_i} \quad \cdots \quad \mathrm e^{\mathrm j 2 \pi(M-1) f_i}\right]^{\mathrm T}</script><p>其中，$f_i = \cos \theta_i / 2$。</p>
+<table><td style="word-wrap:break-word;word-break:break-all;" width="100px" ; bgcolor="HoneyDew"><font size="3">
+<strong>Toeplitz矩阵的范德蒙德分解</strong> ：
+
+对于任意的秩满足$r \leq N$的半正定Toeplitz矩阵$\boldsymbol T(\boldsymbol u) \in \mathbb{C}^{N \times N}$，则有如下的$r-$原子范德蒙德分解：
+$$
+\boldsymbol T(\boldsymbol u) = \sum_{k=1}^{r} p_k \boldsymbol a(f_k) \boldsymbol a^{\mathrm H}(f_k) = \boldsymbol A(f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f)
+$$
+
+其中，$\boldsymbol A(f) = [\boldsymbol a(f_1), \boldsymbol a(f_2), \cdots, \boldsymbol a(f_r)]$。当$r < N$时，此分解是唯一的。
+
+此定律十分重要，原子范数的理论推导直接建立在这个分解之上！！！
+
+</font></td></table>
+
+<h5 id="5-2-DOA估计的一般框架"><a href="#5-2-DOA估计的一般框架" class="headerlink" title="5.2 DOA估计的一般框架"></a>5.2 DOA估计的一般框架</h5><p>考虑$L = 1$即一次观测的简单场景，表示为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol y = \boldsymbol z + \boldsymbol e = \boldsymbol A(f) \boldsymbol s + \boldsymbol e</script><p>那么一般可以以如下的优化问题为目标： </p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min & \mathcal{M}(\boldsymbol{z}) \\ 
+\text { s.t. } & ||\boldsymbol{y - z}||_2 \leq \varepsilon
+\end{cases}</script><p>其中，$\mathcal{M}(\boldsymbol z)$是选择的一种度量metric。 进一步地，通过引入惩罚系数$\lambda$，可将其改写为：</p>
+<script type="math/tex; mode=display">
+\min_{\boldsymbol z} \lambda \mathcal{M}(\boldsymbol z) + \dfrac{1}{2} ||\boldsymbol{y - z}||_2</script><p>下面要重点介绍的，就是以原子范数$||\boldsymbol z||_{\mathcal A}$作为$\mathcal{M}(\boldsymbol z)$的方法。</p>
+<h5 id="5-3-原子范数的概念"><a href="#5-3-原子范数的概念" class="headerlink" title="5.3 原子范数的概念"></a>5.3 原子范数的概念</h5><p><strong>(一) $l_0$原子范数</strong></p>
+<p>首先，<strong><font color="blue">原子集</font></strong>的定义如下：</p>
+<script type="math/tex; mode=display">
+\mathcal A = \left\{\boldsymbol a(f, \phi) = \boldsymbol a(f) \phi \mid f \in \mathbb T, \phi \in \mathbb C, |\phi| = 1 \right\}</script><p>这个集合可以理解为是类似于OMP方法中的字典，但它是无限精度的，因为$f$可以是任意实数。$\phi$是允许了一个初始相位的不同。 而根据$\boldsymbol z = \boldsymbol A(f) \boldsymbol s$，显然$\boldsymbol z$是该原子集中$k$个原子的线性组合。 而$\ell_0$-原子范数，就是指能组成$\boldsymbol z$的最少所需原子数， 即：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+||\boldsymbol z||_{\mathcal A, 0} =& \inf_{c_k, f_k, \phi_k} \left\{ \mathcal K \left| \boldsymbol z = \sum_{k=1}^{\mathcal K} c_k \boldsymbol a(f_k, \phi_k),  \quad c_k >0, f_k \in \mathbb T, |\phi_k| = 1 \right.\right\} \\
+= & \inf_{s_k, f_k} \left\{ \mathcal K \left| \boldsymbol z = \sum_{k=1}^{\mathcal K} s_k \boldsymbol a(f_k),  \quad f_k \in \mathbb T \right. \right\}
+\end{aligned}</script><p>因为我们的目的就是为了恢复出$\boldsymbol A(f)$，而$\boldsymbol z$可以写成无数种$\mathcal{A}$ 中原子线性组合的形式。 但只有对应所用原子数最少即对应最小$\ell_0$-原子范数时，此时组成$\boldsymbol z$的原子才恰好对应待恢复的$\boldsymbol A(f)$。因此，下面的任务就是最小化$\boldsymbol z$的$\ell_0$-原子范数$||\boldsymbol z||_{\mathcal A, 0}$。</p>
+<p><strong>(二) $\ell_0$-原子范数与范德蒙德分解</strong></p>
+<p>虽然模型建立出来了，但是容易看到，如何对$||\boldsymbol z||_{\mathcal A, 0}$进行最小化，可以说是完全摸不着头脑。这似乎比$\ell_0$范数最小化更为抽象。此时就是见证数学魅力的时刻，考虑如下形式的矩阵：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0</script><p>$\boldsymbol T(\boldsymbol u)$的定义如之前，是一个由$\boldsymbol u$得到的Teoplitz矩阵。$x$则是一个待优化的变量。 这个约束隐含了如下的结论：</p>
+<ul>
+<li>① $\boldsymbol T(\boldsymbol u) \succeq 0$，否则无法保证对于任何向量$\boldsymbol y$，都有$\boldsymbol y^{\mathrm H} \left[\begin{array}{cc} x &amp; \boldsymbol z^{\mathrm H} \\ \boldsymbol z &amp; \boldsymbol T(\boldsymbol u) \end{array}\right]\boldsymbol y \geq 0$</li>
+<li>$\boldsymbol z$ 一定位于$\boldsymbol T(\boldsymbol u)$的列空间中。 这个证明也在后面的证明章节中给出了。</li>
+</ul>
+<p>由于$\boldsymbol T(u) \succeq 0$， 因此$\boldsymbol T(u)$是一个半正定矩阵， 即存在范德蒙德分解：</p>
+<script type="math/tex; mode=display">
+\boldsymbol T(u) = \sum_{k=1}^r p_k \boldsymbol a(f_k) \boldsymbol a^{\mathrm H}(f_k) = \boldsymbol A(f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f)</script><p>其中，$r = \mathrm{rank}(\boldsymbol T(u))$。由于$\boldsymbol z$一定位于$\boldsymbol T(u)$的列空间中，那么$\boldsymbol z$必能写为$\boldsymbol a(f_k)$的线性组合！ 这一点至关重要，因为这引出了如下的结论：</p>
+<p><strong><font color="red">最小化$\ell_0$-原子范数等价于求解如下问题</font>：</strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{x, u} & r = \mathrm{rank}(\boldsymbol T(u)) \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(u) 
+\end{array}\right] \succeq 0
+\end{cases}</script><p>由于$\boldsymbol z$是$\boldsymbol T(u)$范德蒙德分解所得的$r$个原子的线性组合。当找到秩最小的$r$时，也就找到了组成$\boldsymbol z$所需的最少原子数。也就对应$\boldsymbol z$的$\ell_0$-原子范数最小化。 而对于这个转化后的问题，如果$u$被解出，那么$\boldsymbol T(u)$也能得到，那么对$\boldsymbol T(u)$进行范德蒙德分解，也就获得了$\boldsymbol A(f)$。但是美中不足的是，该目标函数并非凸函数，无法轻易求解。</p>
+<p><strong>(三) $\ell_1$-原子范数</strong></p>
+<p>将$\ell_0$-原子范数进行凸松弛， 得到的就是$\ell_1$-原子范数。 其定义如下：</p>
+<script type="math/tex; mode=display">
+||\boldsymbol  z||_{\mathcal A, 1} = \inf_{f_k, s_k} \left\{ {\sum_k ∣s_k∣ \left|  \boldsymbol z = \sum_k \boldsymbol a(f_k) s_k , \quad f_k \in \mathbb T \right.} \right\}</script><p>与$\ell_0$-原子范数的定义进行比较，发现这和将传统的$\ell_0$-范数松弛为$\ell_1$-范数如出一辙。然而如何最小化$||\boldsymbol  z||_{\mathcal A, 1}$看上去也非常困难。此时再度利用范德蒙德分解，有如下精彩的结论。</p>
+<p><strong><font color="red">最小化$\ell_1$-原子范数等价于求解如下问题：</font></strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{x, u} & \dfrac{1}{2}x + \dfrac{1}{2}u \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(u) 
+\end{array}\right] \succeq 0
+\end{cases}</script><blockquote>
+<p>注意到，这是一个凸问题。首先目标函数显然是变量的仿射函数，因此为凸(既凸且凹)。限制条件也可以写为变量的仿射函数形式。 因此也满足凸问题的限制条件($f(x) \leq 0$，$f(x)$为凸函数)。($\boldsymbol X \succeq 0$可以等价为$\boldsymbol y^{\mathrm H} \boldsymbol X \boldsymbol y \geq 0, \quad \forall \boldsymbol y$，而对于每个$\boldsymbol y$， 都是关于$\boldsymbol X$的仿射变换）</p>
+<p>$\boldsymbol T(u)$的对角元素都是$u$， 那么事实上$u$就是$\mathrm{tr}(\boldsymbol T(u))$！而后者又被称为<strong>核函数</strong>， 也是$\mathrm{rank}(\boldsymbol T(u))$的经典凸松弛。 这从另一个角度解释了$\ell_1$原子范数最小化是$\ell_0$原子范数最小化的凸松弛。</p>
+</blockquote>
+<p>至此，压缩感知问题被转化为了一个可以由CVX进行直接求解的凸问题！还剩的最后一块拼图：即为何$\ell_1$-原子范数可以等效为这个凸问题，仍照例，放在下面的证明章节中。</p>
+<p><strong>(四) 多维原子范数</strong></p>
+<p>将原子范数拓展到多维是十分必要的，因为通信中DOA估计大多是多次观测。然而其结论大体相似。此时，变量变为二维矩阵$\boldsymbol Z$，而其$\ell_0$-原子范数被定义为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+||\boldsymbol Z||_{\mathcal A, 0} =& \inf_{c_k, f_k, \boldsymbol \phi_k} \left\{ \mathcal K  \left| \boldsymbol Z = \sum_{k=1}^{\mathcal K} c_k \boldsymbol a(f_k, \boldsymbol \phi_k),  \quad c_k >0, f_k \in \mathbb T, ||\boldsymbol \phi_k||_2 = 1 \right. \right\} \\
+= & \inf_{\boldsymbol s_k, f_k} \left\{ \mathcal K \left| \boldsymbol Z = \sum_{k=1}^{\mathcal K} \boldsymbol s_k \boldsymbol a(f_k),  \quad f_k \in \mathbb T\right.\right\}
+\end{aligned}</script><p>其中，$\boldsymbol a(f_k, \boldsymbol \phi_k)$为(注意加粗)：</p>
+<script type="math/tex; mode=display">
+\boldsymbol a(f_k, \boldsymbol \phi_k) = \boldsymbol a(f_k) \boldsymbol \phi_k, \quad f_k \in \mathbb T,  \boldsymbol \phi_k \in \mathbb C^{1 \times L}, || \boldsymbol \phi_k||_2 = 1</script><p>注意到，这和向量$\boldsymbol z$的原子范数的最大区别在于标量$\phi_k$变为了行向量$\boldsymbol \phi_k$。类似的，对其凸松弛为$\ell_1$原子范数，定义为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+||\boldsymbol Z||_{\mathcal A, 1} =& \inf \left\{ t>0  \left| \boldsymbol Z \in t\mathrm{conv}(\mathcal A)\right. \right\} \\
+=& \inf_{c_k, f_k, \boldsymbol\phi_k} \left\{ \sum_k c_k  \left| \boldsymbol Z = \sum_{k=1}^{\mathcal K} c_k \boldsymbol a(f_k, \boldsymbol \phi_k),  \quad c_k >0, f_k \in \mathbb T, ||\boldsymbol \phi_k||_2 = 1 \right. \right\} \\
+= & \inf_{\boldsymbol s_k, f_k} \left\{ \sum_k ||\boldsymbol s_k||_2 \left| \boldsymbol Z = \sum_{k=1}^{\mathcal K} \boldsymbol s_k \boldsymbol a(f_k),  \quad f_k \in \mathbb T\right.\right\}
+\end{aligned}</script><p>其中，$\mathrm{conv}(\mathcal A)$表示原子集合的凸包。而对其的最小化，仍可以等价为如下SDP问题： </p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{\boldsymbol X, u} & \dfrac{1}{2\sqrt{N}} \left[\mathrm{tr}({\boldsymbol X}) + \mathrm{tr}({\boldsymbol T}(u)) \right] \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+\boldsymbol X & \boldsymbol Z^{\mathrm H} \\
+\boldsymbol Z & \boldsymbol T(u) 
+\end{array}\right] \succeq 0
+\end{cases}</script><p>证明见5.4。</p>
+<h5 id="5-4-相关证明"><a href="#5-4-相关证明" class="headerlink" title="5.4 相关证明"></a>5.4 相关证明</h5><p><strong>(一) 范德蒙德分解的证明</strong></p>
+<p><strong>() $\boldsymbol z$存在于列空间的证明</strong></p>
+<p>当$\boldsymbol T(\boldsymbol u)$满秩时，直接成立。当$\boldsymbol T(\boldsymbol u)$不满秩时，此时，可以看到：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0 
+\Longleftrightarrow 
+[ t \quad \boldsymbol y]^{\mathrm H} \left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \left[\begin{array}{c}
+\boldsymbol t \\
+\boldsymbol y
+\end{array}\right] \geq 0, \forall t,\boldsymbol y \\
+\Downarrow\\
+ t^*x t + \boldsymbol y^{\mathrm H} \boldsymbol{z} t +  t^*\boldsymbol z^{\mathrm H}\boldsymbol y + \boldsymbol y^{\mathrm H} \boldsymbol T(\boldsymbol u) \boldsymbol y \geq 0</script><p>此时，取$\boldsymbol y$位于$\boldsymbol T(\boldsymbol u)$的零空间中，则上式进一步变为：</p>
+<script type="math/tex; mode=display">
+t^*x t + \boldsymbol y^{\mathrm H} \boldsymbol{z} t +  t^*\boldsymbol z^{\mathrm H}\boldsymbol y \geq 0</script><p>若$\boldsymbol z$不位于$\boldsymbol T(\boldsymbol u)$的列空间中，即$a = \boldsymbol y^{\mathrm H} \boldsymbol z \neq 0$，则：</p>
+<script type="math/tex; mode=display">
+t^*x t + a t +  t^*a^* \geq 0</script><p>此时，取$t = -\dfrac{a^*}{x}$，则有：</p>
+<script type="math/tex; mode=display">
+\dfrac{aa^*}{x^*} - \dfrac{aa^*}{x^*} - \dfrac{aa^*}{x^*} \geq 0</script><p>由于$x$必为非负实数(取$t = 1, y = 0$)，所以上式显然不成立，矛盾。得证。</p>
+<p><strong>() 原子范数最小化的等价性证明</strong></p>
+<p>记等价凸问题的目标函数为：</p>
+<script type="math/tex; mode=display">
+F=\dfrac{1}{2} x+\dfrac{1}{2} u_{1}</script><p>先证明：$F \leq ||\boldsymbol z||_{\mathcal A}$。</p>
+<p>取$\boldsymbol z = \sum\limits_{k}c_k \boldsymbol a(f_k, \phi_k) = \sum\limits_{k}s_k \boldsymbol a(f_k)$，令$\boldsymbol T(\boldsymbol u) = \sum\limits_{k} c_k \boldsymbol a(f_k) \boldsymbol a^{\mathrm H}(f_k)$、$x = \sum\limits_k c_k$，则有：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+x & \boldsymbol{z}^{\mathrm{H}} \\
+\boldsymbol{z} & \boldsymbol{T}
+\end{array}\right]=\sum_{k} c_{k}\left[\begin{array}{c}
+\phi_{k}^* \\
+\boldsymbol{a}\left(f_{k}\right)
+\end{array}\right]\left[\begin{array}{c}
+\phi_{k}^* \\
+\boldsymbol{a}\left(f_{k}\right)
+\end{array}\right]^{\mathrm{H}} \succeq 0</script><p>因此$\boldsymbol T$和$x$是一组可行解。那么其必然不小于最优解。而这组可行解对应的目标函数为：</p>
+<script type="math/tex; mode=display">
+\dfrac{1}{2} x+\dfrac{1}{2} u_{1} = \sum_k c_k</script><p>因此$F \leq ||\boldsymbol z||_{\mathcal A}$。</p>
+<p>再证明：$F \geq ||\boldsymbol z||_{\mathcal A}$</p>
+<p>设凸问题的最优解为$(\hat x , \hat u)$，对$\boldsymbol T (\hat u)$进行范德蒙德分解，得到参数 $(\hat r, \hat p_k, \hat f_k)$。根据之前的分析，$\boldsymbol z$必然在$\boldsymbol T(\hat u)$的列空间中，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol z = \sum_{k=1}^{\hat r} \hat c_k \boldsymbol a(\hat f_k, \hat\phi_k) = \sum_{k=1}^{\hat r} \hat s_k \boldsymbol a(\hat f_k)</script><p>进一步地，根据<a target="_blank" rel="noopener" href="https://zhuyulab.blog.csdn.net/article/details/121942523">Schur补条件</a>：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(u) 
+\end{array}\right] \succeq 0 
+\quad \Longleftrightarrow \quad
+\hat x \geq \boldsymbol z^{\mathrm H}[\boldsymbol T(\boldsymbol{\hat u})]^{\dagger} \boldsymbol z = \sum_{k=1}^{\hat r}\dfrac{\hat c^2_k}{\hat p_k}</script><p>而$\hat{u}_{1}=\sum\limits_{k=1}^{\hat{r}} \hat{p}_{k}$，因此</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+F & =\dfrac{1}{2} \hat{x}+\dfrac{1}{2} \hat{u}_1 \\
+& \geq \dfrac{1}{2} \sum_{k} \dfrac{\hat{c}_{k}^2}{\hat{p}_{k}}+\dfrac{1}{2} \sum_k \hat{p}_{k} \\
+& \geq \sum_{k} \hat{c}_{k} \\
+& \geq\|\boldsymbol{z}\|_{\mathcal{A}} .
+\end{aligned}</script><p>第一个不等号来自于Schur补条件。 第二个不等号来自于$\dfrac{1}{x}+x$的最大化问题。第三个不等式来自于$|| \boldsymbol z||_{\mathcal{A}}$的定义，即所有线性分解中，$\sum\limits_k c_k$的最小值。<br>至此， 得证：$F =|z|_{\mathcal{A}}$。</p>
+<p><strong>()多维原子范数最小化的等价性证明</strong></p>
+<p><strong>相关参考链接</strong></p>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuyulab.blog.csdn.net/article/details/121867153">压缩感知的尽头: 原子范数最小化 - B417科研笔记 - CSDN</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43553032/article/details/123857173">原子范数最小化(Atomic Norm Minimization) - 大灰煜 - CSDN</a><br>参考链接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43553032/article/details/124083906">解耦原子范数最小化(Decoupled Atomic Norm Minimization) - 大灰煜 - CSDN</a><br>参考链接4：<a target="_blank" rel="noopener" href="https://arxiv.org/pdf/1609.09596.pdf">Sparse Methods for Direction-of-Arrival Estimation - 杨在 - pdf</a>、<a target="_blank" rel="noopener" href="https://sites.google.com/site/zaiyang0248">Zai Yang’s website</a><br>参考链接5：<a target="_blank" rel="noopener" href="https://it.cha138.com/python/show-4698676.html">基于原子范数的深度展开网络实现</a><br>参考链接6：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/connorzx/p/4897207.html">原子范数及线谱估计</a><br>参考链接7：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43413559/article/details/128140473">原子范数初探：以到达角估计为例 - Turbo-shengsong的博客 - CSDN博客</a><br>参考链接8：<a target="_blank" rel="noopener" href="https://blog.csdn.net/FDS99999/article/details/129861193">原子范数去噪及其在线谱估计中的应用 - 飞大圣的博客-CSDN博客</a> </p>
+<h4 id="6-稀疏贝叶斯学习-SBL"><a href="#6-稀疏贝叶斯学习-SBL" class="headerlink" title="6. 稀疏贝叶斯学习(SBL)"></a>6. 稀疏贝叶斯学习(SBL)</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_23947237/article/details/90314230">稀疏贝叶斯学习 1 - 本帅哥屏蔽了凡人 - CSDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/code_Joe123/article/details/124125992">压缩感知学习总结及Matlab代码实现 - WinrenJoe - CSDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_49277759/article/details/116999384">压缩感知、一阶范数、Lasso - CSDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/390844225">Basis Pursuit, LASSO, TV - SINK IN的文章 - 知乎</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
@@ -685,6 +864,22 @@
     
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 
 </html>
