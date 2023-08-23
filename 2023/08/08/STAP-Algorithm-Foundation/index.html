@@ -114,7 +114,7 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h4 id="1-STAP算法简介"><a href="#1-STAP算法简介" class="headerlink" title="1. STAP算法简介"></a>1. STAP算法简介</h4><p>空时自适应处理(STAP)是由L.E. Brennan等人<sup><a href="#[1]">[1]</a></sup>于1973年提出，利用机载雷达杂波信号存在空时耦合特性。</p>
-<p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。STAP 技术的自适应体现在对外部杂波环境的准确感知及应对，其依赖于待检测距离单元( Rangecell Under Test, RUT) 杂波协方差矩阵(Clutter Covariance Matrix, CCM) 的实时获取，而CCM 在实际应用中通常是未知的，需要通过一定数量的独立同分布( Independent Identically Distributed, IID)训练样本<strong>最大似然估计</strong>得到。根据Reed-Mallett-Brennan准则<sup><a href="#[2]">[2]</a></sup>，确保STAP输出信杂噪比损失小于$3\text{ dB}​$以内所需<strong>IID样本</strong>数应至少为<strong>2倍系统自由度</strong>。但机载雷达通常工作在非均匀杂波环境中，难以获得足够的IID训练样本<sup><a href="#[3]">[3]</a></sup>。</p>
+<p>STAP技术充分利用多通道雷达提供的多个空域通道信息和相干脉冲串提供的时域信息，通过空域和时域二维自适应滤波的方式，实现杂波的有效抑制。STAP 技术的自适应体现在对外部杂波环境的准确感知及应对，其依赖于待检测距离单元( Rangecell Under Test, RUT) 杂波协方差矩阵(Clutter Covariance Matrix, CCM) 的实时获取，而CCM 在实际应用中通常是未知的，需要通过一定数量的独立同分布( Independent Identically Distributed, IID)训练样本<strong>最大似然估计</strong>得到。根据Reed-Mallett-Brennan准则<sup><a href="#[2]">[2]</a></sup>，确保STAP输出信杂噪比损失小于$3\text{ dB}$以内所需<strong>IID样本</strong>数应至少为<strong>2倍系统自由度</strong>。但机载雷达通常工作在非均匀杂波环境中，难以获得足够的IID训练样本<sup><a href="#[3]">[3]</a></sup>。</p>
 <p>目前，国内外解决上述问题主要两类技术： 一类是将含奇异值样本剔除，使得样本均匀化；另一类是降低均匀样本需求，设计小样本条件下次最优STAP处理器。具体方法划分如图1.1。</p>
 <center><img src="https://pic.imgdb.cn/item/64ddcb58661c6c8e543b0a68.jpg" alt="图1.1 STAP相关算法" style="zoom:50%"></center>
 
@@ -247,7 +247,7 @@ s^{\mathrm t}_{n, m}(t_k) = a_r u(t_k - \tau_{c}) \mathrm e^{- \mathrm j 2 \pi f
 <script type="math/tex; mode=display">
 s^{\mathrm t}_{n,m}\left(\dfrac{l}{L}T_r\right) = a_r u\left(\dfrac{l}{L}T_r - \tau_c\right)\mathrm e^{- \mathrm j 2 \pi f_c   \tau_{c, n, m}}  \tag{2-7}</script><p>时间离散后的发射复包络信号的矢量形式为：</p>
 <script type="math/tex; mode=display">
-\boldsymbol u = \left[u\left(\dfrac{0}{L}T_r\right) \quad \cdots \quad u\left(\dfrac{l}{L}T_r\right) \quad \cdots \quad u\left(\dfrac{L-1}{L}T_r\right)\right]^{\mathrm T} \tag{2-8}</script><p>考虑到雷达的脉冲压缩(脉冲的匹配滤波)通常在频域进行，我们对第$n$个阵元<br>接收到第$m$个脉冲的离散回波信号$\boldsymbol s^{\mathrm t}_{n,m}$做快速傅里叶变换(FFT)处理，可以得到距<br>离频域的信号形式：</p>
+\boldsymbol u = \left[u\left(\dfrac{0}{L}T_r\right) \quad \cdots \quad u\left(\dfrac{l}{L}T_r\right) \quad \cdots \quad u\left(\dfrac{L-1}{L}T_r\right)\right]^{\mathrm T} \tag{2-8}</script><p>考虑到雷达的脉冲压缩(脉冲的匹配滤波)通常在频域进行，我们对第$n$个阵元接收到第$m$个脉冲的离散回波信号$\boldsymbol s^{\mathrm t}_{n,m}$做快速傅里叶变换(FFT)处理，可以得到距离频域的信号形式：</p>
 <script type="math/tex; mode=display">
 \boldsymbol s^{\mathrm f}_{n,m} = \mathrm{FFT}(\boldsymbol s^{\mathrm t}_{n,m}) = \boldsymbol F^{\mathrm H}\boldsymbol s^{\mathrm t}_{n,m} \tag{2-9}</script><p>式中$\boldsymbol s^{\mathrm f}_{n,m}$为$L \times 1$维列向量，其上标用字母$f$ 表示该式为信号$\boldsymbol s^{\mathrm t}_{n,m}$的频域形式。$\boldsymbol F$为$L \times L$维的FFT矩阵，第$l$列矢量$\boldsymbol f_l$表示为：</p>
 <script type="math/tex; mode=display">
