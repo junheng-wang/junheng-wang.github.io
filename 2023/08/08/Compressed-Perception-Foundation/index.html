@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">5.8k</span>
+            <span class="post-count">10.7k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">24 分钟</span>
+            <span class="post-count">43 分钟</span>
         </span>
     </span>
 </div>
@@ -113,7 +113,206 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h4 id="1-压缩感知基础"><a href="#1-压缩感知基础" class="headerlink" title="1. 压缩感知基础"></a>1. 压缩感知基础</h4><p>压缩感知(Compressed Sensing, CS)是由陶哲轩等人提出的一种用于信息获取的突破性理论。该理论指出：<strong>对于稀疏信号或可压缩信号，可采用低于奈奎斯特采样频率的方式对数据采样，降低数据传输量，并能以高概率精确地重建该信号</strong>。其原始文献为：<em>D. L. Donoh, Compressed sensing, IEEE Transactions on Information Theory, 2006, 52(4): 1289-1306.</em>  </p>
+  <h4 id="0-文献研读中知识点补充"><a href="#0-文献研读中知识点补充" class="headerlink" title="0. 文献研读中知识点补充"></a>0. 文献研读中知识点补充</h4><h5 id="0-1-托普利兹-toeplitz-矩阵"><a href="#0-1-托普利兹-toeplitz-矩阵" class="headerlink" title="0.1 托普利兹(toeplitz)矩阵"></a>0.1 托普利兹(toeplitz)矩阵</h5><p><strong>(一) 基本定义</strong></p>
+<p>Toeplitz矩阵又叫做常对角矩阵(diagonal-constant matrix)，指矩阵中每条自左上至右下的斜线上之元素都为同一常数的矩阵。例如下面就是一个Toeplitz矩阵的例子： </p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{ccccc}
+a & b & c & d & e \\
+f & a & b & c & d  \\
+g & f & a & b & c  \\
+h & g & f & a & b \\
+i & h & g & f & a\\
+\end{array}\right]</script><p>其正式定义<a target="_blank" rel="noopener" href="https://baike.baidu.com/item/%E6%89%98%E6%99%AE%E5%88%A9%E5%85%B9%E7%9F%A9%E9%98%B5/5735426?fr=ge_ala">托普利兹矩阵_百度百科 (baidu.com)</a> 为 —— 设$\boldsymbol T = [t_{ij}] \in \mathbb C^{n \times n}$，如果满足$t_{ij} = t_{j-i}$，即：</p>
+<script type="math/tex; mode=display">
+\boldsymbol T = \left[\begin{array}{ccccc}
+t_0 & t_1 & t_2 & \cdots & t_{n-1} \\
+t_{-1} & t_0 & t_1 & \cdots & t_{n-2} \\
+t_{-2} & t_{-1} & t_0 & \cdots & t_{n-3} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+t_{-n+1} & t_{-n+2} & t_{-n+3} & \cdots & t_{0} 
+\end{array}\right]</script><p>则称$\boldsymbol T$为托普利兹矩阵(Toeplitz matrix)。</p>
+<p><strong>(二) 对称Toeplitz和Hermitian Toeplitz矩阵</strong></p>
+<p>在信号处理领域中经常遇到一种特殊的T型矩阵，它除了具有一般T型矩阵的特点外，还是一个对称矩阵，即满足$t_{-i} = t_i$，形式如下：</p>
+<script type="math/tex; mode=display">
+\boldsymbol T = \left[\begin{array}{ccccc}
+t_0 & t_1 & t_2 & \cdots & t_{n-1} \\
+t_{1} & t_0 & t_1 & \cdots & t_{n-2} \\
+t_{2} & t_{1} & t_0 & \cdots & t_{n-3} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+t_{n-1} & t_{n-2} & t_{n-3} & \cdots & t_{0} 
+\end{array}\right]</script><p>在复数域上，若一个复Toeplitz矩阵的元素满足复共轭对称关系，即$t_{-i} = t_i^*$，形式如下：</p>
+<script type="math/tex; mode=display">
+\boldsymbol T = \left[\begin{array}{ccccc}
+t_0 & t_1 & t_2 & \cdots & t_{n-1} \\
+t_{1}^* & t_0 & t_1 & \cdots & t_{n-2} \\
+t_{2}^* & t_{1}^* & t_0 & \cdots & t_{n-3} \\
+\vdots & \vdots & \vdots & \ddots & \vdots \\
+t_{n-1}^* & t_{n-2}^* & t_{n-3}^* & \cdots & t_{0} 
+\end{array}\right]</script><p>则称之为Hermitian Toeplitz矩阵。</p>
+<p>这种特殊的对称Toeplitz矩阵可仅由矩阵的第一行元素完全确定，因此常简记为$\boldsymbol T = \boldsymbol T(\boldsymbol t) = \mathrm{Toep}[t_0, t_1, \cdots, t_{n-1}]$。</p>
+<p><strong>相关参考链接</strong></p>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://blog.csdn.net/baimafujinji/article/details/74169484">各种矩阵总结-常见矩阵十种类型-白马负金羁-CSDN博客</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://www.docin.com/p-294882010.html?docfrom=rrela">关于TOEPLITZ矩阵的计算 - 豆丁网 (docin.com)</a></p>
+<h5 id="0-2-封闭解、解析解、数值解释义"><a href="#0-2-封闭解、解析解、数值解释义" class="headerlink" title="0.2  封闭解、解析解、数值解释义"></a>0.2  封闭解、解析解、数值解释义</h5><p><strong>(一) 封闭解</strong></p>
+<p>首先，封闭解(closed-form expression)就是一个数学表达式；这种数学表达式包含<strong><font color="red">有限</font>个<font color="blue">标准运算</font></strong>。</p>
+<p><strong>什么是有限？</strong> 比如$x+y$就是一个有限表达式(只有两个变量、一个加法运算)；二次方程的根$\dfrac{-b \pm \sqrt{b^2-4ac}}{2a}$也是一个有限表达式；$\sum\limits_{i=1}^5 2^i$也是有限表达式(这里包含了5次求和运算)。但是$\sum\limits_{i=1}^{+\infty} 2^i$就<strong>不是</strong>一个有限表达式，因为他是无穷求和。</p>
+<p>什么是<strong>标准运算</strong>？根据上面的定义，<strong>标准运算</strong>包含常量、变量、常见运算(如加、减、乘、除)以及一些函数(如$N$次根、指数、对数、三角函数、双曲函数)；但是<strong>极限、差分、积分都不能算作标准运算</strong>。</p>
+<p>有了这两条标准，我们就能很容易地判断出一个解是不是闭合解了，如下示例：</p>
+<ul>
+<li>$x+y$是一个闭合解，它仅包含变量和加法运算；</li>
+<li>$\dfrac{-b \pm \sqrt{b^2-4ac}}{2a}$是一个闭合解，它包含变量、加、减、乘、除以及根号运算；</li>
+<li>$\sum\limits_{i=1}^5 2^i$是一个闭合解，它包含变量、加法、除法以及指数运算；</li>
+<li>$\sum\limits_{i=1}^{+\infty} 2^i$不是一个闭合解，因为它包含了<strong>无限次</strong>加法运算；</li>
+<li>$\Phi(x) = \displaystyle\int_{-\infty}^x \dfrac{1}{2\pi} \exp\left(\dfrac{t^2}{2}\right) \text{ d}t$表示标准正态分布的累积分布函数，如果一个解中包含$\Phi(\cdot)$运算符，那么这个解就不是闭合解(积分运算不能算作标准运算)。</li>
+</ul>
+<p>两点说明：</p>
+<ul>
+<li><p>有些情况下，非闭合解可以转化为闭合解。比如无穷级数$\sum\limits_{i=1}^{+\infty} \dfrac{x}{2^i}$本身不是一个闭合解，但是利用等比数列的求和公式我们可以得到$\sum\limits_{i=1}^{+\infty} \dfrac{x}{2^i} = 2x$。因此，可以将非闭合解  转化为闭合解 。 </p>
+</li>
+<li><p>维基百科上关于Closed-form  expression的定义的最后一句提到：“The set of operations and functions may vary with  author and  context”。换句话说，关于标准运算的定义并不是非常的严格，也是因人而异的。如果在闭合解的范畴以外，再加上一些特别函数(比如Bessel函数、Gamma函数、无限级数、连续分数)等，就是所谓的<strong>解析解</strong>(Analytical solution)。解析解中不包含极限和积分运算。</p>
+</li>
+</ul>
+<p><strong>(二) 3个概念的整体辨析</strong></p>
+<ul>
+<li><p><strong>解析解</strong></p>
+<p>解析解(Analytical solution)  就是根据严格的公式推导，给出任意的自变量就可以求出其因变量，也就是问题的解，然后可以利用这些公式计算相应的问题。所谓的解析解是一种包含分式、三角函数、指数、对数甚至无限级数等基本函数的解的形式。用来求得解析解的方法称为<strong>解析法(Analytical techniques)</strong>，解析法即是常见的微积分技巧，例如分离变量法等。</p>
+</li>
+<li><p><strong>封闭解</strong></p>
+<p>解析解是一个封闭形式(Closed-form) 的函数，因此对任一自变量，我们皆可将其带入解析函数求得正确的因变量。因此，解析解也被称为封闭解(Closed-form solution)。</p>
+</li>
+<li><p><strong>数值解</strong></p>
+<p>数值解(Numerical solution) 是采用某种计算方法，如有限元法， 数值逼近法，插值法等得到的解。别人只能利用数值计算的结果，而不能随意给出自变量并求出计算值。</p>
+</li>
+</ul>
+<blockquote>
+<p>当无法藉由微积分技巧求得解析解时，这时便只能利用数值分析的方式来求得其数值解了。在数值分析的过程中，首先会将原方程加以简化，以利于后来的数值分析。例如，会先将微分符号改为差分(微分的离散形式)符号等，然后再用传统的代数方法将原方程改写成另一种方便求解的形式。这时的求解步骤就是将一自变量带入，求得因变量的近似解，因此利用此方法所求得的因变量为一个个离散的数值，不像解析解为一连续的分布，而且因为经过上述简化的操作，其正确性也不如解析法可靠。</p>
+</blockquote>
+<p>简而言之：（1）解析解就是给出解的具体函数形式，从解的表达式中就可以算出任何对应值；（2）数值解就是用数值方法求出近似解，给出一系列对应的自变量和解。</p>
+<p><strong>相关参考链接</strong></p>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/574867835">到底什么是“闭合解（Closed-form Solution）” - EricG的文章 - 知乎</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://www.cnblogs.com/vive/p/5006552.html">封闭解(Closed-form solution)、解析解(Analytical solution)、数值解(Numerical solution) 释义 - 博客园</a></p>
+<h5 id="0-3-启发式算法的概念"><a href="#0-3-启发式算法的概念" class="headerlink" title="0.3 启发式算法的概念"></a>0.3 启发式算法的概念</h5><p>启发式算法(heuristic algorithm)可以这样定义：一个基于直观或经验构造的算法，在可接受的花费（指计算时间和空间）下给出待解决组合优化(NP-Hard)问题每一个实例的一个可行解，该可行解与最优解的偏离程度一般不能被预计。现阶段，启发式算法以仿自然体算法为主，主要有蚁群算法、模拟退火法、神经网络等。 </p>
+<p>在数学优化和计算机科学中，启发式算法用于在经典方法效果不佳时更快地解决问题或找到近似解。这是通过牺牲最优性、完整性、准确性或精度换取速度来实现的。它是一个与最优化算法相对的概念。</p>
+<p>在某种程度上，它可以被认为是一条捷径。因此启发式算法给出的答案是具有偶然性的，或者说时好时坏，因为启发式方法仅仅告诉我们该如何去找答案，而不直接告诉我们答案是什么。</p>
+<p>某些启发式算法具有强大的基础理论，它们要么是从理论中以自上而下的方式推导出来的，要么是基于实验或现实世界的数据得出的。<strong>其他的只是基于现实世界观察或经验的经验法则，甚至连理论都没有，这些启发式算法的难点是建立符合实际问题的一系列启发式规则</strong>。</p>
+<p>关于启发式算法更多更详细内容请参考：<a target="_blank" rel="noopener" href="https://it.cha138.com/python/show-6057226.html">启发式算法(cha138.com)</a> </p>
+<h5 id="0-4-最优化涉及的一些基本概念"><a href="#0-4-最优化涉及的一些基本概念" class="headerlink" title="0.4 最优化涉及的一些基本概念"></a>0.4 最优化涉及的一些基本概念</h5><p><strong>(一) 线性规划中几个概念辨析</strong></p>
+<p>最优化线性规划问题中的常见概念辨析：可行解，最优解，基，基向量，非基向量，基变量，非基变量等等</p>
+<p>线性规划里面有很多基本的概念容易弄混</p>
+<p>已知标准型为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min & \boldsymbol z = \boldsymbol{C}^{\mathrm T} \boldsymbol x \\ 
+\text { s.t. } & \boldsymbol{Ax} = \boldsymbol b \\
+& \boldsymbol x \geq \boldsymbol 0
+\end{cases}</script><p>其中，$\boldsymbol C \in \mathbb R^n, \boldsymbol x \in \mathbb R^n, \boldsymbol b \in \mathbb R^m, \boldsymbol A \in \mathbb R^{m \times n}(m &lt;n)$，且$\boldsymbol A$的行向量线性无关。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可行解</td>
+<td>只要满足约束条件，$ \boldsymbol{Ax} = \boldsymbol b , \boldsymbol x \geq \boldsymbol 0$的解$\boldsymbol x$称为线性规划问题的可行解。</td>
+</tr>
+<tr>
+<td>最优解</td>
+<td>不仅要满足约束条件，而且要使目标函数$\boldsymbol z = \boldsymbol{Cx}$达到最小值的可行解称为最优解。</td>
+</tr>
+<tr>
+<td>基</td>
+<td>$\boldsymbol A_{m\times n}$是约束系数矩阵，秩为$m$，若$\boldsymbol B_{m \times m}$是$\boldsymbol A$的子阵且可逆(即$\boldsymbol B$是$\boldsymbol A$中$m$个线性无关向量组)，称$\boldsymbol B$为LP的一个基，不失一般性，可设$\boldsymbol B$是$\boldsymbol A$的前$m$列，即$\boldsymbol B = (\boldsymbol a_1, \boldsymbol a_2, \cdots, \boldsymbol a_m)$，其相对应的变量$\boldsymbol x_B = (x_1, x_2, \cdots, x_m)^{\mathrm T}$为基变量，基变量有$m$个。其余变量$\boldsymbol x_N = (x_{m+1}, x_{m+2}, \cdots, x_n)^{\mathrm T}$称为非基变量，非基变量有$n-m$个。</td>
+</tr>
+<tr>
+<td>基向量</td>
+<td>基$\boldsymbol B$的一列就称为一个基向量。</td>
+</tr>
+<tr>
+<td>非基向量</td>
+<td>在$\boldsymbol A$中除了基$\boldsymbol B$之外的一列就称为基$\boldsymbol B$的非基向量。</td>
+</tr>
+<tr>
+<td>基本解(<br>基解<br>基础解)</td>
+<td>若在约束方程组系数矩阵中找到一个基，令其非基变量为零，再求解该$m$元线性方程组可得到唯一解，该解称之为线性规划的基本解，其形式为$\boldsymbol x = (x_1, x_2, \cdots, x_m, 0, 0, \cdots, 0)^{\mathrm T}$ 。</td>
+</tr>
+<tr>
+<td>基可行解</td>
+<td>基解可正可负，负则不可行(违背非负性约束条件)，称满足所有约束条件的基解为基可行解。</td>
+</tr>
+<tr>
+<td>退化的基可行解</td>
+<td>若某个基变量取值为零，则称之为退化的基可行解。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>所以需要注意的是基本解不一定是可行解，非负的基解才是可行解。</p>
+</blockquote>
+<p>说了半天没有一个直观的理解，下面一张图展示了什么是基本解，什么是基本可行解。</p>
+<p><img src="https://pic.imgdb.cn/item/64f2e241661c6c8e54bee524.jpg" alt="各种解示意图"></p>
+<blockquote>
+<p>基本解：各个等式约束直线的交点，外加与坐标轴的交点；<br>基本可行解：基本解里面在可行域范围的那些基本解，可行域的顶点；<br>最优解：基本可行解里面使目标函数最大(最小)的基本可行解</p>
+</blockquote>
+<p><strong>相关参考链接</strong></p>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://blog.csdn.net/shulianghan/article/details/114480211">【运筹学】线性规划数学模型 ( 线性规划三要素 | 一般形式 | 标准形式 | 标准形式转化 | 可行解 | 最优解 | 基 | 基向量 | 基变量 | 非基变量 ) ★★-运筹学三要素-韩曙亮的博客-CSDN博客</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://hanshuliang.blog.csdn.net/article/details/102737266">【运筹学】线性规划数学模型标准形式 ( 标准形式 | 目标函数转化 | 决策变量转化 | 约束方程转化 | 固定转化顺序 | 标准形式转化实例 ) ★★-线性规划模型的标准形式-韩曙亮的博客-CSDN博客</a><br>参考链接3：<a target="_blank" rel="noopener" href="https://hanshuliang.blog.csdn.net/article/details/102853181">【运筹学】线性规划问题的解 ( 可行解 | 可行域 | 最优解 | 秩的概念 | 极大线性无关组 | 向量秩 | 矩阵秩 | 基 | 基变量 | 非基变量 | 基解 | 基可行解 | 可行基 )_线性规划问题的可行解如为最优解_韩曙亮的博客-CSDN博客</a> 机器学习中加正交约参考链接4：<a target="_blank" rel="noopener" href="https://www.zhihu.com/question/395786225">机器学习中加正交约束避免平凡解怎么理解呢？ - 知乎</a></p>
+<p><strong>(二) 数学中的「平凡」「非平凡」「退化」等概念</strong></p>
+<p>首先，<strong>平凡解就是显而易见、没有讨论的必要但为了结果的完整性仍要考虑的解。</strong></p>
+<ol>
+<li>比如$\boldsymbol{Ax} = \boldsymbol 0$中的一个显而易见的解——$\boldsymbol x = \boldsymbol 0$，即为平凡解。</li>
+<li>比如求一个数的因子，正负的1和它本身是这个数最显而易见的解，所以这两个因子就是平凡解，其他的是不平凡的。</li>
+</ol>
+<p>其次，<strong>「退化」在数学里面有“不可逆”、“不满秩”这样的含义</strong>。一个复杂的东西在某种条件下变成一个简单的东西，就叫「退化」 。它一般跟“某个量等于0”有关。① 比如行列式等于0可以叫退化情形(不可逆矩阵)；② 比如三大二阶线性偏微分方程分类里面，抛物型方程一般被称为退化情形，因为它对应的二次型是退化的——实际上也就是说对应的系数矩阵是不可逆的；③ 比如在某一点处的概率为1而在其他点的概率都为0的概率分布，它就比其他一般的分布都更简单，因此叫做退化分布； ④ 比如一个一元二次方程，在二次项系数为零时，就退化成一元一次方程；⑤ 比如椭圆在离心率为零时退化成圆；⑥ 比如向量的内积，在向量只有一维的时候就退化成标量乘法。</p>
+<blockquote>
+<p> <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/21872524/answer/303550906">退化</a>另一释义一般指是某种特殊，极限的情形。比如说欧式几何里两条平行的直线，比如零乘一个多项式变成零，比如一个环里有两个非零的元素乘积是零，比如坐标变换在一点上雅可比行列式为零，比如原本线性无关的基变换后线性相关了……</p>
+</blockquote>
+<p>补充，机器学习中加正交约束避免平凡解怎么理解呢？</p>
+<p>机器学习中很多参数的求解是迭代解法，根据奥卡姆剃刀原理，在结果相同的情况下，模型倾向于选择一个最简单的解。比如：$\boldsymbol{Ax} + \boldsymbol{By} = \boldsymbol 0$，待求参数为$\boldsymbol x$和$\boldsymbol y$，不得不承认$\boldsymbol{x=y=0}$是该方程的解(其实就是上面说的平凡解)，但是这并不是我们想要的结果，因此可以通过增加一个约束项，例如：$|\boldsymbol x|^2&gt;ε$来限制解的范围。平凡解的确也是一种解，但是并不是我们所期望的解，为了避免在迭代过程中模型收敛到平凡解，因此通过增加适当的约束项，来约束解的范围。 </p>
+<p><strong>(三) 小概念之凸包</strong></p>
+<p>平面上给定若干点，则它们的<strong>凸包</strong>被定义为所有能包含所有点的<strong>凸多边形</strong>的<strong>交集</strong>。 </p>
+<p>在一切包含所有点的凸多边形中，凸包的<strong>面积</strong>是最小的<em>(显然)</em>，<strong>周长</strong>也是最小的<em>(因为每个包含所有点的凸多边形，总可以通过下面这样的过程，不断缩小周长，最终得到凸包，完整证明可参见</em><a href="https://link.zhihu.com/?target=https%3A//math.stackexchange.com/questions/13148/convex-hull-has-the-smallest-perimeter">此网页</a><em>)</em>。类似地可以证明，凸包的每个顶点都是<strong>原有的点</strong>。 </p>
+<p>凸包的严格定义为：设集合$S \sub \mathbb R^n$是由$\mathbb R^n$中的$k$个点所组成的集合，即$S = (\boldsymbol x_1,\boldsymbol x_2, \cdots, \boldsymbol x_k)$。定义$S$的凸包为：</p>
+<script type="math/tex; mode=display">
+\mathrm{conv}(S) = \left\{\boldsymbol x = \sum_{i=1}^k \lambda_i \boldsymbol x_i \left|  \sum_{i=1}^k \lambda_i=1, \lambda_i \geq 0 \right.\right\}</script><p>详细内容请参考如下链接：</p>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/584937054">对凸包定义的可视化理解 - Zewbie的文章 - 知乎</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%87%B8%E5%8C%85">凸包 - 维基百科，自由的百科全书 (wikipedia.org)</a><br>参考链接3：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/340442313">算法学习笔记(65): 凸包 - Pecco的文章 - 知乎</a></p>
+<p>优化理论的系统笔记内容：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_39183034/category_12029281.html">最优化理论与方法 - 快乐江湖的专栏 - CSDN</a>：强推！！！</p>
+<h5 id="0-5-DOA估计之确定性VS随机性最大似然法"><a href="#0-5-DOA估计之确定性VS随机性最大似然法" class="headerlink" title="0.5 DOA估计之确定性VS随机性最大似然法"></a>0.5 DOA估计之确定性VS随机性最大似然法</h5><p><strong>(一) 概述</strong></p>
+<p>在空间谱估计中，根据入射信号的模型，最大似然算法基本上分为两类：确定性最大似然(DML)和随机性最大似然(SML)，具体为：</p>
+<ul>
+<li><p>当信号模型是未知的确定模型时导出的最大似然算法称为DML算法；</p>
+</li>
+<li><p>当入射信号服从高斯随机分布模型时导出的最大似然算法是SML算法；</p>
+</li>
+</ul>
+<p>窄带远场信号的 DOA数学模型为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol X(t) = \boldsymbol A(\boldsymbol \theta) \boldsymbol s(t) + \boldsymbol N(t), \quad t=1,2,\cdots,L</script><p>不同的快拍数之间的噪声协方差矩阵为$\boldsymbol O$，也就是不相关，且各阵元接收的噪声是正态分布的，噪声功率为$\sigma^2$。</p>
+<p><strong>(二) DML模型</strong></p>
+<p>根据以上的假设可知，对于DML由于模型未知，所以观察数据的一阶和二阶矩满足如下条件：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+均值:  \quad & \mathbb E[\boldsymbol x(t_i)] = \boldsymbol A(\boldsymbol \theta) \boldsymbol s(t_i) = \bar{\boldsymbol x}(t_i) \\
+协方差:  \quad & \mathbb E[(\boldsymbol x(t_i) - \bar{\boldsymbol x}(t_i)) \cdot (\boldsymbol x(t_i) - \bar{\boldsymbol x}(t_i))^{\mathrm H}] = \sigma^2 \boldsymbol I \delta_{ij}\\
+伪协方差:  \quad & \mathbb E[(\boldsymbol x(t_i) - \bar{\boldsymbol x}(t_i)) \cdot (\boldsymbol x(t_i) - \bar{\boldsymbol x}(t_i))^{\mathrm T}] = \boldsymbol O
+\end{aligned}</script><p>其中，<strong>伪协方差</strong>的概念请参考<a target="_blank" rel="noopener" href="https://www.cnblogs.com/junhengwang/p/17675109.html">复随机过程概念补充 - 博客侦探 - 博客园</a>。根据上式可以得到DML的联合概率密度函数，显然有观测矢量$L$次快拍联合(条件)概率密度函数(PDF)：</p>
+<script type="math/tex; mode=display">
+\boldsymbol f_{\mathrm{DML}}(\boldsymbol x_1, \cdots, \boldsymbol x_L) = \prod_{i=1}^L \dfrac{1}{\mathrm{det}(\pi \sigma^2 \boldsymbol I)} \exp\left(-\dfrac{1}{\sigma^2} |\boldsymbol x_i - \boldsymbol{As}_i|^2\right)</script><p><strong>(三) SML模型</strong></p>
+<p>对于SML，由于其信号的模型为高斯随机分布，所以观察数据是零均值，其二阶矩满足：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+均值:  \quad & \mathbb E[\boldsymbol x(t_i)] = \boldsymbol 0 \\
+协方差:  \quad & \mathbb E[\boldsymbol x(t_i) \cdot \boldsymbol x^{\mathrm H}(t_i)] = [\boldsymbol A(\boldsymbol \theta) \boldsymbol R_{\boldsymbol s} \boldsymbol A^{\mathrm H}(\boldsymbol \theta) + \sigma^2 \boldsymbol I] \delta_{ij}\\
+伪协方差:  \quad & \mathbb E[\boldsymbol x(t_i) \cdot \boldsymbol x^{\mathrm T}(t_i)] = \boldsymbol O
+\end{aligned}</script><p>所以单次观察数据的似然函数为：</p>
+<script type="math/tex; mode=display">
+f_{i}(\boldsymbol x) =\dfrac{1}{\pi^M \mathrm{det}(\boldsymbol R)} \exp\left(\boldsymbol x^{\mathrm H}_i \boldsymbol{R_s}^{-1} \boldsymbol x_i\right)</script><p>于是很容易得出观测矢量$L$次快拍联合(条件)概率密度函数PDF：</p>
+<script type="math/tex; mode=display">
+\boldsymbol f_{\mathrm{SML}}(\boldsymbol x_1, \cdots, \boldsymbol x_L) = \prod_{i=1}^L \dfrac{1}{\pi^M \mathrm{det}(\boldsymbol R)} \exp\left(\boldsymbol x^{\mathrm H}_i \boldsymbol{R_s}^{-1} \boldsymbol x_i\right)</script><p><strong>相关参考链接</strong></p>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_43332450/article/details/121381903">DOA估计 确定性VS随机性最大似然法）-guolideyu的博客-CSDN</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/621005482">DoA 估计 | 确定性最大似然算法 基于牛顿法 附 MATLAB 源码 - 知乎 </a> </p>
+<h5 id="0-6-待定"><a href="#0-6-待定" class="headerlink" title="0.6 待定"></a>0.6 待定</h5><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/26471536">为什么核范数能凸近似矩阵的秩？为什么核范数是凸的？ - 知乎</a><br><a target="_blank" rel="noopener" href="https://hyper.ai/wiki/2687">核范数 Nuclear Norm - 人工智能百科 - 超神经 (hyper.ai)</a> </p>
+<h4 id="1-压缩感知基础"><a href="#1-压缩感知基础" class="headerlink" title="1. 压缩感知基础"></a>1. 压缩感知基础</h4><p>压缩感知(Compressed Sensing, CS)是由陶哲轩等人提出的一种用于信息获取的突破性理论。该理论指出：<strong>对于稀疏信号或可压缩信号，可采用低于奈奎斯特采样频率的方式对数据采样，降低数据传输量，并能以高概率精确地重建该信号</strong>。其原始文献为：<em>D. L. Donoh, Compressed sensing, IEEE Transactions on Information Theory, 2006, 52(4): 1289-1306.</em>  </p>
 <h5 id="1-1-压缩感知的流程"><a href="#1-1-压缩感知的流程" class="headerlink" title="1.1 压缩感知的流程"></a>1.1 压缩感知的流程</h5><p>压缩感知主要分为三步：</p>
 <ul>
 <li>1、信号的稀疏化表示，实现信号的压缩；</li>
