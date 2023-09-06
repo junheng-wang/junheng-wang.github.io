@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">21.6k</span>
+            <span class="post-count">20k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">96 分钟</span>
+            <span class="post-count">86 分钟</span>
         </span>
     </span>
 </div>
@@ -851,6 +851,192 @@ u_2^* & u_1 & \cdots & u_{N-1}\\
 \vdots & \vdots & \ddots & \vdots \\
 u_N^* & u_{N-1}^* & \cdots & u_1
 \end{array}\right] \tag{5-67}</script><p>其中，$\boldsymbol u = [u_1,u_2, \cdots, u_n] \in \mathbb C^N$。并且<strong>$\boldsymbol R$是一个半正定矩阵(PSD)</strong>，秩为$K$(在$K&lt;N$的条件下)。</p>
+<p>Vandermonde分解定理表明：任意非满秩且半正定的Toeplitz矩阵都可以唯一地分解为如式$(5-66)$所示的形式。这就意味着可以从数据协方差中精确地提取频率。形式上这个定理可以表述为如下形式：</p>
+<table width="50px"><td style="word-wrap:break-word;word-break:break-all;" ; bgcolor="HoneyDew"><font size="3">
+
+**定理：**任意的PSD的Toeplitz矩阵$\boldsymbol T(\boldsymbol u) \in \mathbb C^{N \times M}$(秩$r \leq N$)有如下分解：
+$$
+\boldsymbol T(\boldsymbol u) = \sum_{k=1}^r p_k \boldsymbol a(f_k)\boldsymbol a^{\mathrm H}(f_k) = \boldsymbol A(\boldsymbol f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f) \tag{5-68}
+$$
+其中，$p_k > 0$且$f_k \in \mathbb T, k=1,2,\cdots, r$。若秩$r<N$，则分解是唯一的。<br>
+
+证明请参考[半正定Toeplitz矩阵的范德蒙德分解 - CSDN](https://blog.csdn.net/weixin_43413559/article/details/128116149)。
+
+</N$，则分解是唯一的。<br></font></td></table>
+
+<p>在同噪声方差的情况下，协方差$\boldsymbol R$仍是Toeplitz矩阵，此时自然可将$\boldsymbol R$分解为信号协方差与噪声协方差之和：</p>
+<table width="50px"><td style="word-wrap:break-word;word-break:break-all;" ; bgcolor="HoneyDew"><font size="3">
+
+**推论：**任意的PSD的Toeplitz矩阵$\boldsymbol T(\boldsymbol u) \in \mathbb C^{N \times M}$(秩$r \leq N$)有如下分解：
+$$
+\begin{aligned}
+\boldsymbol T(\boldsymbol u) & =\sum_{k=1}^r p_k \boldsymbol a(f_k)\boldsymbol a^{\mathrm H}(f_k) + \sigma \boldsymbol I \\
+& =\boldsymbol A(\boldsymbol f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f) + \sigma \boldsymbol I 
+\end{aligned} \tag{5-69}
+$$
+其中，$\sigma = \lambda_{\min}(\boldsymbol T(\boldsymbol u))$，即$\boldsymbol T(\boldsymbol u)$的最小特征值，$r = \mathrm{rank}(\boldsymbol T - \sigma \boldsymbol I)<N$。<br>
+
+注：推论中分解唯一性是$\sigma = \lambda_{\min}(\boldsymbol T(\boldsymbol u))$保证的。若让$0<\sigma< \lambda_{\min}(\boldsymbol t(\boldsymbol u))$则会使$\boldsymbol u)$满秩，分解不唯一。 < font></\sigma<></N$。<br></font></td></table>
+
+<p>Toeplitz矩阵的Vandemonde分解是无网格稀疏方法中的一个重要工具，特别是这些方法将线谱(频率)估计问题转化为一个PSD的Toeplitz矩阵的估计问题，一旦矩阵被估计出来，则可以进行Vandemonde分解获得频率。</p>
+<p>通过将Toeplitz矩阵释义为数据协方差矩阵(尽管可能因为某些统计假设不成立，导致并不是)，与传统的子空间方法直接从样本协方差矩阵估计频率不同，无网格方法利用更复杂的优化方法来估计数据协方差，利用其特殊结构/性质(Toeplitz性、低秩性、半正定性)有望实现更优的性能。</p>
+<p>下面，在单快拍情况下讨论2种无网格稀疏优化方法：</p>
+<ol>
+<li>确定性优化算法：① 原子范数；② Hankle范数；</li>
+<li>协方差拟合方法：① SPICE的无网格版本；</li>
+</ol>
+<blockquote>
+<p>注：“确定性”是指不对感兴趣的信号做出任何统计假设，相反信号是确定性的。我们在一组预定集合中寻找最稀疏的候选信号，候选信号的选取通过某种稀疏度来衡量。</p>
+</blockquote>
+<p><strong>(三) “确定性”优化算法的通用框架</strong></p>
+<p>单快拍情况下的数据：</p>
+<script type="math/tex; mode=display">
+\boldsymbol y = \boldsymbol z + \boldsymbol e = \boldsymbol A(\boldsymbol f) \boldsymbol s + \boldsymbol e \tag{5-70}</script><p>对于确定性稀疏方法，通常要求解以下形式的优化问题：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{\boldsymbol z} & \mathcal M(\boldsymbol z) \\ 
+\text { s.t. } & \left|\left| \boldsymbol z - \boldsymbol y \right|\right|_2 \leq \eta
+\end{cases} \tag{5-71}</script><p>其中，$\eta$与噪声功率有关，$\mathcal{M}(\boldsymbol z)$是稀疏度量，该稀疏度量被定义为使得通过最小化$\mathcal{M}(\boldsymbol z)$来减少用于表示$\boldsymbol z$的原子个数。</p>
+<p>代替式$(5-71)$，我们可以解决一个正则化问题：</p>
+<script type="math/tex; mode=display">
+\min_{\boldsymbol z} \lambda \mathcal{M}(\boldsymbol z) + \dfrac{1}{2}\left|\left| \boldsymbol z - \boldsymbol y \right|\right|_2^2  \tag{5-72}</script><p>下面则是要重点考察如何构造$\mathcal{M}(z)$。</p>
+<p>(1) 原子$l_0$范数</p>
+<p>定义如下原子集：</p>
+<script type="math/tex; mode=display">
+\mathcal A = \left\{\boldsymbol a(f, \phi) = \boldsymbol a(f) \phi \mid f \in \mathbb T, \phi \in \mathbb C, |\phi| = 1 \right\} \tag{5-73}</script><p>它是无限精度的，因为$f$可以是任意实数。$\phi$是允许了一个初始相位的不同。 而根据式$(5-70)$，真实信号$\boldsymbol z$是原子集中$K$个原子的线性组合。 而原子$l_0$范数，就是指能组成$\boldsymbol z$的最少所需原子数， 即：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+||\boldsymbol z||_{\mathcal A, 0} =& \inf_{c_k, f_k, \phi_k} \left\{ \mathcal K \left| \boldsymbol z = \sum_{k=1}^{\mathcal K} c_k \boldsymbol a(f_k, \phi_k),  \quad c_k >0, f_k \in \mathbb T, |\phi_k| = 1 \right.\right\} \\
+= & \inf_{s_k, f_k} \left\{ \mathcal K \left| \boldsymbol z = \sum_{k=1}^{\mathcal K} s_k \boldsymbol a(f_k),  \quad f_k \in \mathbb T \right. \right\}
+\end{aligned} \tag{5-74}</script><p>因为我们的目的就是为了恢复出$\boldsymbol A(\boldsymbol f)$，而$\boldsymbol z$可以写成无数种$\mathcal{A}$ 中原子线性组合的形式。 但只有对应所用原子数最少即对应最小原子$l_0$范数时，此时组成$\boldsymbol z$的原子才恰好对应待恢复的$\boldsymbol A(\boldsymbol f)$。因此，下面的任务就是最小化$\boldsymbol z$的原子$l_0$范数$||\boldsymbol z||_{\mathcal A, 0}$。</p>
+<p>虽然模型建立出来了，但是容易看到，如何对$||\boldsymbol z||_{\mathcal A, 0}$进行最小化，可以说是完全摸不着头脑。这似乎比$l_0$范数最小化更为抽象。此时就是见证数学魅力的时刻，考虑如下形式的矩阵：</p>
+<script type="math/tex; mode=display">
+\left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0  \tag{5-75}</script><p>其中，$x$是一个要被优化的自由变量(这里是标量)，$\boldsymbol T(\boldsymbol u)$的定义如之前，是一个由$\boldsymbol u$得到的Teoplitz矩阵。$x$则是一个待优化的变量。 这个约束隐含了如下的结论：</p>
+<ol>
+<li>$\boldsymbol T(\boldsymbol u) \succeq 0$，否则无法保证对于任何向量$\boldsymbol y$都有$\boldsymbol y^{\mathrm H} \left[\begin{array}{cc} x &amp; \boldsymbol z^{\mathrm H} \\ \boldsymbol z &amp; \boldsymbol T(\boldsymbol u) \end{array}\right]\boldsymbol y \geq 0$；</li>
+<li>$\boldsymbol z$ 一定位于$\boldsymbol T(\boldsymbol u)$的列空间中，即$\boldsymbol z$能由$r=\mathrm{rank}(\boldsymbol T(\boldsymbol u))$个原子线性表示。</li>
+</ol>
+<p>由于$\boldsymbol T(\boldsymbol u) \succeq 0$， 因此$\boldsymbol T(\boldsymbol u)$是一个半正定矩阵， 即存在范德蒙德分解：</p>
+<script type="math/tex; mode=display">
+\boldsymbol T(\boldsymbol u) = \sum_{k=1}^r p_k \boldsymbol a(f_k) \boldsymbol a^{\mathrm H}(f_k) = \boldsymbol A(\boldsymbol f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(\boldsymbol f) \tag{5-76}</script><p>其中，$r = \mathrm{rank}(\boldsymbol T(\boldsymbol u))$。由于$\boldsymbol z$一定位于$\boldsymbol T(\boldsymbol u)$的列空间中，那么$\boldsymbol z$必能写为$\boldsymbol a(f_k)$的线性组合！ 这一点至关重要，因为这引出了如下的结论：</p>
+<p><strong><font color="red">最小化原子$l_0$范数等价于求解如下问题</font>：</strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{x, \boldsymbol u} & r = \mathrm{rank}(\boldsymbol T(\boldsymbol u)) \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0
+\end{cases} \tag{5-77}</script><p>由于$\boldsymbol z$是$\boldsymbol T(\boldsymbol u)$范德蒙德分解所得的$r$个原子的线性组合。当找到秩最小的$r$时，也就找到了组成$\boldsymbol z$所需的最少原子数，也就对应$\boldsymbol z$的原子$l_0$范数最小化。 而对于这个转化后的问题，如果$\boldsymbol u$被解出，那么$\boldsymbol T(\boldsymbol u)$也能得到，那么对$\boldsymbol T(\boldsymbol u)$进行范德蒙德分解，也就获得了$\boldsymbol A(\boldsymbol f)$。但是美中不足的是，该目标函数并非凸函数，无法轻易求解。</p>
+<p>将原子$l_0$范数进行凸松弛， 得到的就是原子$l_1$范数，简称<strong>&lt;/font color=red&gt;原子范数&lt;/font&gt;</strong>。 其定义如下：</p>
+<p>对于原子集合$\mathcal A$，若其凸包$\mathrm{conv}(\mathcal A)$相对于原点是一个中心对称的紧集，且包含原点作为内点，这意味着$\mathcal A$中的任一元素$\boldsymbol a \in \mathcal A$不会位于除$\boldsymbol a$以外的其他元素所构成的凸包$ \mathrm{conv}(\mathcal A \backslash \boldsymbol a)$内，即$\mathcal A$中的元素都是$\mathrm{conv}(\mathcal A)$的极值点，$\boldsymbol a \in \mathcal A$当且仅当$-\boldsymbol a \in \mathcal A$。此时由凸包$\mathrm{conv}(\mathcal A)$的尺度函数定义的范数称为原子范数，用$||\boldsymbol z||_{\mathcal A, 1}$或$||\boldsymbol z||_{\mathcal A}$表示(详细内容参考：<a target="_blank" rel="noopener" href="https://m.fx361.com/news/2016/0823/16764966.html">如何解决基不匹配问题：从原子范数到无网格压缩感知</a>)：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+||\boldsymbol z||_{\mathcal A, 1} =& \inf \left\{ t>0 \left| \boldsymbol z \in t\mathrm{conv}({\mathcal A})  \right.\right\} \\
+= & \inf_{f_k, s_k} \left\{ {\sum_k ∣s_k∣ \left|  \boldsymbol z = \sum_k \boldsymbol a(f_k) s_k , \quad f_k \in \mathbb T \right.} \right\}
+\end{aligned} \tag{5-78}</script><p>与原子$l_0$范数的定义进行比较，发现这和将传统的$\ell_0$-范数松弛为$\ell_1$-范数如出一辙。然而如何最小化$||\boldsymbol  z||_{\mathcal A, 1}$看上去也非常困难。此时再度利用范德蒙德分解，有如下精彩的结论。</p>
+<p><strong><font color="red">最小化原子范数(Atomic Norm Minimization, ANM)等价于求解如下问题：</font></strong></p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{x, \boldsymbol u} & \dfrac{1}{2}x + \dfrac{1}{2}u_1 \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0
+\end{cases} \tag{5-79}</script><blockquote>
+<p>注意到，这是一个凸问题。首先目标函数显然是变量的仿射函数，因此为凸(既凸且凹)。限制条件也可以写为变量的仿射函数形式。 因此也满足凸问题的限制条件($f(x) \leq 0$，$f(x)$为凸函数)。($\boldsymbol X \succeq 0$可以等价为$\boldsymbol y^{\mathrm H} \boldsymbol X \boldsymbol y \geq 0, \quad \forall \boldsymbol y$，而对于每个$\boldsymbol y$， 都是关于$\boldsymbol X$的仿射变换）</p>
+<p>$\boldsymbol T(\boldsymbol u)$的对角元素都是$u_1$， 那么事实上$u_1$就是$\mathrm{tr}(\boldsymbol T(u))$！而后者又被称为<strong>核函数</strong>， 也是$\mathrm{rank}(\boldsymbol T(u))$的<strong>经典凸松弛</strong>。 这从另一个角度解释了原子范数最小化是原子$l_0$范数最小化的凸松弛。</p>
+</blockquote>
+<p>至此，压缩感知问题被转化为了一个可以由CVX进行直接求解的凸问题！还剩的最后一块拼图：即为何$\ell_1$-原子范数可以等效为这个凸问题(Ps：其实我已经推导过了，详细请参考相关博客)。</p>
+<p>原子范数与原子$l_0$范数类似，频率也被编码在Toeplitz矩阵$\boldsymbol T(\boldsymbol u)$中，因此原子范数可以视为<strong><font color="red">基于协方差矩阵</font></strong>的，但原子范数与原子$l_0$范数有一个区别在于强制$\boldsymbol T(\boldsymbol u)$的低秩性的方法：</p>
+<p><img src="https://pic.imgdb.cn/item/64f84119661c6c8e54f70614.jpg" style="zoom:70%"></p>
+<p>相关文献研究了无噪声时，ANM的理论性能。在ULA情况下由$\min_{\boldsymbol z} \mathcal{M}(\boldsymbol z)  \quad \text{s.t.} \quad  \boldsymbol z = \boldsymbol y$导出的ANM问题实际允许平凡解$\boldsymbol{z=y}$。但是从式$(5-79)$导出的如下SDP问题的解仍有意义，可用于频率估计：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{x, \boldsymbol u} & \dfrac{1}{2}x + \dfrac{1}{2}u_1 \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol y^{\mathrm H} \\
+\boldsymbol y & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0
+\end{cases} \tag{5-80}</script><p>令$\mathcal{T}=\left\{f_1, \ldots, f_K\right\}$，定义$\mathcal T$的最小间隔为任意两个元素之间最近的环绕距离：</p>
+<script type="math/tex; mode=display">
+\Delta \mathcal{T} = \inf_{1 \leq j \neq k \leq K} \min\{|f_j - f_k|, 1-|f_j, f_k|\} \tag{5-81}</script><p>当考虑噪声时，由式$(5-72)$可得相应的SDP问题为：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+\min\limits_{x, \boldsymbol u, \boldsymbol z} & \dfrac{\lambda}{2}(x + \mu_1) + \dfrac{1}{2}||\boldsymbol z - \boldsymbol y||_2^2 \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol z^{\mathrm H} \\
+\boldsymbol z & \boldsymbol T(\boldsymbol u) 
+\end{array}\right] \succeq 0
+\end{cases} \tag{5-82}</script><p>其中，正则化参数$\lambda$明显是用来平衡信号稀疏性和保真度的，但如何选择正则化参数却不清晰。在i.i.d高斯噪声假设下，相关文献进行了研究。</p>
+<p>(2) 基于Hankel的核范数</p>
+<p>另一种$\mathcal{M}(\boldsymbol z)$的选择是基于Hankel的核范数，这种$\mathcal{M}(\boldsymbol z)$度量是基于以下观察提出的：给定式$(5-70)$中的$\boldsymbol z$，构造如下Hankel矩阵：</p>
+<script type="math/tex; mode=display">
+\boldsymbol H(\boldsymbol z) = \left[\begin{array}{cccc}
+z_1 & z_2 & \cdots & z_n \\
+z_2 & z_3 & \cdots & z_{n+1} \\
+\vdots & \vdots & \ddots & \vdots \\
+z_m & z_{m+1} & \cdots & z_N
+\end{array}\right] \tag{5-83}</script><p>其中，$m+n = N+1$，此时也就意味着：</p>
+<script type="math/tex; mode=display">
+\boldsymbol H(\boldsymbol z) = \sum_{k=1}^{K} s_k  \left[\begin{array}{c}
+1 \\ \mathrm{e}^{\mathrm i 2\pi f_k} \\ \vdots \\ \mathrm{e}^{\mathrm i 2\pi (m-1)f_k}
+\end{array}\right]  \left[\begin{array}{c}
+1 & \mathrm{e}^{\mathrm i 2\pi f_k} & \cdots & \mathrm{e}^{\mathrm i 2\pi (n-1)f_k}
+\end{array}\right] \tag{5-84}</script><p>如果$K &lt; \min(m,n)$，则可以得到$\boldsymbol H(\boldsymbol z)$是一个低秩矩阵：$\mathrm{rank}(\boldsymbol H(\boldsymbol z)) = K$。</p>
+<p>因此为了重构$\boldsymbol z$，可以<strong>选择$\mathrm{rank}(\boldsymbol H(\boldsymbol z))$为稀疏度量</strong>，如果可以确定$\boldsymbol z$，那么可以从$\boldsymbol z$中恢复频率。</p>
+<p>由于$\mathrm{rank}(\boldsymbol H(\boldsymbol z))$很难解决，寻找$\mathrm{rank}(\boldsymbol H(\boldsymbol z))$的凸松弛，而<strong>核范数</strong>是一个$\mathrm{rank}$常用的凸松弛，此时有：</p>
+<script type="math/tex; mode=display">
+\mathcal{M}(\boldsymbol z) = ||\boldsymbol H(\boldsymbol z)||_\star \tag{5-85}</script><p>其中，核范数定义式为$||\boldsymbol A||_{\star} = \mathrm{Tr}\sqrt{\boldsymbol A^{\mathrm H}\boldsymbol A}$。将式$(5-71)$和式$(5-72)$中的$\mathcal{M}(\boldsymbol z)$替换为核范数，所导出的优化问题为<strong>增强矩阵补全(EMaC)问题</strong>。</p>
+<p>来看一下核范数本身所导出的SDP问题：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+||\boldsymbol H(\boldsymbol z)||_{\star} = &\min\limits_{\boldsymbol Q_1, \boldsymbol Q_2} & \dfrac{1}{2}\left[\mathrm{Tr}(\boldsymbol Q_1) + \mathrm{Tr}(\boldsymbol Q_1) \right] \\ 
+&\text { s.t. } & \left[\begin{array}{cc}
+\boldsymbol Q_1 & \boldsymbol H^{\mathrm H}(\boldsymbol z) \\
+\boldsymbol H(\boldsymbol z) & \boldsymbol Q_2
+\end{array}\right] \succeq 0
+\end{cases} \tag{5-86}</script><blockquote>
+<p>相关的证明以及矩阵补全问题请参考如下几个链接：<br><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/159485649">矩阵核范数优化和SDP等价性 - 吃饭吧唧吧唧嘴的文章 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/kailugaji/p/14613210.html">涉及矩阵范数的优化问题总结 - 博客园</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/263668140/answer/1147983618">矩阵补全中核范数优化问题如何求解？ - Orbitopes的回答 - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/47716840">矩阵补全（matrix completion）的经典算法有哪些？目前比较流行的算法是什么？ - 知乎</a><br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/aezero/p/4860174.html">研究领域总结（二）：稀疏——矩阵补全 - 博客园</a></p>
+</blockquote>
+<p>与原子范数一样，EMaC问题也可以作为SDP，使用现有的优化器求解。</p>
+<p>(3) ANM与EMaC的联系与区别</p>
+<p>。。。。。。</p>
+<p><strong>(四) 协方差拟合：无网格SPICE(GLS)</strong></p>
+<p>GLS被引入作为SPICE算法的无网格版本的改进。由于SPICE是基于协方差的，并且数据协方差是感兴趣的DOA参数的高度非线性函数，因此在SPICE中执行网格化以基于<strong>零阶近似</strong>将问题线性化。GLS的关键思想是<strong>通过使用Toeplitz协方差矩阵的Vandermonde分解，使用在新参数向量$\boldsymbol u$中是线性的PSD Toeplitz矩阵$\boldsymbol T(\boldsymbol u)$来重新参数化数据协方差矩阵</strong>。为了推导GLS，我们自然会做出与SPICE相同的假设。</p>
+<p>首先考虑ULA的情况。假设噪声是同方差的(注意，与SPICE一样，GLS可以扩展到异方差噪声的情况)。数据协方差矩阵$\boldsymbol R$是Toeplitz矩阵。因此，$\boldsymbol R$可以线性地重新参数化为：</p>
+<script type="math/tex; mode=display">
+\boldsymbol R = \boldsymbol T(\boldsymbol u), \quad \boldsymbol T(\boldsymbol u) \succeq 0 \tag{5-87}</script><p>在单快拍时，SPICE将最小化以下协方差拟合准则：</p>
+<script type="math/tex; mode=display">
+\left\|\boldsymbol{R}^{-\frac{1}{2}}\left(\boldsymbol{y} \boldsymbol{y}^{\mathrm{H}}-\boldsymbol{R}\right)\right\|_{\mathrm{F}}^2=\|\boldsymbol{y}\|_2^2 \cdot \boldsymbol{y}^{\mathrm{H}} \boldsymbol{R}^{-1} \boldsymbol{y}+\operatorname{Tr}(\boldsymbol{R})-2\|\boldsymbol{y}\|_2^2 \tag{5-88}</script><p>将式$(5-87)$带入式$(5-88)$，得到GLS的优化问题：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+&\begin{cases}
+\min\limits_{\boldsymbol u} & \|\boldsymbol{y}\|_2^2 \cdot \boldsymbol{y}^{\mathrm{H}} \boldsymbol{T}^{-1}(\boldsymbol u) \boldsymbol{y}+\operatorname{Tr}(\boldsymbol{T}(\boldsymbol u)) \\ 
+\text { s.t. } &\boldsymbol T(\boldsymbol u) \succeq 0
+\end{cases} \\
+& \qquad \qquad \qquad\Updownarrow \\
+&\begin{cases}
+\min\limits_{x, \boldsymbol u} & \|\boldsymbol{y}\|_2^2 x+Mu_1 \\ 
+\text { s.t. } &\boldsymbol T(\boldsymbol u) \succeq 0 \\
+& x \geq \boldsymbol{y}^{\mathrm{H}} \boldsymbol{T}^{-1}(\boldsymbol u) \boldsymbol{y}
+\end{cases} \\
+& \qquad \qquad \qquad\Updownarrow \\
+&\begin{cases}
+\min\limits_{x, \boldsymbol u} & \|\boldsymbol{y}\|_2^2 x+Mu_1 \\ 
+\text { s.t. } & \left[\begin{array}{cc}
+x & \boldsymbol y^{\mathrm H} \\
+\boldsymbol y & \boldsymbol T( \boldsymbol u)
+\end{array}\right] \succeq 0
+\end{cases}
+\end{aligned} \tag{5-89}</script><p>因此协方差拟合问题被视为可以在多项式时间内求解的SDP问题，问题求解后，就能得到数据协方差估计值$\hat{\boldsymbol R} = \boldsymbol T(\hat{\boldsymbol  u})$，再利用推论(也即式$(5-69)$)，从$\hat{\boldsymbol R}$中估计出参数$(\hat{\boldsymbol f}, \hat{\boldsymbol p}, \sigma)$。</p>
+<p>GLS保证产生一个具有最多$N-1$个源的稀疏解。这是频率检索步骤的直接结果(同样见推论)，一般来讲，在存在噪声时，GLS会高估真实源的数目$K$，这是合理的，因为GLS不假设对源数或者噪声方差有任何了解。</p>
+<p>相关文献中根据数据协方差估计$\hat{\boldsymbol R}$的特征值提出了一种<strong>自动源数估计法(又称模型阶次选择)</strong>，其基本思想是——较大的特征值对应源，较小的特征值对应噪声。一种称为<strong><font color="blue">SORTE算法</font></strong>可以用来区分两组特征值。</p>
+<p><strong>(五) ANM与GLS的关联与区别</strong></p>
+<p>。。。。。。</p>
 <h4 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h4><p><a id="[1]"></a> [1] Brennan L E, Reed L S. Theory of adaptive radar[J]. IEEE transactions on Aerospace and Electronic Systems, 1973 (2): 237-252. </p>
 <p><a id="[2]"></a> [2] Reed I S, Mallett J D, Brennan L E. Rapid convergence rate in adaptive arrays[J]. IEEE Transactions on Aerospace and Electronic Systems, 1974 (6): 853-863. </p>
 <p><a id="[3]"></a> [3] Melvin W L, Showman G A. An approach to knowledge-aided covariance estimation[J]. IEEE Transactions on Aerospace and Electronic Systems, 2006, 42(3): 1021-1042. </p>

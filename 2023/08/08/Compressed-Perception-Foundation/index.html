@@ -413,9 +413,9 @@ x & \boldsymbol z^{\mathrm H} \\
 \end{array}\right] \succeq 0</script><p>$\boldsymbol T(\boldsymbol u)$的定义如之前，是一个由$\boldsymbol u$得到的Teoplitz矩阵。$x$则是一个待优化的变量。 这个约束隐含了如下的结论：</p>
 <ul>
 <li>① $\boldsymbol T(\boldsymbol u) \succeq 0$，否则无法保证对于任何向量$\boldsymbol y$，都有$\boldsymbol y^{\mathrm H} \left[\begin{array}{cc} x &amp; \boldsymbol z^{\mathrm H} \\ \boldsymbol z &amp; \boldsymbol T(\boldsymbol u) \end{array}\right]\boldsymbol y \geq 0$</li>
-<li>$\boldsymbol z$ 一定位于$\boldsymbol T(\boldsymbol u)$的列空间中。 这个证明也在后面的证明章节中给出了。</li>
+<li>② $\boldsymbol z$ 一定位于$\boldsymbol T(\boldsymbol u)$的列空间中。 这个证明也在后面的证明章节中给出了。</li>
 </ul>
-<p>由于$\boldsymbol T(u) \succeq 0$， 因此$\boldsymbol T(u)$是一个半正定矩阵， 即存在范德蒙德分解：</p>
+<p>由于$\boldsymbol T(u) \succeq 0​$， 因此$\boldsymbol T(u)​$是一个半正定矩阵， 即存在范德蒙德分解：</p>
 <script type="math/tex; mode=display">
 \boldsymbol T(u) = \sum_{k=1}^r p_k \boldsymbol a(f_k) \boldsymbol a^{\mathrm H}(f_k) = \boldsymbol A(f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f)</script><p>其中，$r = \mathrm{rank}(\boldsymbol T(u))$。由于$\boldsymbol z$一定位于$\boldsymbol T(u)$的列空间中，那么$\boldsymbol z$必能写为$\boldsymbol a(f_k)$的线性组合！ 这一点至关重要，因为这引出了如下的结论：</p>
 <p><strong><font color="red">最小化$\ell_0$-原子范数等价于求解如下问题</font>：</strong></p>
