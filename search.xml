@@ -10838,7 +10838,7 @@ f(\boldsymbol x) \propto \prod_{n} \exp\left[-\dfrac{2}{q}(|x_n|^q - 1)\right] \
 &\boldsymbol \mu = \boldsymbol{\Sigma A}^{\mathrm H}\boldsymbol y \\
 \\
 &\boldsymbol \Sigma = (\boldsymbol A^{\mathrm H}\boldsymbol A + \sigma \boldsymbol P^{-1})^{-1}
-\end{aligned} \tag{5-15}</script><p>稀疏向量$\boldsymbol x$可以估计为其后验均值$\boldsymbol \mu$。MLE一个主要的困难来自求解式$(5-14)$，该式的第一项$\log |\boldsymbol R|$是参数$(\boldsymbol p, \sigma)$的非凸(实际上是凹的)函数，目前已经提出了不同的方法，例如<strong>重新加权优化法</strong>和<strong><font color="red">稀疏贝叶斯学习法 (SBL)</font></strong>。</p>
+\end{aligned} \tag{5-15}</script><p>稀疏向量$\boldsymbol x$可以估计为其后验均值$\boldsymbol \mu$。MLE一个主要的困难来自求解式$(5-14)$，该式的第一项$\log |\boldsymbol R|$是参数$(\boldsymbol p, \sigma)$的非凸(实际是凹的)函数，目前已提出了不同的方法，如<strong>重新加权优化法</strong>和<strong><font color="red">稀疏贝叶斯学习法 (SBL)</font></strong>。</p>
 <ol>
 <li><strong>重新加权优化法</strong>，给定最新的估计值$\boldsymbol R_j$后，采用<strong>MM算法</strong>在每次迭代时通过其切面$\mathrm{Tr}(\boldsymbol R_j^{-1} \boldsymbol R)$对$ \log |\boldsymbol R| $进行线性化。每次迭代产生的问题都是凸问题，使用一种称为<strong><font color="blue">基于协方差的稀疏迭代估计(SPICE)</font></strong>的算法求解。</li>
 <li>在稀疏贝叶斯SBL框架内，人们对MLE从不同的角度进行了阐释。特别是为了实现稀疏性，假设$\boldsymbol x$的先验分布是具有促进稀疏性的(稀疏先验)，比如以分层方式构建了$\boldsymbol x$的$\mathrm{Student-t}$分布。有趣的是，虽然方法不同，但是得到的目标函数却也是$\min\limits_{\boldsymbol p, \sigma} \mathcal{L}(\boldsymbol p, \sigma)$，为了优化这个目标函数，采用<strong>EM算法</strong>，在E-Step中计算$\boldsymbol x$的后验分布，在M-Step中对参数$(\boldsymbol p, \sigma)$进行更新。(注意：若$\boldsymbol x$设置不同的促进稀疏的先验分布，则SBL的目标函数会略有不同)</li>
@@ -10978,7 +10978,7 @@ h_2 &=\mathrm{Tr}\left(\boldsymbol R^{-1}\tilde{\boldsymbol R^2}\right) + \mathr
 \boldsymbol C = \boldsymbol P' \boldsymbol A'^{\mathrm H}\boldsymbol R^{-1} \tilde{\boldsymbol R}^{1/2}  \tag{5-45}</script><p>将式$(5-44)$带入到式$(5-40)$中，可得最小化$h_1$等价于：</p>
 <script type="math/tex; mode=display">
 \begin{cases}
- \min\limits_{\boldsymbol C, \boldsymbol p \succeq 0, \sigma>0} &\mathrm{Tr}(\boldsymbol C^{\mathrm H}\boldsymbol P'^{-1} \boldsymbol C) + \sum_{n=1}^{\bar N} \left(\boldsymbol a_n^{\mathrm H} \tilde{\boldsymbol R}^{-1} \boldsymbol a_n\right)p_n + \mathrm{Tr}\left(\tilde{\boldsymbol R}^{-1}\right) \sigma\\ 
+ \min\limits_{\boldsymbol C, \boldsymbol p \succeq 0, \sigma>0} &\mathrm{Tr}(\boldsymbol C^{\mathrm H}\boldsymbol P'^{-1} \boldsymbol C) + \displaystyle\sum\limits_{n=1}^{\bar N} \left(\boldsymbol a_n^{\mathrm H} \tilde{\boldsymbol R}^{-1} \boldsymbol a_n\right)p_n + \mathrm{Tr}\left(\tilde{\boldsymbol R}^{-1}\right) \sigma\\ 
  \text { s.t. } & \boldsymbol A' \boldsymbol C = \tilde{\boldsymbol R}^{1/2} 
  \end{cases} \tag{5-46}</script><p>基于式$(5-46)$，通过迭代求解$\boldsymbol C$和$(\boldsymbol p, \sigma)$，得出SPICE算法为：</p>
 <ol>
@@ -11037,7 +11037,7 @@ x_n(t) & = \begin{cases}s_k(t), & \text { if } \bar{\theta}_n=\bar{\theta}_{n_k}
 0, & \text { otherwise, }\end{cases}
 \end{aligned} \tag{5-56}</script><p>其中$n=1, \cdots, \bar{N}, t=1, \cdots, L$。</p>
 <p>由式$(5-54)$可知，Off-Grid模型下，DOA估计问题可以表述为具有不确定参数的稀疏表示。 特别是，一旦可以根据$\boldsymbol Y$估计行稀疏矩阵$\boldsymbol  X$和$\boldsymbol \beta$ ，则可以估计DOA。</p>
-<p>与On-Grid数据模型式$(5-18)$相比，式$(5-54)$中的Off-Grid模型引入了额外的网格偏移参数$\beta_n, n = 1, \cdots, \bar{N}$。注意，若$\boldsymbol \beta = \boldsymbol 0$，则式$(5-54)$的Off-Grid模型可化简为式$(5-18)$的On-Grid数据模型。式$(5-18)$的On-Grid数据模型可视为真实数据模型的<strong>0阶近似</strong>，而式$(5-54)$的Off-Grid模型可视为真实数据模型的<strong>1阶近似</strong>，网格失配可以通过联合估计网格偏移量得到补偿。</p>
+<p>与On-Grid模型式$(5-18)$相比，式$(5-54)$的Off-Grid模型引入了额外的网格偏移参数$\beta_n, n = 1, \cdots, \bar{N}$。注意，若$\boldsymbol \beta = \boldsymbol 0$，则式$(5-54)$的Off-Grid模型可化简为式$(5-18)$的On-Grid数据模型。式$(5-18)$的On-Grid数据模型可视为真实数据模型的<strong>0阶近似</strong>，而式$(5-54)$的Off-Grid模型可视为真实数据模型的<strong>1阶近似</strong>，网格失配可以通过联合估计网格偏移量得到补偿。</p>
 <p>基于式$(5-54)$中的Off-Grid模型已经提出了几种联合估计$\boldsymbol  X$和$\boldsymbol \beta$的算法，下面重点介绍基于$l_1$优化和SBL的2种算法。</p>
 <p>(1) $l_1$优化算法</p>
 <p>受标准稀疏恢复的启发，提出了几种$l_1$优化算法来处理Off-Grid中的DOA估计。首先是一种称为<strong>稀疏全最小二乘(Sparse Total Least-Squares, STLS)</strong>的算法，在单快拍情况下，可解决类似如下LASSO问题：</p>
@@ -11065,7 +11065,7 @@ x_n(t) & = \begin{cases}s_k(t), & \text { if } \bar{\theta}_n=\bar{\theta}_{n_k}
 <li>再固定$\boldsymbol x$，通过最小化$|| \boldsymbol y - [\boldsymbol A + \boldsymbol B \mathrm{diag}(\boldsymbol \beta)] \boldsymbol x ||_2^2$来求解$\boldsymbol \beta$；</li>
 </ol>
 <p>(2) SBL优化算法</p>
-<p>相关文献在多快照情况下的SBL框架内提出了一种Off-Grid DOA估计的系统方法，称为<strong><font color="green">离网稀疏贝叶斯推理(OGSBI)</font></strong>。 为了估计附加参数$\boldsymbol \beta$，假设$\beta_n(n=1, \cdots, \bar N)$是i.i.d的均匀分布在区间$\left[-\dfrac{r}{2}, \dfrac{r}{2}\right]$上。 在所得的EM算法中，行稀疏信号$\boldsymbol X$的后验分布可以像标准SBL中一样在期望步骤中计算。 在最大化步骤中，除了更新行稀疏信号的功率$\boldsymbol p$和噪声方差$\sigma$之外，还更新$\boldsymbol \beta$。 与标准SBL 一样，似然度保证单调增加，因此可以获得算法的收敛性。</p>
+<p>相关文献在多快照下的SBL框架内提出一种Off-Grid DOA估计的系统方法，称为<strong><font color="green">离网稀疏贝叶斯推理(OGSBI)</font></strong>。 为了估计附加参数$\boldsymbol \beta$，假设$\beta_n(n=1, \cdots, \bar N)$是i.i.d的均匀分布在区间$\left[-\dfrac{r}{2}, \dfrac{r}{2}\right]$上。 在所得的EM算法中，行稀疏信号$\boldsymbol X$的后验分布可以像标准SBL中一样在期望步骤中计算。 在最大化步骤中，除了更新行稀疏信号的功率$\boldsymbol p$和噪声方差$\sigma$之外，还更新$\boldsymbol \beta$。 与标准SBL 一样，似然度保证单调增加，因此可以获得算法的收敛性。</p>
 <p><strong>(二) 动态网格</strong></p>
 <p>数据模型被称为动态网格$\bar{\boldsymbol \theta}$，因为网格点$\theta_n$不是固定的：</p>
 <script type="math/tex; mode=display">
@@ -11107,32 +11107,10 @@ u_2^* & u_1 & \cdots & u_{N-1}\\
 u_N^* & u_{N-1}^* & \cdots & u_1
 \end{array}\right] \tag{5-67}</script><p>其中，$\boldsymbol u = [u_1,u_2, \cdots, u_n] \in \mathbb C^N$。并且<strong>$\boldsymbol R$是一个半正定矩阵(PSD)</strong>，秩为$K$(在$K&lt;N$的条件下)。</p>
 <p>Vandermonde分解定理表明：任意非满秩且半正定的Toeplitz矩阵都可以唯一地分解为如式$(5-66)$所示的形式。这就意味着可以从数据协方差中精确地提取频率。形式上这个定理可以表述为如下形式：</p>
-<table width="50px"><td style="word-wrap:break-word;word-break:break-all;" ; bgcolor="HoneyDew"><font size="3">
-
-**定理：**任意的PSD的Toeplitz矩阵$\boldsymbol T(\boldsymbol u) \in \mathbb C^{N \times M}$(秩$r \leq N$)有如下分解：
-$$
-\boldsymbol T(\boldsymbol u) = \sum_{k=1}^r p_k \boldsymbol a(f_k)\boldsymbol a^{\mathrm H}(f_k) = \boldsymbol A(\boldsymbol f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f) \tag{5-68}
-$$
-其中，$p_k > 0$且$f_k \in \mathbb T, k=1,2,\cdots, r$。若秩$r<N$，则分解是唯一的。<br>
-
-证明请参考[半正定Toeplitz矩阵的范德蒙德分解 - CSDN](https://blog.csdn.net/weixin_43413559/article/details/128116149)。
-
-</N$，则分解是唯一的。<br></font></td></table>
-
+<p><img src="https://pic.imgdb.cn/item/64f8724b661c6c8e54069370.jpg"></p>
+<p>证明请参考<a href="https://blog.csdn.net/weixin_43413559/article/details/128116149">半正定Toeplitz矩阵的范德蒙德分解 - CSDN</a>。</p>
 <p>在同噪声方差的情况下，协方差$\boldsymbol R$仍是Toeplitz矩阵，此时自然可将$\boldsymbol R$分解为信号协方差与噪声协方差之和：</p>
-<table width="50px"><td style="word-wrap:break-word;word-break:break-all;" ; bgcolor="HoneyDew"><font size="3">
-
-**推论：**任意的PSD的Toeplitz矩阵$\boldsymbol T(\boldsymbol u) \in \mathbb C^{N \times M}$(秩$r \leq N$)有如下分解：
-$$
-\begin{aligned}
-\boldsymbol T(\boldsymbol u) & =\sum_{k=1}^r p_k \boldsymbol a(f_k)\boldsymbol a^{\mathrm H}(f_k) + \sigma \boldsymbol I \\
-& =\boldsymbol A(\boldsymbol f) \mathrm{diag}(\boldsymbol p) \boldsymbol A^{\mathrm H}(f) + \sigma \boldsymbol I 
-\end{aligned} \tag{5-69}
-$$
-其中，$\sigma = \lambda_{\min}(\boldsymbol T(\boldsymbol u))$，即$\boldsymbol T(\boldsymbol u)$的最小特征值，$r = \mathrm{rank}(\boldsymbol T - \sigma \boldsymbol I)<N$。<br>
-
-注：推论中分解唯一性是$\sigma = \lambda_{\min}(\boldsymbol T(\boldsymbol u))$保证的。若让$0<\sigma< \lambda_{\min}(\boldsymbol t(\boldsymbol u))$则会使$\boldsymbol u)$满秩，分解不唯一。 < font></\sigma<></N$。<br></font></td></table>
-
+<p><img src="https://pic.imgdb.cn/item/64f87296661c6c8e5406af96.jpg"></p>
 <p>Toeplitz矩阵的Vandemonde分解是无网格稀疏方法中的一个重要工具，特别是这些方法将线谱(频率)估计问题转化为一个PSD的Toeplitz矩阵的估计问题，一旦矩阵被估计出来，则可以进行Vandemonde分解获得频率。</p>
 <p>通过将Toeplitz矩阵释义为数据协方差矩阵(尽管可能因为某些统计假设不成立，导致并不是)，与传统的子空间方法直接从样本协方差矩阵估计频率不同，无网格方法利用更复杂的优化方法来估计数据协方差，利用其特殊结构/性质(Toeplitz性、低秩性、半正定性)有望实现更优的性能。</p>
 <p>下面，在单快拍情况下讨论2种无网格稀疏优化方法：</p>
