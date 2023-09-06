@@ -105,8 +105,6 @@
  
     </div>
       
-    <div class="tocbot"></div>
-
 
 
 
@@ -252,7 +250,8 @@ t_{n-1}^* & t_{n-2}^* & t_{n-3}^* & \cdots & t_{0}
 <p>所以需要注意的是基本解不一定是可行解，非负的基解才是可行解。</p>
 </blockquote>
 <p>说了半天没有一个直观的理解，下面一张图展示了什么是基本解，什么是基本可行解。</p>
-<p><img src="https://pic.imgdb.cn/item/64f2e241661c6c8e54bee524.jpg" alt="各种解示意图"></p>
+<center><img src="https://pic.imgdb.cn/item/64f2e241661c6c8e54bee524.jpg" alt="各种解的示意图" style="zoom:70%"></center>
+
 <blockquote>
 <p>基本解：各个等式约束直线的交点，外加与坐标轴的交点；<br>基本可行解：基本解里面在可行域范围的那些基本解，可行域的顶点；<br>最优解：基本可行解里面使目标函数最大(最小)的基本可行解</p>
 </blockquote>
@@ -273,7 +272,7 @@ t_{n-1}^* & t_{n-2}^* & t_{n-3}^* & \cdots & t_{0}
 <p><strong>(三) 小概念之凸包</strong></p>
 <p>平面上给定若干点，则它们的<strong>凸包</strong>被定义为所有能包含所有点的<strong>凸多边形</strong>的<strong>交集</strong>。 </p>
 <p>在一切包含所有点的凸多边形中，凸包的<strong>面积</strong>是最小的<em>(显然)</em>，<strong>周长</strong>也是最小的<em>(因为每个包含所有点的凸多边形，总可以通过下面这样的过程，不断缩小周长，最终得到凸包，完整证明可参见</em><a href="https://link.zhihu.com/?target=https%3A//math.stackexchange.com/questions/13148/convex-hull-has-the-smallest-perimeter">此网页</a><em>)</em>。类似地可以证明，凸包的每个顶点都是<strong>原有的点</strong>。 </p>
-<p>凸包的严格定义为：设集合$S \sub \mathbb R^n$是由$\mathbb R^n$中的$k$个点所组成的集合，即$S = (\boldsymbol x_1,\boldsymbol x_2, \cdots, \boldsymbol x_k)$。定义$S$的凸包为：</p>
+<p>凸包的严格定义为：设集合$S ⊂ \mathbb R^n$是由$\mathbb R^n$中的$k$个点所组成的集合，即$S = (\boldsymbol x_1,\boldsymbol x_2, \cdots, \boldsymbol x_k)$。定义$S$的凸包为：</p>
 <script type="math/tex; mode=display">
 \mathrm{conv}(S) = \left\{\boldsymbol x = \sum_{i=1}^k \lambda_i \boldsymbol x_i \left|  \sum_{i=1}^k \lambda_i=1, \lambda_i \geq 0 \right.\right\}</script><p>详细内容请参考如下链接：</p>
 <p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/584937054">对凸包定义的可视化理解 - Zewbie的文章 - 知乎</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%87%B8%E5%8C%85">凸包 - 维基百科，自由的百科全书 (wikipedia.org)</a><br>参考链接3：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/340442313">算法学习笔记(65): 凸包 - Pecco的文章 - 知乎</a></p>
