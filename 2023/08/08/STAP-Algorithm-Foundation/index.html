@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">25.5k</span>
+            <span class="post-count">25.8k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">113 分钟</span>
+            <span class="post-count">114 分钟</span>
         </span>
     </span>
 </div>
@@ -522,7 +522,10 @@ r_s = |\mathrm{supp}| < \dfrac{\boldsymbol V^{(c)} - 1 + \mathrm{rank}(\boldsymb
 <p>2012年Candés等<sup><a href="#[54]">[54]</a></sup>提出利用全变分范数可从少量时域采样中重构无限精度的连续频率值，该方法直接在连续域上进行稀疏正则化，由于无需对连续参数空间进行离散化，因此能够提供信号的精确SR模型并从根本上消除网格失配问题；Tang等<sup><a href="#[55]">[55]</a></sup>在此基础上提出无网格压缩感知(Gridless Compressive Sensing, GCS)，通过求解原子范数最小化问题，可从有限随机时域采<br>样中重构出无限精度的连续频率值，但对频率源间隔要求不低于系统自由度的四分之一。</p>
 <p>文献<a href="#[38]">[38]</a>将GCS 理论引入到SR-STAP领域，初步验证了该理论对于消除网格失配的天然优势，但并未从理论上给出GCS适用于连续分布杂波的证明，且仅考虑了理想情况． 在后续的工作中，证明GCS理论适用于连续杂波SR，以及研究基于GCS理论的各类非理想条件下SR-STAP方法是该领域的重要研究方向。</p>
 <h5 id="4-2-空域误差问题"><a href="#4-2-空域误差问题" class="headerlink" title="4.2 空域误差问题"></a>4.2 空域误差问题</h5><p>在实际工程中，由于通道内放大器的增益不一致导致的阵元<strong>幅相误差</strong>不可避免。在传统STAP方法中，误差分量隐含在接收回波数据中，因此基于回波数据所构造的CCM中蕴含了误差信息，只要有足够空域系统自由度参与自适应处理，则相应空时滤波器对误差具有较强的自适应补偿能力。而在SR-STAP方法中，由于误差未知，通常直接采用理想空时二维导向矢量来构建字典，因此各原子与真实阵列流形之间存在偏差，且误差越大，偏差越大。如果采用不准确的字典来进行SR处理，所估CCM 势必与真实情况存在较大偏差，从而造成后续滤波性能恶化甚至失效。因此，由阵元通道幅相误差导致的原子失配是SR-STAP应用于实际工程时必须要解决的问题。<br>在SR源定位应用中<sup><a href="#[56]">[56]</a></sup>，可基于特定稀疏优化准则对信源方位和阵列幅相误差参数进行联合优化估计，以实现对误差参数的在线实时估计和校正，从而提升误差条件下源定位的稳健性。需要注意的是，当前源定位误差校正均基于离散信源背景。Ma 等<sup><a href="#[28]">[28]</a></sup>首次将源定位中误差和信源来向联合优化技术移植到联合SR-STAP技术中，但其仿真实验仅基于有限强散射杂波源进行了验证。Sun等<sup><a href="#[36]">[36]</a></sup>继而提出了误差条件下基于SBL的离散强杂波源抑制方法。Liu 等<sup><a href="#[57]">[57]</a></sup>提出一种误差自校正子空间STAP算法，但严重依赖于对杂波秩的准确估计． 近期，文献<sup><a href="#[58]">[58]</a></sup>提出的幅相误差与杂波联合优化估计方法，提升了误差条件下SR STAP方法的杂波抑制性能，但该算法性能严重依赖于正则化参数和惩罚因子的设置。因此，进一步验证连续杂波背景下误差自校正SR STAP技术的可行性，以及在此基础上设计稳健的误差与杂波联合稀疏优化方法是未来解决误差影响问题的重要研究方向。</p>
-<h4 id="5-基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理-59"><a href="#5-基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理-59" class="headerlink" title="5 基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理[59]"></a>5 基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理<sup><a href="#[59]">[59]</a></sup></h4><h5 id="5-1-简要稀疏恢复模型"><a href="#5-1-简要稀疏恢复模型" class="headerlink" title="5.1 简要稀疏恢复模型"></a>5.1 简要稀疏恢复模型</h5><p><strong>(一) 模型概述</strong></p>
+<h4 id="5-基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理-59-61"><a href="#5-基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理-59-61" class="headerlink" title="5 基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理[59], [61]"></a>5 基于DOA估计的On-Grid、Off-Grid、Gridless模型梳理<sup><a href="#[59]">[59]</a>, <a href="#[61]">[61]</a></sup></h4><blockquote>
+<p>注：目前看来文献[61]对其中几个问题有一些解释。</p>
+</blockquote>
+<h5 id="5-1-简要稀疏恢复模型"><a href="#5-1-简要稀疏恢复模型" class="headerlink" title="5.1 简要稀疏恢复模型"></a>5.1 简要稀疏恢复模型</h5><p><strong>(一) 模型概述</strong></p>
 <p>稀疏恢复的模型为：</p>
 <script type="math/tex; mode=display">
 \boldsymbol y = \boldsymbol{Ax} + \boldsymbol e \tag{5-1}</script><p>其中，$\boldsymbol A \in \mathbb C^{M \times \bar{N}}$称为一个字典，$\boldsymbol A$中的列称为“原子”。$\boldsymbol y \in \mathbb C^{M \times 1}$是观测矢量，$\boldsymbol x \in \mathbb C^{\bar{N} \times 1}$是需要稀疏恢复的信号。$\boldsymbol x$中非零元素$K \ll \bar N$，也即$\boldsymbol y$仅需$\boldsymbol A$中$K$个原子就可线性表示。无噪声条件下，稀疏恢复问题为：</p>
@@ -565,7 +568,7 @@ r_s = |\mathrm{supp}| < \dfrac{\boldsymbol V^{(c)} - 1 + \mathrm{rank}(\boldsymb
 \end{cases} \tag{5-9}</script><p>其中，权重系数$w_n = |x_n|^{q-2}$会根据当前迭代的最新解$\boldsymbol x$进行更新。注意，式$(5-9)$可以以closed form求解，因此可以通过适当的初始化来实现迭代算法。该这种算法可以解释为一种保证收敛到局部最小值的<strong>大化-最小化(Majorization-Minimization, MM)</strong>算法。</p>
 <p>当考虑噪声时，可采用如下正则化方法：</p>
 <script type="math/tex; mode=display">
-\min\limits_{\boldsymbol x}  \lambda|| \boldsymbol{x} ||_q^q+ \dfrac{1}{2}||\boldsymbol y - \boldsymbol{Ax}||_2^2 \tag{5-10}</script><p>其中，$\lambda&gt;0$是正则化参数。与FOCUS中相同的主要思想开发了针对$(5-10)$的<strong>正则化FOCUSS算法</strong>。但关于$(5-10)$的一个难题是参数$\lambda$的选择。尽管一些文献中介绍了几种调整该参数的启发式方法，但据我们所知，在这方面还没有理论结果。</p>
+\min\limits_{\boldsymbol x}  \lambda|| \boldsymbol{x} ||_q^q+ \dfrac{1}{2}||\boldsymbol y - \boldsymbol{Ax}||_2^2 \tag{5-10}</script><p>其中，$\lambda&gt;0$是正则化参数。与FOCUS中相同的主要思想开发了针对式$(5-10)$的<strong>正则化FOCUSS算法</strong>。但关于式$(5-10)$的一个难题是参数$\lambda$的选择。尽管一些文献中介绍了几种调整该参数的启发式方法，但据我们所知，在这方面还没有理论结果。</p>
 <p>为了绕过参数调整问题，提出一种通过<strong>迭代最小化稀疏学习(Sparse Learning via Iterative Minimization, SLIM)</strong>的MAP估计方法。假设i.i.d的高斯噪声分布服从$\mathcal{CN}(0, \eta)$，$\boldsymbol x$具有如下先验分布：</p>
 <script type="math/tex; mode=display">
 f(\boldsymbol x) \propto \prod_{n} \exp\left[-\dfrac{2}{q}(|x_n|^q - 1)\right] \tag{5-11}</script><p>SLIM通过求解如下的$l_q$优化问题来计算MAP估计：</p>
@@ -650,7 +653,10 @@ f(\boldsymbol x) \propto \prod_{n} \exp\left[-\dfrac{2}{q}(|x_n|^q - 1)\right] \
 f(\boldsymbol X) \propto  \prod_{n} \exp\left[-\dfrac{2}{q}(||\boldsymbol X_n||_2^q - 1)\right] \tag{5-28}</script><p>与单快拍类似，SLIM通过求解下述$l_{2,q}$优化问题得到$\boldsymbol X$的MAP：</p>
 <script type="math/tex; mode=display">
 \min_{\boldsymbol x} M \log \eta + \eta^{-1} ||\boldsymbol{AX} - \boldsymbol Y||_F^2 + \dfrac{2}{q}||\boldsymbol X||_{2,q}^q \tag{5-29}</script><p>使用与M-FOCUSS类似的重新加权技术，可以以封闭形式迭代更新$\boldsymbol X$和$\eta$，从而得到SLIM的多快拍版本。</p>
-<p><strong>(五) 系数迭代协方差估计SPICE</strong></p>
+<p><strong>(五) 稀疏迭代协方差估计SPICE</strong><sup><a href="#[62]">[62]</a></sup></p>
+<blockquote>
+<p>SPICE(Sparse Iterative Covariance-based Estimation)是一种用于稀疏信号处理和估计的算法，主要用于估计协方差矩阵。<strong>基本思想</strong>是利用协方差矩阵的稀疏性来降低算法的复杂度，并通过迭代方法逐步逼近协方差矩阵的真实值。在迭代过程中，SPICE算法利用了一种基于协方差矩阵估计的方法，即<strong>通过最小化原始数据和协方差矩阵之间的误差来估计协方差矩阵</strong>。在估计协方差矩阵的同时，SPICE算法还实现了稀疏性，即只有少数非零元素的矩阵表示。</p>
+</blockquote>
 <p>(1) 广义最小二乘</p>
 <p>为了推导广义最小二乘，做如下统计假设：</p>
 <script type="math/tex; mode=display">
@@ -664,7 +670,7 @@ f(\boldsymbol X) \propto  \prod_{n} \exp\left[-\dfrac{2}{q}(||\boldsymbol X_n||_
 \boldsymbol R = \mathbb{E}\left[\boldsymbol y(t) \boldsymbol y^{\mathrm H}(t)\right] = \boldsymbol{APA}^{\mathrm H} + \sigma \boldsymbol I = \boldsymbol A' \boldsymbol P' \boldsymbol A'^{\mathrm H}  \tag{5-32}</script><p>其中，$\boldsymbol A’ = [\boldsymbol A, \boldsymbol I] \in \mathbb C^{M \times (\bar N + M)}$，$\boldsymbol P’ = \mathrm{diag}(\boldsymbol p, \sigma I) \in \mathbb C^{(\bar N + M)\times (\bar N + M)}$，该过程示意图如下。</p>
 <center><img src="https://pic.imgdb.cn/item/64f6d6f7661c6c8e54a11f52.jpg" style="zoom:60%"></center>
 
-<p>据此，看到$\boldsymbol R$是参数$(\boldsymbol p, \sigma )$的线性函数。记样本协方差矩阵为$\tilde{\boldsymbol R} = \dfrac{1}{L} \boldsymbol{YY}^{\mathrm H}$，给定$\tilde{\boldsymbol R}$，为了估计$\boldsymbol R$(实际上是估计参数$\boldsymbol p$和$\sigma$)，考虑<strong>广义最小二乘法</strong>。</p>
+<p>据此，看到$\boldsymbol R$是参数$(\boldsymbol p, \sigma )$的线性函数。记样本协方差矩阵(Sample Covariance Matrix, SCM)为$\tilde{\boldsymbol R} = \dfrac{1}{L} \boldsymbol{YY}^{\mathrm H}$，给定$\tilde{\boldsymbol R}$，为了估计$\boldsymbol R$(实际上是估计参数$\boldsymbol p$和$\sigma$)，考虑<strong>广义最小二乘法</strong>。</p>
 <p>首先向量化$\tilde{\boldsymbol R}$为$\tilde{\boldsymbol r} = \mathrm{vec}(\tilde{\boldsymbol R})$，向量化$\boldsymbol R$为$\boldsymbol r = \mathrm{vec}(\boldsymbol R)$，由于$\tilde{\boldsymbol R}$是${\boldsymbol R}$的无偏估计，因此有：</p>
 <script type="math/tex; mode=display">
 \mathbb E(\tilde{\boldsymbol r}) = \boldsymbol r \tag{5-33}</script><p>此外可以计算$\tilde{\boldsymbol r}$的协方差矩阵为(<a target="_blank" rel="noopener" href="https://www.doc88.com/p-3157185346622.html">参考文档-加权协方差拟合准则推导</a>)：</p>
@@ -785,7 +791,7 @@ x_n(t) & = \begin{cases}s_k(t), & \text { if } \bar{\theta}_n=\bar{\theta}_{n_k}
 <p>与On-Grid模型式$(5-18)$相比，式$(5-54)$的Off-Grid模型引入了额外的网格偏移参数$\beta_n, n = 1, \cdots, \bar{N}$。注意，若$\boldsymbol \beta = \boldsymbol 0$，则式$(5-54)$的Off-Grid模型可化简为式$(5-18)$的On-Grid数据模型。式$(5-18)$的On-Grid数据模型可视为真实数据模型的<strong>0阶近似</strong>，而式$(5-54)$的Off-Grid模型可视为真实数据模型的<strong>1阶近似</strong>，网格失配可以通过联合估计网格偏移量得到补偿。</p>
 <p>基于式$(5-54)$中的Off-Grid模型已经提出了几种联合估计$\boldsymbol  X$和$\boldsymbol \beta$的算法，下面重点介绍基于$l_1$优化和SBL的2种算法。</p>
 <p>(1) $l_1$优化算法</p>
-<p>受标准稀疏恢复的启发，提出了几种$l_1$优化算法来处理Off-Grid中的DOA估计。首先是一种称为<strong>稀疏全最小二乘(Sparse Total Least-Squares, STLS)</strong>的算法，在单快拍情况下，可解决类似如下LASSO问题：</p>
+<p>受标准稀疏恢复的启发，提出了几种$l_1$优化算法来处理Off-Grid中的DOA估计。首先是一种称为<strong>稀疏全最小二乘(Sparse Total Least-Squares, STLS)</strong>的算法，在单快拍情况下，可解决如下类似LASSO的问题：</p>
 <script type="math/tex; mode=display">
 \min_{\boldsymbol x , \boldsymbol \beta} \lambda_1 ||\boldsymbol x||_1 + \dfrac{1}{2}|| \boldsymbol y - [\boldsymbol A + \boldsymbol B \mathrm{diag}(\boldsymbol \beta)] \boldsymbol x ||_2^2 + \lambda_2 || \boldsymbol \beta||_2^2 \tag{5-57}</script><p>其中，$\lambda_1, \lambda_2$是正则化参数。但式$(5-57)$中没有使用$\boldsymbol \beta \in \left[-\dfrac{r}{2}, \dfrac{r}{2}\right]^{\bar N}$的先验信息。为了启发式控制$\boldsymbol \beta$的大小，它的功率也被最小化。注意，由于<strong>双线性</strong>项$\mathrm{diag}(\boldsymbol \beta) \boldsymbol x$，式$(5-57)$中的问题是非凸的。因此，为了求解式$(5-57)$采用一种<strong>交替算法</strong>，迭代求解$\boldsymbol x$和$\boldsymbol \beta$。此外式$(5-57)$也可以拓展到MMV情况来利用$\boldsymbol X$的联合稀疏性。但这些算法都存在一定的困难——参数$\lambda_1, \lambda_2$的选择。</p>
 <p>为了利用先验信息$\boldsymbol \beta \in \left[-\dfrac{r}{2}, \dfrac{r}{2}\right]^{\bar N}$，提出了类似BPDN的算法用于单快拍情况：</p>
@@ -909,8 +915,8 @@ x & \boldsymbol z^{\mathrm H} \\
 \boldsymbol z & \boldsymbol T(\boldsymbol u) 
 \end{array}\right] \succeq 0
 \end{cases} \tag{5-77}</script><p>由于$\boldsymbol z$是$\boldsymbol T(\boldsymbol u)$范德蒙德分解所得的$r$个原子的线性组合。当找到秩最小的$r$时，也就找到了组成$\boldsymbol z$所需的最少原子数，也就对应$\boldsymbol z$的原子$l_0$范数最小化。 而对于这个转化后的问题，如果$\boldsymbol u$被解出，那么$\boldsymbol T(\boldsymbol u)$也能得到，那么对$\boldsymbol T(\boldsymbol u)$进行范德蒙德分解，也就获得了$\boldsymbol A(\boldsymbol f)$。但是美中不足的是，该目标函数并非凸函数，无法轻易求解。</p>
-<p>将原子$l_0$范数进行凸松弛， 得到的就是原子$l_1$范数，简称<strong>&lt;/font color=red&gt;原子范数&lt;/font&gt;</strong>。 其定义如下：</p>
-<p>对于原子集合$\mathcal A$，若其凸包$\mathrm{conv}(\mathcal A)$相对于原点是一个中心对称的紧集，且包含原点作为内点，这意味着$\mathcal A$中的任一元素$\boldsymbol a \in \mathcal A$不会位于除$\boldsymbol a$以外的其他元素所构成的凸包$ \mathrm{conv}(\mathcal A \backslash \boldsymbol a)$内，即$\mathcal A$中的元素都是$\mathrm{conv}(\mathcal A)$的极值点，$\boldsymbol a \in \mathcal A$当且仅当$-\boldsymbol a \in \mathcal A$。此时由凸包$\mathrm{conv}(\mathcal A)$的尺度函数定义的范数称为原子范数，用$||\boldsymbol z||_{\mathcal A, 1}$或$||\boldsymbol z||_{\mathcal A}$表示(详细内容参考：<a target="_blank" rel="noopener" href="https://m.fx361.com/news/2016/0823/16764966.html">如何解决基不匹配问题：从原子范数到无网格压缩感知</a>)：</p>
+<p>将原子$l_0$范数进行凸松弛， 得到的就是原子$l_1$范数，简称<strong><font color="red">原子范数</font></strong>。 其定义如下：</p>
+<p>对于原子集合$\mathcal A$，若其凸包$\mathrm{conv}(\mathcal A)$相对于原点是一个中心对称的紧集，且包含原点作为内点，这意味着$\mathcal A$中的任一元素$\boldsymbol a \in \mathcal A$不会位于除$\boldsymbol a$以外的其他元素所构成的凸包$ \mathrm{conv}(\mathcal A \backslash \boldsymbol a)$内，即$\mathcal A$中的元素都是$\mathrm{conv}(\mathcal A)$的极值点，$\boldsymbol a \in \mathcal A$当且仅当$-\boldsymbol a \in \mathcal A$。此时由凸包$\mathrm{conv}(\mathcal A)$的尺度函数定义的范数称为原子范数，用$||\boldsymbol z||_{\mathcal A, 1}$或$||\boldsymbol z||_{\mathcal A}$表示(详细内容参考：<a target="_blank" rel="noopener" href="https://m.fx361.com/news/2016/0823/16764966.html">如何解决基不匹配问题：从原子范数到无网格压缩感知</a>或者文献<a href="#[61]">[61]</a>)：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 ||\boldsymbol z||_{\mathcal A, 1} =& \inf \left\{ t>0 \left| \boldsymbol z \in t\mathrm{conv}({\mathcal A})  \right.\right\} \\
@@ -1075,6 +1081,8 @@ x & \boldsymbol y^{\mathrm H} \\
 <p><a id="[58]"></a> [58] Zhaocheng Y, de Lamare R C, Liu W. Sparsity-based STAP using alternating direction method with gain/phase errors[J]. IEEE Transactions on Aerospace and Electronic Systems, 2017, 53(6): 2756-2768. </p>
 <p><a id="[59]"></a> [59] Yang Z, Li J, Stoica P, et al. Sparse methods for direction-of-arrival estimation[M]//Academic Press Library in Signal Processing, Volume 7. Academic Press, 2018: 509-581. </p>
 <p><a id="[60]"></a> [60] C. Austin, J. Ash, R. Moses, Dynamic dictionary algorithms for model order and parameter estimation, IEEE Transactions on Signal Processing 61 (20) (2013) 5117–5130.</p>
+<p><a id="[61]"></a> [61] 李慧启. 基于无网格压缩感知的跳频信号参数估计研究[D].战略支援部队信息工程大学,2019.</p>
+<p><a id="[62]"></a> [62] Ottersten B, Stoica P, Roy R. Covariance matching estimation techniques for array signal processing applications[J]. Digital Signal Processing, 1998, 8(3): 185-210. </p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
