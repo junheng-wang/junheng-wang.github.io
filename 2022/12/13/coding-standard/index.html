@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3k</span>
+            <span class="post-count">3.2k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">11 分钟</span>
+            <span class="post-count">12 分钟</span>
         </span>
     </span>
 </div>
@@ -114,13 +114,11 @@
     <div class="article-entry" itemprop="articleBody">
        
   <h3 id="1-Matlab编码规范"><a href="#1-Matlab编码规范" class="headerlink" title="1 Matlab编码规范"></a>1 Matlab编码规范</h3><h4 id="1-1-命名规则"><a href="#1-1-命名规则" class="headerlink" title="1.1 命名规则"></a>1.1 命名规则</h4><h5 id="1-1-1-变量"><a href="#1-1-1-变量" class="headerlink" title="1.1.1 变量"></a>1.1.1 变量</h5><ul>
-<li><p><strong>小驼峰命名法</strong></p>
-<ul>
+<li><strong>小驼峰命名法</strong><ul>
 <li>第一个单词以小写字母开始，后面单词的首字母大写。例如：<code>firstName</code>、<code>lastName</code>。</li>
 </ul>
 </li>
-<li><p><strong>使用英文</strong></p>
-<ul>
+<li><strong>使用英文</strong><ul>
 <li>变量名最重要的原则就是，一看就知道这个变量是什么意思。 </li>
 </ul>
 </li>
@@ -130,6 +128,7 @@
 </li>
 <li><strong>循环变量</strong><ul>
 <li>应该以<code>i</code>、<code>j</code>、<code>k</code>为前缀。例如：<code>iFiles</code>、<code>jPositions</code>。不使用<code>i</code>、<code>j</code>的原因是：这两个在matlab中是虚数。 </li>
+<li>此外常用循环变量还有：<code>num</code>、<code>iter</code>、<code>count</code>、<code>mark</code>、<code>index</code>、<code>id</code>以及这些循环变量的组合形式。</li>
 </ul>
 </li>
 <li><strong>代表单个实体数据的变量可以加以后缀No</strong><ul>
@@ -140,7 +139,17 @@
 <li>例如：若命名<code>isNotFound</code>，在使用判断的时候，<code>~isNotFound</code>，搞半天才知道啥意思。所以不适用否定式布尔变量命名。</li>
 </ul>
 </li>
+<li><strong>拓展变量</strong><ul>
+<li>释义：就是在已有变量上经过进一步计算得到的新变量，或者与已有变量相关的变量。</li>
+<li>策略1：在已有变量的基础上以小驼峰命名的方法在变量的后端添加限定词；</li>
+<li>策略2：在已有变量的基础上以小驼峰命名的方法在变量的前端添加限定词；</li>
+<li>推荐使用默认使用——策略1。</li>
 </ul>
+</li>
+</ul>
+<blockquote>
+<p>参考链接1：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/594149389">程序员如何优雅地对变量命名？- idea小时的文章 - 知乎</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://bossshi.notion.site/bossshi/8d0e7f4857504c388462b67999504068">变量命名规范</a></p>
+</blockquote>
 <h5 id="1-1-2-常数"><a href="#1-1-2-常数" class="headerlink" title="1.1.2 常数"></a>1.1.2 常数</h5><ul>
 <li><strong>全大写字母+下划线</strong> <ul>
 <li>例如：<code>MAX_ITERATIONS</code>、<code>COLOR_RED</code>。</li>
