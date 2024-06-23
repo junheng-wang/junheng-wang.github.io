@@ -9633,13 +9633,13 @@ h_i(\boldsymbol x_k) - h_i(\boldsymbol x^*) \xlongequal{泰勒展开} \triangled
 </thead>
 <tbody>
 <tr>
-<td>我们都知道Numpy是支持大量维度数组与矩阵运算的常用扩展库(只能在cpu上跑numpy)。&lt;/br&gt;但是对于<strong>计算图，深度学习或者梯度</strong>，Numpy似乎真的有心无力，因为它的计算&lt;/br&gt;无法像Tensor一样在GPU上加速。 Tensor是n维的数组，在概念上与numpy数组是一样的&lt;/br&gt;，不同的是Tensor可以跟踪计算图和计算梯度[<a href="https://zhuanlan.zhihu.com/p/142859846">参考链接1</a>]。</td>
+<td>我们都知道Numpy是支持大量维度数组与矩阵运算的常用扩展库(只能在cpu上跑numpy)。但是对于<br><strong>计算图，深度学习或者梯度</strong>，Numpy是有心无力，因为它的计算无法像Tensor一样在能用GPU加速。<br>Tensor是n维的数组，在概念上与numpy数组是一样的，但不同的是Tensor可以跟踪计算图和计算梯<br>度[<a href="https://zhuanlan.zhihu.com/p/142859846">参考链接1</a>]。</td>
 </tr>
 <tr>
-<td>Tensor与Numpy没区别，就是多维数组而已，根本不是物理概念的张量。 不用numpy是&lt;/br&gt;因为pytorch需要支持额外的功能：① GPU等其它硬件的支持；② 自动的梯度计算&lt;/br&gt;和back propagation[<a href="https://www.zhihu.com/question/598278407/answer/3019708794">参考链接2</a>]。不精确地说， 若numpy数据结构也支持GPU，现在&lt;/br&gt;深度学习里大概就都叫ndarray而不是Tensor了。</td>
+<td>Tensor与Numpy没区别，就是多维数组而已，不是物理概念的张量。不用numpy是因为pytorch需要<br>支持额外的功能：① GPU等其它硬件的支持；② 自动的梯度计算和back propagation[<a href="https://www.zhihu.com/question/598278407/answer/3019708794">参考链接2</a>]。<br>不精确地说， 若numpy数据结构也支持GPU，现在深度学习里大概就都叫ndarray而不是Tensor了。</td>
 </tr>
 <tr>
-<td>在PyTorch中，张量Tensor是最基础的运算单位，与NumPy中的NDArray类似，张量表示&lt;/br&gt;的是一个多维矩阵。不同的是，PyTorch中的Tensor可以运行在GPU上，而NumPy&lt;/br&gt;的NDArray只能运行在CPU上。由于Tensor能在GPU上运行，故大大加快了运算速度。 &lt;/br&gt;tensor再怎么高级也只是一个数据结构而已，<strong>一句话总结：一个可以运行在gpu上的多维数据而已</strong>[<a href="https://cloud.tencent.com/developer/article/1883945">参考链接3</a>]。</td>
+<td>在PyTorch中，张量Tensor是最基础的运算单位，与NumPy中的NDArray类似，张量表示的是一个多维<br>矩阵。不同的是，PyTorch中的Tensor可以运行在GPU上，而NumPy的NDArray只能运行在CPU上。由<br>于Tensor能在GPU上运行，故大大加快了运算速度，tensor再怎么高级也只是一个数据结构而已。 <br><strong>一句话总结：一个可以运行在gpu上的多维数据而已</strong>[<a href="https://cloud.tencent.com/developer/article/1883945">参考链接3</a>]。</td>
 </tr>
 <tr>
 <td></td>
