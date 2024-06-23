@@ -9377,7 +9377,7 @@ h_i(\boldsymbol x_k) - h_i(\boldsymbol x^*) \xlongequal{泰勒展开} \triangled
 <h5 id="Ⅰ数据类型"><a href="#Ⅰ数据类型" class="headerlink" title="Ⅰ数据类型"></a>Ⅰ数据类型</h5><p><strong>(1) 整数型数组与浮点型数组</strong></p>
 <p>python中的列表存在缺点，列表内的每一个元素可以是不同的数据类型。为克服列表的缺点，一个NumPy数组只<strong>容纳一种数据类型</strong>，以节约内存。为方便起见，可将NumPy数组简单分为<strong>整数型数组</strong>与<strong>浮点型数组</strong>。</p>
 <p>示例</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 利用np.array将python的list转化为Numpy数组，产生一个实例化类对象，如下面的arr1、arr2，实例化对象里面有许多可以调用的成员方法，例如 .astype( )</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建整数型数组：</span></span><br><span class="line">arr1 = np.array( [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] ) <span class="comment"># 元素若都是整数，则为整数型数组</span></span><br><span class="line"><span class="built_in">print</span>(arr1)	<span class="comment"># 输出 [1 2 3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建浮点型数组：</span></span><br><span class="line">arr2 = np.array( [<span class="number">1.0</span>, <span class="number">2</span>, <span class="number">3</span>] ) <span class="comment"># 内含浮点数，则为浮点型数组</span></span><br><span class="line"><span class="built_in">print</span>(arr2) <span class="comment"># 输出 [1. 2. 3.]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="comment"># 利用np.array将python的list转化为Numpy数组，产生一个实例化类对象，如下面的arr1、arr2，</span></span><br><span class="line"><span class="comment"># 实例化对象里面有许多可以调用的成员方法，例如 .astype( )</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建整数型数组：</span></span><br><span class="line">arr1 = np.array( [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>] ) <span class="comment"># 元素若都是整数，则为整数型数组</span></span><br><span class="line"><span class="built_in">print</span>(arr1)	<span class="comment"># 输出 [1 2 3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建浮点型数组：</span></span><br><span class="line">arr2 = np.array( [<span class="number">1.0</span>, <span class="number">2</span>, <span class="number">3</span>] ) <span class="comment"># 内含浮点数，则为浮点型数组</span></span><br><span class="line"><span class="built_in">print</span>(arr2) <span class="comment"># 输出 [1. 2. 3.]</span></span><br></pre></td></tr></table></figure>
 <p><strong>(2) 整数型数组和浮点型数组相互转换</strong></p>
 <p>规范的方法是使用<code>.astype( )</code>方法。</p>
 <p>示例</p>
@@ -9570,7 +9570,15 @@ h_i(\boldsymbol x_k) - h_i(\boldsymbol x^*) \xlongequal{泰勒展开} \triangled
 <h5 id="Ⅳ-满足条件的元素所在位置"><a href="#Ⅳ-满足条件的元素所在位置" class="headerlink" title="Ⅳ 满足条件的元素所在位置"></a>Ⅳ 满足条件的元素所在位置</h5><p>现在我们来思考一种情况：假设一个很长的数组，我想知道满足某个条件的元素们所在的索引位置，此时使用<code>np.where( )</code>函数。</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">In [<span class="number">1</span>] : <span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 模拟英语六级成绩的随机数组，取10000 个样本</span></span><br><span class="line">arr = np.random.normal( <span class="number">500</span>,<span class="number">70</span>,<span class="number">1000</span> )</span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出六级成绩超过650 的元素所在位置</span></span><br><span class="line"><span class="built_in">print</span>( np.where( arr &gt; <span class="number">650</span> ) )</span><br><span class="line"><span class="comment"># (array([127, 129, 317, 342, 484, 490, 634, 658, 677, 755, 763, 819, 820,</span></span><br><span class="line"><span class="comment">#   853, 926, 932, 982], dtype=int64),)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 找出六级成绩最高分的元素所在位置</span></span><br><span class="line"><span class="built_in">print</span>( np.where( arr == np.<span class="built_in">max</span>(arr) ) )</span><br><span class="line"><span class="comment"># (array([342], dtype=int64),)</span></span><br></pre></td></tr></table></figure>
 <p><code>np.where( )</code>函数的输出看起来比较怪异，它是输出了一个<strong>元组</strong>。元组第一个元素是“满足条件的元素所在位置”；第二个元素是数组类型，可忽略掉。</p>
-<h4 id="2-1-8-从数组到张量"><a href="#2-1-8-从数组到张量" class="headerlink" title="2.1.8 从数组到张量"></a>2.1.8 从数组到张量</h4><p>本视频中，numpy为1.21.5版本，torch为1.12.0版本。PyTorch不同版本的发行日志：<a href="https://pytorch.org/blog/。">https://pytorch.org/blog/。</a></p>
+<h4 id="2-1-8-其他补充"><a href="#2-1-8-其他补充" class="headerlink" title="2.1.8 其他补充"></a>2.1.8 其他补充</h4><h5 id="Ⅰ-np-array和np-ndarry-的区别"><a href="#Ⅰ-np-array和np-ndarry-的区别" class="headerlink" title="Ⅰ np.array和np.ndarry 的区别"></a>Ⅰ np.array和np.ndarry 的区别</h5><p>np.array和np.ndarray都是NumPy中用于创建多维数组的函数。</p>
+<p>np.ndarray是NumPy中的多维数组类，它是一种可变的数组，可以通过修改数组中的元素来改变其内容。使用np.ndarray创建的数组必须指定形状、元素类型和存储器位置等参数。例如，可以使用以下代码创建一个2x2的整数数组：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = np.ndarray(shape=(<span class="number">2</span>, <span class="number">2</span>), dtype=<span class="built_in">int</span>, buffer=np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>]))</span><br></pre></td></tr></table></figure>
+<p>np.array是用于创建多维数组的函数，它会将输入的数据转换为一个NumPy数组。与np.ndarray不同，使用np.array创建的数组不需要指定形状、元素类型和存储器位置等参数。例如，以下代码将一个Python列表转换为一个NumPy数组：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">a = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>])</span><br></pre></td></tr></table></figure>
+<p>在实际使用中，<strong>np.array更加常用，因为它可以从Python列表、元组、其他序列类型等对象自动推断形状和数据类型，并且不需要手动指定存储器位置</strong>。但如果你需要创建一些特定的数组，比如指定从已有的数据缓冲区中创建数组，或者指定存储器位置，那么np.ndarray可能更适合你的需求。</p>
+<p>总之，np.ndarray是NumPy中的一个多维数组类，而np.array是一个用于创建多维数组的函数，两者的使用场景略有不同。</p>
+<p>参考：<a href="https://www.cnblogs.com/joiln/p/17279249.html">np.array和np.ndarry 的区别 - 个人博客</a></p>
+<h4 id="2-1-9-从数组到张量"><a href="#2-1-9-从数组到张量" class="headerlink" title="2.1.9 从数组到张量"></a>2.1.9 从数组到张量</h4><p>本视频中，numpy为1.21.5版本，torch为1.12.0版本。PyTorch不同版本的发行日志：<a href="https://pytorch.org/blog/。">https://pytorch.org/blog/。</a></p>
 <h5 id="Ⅰ-数组与张量"><a href="#Ⅰ-数组与张量" class="headerlink" title="Ⅰ 数组与张量"></a>Ⅰ 数组与张量</h5><ul>
 <li>本次课属于《Python 深度学习》系列视频，PyTorch 作为当前首屈一指的深度学习库，其将NumPy 的语法尽数吸收，作为自己处理数组的基本语法，且运算速度从使用CPU 的数组进步到使用GPU 的张量。</li>
 <li>NumPy 和PyTorch 的基础语法几乎一致，具体表现为：<ul>
@@ -9616,6 +9624,127 @@ h_i(\boldsymbol x_k) - h_i(\boldsymbol x^*) \xlongequal{泰勒展开} \triangled
         </div>
     </a>
 </div> 
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Tensor基本概念的理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>我们都知道Numpy是支持大量维度数组与矩阵运算的常用扩展库(只能在cpu上跑numpy)。但是对于<strong>计算图，深度学习或者梯度</strong>，Numpy似乎真的有心无力，因为它的计算无法像Tensor一样在GPU上加速。 Tensor是n维的数组，在概念上与numpy数组是一样的，不同的是Tensor可以跟踪计算图和计算梯度[<a href="https://zhuanlan.zhihu.com/p/142859846">参考链接1</a>]。</td>
+</tr>
+<tr>
+<td>Tensor与Numpy没区别，就是多维数组而已，根本不是物理概念的张量。 不用numpy是因为pytorch需要支持额外的功能：① GPU等其它硬件的支持；② 自动的梯度计算和back propagation[<a href="https://www.zhihu.com/question/598278407/answer/3019708794">参考链接2</a>]。不精确地说， 若numpy数据结构也支持GPU，现在深度学习里大概就都叫ndarray而不是Tensor了。</td>
+</tr>
+<tr>
+<td>在PyTorch中，张量Tensor是最基础的运算单位，与NumPy中的NDArray类似，张量表示的是一个多维矩阵。不同的是，PyTorch中的Tensor可以运行在GPU上，而NumPy的NDArray只能运行在CPU上。由于Tensor能在GPU上运行，因此大大加快了运算速度。 tensor概念再怎么高级也只是一个数据结构而已，<strong>一句话总结：一个可以运行在gpu上的多维数据而已</strong>[<a href="https://cloud.tencent.com/developer/article/1883945">参考链接3</a>]。</td>
+</tr>
+<tr>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="2-2-1-为什么要用tensor"><a href="#2-2-1-为什么要用tensor" class="headerlink" title="2.2.1  为什么要用tensor"></a>2.2.1  为什么要用tensor</h4><p>深度学习中的tensor指的是张量，相比于numpy中的数组，它有如下优点，</p>
+<ul>
+<li><strong>支持 GPU 加速</strong>：深度学习中，需要对大量数据进行计算，并且这些计算通常是高度并行化的。使用 tensor 可以方便地将计算放到 GPU 上进行加速，而 numpy 则通常只能在 CPU 上进行计算。</li>
+<li><strong>支持自动求导</strong>：深度学习中，需要对模型参数进行优化，而优化通常需要求解参数的梯度。使用 tensor 可以方便地实现自动求导，而 numpy 则需要手动实现求导过程。</li>
+<li><strong>支持动态计算图</strong>：深度学习中，通常需要构建复杂的计算图来描述模型结构和计算过程。使用 tensor 可以方便地构建动态计算图，而 numpy  则只能使用静态计算图。</li>
+</ul>
+<p>因此，使用 tensor 可以提高深度学习的计算效率和开发效率，并且方便实现自动求导和构建动态计算图。虽然 tensor  相对于numpy复杂一些，但是在深度学习中，使用 tensor 是非常普遍和必要的。</p>
+<h4 id="2-2-2-Tensor属性"><a href="#2-2-2-Tensor属性" class="headerlink" title="2.2.2 Tensor属性"></a>2.2.2 Tensor属性</h4><h5 id="Ⅰ-Tensor属性概述"><a href="#Ⅰ-Tensor属性概述" class="headerlink" title="Ⅰ Tensor属性概述"></a>Ⅰ Tensor属性概述</h5><p>在 PyTorch 0.4.0 之前，<code>torch.autograd</code> 包中存在 Variable 这种数据类型，主要是用于封装 Tensor，进行自动求导。Variable 主要包含下面几种属性。 在 PyTorch 0.4.0之后，Variable 并入了 Tensor。在之后版本的 Tensor 中，除了具有上面 Variable 的 5 个属性，还有另外 3 个属性。 </p>
+<p><img src="https://pic.imgdb.cn/item/6677f774d9c307b7e9d1966b.png" alt="image.png"></p>
+<ul>
+<li>data：被包装的Tensor；</li>
+<li>grad：data的梯度；</li>
+<li>grad_fn：创建Tensor所使用的Function，是自动求导的关键，因为根据所记录的函数才能计算出导数。</li>
+<li>requires_grad：指示是否需要梯度，并不是所有的张量都需要计算梯度。</li>
+<li>is_leaf：指示是否为叶子节点（张量），叶子节点的概念在计算图中会用到，后面详细介绍。</li>
+<li>dtype：张量的数据类型，如 torch.FloatTensor，torch.cuda.FloatTensor</li>
+<li>shape：张量的形状。如 (64, 3, 224, 224)</li>
+<li>device：张量所在设备 (CPU/GPU)，GPU 是加速计算的关键</li>
+</ul>
+<h5 id="Ⅱ-Tensor数据类型"><a href="#Ⅱ-Tensor数据类型" class="headerlink" title="Ⅱ Tensor数据类型"></a>Ⅱ Tensor数据类型</h5><p>torch.dtype属性标识了torch.Tensor的数据类型。PyTorch有八种不同的数据类型：</p>
+<p><img src="https://pic.imgdb.cn/item/6677f829d9c307b7e9d32edf.png" alt="8a85fcc7257c4b34890002090a7f007e.png"></p>
+<h5 id="Ⅲ-Tensor所在设备"><a href="#Ⅲ-Tensor所在设备" class="headerlink" title="Ⅲ Tensor所在设备"></a>Ⅲ Tensor所在设备</h5><p><img src="https://pic.imgdb.cn/item/6677f871d9c307b7e9d3c2a0.png" alt="64d489edcf384fbc81c0e9942725fecf.png"></p>
+<p>如图所示，我们可以看到每种类型的数据都有一个CPU和一个GPU版本，因此我们对张量进行处理的时候需要指定一个设备，它要么是CPU要么是GPU，这是数据被分配的位置，这决定了给定张量的张量计算位置。</p>
+<p>Pytorch支持多种设备的使用，我们可以用<code>torch.device</code>来创建一个设备，并指定索引，例如：</p>
+<pre><code>device=torch.device(&#39;cuda:0&#39;)
+</code></pre><p>输出结果为：<code>device(type=‘cuda’,index=0)</code>，可看到类型为’cuda’，即GPU，索引0表示为第一个GPU。</p>
+<p>[<a href="https://blog.csdn.net/qq_29923461/article/details/121400160?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171910922016800227421466%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=171910922016800227421466&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~baidu_landing_v2~default-5-121400160-null-null.142^v100^control&amp;utm_term=pytorch%20tensor&amp;spm=1018.2226.3001.4187">参考链接</a>]、[<a href="https://blog.csdn.net/xu1129005165/article/details/130727373?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171910922016800227421466%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=171910922016800227421466&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-4-130727373-null-null.142^v100^control&amp;utm_term=pytorch%20tensor&amp;spm=1018.2226.3001.4187">参考链接</a>]。</p>
+<h4 id="2-2-2-Tensor创建"><a href="#2-2-2-Tensor创建" class="headerlink" title="2.2.2 Tensor创建"></a>2.2.2 Tensor创建</h4><h5 id="Ⅰ-直接创建Tensor"><a href="#Ⅰ-直接创建Tensor" class="headerlink" title="Ⅰ 直接创建Tensor"></a>Ⅰ 直接创建Tensor</h5><p>直接创建Tensor的语法如下。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">data：数据，可以是list, numpy</span></span><br><span class="line"><span class="string">dtype：数据类型，默认与data对应</span></span><br><span class="line"><span class="string">device：张量所在的设备(cuda或cpu)</span></span><br><span class="line"><span class="string">requires_grad：是否需要梯度</span></span><br><span class="line"><span class="string">pin_memory：是否存于锁存内存</span></span><br><span class="line"><span class="string">&quot;&quot;&quot;</span></span><br><span class="line">torch.tensor(data, dtype=<span class="literal">None</span>, device=<span class="literal">None</span>, requires_grad=<span class="literal">False</span>, pin_memory=<span class="literal">False</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意：pin_memory就是锁页内存，创建DataLoader时，设置pin_memory=True，</span></span><br><span class="line"><span class="comment"># 则意味着生成的Tensor数据最开始是属于内存中的锁页内存，这样将内存的Tensor</span></span><br><span class="line"><span class="comment"># 转义到GPU的显存就会更快一些。</span></span><br></pre></td></tr></table></figure>
+<p>示例1：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">arr = np.ones((<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(arr)</span><br><span class="line"><span class="comment"># [[1. 1. 1.]</span></span><br><span class="line"><span class="comment">#  [1. 1. 1.]</span></span><br><span class="line"><span class="comment">#  [1. 1. 1.]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ndarray的数据类型： float64</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ndarray的数据类型：&quot;</span>, arr.dtype)</span><br><span class="line"></span><br><span class="line">t= torch.tensor(arr)</span><br><span class="line"><span class="built_in">print</span>(t)</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">tensor([[1., 1., 1.],</span></span><br><span class="line"><span class="string">        [1., 1., 1.],</span></span><br><span class="line"><span class="string">        [1., 1., 1.]], dtype=torch.float64)</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>如需创建一个放在GPU的数据，则可做如下修改，运行结果同上。 </p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">device= torch.device(<span class="string">&quot;cuda&quot;</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span>)</span><br><span class="line">arr = np.ones((<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;ndarray的数据类型：&quot;</span>, arr.dtype)</span><br><span class="line">t = torch.tensor(arr, device=device)</span><br><span class="line"><span class="built_in">print</span>(t)</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅱ-从Numpy中创建"><a href="#Ⅱ-从Numpy中创建" class="headerlink" title="Ⅱ 从Numpy中创建"></a>Ⅱ 从Numpy中创建</h5><ul>
+<li><code>torch.from_numpy()</code>是PyTorch提供的一个便捷函数，用于将NumPy数组转换为PyTorch张量。该函数在内部使用了NumPy的C接口，所以它保留了NumPy数组的形状和数据类型[<a href="https://blog.csdn.net/qq_41813454/article/details/129838551">参考链接-CSDN博客</a>]。<ul>
+<li><strong>数据类型</strong>：<code>torch.from_numpy()</code>会保留NumPy数组的数据类型。如果NumPy数组是浮点数类型，转换后的张量也将是浮点数类型。</li>
+<li><strong>不可变数据类型</strong>：通过<code>torch.from_numpy()</code>创建的张量默认是不可变的，这意味着你不能直接修改其内容。如果你需要修改张量，可以通过<code>.clone()</code>方法创建一个副本。</li>
+<li><strong>内存共享</strong>：<code>torch.from_numpy()</code>创建的张量和原始NumPy数组共享相同的内存。这意味着对张量的修改将影响原始数组，反之亦然。如果你不希望共享内存，可以使用<code>.clone()</code>方法。</li>
+</ul>
+</li>
+<li><code>torch.Tensor</code>是默认的tensor类型(torch.FloatTensor)的简称，它是一个类，也就是说使用它只能创建torch.FloatTensot类型</li>
+<li><code>torch.tensor</code>是一个函数/方法，它根据参数data创建Tensor，Tensor类型根据数据进行推断，也就是说当我们没有指定dtype使用它创建的类型和data一致，</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">numpy_array= np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">torch_tensor1 = torch.from_numpy(numpy_array)</span><br><span class="line">torch_tensor2 = torch.Tensor(numpy_array) <span class="comment"># 实例化一个Tensor类的对象</span></span><br><span class="line">torch_tensor3 = torch.tensor(numpy_array) <span class="comment"># 函数返回一个Tensor数据</span></span><br></pre></td></tr></table></figure>
+<p>在PyTorch中，<code>torch.Tensor</code>是主要的<strong>tensor类</strong>，所有的tensor都是<code>torch.Tensor</code>的实例。<code>torch.Tensor</code>是<code>torch.FloatTensor</code>的别名。  而<code>torch.tensor</code>是一个<strong>函数</strong>，返回的是一个tensor。</p>
+<blockquote>
+<p>区别1：</p>
+<ul>
+<li>torch.Tensor(data)：将输入的data转化torch.FloatTensor；</li>
+<li>torch.tensor(data)：(当你未指定dype的类型时)将data转化为torch.FloatTensor、torch.LongTensor、torch.DoubleTensor等类型，转化类型依据于data的类型或者dtype的值；</li>
+</ul>
+<p>区别2：</p>
+<ul>
+<li>使用如下语句：<code>tensor_without_data = torch.Tensor()</code> 可以创建一个空的FloatTensor；</li>
+<li>而当你使用<code>tensor_without_data = torch.tensor()</code>时候则会报错。</li>
+</ul>
+<p>[<a href="https://blog.csdn.net/Edisonleeee/article/details/90171442?spm=1001.2101.3001.6661.1&amp;utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7EPaidSort-1-90171442-blog-135943835.235%5Ev43%5Epc_blog_bottom_relevance_base9&amp;depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7EPaidSort-1-90171442-blog-135943835.235%5Ev43%5Epc_blog_bottom_relevance_base9&amp;utm_relevant_index=1">参考链接</a>]</p>
+</blockquote>
+<h5 id="Ⅲ-从Python内置类型中创建"><a href="#Ⅲ-从Python内置类型中创建" class="headerlink" title="Ⅲ 从Python内置类型中创建"></a>Ⅲ 从Python内置类型中创建</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line">a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>]</span><br><span class="line">torch_tensor1 = torch.tensor(a)</span><br><span class="line">a1 = (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">torch_tensor2  = torch.tensor(a1)</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅳ-其他方式"><a href="#Ⅳ-其他方式" class="headerlink" title="Ⅳ 其他方式"></a>Ⅳ 其他方式</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建相同元素的Tensor</span></span><br><span class="line">torch_tensor1  = torch.full([<span class="number">2</span>,<span class="number">3</span>],<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 创建全为1的Tensor</span></span><br><span class="line">torch_tensor2 = torch.ones([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="comment"># 创建全为0的Tensor</span></span><br><span class="line">torch_tensor3 = torch.zeors([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line"><span class="comment"># 创建对角阵的Tensor</span></span><br><span class="line">torch_tensor4  = torch.eye(<span class="number">3</span>)</span><br><span class="line"><span class="comment"># 在区间[1,10]中随机创建Tensor</span></span><br><span class="line">torch_tensor5 = torch.randint(<span class="number">1</span>,<span class="number">10</span>,[<span class="number">2</span>,<span class="number">2</span>])</span><br><span class="line"><span class="comment"># 等等...</span></span><br></pre></td></tr></table></figure>
+<p>创建Tensor时候也可指定数据类型和所存储的设备</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">torch_tensor= torch.zeros([<span class="number">2</span>,<span class="number">3</span>],dtype=torch.float64,device=torch.device(<span class="string">&#x27;cuda:0&#x27;</span>))</span><br><span class="line">torch_tensor.dtype <span class="comment">#torch.float64</span></span><br><span class="line">torch_tensor.device <span class="comment">#cuda:0</span></span><br><span class="line">torch_tensor.is_cuda <span class="comment">#True</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-2-3-Tensor加速"><a href="#2-2-3-Tensor加速" class="headerlink" title="2.2.3 Tensor加速"></a>2.2.3 Tensor加速</h4><p>我们可以使用以下两种方式使得Tensor在GPU上加速。</p>
+<p>第一种方式是定义cuda数据类型。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">dtype = torch.cuda.FloatTensor</span><br><span class="line">gpu_tensor = torch.randn(<span class="number">1</span>,<span class="number">2</span>).<span class="built_in">type</span>(dtype) <span class="comment">#把Tensor转换为cuda数据类型</span></span><br></pre></td></tr></table></figure>
+<p>第二种方式是直接将Tensor放到GPU上(推荐)。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">gpu_tensor = torch.randn(<span class="number">1</span>,<span class="number">2</span>).cuda(<span class="number">0</span>)<span class="comment">#把Tensor直接放在第一个GPU上</span></span><br><span class="line">gpu_tensor = torch.randn(<span class="number">1</span>,<span class="number">2</span>).cuda(<span class="number">1</span>)<span class="comment">#把Tensor直接放在第二个GPU上</span></span><br></pre></td></tr></table></figure>
+<p>而将Tensor放在CPU上也很简单。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">cpu_tensor = gpu_tensor.cpu()</span><br></pre></td></tr></table></figure>
+<h4 id="2-2-4-查看Tensor属性"><a href="#2-2-4-查看Tensor属性" class="headerlink" title="2.2.4 查看Tensor属性"></a>2.2.4 查看Tensor属性</h4><h5 id="Ⅰ-查看Tensor类型属性"><a href="#Ⅰ-查看Tensor类型属性" class="headerlink" title="Ⅰ 查看Tensor类型属性"></a>Ⅰ 查看Tensor类型属性</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor1 = torch.ones([<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">tensor1.dtype <span class="comment"># torch.float32</span></span><br></pre></td></tr></table></figure>
+<h5 id="Ⅱ-查看Tensor尺寸属性"><a href="#Ⅱ-查看Tensor尺寸属性" class="headerlink" title="Ⅱ 查看Tensor尺寸属性"></a>Ⅱ 查看Tensor尺寸属性</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">tensor1.shape <span class="comment"># 尺寸</span></span><br><span class="line">tenosr1.ndim <span class="comment">#维度</span></span><br></pre></td></tr></table></figure>
+<p>关于Tensor的形状对应</p>
+<p>在python中，会有标量，向量，矩阵等的区分。但在PyTorch中，这些统称为张量tensor，只是维度不同而已。</p>
+<ul>
+<li>标量就是0维张量，只有一个数字，没有维度。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66780640d9c307b7e9ecbb31.png" alt="image.png" style="zoom:50%"></p>
+<ul>
+<li>向量就是1维张量，是有顺序的数字，但没有“行”或“列”的区分。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/667806f9d9c307b7e9edf7f5.png" alt="image.png" style="zoom:60%"></p>
+<ul>
+<li>矩阵就是2维张量，有形状，行和列。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/667807dad9c307b7e9ef8f1b.png" alt="image.png" style="zoom:60%"></p>
+<ul>
+<li>3维张量</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66780b34d9c307b7e9f57e7b.png" alt="image.png" style="zoom:60%"></p>
+<ul>
+<li>4维张量</li>
+</ul>
+<p><img src="/2022/04/25/Python-code-tips/I.myBlog\source\_posts\Python-code-tips.assets\1719144349500.png" alt="1719144349500"></p>
+<blockquote>
+<p><strong>注：4维张量的大小输出为torch.Size(N=2, C=3, H=28, W=28)可以理解为：</strong></p>
+<p>N=2张C=3(RGB)通道的28*28的图片。</p>
+</blockquote>
+<h4 id="2-2-5-Tensor操作"><a href="#2-2-5-Tensor操作" class="headerlink" title="2.2.5 Tensor操作"></a>2.2.5 Tensor操作</h4><h5 id="Ⅰ-形状重置"><a href="#Ⅰ-形状重置" class="headerlink" title="Ⅰ 形状重置"></a>Ⅰ 形状重置</h5><p>Tensor的shape可通过<code>torch.reshape</code>接口来改变。例如：</p>
 <h3 id="2-3-Pandas学习"><a href="#2-3-Pandas学习" class="headerlink" title="2.3 Pandas学习"></a>2.3 Pandas学习</h3><h3 id="2-4-matplotlib学习"><a href="#2-4-matplotlib学习" class="headerlink" title="2.4 matplotlib学习"></a>2.4 matplotlib学习</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt  <span class="comment"># python中画图所用到的第三方库</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1956-1920年对应的GDP值，单位亿元</span></span><br><span class="line">y = [<span class="number">1470.1</span>, <span class="number">1447.5</span>, <span class="number">1312.3</span>, <span class="number">1071.4</span>, <span class="number">1030.7</span>, <span class="number">911.6</span>, <span class="number">859.8</span>, <span class="number">824.4</span>, <span class="number">679.1</span>]  </span><br><span class="line"><span class="comment"># 1952-1960年</span></span><br><span class="line">x = [<span class="number">1960</span>, <span class="number">1959</span>, <span class="number">1958</span>, <span class="number">1957</span>, <span class="number">1956</span>, <span class="number">1955</span>, <span class="number">1954</span>, <span class="number">1953</span>, <span class="number">1952</span>]  </span><br><span class="line"></span><br><span class="line">plt.scatter(x, y)  <span class="comment"># 画点，将列表中的值分别画在plot中</span></span><br><span class="line">plt.plot(x, y, color=<span class="string">&#x27;r&#x27;</span>)  <span class="comment"># 连线，按顺序将</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;year&quot;</span>)  <span class="comment"># 横轴的标签</span></span><br><span class="line">plt.ylabel(<span class="string">&quot;GDP/Billion&quot;</span>)  <span class="comment"># 纵轴的标签</span></span><br><span class="line">plt.title(<span class="string">&quot;Changes in China&#x27;s GDP since the founding of the PRC&quot;</span>)  <span class="comment"># 图像标头</span></span><br><span class="line">plt.show()  <span class="comment"># 相当于将图像显示出，必须要加上才能显示出图像</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://pic.imgdb.cn/item/6268bae1239250f7c5112e80.jpg" alt="显示结果" style="zoom:80%"></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
