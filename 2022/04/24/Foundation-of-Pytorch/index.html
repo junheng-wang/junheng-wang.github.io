@@ -128,10 +128,10 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>469.9万</span></span>
+                        <span>475.2万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>4.5万</span></span></p>
+                        <span>4.6万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -145,13 +145,13 @@
 <h3 id="第一章-Pytorch加载数据"><a href="#第一章-Pytorch加载数据" class="headerlink" title="第一章 Pytorch加载数据"></a>第一章 Pytorch加载数据</h3><h4 id="1-1-Pytorch加载数据初识"><a href="#1-1-Pytorch加载数据初识" class="headerlink" title="1.1 Pytorch加载数据初识"></a>1.1 Pytorch加载数据初识</h4><h5 id="一-常见的数据组织形式"><a href="#一-常见的数据组织形式" class="headerlink" title="(一) 常见的数据组织形式"></a>(一) 常见的数据组织形式</h5><ul>
 <li>每一类事物分别放在单独的文件夹内，文件夹的名称即为该类的名字；</li>
 <li>将数据集划分为训练集和测试集两个文件夹(即每类事物混合放)，并会提供一个训练集的数据对应的label文件；</li>
-<li>直接在数据文件的命名中体现出label名</li>
+<li>直接在数据文件的命名中体现出label名。</li>
 </ul>
-<h5 id="二-使用的类"><a href="#二-使用的类" class="headerlink" title="(二) 使用的类"></a>(二) 使用的类</h5><p>pytorch中加载数据主要涉及两个类——<font clolor="red"><strong>Dataset、Dataloader</strong></font></p>
+<h5 id="二-使用的类"><a href="#二-使用的类" class="headerlink" title="(二) 使用的类"></a>(二) 使用的类</h5><p>pytorch中加载数据主要涉及两个类——<strong><font clolor="red">Dataset、Dataloader</font></strong>。</p>
 <p>直白的说：</p>
 <ul>
-<li>Dataset作用：提供一种方式获取数据已经数据对应的label，获取总共有多少数据</li>
-<li>Dataloader作用：为后面的网络提供不同的数据形式，如：mini_batch大小、是否打乱等</li>
+<li><strong>Dataset作用</strong>：提供一种方式获取数据以及数据对应的label，获取总共有多少数据；</li>
+<li><strong>Dataloader作用</strong>：为后面的网络提供不同的数据形式，如：mini_batch大小、是否打乱等。</li>
 </ul>
 <h4 id="1-2-Dataset类"><a href="#1-2-Dataset类" class="headerlink" title="1.2 Dataset类"></a>1.2 Dataset类</h4><p>Dataset是一个抽象类，所有的数据集都要继承这个类，所有的子类都应该重写<code>__getitem__</code>魔法方法(获取每一个数据及其对应的label)，可以选择重写<code>__len__</code>魔法方法(获取数据的总长度)</p>
 <p>在Python中我们可以使用<code>__getitem__</code>、<code>__len__</code>等方法去创建类似于序列和映射的类。这种方法的好处是可以像列表一样使用索引功能访问元素。 </p>
