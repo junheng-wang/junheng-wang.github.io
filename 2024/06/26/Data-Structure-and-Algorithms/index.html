@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">8.4k</span>
+            <span class="post-count">15.9k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">33 分钟</span>
+            <span class="post-count">62 分钟</span>
         </span>
     </span>
 </div>
@@ -158,7 +158,7 @@ T(n) = O(n^3)</script><p>一般情况下，不必计算所有操作的执行次�
 </ul>
 <p>空间复杂度：算法所需存储空间的度量，记作：$S(n) = O(f(n))$，其中$n$为问题的规模(或大小)。</p>
 <p>算法要占据的空间：① 变量等算法本身要占据的空间，输入/输出，指令，常数，变量等；② 算法要使用的辅助空间。</p>
-<h3 id="sect-2-线性表"><a href="#sect-2-线性表" class="headerlink" title="&sect; 2 线性表"></a>&sect; 2 线性表</h3><h4 id="2-1-线性表的定义和特点"><a href="#2-1-线性表的定义和特点" class="headerlink" title="2.1 线性表的定义和特点"></a>2.1 线性表的定义和特点</h4><p>线性表是具有<strong>相同特性</strong>的数据元素的一个<strong>有限序列</strong>：</p>
+<h3 id="sect-2-线性表：顺序表和链表"><a href="#sect-2-线性表：顺序表和链表" class="headerlink" title="&sect; 2 线性表：顺序表和链表"></a>&sect; 2 线性表：顺序表和链表</h3><h4 id="2-1-线性表的定义和特点"><a href="#2-1-线性表的定义和特点" class="headerlink" title="2.1 线性表的定义和特点"></a>2.1 线性表的定义和特点</h4><p>线性表是具有<strong>相同特性</strong>的数据元素的一个<strong>有限序列</strong>：</p>
 <script type="math/tex; mode=display">
 (a_1, a_2, \cdots, a_{i-1}, a_i, a_{i+1}, \cdots, a_{n-1}, a_n)</script><p><img src="https://pic.imgdb.cn/item/667cbd4dd9c307b7e9b718bf.png" alt="image.png"></p>
 <p>线性表的第一个数据元素$a_1$被称为起始节点，最后一个数据元素$a_n$被称为终端节点，中间的数据元素为普通的节点。</p>
@@ -323,9 +323,9 @@ P_n(x) = p_1 x^{e_1} + p_2 x^{e_2} + \cdots + p_m x^{e_m}</script><p>线性表$P
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span> // 声明结点的类型和指向结点的指针类型，该结构体的名字为<span class="title">Lnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;	<span class="comment">// 结点的数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span>* <span class="title">next</span>;</span>	<span class="comment">// 结点的指针域  struct可加可不加</span></span><br><span class="line">&#125;LNode, *LinkList;	<span class="comment">// 根据typedef的作用：LNode是别名，LinkList为指向结构体Lnode的指针类型</span></span><br></pre></td></tr></table></figure>
 <p><img src="https://pic.imgdb.cn/item/66836250d9c307b7e9e461ea.png"></p>
 <p>示例：存储学生学号、姓名、成绩的单链表结点类型定义如下</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> Struct student</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">char</span> num[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="keyword">int</span> score;	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">student</span>*<span class="title">next</span>;</span> <span class="comment">// 指针域</span></span><br><span class="line">&#125;LNode, *LinkList;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">student</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> num[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="keyword">int</span> score;	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">student</span>*<span class="title">next</span>;</span> <span class="comment">// 指针域</span></span><br><span class="line">&#125;LNode, *LinkList;</span><br></pre></td></tr></table></figure>
 <p>为了统一链表形式，通常将如上示例的多属性链表定义为：</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> Struct &#123;</span><br><span class="line">    <span class="keyword">char</span> num[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">	<span class="keyword">int</span> score;		<span class="comment">// 数据域</span></span><br><span class="line">&#125; ElemType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span>&#123;</span></span><br><span class="line">    ElemType data; <span class="comment">//数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span> *<span class="title">next</span>;</span> <span class="comment">//指针域</span></span><br><span class="line">&#125;LNode, *LinkList;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    <span class="keyword">char</span> num[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="keyword">char</span> name[<span class="number">8</span>];	<span class="comment">// 数据域</span></span><br><span class="line">	<span class="keyword">int</span> score;		<span class="comment">// 数据域</span></span><br><span class="line">&#125; ElemType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span>&#123;</span></span><br><span class="line">    ElemType data; <span class="comment">//数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Lnode</span> *<span class="title">next</span>;</span> <span class="comment">//指针域</span></span><br><span class="line">&#125;LNode, *LinkList;</span><br></pre></td></tr></table></figure>
 <p><strong>(2) 单链表的初始化</strong></p>
 <p>算法思想：<br>① 生成新结点作头结点，用头指针L指向头结点；<br>②  将头结点的指针域置空。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InitList</span><span class="params">(LinkList&amp; L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    L = <span class="keyword">new</span> Lnode;</span><br><span class="line">    L-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>;	<span class="comment">// 初始化成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -409,6 +409,456 @@ La = (1, 7, 8) \quad Lb=(2, 4, 6, 8, 10, 11) \quad \Longrightarrow \quad Lc=(1, 
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreatePolyn</span><span class="params">(Polynomial&amp; P, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="comment">// 输入m项的系数和指数，建立表示多项式的有序链表P</span></span><br><span class="line">    P = <span class="keyword">new</span> PNode;</span><br><span class="line">    P-&gt;next = <span class="literal">NULL</span>;	<span class="comment">// 先建立一个带头结点的单链表</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)	<span class="comment">// 依次输入n个非零项</span></span><br><span class="line">    &#123;</span><br><span class="line">        s = <span class="keyword">new</span> PNode;	<span class="comment">// 生成新结点</span></span><br><span class="line">        cin &gt;&gt; s-&gt;coef &gt;&gt; s-&gt;expn;	<span class="comment">// 输入系数和指数</span></span><br><span class="line">        pre=P;	<span class="comment">// pre用于保存q的前驱，初值为头结点</span></span><br><span class="line">        q=P-&gt;next;	<span class="comment">// q初始化，指向首元结点</span></span><br><span class="line">        <span class="keyword">while</span>(q &amp;&amp; q-&gt;expn &lt; s-&gt;expn)	<span class="comment">// 找到第一个大于输入项指数的项*q</span></span><br><span class="line">        &#123;</span><br><span class="line">            pre=q;</span><br><span class="line">            q=q-&gt;next;</span><br><span class="line">        &#125;</span><br><span class="line">        s-&gt;next=q;	<span class="comment">// 将输入项s插入到q和其前驱结点pre之间</span></span><br><span class="line">        pre-&gt;next=s;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>【多项式的相加】算法步骤：</p>
 <p>① 指针p1和p2初始化，分别指向Pa和Pb的首元结点；<br>② p3指向和多项式的当前结点，初值为Pa的头结点。<br>③ 当指针p1和p2均未到达相应表尾时，则循环比较p1和p2所指结点对应的指数值(p1-&gt;expn与p2-&gt;expn)，有下列3种情况：<br>    当p1-&gt;expn$==$p2-&gt;expn时，则将两个结点中的系数相加<br>        若和不为零，则修改p1所指结点的系数值，同时删除p2所指结点；<br>        若和为零，则删除p1和p2所指结点；<br>    当p1-&gt;expn $&lt;$ p2-&gt;expn时，则应摘取p1所指结点插入到“和多项式”链表中去；<br>    当p1-&gt;expn $&gt;$ p2-&gt;expn时，则应摘取p2所指结点插入到“和多项式“链表中去。<br>④ 将非空多项式的剩余段插入到p3所指结点之后；<br>⑤ 释放Pb的头结点。</p>
+<h3 id="sect-3-线性表：栈和队列"><a href="#sect-3-线性表：栈和队列" class="headerlink" title="&sect; 3 线性表：栈和队列"></a>&sect; 3 线性表：栈和队列</h3><h4 id="3-1-栈和队列的定义和特点"><a href="#3-1-栈和队列的定义和特点" class="headerlink" title="3.1 栈和队列的定义和特点"></a>3.1 栈和队列的定义和特点</h4><h5 id="Ⅰ-概念概述"><a href="#Ⅰ-概念概述" class="headerlink" title="Ⅰ 概念概述"></a>Ⅰ 概念概述</h5><p>栈和队列是两种常用的、重要的数据结构。栈和队列是限定插入和删除只能在表的“<strong>端点</strong>”进行的<strong>线性表</strong>。</p>
+<p><strong><font color="red">栈——后进先出</font></strong>：生活举例：电梯进出。</p>
+<p><strong><font color="blue">队列——先进先出</font></strong>：生活举例：排队买票。</p>
+<ul>
+<li>由于栈的操作具有后进先出的固有特性，使得栈成为程序设计中的有用工具。另外，如果问题求解的过程具有”后进先出”的天然特性的话，则求解的算法中也必然需要利用”栈”。</li>
+</ul>
+<p>例如：数制转换、括号匹配的检验、行编辑程序、迷宫求解、表达式求值、八皇后问题、函数调用、递归调用的实现等都与栈这种数据结构有关。</p>
+<ul>
+<li>由于队列的操作具有先进先出的特性，使得队列成为程序设计中解决类似排队问题的有用工具。</li>
+</ul>
+<p>例如：脱机打印输出：按申请的先后顺序依次输出；<br>例如：多用户系统中，多个用户排成队，分时地循环使用CPU和主存；<br>例如：按用户的优先级排成多个队，每个优先级一个队列；<br>例如：实时控制系统中，信号按接收的先后顺序依次处理；<br>例如：网络电文传输，按到达的时间先后顺序依次进行。</p>
+<h5 id="Ⅱ-栈-stack-的概念"><a href="#Ⅱ-栈-stack-的概念" class="headerlink" title="Ⅱ 栈(stack)的概念"></a>Ⅱ 栈(stack)的概念</h5><p><strong>(1) 栈的定义</strong></p>
+<p>栈(stack)是一个特殊的线性表，是限仅在一端(通常是表尾)进行插入和删除操作的线性表。又称为后进先出(Last In First Out)的线性表，简称<strong>LIFO结构</strong>。</p>
+<p>表尾(即$a_n$端)被称为栈顶Top，表头(即$a_1$端)被称为栈底Base。例如：</p>
+<script type="math/tex; mode=display">
+栈： S=(a_1, a_2, \cdots, a_n)</script><p><strong>入栈</strong>：插入元素到栈顶(表尾)的操作；<strong>出栈</strong>：从栈顶(表尾)删除最后一个元素的操作。</p>
+<p><strong>(2) 栈的示意图</strong></p>
+<p><img src="https://pic.imgdb.cn/item/668748abd9c307b7e908ccf7.png" alt="栈的示意图"></p>
+<p><strong>(3) 栈概念和特点小结</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>相关概念</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>限定只能在表的一端进行插入、删除运算的线性表(只能在栈顶操作)</td>
+</tr>
+<tr>
+<td>逻辑结构</td>
+<td>与线性表相同，仍为一对一关系</td>
+</tr>
+<tr>
+<td>存储结构</td>
+<td>用顺序栈或链栈存储均可，但以<strong>顺序栈更常见</strong></td>
+</tr>
+<tr>
+<td>运算规则</td>
+<td>只能在栈顶运算，且访问结点时依照店进先出(LIFO)的原则</td>
+</tr>
+<tr>
+<td>实现方式</td>
+<td>关键是编写入栈和出栈函数，具体实现依顺序栈或链栈的不同而不同</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h5 id="Ⅲ-队列-queue-的概念"><a href="#Ⅲ-队列-queue-的概念" class="headerlink" title="Ⅲ 队列(queue)的概念"></a>Ⅲ 队列(queue)的概念</h5><p><strong>(1) 队列的定义</strong></p>
+<p>队列(queue)是一种先进先出(Frist In Frist Out ——FIFO)的线性表。在表一端插入(表尾)，在另一端(表头)删除。</p>
+<script type="math/tex; mode=display">
+队列：Q=(a_1, a_2, \cdots, a_n)</script><p><strong>(2) 队列示意图</strong></p>
+<p><img src="https://pic.imgdb.cn/item/66874bacd9c307b7e90cffd7.png" alt="队列示意图"></p>
+<p><strong>(3) 队列概念和特点小结</strong></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>相关概念</th>
+<th>释义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>定义</td>
+<td>只能在表的一端进行插入运算，在表的另一端进行删除运算的线性表(头删尾插)</td>
+</tr>
+<tr>
+<td>逻辑结构</td>
+<td>与线性表相同，仍为一对一关系</td>
+</tr>
+<tr>
+<td>存储结构</td>
+<td>顺序队或链队，以<strong>循环顺序队列</strong>更常见</td>
+</tr>
+<tr>
+<td>运算规则</td>
+<td>只能在队首和队尾运算，且访问结点时依照先进先出(FIFO)的原则</td>
+</tr>
+<tr>
+<td>实现方式</td>
+<td>关键是掌握入队和出队操作，具体实现依顺序队或链队的不同而不同</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="3-2-案例引入"><a href="#3-2-案例引入" class="headerlink" title="3.2 案例引入"></a>3.2 案例引入</h4><h5 id="Ⅰ-进制转换"><a href="#Ⅰ-进制转换" class="headerlink" title="Ⅰ 进制转换"></a>Ⅰ 进制转换</h5><p>十进制整数N向其它进制数d(二、八、十六)的转换是计算机实现计算的基本问题。</p>
+<p>转换法则：</p>
+<script type="math/tex; mode=display">
+n = (n \text{ div }d)*d + n \text{ mod }d</script><p>其中，div为取商运算，mod为取余运算。</p>
+<p><img src="https://pic.imgdb.cn/item/66874f2dd9c307b7e911e66e.png" alt="十进制转八进制" style="zoom:40%"></p>
+<h5 id="Ⅱ-LeetCode-20有效的括号"><a href="#Ⅱ-LeetCode-20有效的括号" class="headerlink" title="Ⅱ  LeetCode 20有效的括号"></a>Ⅱ  <a target="_blank" rel="noopener" href="https://leetcode.cn/problems/valid-parentheses/">LeetCode 20有效的括号</a></h5><h5 id="Ⅲ-表达式求值"><a href="#Ⅲ-表达式求值" class="headerlink" title="Ⅲ 表达式求值"></a>Ⅲ 表达式求值</h5><p>表达式求值是程序设计语言编译中一个最基本的问题，它的实现也需要运用栈。</p>
+<p>这里介绍的算法是由运算符优先级确定运算顺序的对表达式求值算法——<strong>算符优先算法</strong>。</p>
+<ul>
+<li>表达式的组成<ul>
+<li>操作数(operand)：常数、变量；</li>
+<li>运算符(operator)：算术运算符、关系运算符和逻辑运算符；</li>
+<li>界限符(delimiter)：左右括弧和表达式结束符。</li>
+</ul>
+</li>
+</ul>
+<p>任何一个算术表达式都由操作数(常数、变量)、算术运算符(+、-、*、/)和界限符(括号、表达式结束符<code>#</code>、虚设的表达式起始符<code>#</code>)组成。后两者统称为算符。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">例如：# <span class="number">3</span>*(<span class="number">7</span><span class="number">-2</span>) #</span><br></pre></td></tr></table></figure>
+<ul>
+<li>为了实现表达式求值，需要设置两个栈：<ul>
+<li>一个是<strong>算符栈OPTR</strong>，用于寄存运算符；</li>
+<li>另一个称为<strong>操作数栈(OPND)</strong>，用于寄存运算数和运算结果。</li>
+</ul>
+</li>
+<li>求值的处理过程是自左至右扫描表达式的每一个字符：<ul>
+<li>当扫描到的是运算数，则将其压入栈OPND；</li>
+<li>当扫描到的是运算符时：<ul>
+<li>若这个运算符比OPTR栈顶运算符的优先级高，则入栈OPTR，继续向后处理；</li>
+<li>若这个运算符比OPTR栈顶运算符优先级低，则从OPND中弹出两个运算数，从OPTR中弹出栈顶运算符进行运算，并将运算结果压入栈OPND。</li>
+</ul>
+</li>
+<li>继续处理当前字符，直到遇到结束符为止。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-3-栈的表示和操作"><a href="#3-3-栈的表示和操作" class="headerlink" title="3.3 栈的表示和操作"></a>3.3 栈的表示和操作</h4><h5 id="Ⅰ-常见的栈操作"><a href="#Ⅰ-常见的栈操作" class="headerlink" title="Ⅰ 常见的栈操作"></a>Ⅰ 常见的栈操作</h5><p><code>InitStack(&amp;S)</code>：初始化操作；操作结果：构造一个空栈S。</p>
+<p><code>DestroyStack(&amp;S)</code>：销毁栈操作；初始条件：栈S已存在；操作结果：栈S被销毁。</p>
+<p><code>StackEmpty(S)</code>：判定S是否为空；初始条件：栈S已存在；操作结果：若栈S为空则返回true，否则false。</p>
+<p><code>StackLength(S)</code>：求栈的长度；初始条件：栈S已存在；操作结果：返回S的元素个数，即栈的长度。</p>
+<p><code>GetTop(S, &amp;e)</code>：取栈顶元素；初始条件：栈S已存在且非空；操作结果：用e返回S的栈顶元素。</p>
+<p><code>ClearStack(&amp;S)</code>：栈置空操作；初始条件：栈S已存在；操作结果：将 S 清为空栈。</p>
+<p><code>Push(&amp;S, e)</code>：入栈操作；初始条件：栈S已存在。操作结果：插入元素e为新的栈顶元素。</p>
+<p><code>Pop(&amp;S, &amp;e)</code>：出栈操作；初始条件：栈S已存在且非空；操作结果：删除S的栈顶元素an，并用e返回<br>其值。</p>
+<h5 id="Ⅱ-顺序栈的表示和实现"><a href="#Ⅱ-顺序栈的表示和实现" class="headerlink" title="Ⅱ 顺序栈的表示和实现"></a>Ⅱ 顺序栈的表示和实现</h5><p>存储方式：同一般线性表的顺序存储结构完全相同，利用一组地址连续的存储单元依次存放自栈底到栈顶的数据元素。</p>
+<p>栈底一般在低地址端。① 附设top指针，指示栈顶元素在顺序栈中的位置。② 附设base指针，指示栈底元素在顺序栈中的位置。③ 用stacksize表示栈可使用的最大容量。</p>
+<p><img src="https://pic.imgdb.cn/item/66875a07d9c307b7e922d9ed.png" style="zoom:50%"></p>
+<p>从上图可以看到，为了方便操作，通常top指示真正的栈顶元素之上的下标地址。</p>
+<p><strong>空栈标志：</strong><code>base=top</code></p>
+<p><strong>栈满标志：</strong><code>top-base=stacksize</code></p>
+<p>栈满时的处理：1、报错，返回操作系统。2、分配更大空间，作为栈的存储空间，将原栈的内容移入新栈。</p>
+<ul>
+<li>使用数组作为顺序栈存储方式的特点：简单，方便、但易产生溢出(数组大小固定)<ul>
+<li>上溢(overflow)：栈已经满，又要压入元素；</li>
+<li>下溢(underflow)：栈已经空，还要弹出元素</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>注：上溢是一种错误，使问题的处理无法进行；而下溢一般认为是一种结束条件，即问题处理结束。</p>
+</blockquote>
+<p><strong>(1) 顺序栈的数据类型定义</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="meta-keyword">define</span> MAXSIZE 100</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    SElemType* base;	<span class="comment">// 栈底指针</span></span><br><span class="line">    SElemType* top;	<span class="comment">// 栈顶指针</span></span><br><span class="line">    <span class="keyword">int</span> stacksize;	<span class="comment">// 栈可用最大容量</span></span><br><span class="line">&#125; SqStack;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 顺序栈的初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitStack</span><span class="params">(SqStack&amp; S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    S.base = <span class="keyword">new</span> SElemType[MAXSIZE];	<span class="comment">// base指针指向数组首元素地址</span></span><br><span class="line">    <span class="keyword">if</span>(!S.base)	<span class="comment">// 判断空间是否分配成功</span></span><br><span class="line">        <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">    S.top = S.base;</span><br><span class="line">    S.stacksize = MAXSIZE;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(3) 顺序栈判断是否为空</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">StackEmpty</span><span class="params">(SqStack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 若栈为空，返回TRUE;否则返回FALSE</span></span><br><span class="line">    <span class="keyword">if</span> (S.top == S.base)</span><br><span class="line">        <span class="keyword">return</span> TRUE;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(4) 顺序栈求长度</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StackLength</span><span class="params">(SqStack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> s.top-S.base;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(5) 顺序栈的清空</strong>(不销毁内存，只清空数据)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ClearStack</span><span class="params">( SqStack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( S.base ) </span><br><span class="line">        S.top = S.base;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(6) 顺序栈的销毁</strong>(销毁内存，清空数据)</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">DestroyStack</span><span class="params">( SqStack&amp; S )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( S.base )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">delete</span>[] S.base ;	<span class="comment">// 注意： ① []是否要加？；② delet是释放空间，指针还存在</span></span><br><span class="line">        S.stacksize =<span class="number">0</span>;</span><br><span class="line">        S.base = S.top = <span class="literal">NULL</span>;	<span class="comment">// 防止野指针？</span></span><br><span class="line">    &#125;</span><br><span class="line">	<span class="keyword">return</span> Ok;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(7) 顺序栈的入栈操作</strong></p>
+<p>算法思想：<br>① 判断是否栈满，若满则出错(上溢)；<br>② 元素e压入栈顶；<br>③ 栈顶指针加1。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Push</span><span class="params">( SqStack&amp; S, SElemType e)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(S.top-S.base==S.stacksize)<span class="comment">// 栈满</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    *S.top = e;</span><br><span class="line">    S.top++;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(8) 顺序栈的出栈操作</strong></p>
+<p>算法思想：<br>① 判断是否栈空，若空则出错(下溢)；<br>② 获取栈顶元素e；<br>③ 栈顶指针减1。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Pop</span><span class="params">(SqStaclk&amp; S, SElemType&amp; e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 若栈不空，则删除S的栈顶无素，用e返回其值,并返回OK;否则返回ERROR</span></span><br><span class="line">    <span class="keyword">if</span>(S.top == S.base)	<span class="comment">// 等价于if(StackEmpty(S))</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    --S.top;</span><br><span class="line">    e = *S.top;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;    </span><br></pre></td></tr></table></figure>
+<h5 id="Ⅲ-链栈的表示和实现"><a href="#Ⅲ-链栈的表示和实现" class="headerlink" title="Ⅲ 链栈的表示和实现"></a>Ⅲ 链栈的表示和实现</h5><p>链栈的表示：链栈是运算受限的单链表，只能在链表头部进行操作。</p>
+<p><img src="https://pic.imgdb.cn/item/668792f8d9c307b7e9888e7b.png"></p>
+<p>看上图，链栈有点类似于用头插法构造链表。</p>
+<ul>
+<li>链表的头指针就是栈顶</li>
+<li>不需要头结点</li>
+<li>基本不存在栈满的情况</li>
+<li>空栈相当于头指针指向空</li>
+<li>插入和删除仅在栈顶处执行</li>
+</ul>
+<p><strong>(1) 链栈的数据类型定义</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Stacknode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    SElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Stacknode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;StackNode, *LinkStack;</span><br><span class="line"></span><br><span class="line">LinkStack S;	<span class="comment">// 创建一个指向链栈结点的指针</span></span><br></pre></td></tr></table></figure>
+<p><strong>(2) 链栈的初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitStack</span><span class="params">(LinkStack&amp; S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//构造一个空栈，栈顶指针置为空</span></span><br><span class="line">    S=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(3) 链栈判断是否为空</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">StackEmpty</span><span class="params">(LinkStack S)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (S==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> TRUE;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> FALSE;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(4) 链栈的入栈操作</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Push</span><span class="params">(LinkStack&amp; S , SElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    LinkStack p=<span class="keyword">new</span> StackNode;	<span class="comment">// 生成新结点p</span></span><br><span class="line">    p-&gt;data=e;	<span class="comment">// 将新结点数据域置为e</span></span><br><span class="line">    p-&gt;next=S;	<span class="comment">// 将新结点插入栈顶</span></span><br><span class="line">    S=p;	<span class="comment">// 修改栈顶指针</span></span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(5) 链栈的出栈操作</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">Pop</span><span class="params">(LinkStack&amp; S, SElemType&amp; e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (S==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    e=S-&gt; data;</span><br><span class="line">    p=S;</span><br><span class="line">    S=S-&gt; next;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(6) 取栈顶元素</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SElemType <span class="title">GetTop</span><span class="params">(LinkStack S)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (S!=<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> S-&gt;data;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-栈与递归"><a href="#3-4-栈与递归" class="headerlink" title="3.4 栈与递归"></a>3.4 栈与递归</h4><h5 id="Ⅰ-递归的定义"><a href="#Ⅰ-递归的定义" class="headerlink" title="Ⅰ 递归的定义"></a>Ⅰ 递归的定义</h5><p>若一个对象部分地包含它自己，或用它自己给自己定义，则称这个对象是递归的；</p>
+<p>若一个过程直接地或间接地调用自己，则称这个过程是递归的过程。例如：递归求n的阶乘</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">Fact</span> <span class="params">( <span class="keyword">long</span> n )</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">0</span>) </span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> n * <span class="built_in">Fact</span>(n<span class="number">-1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下三种情况常常用到递归方法</p>
+<p>① 递归定义的数学函数</p>
+<ul>
+<li>阶乘函数：</li>
+</ul>
+<script type="math/tex; mode=display">
+\text{Fact}(n) = \begin{align}
+\begin{cases}
+1 & n = 1 \\
+n \cdot \text{Fact}(n) & n \neq 1
+\end{cases}
+\end{align}</script><ul>
+<li>2阶Fibonaci数列：</li>
+</ul>
+<script type="math/tex; mode=display">
+\text{Fib}(n) = \begin{align}
+\begin{cases}
+1 & n = 1 \text{ OR }n=2\\
+\text{Fib}(n) + \text{Fib}(n) & \text{others} 
+\end{cases}
+\end{align}</script><p>② 具有递归特性的数据结构</p>
+<ul>
+<li>二叉树</li>
+<li>广义表</li>
+</ul>
+<p>③ 可递归求解的问题</p>
+<ul>
+<li>迷宫问题</li>
+<li>Hanoi塔问题</li>
+</ul>
+<h5 id="Ⅱ-递归的本质解析"><a href="#Ⅱ-递归的本质解析" class="headerlink" title="Ⅱ 递归的本质解析"></a>Ⅱ 递归的本质解析</h5><p><strong>(1) 思想：用分治法求解问题</strong></p>
+<p>分治法：对于一个较为复杂的问题，能够分解成几个相对简单的且解法相同或类似的子问题来求解。</p>
+<p>必备的三个条件：<br>① 能将一个问题转变成一个新问题，而新问题与原问题的解法相同或类同，不同的仅是处理的对象，且这些处理对象是变化有规律的；<br>② 可以通过上述转化而使问题简化；<br>③ 必须有一个明确的递归出口，或称递归的边界。</p>
+<p>分治法求解递归问题算法的一般形式：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">p</span><span class="params">(参数表)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(递归结束条件)</span><br><span class="line">        可直接求解步骤;	<span class="comment">// -----基本项</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="built_in">p</span>(较小的参数);	<span class="comment">// ------归纳项</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 函数调用过程</strong></p>
+<ul>
+<li>调用前，系统完成：<br>① 将实参、返回地址等传递给被调用函数；<br>② 为被调用函数的局部变量分配存储区；<br>③ 将控制转移到被调用函数的入口。</li>
+<li>调用后，系统完成：<br>① 保存被调用函数的计算结果；<br>② 释放被调用函数的数据区；<br>③ 依照被调用函数保存的返回地址将控制转移到调用函数。</li>
+</ul>
+<p>当多个函数构成嵌套调用时，简单分析可知，最后调用的函数先返回结果，也就是遵循：<strong>后调用先返回——栈的特征</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/6688acb9d9c307b7e94cde7e.png" alt="阶乘函数调用"></p>
+<p><strong>(3) 递归的优缺点</strong></p>
+<p>优点：结构清晰，程序易读。</p>
+<p>缺点：每次调用要生成工作记录，保存状态信息，入栈；返回时要出栈恢复状态信息。时间开销大。</p>
+<p>当对时间效率要求比较高的时候，就要想办法把递归变成非递归，通用的方法有2种：</p>
+<p>① 尾递归、单向递归→循环结构；</p>
+<p>尾递归：</p>
+<p><img src="https://pic.imgdb.cn/item/6688af7dd9c307b7e9512999.png"></p>
+<p>单向递归：虽然有一处以上的递归调用语句，但各次递归调用语句的参数只和主调函数有关，相互之间参数无关，并且这些递归调用语句处于算法的最后。</p>
+<p><img src="https://pic.imgdb.cn/item/6688b0fdd9c307b7e95397ff.png"></p>
+<p>② 自用栈模拟系统的运行时栈。</p>
+<p>借助栈改写递归：</p>
+<p>—— 递归程序在执行时需要系统提供栈来实现；</p>
+<p>—— 仿照递归算法执行过程中递归工作栈的状态变化可写出相应的非递归程序；</p>
+<p>—— 改写后的非递归算法与原来的递归算法相比，结构不够清晰，可读性较差有的还需要经过一系列优化。</p>
+<p>详细步骤：</p>
+<p><code>Step 1</code>：设置一个工作栈存放递归工作记录(包括实参、返回地址及局部变量等)；<br><code>Step 2</code>：进入非递归调用入口(即被调用程序开始处)将调用程序传来的实在参数和返回地址入栈(递归程序不可以作为主程序，因而可认为初始是被某个调用程序调用)；<br><code>Step 3</code>：进入递归调用入口:当不满足递归结束条件时，逐层递归，将实参、返回地址及局部变量入栈，这一过程可用循环语句来实现一模拟递归分解的过程；<br><code>Step 4</code>：递归结束条件满足，将到达递归出口的给定常数作为当前的函数值；<br><code>Step 5</code>：返回处理：在栈不空的情况下，反复退出栈顶记录，根据记录中的返回地址进行题意规定的操作，即逐层计算当前函数值，直至栈空为止一模拟递归求值过程。</p>
+<h4 id="3-5-队列的表示和操作"><a href="#3-5-队列的表示和操作" class="headerlink" title="3.5 队列的表示和操作"></a>3.5 队列的表示和操作</h4><h5 id="Ⅰ-常见的队列操作"><a href="#Ⅰ-常见的队列操作" class="headerlink" title="Ⅰ 常见的队列操作"></a>Ⅰ 常见的队列操作</h5><p><code>InitQueue(&amp;Q)</code>：初始化操作；操作结果：构造一个空队列Q。</p>
+<p><code>DestroyQueue(&amp;Q)</code>：销毁队列操作；初始条件：队列Q已存在；操作结果：队列Q被销毁。</p>
+<p><code>ClearQueue(&amp;Q)</code>：判定Q是否为空；初始条件：队列Q已存在；操作结果：若队列Q为空则返回true，否则false。</p>
+<p><code>QueueLength(Q)</code>：求队列Q的长度；初始条件：队列Q已存在；操作结果：返回队列Q的元素个数。</p>
+<p><code>GetHead(Q, &amp;e)</code>：求队头元素；初始条件：队列Q已存在且非空；操作结果：用e返回队头元素。</p>
+<p><code>EnQueue(&amp;Q, e)</code>：插入操作；操作结果：插入元素e为Q的队尾元素。</p>
+<p><code>DeQueue(&amp;Q, &amp;e)</code>：删除操作；条件：Q为非空队列；操作结果：:删除Q的队头元素，用e返回值。</p>
+<p>还有将队列置空、遍历队列等操作….</p>
+<h5 id="Ⅱ-队列的顺序表示和实现"><a href="#Ⅱ-队列的顺序表示和实现" class="headerlink" title="Ⅱ 队列的顺序表示和实现"></a>Ⅱ 队列的顺序表示和实现</h5><p>队列的物理存储可以用顺序存储结构，也可用链式存储结构。相应地，队列的存储方式也分为两种，即顺序队列和链式队列。</p>
+<p>队列的顺序表示 —— 用一维数组<code>base[MAXQSIZE]</code>。</p>
+<p><strong>(1) 顺序队的数据类型定义</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXQSIZE 100 <span class="comment">// 最大队列长度</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    QElemType *base;<span class="comment">// 初始化的动态分配存储空间，用数组存储数据</span></span><br><span class="line">    <span class="keyword">int</span> front;	<span class="comment">// 头指针：称作指针，但实际不是指针类型变量，作用是指示队头位置</span></span><br><span class="line">    <span class="keyword">int</span> reary;	<span class="comment">// 尾指针</span></span><br><span class="line">&#125;sqQueue;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 队列的假溢出</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6688ba4cd9c307b7e96324ee.png" alt="队列的假溢出"></p>
+<ul>
+<li>解决方法：<ul>
+<li>方法1：将队中元素依次向队头方向移动。<br>缺点：时间消耗大，每移动一次，队中元素都要移动。</li>
+<li>方法2：将队空间设想成一个<strong><font color="blue">循环的表</font></strong>，即分配给队列的m个存储单元可以循环使用，当rear为maxgsize时，若向量的开始端空着，又可从头使用空着的空间。当front为maxqsize时，也是一样。</li>
+</ul>
+</li>
+</ul>
+<p>综上，基本使用方法2的<strong>循环队列法</strong>：</p>
+<p><code>base[0]</code>接在<code>base[MAXQSIZE-1]</code>之后，若<code>rear+1==M</code>，则令<code>rear=0</code>。实现方法：利用<strong>&lt;font color=re’d&gt;模(mod，C语言中%)运算&lt;/font&gt;</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 插入元素</span></span><br><span class="line">Q.base[Q.rear] = x;</span><br><span class="line">Q.rear = (Q.rear+<span class="number">1</span>)%MAXQSIZE; 	<span class="comment">// 对MAXQSIZE取模</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 删除元素</span></span><br><span class="line">x = Q.base[s.front]</span><br><span class="line">Q.front = (Q.front+<span class="number">1</span>)%MAXQSIZE;</span><br></pre></td></tr></table></figure>
+<p>但是，采用了循环队列之后，要考虑队空和队满的情况，因为不做处理的时候，队空和队满情况是一样的，如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/6688c2bfd9c307b7e971db9e.png"></p>
+<p><strong>(3) 循环队列解决队空/满的方法——这里介绍少用一个元素法</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6688c469d9c307b7e974951d.png"></p>
+<p>注意，队空的判定仍然是使用<code>front==rear</code>，而队满采用：<code>(rear+1)%MAXQSIXZE==front</code>。</p>
+<p><strong>(4) 循环顺序队列的初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">lnitQueue</span> <span class="params">(SqQueue&amp; Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Q.base = <span class="keyword">new</span> QElemType[MAXQSIZE];	<span class="comment">// 分配数组空间</span></span><br><span class="line">    <span class="keyword">if</span>(!Q.base) </span><br><span class="line">        <span class="built_in">exit</span>(OVERFLOW);	<span class="comment">// 存储分配失败</span></span><br><span class="line">    Q.front=<span class="number">0</span>;	<span class="comment">// 头指针尾指针置为0，队列为空</span></span><br><span class="line">    Q.rear=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(5) 循环顺序队列求长度</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueueLength</span><span class="params">(SqQueue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ( (Q.rear-Q.front + MAXQSIZE)%MAXQSIZE ) 	<span class="comment">// 注意此处算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(6) 循环顺序队列的入队</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">EnQueue</span><span class="params">(SqQueue&amp; Q, QElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( (Q.rear+<span class="number">1</span>)%MAXQSIZE==Q.front )	<span class="comment">// 队满</span></span><br><span class="line">        <span class="keyword">return</span> ERROR; </span><br><span class="line">    </span><br><span class="line">    Q.base[Q.rear]=e;	<span class="comment">// 新元素加入队尾</span></span><br><span class="line">    Q.rear=(Q.rear+<span class="number">1</span>)%MAXQSIZE;	<span class="comment">// 队尾指针+1</span></span><br><span class="line">    <span class="keyword">return</span> Ok;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(7) 循环顺序队列的出队</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">DeQueue</span><span class="params">(SqQueue&amp; Q, QElemType&amp; e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.front==Q.rear)	<span class="comment">// 队空</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    </span><br><span class="line">    e = Q.base[Q.front];	<span class="comment">// 保存队头元素</span></span><br><span class="line">    Q.front=(Q.front+<span class="number">1</span>)%MAXQSIZE;	<span class="comment">// 队头指针+1</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">return</span> Ok;</span><br></pre></td></tr></table></figure>
+<p><strong>(8) 取队首元素</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">SElemType <span class="title">GetHead</span><span class="params">(SqQuere Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.front!=Q.rear)	<span class="comment">// 队列不为空</span></span><br><span class="line">        <span class="keyword">return</span> Q.base[Q.front];	<span class="comment">// 返回队头指针元素的值，队头指针不变</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="literal">NULL</span>;	<span class="comment">// 看具体的数据</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅲ-链队的表示和实现"><a href="#Ⅲ-链队的表示和实现" class="headerlink" title="Ⅲ 链队的表示和实现"></a>Ⅲ 链队的表示和实现</h5><p>若用户无法估计所用队列的长度，则宜采用链队列。</p>
+<p><img src="https://pic.imgdb.cn/item/6688e7e2d9c307b7e9b6052d.png" alt="带头结点的链队"></p>
+<p><strong>(1) 链队的数据类型定义</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 链队的数据类型定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Qnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	QElemType data;</span><br><span class="line">	stuct Qnode *next;</span><br><span class="line">&#125;QNode, *QuenePtr;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头尾指针单独封装起来</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	QuenePtr front;	<span class="comment">// 队头指针</span></span><br><span class="line">	QuenePtr rear;	<span class="comment">// 队尾指针</span></span><br><span class="line">&#125; LinkQueue;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/6688eaf1d9c307b7e9bce5bb.png" style="zoom:70%"></p>
+<p><strong>(2) 链队的初始化</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">initQueue</span> <span class="params">(LinkQueue&amp; Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Q.front = <span class="keyword">new</span> QNode;</span><br><span class="line">    Q.rear = Q.front;</span><br><span class="line">    Q.front-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(3) 链队的销毁</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">DestroyQueue</span><span class="params">(LinkQueue&amp; Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(Q.front)</span><br><span class="line">    &#123;</span><br><span class="line">        p=Q.front-&gt;next; </span><br><span class="line">        <span class="keyword">delete</span> Q.front; </span><br><span class="line">        Q.front=p;</span><br><span class="line">        <span class="keyword">return</span> OK;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(4) 链队的入队操作</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">EnQueue</span><span class="params">(LinkQueue&amp; Q, QElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    QuenePtr p = <span class="keyword">new</span> QNode;</span><br><span class="line">    <span class="keyword">if</span>(!p) </span><br><span class="line">        <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">    p-&gt;data=e; </span><br><span class="line">    p-&gt;next=<span class="literal">NULL</span>;</span><br><span class="line">    Q.rear-&gt;next=p;</span><br><span class="line">    Q.rear=p;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(5) 链队的出队操作</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">DeQueue</span><span class="params">(LinkQueue&amp; Q, QElemType&amp; e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.front==Q.rear)	<span class="comment">// 空队</span></span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    p=Q.front-&gt;next;</span><br><span class="line">    e=p-&gt;data;</span><br><span class="line">    Q.front-&gt;next=p-&gt;next;</span><br><span class="line">    <span class="keyword">if</span>(Q.rear==p)	<span class="comment">// 队中只有一个元素时</span></span><br><span class="line">        Q.rear=Q.front;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(6) 链队求队头操作</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">GetHead</span><span class="params">(LinkQueue Q, QElemType&amp; e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(Q.front==Q.rear) </span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    e=Q.front-&gt;next-&gt;data;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="sect-4-串、数组和广义表"><a href="#sect-4-串、数组和广义表" class="headerlink" title="&sect; 4 串、数组和广义表"></a>&sect; 4 串、数组和广义表</h3><h4 id="4-1-串"><a href="#4-1-串" class="headerlink" title="4.1 串"></a>4.1 串</h4><h5 id="Ⅰ-串的概念"><a href="#Ⅰ-串的概念" class="headerlink" title="Ⅰ 串的概念"></a>Ⅰ 串的概念</h5><p>这里的串，特指“<strong>字符串(String)</strong>”：零个或多个任意字符组成的有限序列。</p>
+<script type="math/tex; mode=display">
+\text{String } S="a_1 a_2 \cdots a_n"</script><p><strong>(1) 几个相关概念</strong></p>
+<ul>
+<li><p><strong>字串</strong>：串中任意个连续字符组成的子序列称为该串的子串。</p>
+</li>
+<li><p><strong>主串</strong>：包含子串的串相应地称为主串。</p>
+</li>
+<li><p><strong>字符位置</strong>：字符在序列中的序号为该字符在串中的位置。</p>
+</li>
+<li><p><strong>子串位置</strong>：子串第一个字符在主串中的位置。</p>
+</li>
+<li><p><strong>空格串</strong>：由一个或多个空格组成的串，与空串不同。</p>
+</li>
+<li><p><strong>串相等</strong>：当且仅当两个串的长度相等，并且各个对应位置上的字符都相同时，这两个串才是相等的。</p>
+<ul>
+<li>所有的空串都是相等的。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-案例引入"><a href="#Ⅱ-案例引入" class="headerlink" title="Ⅱ 案例引入"></a>Ⅱ 案例引入</h5><p>串的应用非常广泛，计算机上的非数值处理的对象大部分是字符串数据，例如：文字编辑、符号处理、各种信息处理系统等等。</p>
+<p><strong>案例： 病毒感染检测</strong></p>
+<p>研究者将人的DNA和病毒DNA均表示成由一些字母组成的字符串序列。然后检测某种病毒DNA序列是否在患者的DNA序列中出现过，如果出现过，则此人感染了该病毒，否则没有感染。</p>
+<p>例如：假设病毒的DNA序列为baa(aab、aba)，患者1的DNA序列为aaabbba，则感染，患者2的DNA序列为babbba，则未感染。(注意，人的DNA序列是线性的，而病毒的DNA序列是环状的)</p>
+<h5 id="Ⅲ-串的表示和实现"><a href="#Ⅲ-串的表示和实现" class="headerlink" title="Ⅲ 串的表示和实现"></a>Ⅲ 串的表示和实现</h5><p><strong>(1) 串的类型定义</strong></p>
+<p>串中元素逻辑关系与线性表的相同，串可以采用与线性表相同的存储结构。</p>
+<p><img src="https://pic.imgdb.cn/item/66891600d9c307b7e912fb17.png" style="zoom:50%"></p>
+<p><strong>涉及串的相关操作：</strong></p>
+<p><code>StrAssign(&amp;T, chars)</code>：串赋值。</p>
+<p><code>StrCompare(S, T)</code>：串比较。</p>
+<p><code>StrLength(S)</code>：求串长。</p>
+<p><code>Concat(&amp;T,S1,S2)</code>：串连结。</p>
+<p><code>SubString(&amp;sub, S, pos, len)</code>：求子串。</p>
+<p><code>StrCopy(&amp;T, S)</code>：串拷贝。</p>
+<p><code>StrEmpty(S)</code>：串判空。</p>
+<p><code>ClearString (&amp;S)</code>：清空串。</p>
+<p><code>index(S, T, pos)</code>：子串的位置。</p>
+<p><code>Replace(&amp;S,T, V)</code>：串替换。</p>
+<p><code>Strlnsert(&amp;S, pos, T)</code>：子串插入。</p>
+<p><code>StrDelete(&amp;S, pos, len)</code>：子串删除。</p>
+<p><code>DestroyString(&amp;S)</code>：串销毁。</p>
+<h5 id="Ⅳ-顺序串的表示和实现"><a href="#Ⅳ-顺序串的表示和实现" class="headerlink" title="Ⅳ 顺序串的表示和实现"></a>Ⅳ 顺序串的表示和实现</h5><p><strong>(1) 顺序串的存储结构</strong></p>
+<p>顺序串在实际中比链串更常用。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXLEN 255</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch[MAXLEN+<span class="number">1</span>];	<span class="comment">//存储串的一维数组</span></span><br><span class="line">    <span class="keyword">int</span> length; <span class="comment">//串的当前长度长度</span></span><br><span class="line">&#125;SString;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 顺序串的模式匹配算法</strong></p>
+<ul>
+<li><strong>概念</strong>：确定主串中所含<strong>子串(模式串)</strong>第一次出现的位置(定位)。</li>
+<li><strong>算法应用</strong>：搜索引擎、拼写检查、语言翻译、数据压缩算法。</li>
+<li><strong>算法种类</strong>：<ul>
+<li>BF算法(Brute-Force，又称古典的、经典的、朴素的、穷举的、暴力算法)</li>
+<li><strong>KMP算法</strong>(特点：速度快)</li>
+</ul>
+</li>
+</ul>
+<p><strong><font color="blue">BF算法：穷举法思想<font></font></font></strong></p>
+<p><img src="https://pic.imgdb.cn/item/66891d7ad9c307b7e9206ef1.png" alt="BF算法基本思想" style="zoom:40%"></p>
+<p>简单来说：算法的思路是从S的第一个字符开始依次与T的字符进行匹配。</p>
+<p>算法流程：</p>
+<p>将主串的第pos个字符和模式串的第一个字符比较</p>
+<p>—— 若相等，继续逐个比较后续字符；</p>
+<p>—— 若不等，从主串的下一字符起，重新与模式串的第一个字符比较。</p>
+<p>—— —— 直到主串的一个连续子串字符序列与模式串相等。返回值为S中与T匹配的子序列第一个字符的序号。</p>
+<p>—— ——否则，匹配失败，返回值 0</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> index <span class="title">BF</span><span class="params">(SString s, sString T )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>, j=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i&lt;=S.length &amp;&amp; j&lt;=T.length) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.ch[i]==t.ch[j]) 	<span class="comment">// 主串和子串依次匹配下一个字符</span></span><br><span class="line">        &#123;</span><br><span class="line">            ++i; </span><br><span class="line">            ++j; </span><br><span class="line">        &#125;	</span><br><span class="line">        <span class="keyword">else</span> 	<span class="comment">// 本次匹配不成功，主串、子串指针回溯重新开始下一次匹配</span></span><br><span class="line">        &#123;</span><br><span class="line">            i=i-j+<span class="number">2</span>; </span><br><span class="line">            j=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j&gt;T.length) </span><br><span class="line">        <span class="keyword">return</span> i-T.length;	<span class="comment">// 返回匹配的第一个字符的下标</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">// 模式匹配不成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong><font color="red">KMP算法<font></font></font></strong></p>
+<p>利用已经部分匹配的结果而加快模式串的滑动速度？且主串S的指针i不必回溯！可提速到$O(n+m)$。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Index_KMP</span><span class="params">(SString S,sString T, <span class="keyword">int</span> pos)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    i = pos;</span><br><span class="line">    j = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> ( i&lt;s.length &amp;&amp; j&lt;Tlength ) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( j==<span class="number">0</span> || S.ch[i]==Tch[j] )</span><br><span class="line">        &#123; </span><br><span class="line">            i++;</span><br><span class="line">            j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            j = next[j];	<span class="comment">// i不变j后退</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> ( j&gt;T.length )</span><br><span class="line">        <span class="keyword">return</span> i-T.length; 	<span class="comment">// 匹配成功</span></span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">// 返回不匹配标志</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其中，<code>next[j]</code>的求法：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">get_next</span><span class="params">(SString T, <span class="keyword">int</span>&amp; next[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    i = <span class="number">1</span>; </span><br><span class="line">    next[<span class="number">1</span>]= <span class="number">0</span>;</span><br><span class="line">    j = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>( i&lt;Tlength )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>( j==<span class="number">0</span> || T.ch[i] == T.ch[j] )</span><br><span class="line">        &#123;</span><br><span class="line">            ++i; </span><br><span class="line">            ++j;</span><br><span class="line">            next[i] =j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            j= next[j];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/onlyblues/p/15609498.html">关于KMP算法中模式串的移动不会产生漏解的证明 - 博客园</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_21989927/article/details/109520767">反证法证明：为什么KMP算法不会跳过（漏掉）正确的答案 - CSDN</a></p>
+<h5 id="Ⅴ-链串的表示和实现"><a href="#Ⅴ-链串的表示和实现" class="headerlink" title="Ⅴ 链串的表示和实现"></a>Ⅴ 链串的表示和实现</h5><p><strong>(1) 链串的存储结构</strong></p>
+<p><img src="https://pic.imgdb.cn/item/66891976d9c307b7e9194b0e.png" style="zoom:60%"></p>
+<p>为例改善存储密度低的问题，一般采用下面这种方式，又被称为<strong><font color="green">块链串</font></strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> CHUNKSIZE 80	<span class="comment">// 块的大小可由用户定义</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Chunk</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">char</span> ch[CHUNKSIZE];</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Chunk</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;Chunk;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line">    Chunk* head,* tail;	<span class="comment">// 串的头指针和尾指针</span></span><br><span class="line">    <span class="keyword">int</span> curlen;	<span class="comment">// 串的当前长度</span></span><br><span class="line">&#125;LString;	<span class="comment">// 字符串的块链结构</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-2-数组"><a href="#4-2-数组" class="headerlink" title="4.2 数组"></a>4.2 数组</h4><h5 id="Ⅰ-数组的概念"><a href="#Ⅰ-数组的概念" class="headerlink" title="Ⅰ 数组的概念"></a>Ⅰ 数组的概念</h5><p>数组：按一定格式排列起来的、具有<strong>相同类型</strong>的数据元素的集合。</p>
+<p><strong>(1) 一维数组</strong></p>
+<p>一维数组：若线性表中的数据元素为非结构的简单元素，则称为一维数组。<br>一维数组的逻辑结构：线性结构，定长的线性表。<br>声明格式：<code>数据类型 变量名称[长度]</code>，e.g. <code>int a[5] = &#123;0, 1, 2, 3, 4&#125;</code>。</p>
+<p><strong>(2) 二维数组</strong></p>
+<p>二维数组：若一维数组中的数据元素又是一维数组结构，则称为二维数组。</p>
+<ul>
+<li>二维数组的逻辑结构可分为2种：<ul>
+<li>非线性结构：每一个数据元素既在一个行表中，又在一个列表中。</li>
+<li>线性结构(定长的线性表)：该线性表的每个数据元素也是一个定长的线性表。</li>
+</ul>
+</li>
+</ul>
+<p>声明格式：<code>数据类型 变量名称[行数][列数]</code>，e.g. <code>int num[5][8]</code>。</p>
+<p><strong>(3) 高维数组</strong></p>
+<p>三维数组：若二维数组中的元素又是一个一维数组，则称作三维数组。<br>n维数组：若n-1维数组中的元素又是一个一维数组结构则称作n维数组。</p>
+<p><strong>(4) 结论</strong></p>
+<p>线性表结构是数组结构的一个特例，而数组结构又是线性表结构的扩展。</p>
+<p>数组特点：<strong>结构固定</strong>——定义后，维数和维界不再改变。</p>
+<p>数组基本操作：除了结构的初始化和销毁之外只有取元素和修改元素值的操作。</p>
+<h5 id="Ⅱ-数组的表示和操作"><a href="#Ⅱ-数组的表示和操作" class="headerlink" title="Ⅱ 数组的表示和操作"></a>Ⅱ 数组的表示和操作</h5><p>数组很少会采用链式存储结构，因为一般数组特点：<strong>结构固定</strong>。</p>
+<p><strong>(1) 数组的顺序存储结构和基本操作</strong></p>
+<p>数组可以是多维的，但存储数据元素的内存单元地址是一维的，因此，在存储数组结构之前，需要解决将多维关系映射到一维关系的问题。</p>
+<p>例1：一个一维数组定义为：<code>int a[5]</code>，每个元素占用4字节，假设<code>a[0]</code>存储在2000单元，<code>a[3]</code>地址是多少?</p>
+<p>答1：占据2012-2015存储单元。</p>
+<p>二维数组的存储顺序可以按行、按列分为2种情况：</p>
+<p><img src="https://pic.imgdb.cn/item/668a0dfcd9c307b7e994cd6d.png"></p>
+<ul>
+<li>以行序为主序时：<ul>
+<li>设数组开始存储位置 <code>LOC(0,0)</code>，存储每个元素需要L个存储单元数组元素<code>a[i][j]</code>的存储位置是：<code>LOC(i,j)= LOC(0,0)+(n*i+j)*L</code>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668b3b42d9c307b7e919d43c.png"></p>
+<p><strong>(2) 特殊矩阵的压缩存储</strong></p>
+<p>矩阵：可以看作是一个由$m \times n$个元素排成的$m$行$n$列的表。</p>
+<p>矩阵的常规存储：将矩阵描述为一个二维数组。矩阵的常规存储的特点：① 可以对其元素进行随机存取；② 矩阵运算非常简单；③存储的密度为 1。</p>
+<p>这里考察某些比较特殊的矩阵的存储，这类矩阵不适宜常规存储的矩阵 —— 值相同的元素很多且呈某种规律分布，零元素多。</p>
+<p><strong>矩阵的压缩存储</strong>：为多个相同的非零元素只分配一个存储空间；对零元素不分配空间。</p>
+<p><strong>压缩存储的定义</strong>：若多个数据元素的值都相同，则只分配一个元素值的存储空间，且零元素不占存储空间。一些特殊矩阵，如：对称矩阵，对角矩阵，三角矩阵，稀疏矩阵等都适合采用压缩存储。</p>
+<ul>
+<li>对称矩阵<ul>
+<li>[存储方法] 只存储下(或者上)三角(包括主对角线)的数据元素。共占用n(n+1)/2个元素空间。</li>
+</ul>
+</li>
+<li>三角矩阵：对角线以下(或者以上)的数据元素(不包括对角线)全部为常数c<ul>
+<li>[存储方法] 重复元素c共享一个元素存储空间，共占用n(n+1)/2+1个元素空间。</li>
+</ul>
+</li>
+<li>对角矩阵(带状矩阵)：在$n \times n$的方阵中，所有非零元素都集中在以主对角线为中心的带状区域中，区域外的值全为0，则称为对角矩阵。常见的有三对角矩阵、五对角矩阵、七对角矩阵等<ul>
+<li>[存储方法] 如下图所示，但是这种方法只有当次对角线数量小于某一值时才可行。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668b43bed9c307b7e923271d.png"></p>
+<ul>
+<li>稀疏矩阵：一般认为矩阵中非零元素占总元素的5%以下时是稀疏的。<ul>
+<li>[存储方法1] <strong>三元组</strong>法 —— 存各非零元的值和非零元的行列位置。为更可靠描述，通常再加一个“总体”信息：即总行数、总列数、非零元素总个数。</li>
+<li>[存储方法2] <strong>十字链表</strong>法 —— 在十字链表中，矩阵的每一个非零元素用一个结点表示该结点除了(row，col，value)以外，还要有两个域：<ul>
+<li>right：用于链接同一行中的下一个非零元素；</li>
+<li>down：用以链接同一列中的下一个非零元素。</li>
+<li><img src="https://pic.imgdb.cn/item/668b475ad9c307b7e927994d.png" alt="十字链表法存储结构示意图" style="zoom:60%"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668b485ad9c307b7e929e78b.png" alt="注：图中中文行列指针标反了" style="zoom:60%"></p>
+<p>基本操作：</p>
+<p><code>InitArray(&amp;A, n, bound1, ..., bound n)</code>：构造数组A</p>
+<p><code>DestroyArray(&amp;A)</code>：销毁数组A</p>
+<p><code>Value(A, &amp;e, index1, ..., index n)</code>：取数组元素值</p>
+<p><code>Assign (A, &amp;e, index1, ..., index n)</code>：给数组元素赋值</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
