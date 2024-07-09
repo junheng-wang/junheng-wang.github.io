@@ -14774,8 +14774,8 @@ n \cdot \text{Fact}(n) & n \neq 1
 <p>将主串的第pos个字符和模式串的第一个字符比较</p>
 <p>—— 若相等，继续逐个比较后续字符；</p>
 <p>—— 若不等，从主串的下一字符起，重新与模式串的第一个字符比较。</p>
-<p>—— —— 直到主串的一个连续子串字符序列与模式串相等。返回值为S中与T匹配的子序列第一个字符的序号。</p>
-<p>—— ——否则，匹配失败，返回值 0</p>
+<p>—— —— 直到主串的一个连续子串字符序列与模式串相等。返回值为S中与T匹配的子序列第一个字符的序号；</p>
+<p>—— ——否则，匹配失败，返回值 0。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> index <span class="title">BF</span><span class="params">(SString s, sString T )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i=<span class="number">1</span>, j=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (i&lt;=S.length &amp;&amp; j&lt;=T.length) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (s.ch[i]==t.ch[j]) 	<span class="comment">// 主串和子串依次匹配下一个字符</span></span><br><span class="line">        &#123;</span><br><span class="line">            ++i; </span><br><span class="line">            ++j; </span><br><span class="line">        &#125;	</span><br><span class="line">        <span class="keyword">else</span> 	<span class="comment">// 本次匹配不成功，主串、子串指针回溯重新开始下一次匹配</span></span><br><span class="line">        &#123;</span><br><span class="line">            i=i-j+<span class="number">2</span>; </span><br><span class="line">            j=<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (j&gt;T.length) </span><br><span class="line">        <span class="keyword">return</span> i-T.length;	<span class="comment">// 返回匹配的第一个字符的下标</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">// 模式匹配不成功</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong><font color="red">KMP算法<font></font></font></strong></p>
 <p>利用已经部分匹配的结果而加快模式串的滑动速度？且主串S的指针i不必回溯！可提速到$O(n+m)$。</p>
@@ -14855,11 +14855,167 @@ n \cdot \text{Fact}(n) & n \neq 1
 </li>
 </ul>
 <p><img src="https://pic.imgdb.cn/item/668b485ad9c307b7e929e78b.png" alt="注：图中中文行列指针标反了" style="zoom:60%"></p>
-<p>基本操作：</p>
-<p><code>InitArray(&amp;A, n, bound1, ..., bound n)</code>：构造数组A</p>
-<p><code>DestroyArray(&amp;A)</code>：销毁数组A</p>
-<p><code>Value(A, &amp;e, index1, ..., index n)</code>：取数组元素值</p>
-<p><code>Assign (A, &amp;e, index1, ..., index n)</code>：给数组元素赋值</p>
+<p><strong>(3) 基本操作</strong></p>
+<p><code>InitArray(&amp;A, n, bound1, ..., bound n)</code>：构造数组A；</p>
+<p><code>DestroyArray(&amp;A)</code>：销毁数组A；</p>
+<p><code>Value(A, &amp;e, index1, ..., index n)</code>：取数组元素值；</p>
+<p><code>Assign (A, &amp;e, index1, ..., index n)</code>：给数组元素赋值。</p>
+<h4 id="4-5-广义表"><a href="#4-5-广义表" class="headerlink" title="4.5 广义表"></a>4.5 广义表</h4><h5 id="Ⅰ-广义表的概念"><a href="#Ⅰ-广义表的概念" class="headerlink" title="Ⅰ 广义表的概念"></a>Ⅰ 广义表的概念</h5><p>广义表(又称列表 Lists)是 $n\geq 0$个元素 $a_0, a_1, … , a_{n-1}$ 的有限序列，其中每一个 $a_i$ 或者是原子，或者是一个广义表。</p>
+<p>广义表通常记作：$LS = (a_1, a_2, \cdots, a_n)$，其中，$LS$为表名，$n$为长度，每一个$a_i$为表的元素。</p>
+<p><strong>表头</strong>：若广义表$LS$非空，则其第一个元素$a_1$就是表头，记作：$\text{head}(LS) = a_1$，表头既可以是原子也可以是子表。</p>
+<p><strong>表尾</strong>：除表头之外的其它元素组成的子表，记作：$\text{tail}(LS) = (a_2, \cdots,  a_n)$，注：表尾不是最后一个元素，而是一个子表；此外，若$LS$中只有一个元素，则只有表头，表尾是一个空的子表。</p>
+<ul>
+<li><p><strong>广义表的特性</strong>：</p>
+<ul>
+<li>① 广义表中的数据元素有相对次序；一个直接前驱和一个直接后继。</li>
+<li>② 广义表的长度定义为最外层所包含元素的个数；</li>
+<li>③ 广义表的深度定义为该广义表展开后所含括号的重数；</li>
+<li>④ 广义表可以为其他广义表共享；如：广义表B就共享表A。在B中不必列出A的值，而是通过名称来引用：<code>B=(A)</code>。</li>
+<li>⑤ 广义表可以是一个递归的表。如：<code>F=(a, F) = (a,(a,(a, ... )))</code>。注意：递归表的深度是无穷值，长度是有限值。</li>
+<li>⑥ 广义表是多层次结构，广义表的元素可以是单元素，也可以是子表，而子表的元素还可以是子表。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668b562cd9c307b7e93cc9f3.png" style="zoom:60%"></p>
+</li>
+<li><p><strong>广义表的基本操作</strong></p>
+<ul>
+<li><code>GetHead(L)</code>：求表头。非空广义表的第一个元素，可以是一个原子，也可以是一个子表。</li>
+<li><code>GetTail(L)</code>：求表尾。非空广义表除去表头元素以外其它元素所构成的表。表尾一定是一个子表。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-广义表-VS-线性表"><a href="#Ⅱ-广义表-VS-线性表" class="headerlink" title="Ⅱ 广义表 VS 线性表"></a>Ⅱ 广义表 VS 线性表</h5><p>  广义表可以看成是线性表的<strong>推广</strong>，线性表是广义表的<strong>特例</strong>。</p>
+<p>  广义表的结构相当灵活，在某种前提下，它可以兼容<strong>线性表</strong>、<strong>数组</strong>、<strong><font color="green">树和有向图</font></strong>等各种常用的数据结构。</p>
+<p>  —— 当二维数组的每行(或每列)作为子表处理时，二维数组即为一个广义表。</p>
+<p>  —— 另外，树和有向图也可以用广义表来表示。</p>
+<p>由于广义表不仅集中了线性表、数组、树和有向图等常见数据结构的特点，而且可有效地利用存储空间，因此在计算机的许多应用领域都有成功使用广义表的实例。</p>
+<h3 id="sect-5-树、二叉树"><a href="#sect-5-树、二叉树" class="headerlink" title="&sect; 5 树、二叉树"></a>&sect; 5 树、二叉树</h3><p><img src="https://pic.imgdb.cn/item/668b6590d9c307b7e95136c3.png"></p>
+<h4 id="5-1-树形结构"><a href="#5-1-树形结构" class="headerlink" title="5.1 树形结构"></a>5.1 树形结构</h4><h5 id="Ⅰ-树的概念"><a href="#Ⅰ-树的概念" class="headerlink" title="Ⅰ 树的概念"></a>Ⅰ 树的概念</h5><p><strong>(1) 树的定义</strong></p>
+<p><strong>树(Tree)</strong> 是 $n(n≥0)$ 个结点的有限集：</p>
+<ul>
+<li>若$n=0$，称为空树；</li>
+<li>若$n&gt;0$，则它满足如下两个条件：<br>① 有且仅有一个特定的称为<strong>根 (Root)</strong>的结点；<br>② 其余结点可分为 $m(m≥0)$ 个互不相交的有限集T1,T2,T3,…,Tm，其中每一个集合本身又是一棵树，并称为根的<strong>子树(SubTree)</strong>。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668b66d5d9c307b7e9534b33.png" style="zoom:70%"></p>
+<p>显然，树的定义是一个<strong>&lt;/font color=red&gt;递归&lt;/font&gt;</strong>的定义。</p>
+<p><strong>(2) 树的表示形式</strong></p>
+<p><img src="https://pic.imgdb.cn/item/668b67ced9c307b7e954e53c.png" style="zoom:50%"></p>
+<p><strong>(3) 树的相关术语</strong></p>
+<p><img src="https://pic.imgdb.cn/item/668b6ae1d9c307b7e95a4be3.png"></p>
+<p>有序树：树中结点的各子树从左至右有次序(最左边的为第一个孩子)，换了顺序就是另一棵树了。</p>
+<p>无序树：树中结点的各子树无次序。</p>
+<p>森林：是 $m(m≥0)$ 棵互不相交的树的集合。把根结点删除树就变成了森林。一棵树可以看成是一个特殊的森林。给森林中的各子树加上一个双亲结点，森林就变成了树。树一定是森林，但森林不一定是树。</p>
+<h5 id="Ⅱ-二叉树"><a href="#Ⅱ-二叉树" class="headerlink" title="Ⅱ 二叉树"></a>Ⅱ 二叉树</h5><p>普通树(多又树)若不转化为二又树，则分支太多且不固定，运算很难实现。</p>
+<ul>
+<li>为何要重点研究每结点最多只有两个“叉”的树？<ul>
+<li>二叉树的结构最简单，规律性最强；</li>
+<li>可以证明，所有树都能转为唯一对应的二叉树不失一般性。</li>
+</ul>
+</li>
+</ul>
+<p><strong>(1) 二叉树的定义</strong></p>
+<p>二叉树是 $n(n≥0)$ 个结点的有限集，它或者是空集($n= 0$)，或者由一个根结点及两棵互不相交的分别称作这个根的<strong>左子树</strong>和<strong>右子树</strong>的二叉树组成。</p>
+<p><strong>特点1：</strong>每个结点最多有俩孩子(二叉树中不存在度大于 2 的结点)。<br><strong>特点2：</strong>子树有左右之分，其次序不能颠倒。<br><strong>特点3：</strong>二叉树可以是空集合，根可以有空的左子树或空的右子树。</p>
+<blockquote>
+<p>注意：二叉树不是树的特殊情况，它们是两个概念。</p>
+<p>二叉树结点的子树<strong>必须区分</strong>左子树和右子树，即使只有一棵子树也进行区分，说明它是左子树，还是右子树。</p>
+<p>树当结点只有一个孩子时，就无须区分它是左还是右的次序。因此二者是不同的。这是二又树与树的最主要的差别。</p>
+<p><img src="https://pic.imgdb.cn/item/668b9788d9c307b7e9a84e03.png" style="zoom:50%"></p>
+<p>简单来说：也就是二叉树每个结点位置或者说次序都是固定的，可以是空，但是不可以说它没有位置，而树的结点位置是相对于别的结点来说的，没有别的结点时，它就无所谓左右了)。</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/668b983dd9c307b7e9aa4d70.png" alt="二叉树的5种形态" style="zoom:40%"></p>
+<p><strong>二叉树有且只有这五种基本形态</strong>。</p>
+<h5 id="Ⅲ-案例引入"><a href="#Ⅲ-案例引入" class="headerlink" title="Ⅲ 案例引入"></a>Ⅲ 案例引入</h5><p><strong>(1) 数据压缩问题</strong></p>
+<p>将数据文件转换成由0、1组成的二进制串，称之为<strong>编码</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/668b9a26d9c307b7e9ad48a9.png"></p>
+<p><strong>(2) 利用二又树求解表达式的值</strong></p>
+<p>以二叉树表示表达式的递归定义如下：</p>
+<p>(1) 若表达式为数或简单变量，则相应二叉树中仅有一个根结点，其数据域存放该表达式信息；</p>
+<p>(2) 若表达式为<code>第一操作数 运算符 第二操作数</code>的形式，则相应的二cha树中以左子树表示第一操作数右子树表示第二操作数，根结点的数据域存放运算符(若为一元运算符，则左子树为空)，其中，操作数本身又为表达式。</p>
+<p><img src="https://pic.imgdb.cn/item/668b9adad9c307b7e9ae76a9.png"></p>
+<h5 id="Ⅳ-树、二叉树的表示"><a href="#Ⅳ-树、二叉树的表示" class="headerlink" title="Ⅳ 树、二叉树的表示"></a>Ⅳ 树、二叉树的表示</h5><p><strong>(1) 二叉树的抽象数据类型定义</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">ADT BinaryTree</span><br><span class="line">&#123;</span><br><span class="line">    数据对象D: D是具有相同特性的数据元素的集合。</span><br><span class="line">    数据关系R: 若D=Φ，则R=Φ;</span><br><span class="line">    		  若D≠Ф，则R=&#123;H&#125;; H是如下二元关系：</span><br><span class="line">                  ① root 唯一    <span class="comment">//关于根的说明</span></span><br><span class="line">                  ② Dj ∩ Dk = Ф  <span class="comment">//关于子树不相交的说明</span></span><br><span class="line">                  ③ ...          <span class="comment">//关于数据元素的说明</span></span><br><span class="line">                  ④ ...          <span class="comment">//关于左子树和右子树的说明</span></span><br><span class="line"></span><br><span class="line">	基本操作 P:</span><br><span class="line">	<span class="comment">// 初始条件: definition给出二叉树T的定义。</span></span><br><span class="line">	<span class="comment">// 操作结果: 按definition构造二叉树T。</span></span><br><span class="line">	<span class="built_in">CreateBiTree</span>(&amp;T, definition);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 初始条件: 二叉树T存在。</span></span><br><span class="line">	<span class="comment">// 操作结果: 先序遍历T，对每个结点访问一次。</span></span><br><span class="line">	<span class="built_in">PreOrderTraverse</span>(T);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 初始条件: 二叉树T存在。</span></span><br><span class="line">	<span class="comment">// 操作结果: 中序遍历T，对每个结点访问一次。</span></span><br><span class="line">	<span class="built_in">InOrderTraverse</span>(T);</span><br><span class="line">	</span><br><span class="line">	<span class="comment">// 初始条件: 二叉树T存在。</span></span><br><span class="line">	<span class="comment">// 操作结果: 后序遍历T，对每个结点访问一次。</span></span><br><span class="line">	<span class="built_in">PostOrderTraverse</span>(T);</span><br><span class="line"></span><br><span class="line">&#125;ADT BinaryTree</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 二叉树的性质与存储结构</strong></p>
+<p><strong>满二叉树</strong>：一棵深度为 $k$且有$2^k-1$个结点的二叉树称为满二叉树。也就是说每一层上的结点数都是最大结点数(即每层都满)；叶子节点全部在最底层。</p>
+<p>对满二叉树结点位置进行编号编号规则：从根结点开始，自上而下，自左而右。每一结点位置都有元素。如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/668c91a0d9c307b7e90bb2f7.png" alt="满二叉树" style="zoom:50%"></p>
+<p><strong>完全二叉树</strong>：深度为$k$的具有$n$个结点的二叉树，当且仅当其每一 个结点都与深度为$k$的满二叉树中编号为$1 \sim n$的结点一一对应时，称之为完全二叉树。如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/668c9308d9c307b7e90d2eda.png"></p>
+<p>完全二叉树的特点：1.叶子只可能分布在层次最大的两层上。2.对任一结点，如果其右子树的最大层次为$i$，则其左子树的最大层次必为$i$或$i+1$。</p>
+<ul>
+<li><p><strong>性质</strong></p>
+<ul>
+<li>① 在二叉树的第$i$层上至多有$2^{i-1}$个结点。</li>
+<li>② 深度为$k$的二叉树至多有$2^k-1$个结点。</li>
+<li>③ 对任何一棵二叉树T，如果其叶子数为$n_0$，度为$2$的结点数为$n_2$，则$n_0 = n_2+1$。</li>
+<li>④ 具有$n$个结点的完全二叉树的深度为$\lfloor \log_2 n \rfloor +1$。</li>
+<li>⑤  如果对一棵有$n$个结点的完全二叉树按层序编号(从第1层到第$\lfloor \log_2 n \rfloor +1$层，每层从左到右)，则对任结点$i(1≤i≤n)$，有:<ul>
+<li>如果$i=1$，则结点$i$是二叉树的根，无双亲；如果$i&gt;1$，则其双亲是结点 $\lfloor i/2 \rfloor$。</li>
+<li>如果$2i&gt;n$，则结点$i$为叶子结点，无左孩子；否则其左孩子是结点$2i$。</li>
+<li>如果$2i+1&gt;n$，则结点$i$无右孩子；否则，其右孩子是结点$2i + 1$。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>树、二叉树的顺序存储结构</strong></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668c9f54d9c307b7e9217a8a.png" alt="二叉树的存储方式" style="zoom:60%"></p>
+<p>按满二叉树的结点层次编号，依次存放二叉树中的数据元素。</p>
+<p><img src="https://pic.imgdb.cn/item/668c9fe2d9c307b7e922b1c5.png" style="zoom:50%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//二叉树顺序存储表示</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXTSIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> TElemType SqBiTree[MAXSTIZE];</span><br><span class="line">SqBiTree bt;</span><br></pre></td></tr></table></figure>
+<p>当不是满二叉树、完全二叉树的时候：不满的地方用0值填充。</p>
+<p><img src="https://pic.imgdb.cn/item/668ca1c1d9c307b7e925a51d.png" style="zoom:40%"></p>
+<p>由此看来，二叉树的顺序存储结构的存储密度会很低，一般只适用于满二叉树和完全二叉树。</p>
+<ul>
+<li><strong>树、二叉树的链式存储结构</strong></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668ca3a5d9c307b7e928c600.png" style="zoom:70%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 二叉链表存储结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Binode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Binode</span> *<span class="title">lchild</span>,*<span class="title">rchild</span>;</span>	<span class="comment">// 左右孩子指针</span></span><br><span class="line">&#125;BiNode,*BiTree;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/668ca4cfd9c307b7e92b41b4.png" style="zoom:40%"></p>
+<p><strong><font color="red">二叉树的三叉链表存储</font>：</strong></p>
+<p><img src="https://pic.imgdb.cn/item/668ca667d9c307b7e92dd96c.png" style="zoom:40%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TriTNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TelemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TriTNode</span> *<span class="title">lchild</span>,*<span class="title">parent</span>,*<span class="title">rchild</span>;</span>	<span class="comment">// 左右孩子指针+双亲指针</span></span><br><span class="line">&#125;TriTNode, *TriTree;</span><br></pre></td></tr></table></figure>
+<h4 id="5-2-遍历二叉树"><a href="#5-2-遍历二叉树" class="headerlink" title="5.2 遍历二叉树"></a>5.2 遍历二叉树</h4><h5 id="Ⅰ-遍历的概念"><a href="#Ⅰ-遍历的概念" class="headerlink" title="Ⅰ 遍历的概念"></a>Ⅰ 遍历的概念</h5><p>遍历定义 —— 顺着某一条搜索路径巡访二叉树中的结点，使得每个结点均被访问一次，而且仅被访问一次(又称周游)。</p>
+<p>“访问”的含义很广，可以是对结点作各种处理，如：输出结点的信息、修改结点的数据值等，但要求这种访问不破坏原来的数据结构。</p>
+<p>遍历目的 —— 得到树中所有结点的一个线性排列。</p>
+<p>遍历用途 —— 它是树结构插入、删除、修改、查找和排序运算的前提，是二叉树一切运算的基础和核心。</p>
+<h5 id="Ⅱ-遍历二叉树算法描述"><a href="#Ⅱ-遍历二叉树算法描述" class="headerlink" title="Ⅱ 遍历二叉树算法描述"></a>Ⅱ 遍历二叉树算法描述</h5><p>假设：L遍历左子树，D访问根结点，R遍历右子树则遍历整个二叉树方案共有6种，分别是：</p>
+<script type="math/tex; mode=display">
+DLR、LDR、LRD、DRL、RDL、RLD</script><p>其中，主要看前三种：先(根)序遍历DLR、中(根)序遍历LDR、后(根)序遍历LRD。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>先序遍历二叉树</th>
+<th>中序遍历二叉树</th>
+<th>后序遍历二叉树</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>若二叉树为空，则空操作；<br>否则<br>(1) 访问根结点；<br>(2) 先序遍历左子树；<br>(3) 先序遍历右子树。</td>
+<td>若二叉树为空，则空操作；<br>否则<br>(1) 中序遍历左子树；<br>(2) 访问根结点；<br>(3) 中序遍历右子树。</td>
+<td>若二叉树为空，则空操作；<br>否则<br>(1) 后序遍历左子树；<br>(2) 后序遍历右子树；<br>(3) 访问根结点。</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>由二叉树的递归定义可知，遍历左子树和遍历右子树可如同遍历二又树一样“<strong>递归</strong>”进行。</p>
+<p><img src="https://pic.imgdb.cn/item/668caee4d9c307b7e93f10f8.png" style="zoom:60%"></p>
+<ul>
+<li><p><strong>根据遍历序列确定二叉树</strong></p>
+<ul>
+<li>若二叉树中各结点的值均不相同，则二叉树结点的先序序列、中序序列和后序列都是唯一的。</li>
+<li>由二叉树的先序序列和中序序列，或由二叉树的后序序列和中序序列可以确定唯一一棵二叉树。==只知道某一种序是不能唯一确定一棵二叉树的==。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-先序遍历二叉树"><a href="#Ⅲ-先序遍历二叉树" class="headerlink" title="Ⅲ 先序遍历二叉树"></a>Ⅲ 先序遍历二叉树</h5><p><img src="https://pic.imgdb.cn/item/668cdf88d9c307b7e9b161e5.png" style="zoom:30%"></p>
+<p>明显，利用<strong><font color="blue">递归</font></strong>的算法进行。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先(根)序遍历</span></span><br><span class="line"><span class="function">Status <span class="title">PreOrderTraverse</span><span class="params">(BiTree T)</span>	<span class="comment">// 指针T指向二叉树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">// 空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">visit</span>(T); <span class="comment">// 访问根结点，根据实际需要进行操作</span></span><br><span class="line">        <span class="built_in">PreOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">PreOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 打印输出当前节点数据</span></span><br><span class="line">    cout &lt;&lt; T-&gt;data &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/668ce2ead9c307b7e9bb4824.png" style="zoom:40%"></p>
+<h5 id="Ⅳ-中序、后序遍历二叉树"><a href="#Ⅳ-中序、后序遍历二叉树" class="headerlink" title="Ⅳ 中序、后序遍历二叉树"></a>Ⅳ 中序、后序遍历二叉树</h5><p><img src="https://pic.imgdb.cn/item/668ce3abd9c307b7e9bce9a6.png" alt="中序遍历" style="zoom:60%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 中(根)序遍历</span></span><br><span class="line"><span class="function">Status <span class="title">InOrderTraverse</span><span class="params">(BiTree T)</span>	<span class="comment">// 指针T指向二叉树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">// 空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">InOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">visit</span>(T);	<span class="comment">// 访问根结点</span></span><br><span class="line">        <span class="built_in">InOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">PostOrderTraverse</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">//空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">PostOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">PostOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">        <span class="built_in">visit</span>(T);	<span class="comment">//访问根结点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
@@ -14892,7 +15048,7 @@ n \cdot \text{Fact}(n) & n \neq 1
 <p>这是，就可以通过Anaconda创建虚拟环境（类似于Windows电脑创建虚拟机，安装Linux系统，或者也类似于手机应用双开？）</p>
 </blockquote>
 <h4 id="1-4-Python是如何运行起来的"><a href="#1-4-Python是如何运行起来的" class="headerlink" title="1.4 Python是如何运行起来的"></a>1.4 Python是如何运行起来的</h4><p><img src="https://pic.imgdb.cn/item/6684f907d9c307b7e9de19ac.png"></p>
-<p>其实简单来说，安装Python就是安装不同版本的Python解释器。</p>
+<p>其实简单来说，安装Python就是安装不同版本的Python解释器 <a href="https://zhuanlan.zhihu.com/p/702296063">为什么python需要配置编程环境</a>。</p>
 <p>pycharm是Python IDE(集成开发环境)</p>
 <h4 id="1-5-显卡、GPU以及相关概念"><a href="#1-5-显卡、GPU以及相关概念" class="headerlink" title="1.5 显卡、GPU以及相关概念"></a>1.5 显卡、GPU以及相关概念</h4><p>显卡是个人计算机（Personal Computer）的组成部分之一，启到控制显示器正确显示的作用，基本功能就是将模拟信号转换为电信号。市场主流的显卡大多都是NVIDIA（英伟达）和AMD（超微半导体）这两个公司设生产的，分别被简称为N卡和A卡（N&amp;A就是取自各自公司英文首字母）。</p>
 <p>显卡的结构为：电容、显存、显示芯片、风扇、各类接口等。其中<strong>显存全称为“显示存储器”，和计算机中的存储器相似，负责存储显示芯片需要处理的各种数据</strong>，其容量的大小，性能的高低，直接影响着电脑的显示效果；<strong>显示芯片就是深度学习中经常提到的GPU或者VPU（或被称作图形处理器），负责并行计算工作</strong>，工作时产生的热量由风扇负责排除；各类接口负责输入输出和桥接。</p>
