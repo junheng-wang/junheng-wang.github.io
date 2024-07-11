@@ -1586,6 +1586,10 @@ W_x(n,l) = 2 \sum_k r_x(n, k) \exp\left(-\mathrm j \dfrac{4\pi}{N}kl\right)</scr
 <p>注意，上面例子中，当$n=3$时候，我在计算的时候出现了下面可笑的结果：</p>
 <script type="math/tex; mode=display">
 n=3时，r_x(3, k) = \{x_0x_6^*,  x_1x_5^*, x_2x_4^*, x_3x_3^*, x_4x_2^*, x_5x_1^*, x_6x_0^* \}</script><p>而实际上，这里是没有$x_6$这一项的，故$n=3$时只有5项。</p>
+<h4 id="（三）连续信号变换的离散化"><a href="#（三）连续信号变换的离散化" class="headerlink" title="（三）连续信号变换的离散化"></a>（三）连续信号变换的离散化</h4><p>这里简单用几句话总结一下目前的理解：</p>
+<p>① 首先离散化积分变量(这里积分变量在信号处理中一般是时间变量或时延变量或频率变量)；</p>
+<p>② 其次，当没有积分项后，其实剩下的连续变量主要是看该连续变量的取值范围，然后直接离散化就行。</p>
+<p>当考察到变量存在<strong>周期性</strong>时候，只需要在变量的一个周期内离散采样即可。</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
@@ -14396,7 +14400,7 @@ La = (1, 7, 8) \quad Lb=(2, 4, 6, 8, 10, 11) \quad \Longrightarrow \quad Lc=(1, 
 <ul>
 <li><strong>用顺序表实现</strong></li>
 </ul>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeList_Sq</span><span class="params">(SqList LA,SqList LB,SqList&amp; LC)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ElemType* pa = LA.elem;</span><br><span class="line">    ElemType* pb = LB.elem;	<span class="comment">// 指针pa和pb的初值分别指向两个表的第一个元素</span></span><br><span class="line">    LC.length = LA.length+LB.length;	<span class="comment">// 新表长度为待合并两表的长度之和</span></span><br><span class="line">    LC.elem = <span class="keyword">new</span> ElemType[Lc.length];	<span class="comment">// 为合并后的新表分配一个数组空间</span></span><br><span class="line">    pc = LC.elem;	<span class="comment">// 指针pc指向新表的第一个元素</span></span><br><span class="line">    pa_last = LA.elem+LA.length<span class="number">-1</span>;	<span class="comment">// 指针pa_last指向LA表的最后一个元素</span></span><br><span class="line">    pb_last = LB.elem+LB.length<span class="number">-1</span>;	<span class="comment">// 指针pb_last指向LB表的最后一个元素</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(pa&lt;=pa last &amp;&amp; pb&lt;=pb last)	<span class="comment">// 两个表都非空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*pa&lt;=*pb)</span><br><span class="line">            *pc++=*pa++;	<span class="comment">// 依次“摘取”两表中值较小的结点</span></span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            *pc++=*pb++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(pa&lt;=pa_last)</span><br><span class="line">        *pc++=*pa++;	<span class="comment">// LB表已到达表尾，将LA中剩余元素加入LC</span></span><br><span class="line">    <span class="keyword">while</span>(pb&lt;=pb last)</span><br><span class="line">        *pc++=*pb++;	<span class="comment">// LA表已到达表尾，将LB中剩余元素加入LC</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeList_Sq</span><span class="params">(SqList LA, SqList LB, SqList&amp; LC)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    ElemType* pa = LA.elem;</span><br><span class="line">    ElemType* pb = LB.elem;	<span class="comment">// 指针pa和pb的初值分别指向两个表的第一个元素</span></span><br><span class="line">    LC.length = LA.length+LB.length;	<span class="comment">// 新表长度为待合并两表的长度之和</span></span><br><span class="line">    LC.elem = <span class="keyword">new</span> ElemType[Lc.length];	<span class="comment">// 为合并后的新表分配一个数组空间</span></span><br><span class="line">    ElemType* pc = LC.elem;	<span class="comment">// 指针pc指向新表的第一个元素</span></span><br><span class="line">    ElemType* pa_last = LA.elem+LA.length<span class="number">-1</span>;	<span class="comment">// 指针pa_last指向LA表的最后一个元素</span></span><br><span class="line">    ElemType* pb_last = LB.elem+LB.length<span class="number">-1</span>;	<span class="comment">// 指针pb_last指向LB表的最后一个元素</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span>(pa&lt;=pa_last &amp;&amp; pb&lt;=pb_last)	<span class="comment">// 两个表都非空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(*pa&lt;=*pb)</span><br><span class="line">            *pc++=*pa++;	<span class="comment">// 依次“摘取”两表中值较小的结点</span></span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            *pc++=*pb++;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">while</span>(pa&lt;=pa_last)</span><br><span class="line">        *pc++=*pa++;	<span class="comment">// LB表已到达表尾，将LA中剩余元素加入LC</span></span><br><span class="line">    <span class="keyword">while</span>(pb&lt;=pb last)</span><br><span class="line">        *pc++=*pb++;	<span class="comment">// LA表已到达表尾，将LB中剩余元素加入LC</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li><strong>用链表实现</strong></li>
 </ul>
@@ -14689,7 +14693,7 @@ n \cdot \text{Fact}(n) & n \neq 1
 <p><img src="https://pic.imgdb.cn/item/6688c469d9c307b7e974951d.png"></p>
 <p>注意，队空的判定仍然是使用<code>front==rear</code>，而队满采用：<code>(rear+1)%MAXQSIXZE==front</code>。</p>
 <p><strong>(4) 循环顺序队列的初始化</strong></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">lnitQueue</span> <span class="params">(SqQueue&amp; Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Q.base = <span class="keyword">new</span> QElemType[MAXQSIZE];	<span class="comment">// 分配数组空间</span></span><br><span class="line">    <span class="keyword">if</span>(!Q.base) </span><br><span class="line">        <span class="built_in">exit</span>(OVERFLOW);	<span class="comment">// 存储分配失败</span></span><br><span class="line">    Q.front=<span class="number">0</span>;	<span class="comment">// 头指针尾指针置为0，队列为空</span></span><br><span class="line">    Q.rear=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function">Status <span class="title">InitQueue</span> <span class="params">(SqQueue&amp; Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Q.base = <span class="keyword">new</span> QElemType[MAXQSIZE];	<span class="comment">// 分配数组空间</span></span><br><span class="line">    <span class="keyword">if</span>(!Q.base) </span><br><span class="line">        <span class="built_in">exit</span>(OVERFLOW);	<span class="comment">// 存储分配失败</span></span><br><span class="line">    Q.front=<span class="number">0</span>;	<span class="comment">// 头指针尾指针置为0，队列为空</span></span><br><span class="line">    Q.rear=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>(5) 循环顺序队列求长度</strong></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">QueueLength</span><span class="params">(SqQueue Q)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> ( (Q.rear-Q.front + MAXQSIZE)%MAXQSIZE ) 	<span class="comment">// 注意此处算法</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><strong>(6) 循环顺序队列的入队</strong></p>
@@ -15009,13 +15013,209 @@ DLR、LDR、LRD、DRL、RDL、RLD</script><p>其中，主要看前三种：先(�
 </ul>
 </li>
 </ul>
-<h5 id="Ⅲ-先序遍历二叉树"><a href="#Ⅲ-先序遍历二叉树" class="headerlink" title="Ⅲ 先序遍历二叉树"></a>Ⅲ 先序遍历二叉树</h5><p><img src="https://pic.imgdb.cn/item/668cdf88d9c307b7e9b161e5.png" style="zoom:30%"></p>
+<h5 id="Ⅲ-先序遍历二叉树-递归方法"><a href="#Ⅲ-先序遍历二叉树-递归方法" class="headerlink" title="Ⅲ 先序遍历二叉树(递归方法)"></a>Ⅲ 先序遍历二叉树(递归方法)</h5><p><img src="https://pic.imgdb.cn/item/668cdf88d9c307b7e9b161e5.png" style="zoom:30%"></p>
 <p>明显，利用<strong><font color="blue">递归</font></strong>的算法进行。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 先(根)序遍历</span></span><br><span class="line"><span class="function">Status <span class="title">PreOrderTraverse</span><span class="params">(BiTree T)</span>	<span class="comment">// 指针T指向二叉树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">// 空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">visit</span>(T); <span class="comment">// 访问根结点，根据实际需要进行操作</span></span><br><span class="line">        <span class="built_in">PreOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">PreOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">visit</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 打印输出当前节点数据</span></span><br><span class="line">    cout &lt;&lt; T-&gt;data &lt;&lt; endl;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p><img src="https://pic.imgdb.cn/item/668ce2ead9c307b7e9bb4824.png" style="zoom:40%"></p>
-<h5 id="Ⅳ-中序、后序遍历二叉树"><a href="#Ⅳ-中序、后序遍历二叉树" class="headerlink" title="Ⅳ 中序、后序遍历二叉树"></a>Ⅳ 中序、后序遍历二叉树</h5><p><img src="https://pic.imgdb.cn/item/668ce3abd9c307b7e9bce9a6.png" alt="中序遍历" style="zoom:60%"></p>
-<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 中(根)序遍历</span></span><br><span class="line"><span class="function">Status <span class="title">InOrderTraverse</span><span class="params">(BiTree T)</span>	<span class="comment">// 指针T指向二叉树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">// 空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">InOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">visit</span>(T);	<span class="comment">// 访问根结点</span></span><br><span class="line">        <span class="built_in">InOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">PostOrderTraverse</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">//空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">PostOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">PostOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">        <span class="built_in">visit</span>(T);	<span class="comment">//访问根结点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅳ-中序、后序遍历二叉树-递归方法"><a href="#Ⅳ-中序、后序遍历二叉树-递归方法" class="headerlink" title="Ⅳ 中序、后序遍历二叉树(递归方法)"></a>Ⅳ 中序、后序遍历二叉树(递归方法)</h5><p><img src="https://pic.imgdb.cn/item/668ce3abd9c307b7e9bce9a6.png" alt="中序遍历" style="zoom:60%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 中(根)序遍历</span></span><br><span class="line"><span class="function">Status <span class="title">InOrderTraverse</span><span class="params">(BiTree T)</span>	<span class="comment">// 指针T指向二叉树的根节点</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> OK; <span class="comment">// 空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">InOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">visit</span>(T);	<span class="comment">// 访问根结点</span></span><br><span class="line">        <span class="built_in">InOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 后(根)序遍历</span></span><br><span class="line"><span class="function">Status <span class="title">PostOrderTraverse</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>) </span><br><span class="line">        <span class="keyword">return</span> OK;	<span class="comment">// 空二叉树</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">PostOrderTraverse</span>(T-&gt;lchild);	<span class="comment">// 递归遍历左子树</span></span><br><span class="line">        <span class="built_in">PostOrderTraverse</span>(T-&gt;rchild);	<span class="comment">// 递归遍历右子树</span></span><br><span class="line">        <span class="built_in">visit</span>(T);	<span class="comment">// 访问根结点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅴ-中序遍历二叉树-非递归方法"><a href="#Ⅴ-中序遍历二叉树-非递归方法" class="headerlink" title="Ⅴ 中序遍历二叉树(非递归方法)"></a>Ⅴ 中序遍历二叉树(非递归方法)</h5><p>二叉树中序遍历的非递归算法的关键：在中序遍历过某结点的整个左子树后，如何找到该结点的根以及右子树。</p>
+<ul>
+<li><strong>基本思想</strong><ul>
+<li>① 建立一个栈；</li>
+<li>② 根结点进栈，遍历左子树；</li>
+<li>③ 根结点出栈，输出根结点，遍历右子树。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 中序遍历非递归算法</span></span><br><span class="line"><span class="function">Status <span class="title">InOrderTraverse</span> <span class="params">(BiTree T)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BiTree p; </span><br><span class="line">    <span class="built_in">InitStack</span>(S);</span><br><span class="line">    p=T;</span><br><span class="line">    <span class="keyword">while</span>(p || !<span class="built_in">StackEmpty</span>(S))</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(p)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="built_in">Push</span>(S,p);	<span class="comment">// 入栈</span></span><br><span class="line">            p=p-&gt;lchild;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">        &#123; </span><br><span class="line">            <span class="built_in">Pop</span>(s,q);	<span class="comment">// 弹出栈顶元素，用q接收</span></span><br><span class="line">            cout &lt;&lt; q-&gt;data &lt;&lt; endl;</span><br><span class="line">            p=q-&gt;rchild;</span><br><span class="line">        &#125;</span><br><span class="line">	&#125;<span class="comment">//while</span></span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅵ-二叉树的层次遍历"><a href="#Ⅵ-二叉树的层次遍历" class="headerlink" title="Ⅵ 二叉树的层次遍历"></a>Ⅵ 二叉树的层次遍历</h5><p>对于一颗二叉树，从根结点开始，按从上到下、从左到右的顺序访问每一个结点。每一个结点仅仅访问一次。</p>
+<ul>
+<li>算法设计思路：使用一个<strong>队列</strong>。<ul>
+<li>① 将根结点进队；</li>
+<li>② 队不空时循环：从队列中出列一个结点*p，访问它;<ul>
+<li>若它有左孩子结点，将左孩子结点进队；</li>
+<li>若它有右孩子结点，将右孩子结点进队。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 使用循环顺序队列，其数据类型定义为</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    BTNode data[MaxSize];	<span class="comment">// 存放队中元素</span></span><br><span class="line">    <span class="keyword">int</span> front;	<span class="comment">// 队头“指针”</span></span><br><span class="line">    <span class="keyword">int</span> rear;	<span class="comment">// 队尾“指针”</span></span><br><span class="line">&#125;SqQueue;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 二叉树层次遍历算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">LevelOrder</span><span class="params">(BTNode *b)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    BTNode *p;</span><br><span class="line">    SqQueue *qu;	</span><br><span class="line">    <span class="built_in">InitQueue</span>(qu);	<span class="comment">// 初始化队列</span></span><br><span class="line">    <span class="built_in">enQueue</span>(qu,b);	<span class="comment">// 根结点指针进入队列</span></span><br><span class="line">    <span class="keyword">while</span> (!<span class="built_in">QueueEmpty</span>(qu))	<span class="comment">// 队不为空，则循环</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">deQueue</span>(qu, p);	<span class="comment">// 出队结点，用指针p接收</span></span><br><span class="line">        cout &lt;&lt; p-&gt;data &lt;&lt; endl;	<span class="comment">// 访问结点p</span></span><br><span class="line">        <span class="keyword">if</span> (p-&gt;lchild!=<span class="literal">NULL</span>) </span><br><span class="line">            <span class="built_in">enQueue</span>(qu, p-&gt;lchild);	<span class="comment">// 有左孩子时将其进队</span></span><br><span class="line">        <span class="keyword">if</span> (p-&gt;rchild!=<span class="literal">NULL</span>) </span><br><span class="line">            <span class="built_in">enQueue</span>(qu, p-&gt;rchild);	<span class="comment">// 有右孩子时将其进队</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅶ-遍历二叉树算法的应用"><a href="#Ⅶ-遍历二叉树算法的应用" class="headerlink" title="Ⅶ 遍历二叉树算法的应用"></a>Ⅶ 遍历二叉树算法的应用</h5><p><strong>(1) 构建一颗二叉树</strong></p>
+<p>按先序遍历序列建立二叉树的二叉链表。</p>
+<p>例：已知先序序列为：ABCDEGF</p>
+<p>① 从键盘输入二叉树的结点信息，建立二叉树的存储结构；<br>② 在建立二叉树的过程中按照二叉树先序方式建立。</p>
+<p>注意，只知道先序序列是无法得到唯一的一个二叉树的，那怎么办呢，一种方法是<strong><font color="red">补充空结点</font></strong>，如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/668e405cd9c307b7e97efd9c.png" style="zoom:50%"></p>
+<p>根据补充的空结点的位置不一样，所得的树就不一样，这样就可确定一颗二叉树了。可以用一个特殊的字符表示空节点(例如：#)。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 递归算法</span></span><br><span class="line"><span class="function">Status <span class="title">CreateBiTree</span><span class="params">(BiTree&amp; T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">char</span> ch;</span><br><span class="line">    cin&gt;&gt;ch;</span><br><span class="line">    <span class="keyword">if</span>(ch == <span class="string">&#x27;#&#x27;</span>)</span><br><span class="line">        T= <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> ( !(T=<span class="keyword">new</span> BiTNode) )</span><br><span class="line">            <span class="built_in">exit</span>(OVERFLOW); </span><br><span class="line">        T-&gt;data = ch;	<span class="comment">// 生成根结点</span></span><br><span class="line">        <span class="built_in">CreateBiTree</span>(T-&gt;lchild);	<span class="comment">// 构造左子树</span></span><br><span class="line">        <span class="built_in">CreateBiTree</span>(T-&gt;rchild);	<span class="comment">// 构造右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125; <span class="comment">// CreateBiTree</span></span><br></pre></td></tr></table></figure>
+<p><strong>(2) 复制一颗二叉树</strong></p>
+<ul>
+<li>① 如果是空树，递归结束；</li>
+<li>② 否则，申请新结点空间，复制根结点<ul>
+<li>递归复制左子树</li>
+<li>递归复制右子树</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Copy</span><span class="params">(BiTree T, BiTree&amp; NewT)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>)</span><br><span class="line">    &#123; <span class="comment">//如果是空树返回0</span></span><br><span class="line">        NewT = <span class="literal">NULL</span>; </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">    &#123;</span><br><span class="line">        NewT = <span class="keyword">new</span> BiTNode;</span><br><span class="line">        NewT-&gt;data=T-&gt;data;</span><br><span class="line">        <span class="comment">// 递归复制</span></span><br><span class="line">        <span class="built_in">Copy</span>(T-&gt;lChild, NewT-&gt;lchild);</span><br><span class="line">        <span class="built_in">Copy</span>(T-&gt;rChild, NewT-&gt;rchild);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(3) 计算二叉树的深度</strong></p>
+<ul>
+<li>① 如果是空树，则深度为0</li>
+<li>② 否则，递归计算左子树的深度记为$m$，递归计算右子树的深度记为$n$<ul>
+<li>二叉树的深度计算方法为：$\max(m, n) + 1$。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Depth</span><span class="params">( BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">// 如果是空树返回0</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        m = <span class="built_in">Depth</span>(T-&gt;lChild);</span><br><span class="line">        n = <span class="built_in">Depth</span>(T-&gt;rChild);</span><br><span class="line">        <span class="keyword">if</span>(m&gt;n)</span><br><span class="line">            <span class="keyword">return</span> (m+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            <span class="built_in"><span class="keyword">return</span></span>(n+<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(4) 计算结点总数</strong></p>
+<ul>
+<li>① 如果是空树，则结点个数为0；</li>
+<li>② 否则，结点个数为左子树的结点个数+右子树的结点个数再+1。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">NodeCount</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">NodeCount</span>(T-&gt;lchile) + <span class="built_in">NodeCount</span>(T-&gt;rchile)+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>(5) 计算二叉树叶子结点数(补充)</strong></p>
+<ul>
+<li>① 如果是空树，则叶子结点个数为0；</li>
+<li>② 否则，为左子树的叶子结点个数+右子树的叶子结点个数。</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LeafCount</span><span class="params">(BiTree T)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(T==<span class="literal">NULL</span>)	<span class="comment">// 如果是空树返回0</span></span><br><span class="line">        <span class="keyword">return</span> O;</span><br><span class="line">    <span class="keyword">if</span>(T-&gt;lchild == <span class="literal">NULL</span> &amp;&amp; T-&gt;rchild == <span class="literal">NULL</span>)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">1</span>;	<span class="comment">// 如果是叶子结点返回1</span></span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">LeafCount</span>(T-&gt;lchild)+<span class="built_in">LeafCount</span>(T-&gt;rchild);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-3-线索二叉树"><a href="#5-3-线索二叉树" class="headerlink" title="5.3 线索二叉树"></a>5.3 线索二叉树</h4><h5 id="Ⅰ-线索二叉树概念"><a href="#Ⅰ-线索二叉树概念" class="headerlink" title="Ⅰ 线索二叉树概念"></a>Ⅰ 线索二叉树概念</h5><p>当用二叉链表作为二叉树的存储结构时可以很方便地找到某个结点的左右孩子；但一般情况下，无法直接找到该结点在某种遍历序列中的前驱和后继结点。</p>
+<ul>
+<li><p><strong>提出的问题</strong>：如何寻找特定遍历序列中二叉树结点的前驱和后继？？？</p>
+</li>
+<li><p><strong>解决的方法</strong></p>
+<ul>
+<li><p>方法1：通过遍历寻找——费时间；</p>
+</li>
+<li><p>方法2：再增设前驱、后继指针域——增加了存储负担；</p>
+</li>
+<li><p>方法3：利用二叉链表中的<strong>空指针域</strong>。</p>
+<blockquote>
+<p>回顾：二叉树链表中空指针域的数量：</p>
+<p>具有$n$个结点的二叉链表中，一共有$2n$个指针域；因为$n$个结点中有$n-1$个孩子，即$2n$个指针域中，有$n-1$个用来指示结点的左右孩子，其余$n+1$个指针域为空！</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>利用二叉链表中的空指针域</strong>：如果某个结点的左孩子为空，则将空的左孩子指针域改为指向其前驱，如果某结点的右孩子为空，则将空的右孩子指针域改为指向其后继。——这种改变指向的指针称为“<strong><font color="green">线索</font></strong>”。</p>
+<p>加上了线索的二叉树称为<strong>线索二叉树(Threaded Binary Tree)</strong>，对二叉树按某种遍历次序使其变为线索二叉树的过程叫<strong>线索化</strong>。</p>
+<p><img src="https://pic.imgdb.cn/item/668e5e74d9c307b7e9a6d153.png" style="zoom:30%"></p>
+<p>为区分<code>lchild</code>和<code>rchild</code>指针到底是指向孩子的指针，还是指问前趋或有后继的指针，对二叉链表中每个结点增设两个标志域<code>ltag</code> 和 <code>rtag</code> ，并约定：<br>—— <code>ltag=0</code>， <code>lchild</code> 指向该结点的左孩子；<br>—— <code>ltag =1</code>，<code>lchild</code> 指向该结点的前驱；<br>—— <code>rtag=0</code>，<code>rchild</code> 指向该结点的右孩子；<br>—— <code>rtag =1</code>，<code>rchild</code> 指向该结点的后继。</p>
+<p>这样，线索二叉树中的结点构成如下：</p>
+<p><img src="https://pic.imgdb.cn/item/668e5fb1d9c307b7e9a84ed9.png" alt="image.png"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line">typdef <span class="class"><span class="keyword">struct</span> <span class="title">BiThrnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> data;</span><br><span class="line">    <span class="keyword">bool</span> ltag;</span><br><span class="line">    <span class="keyword">bool</span> rtag;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiThrnode</span>* <span class="title">lchild</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BiThrnode</span>* <span class="title">rchild</span>;</span></span><br><span class="line">&#125;BiThrNode, *BiThrTree;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅱ-先序线索二叉树"><a href="#Ⅱ-先序线索二叉树" class="headerlink" title="Ⅱ 先序线索二叉树"></a>Ⅱ 先序线索二叉树</h5><p><img src="https://pic.imgdb.cn/item/668e62ded9c307b7e9ac33a2.png" alt="image.png"></p>
+<h4 id="5-4-树和森林"><a href="#5-4-树和森林" class="headerlink" title="5.4 树和森林"></a>5.4 树和森林</h4><p><img src="https://pic.imgdb.cn/item/668f326fd9c307b7e97facad.png" style="zoom:40%"></p>
+<p>注意，树是不分左右顺序的。</p>
+<h5 id="Ⅰ-树的存储结构"><a href="#Ⅰ-树的存储结构" class="headerlink" title="Ⅰ 树的存储结构"></a>Ⅰ 树的存储结构</h5><p><strong>(1) 双亲表示法</strong></p>
+<p>实现：定义结构数组，存放树的结点，每个结点含两个域：① 数据域：存放结点本身信息。② 双亲域：指示本结点的双亲结点在数组中的位置。如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/668f3537d9c307b7e9824f86.png" style="zoom:60%"></p>
+<p>这种方法有比较明显的优缺点：<strong>优点：</strong>找双亲容易；<strong>缺点：</strong>找孩子麻烦。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 树的单个结点的数据存储类型定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">PTnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    <span class="keyword">int</span> parent;</span><br><span class="line">&#125;PTNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">//=====================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 树的数据存储类型定义</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> MAX_TREE_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    PTNode nodes[MAX_TREE_SIZE];</span><br><span class="line">    <span class="keyword">int</span> r;	<span class="comment">// 根节点的位置</span></span><br><span class="line">    <span class="keyword">int</span> n;	<span class="comment">// 节点个数</span></span><br><span class="line">&#125;PTree;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 孩子链表</strong></p>
+<p>把每个结点的孩子结点排列起来，看成是一个线性表，用单链表存储，则$n$个结点有$n$个孩子链表(叶子的孩子链表为空表)。而 $n$ 个头指针又组成一个线性表，用顺序表(含$n$个元素的结构数组)存储。</p>
+<p><img src="https://pic.imgdb.cn/item/668f38fed9c307b7e9861ed5.png" style="zoom:60%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 孩子结点结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">CTnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> child;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CTnode</span>* <span class="title">next</span>;</span></span><br><span class="line">&#125;* ChildePtr;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 双亲结点结构</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    TElemType data;</span><br><span class="line">    ChildePtr firstchild;</span><br><span class="line">&#125;CTBox;</span><br><span class="line"></span><br><span class="line"><span class="comment">//=====================================================</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 树的数据存储类型定义</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> MAX_TREE_SIZE 100</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    CTBox nodes[MAX_TREE_SIZE];</span><br><span class="line">    <span class="keyword">int</span> r;	<span class="comment">// 根节点的位置</span></span><br><span class="line">    <span class="keyword">int</span> n;	<span class="comment">// 结点个数</span></span><br><span class="line">&#125;PTree;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>这种方法有比较明显的优缺点：<strong>优点：</strong>找孩子容易；<strong>缺点：</strong>找双亲麻烦。</p>
+<p><strong>(3) 带双亲的孩子链表</strong></p>
+<p>结合上述2种方法的优点。</p>
+<p><img src="https://pic.imgdb.cn/item/668f3aedd9c307b7e988151e.png" alt="带双亲的孩子链表" style="zoom:50%"></p>
+<p><strong><font color="blue">(4) 孩子兄弟表示法 / 二叉树表示法 / 二叉链表表示法</font></strong> （常用）</p>
+<p>实现：用二叉链表作树的存储结构，链表中每个结点的两个指针域分别指向其<strong>第一个孩子结点</strong>和<strong>下一个兄弟结点</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Csnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">CSnode</span>* <span class="title">firstchild</span>, *<span class="title">nextsibling</span>;</span></span><br><span class="line">&#125;CSNode, *CSTree;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/668f3ccfd9c307b7e98a3839.png" style="zoom:40%"></p>
+<h5 id="Ⅱ-树与二叉树的转换"><a href="#Ⅱ-树与二叉树的转换" class="headerlink" title="Ⅱ 树与二叉树的转换"></a>Ⅱ 树与二叉树的转换</h5><p>将树转化为二叉树进行处理，利用二叉树的算法来实现对树的操作。</p>
+<p>由于树和二叉树都可以用<strong>二叉链表</strong>作存储结构，则以二叉链表作媒介可以导出树与二叉树之间的一个对应关系。</p>
+<p><img src="https://pic.imgdb.cn/item/668f40f1d9c307b7e98eec51.png" style="zoom:40%"></p>
+<p>给定一棵树，可以找到唯一的一棵二叉树与之对应。</p>
+<ul>
+<li><p><strong>树转换为二叉树</strong>：容易发现规律，右兄弟转换为右孩子，具体步骤如下：</p>
+<ul>
+<li>① 加线：在兄弟之间加一连线</li>
+<li>② 抹线：对每个结点，除了其左孩子外，去除其与其余孩子之间的关系；</li>
+<li>③ 旋转：以树的根结点为轴心，将整树顺时针转45°。</li>
+</ul>
+</li>
+<li><p><strong>二叉树转换为树</strong>：</p>
+<ul>
+<li>① 加线：若p结点是双亲结点的左孩子，则将p的右孩子，右孩子的右孩子….沿分支找到的所有右孩子，都与p的双亲用线连起来；</li>
+<li>② 抹线：抹掉原二叉树中双亲与右孩子之间的连线；</li>
+<li>③ 调整：将结点按层次排列，形成树结构。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668f44fcd9c307b7e9933df3.png"></p>
+<h5 id="Ⅲ-森林与二叉树的转换"><a href="#Ⅲ-森林与二叉树的转换" class="headerlink" title="Ⅲ 森林与二叉树的转换"></a>Ⅲ 森林与二叉树的转换</h5><ul>
+<li>森林转换成二叉树(二叉树与多棵树之间的关系)<ul>
+<li>① 将各棵树分别转换成二叉树；</li>
+<li>② 将每棵树的根结点用线相连；</li>
+<li>③ 以第一棵树根结点为二叉树的根，再以根结点为轴心，顺时针旋转构成二叉树型结构。</li>
+<li>二叉树转换成森林</li>
+</ul>
+</li>
+<li>① 抹线：将二叉树中根结点与其右孩子连线，及沿右分支搜索到的所有右孩子间连线全部抹掉，使之变成孤立的二叉树；</li>
+<li>② 还原：将孤立的二叉树还原成树</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668f472ad9c307b7e99595bc.png"></p>
+<h5 id="Ⅳ-树和森林的遍历"><a href="#Ⅳ-树和森林的遍历" class="headerlink" title="Ⅳ 树和森林的遍历"></a>Ⅳ 树和森林的遍历</h5><p><strong>(1) 树的遍历</strong>(三种方法)</p>
+<ul>
+<li><strong>先(根)序遍历</strong>：若树不空，则先访问根结点，然后依次先根遍历各棵子树。</li>
+<li><strong>后(根)序遍历</strong>：若树不空，则先依次后根遍历各棵子树，然后访问根结点。</li>
+<li><strong>按层次遍历</strong>：若树不空，则自上而下自左至右访问树中每个结点。</li>
+</ul>
+<p><strong>(2) 森林的遍历</strong></p>
+<p>为了遍历森林，我们以下面这种视角重新审视森林的结构：</p>
+<p>将森林看作由三部分构成：<code>Part 1</code>：森林中第一棵树的根结点；<code>Part 2</code>：森林中第一棵树的子树森林；<code>Part 3</code>：森林中其它树构成的森林。</p>
+<ul>
+<li><strong>先序遍历</strong>：若森林不空，则<ul>
+<li>① 访问森林中第一棵树的根结点；</li>
+<li>② 先序遍历森林中第一棵树的子树森林；</li>
+<li>③ 先序遍历森林中(除第一棵树之外)其余树构成的森林。</li>
+<li>本质：依次从左至右对森林中的每一棵树进行<strong>先(根)序遍历</strong>。</li>
+</ul>
+</li>
+<li><strong>中序遍历</strong>：若森林不空，则<ul>
+<li>① 中序遍历森林中第一棵树的子树森林；</li>
+<li>② 访问森林中第一棵树的根结点；</li>
+<li>③ 中序遍历森林中(除第一棵树之外)其余树构成的森林。</li>
+<li>本质：依次从左至右对森林中的每一棵树进行<strong>后(根)序遍历</strong>。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/668f4ac1d9c307b7e99989ad.png" style="zoom:70%"></p>
+<h4 id="5-5-哈夫曼树-最优二叉树"><a href="#5-5-哈夫曼树-最优二叉树" class="headerlink" title="5.5 哈夫曼树(最优二叉树)"></a>5.5 哈夫曼树(最优二叉树)</h4><h5 id="Ⅰ-哈夫曼树的概念"><a href="#Ⅰ-哈夫曼树的概念" class="headerlink" title="Ⅰ 哈夫曼树的概念"></a>Ⅰ 哈夫曼树的概念</h5><p>首先来看个例子：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">//【例】编程:将学生的百分制成绩转换为五分制成绩</span></span><br><span class="line"><span class="comment">// &lt;60:E  60-69:D  70-79:C  80-89:B  90-100:A</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span>(score&lt;<span class="number">60</span>)</span><br><span class="line">    grade == <span class="string">&#x27;E&#x27;</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">70</span>)</span><br><span class="line">    grade ==`<span class="string">&#x27;D&#x27;</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">80</span>)</span><br><span class="line">    grade ==<span class="string">&#x27;C&#x27;</span>;</span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">90</span>)</span><br><span class="line">    grade ==`<span class="string">&#x27;B&#x27;</span>;</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    grade ==<span class="string">&#x27;A&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/668f4dc4d9c307b7e99cc2a9.png" alt="判断二叉树" style="zoom:50%"></p>
+<p>判断树：用于描述分类过程的二叉树。</p>
+<p>如果每次的输入量很大，则应考虑程序的操作时间。</p>
+<p>若学生的成绩数据共10000个：E、D、C、B、A分别占总数据的5%、15%、40%、30%、10%。则5%的数据需1次比较，15%的数据需2次比较，40%的数据需3次比较，40%的数据需4次比较，因此10000个数据比较的次数为：</p>
+<script type="math/tex; mode=display">
+10000×(1×5\%+2×15\%+3×40\%+4×10\%)=31500次</script><p>考虑如何减少一些数据量：</p>
+<p><img src="https://pic.imgdb.cn/item/668f4ffbd9c307b7e99f1534.png"></p>
+<p><strong>(1) 相关概念</strong></p>
+<p><strong>路径</strong>：从树中一个结点到另一个结点之间的分支构成这两个结点间的路径。</p>
+<p><strong>结点的路径长度</strong>：两结点间路径上的分支数。</p>
+<p><img src="https://pic.imgdb.cn/item/668f800cd9c307b7e9db738f.png" style="zoom:40%"></p>
+<p><strong>树的路径长度</strong>：从树根到每一个结点的路径长度之和，记作：TL。</p>
+<script type="math/tex; mode=display">
+树(a)的路径长度：TL(a) = 0+1+1+2+2+3+3+4+4=20 \\
+树(b)的路径长度：TL(b) = 0+1+1+2+2+2+2+3+3=16</script><p><strong><font color="#FFA500">一个小结论：结点数目相同的二叉树中，完全二叉树是路径长度最短的 <u>一种</u>  二叉树。</font></strong> </p>
+<p><strong>权重(weight)</strong>：将树中结点赋给一个有着某种含义的数值，则这个数值称为该结点的权。</p>
+<p><strong>结点的带权路径长度</strong>：从根结点到该结点之间的路径长度与该结点的权的乘积。</p>
+<p><strong>树的带权路径长度</strong>：树中所有叶子结点的带权路径长度之和，记作WPL。</p>
+<script type="math/tex; mode=display">
+WPL = \sum_{k=1}^n w_k l_k</script><p><img src="https://pic.imgdb.cn/item/668f8490d9c307b7e9e2f06f.png" style="zoom:70%"></p>
+<p><strong><font color="red">哈夫曼树</font></strong>：带权路径长度(WPL)最短的树。</p>
+<blockquote>
+<p>注意：</p>
+<p>“带权路径长度最短”是在“<strong>度相同</strong>”的树中比较而得的结果，因此有最优二叉树、最优三又树之称等等。</p>
+<p>结点的度：是结点拥有子树的的个数；树的度：是所有结点的度的最大值。</p>
+</blockquote>
+<p><img src="https://pic.imgdb.cn/item/668f87fad9c307b7e9e79b13.png" style="zoom:50%"></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
