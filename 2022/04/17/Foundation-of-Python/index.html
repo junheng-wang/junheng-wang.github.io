@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">21.7k</span>
+            <span class="post-count">24.4k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">90 分钟</span>
+            <span class="post-count">101 分钟</span>
         </span>
     </span>
 </div>
@@ -128,7 +128,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>164.3万</span></span>
+                        <span>165.1万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>4.8万</span></span></p>
@@ -1669,6 +1669,142 @@
 </ul>
 </li>
 </ul>
+<h3 id="第十二章-OS、SYS和argparse模块"><a href="#第十二章-OS、SYS和argparse模块" class="headerlink" title="第十二章 OS、SYS和argparse模块"></a>第十二章 OS、SYS和argparse模块</h3><h4 id="12-1-OS模块"><a href="#12-1-OS模块" class="headerlink" title="12.1 OS模块"></a>12.1 OS模块</h4><h5 id="一-OS模块定义"><a href="#一-OS模块定义" class="headerlink" title="(一) OS模块定义"></a>(一) OS模块定义</h5><p>在自动化过程当中，经常需要<strong>查找操作文件</strong>，比如说查找配置文件(从而读取配置文件的信息)，查找测试报告(从而发送测试报告邮件)，经常要对大量文件和大量路径进行操作，这就依赖于<code>os</code>模块。</p>
+<h5 id="二-OS模块常用方法"><a href="#二-OS模块常用方法" class="headerlink" title="(二) OS模块常用方法"></a>(二) OS模块常用方法</h5><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>当前路径以及路径下的文件</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.getcwd()</code></td>
+<td>查看当前所在路径</td>
+</tr>
+<tr>
+<td><code>os.pardir</code></td>
+<td>获取当前目录的父目录（上一级目录），以字符串形式显示目录名</td>
+</tr>
+<tr>
+<td><code>os.listdir(path)</code></td>
+<td>列举目录下的所有文件。返回的是列表类型。</td>
+</tr>
+<tr>
+<td><code>os.path.abspath(path)</code></td>
+<td>返回path的绝对路径。</td>
+</tr>
+<tr>
+<td><code>os.path.join(path1, path2)</code></td>
+<td>将path进行组合，若其中有绝对路径，则之前的path将被删除。</td>
+</tr>
+<tr>
+<td><code>os.path.exists(path)</code></td>
+<td>path：要判断的路径，可用绝对路径，也可用相对路径。<br>返回值：给定的路径存在则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td><code>os.path.dirname(path)</code></td>
+<td>返回path中的文件夹部分，结果不包含\</td>
+</tr>
+<tr>
+<td><code>os.path.basename(path)</code></td>
+<td>返回path中的文件名</td>
+</tr>
+<tr>
+<td><code>os.path.getsize()</code></td>
+<td>文件或文件夹的大小</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>注意：</p>
+<p><code>path</code>参数不写，默认当前项目路径，若写，则既可使用绝对路径<code>r&quot;E:\A.毕业设计\前期基础知识学习\deep learning project\MINIST-master\data&quot;</code>，又可使用相对路径<code>r&quot;.\dataset&quot;</code>(当前项目路径下的子文件夹dataset)</p>
+<p><code>os.path</code>模块的更多函数参考：<a target="_blank" rel="noopener" href="https://www.jb51.net/python/293897rnc.htm">Python常用基础模块之os.path模块详解</a></p>
+</blockquote>
+<h4 id="12-2-SYS模块"><a href="#12-2-SYS模块" class="headerlink" title="12.2 SYS模块"></a>12.2 SYS模块</h4><h5 id="一-SYS模块定义"><a href="#一-SYS模块定义" class="headerlink" title="(一) SYS模块定义"></a>(一) SYS模块定义</h5><p><code>OS</code>标准库是<strong>操作系统</strong>接口模块，提供了操作系统相关功能的调用函数。 Python的os模块是用于与操作系统进行交互的模块,它提供了许多函数和方法来执行文件和目录操作、进程管理、环境变量访问等 </p>
+<p>而<code>sys</code>模块是与<strong>python解释器</strong>交互的一个接口。sys 模块提供了许多函数和变量来处理 Python 运行时环境的不同部分。 可以用于获取命令行参数、控制程序的执行、管理模块和包、处理异常等。 </p>
+<h5 id="二-SYS模块常用方法"><a href="#二-SYS模块常用方法" class="headerlink" title="(二) SYS模块常用方法"></a>(二) SYS模块常用方法</h5><ul>
+<li><strong>命令行参数</strong></li>
+</ul>
+<p><code>sys</code>模块提供了一些函数和变量用于获取和处理命令行参数。</p>
+<p><code>sys.argv</code>：是一个包含命令行参数的列表，其中第一个元素是脚本的名称。可以使用<code>sys.argv[1:]</code>来获取除脚本名称外的所有参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sys.argv[<span class="number">0</span>]		<span class="comment"># 是脚本的名称。</span></span><br><span class="line">sys.argv[<span class="number">1</span>:]	<span class="comment"># 是除脚本名称外的所有参数。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==========例子=====================</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># 获取脚本的名称</span></span><br><span class="line">script_name = sys.argv[<span class="number">0</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;脚本名称：&quot;</span>, script_name)</span><br><span class="line"><span class="comment"># 获取除脚本名称外的所有参数</span></span><br><span class="line">args = sys.argv[<span class="number">1</span>:]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;参数列表：&quot;</span>, args)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>系统相关</strong></li>
+</ul>
+<p><code>sys</code>模块还提供了一些函数和变量用于与系统相关的操作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">sys.platform	<span class="comment"># 是一个字符串，表示当前运行的操作系统平台。</span></span><br><span class="line">sys.version		<span class="comment"># 是一个字符串，表示当前Python解释器的版本。</span></span><br><span class="line">sys.exit([arg])	<span class="comment"># 用于退出程序，可选地指定一个整数参数作为退出状态码。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==========例子=====================</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># 获取当前操作系统平台</span></span><br><span class="line">platform = sys.platform</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;操作系统平台：&quot;</span>, platform)</span><br><span class="line"><span class="comment"># 获取当前Python解释器的版本</span></span><br><span class="line">version = sys.version</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;Python版本：&quot;</span>, version)</span><br><span class="line"><span class="comment"># 退出程序</span></span><br><span class="line">sys.exit(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>模块和包</strong></li>
+</ul>
+<p><code>sys</code>模块还提供了一些函数和变量用于管理模块和包。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">sys.modules		<span class="comment"># 是一个字典，包含了当前已导入的所有模块。</span></span><br><span class="line">sys.path		<span class="comment"># 是一个列表，包含了Python解释器在搜索模块时要查找的路径。</span></span><br><span class="line">sys.meta_path	<span class="comment"># 是一个列表，包含了当前已注册的所有导入钩子</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==========例子=====================</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="comment"># 获取已导入的所有模块</span></span><br><span class="line">modules = sys.modules</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;已导入的模块：&quot;</span>, modules)</span><br><span class="line"><span class="comment"># 获取模块搜索路径</span></span><br><span class="line">path = sys.path</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;模块搜索路径：&quot;</span>, path)</span><br><span class="line"><span class="comment"># 获取已注册的导入钩子</span></span><br><span class="line">meta_path = sys.meta_path</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;已注册的导入钩子：&quot;</span>, meta_path)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>异常处理</strong></li>
+</ul>
+<p><code>sys</code>模块还提供了一些函数和变量用于处理异常。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sys.exc_info()		<span class="comment"># 返回当前异常的相关信息，包括异常类型、异常值和异常追踪信息。</span></span><br><span class="line">sys.exc_clear()		<span class="comment"># 清除当前异常。</span></span><br><span class="line">sys.exc_type		<span class="comment"># 是一个变量，保存了当前异常的类型。</span></span><br><span class="line">sys.exc_value		<span class="comment"># 是一个变量，保存了当前异常的值。</span></span><br><span class="line">sys.exc_traceback	<span class="comment"># 是一个变量，保存了当前异常的追踪信息。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==========例子=====================</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 产生一个异常</span></span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&quot;发生了一个错误&quot;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="comment"># 获取当前异常的相关信息</span></span><br><span class="line">    exc_type, exc_value, exc_traceback = sys.exc_info()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;异常类型：&quot;</span>, exc_type)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;异常值：&quot;</span>, exc_value)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;异常追踪信息：&quot;</span>, exc_traceback)</span><br><span class="line">    <span class="comment"># 清除当前异常</span></span><br><span class="line">    sys.exc_clear()</span><br></pre></td></tr></table></figure>
+<h4 id="12-3-argparse模块"><a href="#12-3-argparse模块" class="headerlink" title="12.3 argparse模块"></a>12.3 argparse模块</h4><p><code>argparse</code> 是一个用来解析命令行参数和选项的 Python 库，它是 Python 标准库的一部分。</p>
+<p>argparse 模块使<strong>编写用户友好的命令行界面变得容易</strong>。</p>
+<p><strong>程序定义了所需的参数，而 argparse 将找出如何从 <fonr color="red">sys.argv&lt;/font&gt; 中解析这些参数。</fonr></strong></p>
+<p>argparse 模块还会自动生成帮助和使用消息，并在用户为程序提供无效参数时发出错误。</p>
+<p>简而言之，就是汇总函数接口，方便传参。</p>
+<h5 id="一-argparse定义四个步骤"><a href="#一-argparse定义四个步骤" class="headerlink" title="(一 ) argparse定义四个步骤"></a>(一 ) argparse定义四个步骤</h5><ul>
+<li>导入argparse包 —— <code>import argparse</code></li>
+<li>创建一个命令行解析器对象 —— 创建 <code>ArgumentParser()</code> 对象</li>
+<li>给解析器添加命令行参数 —— 调用 <code>add_argument()</code> 方法添加参数</li>
+<li>解析命令行的参数 —— 使用 <code>parse_args()</code> 解析添加的参数</li>
+</ul>
+<h5 id="二-argparse的使用场景举例"><a href="#二-argparse的使用场景举例" class="headerlink" title="(二) argparse的使用场景举例"></a>(二) argparse的使用场景举例</h5><p>在深度学习代码中，特别是在<code>train.py</code>或<code>test.py</code>中，<code>argparse</code>最常被使用。</p>
+<p>因为在这些文件中，通常要对其他.py文件中定义的class或function进行调用，因此必然要传入大量的参数，如果不对这些参数进行集中编写，那么在冗长的代码中去找参数的定义位置或传参的位置将会十分麻烦。</p>
+<p><code>argparse</code>为用户提供了集中编写所需参数的机会，下面的使用教程中我会结合简单而具体的例子进行说明。</p>
+<h5 id="三-具体使用流程"><a href="#三-具体使用流程" class="headerlink" title="(三) 具体使用流程"></a>(三) 具体使用流程</h5><ul>
+<li><strong>1.创建一个解析器</strong></li>
+</ul>
+<p>即创建 <code>ArgumentParser()</code> 对象 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;test&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><strong>description：</strong>大多数对 <code>ArgumentParser</code> 构造方法的调用都会使用 <code>description= 关键字参数</code>。</p>
+<p>这个参数简要描述这个程度做什么以及怎么做。</p>
+<p>在帮助消息中，这个描述会显示在命令行用法字符串和各种参数的帮助消息之间。</p>
+<ul>
+<li><strong>2.添加参数</strong></li>
+</ul>
+<p>即调用 <code>add_argument()</code> 方法添加参数 。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">parser.add_argument(<span class="string">&#x27;--binary&#x27;</span>, action=<span class="string">&#x27;store_true&#x27;</span>, default=<span class="literal">False</span>, </span><br><span class="line">                    <span class="built_in">help</span>=<span class="string">&#x27;action=store_true表示默认为False，当在命令行中使用--binary时自动变为True&#x27;</span>)</span><br><span class="line">parser.add argument(<span class="string">&#x27;--number&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">6</span>，<span class="built_in">help</span>=<span class="string">&#x27;普通数据，type可指定类型.&#x27;</span>)</span><br><span class="line">                    </span><br><span class="line">parser.add argument(<span class="string">&#x27;--epochs&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">300</span>, <span class="built_in">help</span>=<span class="string">&#x27;Number of epochs to train.&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>这里说一下如何定义参数的格式 </p>
+<p><code>ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])</code></p>
+<ul>
+<li><strong>name or flags：选项字符串的名字或者列表，例如 foo 或者 -f, —foo； action：命令行遇到参数时的动作，默认值是 store； store_const：表示赋值为const；</strong></li>
+<li><strong>default ：不指定参数时的默认值。</strong></li>
+<li><strong>type：命令行参数应该被转换成的类型；</strong></li>
+<li><strong>choices：参数可允许的值的一个容器；</strong></li>
+<li><strong>nargs ：应该读取的命令行参数个数，可以是具体的数字，或者是?号，当不指定值时对于 Positional argument 使用 default，对于 Optional argument 使用 const；或者是 * 号，表示 0 或多个参数；或者是 + 号表示 1 或多个参数。</strong></li>
+<li><strong>required：可选参数是否可以省略 (仅针对可选参数)。</strong></li>
+<li><strong>help：参数的帮助信息，当指定为 argparse.SUPPRESS 时表示不显示该参数的帮助信息.</strong></li>
+<li><strong>metavar：在 usage 说明中的参数名称，对于必选参数默认就是参数名称，对于可选参数默认是全大写的参数名称</strong></li>
+<li>dest：解析后的参数名称，默认情况下，对于可选参数选取最长的名称，中划线转换为下划线.</li>
+<li>const：action 和 nargs 所需要的常量值。</li>
+<li>append：将遇到的值存储成列表，也就是如果参数重复则会保存多个值; append_const：将参数规范中定义的一个值保存到一个列表；</li>
+<li>count：存储遇到的次数；此外，也可以继承 argparse.Action 自定义参数解析；</li>
+</ul>
+</blockquote>
+<ul>
+<li><strong>3.解析参数</strong></li>
+</ul>
+<p>即使用 <code>parse_args()</code> 解析添加的参数。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">args = parser.parse_args()</span><br></pre></td></tr></table></figure>
+<h5 id="四-简单而具体的例子"><a href="#四-简单而具体的例子" class="headerlink" title="(四) 简单而具体的例子"></a>(四) 简单而具体的例子</h5><p>例如我现在有一个.py文件，我现在定义了好多好多函数（为了方便我只定义了两个），我现在需要集中管理我传入的参数，使用argparse就会非常方便，对于本.py文件中的传参一目了然。 </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> argparse</span><br><span class="line"></span><br><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;test&#x27;</span>)</span><br><span class="line"></span><br><span class="line">parser.add_argument(<span class="string">&#x27;--spring&#x27;</span> ,action=<span class="string">&#x27;store_true&#x27;</span>, default=<span class="literal">False</span>, <span class="built_in">help</span>=<span class="string">&#x27;nothing.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--summer&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">6</span>, <span class="built_in">help</span>=<span class="string">&#x27;num.&#x27;</span>)</span><br><span class="line">parser.add_argument(<span class="string">&#x27;--fa11&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">11</span>, <span class="built_in">help</span>=<span class="string">&#x27;num.&#x27;</span>)</span><br><span class="line">parser.add argument(<span class="string">&#x27;--winter&#x27;</span>, <span class="built_in">type</span>=<span class="built_in">int</span>, default=<span class="number">100</span>, <span class="built_in">help</span>=<span class="string">&#x27;Number of epochs to train.&#x27;</span>)</span><br><span class="line"></span><br><span class="line">args = parser.parse_args()</span><br><span class="line"><span class="comment"># FLAGs，unparsed = parser.parse_known_args() 这种解析方法用的比较少，有兴趣可以了解一下</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sum_function</span>(<span class="params">num2sum_1, num2sum_2</span>):</span></span><br><span class="line">    sum_result = num2sum_1+num2sum_2</span><br><span class="line">    <span class="keyword">return</span> sum_result</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">multiply_function</span>(<span class="params">num2multiply_1, num2multiply_2</span>):</span></span><br><span class="line">    multiply_result = num2multiply_1*num2multiply_2</span><br><span class="line">    <span class="keyword">return</span> multiply_result</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;args.spring的值是&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(args.spring))</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;args.summer的值是&#123;&#125;&#x27;</span>.<span class="built_in">format</span>(args.summer))</span><br><span class="line"><span class="built_in">print</span>(sum_function(args.summer,args.fall))</span><br><span class="line"><span class="built_in">print</span>(multiply_function(args.summer,args.winter))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 运行结果</span></span><br><span class="line"><span class="comment"># args.spring的值是False</span></span><br><span class="line"><span class="comment"># args.summer的值是6</span></span><br><span class="line"><span class="comment"># 17</span></span><br><span class="line"><span class="comment"># 600</span></span><br></pre></td></tr></table></figure>
+<p>你可以发现，对本文件中的函数进行传参，无论有多少参数需要传，我们只要在argparse中写好需要传的参数，在传参时传入<strong>args.参数名</strong>，需要修改传参值时，统一在argparse中进行修改即可，这样就方便了参数的管理。 </p>
+<h5 id="五-如何修改参数值"><a href="#五-如何修改参数值" class="headerlink" title="(五) 如何修改参数值"></a>(五) 如何修改参数值</h5><ul>
+<li>第一，对于有default的参数，直接修改default的值即可；</li>
+<li>第二，用命令行运行，例如在上面举例的程序，我如果想把summer的值改为10，fall的值改为20，那么命令行指令就是：python train.py —summer 10 —fall 20；如果我同时还想让spring的值成为True，那么命令行指令为：python train.py —summer 10 —fall 20 —spring</li>
+<li>第三，在Edit Configurations中进行配置，然后run即可：</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66950883d9c307b7e96a5f63.png" alt="image.png"></p>
 <hr>
 <p>参考笔记：E:\A.毕业设计\前期基础知识学习\01-Python基础课件.pdf</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 

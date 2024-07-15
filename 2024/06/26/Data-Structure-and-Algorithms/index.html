@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">22.5k</span>
+            <span class="post-count">26.9k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">87 分钟</span>
+            <span class="post-count">104 分钟</span>
         </span>
     </span>
 </div>
@@ -1198,7 +1198,7 @@ DLR、LDR、LRD、DRL、RDL、RLD</script><p>其中，主要看前三种：先(�
 <p><strong>树的路径长度</strong>：从树根到每一个结点的路径长度之和，记作：TL。</p>
 <script type="math/tex; mode=display">
 树(a)的路径长度：TL(a) = 0+1+1+2+2+3+3+4+4=20 \\
-树(b)的路径长度：TL(b) = 0+1+1+2+2+2+2+3+3=16</script><p><strong><font color="#FFA500">一个小结论：结点数目相同的二叉树中，完全二叉树是路径长度最短的 <u>一种</u>  二叉树。</font></strong> </p>
+树(b)的路径长度：TL(b) = 0+1+1+2+2+2+2+3+3=16</script><p><strong><font color="#FFA500">一个小结论：结点数目相同的二叉树中，完全二叉树是路径长度最短的 <u>一种(不唯一)</u>  二叉树。</font></strong> </p>
 <p><strong>权重(weight)</strong>：将树中结点赋给一个有着某种含义的数值，则这个数值称为该结点的权。</p>
 <p><strong>结点的带权路径长度</strong>：从根结点到该结点之间的路径长度与该结点的权的乘积。</p>
 <p><strong>树的带权路径长度</strong>：树中所有叶子结点的带权路径长度之和，记作WPL。</p>
@@ -1211,6 +1211,218 @@ WPL = \sum_{k=1}^n w_k l_k</script><p><img src="https://pic.imgdb.cn/item/668f84
 <p>结点的度：是结点拥有子树的的个数；树的度：是所有结点的度的最大值。</p>
 </blockquote>
 <p><img src="https://pic.imgdb.cn/item/668f87fad9c307b7e9e79b13.png" style="zoom:50%"></p>
+<h5 id="Ⅱ-哈夫曼树的构造"><a href="#Ⅱ-哈夫曼树的构造" class="headerlink" title="Ⅱ 哈夫曼树的构造"></a>Ⅱ 哈夫曼树的构造</h5><p>上面我开门观察得到一个结论：哈夫曼树具有“位高权重”的特点，也即离根近的叶子权重高，离根远的叶子权重低。根据这个特点，有如下的构造思想：</p>
+<ul>
+<li><strong><font color="#FF0FF">贪心算法</font></strong>：构造哈夫曼树时首先选择权值小的叶子结点。<ul>
+<li><strong>① 构造森林全是根</strong><br>根据$n$个给定的权值$(w_1, w_2, \cdots, w_n)$构成$n$棵二叉树的森林$F=(T_1, T_2, \cdots, T_n)$，其中$T_i$只有一个带权为$w_i$的根结点。</li>
+<li><strong>② 选用两小造新树</strong><br>在$F$中选取两棵根结点的权值最小的树作为左右子树，构造一棵新的二叉树，且设置新的二叉树的根结点的权值为其左右子树上根结点的权值之和。</li>
+<li><strong>③ 删除两小添新人</strong><br>在$F$中删除这两棵树，同时将新得到的二叉树加入森林中。</li>
+<li><strong>④ 重复②和③</strong><br>直到森林中只有一棵树为止，这棵树即为哈夫曼树。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66908142d9c307b7e9a2f357.png" style="zoom:70%"></p>
+<p>这种算法得到的哈夫曼树：其结点的度数为0或2，没有度为1的结点。此外，包含$n$个叶子结点的哈夫曼树中共有$2n-1$个结点。</p>
+<h5 id="Ⅲ-哈夫曼树的实现"><a href="#Ⅲ-哈夫曼树的实现" class="headerlink" title="Ⅲ 哈夫曼树的实现"></a>Ⅲ 哈夫曼树的实现</h5><p><strong>(1) 哈夫曼树的存储结构</strong></p>
+<p>既可采用顺序存储结构，又可采用链式存储结构，一般而言采用顺序存储结构比较简单：<strong>一维结构数组</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> weight;	<span class="comment">// 权重值</span></span><br><span class="line">    <span class="keyword">int</span> parent;	<span class="comment">// 双亲</span></span><br><span class="line">    <span class="keyword">int</span> lch;	<span class="comment">// 左孩子</span></span><br><span class="line">    <span class="keyword">int</span> rch;	<span class="comment">// 右孩子</span></span><br><span class="line">&#125;HTNode,*HuffmanTree;</span><br></pre></td></tr></table></figure>
+<p><strong>(2) 实现：分2步</strong></p>
+<ul>
+<li><strong>初始化</strong><ul>
+<li><code>HT [1, 2, ..., 2n-1]:lch=rch=parent=0</code>；</li>
+<li>输入初始n个叶子结点：设置<code>HT[1,...,n]</code>的weight值；</li>
+</ul>
+</li>
+<li><strong>构造过程</strong><ul>
+<li>进行以下n-1次合并，依次产生n-1个结点<code>HT[n+1, ..., 2n-1]</code></li>
+<li>a. 在<code>HT[1, ..., i-1]</code>中选两个未被选过(从<code>parent ==0</code> 的结点中选)的weight最小的两个结点<code>HT[s1]</code>和<code>HT[s2]</code>，<code>s1</code>、<code>s2</code>为两个最小结点下标；</li>
+<li>b. 修改<code>HT[s1]</code>和<code>HT[s2]</code>的parent值：<code>HT[s1].parent=i, HT[s2].parent=i</code>；</li>
+<li>c. 修改新产生的<code>HT[i]</code>：<br><code>HT[i].weight=HT[s1].weight + HT[s2].weight</code><br><code>HT[i]. lch=s1; HT[i].rch=s2</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreatHuffmanTree</span> <span class="params">(HuffmanTree HT, <span class="keyword">int</span> n)</span>	<span class="comment">// 构造哈夫曼树--哈夫曼算法</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 初始化</span></span><br><span class="line">    <span class="keyword">if</span>(n &lt;= <span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    <span class="keyword">int</span> m = <span class="number">2</span>*n<span class="number">-1</span>;	<span class="comment">// 数组共2n-1个元素</span></span><br><span class="line">    HT = <span class="keyword">new</span> HTNode[m+<span class="number">1</span>];	<span class="comment">// 0号单元未用，HT[m]表示根结点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=m; ++i)	<span class="comment">// 将2n-1个元素的lch、rch、parent置为0</span></span><br><span class="line">    &#123;</span><br><span class="line">        HT[i].lch=<span class="number">0</span>; </span><br><span class="line">        HT[i].rch=<span class="number">0</span>; </span><br><span class="line">        HT[i].parent=<span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">        cin &gt;&gt; HT[i].weight;	<span class="comment">// 输入前n个元素的weight值</span></span><br><span class="line">    <span class="comment">// =================初始化结束，下面开始建立哈夫曼树===========</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=n+<span class="number">1</span>; i&lt;=m; i++)	<span class="comment">// 合并产生n-1个结点, 构造Huffman树</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Select</span>(HT, i<span class="number">-1</span> ,s1, s2);	<span class="comment">// 在HT[k](1≤k≤i-1)中选择两个其双亲域为0,</span></span><br><span class="line">        						  <span class="comment">// 且权值最小的结点, 并返回它们在HT中的序号s1和s2</span></span><br><span class="line">        HT[s1].parent=i; HT[s2].parent=i;	<span class="comment">// 表示从F中删除s1,s2</span></span><br><span class="line">        HT[i].lch=s1; HT[i].rch=s2;	<span class="comment">// s1,s2分别作为i的左右孩子</span></span><br><span class="line">        HT[i].weight=HT[s1].weight + HT[s2].weight;	<span class="comment">// i的权值为左右孩子权值之和</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅳ-哈夫曼数的应用——哈夫曼编码"><a href="#Ⅳ-哈夫曼数的应用——哈夫曼编码" class="headerlink" title="Ⅳ 哈夫曼数的应用——哈夫曼编码"></a>Ⅳ 哈夫曼数的应用——哈夫曼编码</h5><p><img src="https://pic.imgdb.cn/item/66909384d9c307b7e9c5a7bc.png"></p>
+<ul>
+<li><strong>两个问题</strong><ul>
+<li>1、为什么哈夫曼编码能够保证是前缀编码？<br>因为没有一片树叶是另一片树叶的祖先，所以每个叶结点的编码就不可能是其它叶结点编码的前缀。</li>
+<li>2、为什么哈夫曼编码能够保证字符编码总长最短？<br>因为哈夫曼树的带权路径长度最短，故字符编码的总长最短。</li>
+</ul>
+</li>
+<li><strong>性质</strong><ul>
+<li>① 哈夫曼编码是前缀码；</li>
+<li>② 哈夫曼编码是最优前缀码；</li>
+</ul>
+</li>
+</ul>
+<p><strong>哈夫曼树的实现</strong></p>
+<p><img src="https://pic.imgdb.cn/item/66909bc4d9c307b7e9d7ea74.png"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 从叶子到根逆向求每个字符的哈夫曼编码，存储在编码表HC中</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">CreatHuffmanCode</span><span class="params">(HuffmanTree HT, HuffmanCode&amp; HC, <span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    HC = <span class="keyword">new</span> <span class="keyword">char</span>*[n+<span class="number">1</span>];	<span class="comment">// 分配n个字符编码的头指针矢量</span></span><br><span class="line">    <span class="keyword">char</span>* cd = <span class="keyword">new</span> <span class="keyword">char</span>[n];	<span class="comment">// 分配临时存放编码的动态数组空间</span></span><br><span class="line">    cd[n<span class="number">-1</span>]= <span class="string">&#x27;\0&#x27;</span>;	<span class="comment">// 编码结束符</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=n; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        start = n<span class="number">-1</span>;</span><br><span class="line">        c = i; </span><br><span class="line">        f = HT[i].parent;</span><br><span class="line">        <span class="keyword">while</span>(f != <span class="number">0</span>)	<span class="comment">// 从叶子结点开始向上回溯，直到根结点</span></span><br><span class="line">        &#123;	</span><br><span class="line">            --start;	<span class="comment">// 逐个字符求哈夫曼编码</span></span><br><span class="line">            <span class="keyword">if</span> ( HT[f].lchild == c )</span><br><span class="line">                cd[start]= <span class="string">&#x27;0&#x27;</span>;	<span class="comment">// 结点c是的的左孩子，则生成代码0</span></span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">                cd[start] = <span class="string">&#x27;1&#x27;</span>;	<span class="comment">// 结点c是的右孩子，则生成代码1</span></span><br><span class="line">            </span><br><span class="line">            c=f; f=HT[f].parent;	<span class="comment">// 继续向上回溯</span></span><br><span class="line">        &#125;	<span class="comment">// 求出第i个字符的编码</span></span><br><span class="line">        </span><br><span class="line">        HC[i] = <span class="keyword">new</span> <span class="keyword">char</span>[n-start];	<span class="comment">// 为第i 个字符串编码分配空间</span></span><br><span class="line">        <span class="built_in">strcpy</span>(HC[i], &amp;cd[start]);	<span class="comment">// 将求得的编码从临时空间cd复制到HC的当前行中</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">delete</span> cd;	<span class="comment">// 释放临时空间</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="sect-6-图"><a href="#sect-6-图" class="headerlink" title="&sect; 6 图"></a>&sect; 6 图</h3><h4 id="6-1-图的定义和术语"><a href="#6-1-图的定义和术语" class="headerlink" title="6.1 图的定义和术语"></a>6.1 图的定义和术语</h4><h5 id="Ⅰ-图的基本概念"><a href="#Ⅰ-图的基本概念" class="headerlink" title="Ⅰ 图的基本概念"></a>Ⅰ 图的基本概念</h5><p><strong>图：G=(V，E)</strong>，V：顶点(数据元素)的有穷非空集合，E：边的有穷集合。</p>
+<p><strong>完全图</strong>：任意两个点都有一条边相连。</p>
+<p><img src="https://pic.imgdb.cn/item/6690a2bed9c307b7e9e7c6ee.png" style="zoom:50%"></p>
+<p><strong>稀疏图</strong>：有很少边或弧(有向图的边)的图($e&lt;n \log n$)。</p>
+<p><strong>稠密图</strong>：有较多边或弧的图。</p>
+<p><strong>网</strong>：边/弧带权的图。</p>
+<p><strong>邻接</strong>： 有边/弧相连的两个顶点之间的关系。存在$(v_i, v_j)$，则称$v_i$和$v_j$互为邻接点；存在$<v_i, v_j>$，则称$v_i$邻接到$v_j$，$v_j$邻接于$v_i$。</v_i,></p>
+<blockquote>
+<p>注意：</p>
+<p>在离散数学中，$(\cdot, \cdot)$表示的<strong>无序</strong>偶对，$&lt;\cdot, \cdot&gt;$表示<strong>有序</strong>偶对。</p>
+</blockquote>
+<p><strong>关联(依附)</strong>：边/弧与顶点之间的关系。</p>
+<p><strong>顶点的度</strong>：与该顶点相关联的边的数目，记为$TD(V)$。在有向图中，顶点的度等于该顶点的<u>入度</u>与<u>出度</u>之和。</p>
+<blockquote>
+<p>注意：</p>
+<p>入度：顶点$v$的入度是以$v$为终点的有向边的条数，记作$ID(v)$；</p>
+<p>出度：顶点$v$的出度是以$v$为始点的有向边的条数，记作$OD(v)$。</p>
+</blockquote>
+<p>问：当有向图中仅1个顶点的入度为0，其余顶点的入度均为1，此时是何形状?<br>答：是树！而且是一棵<strong>有向树</strong>！</p>
+<p><img src="https://pic.imgdb.cn/item/6690cc8cd9c307b7e946d979.png" alt="有向树" style="zoom:60%"></p>
+<p><strong>路径</strong>：接续的边构成的<u>顶点序列</u>。</p>
+<p><strong>路径长度</strong>：路径上边或弧的数目/权值之和。</p>
+<p><strong>回路(环)</strong>：第一个顶点和最后一个顶点相同的路径。</p>
+<p><strong>简单路径</strong>：除路径起点和终点可以相同外，其余顶点均不相同的路径。（序列中顶点不重复出现的路径）</p>
+<p><strong>简单回路(简单环)</strong>：除路径起点和终点相同外，其余顶点均不相同的路径。</p>
+<p><img src="https://pic.imgdb.cn/item/6690cec0d9c307b7e94b77d0.png" style="zoom:70%"></p>
+<p><strong>连通图(强连通图)</strong>：在无(有)向图G=(V，{E})中，若对任何两个顶点v、u都存在从v 到u的路径，则称G是连通图(强连通图)。</p>
+<p><img src="https://pic.imgdb.cn/item/6690d060d9c307b7e94ef2b2.png" style="zoom:60%"></p>
+<p><strong>权与网</strong>：图中边或弧所具有的相关数称为权。表明从一个顶点到另一个顶点的距离或耗费。带权的图称为网。</p>
+<p><strong>子图</strong>：设有两个图G=(V，{E})、G1=(V1，{E1})，若$V1 \subseteq V$，$E1 \subseteq E$，则称 G1是G的子图。</p>
+<p><img src="https://pic.imgdb.cn/item/6690d1fbd9c307b7e951c1c6.png" style="zoom:60%"></p>
+<p><strong>连通分量(强连通分量)</strong>：</p>
+<p>无向图G的<strong>极大</strong>连通子图称为G的连通分量。<strong>极大连通子图</strong>意思是：该子图是G连通子图，将G的任何不在该子<br>图中的顶点加入，子图不再连通。</p>
+<p>有向图G的极大强连通子图称为G的强连通分量。<strong>极大强连通子图</strong>意思是:该子图是G的强连通子图，将D的任何不在该子图中的顶点加入，子图不再是强连通的。</p>
+<p><img src="https://pic.imgdb.cn/item/6690d479d9c307b7e957c591.png" style="zoom:60%"></p>
+<p><strong>极小连通子图</strong>：该子图是G的连通子图，在该子图中删除任何一条边子图不再连通。</p>
+<p><strong>生成树</strong>：包含无向图G所有顶点的极小连通子图。</p>
+<p><strong>生成森林</strong>：对非连通图，由各个连通分量的生成树的集合。</p>
+<p><img src="https://pic.imgdb.cn/item/6690d536d9c307b7e958f5fd.png" style="zoom:60%"></p>
+<h5 id="Ⅱ-案例引入-1"><a href="#Ⅱ-案例引入-1" class="headerlink" title="Ⅱ 案例引入"></a>Ⅱ 案例引入</h5><p><strong>案例6.1 六度空间理论</strong></p>
+<p>“六度空间”理论又称作六度分隔(SixDegrees of Separation )理论。这个理论可以通俗地阐述为：“你和任何一个陌生人之间所间隔的人不会超过六个，也就是说，最多通过六个人你就能够认识任何一个陌生人。”该理论产生于20世纪60年代，由美国心理学家米尔格伦提出。</p>
+<p>把六度空间理论中的人际关系网络抽象成一个无向图G。用图G中的一个顶点表示一个人，两个人认识与否用代表这两个人的顶点之间是否有一条边来表示。从任一顶点出发用广度优先方法对图进行遍历，统计所有路径长度不超过7的顶点</p>
+<h5 id="Ⅲ-图的类型定义"><a href="#Ⅲ-图的类型定义" class="headerlink" title="Ⅲ 图的类型定义"></a>Ⅲ 图的类型定义</h5><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图的抽象数据类型定义如下</span></span><br><span class="line">ADT Graph</span><br><span class="line">&#123;</span><br><span class="line">	数据对象V:具有相同特性的数据元素的集合，称为顶点集</span><br><span class="line">	数据关系R:R=&#123;VR&#125;</span><br><span class="line">				VR=&#123;&lt;v,w&gt;|&lt;v,w&gt;|v,w∈V ^ <span class="built_in">P</span>(v,w)&#125;</span><br><span class="line">				&lt;v,w&gt;表示从v到w的弧，<span class="built_in">P</span>(v,w)定义了弧&lt;v;w&gt;的信息(权)</span><br><span class="line"></span><br><span class="line">	<span class="comment">// 图的基本操作P</span></span><br><span class="line">	<span class="comment">// 图的创建操作。</span></span><br><span class="line">		<span class="comment">// 初始条件:无。</span></span><br><span class="line">		<span class="comment">// 操作结果:生成一个没有顶点的空图G。</span></span><br><span class="line">    <span class="built_in">Create_Graph</span>() </span><br><span class="line"></span><br><span class="line">    <span class="comment">// 求图中的顶点v的值。</span></span><br><span class="line">        <span class="comment">// 初始条件:图G存在，v是图中的一个顶点。</span></span><br><span class="line">        <span class="comment">// 操作结果:求v的值</span></span><br><span class="line">    <span class="built_in">GetVex</span>(G,v);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始条件:V是图的顶点集，VR是图中弧的集合</span></span><br><span class="line">    <span class="comment">// 操作结果:按V和VR的定义构造图G。</span></span><br><span class="line">    <span class="built_in">CreateGraph</span>(&amp;G,V,VR);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 初始条件:图G存在。</span></span><br><span class="line">    <span class="comment">// 操作结果:对图进行深度优先遍历。</span></span><br><span class="line">    <span class="built_in">DFSTraverse</span>(G);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 初始条件:图G存在。</span></span><br><span class="line">    <span class="comment">// 操作结果:对图进行广度优先遍历。</span></span><br><span class="line">    <span class="built_in">BFSTraverse</span>(G)</span><br><span class="line"></span><br><span class="line">&#125; ADT Graph</span><br></pre></td></tr></table></figure>
+<h4 id="6-2-图的存储结构"><a href="#6-2-图的存储结构" class="headerlink" title="6.2 图的存储结构"></a>6.2 图的存储结构</h4><p>前面已经介绍了图的逻辑结构：<strong>多对多</strong>。</p>
+<p>图没有顺序存储结构，但可以借助二维数组来表示元素间的关系——数组表示法(<strong>邻接矩阵</strong>)。</p>
+<p>图有链式存储结构，具体有3种形式：① 多重链表；② 邻接表邻接多重表；③ 十字链表。</p>
+<h5 id="Ⅰ-数组表示法-邻接矩阵"><a href="#Ⅰ-数组表示法-邻接矩阵" class="headerlink" title="Ⅰ 数组表示法(邻接矩阵)"></a>Ⅰ 数组表示法(邻接矩阵)</h5><p>建立一个<strong>顶点表</strong>(记录各个顶点信息)和一个<strong>邻接矩阵</strong>(表示各个顶点之间关系)。</p>
+<p>设图$A=(V, E)$，有$n$个顶点，则可构建一个一维数组，称为顶点表$\text{Vexs}[n]$：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>i</th>
+<th>0</th>
+<th>1</th>
+<th>2</th>
+<th>…</th>
+<th>n-1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>vexs[i]</td>
+<td>v~1~</td>
+<td>v~2~</td>
+<td>v~3~</td>
+<td>…</td>
+<td>v~n-1~</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>图的邻接矩阵是一个二维数组 $\text{A. arcs}[n][n]$，定义为:</p>
+<script type="math/tex; mode=display">
+\text{A. arcs}[i][i] = 
+\begin{cases}
+&1, & <i, j> \in E ~ 或 ~  (i, j) \in E \\
+& 0,& \text{others}
+\end{cases}</script><p><img src="https://pic.imgdb.cn/item/66939428d9c307b7e9a29f5d.png" style="zoom:40%"></p>
+<p>分析1：无向图的邻接矩阵是对称的；</p>
+<p>分析2：无向图顶点$v_i$的度=第$i$行(列) 中1的个数；</p>
+<p>分析3：完全图的邻接矩阵中，对角元素为0，其余1。</p>
+<p><img src="https://pic.imgdb.cn/item/6693975dd9c307b7e9a8a987.png" style="zoom:40%"></p>
+<p>分析1：有向图的邻接矩阵可能是不对称的；</p>
+<p>分析2：顶点的出度=第$i$行元素之和，顶点的入度=第$i$列元素之和，顶点的度=第$i$行元素之和+第$i$列元素之和。</p>
+<p><strong>网(即有权图)</strong>的邻接矩阵表示法：</p>
+<script type="math/tex; mode=display">
+\text{A. arcs}[i][i] = 
+\begin{cases}
+&w_{ij}, & <i, j>~ 或 ~  (i, j) \in VR \\
+& \infty,& \text{others}
+\end{cases}</script><p><img src="https://pic.imgdb.cn/item/66939852d9c307b7e9aa54e8.png" style="zoom:30%"></p>
+<h5 id="Ⅱ-邻接矩阵的存储表示"><a href="#Ⅱ-邻接矩阵的存储表示" class="headerlink" title="Ⅱ 邻接矩阵的存储表示"></a>Ⅱ 邻接矩阵的存储表示</h5><p>用两个数组分别存储<strong>顶点表</strong>和<strong>邻接矩阵</strong>。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MaxInt 32767	<span class="comment">// 表示极大值，即∞</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MVNum 100   	<span class="comment">// 最大顶点数</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> VerTexType;	<span class="comment">// 设顶点的数据类型为字符</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ArcType;	<span class="comment">// 假设边的权值类型为整型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    VerTexType vexs[MVNum];	<span class="comment">// 顶点表</span></span><br><span class="line">    ArcType arcs[MVNum][MVNum];	<span class="comment">// 邻接矩阵</span></span><br><span class="line">    <span class="keyword">int</span> vexnum, arcnum;	<span class="comment">// 图的当前点数和边数</span></span><br><span class="line">&#125;AMGraph; <span class="comment">// Adjacency Matrix Graph</span></span><br></pre></td></tr></table></figure>
+<p><strong>采用邻接矩阵表示法创建无向网</strong>(无向图、有向图、有向网)</p>
+<ul>
+<li>【算法思想】<ul>
+<li>(1) 输入总顶点数和总边数。</li>
+<li>(2) 依次输入点的信息存入顶点表中。</li>
+<li>(3) 初始化邻接矩阵，使每个权值初始化为极大值。</li>
+<li>(4) 构造邻接矩阵。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 图G中查找顶点u，存在则返回顶点表中的下标; 否则返回-1</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">LocateVex</span><span class="params">(AMGraph G, VertexType u)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>( i=<span class="number">0</span>; i&lt;G.vexnum; ++i)</span><br><span class="line">        <span class="keyword">if</span>(u==G.vexs[i])</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 采用邻接矩阵表示法，创建无向网</span></span><br><span class="line"><span class="function">Status <span class="title">CreateUDN</span><span class="params">(AMGraph&amp; G)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    Gcin &gt;&gt; G.vexnum &gt;&gt; G.arcnum;	<span class="comment">// 输入总顶点数，总边数</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i&lt;G.vexnum; ++i)<span class="comment">// 依次输入点的信息</span></span><br><span class="line">        cin &gt;&gt; G.vexs[i];</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i = <span class="number">0</span>; i&lt;G.vexnum; ++i) <span class="comment">// 初始化邻接矩阵</span></span><br><span class="line">        <span class="keyword">for</span>( <span class="keyword">int</span> j = <span class="number">0</span>; j&lt;G.vexnum; ++j)</span><br><span class="line">            G.arcs[i][j] = MaxInt;	<span class="comment">// 边的权值均置为极大值(无穷)</span></span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> k = <span class="number">0</span>; k&lt;G.arcnum; ++k)&#123;	<span class="comment">// 构造邻接矩阵</span></span><br><span class="line">        cin &gt;&gt; v1 &gt;&gt; v2 &gt;&gt; w;	<span class="comment">// 输入一条边所依附的顶点及边的权值</span></span><br><span class="line">        i = <span class="built_in">LocateVex</span>(G, v1);</span><br><span class="line">        j = <span class="built_in">LocateVex</span>(G, v2);	<span class="comment">// 该函数用于确定v1和v2在G中的位置</span></span><br><span class="line">        G.arcs[i][j] = w;	<span class="comment">// 边&lt;v1,v2&gt;的权值置为w</span></span><br><span class="line">        G.arcs[j][i] = G.arcs[i][j]; <span class="comment">// 置&lt;v1,v2&gt;的对称边&lt;v2,v1&gt;的权值为w</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;<span class="comment">//CreateUDN</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/6693a15fd9c307b7e9bb8705.png" style="zoom:40%"></p>
+<p>邻接矩阵存储方式有什么不好？</p>
+<p>① 不便于增加和删除顶点；② 浪费空间——存稀疏图(点很多而边很少)有大量无效元素，对稠密图(特别是完全图)还是很合算的；③ 浪费时间——例如统计稀疏图中一共有多少条边。</p>
+<h5 id="Ⅲ-邻接表表示法-链式"><a href="#Ⅲ-邻接表表示法-链式" class="headerlink" title="Ⅲ 邻接表表示法(链式)"></a>Ⅲ 邻接表表示法(链式)</h5><p><strong>(1) 无向图/网的邻接表</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6693a3bcd9c307b7e9c0b21d.png"></p>
+<ul>
+<li><strong>顶点</strong>：按编号顺序将顶点数据存储在一维数组中；<ul>
+<li>头节点<code>data</code>：存放结点数据；</li>
+<li>头节点<code>firstarc</code>：存放邻接结点的数组下标索引。</li>
+</ul>
+</li>
+<li><strong>关联同一顶点的边(以顶点为尾的弧)</strong>：用线性链表存储。<ul>
+<li>表结点<code>adjvex</code>：</li>
+<li>表结点<code>nextarc</code>：链域，指示下一条边或弧；</li>
+<li>附加：表结点<code>weight</code>：若有权值，则添加weight表示。</li>
+</ul>
+</li>
+</ul>
+<p><strong>特点</strong></p>
+<p>① 邻接表不唯一；</p>
+<p>② 若无向图中有$n$个顶点、$e$条边，则其邻接表需$n$个头结点和$2e$个表结点(空间复杂度$O(n+2e)$)。适宜存储稀疏图。</p>
+<p>③ 无向图中顶点$v_i$的度为第$i$个单链表中的结点数。</p>
+<p><strong>(2) 有向图/网的邻接表</strong></p>
+<p><img src="https://pic.imgdb.cn/item/66947dafd9c307b7e9b72892.png"></p>
+<p>若是带有权值的网，则在表结点上可以再添加一个单元存储<code>info</code>。</p>
+<p><strong>(3) 图的邻接表实现</strong></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MVNum 100	<span class="comment">// 最大顶点数</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 表结点定义(边、弧结点)</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Arcnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">int</span> adjvex;	<span class="comment">// 该边所指向的顶点的位置</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">Arcnode</span>* <span class="title">nextarc</span>;</span>	<span class="comment">// 指向下一条边的指针</span></span><br><span class="line">    OtherInfo info;	<span class="comment">// 和边相关的信息</span></span><br><span class="line">&#125;ArcNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 头节点定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">VNode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    VerTexType data;	<span class="comment">// 顶点信息</span></span><br><span class="line">    ArcNode* firstarc;	<span class="comment">// 指向第一条依附该顶点的边的指针 </span></span><br><span class="line">&#125;VNode, AdjList[MVNum];	<span class="comment">// AdjList表示邻接表类型</span></span><br><span class="line"><span class="comment">// 这里 AdjList v; 等价于 VNode v[MVNum];</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 邻接表图定义</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    AdjList vertices;	<span class="comment">// vertices--vertex的复数</span></span><br><span class="line">    <span class="keyword">int</span> vexnum, arcnum;	<span class="comment">// 图的当前顶点数和弧数</span></span><br><span class="line">&#125;ALGraph;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/6694828bd9c307b7e9bc0cd0.png" alt="邻接表操作举例说明"></p>
+<p><strong>采用邻接表表示法创建无向网</strong></p>
+<ul>
+<li>【算法思想】<ul>
+<li>(1) 输入总顶点数和总边数；</li>
+<li>(2) 建立顶点表<br>依次输入点的信息存入顶点表中，并使每个表头结点的指针域初始化为NULL创建邻接表；</li>
+<li>(3) 创建邻接表<br>依次输入每条边依附的两个顶点，确定两个顶点的序号$i$和$j$，建立边结点将此边结点分别插入到$v_i$和$v_j$对应的两个边链表的头部。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 采用邻接表表示法创建无向图G</span></span><br><span class="line"><span class="function">Status <span class="title">CreateUDG</span><span class="params">(ALGraph&amp; G)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    cin &gt;&gt; G.vexnum &gt;&gt; G.arcnum;	<span class="comment">// 输入总顶点数，总边数</span></span><br><span class="line">    <span class="comment">// 输入各点，构造头结点表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i&lt;G.vexnum; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        cin &gt;&gt; G.vertices[i].data;	<span class="comment">// 输入顶点值</span></span><br><span class="line">        G.vertices[i].firstarc=<span class="literal">NULL</span>;	<span class="comment">// 初始化表头结点的指针域为NULL</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 输入各边，构造邻接表</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k = <span class="number">0</span>; k&lt;G.arcnum; ++k)</span><br><span class="line">    &#123;</span><br><span class="line">        cin &gt;&gt; v1 &gt;&gt; v2;	<span class="comment">// 输入一条边依附的两个顶点</span></span><br><span class="line">        i = <span class="built_in">LocateVex</span>(G, v1);</span><br><span class="line">        j = <span class="built_in">LocateVex</span>(G, v2);</span><br><span class="line">        </span><br><span class="line">        ArcNode* p1 = <span class="keyword">new</span> ArcNode;	<span class="comment">// 生成一个新的边结点*p1</span></span><br><span class="line">        p1-&gt;adjvex = j;	<span class="comment">// 邻接点序号为j</span></span><br><span class="line">        p1-&gt;nextarc = G.vertices[i].firstarc;</span><br><span class="line">        G.vertices[i].firstarc = p1;	<span class="comment">// 将新结点*p1插入顶点vi的边表头部</span></span><br><span class="line">        </span><br><span class="line">        ArcNode* p2 = <span class="keyword">new</span> ArcNode;	<span class="comment">// 生成另一个对称的新的边结点*p2</span></span><br><span class="line">        p2-&gt;adjvex = i;	<span class="comment">// 邻接点序号为i</span></span><br><span class="line">        p2-&gt;nextarc = G.vertices[j].firstarc;</span><br><span class="line">        G.vertices[j].firstarc = p2;	<span class="comment">// 将新结点*p2插入顶点vj的边表头部</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;<span class="comment">//CreateUDG</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>邻接表特点</strong><ul>
+<li>方便找任一顶点的所有“邻接点“</li>
+<li>节约稀疏图的空间：需要N个头指针+2E个结点(每个结点至少2个域)</li>
+<li>方便计算任一顶点的“度”?<ul>
+<li>对无向图：是的</li>
+<li>对有向图：只能计算“出度”，需要构造“逆邻接表”(存指向自己的边)来方便计算”入度“</li>
+<li>不方便检查任意一对顶点间是否存在边。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-图的其他改进表示法"><a href="#Ⅳ-图的其他改进表示法" class="headerlink" title="Ⅳ 图的其他改进表示法"></a>Ⅳ 图的其他改进表示法</h5><p><img src="https://pic.imgdb.cn/item/66948bf8d9c307b7e9c7dc7b.png" style="zoom:60%"></p>
+<p><strong>(1) 十字链表——用于有向图</strong></p>
+<p>十字链表(Orthogonal List)是有向图的另一种链式存储结构。我们也可以把它看成是将有向图的邻接表和逆邻接表结合起来形成的一种链表。</p>
+<p>有向图中的每一条弧对应十字链表中的一个弧结点，同时有向图中的每个顶点在十字链表中对应有一个结点，叫做顶点结点。</p>
+<p><img src="https://pic.imgdb.cn/item/66948f46d9c307b7e9cba8ab.png"></p>
+<p><strong>(2) 邻接多重表——用于无向图</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6694935bd9c307b7e9d14670.png"></p>
+<p>第一个格子是标记域，搜索时用的，用来标记是否被查找过；</p>
+<p>0后边指针的找相同相同位置带0的，1后边招相同位置带1的，推广到任意数。</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
