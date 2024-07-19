@@ -2469,7 +2469,7 @@ W:=W-\alpha \frac{d W}{\sqrt{S_{W}}+\varepsilon}, b:=b-\alpha \frac{d b}{\sqrt{S
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>165.1万</span></span>
+                        <span>165.2万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>4.8万</span></span></p>
@@ -3734,8 +3734,7 @@ W:=W-\alpha \frac{d W}{\sqrt{S_{W}}+\varepsilon}, b:=b-\alpha \frac{d b}{\sqrt{S
 </ul>
 </li>
 </ul>
-<h4 id="7-2-类和对象"><a href="#7-2-类和对象" class="headerlink" title="7.2 类和对象"></a>7.2 类和对象</h4><font color="red">**类和对象的关系：用类去实例化/创建一个对象。**</font>
-
+<h4 id="7-2-类和对象"><a href="#7-2-类和对象" class="headerlink" title="7.2 类和对象"></a>7.2 类和对象</h4><p><strong><font color="red">类和对象的关系：用类去实例化/创建一个对象</font></strong>。</p>
 <h5 id="一-理解类和对象"><a href="#一-理解类和对象" class="headerlink" title="(一) 理解类和对象"></a>(一) 理解类和对象</h5><p><strong>(1) 类</strong></p>
 <p>类是对一系列具有相同特征和行为的事物的统称，是一个抽象的概念，不是真实存在的事物。</p>
 <ul>
@@ -4146,6 +4145,10 @@ W:=W-\alpha \frac{d W}{\sqrt{S_{W}}+\varepsilon}, b:=b-\alpha \frac{d b}{\sqrt{S
 <li>第三，在Edit Configurations中进行配置，然后run即可：</li>
 </ul>
 <p><img src="https://pic.imgdb.cn/item/66950883d9c307b7e96a5f63.png" alt="image.png"></p>
+<ul>
+<li>在 Python 的 <code>argparse</code> 模块中，位置参数不能使用 <code>default</code> 参数。因为定位参数是必需的，它们必须始终由用户提供，而不能使用默认值。 </li>
+<li>在 Python 的 <code>argparse</code> 模块中，位置参数不能使用<code>action</code>参数，<code>action=&quot;store_true&quot;</code> 用于创建布尔开关，但它不适用于必需的位置参数。位置参数不应该使用 <code>action=&quot;store_true&quot;</code>。 </li>
+</ul>
 <hr>
 <p>参考笔记：E:\A.毕业设计\前期基础知识学习\01-Python基础课件.pdf</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
@@ -15572,7 +15575,473 @@ WPL = \sum_{k=1}^n w_k l_k</script><p><img src="https://pic.imgdb.cn/item/668f84
 <p><img src="https://pic.imgdb.cn/item/6694935bd9c307b7e9d14670.png"></p>
 <p>第一个格子是标记域，搜索时用的，用来标记是否被查找过；</p>
 <p>0后边指针的找相同相同位置带0的，1后边招相同位置带1的，推广到任意数。</p>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+<h4 id="6-3-图的遍历"><a href="#6-3-图的遍历" class="headerlink" title="6.3 图的遍历"></a>6.3 图的遍历</h4><h5 id="Ⅰ-遍历的基本概念"><a href="#Ⅰ-遍历的基本概念" class="headerlink" title="Ⅰ 遍历的基本概念"></a>Ⅰ 遍历的基本概念</h5><p>从已给的连通图中某一顶点出发，沿着一些边访遍图中<strong>所有的顶点</strong>，且使每个顶点<strong>仅被访问一次</strong>，就叫做图的遍历，它是图的基本运算。</p>
+<p>遍历实质：找每个顶点的邻接点的过程。</p>
+<p><strong>图的特点</strong>：图中可能存在<u>回路</u>，且图的任一顶点都可能与其它顶点相通，在访问完某个顶点之后可能会沿着某些边又回到了曾经访问过的顶点。</p>
+<ul>
+<li>所以问题来了，怎样<strong>避免重复访问</strong>？<ul>
+<li>解决思路：设置辅助数组 <code>visited[n]</code>，用来标记每个被访问过的顶点。</li>
+<li>初始状态<code>visited [i]</code>设为0；顶点$i$被访问，改 <code>visited [i]</code>为1，防止被多次访问。</li>
+</ul>
+</li>
+<li><strong>==图常用的遍历算法==</strong>：<ul>
+<li>① 深度优先搜索(Depth First Search—DFS )，<strong>思想</strong>：一条道走到黑，然后再回退。</li>
+<li>② 广度优先搜索(Breadth Frist Search—BFS)，</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-深度优先搜索-DFS"><a href="#Ⅱ-深度优先搜索-DFS" class="headerlink" title="Ⅱ 深度优先搜索(DFS)"></a>Ⅱ 深度优先搜索(DFS)</h5><p><strong>(1) DFS的基本步骤</strong></p>
+<ul>
+<li><strong>【算法思想】</strong><ul>
+<li>在访问图中某一起始顶点$v$后，由$v$出发，访问它的任一邻接顶点$w_1$；</li>
+<li>再从$w_1$出发，访问与$w_1$邻接但还未被访问过的顶点$w_2$；</li>
+<li>然后再从$w_2$出发，进行类似的访问 … …</li>
+<li>如此进行下去，直至到达所有的邻接顶点都被访问过的顶点$u$为止。</li>
+<li>接着，退回一步，退到前一次刚访问过的顶点，看是否还有其它没有被访问的邻接顶点。<ul>
+<li>如果有，则访问此顶点，之后再从此顶点出发，进行与前述类似的访问；</li>
+<li>如果没有，就再退回一步进行搜索。重复上述过程，直到连通图中所有顶点都被访问过为止。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6695d6e1d9c307b7e94fde0d.png"></p>
+<p><strong>(2) 基于邻接矩阵表示的无向图DFS</strong></p>
+<ul>
+<li><strong>连通图的遍历</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">DFS</span><span class="params">(AMGraph G <span class="keyword">int</span> v)</span>	<span class="comment">// 图G为邻接矩阵类型</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; v; </span><br><span class="line">    visited[v]= <span class="literal">true</span>;	<span class="comment">// 访问第v个顶点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> w = <span class="number">0</span>; w&lt;G.vexnum; w++)	<span class="comment">// 依次检查邻接矩阵v所在的行</span></span><br><span class="line">        <span class="keyword">if</span>((G.arcs[v][w]!=<span class="number">0</span>) &amp;&amp; (!visited[w]))</span><br><span class="line">            <span class="built_in">DFS</span>(G, w);	<span class="comment">// w是v的邻接点，如果w未访问，则递归调用DFS</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>非连通图的遍历</strong></li>
+</ul>
+<p><strong>(3) 基于邻接表表示的无向图DFS</strong></p>
+<h5 id="Ⅲ-广度优先搜索-BFS"><a href="#Ⅲ-广度优先搜索-BFS" class="headerlink" title="Ⅲ 广度优先搜索(BFS)"></a>Ⅲ 广度优先搜索(BFS)</h5><p><strong>(1) BFS的基本步骤</strong></p>
+<ul>
+<li><strong>【算法思想】</strong><ul>
+<li>从图的某一结点出发，首先依次访问该结点的所有邻接点$v_{i1}, v_{i2}, …, v_{in}$，再按这些顶点被访问的先后次序依次访问与它们相邻接的所有未被访问的顶点；</li>
+<li>重复此过程，直至所有顶点均被访问为止。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6695dd10d9c307b7e956bc0d.png"></p>
+<p><strong>(2) 基于邻接表表示的无向图BFS</strong></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 按广度优先非递归遍历连通图G</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BFS</span><span class="params">(Graph G, <span class="keyword">int</span> v)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    cout &lt;&lt; v; </span><br><span class="line">    visited[v] = <span class="literal">true</span>;	<span class="comment">//访问第v个顶点</span></span><br><span class="line">    <span class="built_in">InitQueue</span>(Q);	<span class="comment">// 辅助队列Q初始化，置空</span></span><br><span class="line">    <span class="built_in">EnQueue</span>(Q, v);	<span class="comment">// v进队</span></span><br><span class="line">    <span class="keyword">while</span>(!<span class="built_in">QueueEmpty</span>(Q))	<span class="comment">// 队列非空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">DeQueue</span>(Q, u);	<span class="comment">// 队头元素出队并置为u</span></span><br><span class="line">        <span class="keyword">for</span>(w = <span class="built_in">FirstAdjVex</span>(G, u); w&gt;=<span class="number">0</span>; w = <span class="built_in">NextAdjVex</span>(G, u, w))</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span>(!visited[w])	<span class="comment">// w为u的尚未访问的邻接顶点</span></span><br><span class="line">            &#123;</span><br><span class="line">                cout&lt;&lt;w; </span><br><span class="line">                visited[w]= <span class="literal">true</span>;</span><br><span class="line">                <span class="built_in">EnQueue</span>(Q, w);	<span class="comment">// w进队</span></span><br><span class="line">            &#125;<span class="comment">//if</span></span><br><span class="line">        &#125;<span class="comment">//for</span></span><br><span class="line">    &#125;<span class="comment">//while</span></span><br><span class="line">&#125;<span class="comment">//BFS</span></span><br></pre></td></tr></table></figure>
+<h4 id="6-4-图的应用"><a href="#6-4-图的应用" class="headerlink" title="6.4 图的应用"></a>6.4 图的应用</h4><h5 id="Ⅰ-最小生成树"><a href="#Ⅰ-最小生成树" class="headerlink" title="Ⅰ 最小生成树"></a>Ⅰ 最小生成树</h5><p><strong>(1) 最小生成树的概念</strong></p>
+<p><strong>生成树</strong>：(所有顶点)均由边连接在一起，但不存在回路的图。</p>
+<ul>
+<li><p>所有生成树具有以下<strong>共同特点</strong>：</p>
+<ul>
+<li>生成树的顶点个数与图的顶点个数相同；</li>
+<li>生成树是图的极小连通子图。去掉一条边则非连通；</li>
+<li>一个有$n$个顶点的连通图的生成树有$n-1$条边；</li>
+<li>在生成树中再加一条边必然形回路；</li>
+<li>生成树中任意两个顶点间的路径是<strong>唯一</strong>的。</li>
+</ul>
+<blockquote>
+<p>注意：含$n$个顶点$n-1$条边的图不一定是生成树。</p>
+</blockquote>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6695e5e4d9c307b7e962c413.png" style="zoom:50%"></p>
+<p>设图 G=(V,E)是个连通图，当从图任一顶点出发遍历图G 时，将边集 E(G)分成两个集合 T(G)和 B(G)。其中 <strong>T(G)是遍历图时所经过的边的集合</strong>，B(G)是遍历图时未经过的边的集合。显然，<strong>G1(V, T)是图的极小连通子图</strong>。即子图G1 是连通图 G 的<strong>生成树</strong>。</p>
+<p><strong>(2) 最小生成树的应用</strong></p>
+<ul>
+<li><strong>最小代价生成树</strong></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6695e778d9c307b7e9648710.png" style="zoom:70%"></p>
+<p>给定一个无向网络，在该网的所有生成树中，使得各边权值之和最小的那棵生成树称为该网的最小生成树，也叫最小代价生成树。</p>
+<p><strong>(3) 构造最小生成树MST</strong></p>
+<p>构造最小生成树的算法很多，其中多数算法都利用了MST的性质。</p>
+<p><strong><font color="blue">MST性质</font></strong>：设$N=(V,E)$是一个连通网，$U$是顶点集$V$的一个非空子集。若边$(u,v)$是一条具有最小权值的边，其中$u \in U，v \in V-U$，则必存在一棵包含边$(u,v)$ 的最小生成树。</p>
+<p><img src="https://pic.imgdb.cn/item/6696129bd9c307b7e99d9ec8.png" alt="MST性质图示"></p>
+<ul>
+<li>在生成树的构造过程中，图中$n$个顶点分属两个集合：<ul>
+<li>已落在生成树上的顶点：$U$；</li>
+<li>尚未落在生成树上的顶点集：$V-U$；</li>
+</ul>
+</li>
+<li>接下来则应在所有连通$U$中顶点和$V-U$中顶点的边中<strong>选取权值最小的边</strong>。</li>
+</ul>
+<p><strong>==构造最小生成树方法一：普里姆(Prim)算法==</strong></p>
+<ul>
+<li>【算法思想】<ul>
+<li>设$N=(V, E)$ 是连通网，$TE$是$N$上最小生成树中边的集合。</li>
+<li>初始令$U=\{u_0\},(u_0 \in V)$，$TE=\{ \}$；</li>
+<li>在所有$u \in U, v\in V-U$的边$(u, v) \in E$中，找一条代价最小的边$(u_0, v_0)$。</li>
+<li>将$(u_0, v_0)$并入集合$TE$，同时$v_0$并入$U$；</li>
+<li>重复上述操作直至$U= V$为止，则 $T = (V, TE)$ 为$N$的最小生成树。</li>
+</ul>
+</li>
+</ul>
+<p><strong>==构造最小生成树方法二：克鲁斯卡尔(Kruskal) 算法==</strong></p>
+<ul>
+<li>【算法思想】（贪心算法）<ul>
+<li>设连通网$N=(V, E)$，令最小生成树初始状态为只有$n$个顶点而无边的非连通图$T=(V, \{\})$，每个顶点自成一个连通分量。</li>
+<li>在$E$中选取代价最小的边，若该边依附的顶点落在 $T$中不同的连通分量上(即<u>不能形成环</u>)，则将此边加入到 $T$中；否则，舍去此边，选取下一条代价最小的边。</li>
+<li>依此类推，直至$T$中所有顶点都在同一连通分量上为止。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-最短路径"><a href="#Ⅱ-最短路径" class="headerlink" title="Ⅱ 最短路径"></a>Ⅱ 最短路径</h5><p>典型用途：交通网络的问题 —— 从甲地到乙地之间是否有公路连通？在有多条通路的情况下，哪一条路最短？</p>
+<p>交通网络用有向网来表示：顶点 —— 表示地点，弧 —— 表示两个地点有路连通，弧上的权值 —— 表示两地点之间的距离、交通费或途中所花费的时间等。</p>
+<p>问题抽象：在有向网中 A点(源点)到达B点(终点)的多条路径中，寻找一条各边权值之和最小的路径，即<strong>最短路径</strong>。</p>
+<blockquote>
+<p>最短路径与最小生成树不同，路径上不一定包含$n$个顶点，也不一定包含 $n-1$ 条边。</p>
+</blockquote>
+<p><strong>最短路径的2类问题</strong>：</p>
+<ul>
+<li>单源最短路径：用Dijkstra(迪杰斯特拉)算法</li>
+<li>所有顶点间的最短路径：用Floyd(弗洛伊德)算法</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66971859d9c307b7e942945f.png"></p>
+<p><strong>(1) Dijkstra(迪杰斯特拉)算法</strong></p>
+<ul>
+<li>【思想概述】<ul>
+<li>初始化：先找出从源点$v_0$到各终点$v_k$的直达路径$(v_0, v_k)$，即通过一条弧到达的路径；</li>
+<li>选择：从这些路径中找出一条长度最短的路径$(v_0, u)$；</li>
+<li>更新：然后对其余各条路径进行适当调整：<ul>
+<li>若在图中存在弧$(u, v_k)$，且$(v_0, u) + (u, v_k) &lt; (v_0, v_k)$，则以路径$(v_0, u , v_k)$代替$(v_0, v_k)$；</li>
+</ul>
+</li>
+<li>在调整后的各条路径中，再找长度最短的路径，依此类推。</li>
+</ul>
+</li>
+<li>【迪杰斯特拉(Dijkstra)算法】按路径长度递增次序产生最短路径<ul>
+<li>把$V$分成两组：<ul>
+<li>(1) $S$：已求出最短路径的顶点的集合；</li>
+<li>(2) $T=V-S$：尚未确定最短路径的顶点集合。</li>
+</ul>
+</li>
+<li>将$T$中顶点按最短路径递增的次序加入到$S$中，保证：<ul>
+<li>(1) 从源点$v_0$到$S$中各顶点的最短路径长度都不大于从$v_0$到$T$中任何顶点的最短路径长度；</li>
+<li>(2) 每个顶点对应一个距离值：<ul>
+<li>$S$ 中顶点：从$v_0$到此顶点的最短路径长度。</li>
+<li>$T$ 中顶点：从$v_0$到此顶点的只包括$S$中顶点作中间顶点的最短路径长度。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66971ee7d9c307b7e94e4500.png" style="zoom:60%"></p>
+<p> <strong>(2) Floyd(弗洛伊德)算法</strong></p>
+<ul>
+<li><strong>所有顶点间的最短路径</strong><ul>
+<li>方法一：每次以一个顶点为源点，重复执行 Dijkstra 算法 n次。</li>
+<li>方法二：弗洛伊德(Floyd)算法</li>
+</ul>
+</li>
+<li>【算法思想】<ul>
+<li>逐个顶点试探</li>
+<li>从$v_i$到$v_j$的所有可能存在的路径中选出一条长度最短的路径</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66972320d9c307b7e9560a17.png" style="zoom:60%"></p>
+<h5 id="Ⅲ-有向无环图：拓扑排序"><a href="#Ⅲ-有向无环图：拓扑排序" class="headerlink" title="Ⅲ 有向无环图：拓扑排序"></a>Ⅲ 有向无环图：拓扑排序</h5><p>有向无环图：无环的有向图，简称 DAG图(Directed Acycline Graph)。</p>
+<p><img src="https://pic.imgdb.cn/item/669723c2d9c307b7e9574170.png" style="zoom:70%"></p>
+<p>有向无环图常用来描述一个工程或系统的进行过程（通常把计划、施工、生产、程序流程等当成是一个工程）。一个工程可以分为若干个子工程，只要完成了这些子工程（活动）就可以导致整个工程的完成。</p>
+<ul>
+<li><strong><font color="blue">AOV 网：拓扑排序问题</font></strong><ul>
+<li>用一个有向图表示一个工程的各子工程及其相互制约的关系，其中以<strong>顶点表示活动</strong>，<strong>弧表示活动之间的优先制约关系</strong>，称这种有向图为顶点表示活动的网，简称 AOV网(Activity On Vertex network)。</li>
+</ul>
+</li>
+<li><strong><font color="green">AOE 网：关键路径问题</font></strong><ul>
+<li>用一个有向图表示一个工程的各子工程及其相互制约的关系，以<strong>弧表示活动</strong>，以<strong>顶点表示活动的开始或结束事件</strong>，称这种有向图为边表示活动的网，简称为AOE网(Activity On Edge)。</li>
+</ul>
+</li>
+</ul>
+<p><strong>AOV 网的特点</strong>：<br>① 若从$i$到$j$有一条有向路径，则$i$是$j$的前驱，$j$是$i$的后继。<br>② 若$<i,j>$是网中有向边，则$i$是$j$的直接前驱，$j$是$i$的直接后继。<br>③ AOV 网中不允许有回路，因为如果有回路存在，则表明某项活动以自己为先决条件，显然这是荒谬的。</i,j></p>
+<p><img src="https://pic.imgdb.cn/item/66972758d9c307b7e95f47d3.png" style="zoom:70%"></p>
+<p><strong>问题：如何判别 AOV 网中是否存在回路</strong>？</p>
+<p><strong>拓扑排序</strong>：在 AOV 网没有回路的前提下，我们将全部活动排列成一个线性序列，使得若 AOV 网中有弧$<i,j>$存在，则在这个序列中，$i$一定排在$j$的前面，具有这种性质的线性序列称为<strong>拓扑有序序列</strong>，相应的拓扑有序排序的算法称为<strong>拓扑排序</strong>。</i,j></p>
+<p><img src="https://pic.imgdb.cn/item/669729fed9c307b7e9646563.png" style="zoom:60%"></p>
+<p><strong>拓扑排序的一个重要应用：检测 AOV 网中是否存在环方法</strong></p>
+<p>对有向图构造其顶点的拓扑有序序列，若网中所有顶点都在它的拓扑有序序列中，则该 AOV 网必定不存在环。</p>
+<h5 id="Ⅳ-有向无环图：关键路径"><a href="#Ⅳ-有向无环图：关键路径" class="headerlink" title="Ⅳ 有向无环图：关键路径"></a>Ⅳ 有向无环图：关键路径</h5><p>关键路径问题引入：</p>
+<p><img src="https://pic.imgdb.cn/item/66972c5cd9c307b7e968e0c4.png" style="zoom:40%"></p>
+<p><img src="https://pic.imgdb.cn/item/66972e8ad9c307b7e96d2b21.png" style="zoom:60%"></p>
+<p>设一个工程有 11项活动，9个事件：</p>
+<p>事件$v_1$—表示整个工程开始(源点:入度为0的顶点)</p>
+<p>事件$v_9$—表示整个工程结束(汇点:出度为0的顶点)</p>
+<p><img src="https://pic.imgdb.cn/item/6697301cd9c307b7e970497f.png" style="zoom:50%"></p>
+<p>对于AOE网，我们关心两个问题：① 完成整项工程至少需要多少时间？② 哪些活动是影响工程进度的关键？</p>
+<p>这两个问题涉及关键路径算法——求路径最长(路径上各活动持续时间之和)。</p>
+<ul>
+<li>如何确定关键路径，需要定义4个描述量：<ul>
+<li><code>ve(vj)</code>： 表示事件<code>vj</code> 的最早发生时间，例：<code>ve(v1)=0, ve(v2)= 30</code>；</li>
+<li><code>vl(vj)</code> ：表示事件<code>vj</code>的最迟发生时间，例：<code>vl(v4)=165</code>；</li>
+<li><code>e(i)</code>：表示活动 <code>ai</code> 的最早开始时间，例：<code>e(a3)= 30</code>；</li>
+<li><code>l(i)</code>表示活动 <code>ai</code>的最迟开始时间，例：<code>l(a3)=120</code>。</li>
+</ul>
+</li>
+<li><code>l(i)-e(i)</code>表示完成活动<code>ai</code>的时间余量。例：<code>l(3)-e(3)= 90</code>；</li>
+<li><strong>关键活动</strong>：关键路径上的活动，<code>l(i)==e(i)</code>(即<code>l(i) - e(i) == 0</code>的活动。</li>
+</ul>
+<p>如何找<code>l(i)==e(i)</code>的关键活动？</p>
+<p>设活动<code>ai</code>用弧$<j,k>$表示，其持续时间记为：$w_{j,k}$，则有：</j,k></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>关系</th>
+<th>图示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\begin{cases} e(i) = ve(j) \\ l(i) = vl(k) - w_{j,k} \end{cases}$</td>
+<td><img src="https://pic.imgdb.cn/item/669735e5d9c307b7e97ce160.png" style="zoom:70%"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>如何求<code>ve(j)</code> 和 <code>v(j)</code>？</p>
+<p>(1) 从 <code>ve(1)=0</code> 开始向前递推，$ve(j) = \max_i \{ ve(i) + w_{i,j}\}, <i, j> \in T, 2\leq j \leq n$，其中$T$是所有以$j$为开头的弧的集合。</i,></p>
+<p>(2) 从 <code>v(n)= ve(n)</code>开始向后递推，$vl(i) = \min_j \{ vl(j) - w_{i,j}\},  <i, j> \in S, 1\leq i \leq n-1$，其中 $S$ 是所有以$i$为尾的弧的集合。</i,></p>
+<p><img src="https://pic.imgdb.cn/item/66976d72d9c307b7e9fb1d02.png"></p>
+<ol>
+<li>若网中有几条关键路径，则需加快同时在几条关键路径上的关键活动。如：a11、a10、a8、a7；</li>
+<li>若一个活动处于所有的关键路径上，那么提高该活动的速度，就能缩短工程的完成时间。如：a1、a4；</li>
+<li>处于所有的关键路径上的活动完成时间不能缩短太多，否则会使原来的关键路径变成不是关键路径。这时，必须重新寻找关键路径。如：a1由6 天变成 3天，就会改变关键路径。</li>
+</ol>
+<h3 id="sect-7-查找操作"><a href="#sect-7-查找操作" class="headerlink" title="&sect; 7 查找操作"></a>&sect; 7 查找操作</h3><h4 id="7-1-查找的基本概念"><a href="#7-1-查找的基本概念" class="headerlink" title="7.1 查找的基本概念"></a>7.1 查找的基本概念</h4><p>本章讲解的查找操作，既不是在线性表上找，也不是在树或图上进行查找，而是在一个新的数据结构——<strong>查找表</strong>上进行查找。</p>
+<p><strong><font color="red">查找表</font></strong>是由同一类型的数据元素(或记录)构成的<strong>集合</strong>。由于“集合”中的数据元素之间存在着<strong>松散的关系</strong>(没有前趋、后继、邻接等关系)，因此查找表是一种应用灵便的结构。</p>
+<p><strong>查找操作</strong>：根据给定的某个值，在查找表中确定一个其关键字等于给定值的数据元素或记录。</p>
+<ul>
+<li><strong>关键字</strong>：用来标识一个数据元素(或记录)的某个数据项的值。<ul>
+<li><u>主关键字</u>：可唯一地标识一个记录的关键字是主关键字；</li>
+<li><u>次关键字</u>：反之，用以识别若干记录的关键字是次关键字。</li>
+</ul>
+</li>
+<li>查找表可分为两类<ul>
+<li><u>静态查找表</u>：仅作“查询”(检索)操作的查找表。</li>
+<li><u>动态查找表</u>：作“插入”和“删除”操作的查找表。<br>有时在查询之后，还需要将“查询”结果为“不在查找表中”的数据元素插入到查找表中；或者，从查找表中删除其“查询”结果为’在查找表中”的数据元素，此类表为动态查找表。</li>
+</ul>
+</li>
+</ul>
+<p>查找的方法取决于<strong>查找表的结构</strong>，即表中数据元素是依何种关系组织在一起的。</p>
+<p>由于对查找表来说，在集合中查询或检索一个“特定的”数据元素时若无规律可循，只能对集合中的元素一一加以辨认直至找到为止。而这样的“查询”或“检索”是任何计算机应用系统中使用频度都很高的操作，因此设法<strong>提高查找表的查找效率</strong>，是本章讨论问题的出发点。</p>
+<p>为提高查找效率，一个办法就是在构造查找表时，在集合中的数据元素之间人为地加上某种确定的<strong>约束</strong>关系。</p>
+<h4 id="7-2-线性表上的查找"><a href="#7-2-线性表上的查找" class="headerlink" title="7.2 线性表上的查找"></a>7.2 线性表上的查找</h4><h5 id="Ⅰ-顺序查找-线性查找"><a href="#Ⅰ-顺序查找-线性查找" class="headerlink" title="Ⅰ 顺序查找(线性查找)"></a>Ⅰ 顺序查找(线性查找)</h5><p>应用范围：顺序表或线性链表表示的静态查找表，且表内元素之间无序。</p>
+<p>数据元素类型定义：</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    KeyType key;	<span class="comment">// 关键字域</span></span><br><span class="line">    ...	<span class="comment">// 其他域</span></span><br><span class="line">&#125;ElemType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType* R;	<span class="comment">// 表基地址</span></span><br><span class="line">    <span class="keyword">int</span> length;	<span class="comment">// 表长</span></span><br><span class="line">&#125;SSTable;</span><br></pre></td></tr></table></figure>
+<p><img src="https://pic.imgdb.cn/item/6698c7aad9c307b7e9727046.png" style="zoom:70%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Seq</span><span class="params">( SsTable ST , KeyType key )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//若成功返回其位置信息，否则返回0</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=ST.length; i&gt;=<span class="number">1</span>; --i)</span><br><span class="line">        <span class="keyword">if</span>( ST.R[i].key==key )</span><br><span class="line">            <span class="keyword">return</span> i;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>容易发现：每执行一次循环都要进行两次比较，是否能改进？</p>
+<p><strong>改进</strong>：把待查关键字<code>key</code>存入表头（“硝兵“、监视哨”），从后往前逐个比较，可免去查找过程中每一步都要检测是否查找完毕，加快速度。</p>
+<p><img src="https://pic.imgdb.cn/item/6698ca58d9c307b7e975a833.png" style="zoom:60%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 设置监视哨的顺序查找</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Seq</span><span class="params">( SsTable ST , KeyType key )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">//若成功返回其位置信息，否则返回0</span></span><br><span class="line">    ST.R[<span class="number">0</span>].key = key</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=ST.length; ST.R[i].key!=key; --i);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当 <code>ST.length</code> 较大时，此改进能使进行一次查找所需的平均时间几乎减少一半。</p>
+<ul>
+<li><strong>顺序查找的特点</strong><ul>
+<li>优点：算法简单，逻辑次序无要求，且不同存储结构均适用。</li>
+<li>缺点：ASL太长，时间效率太低。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅱ-折半查找-二分查找"><a href="#Ⅱ-折半查找-二分查找" class="headerlink" title="Ⅱ 折半查找(二分查找)"></a>Ⅱ 折半查找(二分查找)</h5><p><strong>有序表</strong>表示静态查找表 → 折半查找：每次将待查记录所在区间缩小一半。</p>
+<ul>
+<li>【折半查找算法(非递归算法)】<ul>
+<li>设表长为$n$，$\text{low}$、$\text{high}$和$\text{mid}$分别指向待查元素所在区间的上界、下界和中点，<code>key</code>为给定的要查找的值；</li>
+<li>初始时，令$\text{low}=1$，$\text{high}=n$，$\text{mid} = \lfloor (\text{low} + \text{high})/2 \rfloor$；</li>
+<li>让k与mid指向的记录比较<ul>
+<li>若<code>key==R[mid].key</code>，查找成功；</li>
+<li>若<code>key&lt;R[mid].key</code>，则<code>high=mid-1</code>；</li>
+<li>若<code>key&gt;R[mid].key</code>，则<code>low=mid+1</code>；</li>
+</ul>
+</li>
+<li>重复上述操作，直至<code>low&gt;high</code>时，查找失败。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Bin</span><span class="params">( SSTable ST, KeyType key )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 置区间初值</span></span><br><span class="line">    <span class="keyword">int</span> low=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">int</span> high= STlength ;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">while</span> (low &lt;= high) </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">int</span> mid =(low + high)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (ST.R[mid].key == key)</span><br><span class="line">            <span class="keyword">return</span> mid;	<span class="comment">// 找到待査元素</span></span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; ST.R[mid].key) <span class="comment">// 缩小查找区间</span></span><br><span class="line">            high=mid<span class="number">-1</span>;	<span class="comment">// 继续在前半区间进行查找</span></span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            low = mid +<span class="number">1</span>; <span class="comment">// 继续在后半区间进行査找</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">// 顺序表中不存在待查元素</span></span><br><span class="line">&#125;<span class="comment">// Search_Bin</span></span><br></pre></td></tr></table></figure>
+<p>补充【算法7.3】折半查找—递归算法</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Search_Bin</span> <span class="params">(ssTable ST, keyType key, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(low&gt;high)</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;	<span class="comment">// 查找不到时返回0</span></span><br><span class="line">    mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span>(key==ST.elem[mid].key)</span><br><span class="line">        <span class="keyword">return</span> mid;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span>(key&lt;sTelem[mid].key)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Search_Bin</span>(ST, key, low, mid<span class="number">-1</span>);</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">Search_Bin</span>(ST, key, mid<span class="number">-1</span>, high);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>折半查找的特点</strong><ul>
+<li>折半查找优点：效率比顺序查找高。</li>
+<li>折半查找缺点：只适用于有序表且限于顺序存储结构（对线性链表无效）；此外，只适合查找操作，若查找完后还有插入、删除等操作，则需要移动大量元素。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅲ-分块查找"><a href="#Ⅲ-分块查找" class="headerlink" title="Ⅲ 分块查找"></a>Ⅲ 分块查找</h5><p><strong>条件1</strong>：将表分成几块，且表或者有序，或者分块有序。若$i&lt;j$，则第$j$块中所有记录的关键字均大于第$i$块中的最大关键字。<br><strong>条件2</strong>：建立“索引表”(每个结点含有最大关键字域和指向本块第一个结点的指针，且按关键字有序)。</p>
+<p><strong>查找过程</strong>：先确定待查记录所在块(顺序或折半查找)再在块内查找(顺序查找)。</p>
+<p><img src="https://pic.imgdb.cn/item/6699bd5fd9c307b7e972e9a3.png" style="zoom:50%"></p>
+<h4 id="7-3-树表上的查找"><a href="#7-3-树表上的查找" class="headerlink" title="7.3 树表上的查找"></a>7.3 树表上的查找</h4><p>对于前面讲的线性表查找，当表插入、删除操作频繁时，为维护表的有序性，需要移动表中很多记录。相当复杂。</p>
+<p>一种方法是：改用<strong>动态查找表</strong>——几种特殊的树，表结构在查找过程中动态生成。对于给定值key，若表中存在，则成功返回，否则，插入关键字等于key的记录。</p>
+<p><strong>特殊的树</strong>：二叉排序树、平衡二叉树、红黑树、B-树、B+树、键树。</p>
+<h5 id="Ⅰ-二叉排序树-Binary-Sort-Tree"><a href="#Ⅰ-二叉排序树-Binary-Sort-Tree" class="headerlink" title="Ⅰ 二叉排序树(Binary Sort Tree)"></a>Ⅰ 二叉排序树(Binary Sort Tree)</h5><p><strong>(1) 定义</strong></p>
+<p>二叉排序树或是空树，或是满足如下性质的二叉树：</p>
+<p>(1) 若其左子树非空，则左子树上所有结点的值均小于根结点的值；<br>(2) 若其右子树非空，则右子树上所有结点的值均大于等于根结点的值；<br>(3) 其左右子树本身又各是一棵二叉排序树。</p>
+<p><img src="https://pic.imgdb.cn/item/6699c220d9c307b7e976c054.png" style="zoom:50%"></p>
+<p><strong>二叉排序树的性质</strong>：<strong>中序遍历</strong>非空的二叉排序树所得到的数据元素序列是一个按关键字排列的<strong>递增有序</strong>序列。</p>
+<p><strong>(2) 查找操作</strong></p>
+<p>【算法步骤】</p>
+<ul>
+<li>若查找的关键字等于根结点，成功；</li>
+<li>否则：<ul>
+<li>若小于根结点，查其左子树</li>
+<li>若大于根结点，查其右子树</li>
+<li>在左右子树上的操作类似</li>
+</ul>
+</li>
+</ul>
+<p>【二叉排序树的递归查找】</p>
+<ul>
+<li>若二叉排序树为空，则查找失败，返回空指针。</li>
+<li>若二叉排序树非空，将给定值<code>key</code>与根结点的关键字<code>T-&gt;data.key</code>进行比较：<ul>
+<li>① 若<code>key == T-&gt;data.key</code>，则査找成功，返回根结点地址；</li>
+<li>② 若<code>key &lt;  T-&gt;data.key</code>，则进一步查找左子树；</li>
+<li>③ 若<code>key &gt; T-&gt;data.key</code>，则进一步査找右子树。</li>
+</ul>
+</li>
+</ul>
+<p>【存储结构】</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    KerType key;	<span class="comment">// 关键字项</span></span><br><span class="line">    InfoType otherinfo;	<span class="comment">// 其他数据域</span></span><br><span class="line">&#125;ElemType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">BSTnode</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    ElemType data;	<span class="comment">// 数据域</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">BSTnode</span>* <span class="title">lchild</span>, * <span class="title">rchild</span>;</span>	<span class="comment">// 左右孩子指针</span></span><br><span class="line">&#125;BSTNode, *BSTree;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归查找</span></span><br><span class="line"><span class="function">BSTree <span class="title">SearchBsT</span><span class="params">(BSTree T, KeyType key)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>( (!T) || key==T-&gt;data.key) </span><br><span class="line">        <span class="keyword">return</span> T;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (key &lt; T-&gt;data.key)</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">SearchBST</span>(T-&gt;lchild, key);	<span class="comment">// 在左子树中继续査找</span></span><br><span class="line">    <span class="keyword">else</span> </span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">SearchBST</span>(T-&gt;rchild, key); 	<span class="comment">// 在右子树中继续査找</span></span><br><span class="line">&#125; <span class="comment">// SearchBST</span></span><br></pre></td></tr></table></figure>
+<p><strong>分析易知</strong>：含有$n$个结点的二叉排序树的平均查找长度和树的形态有关。</p>
+<p><strong>问题</strong>：如何提高形态不均衡的二又排序树的查找效率？</p>
+<p><strong>解决办法</strong>：做“<strong>平衡化</strong>”处理，即尽量让二叉树的形状均衡！</p>
+<p>【补充：二叉排序树的插入操作】</p>
+<ul>
+<li>若二叉排序树为空，则插入结点作为根结点插入到空树中；</li>
+<li>否则，继续在其左、右子树上查找<ul>
+<li>树中已有，不再插入；</li>
+<li>树中没有，查找直至某个叶子结点的左子树或右子树为空为止，则插入结点应为该叶子结点的左孩子或右孩子</li>
+</ul>
+</li>
+</ul>
+<p>【补充：二叉排序树的生成操作】</p>
+<p>从空树出发，经过一系列的查找、插入操作之后，可生成一颗二叉排序树。</p>
+<p>一个无序序列可通过构造二叉排序树而变成一个有序序列。构造树的过程就是对无序序列进行排序的过程。</p>
+<p>插入的结点均为叶子结点，故无需移动其他结点。相当于在有序序列上插入记录而无需移动其他记录。</p>
+<p><strong>但是：关键字的输入顺序不同，建立的二叉排序树不同。</strong>如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/6699d051d9c307b7e984f964.png" style="zoom:50%"></p>
+<p>【补充：二叉排序树的删除操作】</p>
+<p>从二叉排序树中删除一个结点，不能把以该结点为根的子树都删去，只能删掉该结点，并且还应保证删除后所得的二叉树仍然满足二叉排序树的性质不变。</p>
+<p>由于中序遍历二叉排序树可以得到一个递增有序的序列。那么，在叉排序树中删去一个结点相当于删去有序序列中的一个结点。</p>
+<ul>
+<li>将因删除结点而断开的二又链表重新链接起来；</li>
+<li>防止重新链接后树的高度增加；</li>
+</ul>
+<p><strong>第一种情况</strong>：被删除的结点是叶子结点</p>
+<p>操作方法：直接删去该结点。</p>
+<p><strong>第二种情况</strong>：被删除的结点只有左子树或者只有右子树</p>
+<p>操作方法：用其左子树或者右子树替换它(结点替换)，也即其双亲结点的相应指针域的值改为“指向被删除结点的左子树或右子树“。</p>
+<p><strong>第三种情况</strong>：被删除的结点既有左子树，也有右子树。</p>
+<p>操作方法：可以以其中序前趋值替换之(值替换)，然后再删除该前趋结点。前趋是左子树中最大的结点。也可以用其后继替换之，然后再删除该后继结点，后继是右子树中最小的结点。</p>
+<p><img src="https://pic.imgdb.cn/item/6699cf92d9c307b7e98445fc.png" style="zoom:50%"></p>
+<h5 id="Ⅱ-平衡二叉树AVL"><a href="#Ⅱ-平衡二叉树AVL" class="headerlink" title="Ⅱ 平衡二叉树AVL"></a>Ⅱ 平衡二叉树AVL</h5><p><img src="https://pic.imgdb.cn/item/6699d25bd9c307b7e9873264.png" style="zoom:50%"></p>
+<p>问题：如何提高形态不均衡的二又排序树的查找效率？</p>
+<p><strong>解决办法</strong>：做“平衡化”处理，即尽量让二又树的形态均衡！$\Longrightarrow$ <strong>平衡二叉树</strong>。</p>
+<p><strong>(1) 定义</strong></p>
+<p>平衡二叉树(balanced binary tree)又称AVL树(Adelson-Velskii and Landis)。</p>
+<p>一棵平衡二叉树或者是空树，或者是具有下列性质的二叉排序树：① 左子树与右子树的高度之差的<strong>绝对值小于等于1</strong>；② 左子树和右子树也是<strong>平衡二叉排序树</strong>。</p>
+<p>为了方便起见，给每个结点<strong>附加一个数字</strong>，<u>给出该结点左子树一右子树的高度差</u>。这个数字称为结点的平衡因子BF)：</p>
+<script type="math/tex; mode=display">
+平衡因子\text{BF} = 结点左子树的高度-结点右子树的高度</script><p>根据平衡二叉树的定义，平衡二叉树上所有结点的平衡因子只能是：$0$、$1$或$-1$。</p>
+<p><img src="https://pic.imgdb.cn/item/6699d586d9c307b7e98a8d71.png" style="zoom:50%"></p>
+<p>对于一棵有$n$个结点的AVL树，其高度保持在$O(\log_2 n)$量级，ASL也保持在$O(\log_2 n)$数量级。</p>
+<p><img src="https://pic.imgdb.cn/item/6699d89fd9c307b7e98f079e.png" style="zoom:50%"></p>
+<p><strong>(2) 失衡二叉树的平衡调整</strong></p>
+<p><img src="https://pic.imgdb.cn/item/6699da4dd9c307b7e990d6d8.png"></p>
+<p>调整原则：1) 降低高度； 2）保持二叉排序树性质。</p>
+<ul>
+<li><strong>LL型调整</strong></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/6699dcd4d9c307b7e9938d0d.png"></p>
+<ul>
+<li><strong>RR型调整</strong></li>
+</ul>
+<p>这里就不贴全图了，RR型的思想本质和LL一样，只是位置正好相反而已。</p>
+<p><img src="https://pic.imgdb.cn/item/669a0af9d9c307b7e9bb3bf2.png" style="zoom:60%"></p>
+<p>① B结点带右子树β一起上升；② A结点成为B的左孩子；③ 原来B结点的左子树α作为A的右子树。</p>
+<ul>
+<li><strong>LR型调整</strong></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669a0da9d9c307b7e9bd5af5.png"></p>
+<ul>
+<li><strong>RL型调整</strong></li>
+</ul>
+<p>这里就不贴全图了，RL型的思想本质和LR一样，只是位置正好相反而已。</p>
+<h4 id="7-4-哈希表-散列表"><a href="#7-4-哈希表-散列表" class="headerlink" title="7.4 哈希表/散列表"></a>7.4 哈希表/散列表</h4><h5 id="Ⅰ-散列表的概念"><a href="#Ⅰ-散列表的概念" class="headerlink" title="Ⅰ 散列表的概念"></a>Ⅰ 散列表的概念</h5><p><strong>(1) 基本概念</strong></p>
+<p>基本思想：记录的存储位置与关键字之间存在对应关系。</p>
+<p>对应关系——<strong>hash函数H(·)</strong>。</p>
+<script type="math/tex; mode=display">
+Loc(i)=H(key_i)</script><p>例如，构造下图所示的hash函数，其映射关系为：学号后两位 → 索引地址。</p>
+<p><img src="https://pic.imgdb.cn/item/669a10c0d9c307b7e9c12362.png" style="zoom:60%"></p>
+<p>优点：查找效率高；缺点：空间效率低。</p>
+<p><strong>(2) 相关术语</strong></p>
+<p><strong>散列方法(杂凑法)</strong>：选取某个函数，依该函数按关键字<u>计算元素的存储位置</u>，并按此存放，查找时，由同一个函数对给定值k计算地址，将k与地址单元中元素关键码进行比，确定查找是否成功。</p>
+<p><strong>散列函数(杂凑函数)</strong>：散列方法中使用的转换函数——<strong>hash函数H(·)</strong>。</p>
+<p><strong>散列表(杂凑表)</strong>：按上述思想构造的表。</p>
+<p><strong>冲突</strong>：不同的关键码映射到同一个散列地址，即$key_1 \neq key_2$，但是$H(key_1)=H(key_2)$。</p>
+<p><strong>同义词</strong>：具有相同函数值的多个关键字。</p>
+<p><strong>(3) 注意事项</strong></p>
+<p>使用散列表要解决好两个问题：</p>
+<p>1) 构造好的散列函数$H(·)$：(a) 所选函数尽可能简单，以便提高转换速度；(b) 所选函数对关键码计算出的地址，应在散列地址集中致均匀分布，以减少空间浪费。<br>2) 制定一个好的解决冲突的方案：查找时，如果从散列函数计算出的地址中查不到关键码，则应当依据解决冲突的规则，有规律地查询其它相关单元。</p>
+<h5 id="Ⅱ-散列函数的构造方法"><a href="#Ⅱ-散列函数的构造方法" class="headerlink" title="Ⅱ 散列函数的构造方法"></a>Ⅱ 散列函数的构造方法</h5><p><strong>(1) 构造散列函数考虑的因素</strong></p>
+<p>① 执行速度(即计算散列函数所需时间)；<br>② 关键字的长度；<br>③ 散列表的大小；<br>④ 关键字的分布情况；<br>⑤ 查找频率。</p>
+<ul>
+<li>根据元素集合的特性构造<ul>
+<li><strong>要求一</strong>：n个数据原仅占用n个地址，虽然散列查找是以空间换时间，但仍希望散列的地址空间尽量小。</li>
+<li><strong>要求二</strong>：无论用什么方法存储，目的都是尽量均匀地存放元素，以避免冲突。</li>
+</ul>
+</li>
+<li>常用的方法：1.直接定址法；2.数字分析法；3.平方取中法；4.折叠法；5.除留余数法；6.随机数法。</li>
+</ul>
+<p><strong>(2) 直接定址法</strong></p>
+<script type="math/tex; mode=display">
+H(key) = a*key+b（a、b为常数）</script><p>优点：以关键码key的某个线性函数值为散列地址，不会产生冲突。</p>
+<p>缺点：要占用连续地址空间，空间效率低。</p>
+<p><strong>(3) 除留余数法</strong></p>
+<script type="math/tex; mode=display">
+H(key) = key ~\text{ mod } ~ p（p是整数）</script><p>$p$选取的一个技巧：设表长为$m$，取 $p≤m$ 且为<strong>质数</strong>。</p>
+<h5 id="Ⅲ-处理冲突的方法"><a href="#Ⅲ-处理冲突的方法" class="headerlink" title="Ⅲ 处理冲突的方法"></a>Ⅲ 处理冲突的方法</h5><ul>
+<li><strong>常见的方法</strong><ul>
+<li>开放定址法(开地址法)</li>
+<li>链地址法(拉链法)</li>
+<li>再散列法(双散列函数法)</li>
+<li>建立一个公共溢出区</li>
+</ul>
+</li>
+</ul>
+<p><strong>(1) 开放定址法</strong></p>
+<p>基本思想：有冲突时就去寻找下一个空的散列地址，只要散列表足够大，空的散列地址总能找到，并将数据元素存入。</p>
+<p><img src="https://pic.imgdb.cn/item/669a5519d9c307b7e905364a.png" style="zoom:50%"></p>
+<ul>
+<li><strong>线性探测法</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+H_i = [H(key) + d_i ] ~ \text{ mod }~ m</script><p>其中，$m$为散列表长度，$d_i$为线性增量序列。该方法一旦冲突，就找下一个地址，直到找到空地址存入。</p>
+<p><img src="https://pic.imgdb.cn/item/669a583dd9c307b7e90a47f0.png" style="zoom:70%"></p>
+<ul>
+<li><strong>二次探测法</strong></li>
+</ul>
+<script type="math/tex; mode=display">
+H_i = [H(key) + d_i ] ~ \text{ mod }~ m</script><p>其中，$m$为散列表长度，m要求是某个$4k+3$的质数，$d_i = 1^2, -1^2, 2^2, -2^2, \cdots, q^2, -q^2$。</p>
+<p><strong>(2) 链地址法(拉链法)</strong></p>
+<p><strong>基本思想</strong>：相同散列地址的记录链成一单链表。</p>
+<p>m个散列地址就设m个单链表，然后用一个数组将m个单链表的表头指针存储起来，形成一个动态的结构。</p>
+<p><img src="https://pic.imgdb.cn/item/669a5acfd9c307b7e90d896f.png" style="zoom:70%"></p>
+<ul>
+<li>链地址法建立散列表步骤<ul>
+<li><code>Step1</code>：取数据元素的关键字<code>key</code>，计算其散列函数值(地址)。若该地址对应的链表为空，则将该元素插入此链表；否则执行<code>Step2</code>解决冲突。</li>
+<li><code>Step2</code>：根据选择的冲突处理方法，计算关键字<code>key</code>的下一一个存储地址。若该地址对应的链表为不为空，则利用链表的前插法或后插法将该元素插入此链表。</li>
+</ul>
+</li>
+</ul>
+<h5 id="Ⅳ-散列表的查找"><a href="#Ⅳ-散列表的查找" class="headerlink" title="Ⅳ 散列表的查找"></a>Ⅳ 散列表的查找</h5><p><img src="https://pic.imgdb.cn/item/669a5f37d9c307b7e9133676.png" style="zoom:50%"></p>
+<ul>
+<li><strong>几点结论</strong><ul>
+<li>散列表技术具有很好的平均性能，优于一些传统的技术；</li>
+<li>链地址法优于开地址法；</li>
+<li>除留余数法作散列函数优于其它类型函数。</li>
+</ul>
+</li>
+</ul>
+<h3 id="sect-8-排序操作"><a href="#sect-8-排序操作" class="headerlink" title="&sect; 8 排序操作"></a>&sect; 8 排序操作</h3><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
         <category>编程与深度学习</category>
