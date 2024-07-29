@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">34.5k</span>
+            <span class="post-count">38.5k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">132 分钟</span>
+            <span class="post-count">148 分钟</span>
         </span>
     </span>
 </div>
@@ -1889,7 +1889,215 @@ H_i = [H(key) + d_i ] ~ \text{ mod }~ m</script><p>其中，$m$为散列表长�
 </ul>
 </li>
 </ul>
-<h3 id="sect-8-排序操作"><a href="#sect-8-排序操作" class="headerlink" title="&sect; 8 排序操作"></a>&sect; 8 排序操作</h3><link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+<h3 id="sect-8-排序操作"><a href="#sect-8-排序操作" class="headerlink" title="&sect; 8 排序操作"></a>&sect; 8 排序操作</h3><h5 id="Ⅰ-排序算法的基本介绍"><a href="#Ⅰ-排序算法的基本介绍" class="headerlink" title="Ⅰ 排序算法的基本介绍"></a>Ⅰ 排序算法的基本介绍</h5><p><strong>排序</strong>：将一组杂乱无章的数据按一定规律顺次排列起来。即，将无序序列排成一个有序序列(由小到大或由大到小)的运算。</p>
+<blockquote>
+<p>如果参加排序的数据结点包含多个数据域，那么排序往往是针对其中某个域而言。</p>
+</blockquote>
+<ul>
+<li><p><strong>排序方法的分类</strong></p>
+<ul>
+<li>按数据存储介质：内部排序和外部排序</li>
+<li>按比较器个数：串行排序和并行排序</li>
+<li>按主要操作：比较排序和基数排序</li>
+<li>按辅助空间：原地排序和非原地排序</li>
+<li>按稳定性：稳定排序和非稳定排序</li>
+<li>按自然性：自然排序和非自然排序</li>
+</ul>
+<p><strong>(1) 按存储介质</strong></p>
+</li>
+</ul>
+<p>内部排序：数据量不大、数据在内存，无需内外存交换数据；</p>
+<p>外部排序：数据量较大、数据在外存(文件排序)。</p>
+<blockquote>
+<p>外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。</p>
+</blockquote>
+<p><strong>(2) 按比较器个数</strong></p>
+<p>串行排序：单处理机(同一时刻比较一对元素)；</p>
+<p>并行排序：多处理机(同一时刻比较多对元素)。</p>
+<p><strong>(3) 按主要操作</strong></p>
+<p>比较排序：用比较的方法，例如：插入排序、交换排序、选择排序、归并排序；</p>
+<p>基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置。</p>
+<p><strong>(4) 按辅助空间</strong></p>
+<p>原地排序：辅助空间用量为$O(1)$的排序方法。(所占的辅助存储空间与参加排序的数据量大小无关)</p>
+<p>非原地排序：辅助空间用量超过$O(1)$的排序方法。</p>
+<p><strong>(5) 按稳定性</strong></p>
+<p>稳定排序：能够使任何数值相等的元素，排序以后相对次序不变；</p>
+<p>非稳定性排序：不是稳定排序的方法。</p>
+<p><img src="https://pic.imgdb.cn/item/669b7d74d9c307b7e9535421.png" style="zoom:60%"></p>
+<p>排序的稳定性只对<strong>结构类型数据</strong>排序有意义。例如下面这种情况：</p>
+<p>n个学生信息(学号、姓名、语文、数学、英语、总分)</p>
+<p>1、按数学成绩从高到低排序<br>2、按照总分从高到低排序,<br>3、总分相同的情况下，数学成绩高的排在前面</p>
+<p><strong>(6) 按自然性</strong></p>
+<p>自然排序：输入数据越有序，排序的速度越快的排序方法。</p>
+<p>非自然排序：不是自然排序的方法。</p>
+<p><img src="https://pic.imgdb.cn/item/669b7f52d9c307b7e9560663.png" style="zoom:50%"></p>
+<ul>
+<li><strong>顺序表存储结构</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 20	<span class="comment">// 设记录不超过20个</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType;	<span class="comment">// 设关键字为整型量(int型)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义每个记录(数据元素)的结构======================================</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    KeyType key ;	<span class="comment">// 关键字</span></span><br><span class="line">    InfoTypeother info;	<span class="comment">// 其它数据项</span></span><br><span class="line">&#125;RedType;	<span class="comment">//Record Type</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义顺序表的结构=================================================</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    RedType r[ MAXSIZE +<span class="number">1</span> ];	<span class="comment">// 存储顺序表的向量</span></span><br><span class="line">    						  <span class="comment">// r[0]一般作哨兵或缓冲区</span></span><br><span class="line">    <span class="keyword">int</span> length ;	<span class="comment">// 顺序表的长度</span></span><br><span class="line">&#125;SqList;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅱ-插入排序概述"><a href="#Ⅱ-插入排序概述" class="headerlink" title="Ⅱ 插入排序概述"></a>Ⅱ 插入排序概述</h5><p>【<strong>基本思想</strong>】每步将一个待排序的对象，按其关键码大小，插入到前面已经排好序的一组对象的适当位置上，直到对象全部插入为止。</p>
+<blockquote>
+<p>即边插入边排序，保证子序列中随时都是排好序的。</p>
+</blockquote>
+<p>【<strong>基本操作</strong>】有序插入</p>
+<p>在有序序列中插入一个元素，保持序列有序，有序长度不断增加。</p>
+<ol>
+<li>起初，a[0]是长度为1的子序列。然后，逐一将a[1]至a[n-1]插入到有序子序列中。</li>
+<li>在插入a[i]前，数组a的前半段(a[0]—a[i-1])是有序段，后半段(a[i]—a[n-1])是停留于输入次序的“无序段”；</li>
+<li>插入a[i]使a[0]—a[i-1]有序，也就是要为a[i]找到有序位置$j(0≤j≤i)$，将a[i]插入在a[j]的位置上。</li>
+</ol>
+<p>【<strong>插入排序的分类</strong>】</p>
+<p><img src="https://pic.imgdb.cn/item/669b837cd9c307b7e95c1244.png" style="zoom:70%"></p>
+<h5 id="Ⅲ-插入排序——直接插入排序"><a href="#Ⅲ-插入排序——直接插入排序" class="headerlink" title="Ⅲ 插入排序——直接插入排序"></a>Ⅲ 插入排序——直接插入排序</h5><p>直接插入排序——采用顺序查找法查找插入位置。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 直接插入排序为减少一次比较，采用了“哨兵”，存在开头</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">( SqList&amp; L )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span> ( i=<span class="number">2</span>; i&lt;=L.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (L.r[i].key &lt; L.r[i<span class="number">-1</span>].key)	<span class="comment">// 若&quot;&lt;&quot;,需将L.r[i]插入有序子表</span></span><br><span class="line">        &#123; </span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i];	<span class="comment">// 复制为哨兵</span></span><br><span class="line">            <span class="keyword">for</span> ( j=i<span class="number">-1</span>; L.r[<span class="number">0</span>].key&lt;L.r[j].key; --j)</span><br><span class="line">            &#123;</span><br><span class="line">                L.r[j+<span class="number">1</span>]=L.[r];	<span class="comment">// 记录后移</span></span><br><span class="line">            &#125;</span><br><span class="line">            L.r[j+<span class="number">1</span>]=L.r[<span class="number">0</span>];	<span class="comment">// 插入到正确位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>时间复杂度结论</strong>】</p>
+<ol>
+<li>原始数据越接近有序，排序速度越快<br>a. 最坏情况下(输入数据是逆有序的)：$Tw(n)=O(n^2)$<br>b. 平均情况下，耗时差不多是最坏情况的一半：$Te(n)=O(n^2)$</li>
+<li>要提高查找速度：① 减少元素的比较次数；② 减少元素的移动次数。</li>
+</ol>
+<h5 id="Ⅳ-插入排序——折半插入排序"><a href="#Ⅳ-插入排序——折半插入排序" class="headerlink" title="Ⅳ 插入排序——折半插入排序"></a>Ⅳ 插入排序——折半插入排序</h5><p><img src="https://pic.imgdb.cn/item/669b8a57d9c307b7e963f6a3.png" style="zoom:70%"></p>
+<p>其本质思想来自：第7章节的折半查找。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BInsertSort</span><span class="params">(SqList&amp; L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=L.length; ++i)	<span class="comment">// 依次插入第2~第n个元素</span></span><br><span class="line">    &#123; </span><br><span class="line">        L.r[<span class="number">0</span>]= L.r[i];	<span class="comment">// 当前插入元素存到“哨兵”位置</span></span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> high=i<span class="number">-1</span>;	<span class="comment">// 采用二分查找法查找插入位置</span></span><br><span class="line">        <span class="keyword">while</span> ( low &lt;= high )</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (low + high)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>( L.r[<span class="number">0</span>].key &lt; L.r[mid].key )</span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="comment">//循环结束，high+1则为插入位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i<span class="number">-1</span>; j&gt;=high+<span class="number">1</span>; --j)</span><br><span class="line">            L.r[j+<span class="number">1</span>] = L.r[j];	<span class="comment">// 移动元素</span></span><br><span class="line">        L.r[high+<span class="number">1</span>] = L.r[<span class="number">0</span>];	<span class="comment">// 插入到正确位置</span></span><br><span class="line">&#125; <span class="comment">// BInsertSort</span></span><br></pre></td></tr></table></figure>
+<p>【<strong>复杂度简要结论</strong>】</p>
+<ol>
+<li>折半插入排序的对象移动次数与直接插入排序相同，依赖于对象的们排列；</li>
+<li>减少了比较次数，但没有减少移动次数；</li>
+<li>平均性能优于直接插入排序。</li>
+</ol>
+<h5 id="Ⅴ-插入排序——希尔排序"><a href="#Ⅴ-插入排序——希尔排序" class="headerlink" title="Ⅴ 插入排序——希尔排序"></a>Ⅴ 插入排序——希尔排序</h5><p>【<strong>基本思想</strong>】</p>
+<p>先将整个待排记录序列分割成<strong>若干子序列</strong>，分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行一次直接插入排序。</p>
+<p><img src="https://pic.imgdb.cn/item/669c6290d9c307b7e92aaf4a.png"></p>
+<p>【<strong>希尔排序思路</strong>】</p>
+<ol>
+<li>定义增量序列$D_k$：$D_M&gt;D_{M-1}&gt;…&gt;D_1=1$；<br>刚才的例子中：$D_3=5，D_2=3，D_1=1$</li>
+<li>对每个$D_k$进行“Dκ-间隔”插入排序($k=M, M-1, …, 1$)。</li>
+</ol>
+<p>【<strong>希尔排序特点</strong>】</p>
+<ol>
+<li>一次移动，移动位置较大，跳跃式地接近排序后的最终位置；</li>
+<li>最后一次只需要少量移动；</li>
+<li>增量序列必须是递减的，最后一个必须是1；</li>
+<li>增量序列应该是<strong>互质</strong>的。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对顺序表L进行一趟增量为dk的Shell排序，dk为步长因子</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellInsert</span><span class="params">(SqList&amp; L, <span class="keyword">int</span> dk)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=dk+<span class="number">1</span>; i&lt;=L.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(L.r[i].key &lt; L.r[i-dk].key) </span><br><span class="line">        &#123;</span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i-dk; j&gt;<span class="number">0</span> &amp;&amp;(L.r[<span class="number">0</span>].key&lt;L.r[j].key); j=j-dk)</span><br><span class="line">                L.r[j+dk]=L.r[j];</span><br><span class="line">            L.r[j+dk]=L.r[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(Sqlist&amp; L, <span class="keyword">int</span> dltal[], <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 按增量序列dlta[0...t-1]对顺序表L作希尔排序</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;t; ++k)</span><br><span class="line">        <span class="built_in">ShellInsert</span>(L，dlta[k]);	<span class="comment">// 一趟增量为dlta[k]的插入排序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>希尔排序算法分析</strong>】</p>
+<ol>
+<li>希尔排序算法效率与增量序列的取值有关<ol>
+<li>一种常用的增量序列：<strong>Hibbard增量序列</strong>：$D_k=2^{k-1}$—相邻元素互质，其最坏情况：$T_{worst}=O(n^{3/2})$，猜想平均情况：$T_{avg}=O(n^{5/4})$。</li>
+<li>另一种常用增量序列：<strong>Sedgewick增量序列</strong>。</li>
+</ol>
+</li>
+<li>希尔排序法是一种<u>不稳定</u>的排序算法。</li>
+<li>空间复杂度：$O(1)$。</li>
+<li>不宜在链式存储结构上实现。</li>
+</ol>
+<h5 id="Ⅵ-交换排序——冒泡排序"><a href="#Ⅵ-交换排序——冒泡排序" class="headerlink" title="Ⅵ 交换排序——冒泡排序"></a>Ⅵ 交换排序——冒泡排序</h5><p>【<strong>基本思想</strong>】两两比较，如果发生逆序则交换，直到所有记录都排好序为止。</p>
+<p>【<strong>冒泡排序基本思想</strong>】基于简单交换思想，每趟不断将记录两两比较，并按“前小后大”规则交换。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 冒泡排序算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(SqList&amp; L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, j;</span><br><span class="line">    <span class="keyword">int</span> n = L.length;</span><br><span class="line">    RedType x;	<span class="comment">// 交换时临时存储</span></span><br><span class="line">    <span class="keyword">for</span>(m=<span class="number">1</span>; m&lt;=n<span class="number">-1</span>; m++)	<span class="comment">// 总共需m趟</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n-m; j++)</span><br><span class="line">            <span class="keyword">if</span>(L.r[j].key&gt;L.r[j+<span class="number">1</span>].key)	<span class="comment">// 发生逆序</span></span><br><span class="line">            &#123;</span><br><span class="line">                x=L.r[j]; </span><br><span class="line">                L.r[j]=L.r[j+<span class="number">1</span>];</span><br><span class="line">                L.r[j+<span class="number">1</span>]=x; <span class="comment">//交换</span></span><br><span class="line">            &#125; <span class="comment">//endif</span></span><br><span class="line">    &#125; <span class="comment">//for</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅶ-交换排序——快速排序"><a href="#Ⅶ-交换排序——快速排序" class="headerlink" title="Ⅶ 交换排序——快速排序"></a>Ⅶ 交换排序——快速排序</h5><ul>
+<li>【<strong>基本思想</strong>】：递归思想<ul>
+<li>任取一个元素 (如：第一个)为中心；</li>
+<li>所有比它小的元素一律前放，比它大的元素一律后放，形成左右两个子表；</li>
+<li>对各子表重新选择中心元素并依此规则调整；</li>
+<li>直到每个子表的元素只剩一个。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669c6d23d9c307b7e934b5f5.png" style="zoom:40%"></p>
+<ul>
+<li>【<strong>快速排序的特点</strong>】<ul>
+<li>① 每一趟的子表的形成是采用从两头向中间交替式逼近法，</li>
+<li>② 由于每趟中对各子表的操作都相似，可采用<strong>递归算法</strong>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span> <span class="params">( SqList&amp; L, <span class="keyword">int</span> low, <span class="keyword">int</span> high )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    L.r[<span class="number">0</span>]= L.r[low];</span><br><span class="line">    pivotkey = L.r[low].key;</span><br><span class="line">    <span class="keyword">while</span> (low &lt; high )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> ( low &lt; high &amp;&amp; L.r[high].key &gt;= pivotkey)</span><br><span class="line">            --high;</span><br><span class="line">        L.r[low] = L.r[high];</span><br><span class="line">        <span class="keyword">while</span> ( low &lt; high &amp;&amp; L.r[low].key &lt;= pivotkey )</span><br><span class="line">            ++low;</span><br><span class="line">        L.r[high]= L.r[low];</span><br><span class="line">    &#125;</span><br><span class="line">    L.r[low]=L.r[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对顺序表L快速排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span><span class="params">(SqList&amp; L, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (low &lt; high)	<span class="comment">// 长度大于1</span></span><br><span class="line">    &#123; </span><br><span class="line">        pivotloc = <span class="built_in">Partition</span>(L, low, high);	<span class="comment">// 将L.r[low, high]一分为二，pivotloc为枢轴元素排好序的位置</span></span><br><span class="line">        <span class="built_in">QSort</span>(L, low, pivotloc<span class="number">-1</span>);	<span class="comment">// 对低子表递归排序</span></span><br><span class="line">        <span class="built_in">QSort</span>(L, pivotloc+<span class="number">1</span>, high);	<span class="comment">// 对高子表递归排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="comment">// QSort</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">Qsort</span>(L, <span class="number">1</span>, L.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>快速排序复杂度分析</strong>】</p>
+<p>时间复杂度：可以证明，平均计算时间是$O(n \log_2 n)$。</p>
+<blockquote>
+<p>实验结果表明：就平均计算时间而言，快速排序是我们所讨论的所有内排序分法中最好的一个。</p>
+</blockquote>
+<p>空间复杂度：快速排序不是原地排序<br>由于程序中使用了递归，需要递归调用栈的支持，而栈的长度取决于递归调用的深度。(即使不用递归，也需要用用户栈)。在平均情况下：需要$O(\log n)$的栈空间；最坏情况下：栈空间可达$O(n)$。</p>
+<p>稳定性：快速排序是一种不稳定的排序方法。</p>
+<p>自然性：输入数据次序越乱，所选划分元素值的随机性越好，排序速度越快，快速排序不是自然排序方法。</p>
+<h5 id="Ⅷ-选择排序——简单选择排序"><a href="#Ⅷ-选择排序——简单选择排序" class="headerlink" title="Ⅷ 选择排序——简单选择排序"></a>Ⅷ 选择排序——简单选择排序</h5><p>【<strong>基本思想</strong>】在待排序的数据中选出最大(小)的元素放在其最终的位置。</p>
+<ul>
+<li>【<strong>基本操作</strong>】<ul>
+<li>首先，通过$n-1$次关键字比较，从$n$个记录中找出关键字最小的记录，将它与第1个记录交换；</li>
+<li>其次，通过$n-2$次比较，从剩余的$n-1$个记录中找出关键字次小的记录，将它与第2个记录交换；</li>
+<li>重复上述操作，共进行$n-1$趟排序后，排序结束。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669c7695d9c307b7e93c453a.png" style="zoom:60%"></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SelectSort</span><span class="params">(SqList&amp; k)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;L.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        k=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;=L.length; j++)</span><br><span class="line">            <span class="keyword">if</span>( L.r[j].key &lt; L.r[k].key)	<span class="comment">// 记录最小值位置</span></span><br><span class="line">                k=j;	</span><br><span class="line">        <span class="keyword">if</span>(k!=i)	<span class="comment">// 交换</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = L.r[i];</span><br><span class="line">            L.r[i] = L.r[k];</span><br><span class="line">            L.r[k] = temp;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>简单选择排序复杂度分析</strong>】</p>
+<p>时间复杂度：</p>
+<ol>
+<li>记录移动次数<br>最好情况为0，最坏情况为$3(n-1)$</li>
+<li>比较次数<br>无论待排序列处于什么状态，选择排序所需进行的”比较”次数都相同</li>
+<li>算法稳定性<br>简单选择排序是不稳定排序，但是可以稳定化。</li>
+</ol>
+<h5 id="Ⅸ-选择排序——堆排序"><a href="#Ⅸ-选择排序——堆排序" class="headerlink" title="Ⅸ 选择排序——堆排序"></a>Ⅸ 选择排序——堆排序</h5><p><strong>(1) 堆的定义</strong></p>
+<p>若$n$个元素的序列$(a_1, a_2, \cdots, a_n)$满足：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+a_i \leq a_{2i} \\
+a_i \leq a_{2i+1}
+\end{cases}
+
+\quad
+\text{OR}
+\quad
+
+\begin{cases}
+a_i \geq a_{2i} \\
+a_i \geq a_{2i+1}
+\end{cases}</script><p>则称该序列为<strong>小根堆</strong>$\text{ OR }$<strong>大根堆</strong>。</p>
+<p>从堆的定义可以看出，堆实质是满足如下性质的<strong>完全二叉树</strong>：二叉树中任一非叶子结点均小于(大于)它的孩子结点。</p>
+<p><strong>(2) 堆排序</strong></p>
+<p>若在输出堆顶的最小值(最大值)后，使得剩余$n-1$个元素的序列重又建成一个堆，则得到$n$个元素的次小值(次大值)…如此反复，便能得到一个有序序列，这个过程称之为堆排序。</p>
+<p>实现堆排序需解决两个问题：1、如何由一个无序序列建成一个堆；2、如何在输出堆顶元素后，调整剩余元素为一个新的堆?</p>
+<p><strong>(3) 问题2：如何在输出堆顶元素后，调整剩余元素为一个新的堆?</strong></p>
+<ul>
+<li>对于小根堆：<ul>
+<li><ol>
+<li>输出堆顶元素之后，以堆中最后一个元素替代之；</li>
+<li>然后将根结点值与左、右子树的根结点值进行比较，并与其中<strong>小者</strong>进行交换；</li>
+<li>重复上述操作，直至叶子结点，将得到新的堆，称这个从堆顶至叶子的调整过程为“<strong>筛选</strong>”。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>对于大根堆：与小根堆相反。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669cafaed9c307b7e971ba66.png" alt="小根堆调整示例"></p>
+<p>【<strong>筛选过程</strong>】</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">已知R[s..m]中记录的关键字除R[S]之外均满足堆的定义，</span></span><br><span class="line"><span class="comment">本函数调整R[S]的关键字，使R[s..m]成为一个大根堆</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapAdjust</span> <span class="params">(elem R[], <span class="keyword">int</span> s, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rc = R[s];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>*s; j&lt;=m; j*=<span class="number">2</span>)	<span class="comment">// 沿key较大的孩子结点向下筛选</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j&lt;m &amp;&amp; R[j]&lt; R[j+<span class="number">1</span>])</span><br><span class="line">            ++j;	<span class="comment">// j为key较大的记录的下标</span></span><br><span class="line">        <span class="keyword">if</span>( rc &gt;= R[j]) </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        R[s] = R[j];	<span class="comment">// rc应插入在位置s上</span></span><br><span class="line">        s = j;</span><br><span class="line">    &#125;<span class="comment">//for</span></span><br><span class="line">    R[s]= rc;	<span class="comment">// 插入</span></span><br><span class="line">&#125;<span class="comment">// HeapAdjust</span></span><br></pre></td></tr></table></figure>
+<p><strong>(4) 问题1：如何由一个无序序列建成一个堆？</strong></p>
+<p>显然：单结点的二叉树是堆；在完全二叉树中所有以叶子结点(序号i&gt;n/2)为根的子树是堆。</p>
+<p>这样，我们只需依次将以序号为$n/2, n/2-1, …, 1$的结点为根的子树均调整为堆即可。即：对应由$n$个元素组成的无序序列，“筛选”只需从第$n/2$个元素开始。</p>
+<p>由于堆实质上是一个线形表，那么我们可以顺序存储一个堆。</p>
+<p>下面以一个实例介绍建一个小根堆的过程。例：有关键字为49，38，65，97，76，13，27，49的一组记录，将其按关键字调整为一个小根堆。</p>
+<p><img src="https://pic.imgdb.cn/item/669cb952d9c307b7e97b9fb1.png"></p>
+<p>由以上分析知：</p>
+<p>若对一个无序序列建堆，然后输出根；重复该过程就可以由一个无需序列输出有序序列。<br>实质上，<u>堆排序就是利用完全二叉树中父结点与孩子结点之间的内在关系来排序的</u>。</p>
+<p>【<strong>堆排序算法如下</strong>】</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 对R[1]到R[n]进行堆排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(elem R[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>( i=n/<span class="number">2</span>; i&gt;=<span class="number">1</span>; i--)</span><br><span class="line">        <span class="built_in">HeapAdjust</span>(R,i,n);	<span class="comment">// 建初始堆</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( i=n; i&gt;<span class="number">1</span>; i--)	<span class="comment">// 进行n-1趟排序</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Swap</span>(R[<span class="number">1</span>]，R[i]);	<span class="comment">// 根与最后一个元素交换</span></span><br><span class="line">        <span class="built_in">HeapAdjust</span>(R, <span class="number">1</span>, i<span class="number">-1</span>);	<span class="comment">// 对R[1]到R[i -1]重新建堆</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//HeapSort</span></span><br></pre></td></tr></table></figure>
+<p>【<strong>堆排序算法复杂度</strong>】</p>
+<h5 id="Ⅹ-归并排序"><a href="#Ⅹ-归并排序" class="headerlink" title="Ⅹ 归并排序"></a>Ⅹ 归并排序</h5><p>【<strong>基本思想</strong>】将两个或两个以上的有序子序列，“归并/合并”为一个有序序列。</p>
+<p>在内部排序中，通常采用的是<strong>2-路归并排序</strong>，即：将两个位置相邻的有序子序列$R[1 \sim m]$和$R[m+1 \sim n]$归并为一个有序序列$R[1 \sim n]$。</p>
+<p><img src="https://pic.imgdb.cn/item/669cbe01d9c307b7e9800f91.png" alt="2-路归并排序示例" style="zoom:30%"></p>
+<p>关键问题：如何将两个有序序列合成一个有序序列?</p>
+<p>这个问题其实在第2章线性表的时候已经学过了，过程可用下图示例。</p>
+<p><img src="https://pic.imgdb.cn/item/669cc14cd9c307b7e9845f97.png" style="zoom:40%"></p>
+<p><img src="https://pic.imgdb.cn/item/669cc1f3d9c307b7e984f7d9.png" alt="归并排序中的有序表合并" style="zoom:40%"></p>
+<h5 id="Ⅺ-基数-桶-箱-排序"><a href="#Ⅺ-基数-桶-箱-排序" class="headerlink" title="Ⅺ 基数(桶/箱)排序"></a>Ⅺ 基数(桶/箱)排序</h5><p>【<strong>基本思想</strong>】分配+收集</p>
+<p>也叫桶排序或箱排序：设置若干个箱子，将关键字为$k$的记录放入第$k$个箱然后在按序号将非空的连接。</p>
+<p>【<strong>前提条件</strong>】数字是有范围的</p>
+<p>均由0-9这十个数字组成，则只需设置十个箱子，相继按个、十、百….进行排序。</p>
+<p>一副扑克牌，有4种花色，每种花色有13张牌，利用桶排序可以：<code>Step 1</code>先准备4个桶，将牌分成4种花色；<code>Step 2</code>再准备13个桶，将13张牌排序。也即：桶排序适合多关键字排序。</p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
     </div>
@@ -2411,22 +2619,6 @@ H_i = [H(key) + d_i ] ~ \text{ mod }~ m</script><p>其中，$m$为散列表长�
     
 
   </div>
-<script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-        tex2jax: {
-            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
-            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            processEscapes: true
-        }
-    });
-    MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax();
-        for (var i = 0; i < all.length; ++i)
-            all[i].SourceElement().parentNode.className += ' has-jax';
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
-
 </body>
 
 </html>
