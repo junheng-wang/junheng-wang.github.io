@@ -16041,7 +16041,215 @@ H_i = [H(key) + d_i ] ~ \text{ mod }~ m</script><p>其中，$m$为散列表长�
 </ul>
 </li>
 </ul>
-<h3 id="sect-8-排序操作"><a href="#sect-8-排序操作" class="headerlink" title="&sect; 8 排序操作"></a>&sect; 8 排序操作</h3><link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+<h3 id="sect-8-排序操作"><a href="#sect-8-排序操作" class="headerlink" title="&sect; 8 排序操作"></a>&sect; 8 排序操作</h3><h5 id="Ⅰ-排序算法的基本介绍"><a href="#Ⅰ-排序算法的基本介绍" class="headerlink" title="Ⅰ 排序算法的基本介绍"></a>Ⅰ 排序算法的基本介绍</h5><p><strong>排序</strong>：将一组杂乱无章的数据按一定规律顺次排列起来。即，将无序序列排成一个有序序列(由小到大或由大到小)的运算。</p>
+<blockquote>
+<p>如果参加排序的数据结点包含多个数据域，那么排序往往是针对其中某个域而言。</p>
+</blockquote>
+<ul>
+<li><p><strong>排序方法的分类</strong></p>
+<ul>
+<li>按数据存储介质：内部排序和外部排序</li>
+<li>按比较器个数：串行排序和并行排序</li>
+<li>按主要操作：比较排序和基数排序</li>
+<li>按辅助空间：原地排序和非原地排序</li>
+<li>按稳定性：稳定排序和非稳定排序</li>
+<li>按自然性：自然排序和非自然排序</li>
+</ul>
+<p><strong>(1) 按存储介质</strong></p>
+</li>
+</ul>
+<p>内部排序：数据量不大、数据在内存，无需内外存交换数据；</p>
+<p>外部排序：数据量较大、数据在外存(文件排序)。</p>
+<blockquote>
+<p>外部排序时，要将数据分批调入内存来排序，中间结果还要及时放入外存，显然外部排序要复杂得多。</p>
+</blockquote>
+<p><strong>(2) 按比较器个数</strong></p>
+<p>串行排序：单处理机(同一时刻比较一对元素)；</p>
+<p>并行排序：多处理机(同一时刻比较多对元素)。</p>
+<p><strong>(3) 按主要操作</strong></p>
+<p>比较排序：用比较的方法，例如：插入排序、交换排序、选择排序、归并排序；</p>
+<p>基数排序：不比较元素的大小，仅仅根据元素本身的取值确定其有序位置。</p>
+<p><strong>(4) 按辅助空间</strong></p>
+<p>原地排序：辅助空间用量为$O(1)$的排序方法。(所占的辅助存储空间与参加排序的数据量大小无关)</p>
+<p>非原地排序：辅助空间用量超过$O(1)$的排序方法。</p>
+<p><strong>(5) 按稳定性</strong></p>
+<p>稳定排序：能够使任何数值相等的元素，排序以后相对次序不变；</p>
+<p>非稳定性排序：不是稳定排序的方法。</p>
+<p><img src="https://pic.imgdb.cn/item/669b7d74d9c307b7e9535421.png" style="zoom:60%"></p>
+<p>排序的稳定性只对<strong>结构类型数据</strong>排序有意义。例如下面这种情况：</p>
+<p>n个学生信息(学号、姓名、语文、数学、英语、总分)</p>
+<p>1、按数学成绩从高到低排序<br>2、按照总分从高到低排序,<br>3、总分相同的情况下，数学成绩高的排在前面</p>
+<p><strong>(6) 按自然性</strong></p>
+<p>自然排序：输入数据越有序，排序的速度越快的排序方法。</p>
+<p>非自然排序：不是自然排序的方法。</p>
+<p><img src="https://pic.imgdb.cn/item/669b7f52d9c307b7e9560663.png" style="zoom:50%"></p>
+<ul>
+<li><strong>顺序表存储结构</strong></li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXSIZE 20	<span class="comment">// 设记录不超过20个</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> KeyType;	<span class="comment">// 设关键字为整型量(int型)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义每个记录(数据元素)的结构======================================</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> </span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    KeyType key ;	<span class="comment">// 关键字</span></span><br><span class="line">    InfoTypeother info;	<span class="comment">// 其它数据项</span></span><br><span class="line">&#125;RedType;	<span class="comment">//Record Type</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义顺序表的结构=================================================</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">    RedType r[ MAXSIZE +<span class="number">1</span> ];	<span class="comment">// 存储顺序表的向量</span></span><br><span class="line">    						  <span class="comment">// r[0]一般作哨兵或缓冲区</span></span><br><span class="line">    <span class="keyword">int</span> length ;	<span class="comment">// 顺序表的长度</span></span><br><span class="line">&#125;SqList;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅱ-插入排序概述"><a href="#Ⅱ-插入排序概述" class="headerlink" title="Ⅱ 插入排序概述"></a>Ⅱ 插入排序概述</h5><p>【<strong>基本思想</strong>】每步将一个待排序的对象，按其关键码大小，插入到前面已经排好序的一组对象的适当位置上，直到对象全部插入为止。</p>
+<blockquote>
+<p>即边插入边排序，保证子序列中随时都是排好序的。</p>
+</blockquote>
+<p>【<strong>基本操作</strong>】有序插入</p>
+<p>在有序序列中插入一个元素，保持序列有序，有序长度不断增加。</p>
+<ol>
+<li>起初，a[0]是长度为1的子序列。然后，逐一将a[1]至a[n-1]插入到有序子序列中。</li>
+<li>在插入a[i]前，数组a的前半段(a[0]—a[i-1])是有序段，后半段(a[i]—a[n-1])是停留于输入次序的“无序段”；</li>
+<li>插入a[i]使a[0]—a[i-1]有序，也就是要为a[i]找到有序位置$j(0≤j≤i)$，将a[i]插入在a[j]的位置上。</li>
+</ol>
+<p>【<strong>插入排序的分类</strong>】</p>
+<p><img src="https://pic.imgdb.cn/item/669b837cd9c307b7e95c1244.png" style="zoom:70%"></p>
+<h5 id="Ⅲ-插入排序——直接插入排序"><a href="#Ⅲ-插入排序——直接插入排序" class="headerlink" title="Ⅲ 插入排序——直接插入排序"></a>Ⅲ 插入排序——直接插入排序</h5><p>直接插入排序——采用顺序查找法查找插入位置。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 直接插入排序为减少一次比较，采用了“哨兵”，存在开头</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span><span class="params">( SqList&amp; L )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i, j;</span><br><span class="line">    <span class="keyword">for</span> ( i=<span class="number">2</span>; i&lt;=L.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (L.r[i].key &lt; L.r[i<span class="number">-1</span>].key)	<span class="comment">// 若&quot;&lt;&quot;,需将L.r[i]插入有序子表</span></span><br><span class="line">        &#123; </span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i];	<span class="comment">// 复制为哨兵</span></span><br><span class="line">            <span class="keyword">for</span> ( j=i<span class="number">-1</span>; L.r[<span class="number">0</span>].key&lt;L.r[j].key; --j)</span><br><span class="line">            &#123;</span><br><span class="line">                L.r[j+<span class="number">1</span>]=L.[r];	<span class="comment">// 记录后移</span></span><br><span class="line">            &#125;</span><br><span class="line">            L.r[j+<span class="number">1</span>]=L.r[<span class="number">0</span>];	<span class="comment">// 插入到正确位置</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>时间复杂度结论</strong>】</p>
+<ol>
+<li>原始数据越接近有序，排序速度越快<br>a. 最坏情况下(输入数据是逆有序的)：$Tw(n)=O(n^2)$<br>b. 平均情况下，耗时差不多是最坏情况的一半：$Te(n)=O(n^2)$</li>
+<li>要提高查找速度：① 减少元素的比较次数；② 减少元素的移动次数。</li>
+</ol>
+<h5 id="Ⅳ-插入排序——折半插入排序"><a href="#Ⅳ-插入排序——折半插入排序" class="headerlink" title="Ⅳ 插入排序——折半插入排序"></a>Ⅳ 插入排序——折半插入排序</h5><p><img src="https://pic.imgdb.cn/item/669b8a57d9c307b7e963f6a3.png" style="zoom:70%"></p>
+<p>其本质思想来自：第7章节的折半查找。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">BInsertSort</span><span class="params">(SqList&amp; L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>( <span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=L.length; ++i)	<span class="comment">// 依次插入第2~第n个元素</span></span><br><span class="line">    &#123; </span><br><span class="line">        L.r[<span class="number">0</span>]= L.r[i];	<span class="comment">// 当前插入元素存到“哨兵”位置</span></span><br><span class="line">        <span class="keyword">int</span> low=<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">int</span> high=i<span class="number">-1</span>;	<span class="comment">// 采用二分查找法查找插入位置</span></span><br><span class="line">        <span class="keyword">while</span> ( low &lt;= high )</span><br><span class="line">        &#123;</span><br><span class="line">            mid = (low + high)/<span class="number">2</span>;</span><br><span class="line">            <span class="keyword">if</span>( L.r[<span class="number">0</span>].key &lt; L.r[mid].key )</span><br><span class="line">                high = mid - <span class="number">1</span>;</span><br><span class="line">            <span class="keyword">else</span> </span><br><span class="line">                low = mid + <span class="number">1</span>;</span><br><span class="line">        &#125; <span class="comment">//循环结束，high+1则为插入位置</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j=i<span class="number">-1</span>; j&gt;=high+<span class="number">1</span>; --j)</span><br><span class="line">            L.r[j+<span class="number">1</span>] = L.r[j];	<span class="comment">// 移动元素</span></span><br><span class="line">        L.r[high+<span class="number">1</span>] = L.r[<span class="number">0</span>];	<span class="comment">// 插入到正确位置</span></span><br><span class="line">&#125; <span class="comment">// BInsertSort</span></span><br></pre></td></tr></table></figure>
+<p>【<strong>复杂度简要结论</strong>】</p>
+<ol>
+<li>折半插入排序的对象移动次数与直接插入排序相同，依赖于对象的们排列；</li>
+<li>减少了比较次数，但没有减少移动次数；</li>
+<li>平均性能优于直接插入排序。</li>
+</ol>
+<h5 id="Ⅴ-插入排序——希尔排序"><a href="#Ⅴ-插入排序——希尔排序" class="headerlink" title="Ⅴ 插入排序——希尔排序"></a>Ⅴ 插入排序——希尔排序</h5><p>【<strong>基本思想</strong>】</p>
+<p>先将整个待排记录序列分割成<strong>若干子序列</strong>，分别进行直接插入排序，待整个序列中的记录“基本有序”时，再对全体记录进行一次直接插入排序。</p>
+<p><img src="https://pic.imgdb.cn/item/669c6290d9c307b7e92aaf4a.png"></p>
+<p>【<strong>希尔排序思路</strong>】</p>
+<ol>
+<li>定义增量序列$D_k$：$D_M&gt;D_{M-1}&gt;…&gt;D_1=1$；<br>刚才的例子中：$D_3=5，D_2=3，D_1=1$</li>
+<li>对每个$D_k$进行“Dκ-间隔”插入排序($k=M, M-1, …, 1$)。</li>
+</ol>
+<p>【<strong>希尔排序特点</strong>】</p>
+<ol>
+<li>一次移动，移动位置较大，跳跃式地接近排序后的最终位置；</li>
+<li>最后一次只需要少量移动；</li>
+<li>增量序列必须是递减的，最后一个必须是1；</li>
+<li>增量序列应该是<strong>互质</strong>的。</li>
+</ol>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对顺序表L进行一趟增量为dk的Shell排序，dk为步长因子</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellInsert</span><span class="params">(SqList&amp; L, <span class="keyword">int</span> dk)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=dk+<span class="number">1</span>; i&lt;=L.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(L.r[i].key &lt; L.r[i-dk].key) </span><br><span class="line">        &#123;</span><br><span class="line">            L.r[<span class="number">0</span>]=L.r[i];</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=i-dk; j&gt;<span class="number">0</span> &amp;&amp;(L.r[<span class="number">0</span>].key&lt;L.r[j].key); j=j-dk)</span><br><span class="line">                L.r[j+dk]=L.r[j];</span><br><span class="line">            L.r[j+dk]=L.r[<span class="number">0</span>];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShellSort</span><span class="params">(Sqlist&amp; L, <span class="keyword">int</span> dltal[], <span class="keyword">int</span> t)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// 按增量序列dlta[0...t-1]对顺序表L作希尔排序</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">0</span>; k&lt;t; ++k)</span><br><span class="line">        <span class="built_in">ShellInsert</span>(L，dlta[k]);	<span class="comment">// 一趟增量为dlta[k]的插入排序</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>希尔排序算法分析</strong>】</p>
+<ol>
+<li>希尔排序算法效率与增量序列的取值有关<ol>
+<li>一种常用的增量序列：<strong>Hibbard增量序列</strong>：$D_k=2^{k-1}$—相邻元素互质，其最坏情况：$T_{worst}=O(n^{3/2})$，猜想平均情况：$T_{avg}=O(n^{5/4})$。</li>
+<li>另一种常用增量序列：<strong>Sedgewick增量序列</strong>。</li>
+</ol>
+</li>
+<li>希尔排序法是一种<u>不稳定</u>的排序算法。</li>
+<li>空间复杂度：$O(1)$。</li>
+<li>不宜在链式存储结构上实现。</li>
+</ol>
+<h5 id="Ⅵ-交换排序——冒泡排序"><a href="#Ⅵ-交换排序——冒泡排序" class="headerlink" title="Ⅵ 交换排序——冒泡排序"></a>Ⅵ 交换排序——冒泡排序</h5><p>【<strong>基本思想</strong>】两两比较，如果发生逆序则交换，直到所有记录都排好序为止。</p>
+<p>【<strong>冒泡排序基本思想</strong>】基于简单交换思想，每趟不断将记录两两比较，并按“前小后大”规则交换。</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 冒泡排序算法</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(SqList&amp; L)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> m, j;</span><br><span class="line">    <span class="keyword">int</span> n = L.length;</span><br><span class="line">    RedType x;	<span class="comment">// 交换时临时存储</span></span><br><span class="line">    <span class="keyword">for</span>(m=<span class="number">1</span>; m&lt;=n<span class="number">-1</span>; m++)	<span class="comment">// 总共需m趟</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>; j&lt;=n-m; j++)</span><br><span class="line">            <span class="keyword">if</span>(L.r[j].key&gt;L.r[j+<span class="number">1</span>].key)	<span class="comment">// 发生逆序</span></span><br><span class="line">            &#123;</span><br><span class="line">                x=L.r[j]; </span><br><span class="line">                L.r[j]=L.r[j+<span class="number">1</span>];</span><br><span class="line">                L.r[j+<span class="number">1</span>]=x; <span class="comment">//交换</span></span><br><span class="line">            &#125; <span class="comment">//endif</span></span><br><span class="line">    &#125; <span class="comment">//for</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Ⅶ-交换排序——快速排序"><a href="#Ⅶ-交换排序——快速排序" class="headerlink" title="Ⅶ 交换排序——快速排序"></a>Ⅶ 交换排序——快速排序</h5><ul>
+<li>【<strong>基本思想</strong>】：递归思想<ul>
+<li>任取一个元素 (如：第一个)为中心；</li>
+<li>所有比它小的元素一律前放，比它大的元素一律后放，形成左右两个子表；</li>
+<li>对各子表重新选择中心元素并依此规则调整；</li>
+<li>直到每个子表的元素只剩一个。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669c6d23d9c307b7e934b5f5.png" style="zoom:40%"></p>
+<ul>
+<li>【<strong>快速排序的特点</strong>】<ul>
+<li>① 每一趟的子表的形成是采用从两头向中间交替式逼近法，</li>
+<li>② 由于每趟中对各子表的操作都相似，可采用<strong>递归算法</strong>。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Partition</span> <span class="params">( SqList&amp; L, <span class="keyword">int</span> low, <span class="keyword">int</span> high )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    L.r[<span class="number">0</span>]= L.r[low];</span><br><span class="line">    pivotkey = L.r[low].key;</span><br><span class="line">    <span class="keyword">while</span> (low &lt; high )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">while</span> ( low &lt; high &amp;&amp; L.r[high].key &gt;= pivotkey)</span><br><span class="line">            --high;</span><br><span class="line">        L.r[low] = L.r[high];</span><br><span class="line">        <span class="keyword">while</span> ( low &lt; high &amp;&amp; L.r[low].key &lt;= pivotkey )</span><br><span class="line">            ++low;</span><br><span class="line">        L.r[high]= L.r[low];</span><br><span class="line">    &#125;</span><br><span class="line">    L.r[low]=L.r[<span class="number">0</span>];</span><br><span class="line">    <span class="keyword">return</span> low;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 对顺序表L快速排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">QSort</span><span class="params">(SqList&amp; L, <span class="keyword">int</span> low, <span class="keyword">int</span> high)</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">if</span> (low &lt; high)	<span class="comment">// 长度大于1</span></span><br><span class="line">    &#123; </span><br><span class="line">        pivotloc = <span class="built_in">Partition</span>(L, low, high);	<span class="comment">// 将L.r[low, high]一分为二，pivotloc为枢轴元素排好序的位置</span></span><br><span class="line">        <span class="built_in">QSort</span>(L, low, pivotloc<span class="number">-1</span>);	<span class="comment">// 对低子表递归排序</span></span><br><span class="line">        <span class="built_in">QSort</span>(L, pivotloc+<span class="number">1</span>, high);	<span class="comment">// 对高子表递归排序</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="comment">// QSort</span></span><br><span class="line">    </span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">Qsort</span>(L, <span class="number">1</span>, L.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>快速排序复杂度分析</strong>】</p>
+<p>时间复杂度：可以证明，平均计算时间是$O(n \log_2 n)$。</p>
+<blockquote>
+<p>实验结果表明：就平均计算时间而言，快速排序是我们所讨论的所有内排序分法中最好的一个。</p>
+</blockquote>
+<p>空间复杂度：快速排序不是原地排序<br>由于程序中使用了递归，需要递归调用栈的支持，而栈的长度取决于递归调用的深度。(即使不用递归，也需要用用户栈)。在平均情况下：需要$O(\log n)$的栈空间；最坏情况下：栈空间可达$O(n)$。</p>
+<p>稳定性：快速排序是一种不稳定的排序方法。</p>
+<p>自然性：输入数据次序越乱，所选划分元素值的随机性越好，排序速度越快，快速排序不是自然排序方法。</p>
+<h5 id="Ⅷ-选择排序——简单选择排序"><a href="#Ⅷ-选择排序——简单选择排序" class="headerlink" title="Ⅷ 选择排序——简单选择排序"></a>Ⅷ 选择排序——简单选择排序</h5><p>【<strong>基本思想</strong>】在待排序的数据中选出最大(小)的元素放在其最终的位置。</p>
+<ul>
+<li>【<strong>基本操作</strong>】<ul>
+<li>首先，通过$n-1$次关键字比较，从$n$个记录中找出关键字最小的记录，将它与第1个记录交换；</li>
+<li>其次，通过$n-2$次比较，从剩余的$n-1$个记录中找出关键字次小的记录，将它与第2个记录交换；</li>
+<li>重复上述操作，共进行$n-1$趟排序后，排序结束。</li>
+</ul>
+</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669c7695d9c307b7e93c453a.png" style="zoom:60%"></p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SelectSort</span><span class="params">(SqList&amp; k)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;L.length; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        k=i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=i+<span class="number">1</span>; j&lt;=L.length; j++)</span><br><span class="line">            <span class="keyword">if</span>( L.r[j].key &lt; L.r[k].key)	<span class="comment">// 记录最小值位置</span></span><br><span class="line">                k=j;	</span><br><span class="line">        <span class="keyword">if</span>(k!=i)	<span class="comment">// 交换</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">int</span> temp = L.r[i];</span><br><span class="line">            L.r[i] = L.r[k];</span><br><span class="line">            L.r[k] = temp;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>【<strong>简单选择排序复杂度分析</strong>】</p>
+<p>时间复杂度：</p>
+<ol>
+<li>记录移动次数<br>最好情况为0，最坏情况为$3(n-1)$</li>
+<li>比较次数<br>无论待排序列处于什么状态，选择排序所需进行的”比较”次数都相同</li>
+<li>算法稳定性<br>简单选择排序是不稳定排序，但是可以稳定化。</li>
+</ol>
+<h5 id="Ⅸ-选择排序——堆排序"><a href="#Ⅸ-选择排序——堆排序" class="headerlink" title="Ⅸ 选择排序——堆排序"></a>Ⅸ 选择排序——堆排序</h5><p><strong>(1) 堆的定义</strong></p>
+<p>若$n$个元素的序列$(a_1, a_2, \cdots, a_n)$满足：</p>
+<script type="math/tex; mode=display">
+\begin{cases}
+a_i \leq a_{2i} \\
+a_i \leq a_{2i+1}
+\end{cases}
+
+\quad
+\text{OR}
+\quad
+
+\begin{cases}
+a_i \geq a_{2i} \\
+a_i \geq a_{2i+1}
+\end{cases}</script><p>则称该序列为<strong>小根堆</strong>$\text{ OR }$<strong>大根堆</strong>。</p>
+<p>从堆的定义可以看出，堆实质是满足如下性质的<strong>完全二叉树</strong>：二叉树中任一非叶子结点均小于(大于)它的孩子结点。</p>
+<p><strong>(2) 堆排序</strong></p>
+<p>若在输出堆顶的最小值(最大值)后，使得剩余$n-1$个元素的序列重又建成一个堆，则得到$n$个元素的次小值(次大值)…如此反复，便能得到一个有序序列，这个过程称之为堆排序。</p>
+<p>实现堆排序需解决两个问题：1、如何由一个无序序列建成一个堆；2、如何在输出堆顶元素后，调整剩余元素为一个新的堆?</p>
+<p><strong>(3) 问题2：如何在输出堆顶元素后，调整剩余元素为一个新的堆?</strong></p>
+<ul>
+<li>对于小根堆：<ul>
+<li><ol>
+<li>输出堆顶元素之后，以堆中最后一个元素替代之；</li>
+<li>然后将根结点值与左、右子树的根结点值进行比较，并与其中<strong>小者</strong>进行交换；</li>
+<li>重复上述操作，直至叶子结点，将得到新的堆，称这个从堆顶至叶子的调整过程为“<strong>筛选</strong>”。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>对于大根堆：与小根堆相反。</li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/669cafaed9c307b7e971ba66.png" alt="小根堆调整示例"></p>
+<p>【<strong>筛选过程</strong>】</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">已知R[s..m]中记录的关键字除R[S]之外均满足堆的定义，</span></span><br><span class="line"><span class="comment">本函数调整R[S]的关键字，使R[s..m]成为一个大根堆</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapAdjust</span> <span class="params">(elem R[], <span class="keyword">int</span> s, <span class="keyword">int</span> m)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    rc = R[s];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">2</span>*s; j&lt;=m; j*=<span class="number">2</span>)	<span class="comment">// 沿key较大的孩子结点向下筛选</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span>(j&lt;m &amp;&amp; R[j]&lt; R[j+<span class="number">1</span>])</span><br><span class="line">            ++j;	<span class="comment">// j为key较大的记录的下标</span></span><br><span class="line">        <span class="keyword">if</span>( rc &gt;= R[j]) </span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        R[s] = R[j];	<span class="comment">// rc应插入在位置s上</span></span><br><span class="line">        s = j;</span><br><span class="line">    &#125;<span class="comment">//for</span></span><br><span class="line">    R[s]= rc;	<span class="comment">// 插入</span></span><br><span class="line">&#125;<span class="comment">// HeapAdjust</span></span><br></pre></td></tr></table></figure>
+<p><strong>(4) 问题1：如何由一个无序序列建成一个堆？</strong></p>
+<p>显然：单结点的二叉树是堆；在完全二叉树中所有以叶子结点(序号i&gt;n/2)为根的子树是堆。</p>
+<p>这样，我们只需依次将以序号为$n/2, n/2-1, …, 1$的结点为根的子树均调整为堆即可。即：对应由$n$个元素组成的无序序列，“筛选”只需从第$n/2$个元素开始。</p>
+<p>由于堆实质上是一个线形表，那么我们可以顺序存储一个堆。</p>
+<p>下面以一个实例介绍建一个小根堆的过程。例：有关键字为49，38，65，97，76，13，27，49的一组记录，将其按关键字调整为一个小根堆。</p>
+<p><img src="https://pic.imgdb.cn/item/669cb952d9c307b7e97b9fb1.png"></p>
+<p>由以上分析知：</p>
+<p>若对一个无序序列建堆，然后输出根；重复该过程就可以由一个无需序列输出有序序列。<br>实质上，<u>堆排序就是利用完全二叉树中父结点与孩子结点之间的内在关系来排序的</u>。</p>
+<p>【<strong>堆排序算法如下</strong>】</p>
+<figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 对R[1]到R[n]进行堆排序</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(elem R[])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">for</span>( i=n/<span class="number">2</span>; i&gt;=<span class="number">1</span>; i--)</span><br><span class="line">        <span class="built_in">HeapAdjust</span>(R,i,n);	<span class="comment">// 建初始堆</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>( i=n; i&gt;<span class="number">1</span>; i--)	<span class="comment">// 进行n-1趟排序</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">Swap</span>(R[<span class="number">1</span>]，R[i]);	<span class="comment">// 根与最后一个元素交换</span></span><br><span class="line">        <span class="built_in">HeapAdjust</span>(R, <span class="number">1</span>, i<span class="number">-1</span>);	<span class="comment">// 对R[1]到R[i -1]重新建堆</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//HeapSort</span></span><br></pre></td></tr></table></figure>
+<p>【<strong>堆排序算法复杂度</strong>】</p>
+<h5 id="Ⅹ-归并排序"><a href="#Ⅹ-归并排序" class="headerlink" title="Ⅹ 归并排序"></a>Ⅹ 归并排序</h5><p>【<strong>基本思想</strong>】将两个或两个以上的有序子序列，“归并/合并”为一个有序序列。</p>
+<p>在内部排序中，通常采用的是<strong>2-路归并排序</strong>，即：将两个位置相邻的有序子序列$R[1 \sim m]$和$R[m+1 \sim n]$归并为一个有序序列$R[1 \sim n]$。</p>
+<p><img src="https://pic.imgdb.cn/item/669cbe01d9c307b7e9800f91.png" alt="2-路归并排序示例" style="zoom:30%"></p>
+<p>关键问题：如何将两个有序序列合成一个有序序列?</p>
+<p>这个问题其实在第2章线性表的时候已经学过了，过程可用下图示例。</p>
+<p><img src="https://pic.imgdb.cn/item/669cc14cd9c307b7e9845f97.png" style="zoom:40%"></p>
+<p><img src="https://pic.imgdb.cn/item/669cc1f3d9c307b7e984f7d9.png" alt="归并排序中的有序表合并" style="zoom:40%"></p>
+<h5 id="Ⅺ-基数-桶-箱-排序"><a href="#Ⅺ-基数-桶-箱-排序" class="headerlink" title="Ⅺ 基数(桶/箱)排序"></a>Ⅺ 基数(桶/箱)排序</h5><p>【<strong>基本思想</strong>】分配+收集</p>
+<p>也叫桶排序或箱排序：设置若干个箱子，将关键字为$k$的记录放入第$k$个箱然后在按序号将非空的连接。</p>
+<p>【<strong>前提条件</strong>】数字是有范围的</p>
+<p>均由0-9这十个数字组成，则只需设置十个箱子，相继按个、十、百….进行排序。</p>
+<p>一副扑克牌，有4种花色，每种花色有13张牌，利用桶排序可以：<code>Step 1</code>先准备4个桶，将牌分成4种花色；<code>Step 2</code>再准备13个桶，将13张牌排序。也即：桶排序适合多关键字排序。</p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
         <category>编程与深度学习</category>
@@ -16089,6 +16297,209 @@ H_i = [H(key) + d_i ] ~ \text{ mod }~ m</script><p>其中，$m$为散列表长�
       <tags>
         <tag>深度学习</tag>
         <tag>环境配置</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算机科学速成课</title>
+    <url>/2024/07/29/Crash-Course-Computer-Science/</url>
+    <content><![CDATA[<h3 id="1-计算机早期历史"><a href="#1-计算机早期历史" class="headerlink" title="1 计算机早期历史"></a>1 计算机早期历史</h3><h4 id="1-1-计算机的重要性"><a href="#1-1-计算机的重要性" class="headerlink" title="1.1 计算机的重要性"></a>1.1 计算机的重要性</h4><p>计算机是当今世界的命脉，如果突然关掉所有计算机，那么世界将会直接乱套。我们生活中很多产品也都是依靠计算机生产出来的。所以说，<strong>计算机改变了我们生活几乎所有方面，计算机对我们社会的重要性不言而喻。</strong></p>
+<h4 id="1-2-计算机的发展"><a href="#1-2-计算机的发展" class="headerlink" title="1.2 计算机的发展"></a>1.2 计算机的发展</h4><p>略。。。</p>
+<h3 id="2-电子计算机"><a href="#2-电子计算机" class="headerlink" title="2 电子计算机"></a>2 电子计算机</h3><p>上节提到，用于特定场景的计算设备，如制表机，大大提高了企业和政府的工作效率。但是随着社会的发展，交通运输、科学研究甚至航空航天等发展，人民需要计算能力更强的机器。这种计算能力更强的机器，往往体积巨大，耗电量巨大，这为后面的创新埋下伏笔。</p>
+<h4 id="2-1-传统大型计算机的缺点"><a href="#2-1-传统大型计算机的缺点" class="headerlink" title="2.1 传统大型计算机的缺点"></a>2.1 传统大型计算机的缺点</h4><p>传统计算机主要有<strong>两个缺点</strong></p>
+<ul>
+<li>运算速度慢，进行普通的加减乘除的耗时都很长；</li>
+<li>齿轮等计算机机械组件磨损，导致早期计算机容易出现Bug。</li>
+</ul>
+<p>最大的机电计算机是<strong>哈佛马克一号</strong>，由IBM公司完成，它由着数十万组件、上百万连接点和几百英里的导线，这台机器最早是用于给“曼哈顿计划”跑模拟。这台机器的大脑是<strong>继电器。</strong></p>
+<p><strong>什么是继电器</strong></p>
+<p>继电器是用电控制的机械开关。继电器有根“控制线路”，控制电路是开还是关。当螺线圈通过电时，其会产生磁场，吸引上面的线闭合，达到连通的目的。这个继电器可以用于机器进行控制。</p>
+<p><img src="https://pic.imgdb.cn/item/66a75235d9c307b7e9f96b38.png"></p>
+<p>糟糕的是，继电器开关有一定质量，这会影响其闭合。其一秒能够闭合50次，<strong>导致计算机的运算非常慢（完成一次加减乘除需要几秒钟）</strong>。</p>
+<p><strong>除了速度慢，另一个限制是齿轮磨损。</strong>随着机器的不断运行，器件的磨损不可避免。哈佛马克一号有上千的继电器，任何一个发生故障，就会导致计算出错。</p>
+<p>此外，黑色的温暖的环境，也会使虫子滋生。虫子，英文命Bug。<strong>虫子附着在大型计算机的组件上，会导致其运行出错。那么，机器故障（Bug）的来源也是此。</strong></p>
+<h4 id="2-2-电子管"><a href="#2-2-电子管" class="headerlink" title="2.2 电子管"></a>2.2 电子管</h4><p>显然，未来要想继续制造出更强大的计算机，就必须用其他东西代替继电器。幸运的是，一个新的电子组件出现了——“<strong>热电子管</strong>”。这种电子管只能运行电流单向运动，当电流反向时，电子管不能发光。这种管叫“<strong>二极管</strong>”。</p>
+<p>但是，要怎么利用电子管进行开关控制呢？答案就是——<strong>真空三极管</strong></p>
+<p>聪明的人民在二极管中添加了一根导线。利用这跟导线，可以控制向电子添加正电荷或者负电荷，来控制电流的流通。</p>
+<p><img src="https://pic.imgdb.cn/item/66a75337d9c307b7e9fa5127.png" alt="三极管" style="zoom:50%"></p>
+<p>三极管和继电器有着相同的功能，但是由于没有部件的物理移动，所以它的磨损很少，开闭速度可以达到上千次每秒。这种真空三极管，在电子设备中大量运用，持续了近半个世纪。</p>
+<p>刚开始时，这种三极管造价昂贵，而且一个计算机需要上千个电气开关。不过随着时间推移，一些政府部门可以承担这种价格，这种三极管开始应用计算机。标志着<strong>计算机从机电转向电子。</strong></p>
+<h4 id="2-3-电子计算机"><a href="#2-3-电子计算机" class="headerlink" title="2.3 电子计算机"></a>2.3 电子计算机</h4><p>世界上第一台电子计算机造成于英国，名叫<strong>“巨人一号”</strong>，它有1600个真空管。最初是英国政府用来破解纳粹的通信加密密码的。<strong>巨人，被认为是第一个可编程的计算机。</strong></p>
+<p><strong>世界上第一个真正的通用的可编程计算机，是ENIAC。</strong>不过由于真空管很多，它几乎半天就会出现一次故障。</p>
+<h4 id="2-4-晶体管"><a href="#2-4-晶体管" class="headerlink" title="2.4 晶体管"></a>2.4 晶体管</h4><p>为了降低成本和大小，同时提高可靠性和速度，我们需要一种新的电子开关。<strong>1947年，贝尔实验室发明了晶体管（晶体三极管）。</strong>一个全新的计算机时代来临了。</p>
+<p><img src="https://pic.imgdb.cn/item/66a764fdd9c307b7e90b4dd4.png" alt="晶体管" style="zoom:50%"></p>
+<p>晶体管的物理性特别复杂，涉及到量子力学。简单地来说，晶体管的制造需要半导体材料，通过控制基极电荷，控于控制半导体材料的导电性，来是否允许电流的流动。</p>
+<p>晶体管具有很好的开关速度，且其为固态的，比起易碎的玻璃电子管。其体积也远小于继电器或者真空管。<strong>这样我们就能制造出更小更便宜的计算机</strong>。</p>
+<p>如今，晶体管小至几十纳米，运算次数达到几十上百万，并且有几十年的寿命。</p>
+<h3 id="3-布尔逻辑和逻辑门"><a href="#3-布尔逻辑和逻辑门" class="headerlink" title="3 布尔逻辑和逻辑门"></a>3 布尔逻辑和逻辑门</h3><h4 id="3-1-什么是二进制"><a href="#3-1-什么是二进制" class="headerlink" title="3.1 什么是二进制"></a>3.1 什么是二进制</h4><p>前文我们提到，计算机最早是机电设备，一般用十进制计数，比如用齿轮数代表十进制，再到晶体管计算机。</p>
+<p>幸运的是，只用开关两种状态也可以代表信息。这种叫做<strong>二进制，意思是用两种状态表示</strong>。</p>
+<p>你可能认为只用两种状态能表示的信息不多，不过这对计算机来说有很多好处。对于电子元件：电路闭合，有电流通过，代表真；电路断开，无电流通过，代表假。二进制也可以写成0和1。</p>
+<h4 id="3-2-为什么使用二进制？"><a href="#3-2-为什么使用二进制？" class="headerlink" title="3.2 为什么使用二进制？"></a>3.2 为什么使用二进制？</h4><ul>
+<li>二进制表示的状态相对于其他进制更容易区分。</li>
+<li>二进制已经有一个专门研究的数学分支——<strong>布尔代数</strong>，在此方面已经有较大的发展了。</li>
+</ul>
+<p>当初，一些早期的计算机是三进制的，甚至是五进制的。问题是状态越多，越难区分不同的状态，信号可能会发生交叠。所以，<strong>我们用信号的开和闭，尽可能地减少这种问题</strong>。</p>
+<p><strong>另一个使用二进制的原因，就是有一整个数学分支，专门处理“真”和“假”</strong>。它已经解决了所有法则和符号问题，这个数学分支叫“<strong>布尔代数</strong>”。</p>
+<h4 id="3-3-布尔代数及基本逻辑门单元"><a href="#3-3-布尔代数及基本逻辑门单元" class="headerlink" title="3.3 布尔代数及基本逻辑门单元"></a>3.3 布尔代数及基本逻辑门单元</h4><p>布尔代数的基本单元不是数学中的数字，而是<strong>非（NOT）</strong>，<strong>与（AND）</strong>、<strong>或（OR）</strong>和<strong>异或（XOR）</strong>等。那么这几种符号的作用，学数字电路中已经接触很多了。下面简单这几种逻辑门介绍：</p>
+<p><strong>非（NOT）</strong>：输出与输入相反，输入真，输出假，反之亦然。<br><strong>与（AND）</strong>：两个输入仅同真输出真，若有一假则为假。<br><strong>或（OR）</strong>：两个输入只要有一个是真，则输入为真。<br><strong>异或（XOR）</strong>：两输入相异则输出真，两输入相同则输出假。 </p>
+<p>不过，设计师在设计电路和芯片时，不需要考虑这些晶体管是如何设计或电子是怎么流过半导体的。他们需要考虑的是抽象层次的东西，很少在晶体管层次考虑，而是考虑逻辑门或者更大的组件。 </p>
+<h3 id="4-二进制"><a href="#4-二进制" class="headerlink" title="4 二进制"></a>4 二进制</h3><h4 id="4-1-二进制的数字表示"><a href="#4-1-二进制的数字表示" class="headerlink" title="4.1 二进制的数字表示"></a>4.1 二进制的数字表示</h4><p>要想表示更多的信息，就要增加数字表示的位数，类似十进制那样。多位数字，如“263”，就能表示比10更大的数。这种逢十进一的数字表示方法，就是十进制（基于十的表示法）。</p>
+<p><strong>二进制也一样，它是基于2的表示法，其只有两个数字，0和1。</strong>多位二进制表示法，应该按权值展开，如下图所示：</p>
+<p><img src="https://pic.imgdb.cn/item/66a769b9d9c307b7e91029b0.png" style="zoom:50%"></p>
+<h4 id="4-2-二进制的加法"><a href="#4-2-二进制的加法" class="headerlink" title="4.2 二进制的加法"></a>4.2 二进制的加法</h4><p>二进制的加法和十进制一样，满足条件则进一。如下图的二进制加法。</p>
+<p><img src="https://pic.imgdb.cn/item/66a76a20d9c307b7e910750f.png" style="zoom:50%"></p>
+<h4 id="4-3-字节"><a href="#4-3-字节" class="headerlink" title="4.3 字节"></a>4.3 字节</h4><p>二进制中，一个1或0叫做一位，即一个位(bit)有两个不同状态0和1，<strong>8位叫做一个字节</strong>。即1字节=8位。我们的32为或64位电脑，指的是一次能进行32位的或64位的同时计算。</p>
+<p>除了字节外，还有KB、MB和TB等，转化关系如下表所示。</p>
+<script type="math/tex; mode=display">
+1 \text{ Byte} = 8 \text{ bit} \\
+1 \text{ KB} = 2^{10} \text{ Byte} \\
+1 \text{ MB} = 2^{10} \text{ KB} \\
+1 \text{ GB} = 2^{10} \text{ MB} \\
+1 \text{ TB} = 2^{10} \text{ GB}</script><h4 id="4-4-计算机中的正负表示"><a href="#4-4-计算机中的正负表示" class="headerlink" title="4.4 计算机中的正负表示"></a>4.4 计算机中的正负表示</h4><p>计算机中，大多<u>用第一位表示正负，1是负，0是正</u>。</p>
+<p>后面，我们还会讲到，计算机会给内存中的每一个位置，做一个标记，这个标记叫位址，目的是为了方便存取数据。因为现在的数据量越来越大，内存地址也有64位。</p>
+<h4 id="4-5-计算机中的浮点数"><a href="#4-5-计算机中的浮点数" class="headerlink" title="4.5 计算机中的浮点数"></a>4.5 计算机中的浮点数</h4><p>我们有几种方法表示浮点数，最常用的是<strong><font color="red">IEEE 754标准</font></strong>。它用类似科学计数法的方法，来存十进制数。对于32位浮点数，第一位表示正负，后面8位表示指数，最后23位表示有效数。</p>
+<p>例如，$625.9 = 0.6259*10^3$，其中，$6259$为有效位数，$3$是指数，其在计算机中的表示如下图。</p>
+<p><img src="https://pic.imgdb.cn/item/66a76dafd9c307b7e9131b3f.png" style="zoom:50%"></p>
+<h4 id="4-6-ASCII-计算机中的文字表示"><a href="#4-6-ASCII-计算机中的文字表示" class="headerlink" title="4.6 ASCII-计算机中的文字表示"></a>4.6 ASCII-计算机中的文字表示</h4><p>不同于书面用符号来表示文字信息，计算机中用数字表示文字。一种方法是，用1表示A，2表示B，3表示C，以此类推。美国科学家曾用5位来表示字母，因为$2^5$为32，这对26个字母来说够了，但这不能表示标点符号、数字和大小写字母。</p>
+<p><strong>ASCII，美国信息交换标准代码</strong>，发明于1963年，ASCII码是7位代码，足够存储128个不同的值。扩展范围后，足够表示大小写字母、数字和标点符号等。</p>
+<p>因为ASCII码值发明地较早，所以被广泛使用，这样，可以让不同公司制作的计算机，能够交换数据。这种交换信息的能力叫互用性。我们知道一个字节有8位，在值为128以后的数字，可以由各国自己根据情况使用。在美国，这些额外的数字主要用于编码附加符号，比如数字符号，图形元素和常用的重音字符，而在希腊，则用于表示希腊字母等。 </p>
+<h4 id="4-7-Unicode-解决不同标准编码下的乱码问题"><a href="#4-7-Unicode-解决不同标准编码下的乱码问题" class="headerlink" title="4.7 Unicode-解决不同标准编码下的乱码问题"></a>4.7 Unicode-解决不同标准编码下的乱码问题</h4><p>不过虽然ASCII码已经能很好地应用于计算机了，但是对于亚洲一些国家（如中国和日本），他们有着上千的文字，ASCII码显然不够用。此外，各个国家设置了相应的字符编码表，但是互不兼容。<strong>字码不兼容的问题经常出现，以致于出现一个专门形容这种情况的名词，“mojibake”，意为“乱码”。</strong></p>
+<p>所以，<strong>Unicode</strong>诞生了，统一了所有的编码标准，设计于1992年，解决了不同国家不同标准的问题，Unicode用一个统一的编码。最常见的Unicode是16位的，有超过一百万个位置，这对所有语言的字符都够用了，能很好地<strong>解决字符不兼容导致乱码的问题</strong>。</p>
+<p>对于其他格式的信息如MP3或GIF，就像ASCII用二进制表示字母一样，我们用二进制编码声音/颜色，表示照片，电影和音乐。</p>
+<p>最后，我们要知道，对于计算机，网页、短信、视频甚至操作系统，都是一长串01字符。</p>
+<h3 id="5-算术逻辑单元"><a href="#5-算术逻辑单元" class="headerlink" title="5 算术逻辑单元"></a>5 算术逻辑单元</h3><h4 id="5-1-什么是ALU"><a href="#5-1-什么是ALU" class="headerlink" title="5.1 什么是ALU"></a>5.1 什么是ALU</h4><p>上一节课我们提到如何用二进制表示数据，如010表示2等。我们知道，<strong>表示和存储数据</strong>是计算机的重要功能。但真正的目标是计算处理有意义的数据，这些操作由计算机的“<strong>算术逻辑单元</strong>”处理，简称<strong>ALU</strong>。</p>
+<p>ALU是计算机的数学大脑，理解了ALU的设计和功能后，你就理解了现代计算机的基石。ALU就是计算机中负责运算的组件，基本上其他组件都需要用到它。</p>
+<p>最著名的ALU，就是<strong>英特尔的74181</strong>，1970年发布，是第一个封装在单个芯片内的完整ALU。</p>
+<p><img src="https://pic.imgdb.cn/item/66a773cad9c307b7e917a162.png" alt="英特尔的74181芯片" style="zoom:40%"></p>
+<p>接下来，我们将利用我们之前学过的逻辑门，设计一个功能与74181相同的组件，然后甚至用此设计CPU。 </p>
+<h4 id="5-2-ALU单元之一：算术单元"><a href="#5-2-ALU单元之一：算术单元" class="headerlink" title="5.2 ALU单元之一：算术单元"></a>5.2 ALU单元之一：算术单元</h4><p>ALU有两个单元，1个算术单元，1个逻辑单元。</p>
+<h5 id="5-2-1-什么是算术单元"><a href="#5-2-1-什么是算术单元" class="headerlink" title="5.2.1 什么是算术单元"></a>5.2.1 什么是算术单元</h5><p><strong>算术单元负责计算机里的所有数字操作</strong>，比如加减法，或者给某个数+1（这个叫增量运算），不过今天我们重点要理解的是加法运算。</p>
+<p>设计时，我们不在晶体管层次出发，而是用更高层的抽象——逻辑门。我们需要用到<strong>AND，OR，NOT和XOR</strong>逻辑门。</p>
+<h5 id="5-2-2-半加器"><a href="#5-2-2-半加器" class="headerlink" title="5.2.2 半加器"></a>5.2.2 半加器</h5><p>对于二进制加法，1+0=1，0+1=1，0+0=0，1+1=10。如下图：</p>
+<p><img src="https://pic.imgdb.cn/item/66a77525d9c307b7e918a958.png" style="zoom:50%"></p>
+<p>我们只看前三个和第四个的第一位，发现它和异或（XOR）操作一样。不过对于1+1，我们还需要一个进位，这里就用到了与操作（AND）。设计如下： </p>
+<p><img src="https://pic.imgdb.cn/item/66a775c4d9c307b7e9191ae8.png" style="zoom:50%"></p>
+<p>它只能处理一位计算，我们称为半加器。我们也可以将其封装起来，变成只有输入和输出的“黑盒操作”，如下图： </p>
+<p><img src="https://pic.imgdb.cn/item/66a77602d9c307b7e9194c2c.png" style="zoom:50%"></p>
+<h5 id="5-2-3-全加器"><a href="#5-2-3-全加器" class="headerlink" title="5.2.3 全加器"></a>5.2.3 全加器</h5><p>如果想要处理超过1+1的运算，我们需要“全加器”。半加器输出了进位，着意味着，我们处理时，还需要将进位考虑进去，才能设计全加器。</p>
+<p>全加器要考虑三位数字的和，如下图所示。全加器有三输入（这里是ABC），两输出（进位和总和）。</p>
+<p><img src="https://pic.imgdb.cn/item/66a7769fd9c307b7e91af540.png" style="zoom:50%"></p>
+<p>我们可以用半加器进行A+B，再把C输入到第二个半加器上，然后用一个或门（OR）计算进位，最终我们得到<strong>全加器</strong>。设计如下： </p>
+<p><img src="https://pic.imgdb.cn/item/66a776ced9c307b7e91b19f8.png" style="zoom:50%"></p>
+<p>我们一样可以将全加器封装起来，这样只能看到输入（ABC）和输出（SUM总和，CARRY进位），方便我们进行更高层次的设计。 </p>
+<p><img src="https://pic.imgdb.cn/item/66a7771cd9c307b7e91b52c1.png" alt="全加器" style="zoom:50%"></p>
+<h5 id="5-2-4-8位加法器设计"><a href="#5-2-4-8位加法器设计" class="headerlink" title="5.2.4 8位加法器设计"></a>5.2.4 8位加法器设计</h5><p>有了全加器，我们可以进行多位加法器设计。这主要是利用半加器和全加器进行，刚开始因为没有高位的进位，我们使用半加器，接下来我们全部使用全加器，因为需要考虑进位。如下图：</p>
+<p><img src="https://pic.imgdb.cn/item/66a777b1d9c307b7e91bcab4.png" alt="8位加法器(行波进位加法器)" style="zoom:40%"></p>
+<p>因为是一个进位一个进位地往下输入的，所以叫“8位行波进位加法器”，当然，最后一位可能会发生进位，<strong>表示相加的两个数字和太大了，超过了8位，这叫做“溢出”</strong>。这会导致错误和不可预测的结果。</p>
+<p>我们可以用更多的全加器，可以操作16位或32位数字，让溢出更难发生。不过代价是更多的逻辑门和更多的耗时。所以，现代电路用的加法器不同，叫“<strong><font color="blue">超前进位加法器</font></strong>”。</p>
+<p>简单的ALU单元可以进行多种加减操作，如半加、全加、减法、增1等，但是没有乘除操作。这是因为，简单的ALU没有专门的电路来处理，而是<strong>把乘法用多次加法来实现</strong>。不过对于强大的手机和电脑，有专门的乘法处理电路。没有多困难，只是逻辑门更多，造价更昂贵而已。</p>
+<h4 id="5-3-ALU单元之二：逻辑单元"><a href="#5-3-ALU单元之二：逻辑单元" class="headerlink" title="5.3 ALU单元之二：逻辑单元"></a>5.3 ALU单元之二：逻辑单元</h4><p>现在，我们讲ALU的另一部分，逻辑单元。逻辑单元执行逻辑操作，比如之前的AND，OR和NOT等操作。它也能做一些简单的判断，比如结果是不是0，是否为负数等。</p>
+<p>例如下图就是检查ALU输出是不是0的电路，很简单，多个或操作，然后最后取反便可，因为只有输出位数全为0，结果才为0。</p>
+<p><img src="https://pic.imgdb.cn/item/66a779b3d9c307b7e91d53b3.png" alt="判断输入是否为0" style="zoom:40%"></p>
+<p>前面我们讲的英特尔公司发明的74181，不过只能处理4位输入，也就是说，我们做了一个比英特尔74181还好的ALU！！ </p>
+<p><img src="https://pic.imgdb.cn/item/66a77a51d9c307b7e91dc287.png" alt="英特尔74181内部结构" style="zoom:60%"></p>
+<h4 id="5-4-ALU"><a href="#5-4-ALU" class="headerlink" title="5.4 ALU"></a>5.4 ALU</h4><p>74181用了大概70个逻辑门，但不能执行乘法操作。但它向小型化迈出了一大步，可以让计算机更强大更便宜。ALU需要大量的逻辑，我们用一个符号来代替，它看起来像一个大“V”，如下图所示。</p>
+<p><img src="https://pic.imgdb.cn/item/66a77b3dd9c307b7e91e661c.png" style="zoom:30%"></p>
+<p>ALU有两个8位的输入，然后用一个操作代码来控制其是加法还是减法操作，操作代码告诉ALU进行什么操作。</p>
+<p>ALU的输出是8位的，ALU还输出一堆标志（Flag）。一些操作介绍如下：</p>
+<ul>
+<li><strong>ZERO</strong>：若ALU输出是0，那么ZERO标志就变成1。</li>
+<li><strong>NEGATIVE</strong>：我们可以用ALU做减法，然后用NEGATIVE判断其是不是小于0，从而进行比较大小。</li>
+<li><strong>OVERFLOW：</strong>ALU还有溢出单元，判断有没有进位。</li>
+</ul>
+<p>ALU有很多Flag，这三个是最常用的。</p>
+<h3 id="6-寄存器与内存"><a href="#6-寄存器与内存" class="headerlink" title="6 寄存器与内存"></a>6 寄存器与内存</h3><p>上节课，我们用逻辑门做了一个简单的ALU，它能执行算术运算（Arithmetic）和逻辑运算（Logic），ALU里的A和L因此得名。当然，算出来后将结果扔掉的话那就没什么意义了，得找个办法存起来，这就需要用到计算机的内存了。</p>
+<h4 id="6-1-计算机中的存储器"><a href="#6-1-计算机中的存储器" class="headerlink" title="6.1 计算机中的存储器"></a>6.1 计算机中的存储器</h4><p>当我们正在使用电脑时，比如打游戏、看视频，如果突然断开电源，进度将会中断且不难复原。我们会损失数据的原因是，电脑使用的是“随机存取存储器”，简称“RAM”。它只能在有电的情况下存储东西。</p>
+<p>另一种存储叫持久存储，关掉电脑数据也不好丢失。</p>
+<p>本节课，我们将从简单开始，做出存储1的器件，之后再扩大，做出我们的内存模块。下次再和ALU结合，做出CPU。</p>
+<h4 id="6-2-存储器的原理与制作"><a href="#6-2-存储器的原理与制作" class="headerlink" title="6.2 存储器的原理与制作"></a>6.2 存储器的原理与制作</h4><h5 id="6-2-1-存0电路与存1电路"><a href="#6-2-1-存0电路与存1电路" class="headerlink" title="6.2.1 存0电路与存1电路"></a>6.2.1 存0电路与存1电路</h5><p><strong>(1) 存1电路</strong></p>
+<p>至今，我们所说的电路都是单向的，总是向前流动，但是我们也可以把输出连回输入。如下图所示的连法，当输出是1后，无论输入是0还是1，因为将输出连回了输入，最终的输出都是1。那么，<strong>这个电路元件就可以存储1</strong>。<em><u>然而问题是，无论怎么试，都没法将1变回0</u></em>。</p>
+<p><img src="https://pic.imgdb.cn/item/66a77dfcd9c307b7e9205c36.png" alt="存1电路"></p>
+<p><strong>(2) 存0电路</strong></p>
+<p>那么，我们来看看将这个电路里的OR门换成AND门会怎么样，如图。当输出是0后，无论再对A输入0还是1，输出都是0，就是说，<strong>这个电路了可以存储0</strong>。这里就不绘制动态分析过程了，可参照存0电路。</p>
+<p><img src="https://pic.imgdb.cn/item/66a77e93d9c307b7e920c18b.png" alt="存0电路" style="zoom:30%"></p>
+<h5 id="6-2-2-锁存器与门所"><a href="#6-2-2-锁存器与门所" class="headerlink" title="6.2.2 锁存器与门所"></a>6.2.2 锁存器与门所</h5><p><strong>(1) 锁存器</strong></p>
+<p>现在，我们用了存1存储器和存0存储器了，我们将其都利用起来，如下图，这个叫做“<strong>AND-OR锁存器</strong>”。它有两个输入，“设置”输入，把输出变成1，“复位”输入把输出变成“0”。如果“设置”和“复位”都是0，电路会输出最后放入的内容。这就是说它存住了一位的信息，这叫“锁存”，因为他锁住了一个值。</p>
+<p><img src="https://pic.imgdb.cn/item/66a77f3fd9c307b7e9212f7e.png" alt="image.png"></p>
+<ul>
+<li>若<code>SET=1,RESET=0</code>，则输出为1；</li>
+<li>若<code>SET=0,RESET=1</code>，则输出为0；</li>
+<li>若<code>SET=0,RESET=0</code>，则输出不变，也即会保存上一个状态的输出，也即它锁住了1位的信息（<strong>存储</strong>）；</li>
+<li>若<code>SET=1,RESET=1</code>，则输出为0，个人认为这种操作没有什么太大的意义；</li>
+</ul>
+<p><strong>放入数据的操作叫“写入”，拿出数据的操作叫读取。</strong> </p>
+<p><strong>(2) 门锁</strong></p>
+<p>麻烦的是，用两条线“设置”和 “复位”来输入，有点难理解。为了更容易用，我们希望只有一条输入线，进行输入数据。然后设置另一条线，叫允许写入线，用来启用内存，启用时允许写入，没启用时就锁定。外加一些逻辑门，就可以做出这个电路。这个叫<strong>门锁，因为门可以打开和关上。</strong></p>
+<p><img src="https://pic.imgdb.cn/item/66a7818fd9c307b7e922d709.png" alt="门锁示意图" style="zoom:50%"></p>
+<p>其中，DATA INPUT表示输入要保存的数据；WRITE ENABLE表示允许写入线，此线输入1时为启用(允许写入数据)，此线输入为0时为锁定(存储数据，此时不论DATA INPUT如何变输出都不变)。</p>
+<p>但是，我们不想直接面对这个电路，我们想用一个“黑盒”将其框住，这就成为了一个组件。这个门锁只有当“允许写入线”为1时才可以写入和输出数据。 </p>
+<p><img src="https://pic.imgdb.cn/item/66a782b2d9c307b7e923c022.png" style="zoom:40%"></p>
+<h5 id="6-2-3-寄存器"><a href="#6-2-3-寄存器" class="headerlink" title="6.2.3 寄存器"></a>6.2.3 寄存器</h5><p>虽然一个门锁只能存储一位数字，但是我们并排放8个锁存器，就可以存8位信息。</p>
+<p>一组这样的锁存器叫“<strong><font color="green">寄存器</font></strong>”，寄存器能存储一个数字，这个数字有多少位，叫位宽。</p>
+<p>早期计算机用8位寄存器，后来到16位、32位和如今的64位。</p>
+<p>写入寄存器时，我们需要先将所有的“允许写入线”设为1，这里我们可以引一条总线统一控制。然后我们将数据输入，完成输入后再将所有的“允许写入线”设为0。</p>
+<p><img src="https://pic.imgdb.cn/item/66a78464d9c307b7e9251a30.png" alt="8位寄存器" style="zoom:40%"></p>
+<h5 id="6-2-4-矩阵网络优化门锁放置"><a href="#6-2-4-矩阵网络优化门锁放置" class="headerlink" title="6.2.4 矩阵网络优化门锁放置"></a>6.2.4 矩阵网络优化门锁放置</h5><p>如果只有很少的位(bits)，把锁存器并排放置，也勉强够用了。64 位寄存器要 64 根数据线，64 根连到输出端，幸运的是，我们只要1根线(“总线”)启用所有锁存器，但加起来也有 129 条线了。如果存 256 位要 513 条线！非常耗材。</p>
+<p>解决方法就是<strong>矩阵</strong>，在计算机中，<strong>寄存器并不并排放，而是成矩阵网络</strong>。存256位的寄存器，就将门锁摆成16*16形式，要用某个寄存器，就打开想应的行线和列线。</p>
+<p><img src="https://pic.imgdb.cn/item/66a785c9d9c307b7e92629c4.png" alt="门锁矩阵网络" style="zoom:40%"></p>
+<p>要启用某个锁存器，就打开相应的行线和列线，放大看看怎么做的。</p>
+<p>我们只想打开交叉处锁存器的”允许写入线”，所有其他锁存器，保持关闭。我们可以用 AND 门！只有行线和列线均为1，AND门才输出 1。所以可以用选择单个锁存器，这种行/列排列法，用一根“允许写入线(总线)”连所有锁存器。</p>
+<p><img src="https://pic.imgdb.cn/item/66a787cfd9c307b7e9279e4b.png" alt="放大示意图" style="zoom:50%"></p>
+<p>为了让锁存器变成“允许写入”，行线，列线和“允许写入线”都必须是 1，每次只有行列号对应的那1个锁存器会这样。同时，有了这种电路连接结构，使得我们可以只用一根”数据线”(类似于允许写入线的总线)连所有锁存器来传数据，因为只有一个锁存器会启用，只有那个会存数据。其他锁存器会忽略数据线上的值，因为没有“允许写入”。</p>
+<p>我们可以用类似的技巧，做<strong>“允许读取线(READ ENABLE)”</strong>来读数据。</p>
+<p>所以对于 256 位的存储只要 35 条线，具体计算如下：</p>
+<script type="math/tex; mode=display">
+1条数据线 + 1条允许写入线 + 1条允许读取线 + 16条行线 + 16条列线 = 35条线</script><p>不过，我们怎么将计算机的二进制数据传给这个“矩阵”呢？因此，我们需要用到<strong>多路复用器</strong>，它能够连通所给输入对应的线，比如若输入“1010”，那么多路复用器就会将第10路连通，达到选线路的目标。 </p>
+<p><img src="https://pic.imgdb.cn/item/66a78ac5d9c307b7e929d0e7.png" alt="多路复用器" style="zoom:60%"></p>
+<p>那么，更高的一层抽象来了，256位内存，如下。其分别有上文提到的8位地址线、数据线、允许写入线和允许读取线： </p>
+<p><img src="https://pic.imgdb.cn/item/66a78b91d9c307b7e92a7601.png" alt="256位寄存器的抽象" style="zoom:50%"></p>
+<p>这样，我们就做成了一个内存了。</p>
+<h3 id="6-3-如何利用多个内存完成数据存取"><a href="#6-3-如何利用多个内存完成数据存取" class="headerlink" title="6.3 如何利用多个内存完成数据存取"></a>6.3 如何利用多个内存完成数据存取</h3><p>利用这个256位的内存，我们可以存许多数据。具体的存法如下：</p>
+<p><img src="https://pic.imgdb.cn/item/66a78cb4d9c307b7e92b5b80.png" style="zoom:60%"></p>
+<p>我们将8个256位的内存并排在一起，用同样地址线将其连接。那么，一个内存可以存一位（<strong>单独</strong>），8个并在一起就可以<em><u>同时存8位（1Byte）</u></em>。<strong>为了存8位的数据，我们给8个内存同样的地址，也就是一个8位数据，分给8个内存分别存储</strong>。因为是256位的内存，所以可以存256个八位，也就是<strong>256 Byte</strong>的数据。 </p>
+<p>我们将其抽象，也就是说，这8给内存，可以有256有地址，每个地址可以读写一个8位数据。 </p>
+<p><img src="https://pic.imgdb.cn/item/66a78d5ad9c307b7e92be137.png" style="zoom:60%"></p>
+<p>内存的一个重要特征是可以随时访问任何位置，因此叫“<strong>随机存取存储器</strong>”（RAM），RAM就像人类的短期记忆，记录计算机当时正在干嘛。 </p>
+<p><img src="https://pic.imgdb.cn/item/66a7901dd9c307b7e92e37aa.png" style="zoom:70%"></p>
+<p>上面真实的内存条中，有8颗芯片，每个芯片有32个内存方块，每个内存方块4个矩阵，所以1个方格有8192×4=32768位，总之，总位数约为：</p>
+<script type="math/tex; mode=display">
+32768 \times 32 \times 8 = 8388608 ≈ 800 \text{万位} ≈ 1 \text{兆字节}</script><p>所以，这节课，我们做了一个SRAM（<strong>静态随机存取存储器</strong>），还有其他比如DRAM、闪存等等，他们在功能上与SRAM相似，但用不同的电路存单个位，比如用不同的逻辑门、电容器、电荷捕获或忆阻器等等。但根本上，这些技术都是矩阵层次嵌套，来存储大量信息。</p>
+<p>就像计算机中的很多事情，底层其实都很简单。让人难以理解的是一层层精妙的抽象，像一个越来越小的俄罗斯套娃。</p>
+<h3 id="7-中央处理器CPU"><a href="#7-中央处理器CPU" class="headerlink" title="7 中央处理器CPU"></a>7 中央处理器CPU</h3><h4 id="7-1-CPU与指令"><a href="#7-1-CPU与指令" class="headerlink" title="7.1 CPU与指令"></a>7.1 CPU与指令</h4><p>前面课程已经提到，我们已经做了一个算术逻辑单元（ALU），输入二进制，它会执行计算。我们还做了两种内存：寄存器，很小的内存，能存一个值；RAM，能在不同地址存大量数字。现在，我们是时候把他们放在一起，组建计算机的“心脏”了，<strong>这个“心脏”叫“中央处理单元”，简称CPU。</strong></p>
+<p>CPU负责执行程序，这些程序可能是浏览器、社交软件和音乐等等。这些程序是由一个个操作组成的，这种“操作”叫“指令”，因为它“指示”计算机要做什么。如果是计算指令如加或者减，CPU会让ALU进行数学运算。也可能是内存指令，CPU会和内存通信，然后读/写值。</p>
+<p>当我们用一条线连接两个组件时，这条线只是所有必须线路的一个抽象，这种高层次视角叫”微体系架构“。意思就是，我们从微观部件考虑整体同类型部件，以更高抽象层次去看代问题。</p>
+<h4 id="7-2-CPU指令体系"><a href="#7-2-CPU指令体系" class="headerlink" title="7.2 CPU指令体系"></a>7.2 CPU指令体系</h4><p>我们已经知道数据是以二进制值存在内存里，程序也可以存在内存里。我们可以给CPU 支持的所有指令，分配一个 ID，下图为计算机指令表。下表中，我们看到，前四位存储指令的”操作代码“，如0010、0001等，后面四位代表数据来源于哪里（地址或者寄存器）</p>
+<p><img src="https://pic.imgdb.cn/item/66a793ecd9c307b7e931919c.png" alt="CPU指令表" style="zoom:40%"></p>
+<p>我们还需要两个寄存器来完成CPU指令<strong>，一个寄存器追踪程序运行到哪了</strong>，我们叫它”指令地址寄存器“，顾名思义，存当前指令的内存地址。<strong>另一个寄存器存当前指令</strong>，叫”指令寄存器“。指令体系如下： </p>
+<p><img src="https://pic.imgdb.cn/item/66a796a2d9c307b7e933d695.png" alt="指令系统示意图" style="zoom:60%"></p>
+<h4 id="7-3-指令的运行流程"><a href="#7-3-指令的运行流程" class="headerlink" title="7.3 指令的运行流程"></a>7.3 指令的运行流程</h4><p>指令的运行，有三个阶段，分别是<strong>取指令阶段、解码和执行</strong>。这里，我们会在RAM里放一个程序，过一遍流程。</p>
+<p>CPU的第一个阶段叫”<strong>取指令阶段</strong>“。指令地址寄存器连接到RAM，RAM得到指令地址寄存器的内容，将对应地址的数据传到指令寄存器中，图中显示的是”0010 1110“。</p>
+<p>然后是<strong>解码</strong>，根据前文的指令表，知道0010是LOAD_A指令。后四位是RAM的地址（如表），1110是14，那么我们就取得RAM中地址是14的值3。这是一个LOAD_A指令，会将这个值放入A寄存器中，而其他寄存器不受影响。</p>
+<p>最后是<strong>执行</strong>，通过检验电路和输入运行线开关，就将3写入了寄存器A中。执行完后，指令地址寄存器地址+1，进行下一个指令。</p>
+<p>当然，每一个指令都会有对应的逻辑电路来判断其是否要进行。这些控制单元可能非常复杂，我们将其抽象一层，以一个整体部件（控制单元Control Unit）代替。</p>
+<p><img src="https://pic.imgdb.cn/item/66a797ead9c307b7e934f7e5.png" style="zoom:70%"></p>
+<p>这个控制单元就行交响乐的指挥使，控制CPU的所有组件。”取指令-解码-执行“完成后，我们可以再来一次其他指令，从”取指令开始“。上面介绍的指令只涉及到寄存器的存取，其他指令如ADD，会用到<strong>ALU部件</strong>。利用ALU将值计算出来后，再传回对应的寄存器中。<strong>也就是说，寄存器加ALU，就可以做成CPU。</strong> </p>
+<h4 id="7-4-CPU的节奏把控者——时钟"><a href="#7-4-CPU的节奏把控者——时钟" class="headerlink" title="7.4 CPU的节奏把控者——时钟"></a>7.4 CPU的节奏把控者——时钟</h4><p>我们刚才走的是一个人工的流程，但是计算机中没有”人工“，所以<strong>计算机中靠的是时钟来负责管理CPU的节奏</strong>。时钟以精确的时间间隔，触发电信号。控制单元会用这个信号，推进CPU的内部操作，确保一切按节奏进行。</p>
+<p>时间间隔不能太短，因为电信号的传输也需要一定的时间。**<font color="red">CPU进行“取指令-解码-执行”的速度叫“时钟速度”，单位是Hz，1Hz表示一秒一个周期</font>。</p>
+<p><img src="https://pic.imgdb.cn/item/66a79d37d9c307b7e939973a.png" style="zoom:60%"></p>
+<p>第一个单芯片CPU是“英特尔4004”，1971年发布的4位CPU，它的微架构很像我们之前所说的CPU。虽然是第一个小型CPU，但他的时钟速度达到740千赫兹——每秒740万个周期。</p>
+<p><img src="https://pic.imgdb.cn/item/66a79b79d9c307b7e937f9e7.png" style="zoom:70%"></p>
+<ul>
+<li><p><strong>超频</strong><br>你可能听过有人会把计算机超频，意思是<strong>修改时钟速度</strong>，加快CPU的速度，就像罗马帆船要撞另一艘船时，鼓手会加快敲鼓速度。芯片制造商经常给CPU留一点余地，可以接受一点超频！但超频大多会让CPU过热或产生乱码，因为信号跟不上时钟。</p>
+</li>
+<li><p><strong>降频</strong><br>你可能很少听说降频，但降频其实很有用，有时没必要让处理器全速运行(例如，可能用户走开了，或者在跑一个性能要求较低的程序)。把 CPU 的速度降下来，可以省很多电，省电对用电池的设备很重要，比如笔记本和手机</p>
+</li>
+<li><strong>动态调频</strong><br>很多现代处理器可以按需求，加快或者减慢时钟速度，这叫“<strong>动态调整频率</strong>”，加上时钟后，CPU才完整，这样我们又提升了一层抽象。<strong>CPU和RAM独立，两者用地址线、数据线和允许读写线进行通信。</strong> </li>
+</ul>
+<h5 id="7-5-小小结"><a href="#7-5-小小结" class="headerlink" title="7.5 小小结"></a>7.5 小小结</h5><p>加上时钟后，CPU才是完整的，现在可以放到盒子里，抽象成一个独立组件。</p>
+<p><img src="https://pic.imgdb.cn/item/66a79d8fd9c307b7e939ea7d.png" style="zoom:60%"></p>
+<link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
+      <categories>
+        <category>学习提升</category>
+        <category>编程与深度学习</category>
+        <category>编程语言学习</category>
+      </categories>
+      <tags>
+        <tag>计算机基础</tag>
       </tags>
   </entry>
 </search>
