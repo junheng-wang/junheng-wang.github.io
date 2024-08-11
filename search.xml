@@ -16294,6 +16294,13 @@ a_i \geq a_{2i+1}
 <p>【<strong>前提条件</strong>】数字是有范围的</p>
 <p>均由0-9这十个数字组成，则只需设置十个箱子，相继按个、十、百….进行排序。</p>
 <p>一副扑克牌，有4种花色，每种花色有13张牌，利用桶排序可以：<code>Step 1</code>先准备4个桶，将牌分成4种花色；<code>Step 2</code>再准备13个桶，将13张牌排序。也即：桶排序适合多关键字排序。</p>
+<ul>
+<li><strong>各种排序方法比较</strong></li>
+</ul>
+<p><img src="https://pic.imgdb.cn/item/66b8a13dd9c307b7e97c66e2.png"></p>
+<h3 id="补充1（不系统）：动态规划"><a href="#补充1（不系统）：动态规划" class="headerlink" title="补充1（不系统）：动态规划"></a>补充1（不系统）：动态规划</h3><p>首先我们来看一个经典的动态规划问题：</p>
+<p>给你一个无序的数组nums = [1，5，2，4，3]，要求我们找出其中最长的递增的子序列（比如这里的 1,2,4 就是其中的一个，1,2,3 是另外一个答案）。这里我们再对这个问题做一些简化，我们要求这个算法只返回最长序列的“长度”就好了（也即3）</p>
+<p>解决这道题，最容易想到的办法是<strong>暴力枚举</strong>/或者叫暴力搜索</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
         <category>学习提升</category>
