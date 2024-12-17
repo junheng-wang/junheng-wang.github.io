@@ -128,10 +128,10 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>165.2万</span></span>
+                        <span>169.0万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>4.8万</span></span></p>
+                        <span>4.9万</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -1745,11 +1745,16 @@
 </ul>
 <p><code>sys</code>模块还提供了一些函数和变量用于处理异常。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">sys.exc_info()		<span class="comment"># 返回当前异常的相关信息，包括异常类型、异常值和异常追踪信息。</span></span><br><span class="line">sys.exc_clear()		<span class="comment"># 清除当前异常。</span></span><br><span class="line">sys.exc_type		<span class="comment"># 是一个变量，保存了当前异常的类型。</span></span><br><span class="line">sys.exc_value		<span class="comment"># 是一个变量，保存了当前异常的值。</span></span><br><span class="line">sys.exc_traceback	<span class="comment"># 是一个变量，保存了当前异常的追踪信息。</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># ==========例子=====================</span></span><br><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    <span class="comment"># 产生一个异常</span></span><br><span class="line">    <span class="keyword">raise</span> ValueError(<span class="string">&quot;发生了一个错误&quot;</span>)</span><br><span class="line"><span class="keyword">except</span>:</span><br><span class="line">    <span class="comment"># 获取当前异常的相关信息</span></span><br><span class="line">    exc_type, exc_value, exc_traceback = sys.exc_info()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;异常类型：&quot;</span>, exc_type)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;异常值：&quot;</span>, exc_value)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;异常追踪信息：&quot;</span>, exc_traceback)</span><br><span class="line">    <span class="comment"># 清除当前异常</span></span><br><span class="line">    sys.exc_clear()</span><br></pre></td></tr></table></figure>
-<h4 id="12-3-argparse模块"><a href="#12-3-argparse模块" class="headerlink" title="12.3 argparse模块"></a>12.3 argparse模块</h4><p><code>argparse</code> 是一个用来解析命令行参数和选项的 Python 库，它是 Python 标准库的一部分。</p>
-<p>argparse 模块使<strong>编写用户友好的命令行界面变得容易</strong>。</p>
-<p><strong>程序定义了所需的参数，而 argparse 将找出如何从 <fonr color="red">sys.argv&lt;/font&gt; 中解析这些参数。</fonr></strong></p>
-<p>argparse 模块还会自动生成帮助和使用消息，并在用户为程序提供无效参数时发出错误。</p>
-<p>简而言之，就是汇总函数接口，方便传参。</p>
+<h4 id="12-3-argparse模块"><a href="#12-3-argparse模块" class="headerlink" title="12.3 argparse模块"></a>12.3 argparse模块</h4><p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1mv411G7xV/?spm_id_from=333.337.search-card.all.click&amp;vd_source=b11850f360abfce51bee36035b825020">一个简单的argparse基础用法讲解视频 - bilibili</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1jM4m1176F/?spm_id_from=333.337.search-card.all.click&amp;vd_source=b11850f360abfce51bee36035b825020">深度学习基础 ｜ argparse 模块 ｜ 命令行参数解析 - bilibili</a></p>
+<ul>
+<li><code>argparse</code> 是一个用来解析命令行参数和选项的 Python 库，它是 Python 标准库的一部分。<ul>
+<li>argparse 模块使<strong>编写用户友好的命令行界面变得容易</strong>。</li>
+<li><strong>程序定义了所需的参数，而 argparse 将找出如何从 sys.argv 中解析这些参数。</strong></li>
+<li>argparse 模块还会自动生成帮助和使用消息，并在用户为程序提供无效参数时发出错误。</li>
+<li>简而言之，就是汇总函数接口，方便传参。</li>
+</ul>
+</li>
+</ul>
 <h5 id="一-argparse定义四个步骤"><a href="#一-argparse定义四个步骤" class="headerlink" title="(一 ) argparse定义四个步骤"></a>(一 ) argparse定义四个步骤</h5><ul>
 <li>导入argparse包 —— <code>import argparse</code></li>
 <li>创建一个命令行解析器对象 —— 创建 <code>ArgumentParser()</code> 对象</li>
@@ -1763,7 +1768,7 @@
 <li><strong>1.创建一个解析器</strong></li>
 </ul>
 <p>即创建 <code>ArgumentParser()</code> 对象 。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;test&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">parser = argparse.ArgumentParser(description=<span class="string">&#x27;该程序的功能是计算圆的面积&#x27;</span>)</span><br></pre></td></tr></table></figure>
 <p><strong>description：</strong>大多数对 <code>ArgumentParser</code> 构造方法的调用都会使用 <code>description= 关键字参数</code>。</p>
 <p>这个参数简要描述这个程度做什么以及怎么做。</p>
 <p>在帮助消息中，这个描述会显示在命令行用法字符串和各种参数的帮助消息之间。</p>
