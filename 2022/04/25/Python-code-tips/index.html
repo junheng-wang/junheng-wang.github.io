@@ -170,7 +170,7 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">MAX_CLIENT = <span class="number">100</span></span><br><span class="line">MAX_CONNECTION = <span class="number">1000</span></span><br><span class="line">CONNECTION_TIMEOUT = <span class="number">600</span></span><br></pre></td></tr></table></figure>
 <p>【参考资料1】：<a target="_blank" rel="noopener" href="https://blog.csdn.net/meiqi0538/article/details/104993760">【Python】编程代码书写规范！ -  科皮子菊 - CSDN</a></p>
 <p>【参考资料2】：<a target="_blank" rel="noopener" href="https://python.freelycode.com/contribution/detail/47">PEP8中文版 — Python编码风格指南</a></p>
-<h2 id="二、深度学习的相关库"><a href="#二、深度学习的相关库" class="headerlink" title="二、深度学习的相关库"></a>二、深度学习的相关库</h2><p><img src="https://pic.imgdb.cn/item/66778500d9c307b7e9f7a3df.png" alt="image.png"></p>
+<h2 id="二、深度学习的相关库"><a href="#二、深度学习的相关库" class="headerlink" title="二、深度学习的相关库"></a>二、深度学习的相关库</h2><p><img src="https://pic.imgdb.cn/item/66778500d9c307b7e9f7a3df.png"></p>
 <p>① NumPy 包为Python 加上了关键的数组变量类型，弥补了Python 的不足；<br>② Pandas 包在NumPy 数组的基础上添加了与Excel 类似的行列标签；<br>③ Matplotlib 库借鉴Matlab，帮Python 具备了绘图能力，使其如虎添翼；<br>④ Scikit-learn 库是机器学习库，内含分类、回归、聚类、降维等多种算法；<br>⑤ TensorFlow 库是Google 公司开发的深度学习框架，于2015 年问世；<br>⑥ PyTorch 库是Facebook 公司开发的深度学习框架，于2017 年问世。</p>
 <h3 id="2-1-Numpy学习"><a href="#2-1-Numpy学习" class="headerlink" title="2.1 Numpy学习"></a>2.1 Numpy学习</h3><div class="bvideo">
     <a href="//www.bilibili.com/video/BV1Wy4y1h7ii" target="_blank">
@@ -187,7 +187,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>20.5万</span></span>
+                        <span>20.6万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>382</span></span></p>
@@ -248,7 +248,7 @@
                         <span>9.7万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
-                        <span>668</span></span></p>
+                        <span>671</span></span></p>
                 <div class="partition">
                     <label class="card-label">视频</label>
                     <label class="up-label"></label>
@@ -324,11 +324,11 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建向量</span></span><br><span class="line">arr1 = np.arange(<span class="number">0</span>,<span class="number">90</span>,<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(arr1) <span class="comment"># [ 0 10 20 30 40 50 60 70 80]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 花式索引</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ [<span class="number">0</span>,<span class="number">2</span>] ] ) <span class="comment"># [0 20]</span></span><br></pre></td></tr></table></figure>
 <p><strong>(2) 矩阵的花式索引</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建矩阵</span></span><br><span class="line">arr2 = np.arange(<span class="number">1</span>,<span class="number">17</span>).reshape(<span class="number">4</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(arr2)</span><br><span class="line"><span class="comment"># [[01 02 03 04]</span></span><br><span class="line"><span class="comment">#  [05 06 07 08]</span></span><br><span class="line"><span class="comment">#  [09 10 11 12]</span></span><br><span class="line"><span class="comment">#  [13 14 15 16]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 花式索引</span></span><br><span class="line"><span class="built_in">print</span>( arr2[ [<span class="number">0</span>,<span class="number">1</span>] , [<span class="number">0</span>,<span class="number">1</span>] ] ) <span class="comment"># [1 6]</span></span><br><span class="line"><span class="built_in">print</span>( arr2[ [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>] , [<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>] ] ) <span class="comment"># [3 6 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 修改数组元素</span></span><br><span class="line">arr2[ [<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] , [<span class="number">3</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>] ] = <span class="number">100</span></span><br><span class="line"><span class="built_in">print</span>(arr2)</span><br><span class="line"><span class="comment"># [[001 002 003 100]</span></span><br><span class="line"><span class="comment">#  [005006 100 008]</span></span><br><span class="line"><span class="comment">#  [009 100 011 012]</span></span><br><span class="line"><span class="comment">#  [100 014 015 016]]</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p><img src="https://pic.imgdb.cn/item/667793a7d9c307b7e91154c9.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667793a7d9c307b7e91154c9.png"></p>
 <p>根据以上实例，花式索引输出的仍然是一个向量。</p>
 <h5 id="Ⅲ-访问数组切片"><a href="#Ⅲ-访问数组切片" class="headerlink" title="Ⅲ 访问数组切片"></a>Ⅲ 访问数组切片</h5><p><strong>(1) 向量的切片</strong></p>
 <p>向量与列表切片的操作完全一致，因此本页内容在Python 基础中均有涉及。</p>
-<p><img src="https://pic.imgdb.cn/item/667793f2d9c307b7e911deb7.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667793f2d9c307b7e911deb7.png"></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">arr1 = np.arange(<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>( arr1 ) <span class="comment"># [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当明确知道从第x个元素切到第y个元素，如示例所示。</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ <span class="number">1</span> : <span class="number">4</span> ] ) <span class="comment"># 从索引[1]开始，切到索引[4]之前 [1 2 3]</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ <span class="number">1</span> : ] ) <span class="comment"># 从索引[1]开始，切到结尾 [1 2 3 4 5 6 7 8 9]</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ : <span class="number">4</span> ] ) <span class="comment"># 从数组开头开始，切到索引[4]之前 [0 1 2 3]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当明确切除数组的开头与结尾，如示例所示。</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ <span class="number">2</span> : -<span class="number">2</span> ] ) <span class="comment"># 切除开头2个和结尾2个 [2 3 4 5 6 7]</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ <span class="number">2</span> : ] ) <span class="comment"># 切除开头2个 [2 3 4 5 6 7 8 9]</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ : -<span class="number">2</span> ] ) <span class="comment"># 切除结尾2个 [0 1 2 3 4 5 6 7]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 当明确隔几个元素采样一次时，示例如下。</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ : : <span class="number">2</span> ] ) <span class="comment"># 每2 个元素采样一次 [0 2 4 6 8]</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ : : <span class="number">3</span> ] ) <span class="comment"># 每3 个元素采样一次 [0 3 6 9]</span></span><br><span class="line"><span class="built_in">print</span>( arr1[ <span class="number">1</span> : -<span class="number">1</span> : <span class="number">2</span> ] ) <span class="comment"># 切除一头一尾后，每2个元素采样一次 [1 3 5 7]</span></span><br></pre></td></tr></table></figure>
 <p><strong>(2) 矩阵的切片</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">arr2 = np.arange(<span class="number">1</span>,<span class="number">21</span>).reshape(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>( arr2 )</span><br><span class="line"><span class="comment"># [[01 02 03 04 05]</span></span><br><span class="line"><span class="comment">#  [06 07 08 09 10]</span></span><br><span class="line"><span class="comment">#  [11 12 13 14 15]</span></span><br><span class="line"><span class="comment">#  [16 17 18 19 20]]</span></span><br><span class="line"><span class="built_in">print</span>( arr2[ <span class="number">1</span>:<span class="number">3</span> , <span class="number">1</span>:-<span class="number">1</span> ] )</span><br><span class="line"><span class="comment"># [[07 08 09]</span></span><br><span class="line"><span class="comment">#  [12 13 14]]</span></span><br><span class="line"><span class="built_in">print</span>( arr2[ ::<span class="number">3</span> , ::<span class="number">2</span> ] ) <span class="comment"># 跳跃采样</span></span><br><span class="line"><span class="comment"># [[01 03 05]</span></span><br><span class="line"><span class="comment">#  [16 18 20]]</span></span><br></pre></td></tr></table></figure>
@@ -386,7 +386,7 @@
 <p>矩阵的分裂同样可以按不同的维度进行，分裂出来的均为矩阵。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建矩阵</span></span><br><span class="line">arr = np.arange(<span class="number">1</span>,<span class="number">9</span>).reshape(<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>(arr)</span><br><span class="line"><span class="comment"># [[1 2 3 4]</span></span><br><span class="line"><span class="comment">#  [5 6 7 8]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按第一个维度（行）分裂</span></span><br><span class="line">arr1, arr2 = np.split(arr,[<span class="number">1</span>]) <span class="comment"># 默认参数axis=0</span></span><br><span class="line"><span class="built_in">print</span>(arr1 , <span class="string">&#x27;\n\n&#x27;</span> , arr2) <span class="comment"># 注意输出的是矩阵</span></span><br><span class="line"><span class="comment"># [[1 2 3 4]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># [[5 6 7 8]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 按第二个维度（列）分裂</span></span><br><span class="line">arr1,arr2,arr3 = np.split( arr , [<span class="number">1</span>,<span class="number">3</span>] , axis=<span class="number">1</span> )</span><br><span class="line"><span class="built_in">print</span>( arr1 , <span class="string">&#x27;\n\n&#x27;</span> , arr2 , <span class="string">&#x27;\n\n&#x27;</span> , arr3 )</span><br><span class="line"><span class="comment"># [[1]</span></span><br><span class="line"><span class="comment">#  [5]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># [[2 3]</span></span><br><span class="line"><span class="comment">#  [6 7]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># [[4]</span></span><br><span class="line"><span class="comment">#  [8]]</span></span><br></pre></td></tr></table></figure>
 <h4 id="2-1-5-数组的运算"><a href="#2-1-5-数组的运算" class="headerlink" title="2.1.5 数组的运算"></a>2.1.5 数组的运算</h4><h5 id="Ⅰ-数组与系数之间的运算"><a href="#Ⅰ-数组与系数之间的运算" class="headerlink" title="Ⅰ 数组与系数之间的运算"></a>Ⅰ 数组与系数之间的运算</h5><p>Python 基础中，常用的运算符如下表所示，NumPy的运算符与之相同。</p>
-<p><img src="https://pic.imgdb.cn/item/6677d3d4d9c307b7e98ccf98.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/6677d3d4d9c307b7e98ccf98.png"></p>
 <p>这里仅以矩阵为例，向量与系数的操作与之相同。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建矩阵</span></span><br><span class="line">arr = np.arange(<span class="number">1</span>,<span class="number">9</span>).reshape(<span class="number">2</span>,<span class="number">4</span>)</span><br><span class="line"><span class="built_in">print</span>( arr )</span><br><span class="line"><span class="comment"># [[1 2 3 4]</span></span><br><span class="line"><span class="comment">#  [5 6 7 8]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr + <span class="number">10</span> ) <span class="comment"># 加法</span></span><br><span class="line"><span class="comment"># [[11 12 13 14]</span></span><br><span class="line"><span class="comment">#  [15 16 17 18]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr - <span class="number">10</span> ) <span class="comment"># 减法</span></span><br><span class="line"><span class="comment"># [[-9 -8 -7 -6]</span></span><br><span class="line"><span class="comment">#  [-5 -4 -3 -2]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr * <span class="number">10</span> ) <span class="comment"># 乘法</span></span><br><span class="line"><span class="comment"># [[10 20 30 40]</span></span><br><span class="line"><span class="comment">#  [50 60 70 80]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr / <span class="number">10</span> ) <span class="comment"># 除法</span></span><br><span class="line"><span class="comment"># [[0.1 0.2 0.3 0.4]</span></span><br><span class="line"><span class="comment">#  [0.5 0.6 0.7 0.8]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr ** <span class="number">2</span>) <span class="comment"># 平方</span></span><br><span class="line"><span class="comment"># [[01 04 09 16]</span></span><br><span class="line"><span class="comment">#  [25 36 49 64]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr // <span class="number">6</span>) <span class="comment"># 取整</span></span><br><span class="line"><span class="comment"># [[0 0 0 0]</span></span><br><span class="line"><span class="comment">#  [0 1 1 1]]</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>( arr % <span class="number">6</span>) <span class="comment"># 取余</span></span><br><span class="line"><span class="comment"># [[1 2 3 4]</span></span><br><span class="line"><span class="comment">#  [5 0 1 2]]</span></span><br></pre></td></tr></table></figure>
 <h5 id="Ⅱ-数组与数组之间的运算"><a href="#Ⅱ-数组与数组之间的运算" class="headerlink" title="Ⅱ 数组与数组之间的运算"></a>Ⅱ 数组与数组之间的运算</h5><p>同维度数组间的运算即对应元素之间的运算，这里仅以矩阵为例，向量与向量的操作与之相同。</p>
@@ -480,7 +480,7 @@
 </li>
 </ul>
 <h5 id="Ⅱ-语法不同点"><a href="#Ⅱ-语法不同点" class="headerlink" title="Ⅱ 语法不同点"></a>Ⅱ 语法不同点</h5><p>为找到NumPy 和PyTorch哪些语法不同，UP对本文档进行了替换操作，将np改为torch，将array改为tensor，并重新运行所有代码，得出结论：<strong>PyTorch只是少量修改了NumPy 的部分函数或方法</strong>，现对其中不同的地方进行罗列。</p>
-<p><img src="https://pic.imgdb.cn/item/6677e61ed9c307b7e9b196e7.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/6677e61ed9c307b7e9b196e7.png"></p>
 <h3 id="2-2-Tensor学习"><a href="#2-2-Tensor学习" class="headerlink" title="2.2 Tensor学习"></a>2.2 Tensor学习</h3><div class="bvideo">
     <a href="//www.bilibili.com/video/BV1dp4y1U7mD" target="_blank">
         <div class="bvideo-box">
@@ -541,7 +541,7 @@
 </ul>
 <p>因此，使用 tensor 可以提高深度学习的计算效率和开发效率，并且方便实现自动求导和构建动态计算图。虽然 tensor  相对于numpy复杂一些，但是在深度学习中，使用 tensor 是非常普遍和必要的。</p>
 <h4 id="2-2-2-Tensor属性"><a href="#2-2-2-Tensor属性" class="headerlink" title="2.2.2 Tensor属性"></a>2.2.2 Tensor属性</h4><h5 id="Ⅰ-Tensor属性概述"><a href="#Ⅰ-Tensor属性概述" class="headerlink" title="Ⅰ Tensor属性概述"></a>Ⅰ Tensor属性概述</h5><p>在 PyTorch 0.4.0 之前，<code>torch.autograd</code> 包中存在 Variable 这种数据类型，主要是用于封装 Tensor，进行自动求导。Variable 主要包含下面几种属性。 在 PyTorch 0.4.0之后，Variable 并入了 Tensor。在之后版本的 Tensor 中，除了具有上面 Variable 的 5 个属性，还有另外 3 个属性。 </p>
-<p><img src="https://pic.imgdb.cn/item/6677f774d9c307b7e9d1966b.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/6677f774d9c307b7e9d1966b.png"></p>
 <ul>
 <li>data：被包装的Tensor；</li>
 <li>grad：data的梯度；</li>
@@ -553,8 +553,8 @@
 <li>device：张量所在设备 (CPU/GPU)，GPU 是加速计算的关键</li>
 </ul>
 <h5 id="Ⅱ-Tensor数据类型"><a href="#Ⅱ-Tensor数据类型" class="headerlink" title="Ⅱ Tensor数据类型"></a>Ⅱ Tensor数据类型</h5><p>torch.dtype属性标识了torch.Tensor的数据类型。PyTorch有八种不同的数据类型：</p>
-<p><img src="https://pic.imgdb.cn/item/6677f829d9c307b7e9d32edf.png" alt="8a85fcc7257c4b34890002090a7f007e.png"></p>
-<h5 id="Ⅲ-Tensor所在设备"><a href="#Ⅲ-Tensor所在设备" class="headerlink" title="Ⅲ Tensor所在设备"></a>Ⅲ Tensor所在设备</h5><p><img src="https://pic.imgdb.cn/item/6677f871d9c307b7e9d3c2a0.png" alt="64d489edcf384fbc81c0e9942725fecf.png"></p>
+<p><img src="https://pic.imgdb.cn/item/6677f829d9c307b7e9d32edf.png"></p>
+<h5 id="Ⅲ-Tensor所在设备"><a href="#Ⅲ-Tensor所在设备" class="headerlink" title="Ⅲ Tensor所在设备"></a>Ⅲ Tensor所在设备</h5><p><img src="https://pic.imgdb.cn/item/6677f871d9c307b7e9d3c2a0.png"></p>
 <p>如图所示，我们可以看到每种类型的数据都有一个CPU和一个GPU版本，因此我们对张量进行处理的时候需要指定一个设备，它要么是CPU要么是GPU，这是数据被分配的位置，这决定了给定张量的张量计算位置。</p>
 <p>Pytorch支持多种设备的使用，我们可以用<code>torch.device</code>来创建一个设备，并指定索引，例如：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">device=torch.device(<span class="string">&#x27;cuda:0&#x27;</span>)</span><br></pre></td></tr></table></figure>
@@ -609,19 +609,19 @@
 <ul>
 <li>标量就是0维张量，只有一个数字，没有维度。</li>
 </ul>
-<p><img src="https://pic.imgdb.cn/item/66780640d9c307b7e9ecbb31.png" alt="image.png" style="zoom:50%"></p>
+<p><img src="https://pic.imgdb.cn/item/66780640d9c307b7e9ecbb31.png" style="zoom:50%"></p>
 <ul>
 <li>向量就是1维张量，是有顺序的数字，但没有“行”或“列”的区分。</li>
 </ul>
-<p><img src="https://pic.imgdb.cn/item/667806f9d9c307b7e9edf7f5.png" alt="image.png" style="zoom:60%"></p>
+<p><img src="https://pic.imgdb.cn/item/667806f9d9c307b7e9edf7f5.png" style="zoom:60%"></p>
 <ul>
 <li>矩阵就是2维张量，有形状，行和列。</li>
 </ul>
-<p><img src="https://pic.imgdb.cn/item/667807dad9c307b7e9ef8f1b.png" alt="image.png" style="zoom:60%"></p>
+<p><img src="https://pic.imgdb.cn/item/667807dad9c307b7e9ef8f1b.png" style="zoom:60%"></p>
 <ul>
 <li>3维张量</li>
 </ul>
-<p><img src="https://pic.imgdb.cn/item/66780b34d9c307b7e9f57e7b.png" alt="image.png" style="zoom:60%"></p>
+<p><img src="https://pic.imgdb.cn/item/66780b34d9c307b7e9f57e7b.png" style="zoom:60%"></p>
 <blockquote>
 <p><strong>注：3维张量的大小输出为torch.Size(C=3, H=28, W=28)可以理解为：</strong></p>
 <p>1张C=3(RGB)通道的28*28的图片。</p>
@@ -629,7 +629,7 @@
 <ul>
 <li>4维张量</li>
 </ul>
-<p><img src="https://pic.imgdb.cn/item/66782071d9c307b7e9220dbc.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/66782071d9c307b7e9220dbc.png"></p>
 <blockquote>
 <p><strong>注：4维张量的大小输出为torch.Size(N=2, C=3, H=28, W=28)可以理解为：</strong></p>
 <p>N=2张C=3(RGB)通道的28*28的图片。</p>
@@ -658,7 +658,7 @@
 <p><strong>(3) 矩阵运算</strong> </p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x.t()                         <span class="comment"># 矩阵转置</span></span><br><span class="line">x.transpose([<span class="number">1</span>, <span class="number">0</span>])           <span class="comment"># 交换第 0 维与第 1 维的顺序</span></span><br><span class="line">x.norm(<span class="string">&#x27;fro&#x27;</span>)                 <span class="comment"># 矩阵的弗罗贝尼乌斯范数</span></span><br><span class="line">x.dist(y, p=<span class="number">2</span>)                <span class="comment"># 矩阵（x-y）的2范数</span></span><br><span class="line">x.matmul(y)                   <span class="comment"># 矩阵乘法</span></span><br></pre></td></tr></table></figure>
 <p>2.2.6 Tensor的广播机制[<a target="_blank" rel="noopener" href="https://blog.csdn.net/xu1129005165/article/details/130727373?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522171910922016800227421466%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;request_id=171910922016800227421466&amp;biz_id=0&amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-4-130727373-null-null.142^v100^control&amp;utm_term=pytorch%20tensor&amp;spm=1018.2226.3001.4187">参考</a>]</p>
-<p><img src="https://pic.imgdb.cn/item/667824b7d9c307b7e92b4c85.png" alt="229f2794d5af4d97ab0a37412bdc5531.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667824b7d9c307b7e92b4c85.png"></p>
 <h3 id="2-3-Pandas学习"><a href="#2-3-Pandas学习" class="headerlink" title="2.3 Pandas学习"></a>2.3 Pandas学习</h3><div class="bvideo">
     <a href="//www.bilibili.com/video/BV1hP41197we" target="_blank">
         <div class="bvideo-box">
@@ -709,7 +709,7 @@
 <p><a target="_blank" rel="noopener" href="https://mofanpy.com/tutorials/data-manipulation/pandas/why/">参考链接2：为什么用 Pandas - 莫凡Python</a></p>
 <h4 id="2-3-1-对象的创建"><a href="#2-3-1-对象的创建" class="headerlink" title="2.3.1 对象的创建"></a>2.3.1 对象的创建</h4><p>导入Pandas时，通常给其一个别名“pd”，即 <code>import pandas as pd</code>。</p>
 <p>作为标签库，Pandas对象在NumPy数组基础上给予其行列标签。可以说：</p>
-<p><img src="https://pic.imgdb.cn/item/667826b1d9c307b7e92fb32c.png" alt="image.png" style="zoom:60%"></p>
+<p><img src="https://pic.imgdb.cn/item/667826b1d9c307b7e92fb32c.png" style="zoom:60%"></p>
 <p>Pandas中，所有数组特性仍在，Pandas的数据以NumPy数组的方式存储。</p>
 <h5 id="Ⅰ-一维对象的创建"><a href="#Ⅰ-一维对象的创建" class="headerlink" title="Ⅰ 一维对象的创建"></a>Ⅰ 一维对象的创建</h5><p><strong>(1) 字典创建法</strong></p>
 <p>NumPy中，可以通过<code>np.array()</code>函数，将Python列表转化为NumPy数组；同样，Pandas中，可以通过 <code>pd.Series()</code>函数，将Python字典转化为 Series 对象</p>
@@ -814,9 +814,9 @@
 <p><strong>(2) 二维对象填充</strong></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">v=[[<span class="literal">None</span>,<span class="literal">None</span>],[<span class="number">64</span>,<span class="literal">None</span>],[<span class="number">72</span>,<span class="number">3</span>],[<span class="number">82</span>,<span class="number">4</span>]]</span><br><span class="line">i = [<span class="string">&#x27;1号&#x27;</span>, <span class="string">&#x27;2号&#x27;</span>, <span class="string">&#x27;3号&#x27;</span>, <span class="string">&#x27;4号&#x27;</span>]</span><br><span class="line">c = [<span class="string">&#x27;年龄&#x27;</span>, <span class="string">&#x27;牌照&#x27;</span>]</span><br><span class="line">df = pd.DataFrame(v,index=i,columns=c)</span><br><span class="line"><span class="built_in">print</span>(df)</span><br><span class="line"><span class="comment"># 用常数0填充</span></span><br><span class="line">df1 = df.fillna(<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(df1)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用均值填充</span></span><br><span class="line">df2 = df.fillna(np.mean(df))</span><br><span class="line"><span class="built_in">print</span>(df2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 用前值填充</span></span><br><span class="line">df3 = df.fillna(method=<span class="string">&#x27;ffill&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(df3)</span><br><span class="line"><span class="comment">#       年龄   牌照</span></span><br><span class="line"><span class="comment"># 1号   NaN  NaN</span></span><br><span class="line"><span class="comment"># 2号  64.0  NaN</span></span><br><span class="line"><span class="comment"># 3号  72.0  3.0</span></span><br><span class="line"><span class="comment"># 4号  82.0  4.0</span></span><br><span class="line"><span class="comment"># 注意，前值没有，故仍用NaN</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 用后值填充</span></span><br><span class="line">df4 = df.fillna(method=<span class="string">&#x27;bfill&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(df4)</span><br></pre></td></tr></table></figure>
 <h4 id="2-3-6-导入-Excel-文件"><a href="#2-3-6-导入-Excel-文件" class="headerlink" title="2.3.6 导入 Excel 文件"></a>2.3.6 导入 Excel 文件</h4><h5 id="Ⅰ-创建-Excel-文件"><a href="#Ⅰ-创建-Excel-文件" class="headerlink" title="Ⅰ 创建 Excel 文件"></a>Ⅰ 创建 Excel 文件</h5><p>首先，创建 Excel 文件，录入信息，第一列为index，第一行为columns。</p>
-<p><img src="https://pic.imgdb.cn/item/667aa931d9c307b7e9aaec4f.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667aa931d9c307b7e9aaec4f.png"></p>
 <p>如果你的数据没有index和columns，也即你只是想导入一个数组，那么也请先补上行列标签，后续用<code>.values</code>属性就能将二维对象转换为数组。</p>
-<p><img src="https://pic.imgdb.cn/item/667aa9c8d9c307b7e9abe65f.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667aa9c8d9c307b7e9abe65f.png"></p>
 <p>接着，将其另存为为CSV文件。</p>
 <h5 id="Ⅱ-放入项目文件夹"><a href="#Ⅱ-放入项目文件夹" class="headerlink" title="Ⅱ 放入项目文件夹"></a>Ⅱ 放入项目文件夹</h5><p>将刚刚另存为的 CSV 文件放置工程项目文件夹。</p>
 <h5 id="Ⅲ-导入Excel信息"><a href="#Ⅲ-导入Excel信息" class="headerlink" title="Ⅲ 导入Excel信息"></a>Ⅲ 导入Excel信息</h5><ul>
@@ -830,15 +830,15 @@
 </li>
 </ul>
 <h4 id="2-3-7-数据分析"><a href="#2-3-7-数据分析" class="headerlink" title="2.3.7 数据分析"></a>2.3.7 数据分析</h4><h5 id="Ⅰ-导入信息"><a href="#Ⅰ-导入信息" class="headerlink" title="Ⅰ 导入信息"></a>Ⅰ 导入信息</h5><p>首先，准备好Excel数据表格。</p>
-<p><img src="https://pic.imgdb.cn/item/667aad34d9c307b7e9b1e096.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667aad34d9c307b7e9b1e096.png"></p>
 <p>发现没有行标签,因此需要在最左侧快速填充一列顺序数字：</p>
-<p><img src="https://pic.imgdb.cn/item/667aad6ed9c307b7e9b23e74.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667aad6ed9c307b7e9b23e74.png"></p>
 <p>导入表格到python中。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment">#导入Pandas对象</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;行星数据.csv&#x27;</span>, index_col=<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
 <h5 id="Ⅱ-聚合方法"><a href="#Ⅱ-聚合方法" class="headerlink" title="Ⅱ 聚合方法"></a>Ⅱ 聚合方法</h5><p>可在输出 df时，对其使用<code>.head()</code>方法，使其仅输出前五行。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment">#导入Pandas对象</span></span><br><span class="line">df = pd.read_csv(<span class="string">&#x27;行星数据.csv&#x27;</span>, index_col=<span class="number">0</span>)</span><br><span class="line"><span class="built_in">print</span>(df.head())</span><br><span class="line"><span class="comment">#    发现时间  发现数量   观测方法    行星质量   距地距离       轨道周期</span></span><br><span class="line"><span class="comment"># 0  1982     1   径向速度  11.680  40.57  29.726245</span></span><br><span class="line"><span class="comment"># 1  1992     3  脉冲行星法   2.000    NaN  12.797459</span></span><br><span class="line"><span class="comment"># 2  1992     3  脉冲行星法   3.000    NaN  93.576595</span></span><br><span class="line"><span class="comment"># 3  1994     3  脉冲行星法   4.000    NaN  83.094802</span></span><br><span class="line"><span class="comment"># 4  1995     1   径向速度   0.472  15.36  79.473673</span></span><br></pre></td></tr></table></figure>
 <p>NumPy中所有的聚合函数对Pandas对象均适用。此外，Pandas将这些函数变为对象的方法，这样<strong>不导入NumPy 也可使用</strong>。</p>
-<p><img src="https://pic.imgdb.cn/item/667aaf23d9c307b7e9b53fb2.png" alt="image.png"></p>
+<p><img src="https://pic.imgdb.cn/item/667aaf23d9c307b7e9b53fb2.png"></p>
 <p>在这些方法中，像 NumPy中一样，有默认值为0的参数axis。一般不要将其数值手动设定为1，因为这种情况在数据分析中毫无意义。</p>
 <p> 此外，这些方法都忽略了缺失值，属于NumPy中聚合函数的安全版本。</p>
 <h5 id="Ⅲ-描述方法"><a href="#Ⅲ-描述方法" class="headerlink" title="Ⅲ 描述方法"></a>Ⅲ 描述方法</h5><p>在数据分析中用以上方法挨个查看未免太过麻烦，可以使用 <code>.describe()</code> 方法直接查看所有聚合函数的信息。</p>
@@ -1483,6 +1483,22 @@
     
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 
 </html>
