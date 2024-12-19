@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">24.9k</span>
+            <span class="post-count">25.4k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">103 分钟</span>
+            <span class="post-count">104 分钟</span>
         </span>
     </span>
 </div>
@@ -1444,6 +1444,29 @@
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">self.属性名</span><br></pre></td></tr></table></figure>
 <p>示例</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 定义类</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Washer</span>():</span></span><br><span class="line">	<span class="function"><span class="keyword">def</span> <span class="title">print_info</span>(<span class="params">self</span>):</span></span><br><span class="line">		<span class="comment"># 类里面获取实例属性</span></span><br><span class="line">		<span class="built_in">print</span>(<span class="string">f&#x27;haier1洗衣机的宽度是<span class="subst">&#123;self.width&#125;</span>&#x27;</span>)</span><br><span class="line">		<span class="built_in">print</span>(<span class="string">f&#x27;haier1洗衣机的高度是<span class="subst">&#123;self.height&#125;</span>&#x27;</span>)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line"><span class="comment"># 创建对象</span></span><br><span class="line">haier1 = Washer()</span><br><span class="line"><span class="comment"># 添加实例例属性</span></span><br><span class="line">haier1.width = <span class="number">500</span></span><br><span class="line">haier1.height = <span class="number">800</span></span><br><span class="line">haier1.print_info()</span><br></pre></td></tr></table></figure>
+<h5 id="四-类变量和实例变量"><a href="#四-类变量和实例变量" class="headerlink" title="(四) 类变量和实例变量"></a>(四) 类变量和实例变量</h5><ul>
+<li><strong>类变量</strong></li>
+</ul>
+<p>类变量是在类定义中直接声明的变量，它属于类本身，而不是类的任何特定实例。类变量在内存中只有一个副本，无论创建了多少个类的实例，这个变量都被所有实例共享。在类变量前不使用<code>self</code>（或任何其他实例引用）。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>:</span>  </span><br><span class="line">    class_variable = <span class="string">&quot;这是一个类变量&quot;</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 访问类变量  </span></span><br><span class="line"><span class="built_in">print</span>(MyClass.class_variable)  <span class="comment"># 这是一个类变量  </span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 通过实例也可以访问，但仍然是同一个变量  </span></span><br><span class="line">obj = MyClass()  </span><br><span class="line"><span class="built_in">print</span>(obj.class_variable)  <span class="comment"># 这是一个类变量</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>实例变量</strong></li>
+</ul>
+<p>实例变量（也称为对象变量）属于类的实例。每个实例都有自己独立的实例变量副本。实例变量通常在类的方法中通过<code>self</code>参数来定义和访问。<code>self</code>是一个对当前实例的引用，允许你访问该实例的属性和方法。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyClass</span>:</span>  </span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self, value</span>):</span>  </span><br><span class="line">        self.instance_variable = value  <span class="comment"># 这是一个实例变量  </span></span><br><span class="line">  </span><br><span class="line"><span class="comment"># 实例化对象并设置实例变量  </span></span><br><span class="line">obj1 = MyClass(<span class="string">&quot;实例变量1&quot;</span>)  </span><br><span class="line">obj2 = MyClass(<span class="string">&quot;实例变量2&quot;</span>)  </span><br><span class="line">  </span><br><span class="line"><span class="comment"># 访问实例变量  </span></span><br><span class="line"><span class="built_in">print</span>(obj1.instance_variable)  <span class="comment"># 实例变量1  </span></span><br><span class="line"><span class="built_in">print</span>(obj2.instance_variable)  <span class="comment"># 实例变量2</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>小结</strong><ul>
+<li><strong>类变量</strong>：不使用<code>self</code>，直接定义在类体中，属于类本身，被所有实例共享。</li>
+<li><strong>实例变量</strong>：通过<code>self</code>在类的方法中定义和访问，属于类的实例，每个实例都有自己的独立副本。</li>
+</ul>
+</li>
+<li><strong>注意事项</strong><ul>
+<li>你可以通过实例访问类变量，但若通过实例修改了类变量的值，那么这个修改会影响到所有实例，因为类变量在内存中只有一个副本。</li>
+<li>类变量通常用于定义那些不需要为每个实例单独存储的、所有实例共享的数据。</li>
+<li>实例变量则用于存储那些不同实例的数据会有不同的情况（例如不同的冰箱长宽不同）。</li>
+</ul>
+</li>
+</ul>
 <h4 id="7-4-魔法方法"><a href="#7-4-魔法方法" class="headerlink" title="7.4 魔法方法"></a>7.4 魔法方法</h4><p>在Python中，<code>__xx__()</code>的函数叫做魔法方法，指的是具有<strong>特殊功能</strong>的函数。</p>
 <p>魔法方法是python内置方法，<strong>不需要主动调用</strong>，存在的目的是为了给python的解释器进行调用，几乎每个魔法方法都有一个对应的内置函数，或者运算符，当我们对这个对象使用这些函数或者运算符时就会调用类中的对应魔法方法，可以理解为重写这些python的内置函数(类似于方法重载)。 </p>
 <h5 id="一-init-魔法方法"><a href="#一-init-魔法方法" class="headerlink" title="(一) __init__()魔法方法"></a>(一) <code>__init__()</code>魔法方法</h5><p>思考：洗衣机的宽度高度是与生俱来的属性，可不可以在生产过程中就赋予这些属性呢？<br>答：理应如此。</p>
@@ -2347,6 +2370,22 @@
     
 
   </div>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [ ["$","$"], ["\\(","\\)"] ],
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            processEscapes: true
+        }
+    });
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax();
+        for (var i = 0; i < all.length; ++i)
+            all[i].SourceElement().parentNode.className += ' has-jax';
+    });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
 </body>
 
 </html>
