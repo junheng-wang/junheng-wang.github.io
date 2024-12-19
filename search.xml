@@ -3762,6 +3762,9 @@ W:=W-\alpha \frac{d W}{\sqrt{S_{W}}+\varepsilon}, b:=b-\alpha \frac{d b}{\sqrt{S
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">对象名 = 类名()</span><br></pre></td></tr></table></figure>
 <p>示例</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 创建对象</span></span><br><span class="line">haier1 = Washer()</span><br><span class="line"><span class="comment"># &lt;__main__.Washer object at 0x0000018B7B224240&gt;</span></span><br><span class="line"><span class="built_in">print</span>(haier1)</span><br><span class="line"><span class="comment"># haier对象调用实例方法</span></span><br><span class="line">haier1.wash()</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：在python下实例化一个类对象时一般都会在类名后加上小括号，但如果不带括号会执行什么操作呢？ 如果不带括号本质上是给类对象起了一个<strong>别名</strong>，类似C语言中的<strong>typedef</strong>关键字，而并<strong>不会创建一个实例</strong>。 </p>
+</blockquote>
 <p><strong>(3) self</strong></p>
 <p>self指的是调用该函数的对象。</p>
 <p>示例</p>
