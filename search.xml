@@ -15480,7 +15480,69 @@ B^x \text{ mod } M</script><p>这样，如果只给$B$、$M$和余数，很难�
   <entry>
     <title>深度学习知识查漏补缺</title>
     <url>/2024/08/06/Foundation-of-DeepLearning-4/</url>
-    <content><![CDATA[<h3 id="1-dropout层原理和反向传播"><a href="#1-dropout层原理和反向传播" class="headerlink" title="1 dropout层原理和反向传播"></a>1 dropout层原理和反向传播</h3><p><a href="https://blog.csdn.net/oBrightLamp/article/details/84105097">dropout函数详解及反向传播中的梯度求导 - CSDN</a></p>
+    <content><![CDATA[<h3 id="1-dropout层原理和反向传播"><a href="#1-dropout层原理和反向传播" class="headerlink" title="1 dropout层原理和反向传播"></a>1 dropout层原理和反向传播</h3><h4 id="1-1-dropout-的概念"><a href="#1-1-dropout-的概念" class="headerlink" title="1.1 dropout 的概念"></a>1.1 dropout 的概念</h4><p>深度神经网络结构的过拟合是指：在训练集上的正确率很高, 但在测试集上的准确率很低。为了缓解网络过拟合的问题，其中一种常见的办法是使用 dropout 函数。</p>
+<p>dropout 是指在深度网络的训练中，以一定的概率随机地 “临时丢弃” 一部分神经元节点，具体来讲，<strong>dropout作用于每份小批量训练数据</strong>，由于其随机丢弃部分神经元的机制, 相当于每次迭代都在训练不同结构的神经网络。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">dropout 前网络结构示意</th>
+<th style="text-align:center">dropout 后网络结构示意</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><img src="https://pic.imgdb.cn/item/676a7470d0e0a243d4e93a9a.png"></td>
+<td style="text-align:center"><img src="https://pic.imgdb.cn/item/676a7484d0e0a243d4e93a9c.png"></td>
+</tr>
+</tbody>
+</table>
+</div>
+<h4 id="1-2-dropout-的作用"><a href="#1-2-dropout-的作用" class="headerlink" title="1.2 dropout 的作用"></a>1.2 dropout 的作用</h4><p>dropout 最直接的作用就是可以提升模型的泛化能力，提高模型的健壮性，提高通用性。</p>
+<blockquote>
+<p>通俗的理解：</p>
+<p>假设某公司存在一个职能稳定，合理分工团队。因为某些不可避免的原因，该团队的成员每天都有 50% 概率不能参与工作。为了完成任务，需要其他同事加班完成缺席员工任务。一段时间后, 该团队的成员普遍学会了其他同事的相关工作技能。于是，该团队拥有了更好的泛化能力。</p>
+</blockquote>
+<h4 id="1-3-训练过程中的-dropout"><a href="#1-3-训练过程中的-dropout" class="headerlink" title="1.3 训练过程中的 dropout"></a>1.3 训练过程中的 dropout</h4><p>为了定义 dropout，我们需要一个随机数生成函数<code>rand()</code>，每一次调用都会重新生成一个<code>0~1</code>之间的小数：</p>
+<script type="math/tex; mode=display">
+r = \text{rand()} \in (0,1)</script><p>假设每一次 dropout 都以$0&lt;p&lt;1$的概率随机丢弃一个节点，则 dropout 函数的定义为：</p>
+<script type="math/tex; mode=display">
+\text{dropout}(x) = 
+\begin{cases}
+0&, r < p \\
+\dfrac{x}{1-p}&, r \geq p
+\end{cases}</script><p>将通过的信号被放大$\dfrac{1}{1-p}$倍，保证总体信号强度不变 (加班)。</p>
+<p>dropout函数是逐个元素处理的, 并不需要写成向量的形式，但为了方便编程实现，这里将其进行改编成向量的形式：考虑一个输入向量$\boldsymbol x$，同时定义一个随机掩码函数和一个随机掩码向量$\boldsymbol m$：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+& \boldsymbol x = (x_1, x_2, \cdots, x_k) \\
+& r_i = \text{rand}() \\
+& m_i = \text{randomMask}(x_i) = \begin{cases}
+0&, r < p \\
+\dfrac{1}{1-p}&, r \geq p
+\end{cases}
+\end{align}</script><p>dropout函数可用向量运算表示为：</p>
+<script type="math/tex; mode=display">
+\text{dropout}(\boldsymbol x) = \boldsymbol x \odot \boldsymbol m = (x_1m_1, x_2m_2, \cdots, x_km_k)</script><h4 id="1-4-测试过程中的-dropout"><a href="#1-4-测试过程中的-dropout" class="headerlink" title="1.4 测试过程中的 dropout"></a>1.4 测试过程中的 dropout</h4><p>训练完成后，恢复完整的网络结构：</p>
+<script type="math/tex; mode=display">
+\text{dropout}(\boldsymbol x) = \boldsymbol x</script><h4 id="1-5-反向传播"><a href="#1-5-反向传播" class="headerlink" title="1.5 反向传播"></a>1.5 反向传播</h4><p>考虑一个输入向量$\boldsymbol x$，经丢弃概率为$p$的dropout函数变换后得到向量$\boldsymbol d$，往前 forward 传播得到误差值 error (标量 e )，求在训练过程中 e 对 $\boldsymbol x$ 的梯度：</p>
+<script type="math/tex; mode=display">
+\begin{align}
+& \boldsymbol x = (x_1, x_2, \cdots, x_k) \\
+& \boldsymbol d = \text{dropout}(\boldsymbol x) \\
+& e = \text{forward}(\boldsymbol d) 
+\end{align}</script><p>求梯度：</p>
+<script type="math/tex; mode=display">
+\dfrac{\text{d} e}{\text{d}x_i} = \dfrac{\text{d} e}{\text{d}d_i} \dfrac{\text{d} d_i}{\text{d}x_i}</script><p>其中：</p>
+<script type="math/tex; mode=display">
+\dfrac{\text{d} d_i}{\text{d}x_i} = m_i = \begin{cases}
+0&, r_i < p \\
+\dfrac{1}{1-p}&, r_i \geq p
+\end{cases}</script><p>故有：</p>
+<script type="math/tex; mode=display">
+\dfrac{\text{d} e}{\text{d}x_i}  = \dfrac{\text{d} e}{\text{d}d_i} \odot m_i</script><p>向量$\dfrac{\text{d} e}{\text{d}d_i}$由上游负责计算，是已知的。</p>
+<p><a href="https://blog.csdn.net/oBrightLamp/article/details/84105097">dropout函数详解及反向传播中的梯度求导 - CSDN</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/35948928">dropout正则化的反向传播的代码实现 - 知乎</a></p>
 <h3 id="2-池化层的反向传播"><a href="#2-池化层的反向传播" class="headerlink" title="2 池化层的反向传播"></a>2 池化层的反向传播</h3><p><a href="https://blog.csdn.net/qq_36561737/article/details/120066997">MaxPooling和AvgPooling的求导过程 - CSDN</a><br><a href="https://blog.csdn.net/qq_50710984/article/details/123378960">池化层的反向传播 - CSDN</a><br><a href="https://www.bilibili.com/video/BV1Dd4y1Q7Qq/?p=126&amp;vd_source=b11850f360abfce51bee36035b825020">33.7.13 池化层的反向传播 - bilibili</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css">]]></content>
       <categories>
