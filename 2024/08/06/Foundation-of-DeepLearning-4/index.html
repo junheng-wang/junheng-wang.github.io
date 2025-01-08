@@ -126,7 +126,7 @@ L(k, b)
 & = (y_1 - kx_1 - b)^2 + (y_2 - kx_2 - b)^2 + (y_3 - kx_3 - b)^2 + (y_4 - kx_4 - b)^2 + (y_5 - kx_5 - b)^2 \\
 \end{align}</script><p><strong>梯度计算</strong>：损失函数对$k$和$b$的梯度为</p>
 <script type="math/tex; mode=display">
-\dfrac{\partial L}{\partial k} = -2\sum_{i=1}^{n=5}(y_i - kx_i - b)x_i \quad \text{和} \quad -\dfrac{\partial L}{\partial b} = -2\sum_{i=1}^{n=5}(y_i - kx_i - b)</script><p><strong>梯度下降更新规则</strong>：通过梯度下降法，逐步更新$k$和$b$</p>
+\dfrac{\partial L}{\partial k} = -2\sum_{i=1}^{n=5}(y_i - kx_i - b)x_i \quad \text{和} \quad \dfrac{\partial L}{\partial b} = -2\sum_{i=1}^{n=5}(y_i - kx_i - b)</script><p><strong>梯度下降更新规则</strong>：通过梯度下降法，逐步更新$k$和$b$</p>
 <script type="math/tex; mode=display">
 k = k - \eta \dfrac{\partial L}{\partial k} \quad \text{和} \quad b = b - \eta\dfrac{\partial L}{\partial b}</script><p><strong>具体步骤</strong></p>
 <p> （1）初始化参数</p>
@@ -138,33 +138,23 @@ k = k - \eta \dfrac{\partial L}{\partial k} \quad \text{和} \quad b = b - \eta\
 <p>（2）迭代过程</p>
 <p>我们以第一次迭代为例，详细说明每一步的计算。</p>
 <p>第一次迭代：</p>
-<ol>
-<li>计算预测值：</li>
-</ol>
+<p></p><p style="text-indent:2em">1. 计算预测值：</p><p></p>
 <script type="math/tex; mode=display">
-\hat y_i  = kx_i+b=0.0⋅x_i+0.0=0.0 \qquad i = 1,2,3,4,5</script><ol>
-<li>带入梯度计算公式：</li>
-</ol>
+\hat y_i  = kx_i+b=0.0⋅x_i+0.0=0.0 \qquad i = 1,2,3,4,5</script><p></p><p style="text-indent:2em">2. 带入梯度计算公式：</p><p></p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \frac{\partial L}{\partial k} & =-2\sum_{i=1}^{n=5}(y_i-kx_i-b)x_i & \frac{\partial L}{\partial b} & =-2\sum_{i=1}^{n=5}(y_i-kx_i-b) \\
  & =-2\sum_{i=1}^{n=5}y_ix_i & & =-2\sum_{i=1}^{n=5}y_i \\
  & =-2(2\cdot1+4\cdot2+5\cdot3+4\cdot4+5\cdot5) & & =-2(2+4+5+4+5) \\
  & =-132 & & =-40
-\end{aligned}</script><ol>
-<li>更新参数：<script type="math/tex; mode=display">
+\end{aligned}</script><p></p><p style="text-indent:2em"> 3. 更新参数：</p><p></p>
+<script type="math/tex; mode=display">
 k = k - \eta \dfrac{\partial L}{\partial k} = 0.0 − 0.01⋅(−132) = 1.32 \\
-b = b - \eta\dfrac{\partial L}{\partial b} = 0.0−0.01⋅(−40)=0.4</script></li>
-</ol>
-<p>第二次迭代：</p>
-<ol>
-<li>计算预测值：</li>
-</ol>
+b = b - \eta\dfrac{\partial L}{\partial b} = 0.0−0.01⋅(−40)=0.4</script><p>第二次迭代：</p>
+<p></p><p style="text-indent:2em"> 1. 计算预测值：</p><p></p>
 <script type="math/tex; mode=display">
 \hat y_i  = kx_i+b = 1.32⋅x_i + 0.4</script><p>经计算，对于$x=[1,2,3,4,5]$，$\hat y = [1.72,3.04,4.36,5.68,7.0]$。 </p>
-<ol>
-<li>带入梯度计算公式：</li>
-</ol>
+<p></p><p style="text-indent:2em"> 2. 带入梯度计算公式：</p><p></p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 \frac{\partial L}{\partial k} & =-2\sum_{i=1}^{n=5}(y_i-kx_i-b)x_i & \frac{\partial L}{\partial b} & =-2\sum_{i=1}^{n=5}(y_i-kx_i-b) \\
@@ -172,14 +162,12 @@ b = b - \eta\dfrac{\partial L}{\partial b} = 0.0−0.01⋅(−40)=0.4</script></
  & =−2(0.28⋅1+0.96⋅2+0.64⋅3 & & =−2(0.28+0.96+0.64−1.68−2.0) \\
  &  \quad \qquad +(−1.68)⋅4+(−2.0)⋅5) \\
  & =25.2  & & =3.6
-\end{aligned}</script><ol>
-<li>更新参数： </li>
-</ol>
+\end{aligned}</script><p></p><p style="text-indent:2em"> 3. 更新参数： </p><p></p>
 <script type="math/tex; mode=display">
 k = k - \eta \dfrac{\partial L}{\partial k} = 1.32 − 0.01⋅25.2 = 1.068 \\
 b = b - \eta\dfrac{\partial L}{\partial b} = 0.4−0.01⋅3.6 = 0.364</script><p>继续迭代：</p>
 <p>重复上述过程，直到达到指定的迭代次数（如 1000 次）或损失函数收敛。</p>
-<p>可以看到，<font color="red">损失函数是<strong>权重的函数</strong>，而不是输入数据的函数。 梯度下降是对<strong>权重（参数）</strong>进行下降，而不是对输入数据&lt;/color&gt;。 </font></p>
+<p>可以看到，<font color="red">损失函数是<strong>权重的函数</strong>，而不是输入数据的函数。 梯度下降是对<strong>权重（参数）</strong>进行下降，而不是对输入数据</font>。 </p>
 <blockquote>
 <p>2025-01-07日晚上之所以花时间写下这部分内容，主要就是有一个小小的问题把我困绕了好久，那就是神经网络的损失函数：</p>
 <script type="math/tex; mode=display">
@@ -187,30 +175,32 @@ J = f(\boldsymbol W \boldsymbol X + \boldsymbol b) - \boldsymbol y</script><p>�
 </blockquote>
 <p><strong><font color="purple">补充</font></strong>：为什么神经网络利用梯度下降进行反向传播时，不像最小二乘一样使用全部的数据来计算呢？</p>
 <p>神经网络不一下子把所有数据全都喂进网络，再进行反向传播求解参数，主要有以下几个原因：</p>
-<ol>
-<li><strong>内存限制</strong></li>
-</ol>
-<p>训练大型神经网络时，数据集通常非常大。一次性将所有数据加载到内存中可能会导致内存不足的问题。</p>
-<ol>
-<li><strong>计算效率</strong></li>
-</ol>
-<p>现代硬件（如GPU和TPU）在处理大规模矩阵运算时非常高效，但它们在处理单个非常大的矩阵时可能不如处理多个较小的矩阵高效。通过将数据分成小批次，可以更好地利用这些硬件的并行计算能力，提高训练速度。</p>
-<ol>
-<li><strong>梯度估计的稳定性</strong></li>
-</ol>
-<p>在每次迭代中使用整个数据集来计算梯度，会导致梯度估计非常不稳定，因为每个梯度更新都基于整个数据集的统计特性。这可能导致训练过程波动较大，甚至可能使模型无法收敛。而使用小批次的数据来估计梯度，可以使梯度估计更加稳定，从而有助于更稳定的训练过程。</p>
-<ol>
-<li><strong>正则化效果</strong></li>
-</ol>
-<p>在小批次训练中，随机梯度下降（SGD）等优化算法引入了噪声，这种噪声有助于防止过拟合，起到一定的正则化效果。而在全量数据训练中，梯度更新过于平滑，可能会使模型过拟合训练数据。</p>
-<ol>
-<li><strong>在线学习与实时更新</strong></li>
-</ol>
-<p>在某些应用场景中，例如在线学习或实时更新模型，数据是持续到来的。在这种情况下，不可能一次性将所有数据加载到内存中进行处理。分批次处理数据使得模型能够逐步适应新数据，保持其性能。</p>
-<ol>
-<li><strong>分布式训练</strong></li>
-</ol>
-<p>在分布式训练环境中，数据需要被分割成小块并分发到不同的计算节点上。分批次处理数据使得这种分布式训练成为可能，并且可以有效地利用多台机器的计算资源。</p>
+<ul>
+<li><strong>内存限制</strong><ul>
+<li>训练大型神经网络时，数据集通常非常大。一次性将所有数据加载到内存中可能会导致内存不足的问题。</li>
+</ul>
+</li>
+<li><strong>计算效率</strong><ul>
+<li>现代硬件（如GPU和TPU）在处理大规模矩阵运算时非常高效，但它们在处理单个非常大的矩阵时可能不如处理多个较小的矩阵高效。通过将数据分成小批次，可以更好地利用这些硬件的并行计算能力，提高训练速度。</li>
+</ul>
+</li>
+<li><strong>梯度估计的稳定性</strong><ul>
+<li>在每次迭代中使用整个数据集来计算梯度，会导致梯度估计非常不稳定，因为每个梯度更新都基于整个数据集的统计特性。这可能导致训练过程波动较大，甚至可能使模型无法收敛。而使用小批次的数据来估计梯度，可以使梯度估计更加稳定，从而有助于更稳定的训练过程。</li>
+</ul>
+</li>
+<li><strong>正则化效果</strong><ul>
+<li>在小批次训练中，随机梯度下降（SGD）等优化算法引入了噪声，这种噪声有助于防止过拟合，起到一定的正则化效果。而在全量数据训练中，梯度更新过于平滑，可能会使模型过拟合训练数据。</li>
+</ul>
+</li>
+<li><strong>在线学习与实时更新</strong><ul>
+<li>在某些应用场景中，例如在线学习或实时更新模型，数据是持续到来的。在这种情况下，不可能一次性将所有数据加载到内存中进行处理。分批次处理数据使得模型能够逐步适应新数据，保持其性能。</li>
+</ul>
+</li>
+<li><strong>分布式训练</strong><ul>
+<li>在分布式训练环境中，数据需要被分割成小块并分发到不同的计算节点上。分批次处理数据使得这种分布式训练成为可能，并且可以有效地利用多台机器的计算资源。</li>
+</ul>
+</li>
+</ul>
 <h3 id="2-dropout层原理和反向传播"><a href="#2-dropout层原理和反向传播" class="headerlink" title="2 dropout层原理和反向传播"></a>2 dropout层原理和反向传播</h3><h4 id="2-1-dropout-的概念"><a href="#2-1-dropout-的概念" class="headerlink" title="2.1 dropout 的概念"></a>2.1 dropout 的概念</h4><p>深度神经网络结构的过拟合是指：在训练集上的正确率很高, 但在测试集上的准确率很低。为了缓解网络过拟合的问题，其中一种常见的办法是使用 dropout 函数。</p>
 <p>dropout 是指在深度网络的训练中，以一定的概率随机地 “临时丢弃” 一部分神经元节点，具体来讲，<strong>dropout作用于每份小批量训练数据</strong>，由于其随机丢弃部分神经元的机制, 相当于每次迭代都在训练不同结构的神经网络。</p>
 <div class="table-container">

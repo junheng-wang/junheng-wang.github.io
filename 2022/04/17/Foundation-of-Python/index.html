@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">25.4k</span>
+            <span class="post-count">25.6k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">104 分钟</span>
+            <span class="post-count">105 分钟</span>
         </span>
     </span>
 </div>
@@ -128,7 +128,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>169.0万</span></span>
+                        <span>169.4万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>4.9万</span></span></p>
@@ -1124,6 +1124,11 @@
 <blockquote>
 <p>若函数没有返回值，则可以使用<code>None</code>参数表明，如下代码示例：<code>def greet(name: int) -&gt; None:</code>。</p>
 </blockquote>
+<p style="text-indent:2em"> 插入：yield关键字</p>
+
+<p><code>yield</code>是一个类似<code>return</code>的关键字，迭代一次遇到<code>yield</code>时就返回<code>yield</code>后面的值。重点是：下一次迭代时，从上一次迭代遇到的<code>yield</code>后面的代码开始执行。</p>
+<p>简要理解：<code>yield</code>就是<code>return</code>返回一个值，并且记住这个返回的位置，下次迭代就从这个位置后开始。  </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#encoding:UTF-8  </span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">yield_test</span>(<span class="params">n</span>):</span>  </span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(n):  </span><br><span class="line">        <span class="keyword">yield</span> call(i)  </span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&quot;i=&quot;</span>,i)  </span><br><span class="line">    <span class="comment">#做一些其它的事情      </span></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;do something.&quot;</span>)      </span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;end.&quot;</span>)  </span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">call</span>(<span class="params">i</span>):</span>  </span><br><span class="line">    <span class="keyword">return</span> i*<span class="number">2</span>  </span><br><span class="line"></span><br><span class="line"><span class="comment">#使用for循环  </span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> yield_test(<span class="number">5</span>):  </span><br><span class="line">    <span class="built_in">print</span>(i,<span class="string">&quot;,&quot;</span>)</span><br></pre></td></tr></table></figure>
 <h5 id="三-函数的参数"><a href="#三-函数的参数" class="headerlink" title="(三) 函数的参数"></a>(三) 函数的参数</h5><p><strong>(0) 参数的类型</strong></p>
 <p>python中，在参数后面使用冒号的作用是为了指明参数的类型，如下述示例代码。</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">greet</span>(<span class="params">name: <span class="built_in">str</span></span>) -&gt; <span class="built_in">str</span>:</span> </span><br><span class="line">    <span class="keyword">return</span> <span class="string">f&quot;Hello, <span class="subst">&#123;name&#125;</span>!&quot;</span> </span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(greet(<span class="string">&#x27;Alice&#x27;</span>))</span><br></pre></td></tr></table></figure>
