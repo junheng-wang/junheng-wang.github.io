@@ -10601,11 +10601,26 @@ x & \boldsymbol y^{\mathrm H} \\
 <h5 id="1-3-4-绘图、字体设置"><a href="#1-3-4-绘图、字体设置" class="headerlink" title="1.3.4 绘图、字体设置"></a>1.3.4 绘图、字体设置</h5><p>王老师关于绘图、字体设置的一些简单设置：<code>PlotCurvesFontSizeFontName.m</code></p>
 <figure class="highlight matlab"><table><tr><td class="code"><pre><span class="line"><span class="comment">%% MATLAB曲线图示例设置字号字体</span></span><br><span class="line"></span><br><span class="line">clear all; clc; close all;</span><br><span class="line"><span class="comment">%% Lena512.bmp图像</span></span><br><span class="line"><span class="comment">%% X Y分别为编码比特率和峰值信噪比</span></span><br><span class="line">X1=[<span class="number">0.15</span> <span class="number">0.20</span> <span class="number">0.25</span> <span class="number">0.30</span> <span class="number">0.40</span> <span class="number">0.50</span> <span class="number">0.60</span> <span class="number">0.75</span> <span class="number">1.00</span> <span class="number">1.25</span>];</span><br><span class="line">X2=X1; X3=X1; X4=X1;</span><br><span class="line">Y1=[<span class="number">22.0370</span> <span class="number">23.4718</span> <span class="number">24.3595</span> <span class="number">25.1125</span> <span class="number">26.5516</span> <span class="number">27.8992</span> <span class="number">29.1981</span> <span class="number">30.8826</span> <span class="number">33.2239</span> <span class="number">35.0960</span>];</span><br><span class="line">Y2=[<span class="number">22.5249</span> <span class="number">23.5379</span> <span class="number">24.2606</span> <span class="number">24.9596</span> <span class="number">26.3507</span> <span class="number">27.5956</span> <span class="number">28.7035</span> <span class="number">30.0974</span> <span class="number">32.1077</span> <span class="number">33.7383</span>];</span><br><span class="line">Y3=[<span class="number">22.5594</span> <span class="number">23.6605</span> <span class="number">24.3931</span> <span class="number">25.1403</span> <span class="number">26.5922</span> <span class="number">27.8500</span> <span class="number">28.9936</span> <span class="number">30.4864</span> <span class="number">32.5300</span> <span class="number">34.1851</span>];</span><br><span class="line">Y4=[<span class="number">22.6049</span> <span class="number">23.7881</span> <span class="number">24.6194</span> <span class="number">25.4626</span> <span class="number">27.0361</span> <span class="number">28.3933</span> <span class="number">29.6686</span> <span class="number">31.3865</span> <span class="number">33.5905</span> <span class="number">35.3823</span>];</span><br><span class="line"><span class="built_in">plot</span>(X1, Y1, <span class="string">&#x27;- r .&#x27;</span>, X2, Y2, <span class="string">&#x27;-. b o&#x27;</span>, X3, Y3, <span class="string">&#x27;: m *&#x27;</span>, X4, Y4, <span class="string">&#x27;-- k p&#x27;</span>, <span class="string">&#x27;LineWidth&#x27;</span>, <span class="number">1</span>)</span><br><span class="line"><span class="built_in">legend</span>(<span class="string">&#x27;DCT-JPEG&#x27;</span>, <span class="string">&#x27;APWBT-JPEG&#x27;</span>, <span class="string">&#x27;APDCBT-JPEG&#x27;</span>, <span class="string">&#x27;APIDCBT-JPEG&#x27;</span>)</span><br><span class="line">axis([<span class="number">0</span>, <span class="number">1.4</span>, <span class="number">22</span>, <span class="number">36</span>]);</span><br><span class="line"><span class="comment">%% MATLAB的默认字体是Helvetica，fontname的设置，中文字体：宋体、楷体、仿宋、隶书、微软雅黑、幼圆等</span></span><br><span class="line"><span class="comment">%% 英文字体: Times New Roman, Arial, Bodoni, Calibri, Courier New, Frutiger, Futura, Garamond, Geogia, Platino Linotype, Verdana等</span></span><br><span class="line">xlabel(<span class="string">&#x27;\fontsize&#123;12&#125;\fontname&#123;宋体&#125;码率\fontname&#123;Times New Roman&#125;(bpp)&#x27;</span>)</span><br><span class="line">ylabel(<span class="string">&#x27;\fontsize&#123;12&#125;\fontname&#123;Times New Roman&#125;PSNR (dB)&#x27;</span>)</span><br><span class="line">set(gca, <span class="string">&#x27;xtick&#x27;</span>, [<span class="number">0</span>:<span class="number">0.2</span>:<span class="number">1.4</span>], <span class="string">&#x27;ytick&#x27;</span>, [<span class="number">22</span>:<span class="number">2</span>:<span class="number">36</span>], <span class="string">&#x27;FontSize&#x27;</span>, <span class="number">12</span>, <span class="string">&#x27;Fontname&#x27;</span>, <span class="string">&#x27;Times New Roman&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="2-Python编码规范"><a href="#2-Python编码规范" class="headerlink" title="2 Python编码规范"></a>2 Python编码规范</h3><h4 id="2-1-编码"><a href="#2-1-编码" class="headerlink" title="2.1 编码"></a>2.1 编码</h4><p>无特殊情况，建议Python脚本程序一律使用 UTF-8 编码，并且在文件头部必须加入<code>#-*-coding:utf-8-*-</code>标识，声明文件编码方式，程序文件编码要和声明编码保持一致。 </p>
-<h4 id="2-2-命名规范"><a href="#2-2-命名规范" class="headerlink" title="2.2 命名规范"></a>2.2 命名规范</h4><p><strong>模块</strong>： 模块尽量使用小写命名，首字母保持小写，尽量不要用下划线(除非多个单词，且数量不多的情况)</p>
+<h4 id="2-2-命名规范"><a href="#2-2-命名规范" class="headerlink" title="2.2 命名规范"></a>2.2 命名规范</h4><p><strong>文件/模块</strong>： </p>
+<ol>
+<li>小写字母，使用下划线：<code>Python</code> 的文件名通常是小写字母，单词之间使用下划线 (_) 来分隔。例如：<code>my_script.py</code>，<code>hello_world.py</code>。</li>
+<li>避免使用大写字母：<code>Python</code> 不推荐在文件名中使用大写字母。虽然操作系统允许使用，但遵循小写字母的规范可以增加代码的可读性和一致性。</li>
+<li>避免特殊字符和空格：尽量避免在文件名中使用特殊字符（如 !, @, #, &amp;, 空格等）。使用下划线来分隔单词。</li>
+</ol>
+<blockquote>
+<p>在<code>python</code>中，一个<code>python</code>文件（以<code>.py</code>为后缀名的文件）就叫作模块，每一个模块在python里都被看做是一个独立的文件。 使用模块也可以<strong>避免函数名称和变量名称重复</strong>，在不同的模块中可以存在相同名字的函数名和变量名。 </p>
+<p>简单了解一下<code>python中</code>模块、库、包之间的概念差异</p>
+<ul>
+<li>模块(<code>module</code>)其实就是<code>py</code>文件，里面定义了一些函数、类、变量等</li>
+<li>包(<code>package</code>)是多个模块的聚合体形成的文件夹，里面可以是多个<code>py</code>文件，也可以嵌套文件夹</li>
+<li>库是参考其他编程语言的说法，是指完成一定功能的代码集合，在<code>python</code>中的形式就是模块和包</li>
+</ul>
+<p>我们简单地将这三者都统称为模块，因为我们只需要知道如何去使用就可以了</p>
+</blockquote>
 <p><strong>类名</strong>： 类名使用驼峰(CamelCase)命名风格，首字母大写，私有类可用一个下划线开头；将相关的类和顶级函数放在同一个模块里。不像Java，没必要限制一个类一个模块。 </p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Farm</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">AnimalFarm</span>(<span class="params">Farm</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_PrivateFarm</span>(<span class="params">Farm</span>):</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>函数名：</strong></p>
-<p>函数名一律小写，如有多个单词，用<strong>下划线</strong>隔开；</p>
+<p>函数名一律小写，如有多个单词，用<strong>下划线</strong>隔开；如果要定义<strong>私有函数</strong>，可以在函数名前面加一个下划线。 </p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">run_with_env</span>():</span></span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <p><strong>变量名</strong></p>
 <ul>
@@ -10616,8 +10631,52 @@ x & \boldsymbol y^{\mathrm H} \\
 <li>常量采用全大写，如有多个单词，使用下划线隔开；</li>
 </ul>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">MAX_CLIENT = <span class="number">100</span></span><br><span class="line">MAX_CONNECTION = <span class="number">1000</span></span><br><span class="line">CONNECTION_TIMEOUT = <span class="number">600</span></span><br></pre></td></tr></table></figure>
-<p>【参考资料1】：<a href="https://blog.csdn.net/meiqi0538/article/details/104993760">【Python】编程代码书写规范！- 科皮子菊的文章  - CSDN</a></p>
-<p>【参考资料2】：<a href="https://python.freelycode.com/contribution/detail/47">PEP8中文版 — Python编码风格指南</a></p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>Python</th>
+<th>Java</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>文件命名</td>
+<td><code>hello_world.py</code>（小写字母+下划线）</td>
+<td></td>
+</tr>
+<tr>
+<td>函数命名</td>
+<td><code>run_with_env()</code>（小写字母+下划线）</td>
+<td></td>
+</tr>
+<tr>
+<td>变量命名</td>
+<td><code>snake_case</code>（小写字母+下划线）</td>
+<td><code>camelCase</code>（首字母小写驼峰命名）</td>
+</tr>
+<tr>
+<td>类名命名</td>
+<td><code>CamelCase</code>（大写字母开头的驼峰命名）</td>
+<td><code>amelCase</code>（大写字母开头的驼峰命名）</td>
+</tr>
+<tr>
+<td>常量命名</td>
+<td><code>UPPER_CASE</code>（全大写字母+下划线）</td>
+<td><code>UPPER_CASE</code>（全大写字母+下划线）</td>
+</tr>
+<tr>
+<td>私有变量</td>
+<td>使用单下划线<code>_var</code> 或双下划线 <code>__var</code></td>
+<td>使用 <code>private</code> 关键字</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>【参考资料1】：<a href="https://blog.csdn.net/u011148770/article/details/144094991">002.Python命名规则</a></p>
+<p>【参考资料2】：<a href="https://blog.csdn.net/meiqi0538/article/details/104993760">【Python】编程代码书写规范！- 科皮子菊的文章  - CSDN</a></p>
+<p>【参考资料3】：<a href="https://python.freelycode.com/contribution/detail/47">PEP8中文版 — Python编码风格指南</a></p>
 <h4 id="2-3-注释"><a href="#2-3-注释" class="headerlink" title="2.3 注释"></a>2.3 注释</h4><ul>
 <li><strong>行注释：</strong> 以 <code>#</code> 开头，<code>#</code> 右边的所有内容都被当做说明文字，只起到辅助说明作用。 </li>
 </ul>
