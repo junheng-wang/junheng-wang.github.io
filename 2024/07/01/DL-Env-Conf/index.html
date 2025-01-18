@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">1.7k</span>
+            <span class="post-count">3k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">6 分钟</span>
+            <span class="post-count">11 分钟</span>
         </span>
     </span>
 </div>
@@ -143,7 +143,7 @@
 <h3 id="2-使用google-colab"><a href="#2-使用google-colab" class="headerlink" title="2 使用google colab"></a>2 使用google colab</h3><p>官网：<a target="_blank" rel="noopener" href="https://colab.research.google.com/">google colab</a></p>
 <h4 id="2-1-基本步骤"><a href="#2-1-基本步骤" class="headerlink" title="2.1 基本步骤"></a>2.1 基本步骤</h4><p>首先，在谷歌云盘创建一个文件夹，然后，在该文件夹下创建一个<strong>Google Colaboratory</strong>文件。</p>
 <p>进入Google Colaboratory文件后，输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">!<span class="built_in">pwd</span>			<span class="comment"># 打印当前目录</span></span><br><span class="line">!python			<span class="comment"># 查看python版本</span></span><br><span class="line">!nvidia-smi		<span class="comment"># 查看GPU的信息——型号、显存大小</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!date                   <span class="comment"># 显示当前的日期和时间</span></span><br><span class="line">!<span class="built_in">pwd</span>                    <span class="comment"># 打印当前目录</span></span><br><span class="line">!python --version		<span class="comment"># 查看python版本</span></span><br><span class="line">!nvidia-smi		        <span class="comment"># 查看GPU的信息——型号、显存大小</span></span><br></pre></td></tr></table></figure>
 <p>下面，需要将谷歌云盘与服务器挂载起来：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash"> 挂载云盘</span></span><br><span class="line">import os</span><br><span class="line">from google.colab import drive</span><br><span class="line">drive.mount(&#x27;/content/drive&#x27;)</span><br></pre></td></tr></table></figure>
 <p>完成挂载后，切换目录到我们创建的文件夹下面：</p>
@@ -160,7 +160,63 @@
 <p>在TensorFlow中，TPU的支持已经非常成熟。TensorFlow/TPU项目提供了与TensorFlow库无缝集成的API，使得开发者能够在现有的TensorFlow代码基础上轻松添加TPU支持。这个项目兼容TensorFlow v1和v2，使得旧版和新版的用户都能享受TPU的加速效果。</p>
 <p>尽管PyTorch原生并不直接支持TPU，但可以通过PyTorch XLA（Accelerated Linear Algebra）库来实现对TPU的支持。PyTorch XLA是PyTorch的一个扩展，提供了与TPU的集成支持。使用PyTorch XLA，开发者可以在PyTorch中利用TPU资源进行训练和推理。</p>
 <p>参考链接1：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YK4y1E7zd">在google colab进行yolov5模型训练，免费使用GPU资源 - 哔哩哔哩</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://www.bilibili.com/opus/769912341585199175">【sovitsAI语音】在colab部署，新人学习分享 - 哔哩哔哩</a><br>参考链接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45802280/article/details/144251689">Google Colab TPU 使用方法 - CSDN博客</a><br>参考链接4：<a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1659754569830715933&amp;wfr=spider&amp;for=pc">一行代码安装，TPU也能运行PyTorch，修改少量代码即可快速移植 - 百度百家号</a><br>参考链接5：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648570557">4090和t4同任务速度对比 - 慢下来不就好了的文章 - 知乎</a></p>
-<h3 id="3-Linux服务器上安装Anaconda"><a href="#3-Linux服务器上安装Anaconda" class="headerlink" title="3 Linux服务器上安装Anaconda"></a>3 Linux服务器上安装Anaconda</h3><p>参考链接1：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2063049">如何在Linux服务器上安装Anaconda（超详细）「建议收藏」 - 腾讯云博客</a></p>
+<h3 id="3-使用Kaggle"><a href="#3-使用Kaggle" class="headerlink" title="3 使用Kaggle"></a>3 使用Kaggle</h3><p>kaggle的官网：<a target="_blank" rel="noopener" href="https://www.kaggle.com/">Kaggle: Your Machine Learning and Data Science Community</a></p>
+<h4 id="3-1-登录注册"><a href="#3-1-登录注册" class="headerlink" title="3.1 登录注册"></a>3.1 登录注册</h4><p>这里有两种注册方式，一种是使用谷歌账号（需要科学上网），另外一种是使用email，我使用的是谷歌账号的方式，过程很顺利，但是据其他帖子中所说使用email的话会比较麻烦，可能没办法通过人机验证，不过别的帖子里也有解决方法，这里不多赘述。 </p>
+<h4 id="3-2-进行相关配置"><a href="#3-2-进行相关配置" class="headerlink" title="3.2 进行相关配置"></a>3.2 进行相关配置</h4><p>成功登陆以后，进入以下的界面： </p>
+<p><img src="https://pic1.imgdb.cn/item/678b7671d0e0a243d4f57243.png"></p>
+<p>点击Notebooks，进入以下页面： </p>
+<p><img src="https://pic1.imgdb.cn/item/678b76edd0e0a243d4f57284.png"></p>
+<p>红色框里包含了你曾经创建的notebook，点击蓝色框中的create即可创建新的notebook，选择New notebook：</p>
+<p><img src="https://pica.zhimg.com/v2-053e7d635c0727e2d8ae5c1c59ea7c44_r.jpg" style="zoom:40%"></p>
+<p>进入新的notebook后，界面如下所示： </p>
+<p><img src="https://pic1.imgdb.cn/item/678b7779d0e0a243d4f572af.png"></p>
+<p>其实这里的<strong>notebook和jupyter_notebook</strong>非常的相似，只要你使用过jupyter_notebook，应该就对这个不会陌生，为了照顾没有用过jupyter_notebook的同学，这里介绍一下notebook的基本使用方法：</p>
+<ol>
+<li>红框1处为notebook的名字，点击这里可以改名；</li>
+<li>点击红框2处可以增加代码单元，在代码块中写代码；</li>
+<li>点击红框3处可以运行相应的代码单元；</li>
+<li>点击红框4处可以按顺序运行所有的代码单元。</li>
+</ol>
+<p>在右侧的方框处，找到Session Option模块： </p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>图示</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="https://pic1.imgdb.cn/item/678b77ffd0e0a243d4f572b6.png" style="zoom:70%"></td>
+<td>ACCELERATOR，即加速器，可选择是否使用GPU以及GPU型号。<br>LANGUAGE：选择编程语言，这里只有Python和R语言可选。<br>PERSISTENCE：保存文件类型，详细请参见UP的解释<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b?t=488.3">持久化</a><br>ENVIRONMENT：环境配置相关，详细参见UP的解释<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b?t=583.9">版本策略</a><br>INTERNET：是否连接网络，一般选择打开， 否则没办法<code>pip install</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>然后就可以愉快的使用GPU啦。</p>
+<h4 id="3-3-使用示例"><a href="#3-3-使用示例" class="headerlink" title="3.3 使用示例"></a>3.3 使用示例</h4><h5 id="3-3-1-上传自己的数据集"><a href="#3-3-1-上传自己的数据集" class="headerlink" title="3.3.1 上传自己的数据集"></a>3.3.1 上传自己的数据集</h5><p>运行代码有两种方式，<strong>一种是上传已经写好的代码，另外一种就是自己在notebook里写，写好再运行</strong>。我目前一般是现在本地把代码都写好，只是利用平台的免费GPU跑模型进行训练，因此数据集和代码均是通过上传的方式进行。</p>
+<p>上传数据集肯定是必不可少的，这里我们可以下载kaggle上的数据集，也可以上传我们自己的数据集，这里介绍一下上传自己数据集的方法。</p>
+<p>首先，进入下图右上方的Input界面，其中：<strong>Add Input</strong>：导入 Kaggle 中已有的数据集；<strong>Upload</strong>：上传本地的数据集。点击右上方的upload，选择new dataset，然后选择数据集或者模型代码进行上传。如果<strong>数据集较大的话建议先上传压缩文件</strong>，kaggle上传完成后会自动解压的 。</p>
+<p><img src="https://pic1.imgdb.cn/item/678b7afed0e0a243d4f573a7.png"></p>
+<p>上传之后就可以在Input里就可以看见，点击红框处，复制文件的路径，就能在代码中使用了 。</p>
+<p><img src="https://pic1.imgdb.cn/item/678b7be6d0e0a243d4f573d9.png"></p>
+<p>注意，上传文件后，文件保存在<code>/kaggle/input/&lt;上传文件时候的命名&gt;</code>。若上传的数据集，则不需要移动数据集，就在这个目录下应用即可，也就是只需要代码中的数据集路径使用上述路径即可。</p>
+<p>但若是上传的模型代码文件，则一般需要把上传的代码文件转移到当前工作环境<code>/kaggle/working</code>，转移代码如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shutil <span class="keyword">import</span> copyfile</span><br><span class="line">copyfile(src = <span class="string">&quot;../input/model-train/model.py&quot;</span>, dst = <span class="string">&quot;../working/model.py&quot;</span>)</span><br><span class="line">copyfile(src = <span class="string">&quot;../input/model-train/model_train.py&quot;</span>, dst = <span class="string">&quot;../working/model_train.py&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>下面就可以运行代码进行训练了。</p>
+<h5 id="3-3-2-给出的一个示例流程"><a href="#3-3-2-给出的一个示例流程" class="headerlink" title="3.3.2 给出的一个示例流程"></a>3.3.2 给出的一个示例流程</h5><p>进入kaggle Notebook后，输入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!date                   <span class="comment"># 显示当前的日期和时间</span></span><br><span class="line">!<span class="built_in">pwd</span>                    <span class="comment"># 打印当前目录</span></span><br><span class="line">!python --version		<span class="comment"># 查看python版本</span></span><br><span class="line">!nvidia-smi		        <span class="comment"># 查看GPU的信息——型号、显存大小</span></span><br></pre></td></tr></table></figure>
+<p>转移代码文件到当前工作目录下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> shutil <span class="keyword">import</span> copyfile</span><br><span class="line">copyfile(src = <span class="string">&quot;../input/model-train/model.py&quot;</span>, dst = <span class="string">&quot;../working/model.py&quot;</span>)</span><br><span class="line">copyfile(src = <span class="string">&quot;../input/model-train/model_train.py&quot;</span>, dst = <span class="string">&quot;../working/model_train.py&quot;</span>)</span><br></pre></td></tr></table></figure>
+<p>展示当前目录下的文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">!<span class="built_in">pwd</span></span><br><span class="line">!ls</span><br></pre></td></tr></table></figure>
+<p>没问题即可开始训练模型</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python model_train.py</span><br></pre></td></tr></table></figure>
+<h4 id="3-4-下载输出（Output）的文件"><a href="#3-4-下载输出（Output）的文件" class="headerlink" title="3.4 下载输出（Output）的文件"></a>3.4 下载输出（Output）的文件</h4><p>请参考连接4。</p>
+<h4 id="3-5-其他说明"><a href="#3-5-其他说明" class="headerlink" title="3.5 其他说明"></a>3.5 其他说明</h4><p>有的时候模型运行比较久，可能会因为存在网络等问题导致训练中断，这时候可以使用后台任务功能，具体情况UP的解释：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b?t=1067.4">后台任务设置</a></p>
+<p>参考连接1：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b/?share_source=copy_web&amp;vd_source=5cb8e8e385b900f1a132ca50a9d46ab5">【免费GPU系列：kaggle，colab，百度 AI studio 使用方法（上半部分）】- 哔哩哔哩</a><br>参考连接2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42901277/article/details/127277811">免费gpu：kaggle本地项目上传使用说明 - CSDN</a><br>参考连接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42426841/article/details/143591586">Kaggle：免费 GPU 使用指南，Colab 的理想替代方案 - CSDN</a><br>参考连接4：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/18209757723">kaggle GPU资源使用教程——针对超级小白 - 未雨的文章 - 知乎</a><br>参考连接5：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_53115174/article/details/144007060?fromshare=blogdetail&amp;sharetype=blogdetail&amp;sharerId=144007060&amp;sharerefer=PC&amp;sharesource=m0_46276396&amp;sharefrom=from_link">Kaggle下载输出（Output）的文件 - CSDN</a></p>
+<h3 id="4-Linux服务器上安装Anaconda"><a href="#4-Linux服务器上安装Anaconda" class="headerlink" title="4 Linux服务器上安装Anaconda"></a>4 Linux服务器上安装Anaconda</h3><p>参考链接1：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2063049">如何在Linux服务器上安装Anaconda（超详细）「建议收藏」 - 腾讯云博客</a></p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
