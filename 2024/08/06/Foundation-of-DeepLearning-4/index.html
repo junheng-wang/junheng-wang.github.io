@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">2.5k</span>
+            <span class="post-count">2.7k</span>
         </span>
     </span>
 
@@ -265,11 +265,21 @@ r = \text{rand()} \in (0,1)</script><p>假设每一次 dropout 都以$0&lt;p&lt;
 <p><a target="_blank" rel="noopener" href="https://blog.csdn.net/oBrightLamp/article/details/84105097">dropout函数详解及反向传播中的梯度求导 - CSDN</a></p>
 <p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35948928">dropout正则化的反向传播的代码实现 - 知乎</a></p>
 <h3 id="3-卷积层为什么不使用dropout"><a href="#3-卷积层为什么不使用dropout" class="headerlink" title="3 卷积层为什么不使用dropout"></a>3 卷积层为什么不使用dropout</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/52426832">卷积层为什么不使用dropout? - 知乎</a></p>
-<h3 id="4-池化层的反向传播"><a href="#4-池化层的反向传播" class="headerlink" title="4 池化层的反向传播"></a>4 池化层的反向传播</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36561737/article/details/120066997">MaxPooling和AvgPooling的求导过程 - CSDN</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50710984/article/details/123378960">池化层的反向传播 - CSDN</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Dd4y1Q7Qq/?p=126&amp;vd_source=b11850f360abfce51bee36035b825020">33.7.13 池化层的反向传播 - bilibili</a></p>
-<h3 id="5-请问训练数据包含负数能用relu激活函数吗"><a href="#5-请问训练数据包含负数能用relu激活函数吗" class="headerlink" title="5 请问训练数据包含负数能用relu激活函数吗"></a>5 请问训练数据包含负数能用relu激活函数吗</h3><p><a target="_blank" rel="noopener" href="https://www2.zhihu.com/question/357980658">卷积神经网络训练图像的时候，像素值都是大于0的，那么激活函数relu还有什么作用呢？- 知乎</a></p>
-<h3 id="6-从零构建神经网络-不使用框架"><a href="#6-从零构建神经网络-不使用框架" class="headerlink" title="6 从零构建神经网络-不使用框架"></a>6 从零构建神经网络-不使用框架</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/314879954">如何自己从零实现一个神经网络? - 知乎</a></p>
-<h3 id="7-其他问题"><a href="#7-其他问题" class="headerlink" title="7 其他问题"></a>7 其他问题</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67054518">由dead relu引发的思考——正则化算法漫谈</a></p>
-<link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
+<h3 id="4-卷积核梯度计算"><a href="#4-卷积核梯度计算" class="headerlink" title="4 卷积核梯度计算"></a>4 卷积核梯度计算</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44246009/article/details/119379516">【PyTorch】卷积层、池化层梯度计算 - CSDN</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/64248652">卷积核梯度计算的推导及实现 - 渐渐弃坑的文章 - 知乎</a></p>
+<h3 id="5-池化层的反向传播"><a href="#5-池化层的反向传播" class="headerlink" title="5 池化层的反向传播"></a>5 池化层的反向传播</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_36561737/article/details/120066997">MaxPooling和AvgPooling的求导过程 - CSDN</a><br><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_50710984/article/details/123378960">池化层的反向传播 - CSDN</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1Dd4y1Q7Qq/?p=126&amp;vd_source=b11850f360abfce51bee36035b825020">33.7.13 池化层的反向传播 - bilibili</a></p>
+<h3 id="6-请问训练数据包含负数能用relu激活函数吗"><a href="#6-请问训练数据包含负数能用relu激活函数吗" class="headerlink" title="6 请问训练数据包含负数能用relu激活函数吗"></a>6 请问训练数据包含负数能用relu激活函数吗</h3><p><a target="_blank" rel="noopener" href="https://www2.zhihu.com/question/357980658">卷积神经网络训练图像的时候，像素值都是大于0的，那么激活函数relu还有什么作用呢？- 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://www2.zhihu.com/question/49096923">深度学习中，图片的预处理为什么要减去图片的平均值，在什么情况下要选择这种预处理方式？ - 知乎</a></p>
+<h3 id="7-从零构建神经网络-不使用框架"><a href="#7-从零构建神经网络-不使用框架" class="headerlink" title="7 从零构建神经网络-不使用框架"></a>7 从零构建神经网络-不使用框架</h3><p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/314879954">如何自己从零实现一个神经网络? - 知乎</a></p>
+<h3 id="8-如何自定义激活函数"><a href="#8-如何自定义激活函数" class="headerlink" title="8 如何自定义激活函数"></a>8 如何自定义激活函数</h3><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_49117441/article/details/123056849">Pytorch 学习笔记-自定义激活函数 - CSDN</a></p>
+<h3 id="9-关于激活函数的问题"><a href="#9-关于激活函数的问题" class="headerlink" title="9 关于激活函数的问题"></a>9 关于激活函数的问题</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/67054518">由dead relu引发的思考——正则化算法漫谈</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/444283657">为什么不用绝对值作为神经网络的激活函数？ - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.rvmcu.com/community-topic-id-654.html">【分享】 激活函数ReLU的理解与总结</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/535000741">ReLU的作用 - sylvia的文章 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.sciencenet.cn/blog-3428464-1285447.html">【转载】激活函数总结（一）</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/431710950">关于RELU激活函数造成神经元不可逆死亡的思考. - RICH双子的文章 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_38190702/article/details/125540813">Dynamic ReLU激活函数 - CSDN</a></p>
+<h3 id="10-其他问题"><a href="#10-其他问题" class="headerlink" title="10 其他问题"></a>10 其他问题</h3><link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
     </div>
