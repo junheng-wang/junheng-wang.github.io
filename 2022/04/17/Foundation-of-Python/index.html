@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">25.6k</span>
+            <span class="post-count">25.8k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">105 分钟</span>
+            <span class="post-count">106 分钟</span>
         </span>
     </span>
 </div>
@@ -128,7 +128,7 @@
                 <p class="card-status">
                     <span class="play-num">
                         <i class="fa fa-youtube-play"></i>
-                        <span>170.2万</span></span>
+                        <span>172.3万</span></span>
                     <span>
                         <i class="fa fa-list-alt"></i>
                         <span>4.9万</span></span></p>
@@ -1760,6 +1760,15 @@
 <p><code>path</code>参数不写，默认当前项目路径，若写，则既可使用绝对路径<code>r&quot;E:\A.毕业设计\前期基础知识学习\deep learning project\MINIST-master\data&quot;</code>，又可使用相对路径<code>r&quot;.\dataset&quot;</code>(当前项目路径下的子文件夹dataset)</p>
 <p><code>os.path</code>模块的更多函数参考：<a target="_blank" rel="noopener" href="https://www.jb51.net/python/293897rnc.htm">Python常用基础模块之os.path模块详解</a></p>
 </blockquote>
+<h5 id="三-示例"><a href="#三-示例" class="headerlink" title="(三) 示例"></a>(三) 示例</h5><p>假设你当前所在的路径为<code>D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass</code>，下面有几个任务：</p>
+<ul>
+<li>① 统计当前目录下有几个<code>.txt</code>文件：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    # 绝对路径(Windows格式1)</span></span><br><span class="line"><span class="string">    directory_path = R&#x27;D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass\&#x27;</span></span><br><span class="line"><span class="string">    # 绝对路径(Windows格式2)</span></span><br><span class="line"><span class="string">    directory_path = &#x27;D:\\Github_Project\\UNet_Demo\\datasets\\cat\\SegmentationClass\&#x27;</span></span><br><span class="line"><span class="string">    # 绝对路径(Linux格式)</span></span><br><span class="line"><span class="string">    directory_path = &#x27;D:/Github_Project/UNet_Demo/datasets/cat/SegmentationClass/&#x27;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 相对路径</span></span><br><span class="line">    directory_path = <span class="string">&#x27;./&#x27;</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> entry <span class="keyword">in</span> os.scandir(directory_path):</span><br><span class="line">        <span class="keyword">if</span> entry.name.endswith(<span class="string">&#x27;.txt&#x27;</span>) <span class="keyword">and</span> entry.is_file():</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Number of .txt files: <span class="subst">&#123;count&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>统计<code>D:\Github_Project\UNet_Demo\my_folder</code>目录下有几个<code>.txt</code>文件：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    简单分析，当前路径为D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass\，则易知D:\Github_Project\UNet_Demo\my_folder相对于当前路径为【上级目录cat的上级目录datasets的上级目录UNet_Demo下的my_folder】，采用Linux的相对路径表示方法为【../../../my_folder/】</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    # 绝对路径(Windows格式1)</span></span><br><span class="line"><span class="string">    directory_path = R&#x27;D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass\&#x27;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 相对路径</span></span><br><span class="line">    directory_path = <span class="string">&#x27;../../../my_folder/&#x27;</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> entry <span class="keyword">in</span> os.scandir(directory_path):</span><br><span class="line">        <span class="keyword">if</span> entry.name.endswith(<span class="string">&#x27;.txt&#x27;</span>) <span class="keyword">and</span> entry.is_file():</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Number of .txt files: <span class="subst">&#123;count&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
 <h4 id="12-2-SYS模块"><a href="#12-2-SYS模块" class="headerlink" title="12.2 SYS模块"></a>12.2 SYS模块</h4><h5 id="一-SYS模块定义"><a href="#一-SYS模块定义" class="headerlink" title="(一) SYS模块定义"></a>(一) SYS模块定义</h5><p><code>OS</code>标准库是<strong>操作系统</strong>接口模块，提供了操作系统相关功能的调用函数。 Python的os模块是用于与操作系统进行交互的模块,它提供了许多函数和方法来执行文件和目录操作、进程管理、环境变量访问等 </p>
 <p>而<code>sys</code>模块是与<strong>python解释器</strong>交互的一个接口。sys 模块提供了许多函数和变量来处理 Python 运行时环境的不同部分。 可以用于获取命令行参数、控制程序的执行、管理模块和包、处理异常等。 </p>
 <h5 id="二-SYS模块常用方法"><a href="#二-SYS模块常用方法" class="headerlink" title="(二) SYS模块常用方法"></a>(二) SYS模块常用方法</h5><ul>

@@ -89,7 +89,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">3k</span>
+            <span class="post-count">3.7k</span>
         </span>
     </span>
 
@@ -98,7 +98,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">11 分钟</span>
+            <span class="post-count">14 分钟</span>
         </span>
     </span>
 </div>
@@ -140,8 +140,73 @@
 <p>显卡是一个硬件，可以插到电脑主板上，因此一般情况下，需要装<strong>驱动(能够让计算机识别相应的硬件)</strong>。</p>
 <p>对于深度学习而言使用的显卡都是英伟达的显卡，因为NVIDIA公司创建了一个CUDA平台，开发者可以利用CUDA去操作NVIDIA的显卡。</p>
 <h4 id="1-6-小结：上述各个软件关系"><a href="#1-6-小结：上述各个软件关系" class="headerlink" title="1.6 小结：上述各个软件关系"></a>1.6 小结：上述各个软件关系</h4><p><img src="https://pic.imgdb.cn/item/66850dc5d9c307b7e90a4199.png"></p>
-<h3 id="2-使用google-colab"><a href="#2-使用google-colab" class="headerlink" title="2 使用google colab"></a>2 使用google colab</h3><p>官网：<a target="_blank" rel="noopener" href="https://colab.research.google.com/">google colab</a></p>
-<h4 id="2-1-基本步骤"><a href="#2-1-基本步骤" class="headerlink" title="2.1 基本步骤"></a>2.1 基本步骤</h4><p>首先，在谷歌云盘创建一个文件夹，然后，在该文件夹下创建一个<strong>Google Colaboratory</strong>文件。</p>
+<h3 id="2-文件路径表示"><a href="#2-文件路径表示" class="headerlink" title="2 文件路径表示"></a>2 文件路径表示</h3><p>一般使用远程登录电脑的时候，由于文件路径发生了变化，所以推荐路径一般使用相对路径：</p>
+<h4 id="2-1-OS模块定义"><a href="#2-1-OS模块定义" class="headerlink" title="2.1 OS模块定义"></a>2.1 OS模块定义</h4><p>在自动化过程当中，经常需要<strong>查找操作文件</strong>，比如说查找配置文件(从而读取配置文件的信息)，查找测试报告(从而发送测试报告邮件)，经常要对大量文件和大量路径进行操作，这就依赖于<code>os</code>模块。</p>
+<h4 id="2-2-OS模块常用方法"><a href="#2-2-OS模块常用方法" class="headerlink" title="2.2 OS模块常用方法"></a>2.2 OS模块常用方法</h4><div class="table-container">
+<table>
+<thead>
+<tr>
+<th>当前路径以及路径下的文件</th>
+<th>解释</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>os.getcwd()</code></td>
+<td>查看当前所在路径</td>
+</tr>
+<tr>
+<td><code>os.pardir</code></td>
+<td>获取当前目录的父目录（上一级目录），以字符串形式显示目录名</td>
+</tr>
+<tr>
+<td><code>os.listdir(path)</code></td>
+<td>列举目录下的所有文件。返回的是列表类型。</td>
+</tr>
+<tr>
+<td><code>os.path.abspath(path)</code></td>
+<td>返回path的绝对路径。</td>
+</tr>
+<tr>
+<td><code>os.path.join(path1, path2)</code></td>
+<td>将path进行组合，若其中有绝对路径，则之前的path将被删除。</td>
+</tr>
+<tr>
+<td><code>os.path.exists(path)</code></td>
+<td>path：要判断的路径，可用绝对路径，也可用相对路径。<br>返回值：给定的路径存在则返回 True，否则返回 False。</td>
+</tr>
+<tr>
+<td><code>os.path.dirname(path)</code></td>
+<td>返回path中的文件夹部分，结果不包含\</td>
+</tr>
+<tr>
+<td><code>os.path.basename(path)</code></td>
+<td>返回path中的文件名</td>
+</tr>
+<tr>
+<td><code>os.path.getsize()</code></td>
+<td>文件或文件夹的大小</td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<p>注意：</p>
+<p><code>path</code>参数不写，默认当前项目路径，若写，则既可使用绝对路径<code>r&quot;E:\A.毕业设计\前期基础知识学习\deep learning project\MINIST-master\data&quot;</code>，又可使用相对路径<code>r&quot;.\dataset&quot;</code>(当前项目路径下的子文件夹dataset)</p>
+<p><code>os.path</code>模块的更多函数参考：<a target="_blank" rel="noopener" href="https://www.jb51.net/python/293897rnc.htm">Python常用基础模块之os.path模块详解</a></p>
+</blockquote>
+<h4 id="2-3-示例"><a href="#2-3-示例" class="headerlink" title="2.3 示例"></a>2.3 示例</h4><p>假设你当前所在的路径为<code>D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass</code>，下面有几个任务：</p>
+<ul>
+<li>① 统计当前目录下有几个<code>.txt</code>文件：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    # 绝对路径(Windows格式1)</span></span><br><span class="line"><span class="string">    directory_path = R&#x27;D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass\&#x27;</span></span><br><span class="line"><span class="string">    # 绝对路径(Windows格式2)</span></span><br><span class="line"><span class="string">    directory_path = &#x27;D:\\Github_Project\\UNet_Demo\\datasets\\cat\\SegmentationClass\&#x27;</span></span><br><span class="line"><span class="string">    # 绝对路径(Linux格式)</span></span><br><span class="line"><span class="string">    directory_path = &#x27;D:/Github_Project/UNet_Demo/datasets/cat/SegmentationClass/&#x27;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 相对路径</span></span><br><span class="line">    directory_path = <span class="string">&#x27;./&#x27;</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> entry <span class="keyword">in</span> os.scandir(directory_path):</span><br><span class="line">        <span class="keyword">if</span> entry.name.endswith(<span class="string">&#x27;.txt&#x27;</span>) <span class="keyword">and</span> entry.is_file():</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Number of .txt files: <span class="subst">&#123;count&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>统计<code>D:\Github_Project\UNet_Demo\my_folder</code>目录下有几个<code>.txt</code>文件：</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&#x27;__main__&#x27;</span>:</span><br><span class="line">    <span class="string">&quot;&quot;&quot;</span></span><br><span class="line"><span class="string">    简单分析，当前路径为D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass\，则易知D:\Github_Project\UNet_Demo\my_folder相对于当前路径为【上级目录cat的上级目录datasets的上级目录UNet_Demo下的my_folder】，采用Linux的相对路径表示方法为【../../../my_folder/】</span></span><br><span class="line"><span class="string">    </span></span><br><span class="line"><span class="string">    # 绝对路径(Windows格式1)</span></span><br><span class="line"><span class="string">    directory_path = R&#x27;D:\Github_Project\UNet_Demo\datasets\cat\SegmentationClass\&#x27;</span></span><br><span class="line"><span class="string">    &quot;&quot;&quot;</span></span><br><span class="line">    <span class="comment"># 相对路径</span></span><br><span class="line">    directory_path = <span class="string">&#x27;../../../my_folder/&#x27;</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> entry <span class="keyword">in</span> os.scandir(directory_path):</span><br><span class="line">        <span class="keyword">if</span> entry.name.endswith(<span class="string">&#x27;.txt&#x27;</span>) <span class="keyword">and</span> entry.is_file():</span><br><span class="line">            count += <span class="number">1</span></span><br><span class="line">            <span class="keyword">pass</span></span><br><span class="line">        <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">    <span class="built_in">print</span>(<span class="string">f&quot;Number of .txt files: <span class="subst">&#123;count&#125;</span>&quot;</span>)</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+<h3 id="3-使用google-colab"><a href="#3-使用google-colab" class="headerlink" title="3 使用google colab"></a>3 使用google colab</h3><p>官网：<a target="_blank" rel="noopener" href="https://colab.research.google.com/">google colab</a></p>
+<h4 id="3-1-基本步骤"><a href="#3-1-基本步骤" class="headerlink" title="3.1 基本步骤"></a>3.1 基本步骤</h4><p>请结合链接：[]</p>
+<p>首先，在谷歌云盘创建一个文件夹，然后，在该文件夹下创建一个<strong>Google Colaboratory</strong>文件。</p>
 <p>进入Google Colaboratory文件后，输入：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">!date                   <span class="comment"># 显示当前的日期和时间</span></span><br><span class="line">!<span class="built_in">pwd</span>                    <span class="comment"># 打印当前目录</span></span><br><span class="line">!python --version		<span class="comment"># 查看python版本</span></span><br><span class="line">!nvidia-smi		        <span class="comment"># 查看GPU的信息——型号、显存大小</span></span><br></pre></td></tr></table></figure>
 <p>下面，需要将谷歌云盘与服务器挂载起来：</p>
@@ -153,16 +218,16 @@
 </blockquote>
 <p>最后，使用下面的命令开始训练模型：</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python model_train.py</span><br></pre></td></tr></table></figure>
-<h4 id="2-2-T4-GPU的性能"><a href="#2-2-T4-GPU的性能" class="headerlink" title="2.2 T4 GPU的性能"></a>2.2 T4 GPU的性能</h4><p>任务场景就是对bert进行微调。今天比较巧，用了<strong>T4</strong>也用了<strong>RTX 4090</strong>去做bert微调的任务，发现两者速度又很直观的不同，但从我看到的差异4090是T4的<strong><font color+red>3.x倍</font></strong>。T4是<strong>Google Colab</strong>提供的免费的，4090是租的在线，2.8一小时，体验一下。 </p>
+<h4 id="3-2-T4-GPU的性能"><a href="#3-2-T4-GPU的性能" class="headerlink" title="3.2 T4 GPU的性能"></a>3.2 T4 GPU的性能</h4><p>任务场景就是对bert进行微调。今天比较巧，用了<strong>T4</strong>也用了<strong>RTX 4090</strong>去做bert微调的任务，发现两者速度又很直观的不同，但从我看到的差异4090是T4的<strong><font color+red>3.x倍</font></strong>。T4是<strong>Google Colab</strong>提供的免费的，4090是租的在线，2.8一小时，体验一下。 </p>
 <p>又去试了试<strong>RTX 3090</strong>的速度。差不多是T4速度的2.6倍，0.75的4090的速度，不过价格却是4090的0.58，似乎租3090更划算。 </p>
-<h4 id="2-3-v2-8-TPU说明"><a href="#2-3-v2-8-TPU说明" class="headerlink" title="2.3 v2-8 TPU说明"></a>2.3 v2-8 TPU说明</h4><p>v2-8 TPU支持<strong>TensorFlow库和PyTorch库(有条件)</strong>。</p>
+<h4 id="3-3-v2-8-TPU说明"><a href="#3-3-v2-8-TPU说明" class="headerlink" title="3.3 v2-8 TPU说明"></a>3.3 v2-8 TPU说明</h4><p>v2-8 TPU支持<strong>TensorFlow库和PyTorch库(有条件)</strong>。</p>
 <p>TPU（Tensor Processing Unit）是谷歌开发的一种专用于深度学习的硬件加速器，旨在提高机器学习任务的计算效率和速度。它通过高度优化的矩阵运算和片上存储，减少数据传输延迟，从而提升性能。</p>
 <p>在TensorFlow中，TPU的支持已经非常成熟。TensorFlow/TPU项目提供了与TensorFlow库无缝集成的API，使得开发者能够在现有的TensorFlow代码基础上轻松添加TPU支持。这个项目兼容TensorFlow v1和v2，使得旧版和新版的用户都能享受TPU的加速效果。</p>
 <p>尽管PyTorch原生并不直接支持TPU，但可以通过PyTorch XLA（Accelerated Linear Algebra）库来实现对TPU的支持。PyTorch XLA是PyTorch的一个扩展，提供了与TPU的集成支持。使用PyTorch XLA，开发者可以在PyTorch中利用TPU资源进行训练和推理。</p>
 <p>参考链接1：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1YK4y1E7zd">在google colab进行yolov5模型训练，免费使用GPU资源 - 哔哩哔哩</a><br>参考链接2：<a target="_blank" rel="noopener" href="https://www.bilibili.com/opus/769912341585199175">【sovitsAI语音】在colab部署，新人学习分享 - 哔哩哔哩</a><br>参考链接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45802280/article/details/144251689">Google Colab TPU 使用方法 - CSDN博客</a><br>参考链接4：<a target="_blank" rel="noopener" href="https://baijiahao.baidu.com/s?id=1659754569830715933&amp;wfr=spider&amp;for=pc">一行代码安装，TPU也能运行PyTorch，修改少量代码即可快速移植 - 百度百家号</a><br>参考链接5：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/648570557">4090和t4同任务速度对比 - 慢下来不就好了的文章 - 知乎</a></p>
-<h3 id="3-使用Kaggle"><a href="#3-使用Kaggle" class="headerlink" title="3 使用Kaggle"></a>3 使用Kaggle</h3><p>kaggle的官网：<a target="_blank" rel="noopener" href="https://www.kaggle.com/">Kaggle: Your Machine Learning and Data Science Community</a></p>
-<h4 id="3-1-登录注册"><a href="#3-1-登录注册" class="headerlink" title="3.1 登录注册"></a>3.1 登录注册</h4><p>这里有两种注册方式，一种是使用谷歌账号（需要科学上网），另外一种是使用email，我使用的是谷歌账号的方式，过程很顺利，但是据其他帖子中所说使用email的话会比较麻烦，可能没办法通过人机验证，不过别的帖子里也有解决方法，这里不多赘述。 </p>
-<h4 id="3-2-进行相关配置"><a href="#3-2-进行相关配置" class="headerlink" title="3.2 进行相关配置"></a>3.2 进行相关配置</h4><p>成功登陆以后，进入以下的界面： </p>
+<h3 id="4-使用Kaggle"><a href="#4-使用Kaggle" class="headerlink" title="4 使用Kaggle"></a>4 使用Kaggle</h3><p>kaggle的官网：<a target="_blank" rel="noopener" href="https://www.kaggle.com/">Kaggle: Your Machine Learning and Data Science Community</a></p>
+<h4 id="4-1-登录注册"><a href="#4-1-登录注册" class="headerlink" title="4.1 登录注册"></a>4.1 登录注册</h4><p>这里有两种注册方式，一种是使用谷歌账号（需要科学上网），另外一种是使用email，我使用的是谷歌账号的方式，过程很顺利，但是据其他帖子中所说使用email的话会比较麻烦，可能没办法通过人机验证，不过别的帖子里也有解决方法，这里不多赘述。 </p>
+<h4 id="4-2-进行相关配置"><a href="#4-2-进行相关配置" class="headerlink" title="4.2 进行相关配置"></a>4.2 进行相关配置</h4><p>成功登陆以后，进入以下的界面： </p>
 <p><img src="https://pic1.imgdb.cn/item/678b7671d0e0a243d4f57243.png"></p>
 <p>点击Notebooks，进入以下页面： </p>
 <p><img src="https://pic1.imgdb.cn/item/678b76edd0e0a243d4f57284.png"></p>
@@ -195,7 +260,7 @@
 </table>
 </div>
 <p>然后就可以愉快的使用GPU啦。</p>
-<h4 id="3-3-使用示例"><a href="#3-3-使用示例" class="headerlink" title="3.3 使用示例"></a>3.3 使用示例</h4><h5 id="3-3-1-上传自己的数据集"><a href="#3-3-1-上传自己的数据集" class="headerlink" title="3.3.1 上传自己的数据集"></a>3.3.1 上传自己的数据集</h5><p>运行代码有两种方式，<strong>一种是上传已经写好的代码，另外一种就是自己在notebook里写，写好再运行</strong>。我目前一般是现在本地把代码都写好，只是利用平台的免费GPU跑模型进行训练，因此数据集和代码均是通过上传的方式进行。</p>
+<h4 id="4-3-使用示例"><a href="#4-3-使用示例" class="headerlink" title="4.3 使用示例"></a>4.3 使用示例</h4><h5 id="4-3-1-上传自己的数据集"><a href="#4-3-1-上传自己的数据集" class="headerlink" title="4.3.1 上传自己的数据集"></a>4.3.1 上传自己的数据集</h5><p>运行代码有两种方式，<strong>一种是上传已经写好的代码，另外一种就是自己在notebook里写，写好再运行</strong>。我目前一般是现在本地把代码都写好，只是利用平台的免费GPU跑模型进行训练，因此数据集和代码均是通过上传的方式进行。</p>
 <p>上传数据集肯定是必不可少的，这里我们可以下载kaggle上的数据集，也可以上传我们自己的数据集，这里介绍一下上传自己数据集的方法。</p>
 <p>首先，进入下图右上方的Input界面，其中：<strong>Add Input</strong>：导入 Kaggle 中已有的数据集；<strong>Upload</strong>：上传本地的数据集。点击右上方的upload，选择new dataset，然后选择数据集或者模型代码进行上传。如果<strong>数据集较大的话建议先上传压缩文件</strong>，kaggle上传完成后会自动解压的 。</p>
 <p><img src="https://pic1.imgdb.cn/item/678b7afed0e0a243d4f573a7.png"></p>
@@ -213,10 +278,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">!<span class="built_in">pwd</span></span><br><span class="line">!ls</span><br></pre></td></tr></table></figure>
 <p>没问题即可开始训练模型</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">!python model_train.py</span><br></pre></td></tr></table></figure>
-<h4 id="3-4-下载输出（Output）的文件"><a href="#3-4-下载输出（Output）的文件" class="headerlink" title="3.4 下载输出（Output）的文件"></a>3.4 下载输出（Output）的文件</h4><p>请参考连接4。</p>
-<h4 id="3-5-其他说明"><a href="#3-5-其他说明" class="headerlink" title="3.5 其他说明"></a>3.5 其他说明</h4><p>有的时候模型运行比较久，可能会因为存在网络等问题导致训练中断，这时候可以使用后台任务功能，具体情况UP的解释：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b?t=1067.4">后台任务设置</a></p>
+<h4 id="4-4-下载输出（Output）的文件"><a href="#4-4-下载输出（Output）的文件" class="headerlink" title="4.4 下载输出（Output）的文件"></a>4.4 下载输出（Output）的文件</h4><p>请参考连接4。</p>
+<h4 id="4-5-其他说明"><a href="#4-5-其他说明" class="headerlink" title="4.5 其他说明"></a>4.5 其他说明</h4><p>有的时候模型运行比较久，可能会因为存在网络等问题导致训练中断，这时候可以使用后台任务功能，具体情况UP的解释：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b?t=1067.4">后台任务设置</a></p>
 <p>参考连接1：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1kU411Z73b/?share_source=copy_web&amp;vd_source=5cb8e8e385b900f1a132ca50a9d46ab5">【免费GPU系列：kaggle，colab，百度 AI studio 使用方法（上半部分）】- 哔哩哔哩</a><br>参考连接2：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42901277/article/details/127277811">免费gpu：kaggle本地项目上传使用说明 - CSDN</a><br>参考连接3：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_42426841/article/details/143591586">Kaggle：免费 GPU 使用指南，Colab 的理想替代方案 - CSDN</a><br>参考连接4：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/18209757723">kaggle GPU资源使用教程——针对超级小白 - 未雨的文章 - 知乎</a><br>参考连接5：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_53115174/article/details/144007060?fromshare=blogdetail&amp;sharetype=blogdetail&amp;sharerId=144007060&amp;sharerefer=PC&amp;sharesource=m0_46276396&amp;sharefrom=from_link">Kaggle下载输出（Output）的文件 - CSDN</a></p>
-<h3 id="4-Linux服务器上安装Anaconda"><a href="#4-Linux服务器上安装Anaconda" class="headerlink" title="4 Linux服务器上安装Anaconda"></a>4 Linux服务器上安装Anaconda</h3><p>参考链接1：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2063049">如何在Linux服务器上安装Anaconda（超详细）「建议收藏」 - 腾讯云博客</a><br>参考连接2：</p>
+<h3 id="5-Linux服务器上安装Anaconda"><a href="#5-Linux服务器上安装Anaconda" class="headerlink" title="5 Linux服务器上安装Anaconda"></a>5 Linux服务器上安装Anaconda</h3><p>参考链接1：<a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/2063049">如何在Linux服务器上安装Anaconda（超详细）「建议收藏」 - 腾讯云博客</a><br>参考连接2：</p>
 <link rel="stylesheet" href="/css/bilicard.css" type="text/css"> 
       <!-- reward -->
       
